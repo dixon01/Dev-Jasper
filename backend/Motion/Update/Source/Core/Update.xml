@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Update xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="file:///. Update.xsd">
+  <Agent Enabled="true">
+    <!--
+    you can change the handled unit name manually by setting it here:
+    <UnitName>MyName</UnitName>
+    -->
+    <UnitName></UnitName>
+    <InstallationRoot></InstallationRoot>
+    <RestartApplications>
+      <Dependency Path ="D:\Presentation\main.im2">
+        <ExecutablePath>D:\Progs\Composer\Composer.exe</ExecutablePath>
+      </Dependency>
+    </RestartApplications>
+    <ShowVisualization>true</ShowVisualization>
+  </Agent>
+  <Clients>
+    <USBUpdateClient Name="USB_E">
+      <ShowVisualization>true</ShowVisualization>
+      <RepositoryBasePath>E:\Gorba\Update</RepositoryBasePath>
+      <USBDetectionTimeOut>PT20S</USBDetectionTimeOut>
+      <PollInterval>PT30S</PollInterval>
+    </USBUpdateClient>
+    <USBUpdateClient Name="USB_F">
+      <ShowVisualization>true</ShowVisualization>
+      <RepositoryBasePath>F:\Gorba\Update</RepositoryBasePath>
+      <USBDetectionTimeOut>PT20S</USBDetectionTimeOut>
+      <PollInterval>PT30S</PollInterval>
+    </USBUpdateClient>
+    <FTPUpdateClient Name="FTP">
+      <ShowVisualization>false</ShowVisualization>
+      <EnableMulticastIP>true</EnableMulticastIP>
+      <!--
+        Set the host IP to the FTP server that the unit will get updates from. Defaults are for staging test server only!
+      -->
+      <Host>infotest-ftp.luminatorusa.com</Host>
+      <!--
+        Set the root ftp path for local ftp connections from third party clients like LTG Infotransite.
+      -->
+      <LocalFtpHomePath>D:\ftproot</LocalFtpHomePath>
+      <Password>C-n7pn7)1uze</Password>
+      <!--
+        Set RequireWifiNetworkConnection true to require a Ximple/medi Network connection message to UpdateManager via medi
+        to enable ftp operations, set false to ignore this case and function without restrictions.
+        This allows only ftp downloads when in a wifi connection area as established by some external check. Set false to ignore.
+      -->
+      <RequireWifiNetworkConnection>false</RequireWifiNetworkConnection>
+      <PollInterval>PT60S</PollInterval>
+      <Port>21</Port>
+      <RepositoryBasePath>/</RepositoryBasePath>
+      <Username>FTPuser</Username>
+    </FTPUpdateClient>
+  </Clients>
+  <Providers>
+    <!--<USBUpdateProvider Name="Usb1">
+      <ShowVisualization>false</ShowVisualization>
+      <RepositoryBasePath>E:\Feedbacks</RepositoryBasePath>
+    </USBUpdateProvider>-->
+  </Providers>
+  <Visualization HideTimeout="PT15S">
+    <SplashScreen Enabled="true" X="0" Y="0" Width="1366" Height="768" />
+    <LED Enabled="false" DefaultFrequency="1.25" ErrorFrequency="5" />
+  </Visualization>
+  <CacheLimits Enabled="true">
+    <FreeSpaceMB>1000</FreeSpaceMB>
+    <NumberOfFiles>100</NumberOfFiles>
+  </CacheLimits>
+</Update>

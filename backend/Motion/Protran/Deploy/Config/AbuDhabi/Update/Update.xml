@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Update>
+  <StartUpDelay>30</StartUpDelay>
+  
+  <Roots>
+    <Root DeleteAfterUpdate="false">F:\UpdateData\</Root>
+    <Root DeleteAfterUpdate="false">E:\UpdateData\</Root>
+
+    <Root DeleteAfterUpdate="true">D:\UpdateData\</Root>
+  </Roots>
+  
+  <Copy>
+    <Source>Progs</Source>
+    <Destination>D:\Progs</Destination>
+  </Copy>
+  <Copy>
+    <Source>InfoMedia</Source>
+    <Destination>D:\InfoMedia</Destination>
+  </Copy>
+
+  <Execution>Scripts\Update.bat</Execution>
+  <StartUp>D:\Progs\SystemManager\SystemManager.exe</StartUp>
+</Update>

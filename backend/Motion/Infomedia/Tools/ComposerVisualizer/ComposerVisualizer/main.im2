@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Infomedia Version="2.0">
+  <PhysicalScreens>
+    <PhysicalScreen Name="TftScreen" Type="TFT" Width="1440" Height="900">
+      <Visible>
+        <Not>
+          <IntegerCompare Begin="999" End="999">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Not>
+      </Visible>
+    </PhysicalScreen>
+    <PhysicalScreen Name="TftScreen1" Type="TFT" Width="1368" Height="768"/>
+  </PhysicalScreens>
+
+  <VirtualDisplays>
+    <VirtualDisplay Name="TftDisplay" CyclePackage="TftPackage" Width="1440" Height="900"/>
+    <VirtualDisplay Name="TftDisplay1" CyclePackage="TftPackage" Width="1368" Height="768"/>
+  </VirtualDisplays>
+
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MasterCycle">
+        <MasterSection Duration="17" Layout="MasterLayout" />
+      </MasterCycle>
+    </MasterCycles>
+
+    <MasterEventCycles />
+
+    <MasterLayouts>
+      <MasterLayout Name="MasterLayout">
+        <PhysicalScreen Ref="TftScreen">
+          <VirtualDisplay Ref="TftDisplay" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="TftScreen1">
+          <VirtualDisplay Ref="TftDisplay1" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+
+  <CyclePackages>
+    <CyclePackage Name="TftPackage">
+      <StandardCycles>
+        <StandardCycle Ref="CriteriaCycle" />
+        <StandardCycle Ref="SpecialElementsCycle" />
+        <StandardCycle Ref="TextRendering1Cycle" />
+        <StandardCycle Ref="TextRendering2Cycle" />
+        <StandardCycle Ref="TextRendering3Cycle" />
+        <StandardCycle Ref="TextRendering4Cycle" />
+        <StandardCycle Ref="SpecialFontsCycle" />
+        <StandardCycle Ref="PoolCycle" />
+        <StandardCycle Ref="VideoCycle" />
+        <StandardCycle Ref="MultiVideoCycle" />
+        <StandardCycle Ref="MainCycle" />
+      </StandardCycles>
+
+      <EventCycles>
+        <EventCycle Ref="EventCycle" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="CriteriaCycle">
+        <Enabled>
+          <IntegerCompare Begin="300" End="399">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="OtherLayout" />
+
+      </StandardCycle>
+
+      <StandardCycle Name="SpecialElementsCycle">
+        <Enabled>
+          <IntegerCompare Begin="500" End="599">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="SpecialElementsLayout" />
+      </StandardCycle>
+
+      <StandardCycle Name="TextRendering1Cycle">
+        <Enabled>
+          <IntegerCompare Begin="700" End="709">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="TextRendering1Layout" />
+      </StandardCycle>
+
+      <StandardCycle Name="TextRendering2Cycle">
+        <Enabled>
+          <IntegerCompare Begin="710" End="719">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="TextRendering2Layout" />
+      </StandardCycle>
+
+      <StandardCycle Name="TextRendering3Cycle">
+        <Enabled>
+          <IntegerCompare Begin="720" End="729">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="TextRendering3Layout" />
+      </StandardCycle>
+
+      <StandardCycle Name="TextRendering4Cycle">
+        <Enabled>
+          <IntegerCompare Begin="730" End="739">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="TextRendering4Layout" />
+      </StandardCycle>
+
+      <StandardCycle Name="SpecialFontsCycle">
+        <Enabled>
+          <IntegerCompare Begin="790" End="799">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="SpecialFontsLayout" />
+      </StandardCycle>
+
+      <StandardCycle Name="PoolCycle">
+        <Enabled>
+          <IntegerCompare Begin="800" End="899">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <!--<StandardSection Duration="10" Layout="MainLayout" />-->
+        <PoolSection Duration="10" Layout="MainLayout" Pool="VideoPool" Frame="0" VideoEndMode="Adapt" />
+      </StandardCycle>
+
+      <StandardCycle Name="VideoCycle">
+        <Enabled>
+          <IntegerCompare Begin="900" End="949">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="VideoLayout" />
+      </StandardCycle>
+
+      <StandardCycle Name="MultiVideoCycle">
+        <Enabled>
+          <IntegerCompare Begin="950" End="998">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="10" Layout="MultiVideoLayout" />
+      </StandardCycle>
+
+      <StandardCycle Name="MainCycle">
+        <StandardSection Duration="10" Layout="MainLayout" />
+        <StandardSection Duration="10" Layout="OtherLayout" />
+        <StandardSection Duration="10" Layout="ConditionLayout">
+          <Enabled>
+            <IntegerCompare Begin="200" End="299">
+              <Generic Lang="0" Table="10" Column="8" Row="0" />
+            </IntegerCompare>
+          </Enabled>
+        </StandardSection>
+      </StandardCycle>
+    </StandardCycles>
+
+    <EventCycles>
+      <EventCycle Name="EventCycle">
+        <!-- TODO: [IM2] change this trigger and add an Enabled property -->
+        <Trigger>
+          <IntegerCompare Begin="600" End="699">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Trigger>
+
+        <StandardSection Duration="5" Layout="EventLayout" />
+        <StandardSection Duration="5" Layout="ConditionLayout" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+
+  <Layouts>
+    <Layout Name="BaseLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="60" Width="200" Height="25" ZIndex="999" Align="Center" Overflow="Scale" Value="From base layout">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#33FF33" />
+        </Text>
+
+        <Group X="20" Y="100">
+          <Text X="0" Y="0" Width="200" Height="25" ZIndex="999" Align="Center" Overflow="Scale" Value="First text in a group">
+            <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          </Text>
+
+          <Text X="0" Y="30" Width="200" Height="25" ZIndex="999" Align="Center" Overflow="Scale" Value="Second text in a group">
+            <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#FFFF00" />
+          </Text>
+
+          <Visible>
+            <Not>
+              <IntegerCompare Begin="100" End="199">
+                <Generic Lang="0" Table="10" Column="8" Row="0" />
+              </IntegerCompare>
+            </Not>
+          </Visible>
+        </Group>
+
+        <Image X="0" Y="300" Width="1280" Height="50" ZIndex="0" Filename="images\lineal-1280.gif" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="OtherLayout" Base="BaseLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" Align="Center" Overflow="Scale" Value="We are in the other layout">
+          <Font Face="Arial" Height="24" Weight="900" Italic="false" Color="#FF00FF" />
+        </Text>
+      </Resolution>
+    </Layout>
+
+    <Layout Name="ConditionLayout" Base="BaseLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" Align="Center" Overflow="Scale" Value="Condition layout">
+          <Font Face="Arial" Height="24" Weight="900" Italic="false" Color="#00FFFF" />
+        </Text>
+      </Resolution>
+    </Layout>
+
+    <Layout Name="EventLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" Align="Center" Overflow="Scale" Value="Event layout">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+        </Text>
+      </Resolution>
+    </Layout>
+
+    <Layout Name="VideoLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" ZIndex="10" Align="Center" Overflow="Scale" Value="Video layout">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+        </Text>
+        <Video X="20" Y="100" Width="720" Height="500" VideoUri="videos/Wildlife.wmv" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="MultiVideoLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" ZIndex="10" Align="Center" Overflow="Scale" Value="Two videos">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+        </Text>
+        <Video X="10" Y="110" Width="320" Height="240" VideoUri="videos/video.mpg" />
+        <Video X="10" Y="360" Width="640" Height="360" VideoUri="videos/Wildlife.wmv" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="MainLayout" Base="BaseLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="30" Width="200" Height="25" ZIndex="1" Align="Center" Overflow="Scale" Value="Hello World!">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="PT1.5S">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </Value>
+
+          <Visible>
+            <Or>
+              <IntegerCompare Begin="100" End="199">
+                <Generic Lang="0" Table="10" Column="8" Row="0" />
+              </IntegerCompare>
+              <And>
+                <IntegerCompare Begin="1" End="1">
+                  <Generic Lang="0" Table="0" Column="2" Row="0" />
+                </IntegerCompare>
+                <StringCompare Value="111">
+                  <Generic Lang="0" Table="10" Column="8" Row="0" />
+                </StringCompare>
+              </And>
+            </Or>
+          </Visible>
+        </Text>
+
+        <Text X="220" Y="30" Width="200" Height="25" ZIndex="1" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value AnimationType="Linear" AnimationDuration="PT1.5S">
+            <Format Format="The run is {0} and IBIS is {1}.">
+              <!-- argument 0 -->
+              <Generic Lang="0" Table="10" Column="8" Row="0" />
+              <!-- argument 1 -->
+              <If>
+                <Condition>
+                  <IntegerCompare Begin="1" End="1">
+                    <Generic Lang="0" Table="0" Column="2" Row="0" />
+                  </IntegerCompare>
+                </Condition>
+                <Then>
+                  available
+                </Then>
+                <Else>
+                  not available
+                </Else>
+              </If>
+            </Format>
+          </Value>
+        </Text>
+
+        <Image X="60" Y="35" Width="100" Height="50" ZIndex="0">
+          <Filename AnimationType="FadeThroughNothing" AnimationDuration="PT1.5S">
+            <If>
+              <Condition>
+                <StringCompare Value="">
+                  <Generic Lang="0" Table="11" Column="0" Row="0" />
+                </StringCompare>
+              </Condition>
+              <Then>
+                images\gorba.jpg
+              </Then>
+              <Else>
+                <Generic Lang="0" Table="11" Column="0" Row="0" />
+              </Else>
+            </If>
+          </Filename>
+        </Image>
+
+        <Text X="440" Y="30" Width="300" Height="25" ZIndex="1" Align="Left" Overflow="Scale" Value="It is [time=HH:mm]">
+          <Font Face="Arial" Height="32" Weight="900" Italic="false" Color="#6666FF" />
+        </Text>
+      </Resolution>
+    </Layout>
+    
+    <Layout Name="SpecialElementsLayout">
+      <Resolution Width="1440" Height="900">
+        <AnalogClock X="100" Y="100" Width="200" Height="200">
+          <Hour Filename="images\hour.png" X="95" Y="57" Width="9" Height="57" ZIndex="0" Mode="Smooth" CenterX="5" CenterY="43" />
+          <Minute Filename="images\minute.png" X="98" Y="40" Width="5" Height="74" ZIndex="1" Mode="Jump" CenterX="2" CenterY="60" />
+          <Seconds Filename="images\seconds.png" X="93" Y="36" Width="13" Height="78" ZIndex="2" Mode="CatchUp" CenterX="7" CenterY="64" />
+        </AnalogClock>
+        <Image X="100" Y="100" Width="200" Height="200" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="TextRendering1Layout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="20" Width="200" Height="25" Align="Center" Overflow="Scale" Value="Center and Scale">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="50" Width="200" Height="25" Align="Center" Overflow="Scale" Value="This text is also Center and Scale but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="120" Width="200" Height="25" Align="Left" Overflow="Scale" Value="Left and Scale">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="150" Width="200" Height="25" Align="Left" Overflow="Scale" Value="This text is also Left and Scale but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="220" Width="200" Height="25" Align="Right" Overflow="Scale" Value="Right and Scale">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="250" Width="200" Height="25" Align="Right" Overflow="Scale" Value="This text is also Right and Scale but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="250" Y="20" Width="200" Height="25" Align="Center" Overflow="Extend" Value="Center and Overflow">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="50" Width="200" Height="25" Align="Center" Overflow="Extend" Value="This text is also Center and Overflow but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="250" Y="120" Width="200" Height="25" Align="Left" Overflow="Extend" Value="Left and Overflow">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="150" Width="200" Height="25" Align="Left" Overflow="Extend" Value="This text is also Left and Overflow but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="250" Y="220" Width="200" Height="25" Align="Right" Overflow="Extend" Value="Right and Overflow">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="250" Width="200" Height="25" Align="Right" Overflow="Extend" Value="This text is also Right and Overflow but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="480" Y="20" Width="200" Height="25" Align="Center" Overflow="Clip" Value="Center and Clip">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="50" Width="200" Height="25" Align="Center" Overflow="Clip" Value="This text is also Center and Clip but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="480" Y="120" Width="200" Height="25" Align="Left" Overflow="Clip" Value="Left and Clip">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="150" Width="200" Height="25" Align="Left" Overflow="Clip" Value="This text is also Left and Clip but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="480" Y="220" Width="200" Height="25" Align="Right" Overflow="Clip" Value="Right and Clip">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="250" Width="200" Height="25" Align="Right" Overflow="Clip" Value="This text is also Right and Clip but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="20" Y="320" Width="400" Height="25" Align="Center" Overflow="Scale"
+              Value="This [face=Verdana]is [b]some [size=50%]random[/size][/b] text[/face] [size=14]with[/size] [i]different[/i] [bl][color=red]sty[/color]les[/bl].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="320" Width="400" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="350" Width="200" Height="25" Align="Center" Overflow="Scale" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="350" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="380" Width="400" Height="25" Align="Center" Overflow="Scale"
+              Value="Some more [bl]blinking[/bl] text.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="380" Width="400" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="410" Width="200" Height="25" Align="Center" Overflow="Scale" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="410" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="TextRendering2Layout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="20" Width="200" Height="25" Align="Center" Overflow="Scroll" ScrollSpeed="-20" Value="Center and Scroll">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="50" Width="200" Height="25" Align="Center" Overflow="Scroll" ScrollSpeed="-20" Value="This text is also Center and Scroll but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="120" Width="200" Height="25" Align="Left" Overflow="Scroll" ScrollSpeed="-20" Value="Left and Scroll">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="150" Width="200" Height="25" Align="Left" Overflow="Scroll" ScrollSpeed="-20" Value="This text is also Left and Scroll but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="220" Width="200" Height="25" Align="Right" Overflow="Scroll" ScrollSpeed="-20" Value="Right and Scroll">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="250" Width="200" Height="25" Align="Right" Overflow="Scroll" ScrollSpeed="-20" Value="This text is also Right and Scroll but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="250" Y="20" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20" Value="Center and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="50" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20" Value="This text is also Center and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="250" Y="120" Width="200" Height="25" Align="Left" Overflow="ScrollAlways" ScrollSpeed="-20" Value="Left and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="150" Width="200" Height="25" Align="Left" Overflow="ScrollAlways" ScrollSpeed="-20" Value="This text is also Left and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="250" Y="220" Width="200" Height="25" Align="Right" Overflow="ScrollAlways" ScrollSpeed="-20" Value="Right and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="250" Y="250" Width="200" Height="25" Align="Right" Overflow="ScrollAlways" ScrollSpeed="-20" Value="This text is also Right and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#00FF00" />
+        </Text>
+        <Image X="250" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="480" Y="20" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="20" Value="Center and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="20" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="50" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="20" Value="This text is also Center and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="50" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="480" Y="120" Width="200" Height="25" Align="Left" Overflow="ScrollAlways" ScrollSpeed="20" Value="Left and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="120" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="150" Width="200" Height="25" Align="Left" Overflow="ScrollAlways" ScrollSpeed="20" Value="This text is also Left and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="150" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="480" Y="220" Width="200" Height="25" Align="Right" Overflow="ScrollAlways" ScrollSpeed="20" Value="Right and SA">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="220" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="480" Y="250" Width="200" Height="25" Align="Right" Overflow="ScrollAlways" ScrollSpeed="20" Value="This text is also Right and ScrollAlways but much longer.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="480" Y="250" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="20" Y="320" Width="400" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20"
+              Value="This [face=Verdana]is [b]some [size=50%]random[/size][/b] text[/face] [size=14]with[/size] [i]different[/i] [bl][color=red]sty[/color]les[/bl].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="320" Width="400" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="350" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="350" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="380" Width="400" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20"
+              Value="Some more [bl]blinking[/bl] text.">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="380" Width="400" Height="25" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="410" Width="200" Height="25" Align="Center" Overflow="ScrollAlways" ScrollSpeed="-20" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="410" Width="200" Height="25" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="TextRendering3Layout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="20" Width="200" Height="100" Align="Center" Overflow="Scale" Value="This text has a big [img=images\gorba.jpg].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="20" Y="20" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="160" Width="200" Height="100" Align="Center" Overflow="Scale" Value="This text has a small [img=images\cross.png].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="20" Y="160" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="300" Width="200" Height="100" Align="Center" Overflow="Scale" Value="This text has a [vid=videos\video.mpg].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="20" Y="300" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="420" Y="20" Width="200" Height="100" Align="Center" Overflow="Extend" Value="This text has a big [img=images\gorba.jpg].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="420" Y="20" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="420" Y="160" Width="200" Height="100" Align="Center" Overflow="Extend" Value="This text has a small [img=images\cross.png].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="420" Y="160" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="420" Y="300" Width="200" Height="100" Align="Center" Overflow="Extend" Value="This text has a [vid=videos\video.mpg].">
+          <Font Face="Arial" Height="20" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="420" Y="300" Width="200" Height="100" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+
+
+    <Layout Name="TextRendering4Layout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="20" Width="600" Height="75" Align="Center" Overflow="Scale" Value="Center and Scale">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="20" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="110" Width="600" Height="75" Align="Center" Overflow="Scale" Value="This text is also Center and Scale but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="110" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="200" Width="600" Height="75" Align="Left" Overflow="Scale" Value="Left and Scale">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="200" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="290" Width="600" Height="75" Align="Left" Overflow="Scale" Value="This text is also Left and Scale but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="290" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="20" Y="380" Width="600" Height="75" Align="Right" Overflow="Scale" Value="Right and Scale">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="380" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="470" Width="600" Height="75" Align="Right" Overflow="Scale" Value="This text is also Right and Scale but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="470" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="710" Y="20" Width="600" Height="75" Align="Center" Overflow="Clip" Value="Center and Clip">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="20" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="710" Y="110" Width="600" Height="75" Align="Center" Overflow="Clip" Value="This text is also Center and Clip but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="110" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="710" Y="200" Width="600" Height="75" Align="Left" Overflow="Clip" Value="Left and Clip">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="200" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="710" Y="290" Width="600" Height="75" Align="Left" Overflow="Clip" Value="This text is also Left and Clip but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="290" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+        <Text X="710" Y="380" Width="600" Height="75" Align="Right" Overflow="Clip" Value="Right and Clip">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="380" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="710" Y="470" Width="600" Height="75" Align="Right" Overflow="Clip" Value="This text is also Right and Clip but much longer.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#FF0000" />
+        </Text>
+        <Image X="710" Y="470" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+
+
+        <Text X="20" Y="560" Width="400" Height="75" Align="Center" Overflow="Scale"
+              Value="This [face=Verdana]is [b]some [size=50%]random[/size][/b] text[/face] [size=14]with[/size] [i]different[/i] [bl][color=red]sty[/color]les[/bl].">
+          <Font Face="Arial" Height="60" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="560" Width="400" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="650" Width="600" Height="75" Align="Center" Overflow="Scale" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="650" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="740" Width="400" Height="75" Align="Center" Overflow="Scale"
+              Value="Some more [bl]blinking[/bl] text.">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="740" Width="400" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="830" Width="600" Height="75" Align="Center" Overflow="Scale" Value="This [a]is[|]alternating[|]text[/a].">
+          <Font Face="Arial" Height="60" Weight="900" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="830" Width="600" Height="75" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+
+
+    <Layout Name="SpecialFontsLayout">
+      <Resolution Width="1440" Height="900">
+        <Text X="20" Y="20" Width="900" Height="75" Align="Center" Overflow="Scale" Value="Angelic War example 0123456789">
+          <Font Face="Angelic War" Height="60" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="20" Width="900" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="110" Width="900" Height="75" Align="Center" Overflow="Scale" Value="BadaBoom example 0123456789">
+          <Font Face="BadaBoom BB" Height="60" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="110" Width="900" Height="75" ZIndex="-10" Filename="images\white.png" />
+
+        <Text X="20" Y="200" Width="900" Height="75" Align="Center" Overflow="Scale" Value="Just kidding example 0123456789">
+          <Font Face="Just kidding." Height="60" Weight="100" Italic="false" Color="#000000" />
+        </Text>
+        <Image X="20" Y="200" Width="900" Height="75" ZIndex="-10" Filename="images\white.png" />
+      </Resolution>
+    </Layout>
+  </Layouts>
+
+  <Pools>
+    <Pool Name="VideoPool" BaseDirectory="videos\"/>
+    <Pool Name="ImagePool" BaseDirectory="images\"/>
+  </Pools>
+
+  <Fonts>
+    <Font Path="fonts\AngelicWar.otf" />
+    <Font Path="fonts\BADABB__.TTF" />
+    <Font Path="fonts\just kidding.ttf" />
+  </Fonts>
+</Infomedia>

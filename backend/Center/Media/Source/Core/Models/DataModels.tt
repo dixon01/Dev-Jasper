@@ -1,0 +1,838 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="$(SolutionDir)Source\T4Templating\bin\Debug\Gorba.Center.Media.T4Templating.dll" #>
+
+<#@ import namespace="ICSharpCode.NRefactory.CSharp" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.CSharp.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\Mono.Cecil\0.9.5.2\net40\Mono.Cecil.dll" #>
+
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#
+    var entitiesFileName = "../../../../../Common/Configuration/Source/Infomedia/Entities.xml";
+
+    var fileName = "../DataViewModels/DataViewModels.xml";
+    this.templates = DataViewModelTemplatedEntities.Load(Host.ResolvePath(entitiesFileName), Host.ResolvePath(fileName));
+    var namespaces = templates.NamespaceEntityDescriptors;
+    foreach (var ns in namespaces)
+    {
+        this.currentNamespace = ns;
+        #>
+
+namespace Gorba.Center.Media.Core.Models.<#= ns.Name #>
+{
+    using Gorba.Center.Common.Wpf.Framework.DataViewModels;
+    using Gorba.Center.Media.Core.DataViewModels.Eval;
+    using Gorba.Center.Media.Core.DataViewModels.Layout;
+    using Gorba.Center.Media.Core.DataViewModels.Presentation.Section;
+    using Gorba.Center.Media.Core.Models.Eval;
+    using Gorba.Center.Media.Core.Models.Layout;
+    using Gorba.Center.Media.Core.Models.Presentation.Section;
+    using Gorba.Center.Media.Core.Extensions;
+    using Gorba.Center.Media.Core.ViewModels;
+    using Gorba.Common.Configuration.Infomedia.Eval;
+    using Gorba.Common.Configuration.Infomedia.Layout;
+    using Gorba.Common.Configuration.Infomedia.Presentation;
+    using Gorba.Center.Media.Core.DataViewModels.Presentation.Cycle;
+    using Gorba.Common.Configuration.Infomedia.Presentation.Cycle;
+    using Gorba.Common.Configuration.Infomedia.Presentation.Section;
+	
+	using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Globalization;
+	using System.Linq;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
+    
+<#
+    foreach (var dataViewModelEntity in ns.FilteredDataViewModelEntityDescriptors)
+    {
+        this.GenerateEntity(dataViewModelEntity);
+    }
+#>
+}
+<#
+    }
+
+    PrettyPrinter.CleanUp(this.GenerationEnvironment);
+#>
+<#+
+    DataViewModelTemplatedEntities templates;
+    NamespaceEntityDescriptor currentNamespace;
+	private void GenerateEntity(DataViewModelEntityDescriptor dataViewModelDescriptor)
+	{
+        ListProperty complexListProperty = null;
+        CompositeProperty singleComplexProperty = null;
+        foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+        {
+            var listProperty = property as ListProperty;
+            if (listProperty != null && listProperty.ElementType.EndsWith("Base"))
+            {
+                complexListProperty = listProperty;
+                break;
+            }
+
+            var complexProperty = property as CompositeProperty;
+            if (complexProperty != null && complexProperty.Type.EndsWith("Base"))
+            {
+                singleComplexProperty = complexProperty;
+                break;
+            }
+        }
+        string xmlSerializationMembersModifier = null;
+        //var xmlSerializationMembersModifier = dataViewModelDescriptor.Base != null && dataViewModelDescriptor.Base.EndsWith("DynamicProperty") ? "override" : null;
+    var baseClass = dataViewModelDescriptor;
+    while ((baseClass = this.currentNamespace.FilteredDataViewModelEntityDescriptors.FirstOrDefault(clazz => clazz.Name == baseClass.Base)) != null)
+    {
+        ListProperty listTest;
+        CompositeProperty compositeTest;
+        this.GetComplexProperty(baseClass, out listTest, out compositeTest);
+        if (listTest != null || compositeTest != null)
+        {
+            xmlSerializationMembersModifier = "override";
+            break;
+        }
+    }
+
+    var baseClassName = dataViewModelDescriptor.BaseDataViewModel.FullQualifiedDataModelName;
+    if (dataViewModelDescriptor.ParentObject.Name == "Eval" && dataViewModelDescriptor.Base == "Base")
+    {
+        baseClassName = "EvalDataModelBase";
+    }
+
+     if (dataViewModelDescriptor.ParentObject.Name == "Layout" && dataViewModelDescriptor.Base == "Base")
+        {
+            baseClassName = "LayoutElementDataModelBase";
+        }
+    var xmlInterface = "";
+    if (complexListProperty != null || singleComplexProperty != null)
+    {
+        xmlInterface = ", IXmlSerializable";
+        xmlSerializationMembersModifier = "virtual";
+    }
+    #>
+
+    [XmlRoot("<#= dataViewModelDescriptor.Name #>")]
+    [Serializable]
+    public partial class <#= dataViewModelDescriptor.DataModelName #> : <#= baseClassName + xmlInterface #>
+	{
+		public <#= dataViewModelDescriptor.DataModelName #>()
+		{
+<#+
+	    foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+	    {
+	        this.GeneratePropertyInitialization(property);
+	    }
+#>
+			this.AdditionalInitialization();
+		}
+<#+
+
+	    foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+	    {
+	        this.GenerateProperty(property);
+	    }
+
+        if (dataViewModelDescriptor.Base == "DynamicProperty")
+        {
+#>
+            public DynamicPropertyDataModel Evaluation { get; set; }
+<#+ 
+        }
+#>
+		
+		partial void AdditionalInitialization();
+<#+ 
+        var needXml = false;
+         if (complexListProperty != null || singleComplexProperty != null)
+        {
+            needXml = true;
+            
+#>
+
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
+        
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+<#+ 
+            if (complexListProperty != null)
+            { 
+#>
+                this.<#= complexListProperty.Name #>.Clear();
+<#+ 
+            }
+#>
+            this.ReadXmlAttributes(reader);
+
+            
+            if (reader.IsEmptyElement)
+            {
+                reader.ReadStartElement();
+                return;
+            }
+
+            reader.ReadStartElement();
+            reader.MoveToContent();
+<#+ 
+            if (complexListProperty != null)
+            {
+#>
+                while (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (!this.ReadXmlElement(reader.Name, reader))
+                    {
+<#+ 
+                        if (complexListProperty.ElementType == "DynamicProperty")
+                        {
+#>
+                            var item = (EvalDataModelBase)DataModelSerializer.Deserialize(reader, "Gorba.Center.Media.Core.Models.Eval");
+<#+ 
+                        }
+                        else
+                        {
+                            var propertyNameSpace = complexListProperty.ElementTypeDataViewModel.FullQualifiedDataModelNamespace;
+                        
+#>
+                            var item = (<#= complexListProperty.ElementTypeDataViewModel.FullQualifiedDataModelName #>)DataModelSerializer.Deserialize(reader, "<#= complexListProperty.ElementTypeDataViewModel.FullQualifiedDataModelNamespace #>");
+                     <#+ 
+                     } #>
+                        if (item != null)
+                        {
+                            this.<#= complexListProperty.Name #>.Add(item);
+                        }
+                    }
+
+                    reader.MoveToContent();
+                }
+<#+ 
+            }
+            else
+            {
+                if (singleComplexProperty != null)
+                {
+                    if (singleComplexProperty.Type == "DynamicProperty")
+                    {
+#>
+                        this.<#= singleComplexProperty.Name #> = (EvalDataModelBase)DataModelSerializer.Deserialize(reader, "Gorba.Center.Media.Core.Models.Eval");
+<#+ 
+                    }
+                    else
+                    {
+#>
+                        this.<#= singleComplexProperty.Name #> = (<#= singleComplexProperty.TypeDataViewModel.FullQualifiedDataModelName #>)DataModelSerializer.Deserialize(reader, "<#= singleComplexProperty.TypeDataViewModel.FullQualifiedDataModelNamespace #>");
+<#+ 
+                    }
+                }
+              
+            } 
+#>
+            reader.ReadEndElement();
+        }
+        
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            this.WriteXmlAttributes(writer);
+            this.WriteXmlElements(writer);
+<#+ 
+            if (complexListProperty != null)
+            {
+#>
+                foreach (var item in this.<#= complexListProperty.Name #>)
+                {
+                   DataModelSerializer.Serialize(item, writer);
+                }
+<#+
+            }
+            else
+            {
+                if (singleComplexProperty.Name == "Evaluation")
+                {
+ #>
+                    if (this.<#= singleComplexProperty.Name #> != null)
+                    {
+                        DataModelSerializer.Serialize(this.<#= singleComplexProperty.Name #>, writer);
+                    }
+      <#+    
+                }
+                else
+                {
+             #>
+                    if (this.<#= singleComplexProperty.Name #>Evaluation != null)
+                    {
+                        DataModelSerializer.Serialize(this.<#= singleComplexProperty.Name #>Evaluation, writer);
+                    }
+      <#+       } 
+            }
+         
+#>
+        }
+        
+        <#+ 
+        }   
+        if (xmlSerializationMembersModifier != null && (needXml || dataViewModelDescriptor.ParentObject.Name == "Eval"))
+    { 
+         #>
+        protected <#= xmlSerializationMembersModifier #> void ReadXmlAttributes(XmlReader reader)
+        {<#+
+        this.GenerateAttributeReaders(dataViewModelDescriptor);
+        if (xmlSerializationMembersModifier == "override")
+        {
+        #>
+            var attrDisplayText = reader.GetAttribute("DisplayText");
+            if (attrDisplayText != null)
+            {
+                this.DisplayText = attrDisplayText;
+            }
+        <#+
+        }
+        #>
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> bool ReadXmlElement(string elementName, XmlReader reader)
+        {<#+
+        this.GenerateElementReaders(dataViewModelDescriptor);
+        #>
+
+            return false;
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> void WriteXmlAttributes(XmlWriter writer)
+        {<#+
+        this.GenerateAttributeWriters(dataViewModelDescriptor);
+         if (xmlSerializationMembersModifier == "override")
+        {
+        #>
+
+            writer.WriteAttributeString("DisplayText", this.DisplayText);
+<#+
+        }
+#>
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> void WriteXmlElements(XmlWriter writer)
+        {<#+
+        this.GenerateElementWriters(dataViewModelDescriptor);
+    #>
+        }
+    <#+
+      
+	}
+#>
+}
+<#+ 
+    }
+
+	private void GeneratePropertyField(PropertyBase propertyDescriptor)
+	{
+	    var compositeProperty = propertyDescriptor as CompositeProperty;
+	    if (compositeProperty != null)
+	    {
+	        this.GenerateCompositePropertyField(compositeProperty);
+	    }
+	}
+
+	private void GenerateCompositePropertyField(CompositeProperty propertyDescriptor)
+	{
+	}
+
+	private void GenerateProperty(PropertyBase propertyDescriptor)
+	{
+	    var referenceProperty = propertyDescriptor as ReferenceProperty;
+	    if (referenceProperty != null)
+	    {
+	        this.GenerateReferenceProperty(referenceProperty);
+	        return;
+	    }
+
+	    var listProperty = propertyDescriptor as ListProperty;
+	    if (listProperty != null)
+	    {
+	        this.GenerateListProperty(listProperty);
+	        return;
+	    }
+
+	    var compositeProperty = propertyDescriptor as CompositeProperty;
+	    if (compositeProperty != null)
+	    {
+	        this.GenerateCompositeProperty(compositeProperty);
+	        return;
+	    }
+
+	    var typedProperty = propertyDescriptor as Property;
+	    if (typedProperty != null)
+	    {
+	        this.GenerateDefaultProperty(typedProperty);
+	        return;
+	    }
+
+		throw new ArgumentOutOfRangeException("can' thandle property type");
+	}
+
+	private void GeneratePropertyInitialization(PropertyBase propertyDescriptor)
+	{
+	    var listProperty = propertyDescriptor as ListProperty;
+	    if (listProperty != null)
+	    {
+	        this.GenerateListPropertyInitialization(listProperty);
+	        return;
+	    }
+
+         var property = propertyDescriptor as Property;
+        if (property == null || string.IsNullOrEmpty(property.DefaultValue))
+        {
+            return;
+        }
+
+#>            this.<#= property.Name #> = <#= property.GetEscapedDefaultValue() #>;
+<#+
+	}
+
+    private void GenerateDefaultPropertyInitialization(Property propertyDescriptor)
+    {
+        var defaultValue = "string.Empty";
+        if (string.IsNullOrEmpty(propertyDescriptor.DefaultValue))
+        {
+            var valueTypes = new[] { "int", "bool" };
+            if (valueTypes.Contains(propertyDescriptor.Type))
+            {
+                defaultValue = "default(" + propertyDescriptor.Type + ")";
+            }
+            else if (propertyDescriptor.Type != "string")
+            {
+                defaultValue = "new " + propertyDescriptor.Type + "()";
+            }
+        }
+        else
+        {
+            defaultValue = propertyDescriptor.DefaultValue;
+        }
+
+        var prefix = string.Empty;
+        if (propertyDescriptor.Animated)
+        {
+            prefix = "AnimatedDynamic";
+        }
+        else if (propertyDescriptor.Dynamic)
+        {
+            prefix = "Dynamic";
+        }
+        #>
+			this.<#= propertyDescriptor.Name #> = new <#= prefix #>DataValue<<#= propertyDescriptor.Type #>>(<#= defaultValue #>);
+<#+
+    }
+
+    private void GenerateReferencePropertyInitialization(ReferenceProperty propertyDescriptor)
+    {
+        #>
+<#+
+    }
+
+	private void GenerateCompositePropertyInitialization(CompositeProperty propertyDescriptor)
+	{
+	    if (propertyDescriptor.TypeDataViewModel.ViewModelName == "EvalDataViewModelBase")
+	    {
+	        return;
+	    }
+        if (propertyDescriptor.Type == "DynamicProperty")
+        {
+
+	#>
+            this.<#= propertyDescriptor.FieldName #> = new DynamicDataValue<EvalDataModelBase>();
+        <#+
+        }
+        else
+        {
+    #>
+			this.<#= propertyDescriptor.FieldName #> = new <#= propertyDescriptor.TypeDataViewModel.FullQualifiedDataModelName #>();
+<#+
+        }
+	}
+
+	private void GenerateListPropertyInitialization(ListProperty propertyDescriptor)
+	{
+	#>
+			this.<#= propertyDescriptor.Name #> = new List<<#= propertyDescriptor.ElementTypeDataViewModel.FullQualifiedDataModelName #>>();
+<#+
+	}
+
+	private void GenerateDefaultProperty(Property propertyDescriptor)
+	{
+	    
+    var propertyName = propertyDescriptor.Name;
+    var xmlName = propertyDescriptor.XmlName ?? propertyDescriptor.Name;
+    var propertyType = propertyDescriptor.Type;
+    var getterSetter = "get; set;";
+
+    if (propertyDescriptor.Type == "TimeSpan")
+    {
+        // TimeSpan needs special serialization handling because it is a duration
+        #>
+
+        [XmlIgnore]
+        public <#= propertyDescriptor.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return XmlConvert.ToString(this." + propertyName + "); } "
+                       + "set { this." + propertyName + " = XmlConvert.ToTimeSpan(value); }";
+        propertyName += "Xml";
+        xmlName += "\", DataType = \"duration";
+        propertyType = "string";
+    }
+    else if (propertyDescriptor.Type == "DateTime")
+    {
+        // DateTime needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= propertyDescriptor.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return this." + propertyName + ".ToString(\"" + propertyDescriptor.Format + "\"); } "
+                       + "set { this." + propertyName + " = DateTime.ParseExact(value, \"" + propertyDescriptor.Format + "\", CultureInfo.InvariantCulture); }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+    else if (propertyDescriptor.Type == "Time")
+    {
+        // Time is used in Eval and needs special serialization handling, because it is the time of day.
+        #>
+
+        [XmlIgnore]
+        public TimeSpan <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return new DateTime(2000, 1, 1).Add(this." + propertyName + ").ToString(\"" + propertyDescriptor.Format + "\"); } "
+                       + "set { this." + propertyName + " = DateTime.ParseExact(value, \"" + propertyDescriptor.Format + "\", CultureInfo.InvariantCulture).TimeOfDay; }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+    else if (propertyDescriptor.Type == "Version")
+    {
+        // Version needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= propertyDescriptor.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return this." + propertyName + ".ToString(); } "
+                       + "set { this." + propertyName + " = new Version(value); }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+
+    #>
+
+        [XmlAttribute("<#= xmlName #>")]
+<#+
+    if (!string.IsNullOrEmpty(propertyDescriptor.DefaultValue))
+    {
+#>
+        [DefaultValue(<#= propertyDescriptor.GetEscapedDefaultValue() #>)]
+<#+
+    }
+    #>
+        public <#= propertyType #> <#= propertyName #> { <#= getterSetter #> }
+<#+
+        if (!propertyDescriptor.Dynamic)
+        {
+            return;
+        }
+
+        var animated = string.Empty;
+        if (propertyDescriptor.Animated)
+        {
+                animated = "Animated";
+        }
+        #>
+
+        [XmlElement("<#= xmlName #>")]
+        public <#= animated #>DynamicPropertyDataModel <#= propertyDescriptor.Name #>Property { get; set; }
+        <#+ 
+        
+	}
+
+	private void GenerateReferenceProperty(ReferenceProperty propertyDescriptor)
+	{
+	#>
+        
+        [XmlAttribute("<#= propertyDescriptor.XmlName ?? propertyDescriptor.Name #>")]
+		public string <#= propertyDescriptor.Name #> { get;	set; }
+<#+
+	}
+
+	private void GenerateCompositeProperty(CompositeProperty propertyDescriptor)
+	{
+	#>
+        [XmlElement("<#= propertyDescriptor.XmlName ?? propertyDescriptor.Name #>")]
+<#+     if (propertyDescriptor.Type == "DynamicProperty")
+        {
+    #>
+        public DynamicPropertyDataModel <#= propertyDescriptor.Name #> { get; set; }
+<#+
+        }
+        else
+        {
+    #>
+		    public <#= propertyDescriptor.TypeDataViewModel.FullQualifiedDataModelName #> <#= propertyDescriptor.Name #> { get; set; }
+<#+
+        }
+	}
+
+	private void GenerateListProperty(ListProperty listProperty)
+	{
+         string attribute;
+        if (listProperty.Inline)
+        {
+            attribute = "XmlElement(\"" + (listProperty.XmlName ?? listProperty.ElementType) + "\")";
+        }
+        else
+        {
+            attribute = "XmlArrayItem(\"" + (listProperty.XmlName ?? listProperty.ElementType) + "\")";
+        }
+
+        #>
+
+        [<#= attribute #>]
+		public List<<#= listProperty.ElementTypeDataViewModel.FullQualifiedDataModelName #>> <#= listProperty.Name #> { get; set; }
+<#+
+        
+       
+	}
+
+    /// <summary>
+/// Generates recursively the element reader calls for complex property owners.
+/// <summary>
+private void GenerateElementReaders(DataViewModelEntityDescriptor descriptor)
+{
+    var baseClass = this.GetDataViewModelDescriptor(descriptor.Base);
+    if (baseClass != null)
+    {
+        this.GenerateElementReaders(baseClass);
+    }
+
+    foreach (var prop in descriptor.PropertyDescriptors)
+    {
+        var property = prop as Property;
+        if (property == null || !property.Dynamic)
+        {
+            continue;
+        }
+
+        #>
+
+            if (elementName == "<#= property.Name #>")
+            {
+                <#+
+                if (property.Animated)
+                {
+#>
+                    this.<#= property.Name #>Property = AnimatedDynamicPropertyDataModel.ReadFromXml(reader);
+<#+ 
+                }
+                else
+                {
+#>
+                    this.<#= property.Name #>Property = DynamicPropertyDataModel.ReadFromXml(reader);
+<#+ 
+                }
+#>
+                return true;
+            }
+<#+
+    }
+}
+
+/// <summary>
+/// Generates recursively the element writer calls for complex property owners.
+/// <summary>
+private void GenerateElementWriters(DataViewModelEntityDescriptor descriptor)
+{
+    var baseClass = this.GetDataViewModelDescriptor(descriptor.Base);
+    if (baseClass != null)
+    {
+        this.GenerateElementWriters(baseClass);
+    }
+    
+    foreach (var prop in descriptor.PropertyDescriptors)
+    {
+        var property = prop as Property;
+        if (property == null || !property.Dynamic)
+        {
+            continue;
+        }
+
+        if (property.Animated)
+        {
+#>
+            AnimatedPropertyDataModel.WriteToXml("<#= property.Name #>", this.<#= property.Name #>Property, writer);
+<#+ 
+        }
+        else
+        { 
+#>
+            DynamicPropertyDataModel.WriteToXml("<#= property.Name #>", this.<#= property.Name #>Property, writer);
+<#+
+        }
+    }
+}
+
+/// <summary>
+/// Generates recursively the attribute reader calls for ICompositeElement implementors.
+/// <summary>
+private void GenerateAttributeReaders(DataViewModelEntityDescriptor descriptor, bool recursive = true)
+{
+    if (recursive)
+    {
+        var baseClass = this.GetDataViewModelDescriptor(descriptor.Base);
+        if (baseClass != null)
+        {
+            this.GenerateAttributeReaders(baseClass);
+        }
+    }
+
+    foreach (var prop in descriptor.PropertyDescriptors)
+    {
+        var property = prop as Property;
+        if (property == null)
+        {
+            continue;
+        }
+
+        var converter = "attr" + property.Name;
+        switch (property.Type)
+        {
+            // TODO: add more supported types
+            case "int":
+                converter = "XmlConvert.ToInt32(" + converter + ")";
+                break;
+            case "bool":
+                converter = "XmlConvert.ToBoolean(" + converter + ")";
+                break;
+            case "HorizontalAlignment":
+                converter = "(HorizontalAlignment)Enum.Parse(typeof(HorizontalAlignment), " + converter + ")";
+                break;
+                case "VerticalAlignment":
+                converter = "(VerticalAlignment)Enum.Parse(typeof(VerticalAlignment), " + converter + ")";
+                break;
+                case "TextOverflow":
+                converter = "(TextOverflow)Enum.Parse(typeof(TextOverflow), " + converter + ")";
+                break;
+                case "ElementScaling":
+                converter = "(ElementScaling)Enum.Parse(typeof(ElementScaling), " + converter + ")";
+                break;
+                case "PhysicalScreenType":
+                converter = "(PhysicalScreenType)Enum.Parse(typeof(PhysicalScreenType), " + converter + ")";
+                break;
+               
+            default:
+                break;
+        }
+
+        #>
+
+            var attr<#= property.Name #> = reader.GetAttribute("<#= property.Name #>");
+            if (attr<#= property.Name #> != null)
+            {
+                this.<#= property.Name #> = <#= converter #>;
+            }
+        <#+
+    }
+}
+
+/// <summary>
+/// Generates recursively the attribute writer calls for ICompositeElement implementors.
+/// <summary>
+private void GenerateAttributeWriters(DataViewModelEntityDescriptor descriptor, bool recursive = true)
+{
+    if (recursive)
+    {
+        var baseClass = this.GetDataViewModelDescriptor(descriptor.Base);
+        if (baseClass != null)
+        {
+            this.GenerateAttributeWriters(baseClass);
+        }
+    }
+    
+    foreach (var prop in descriptor.PropertyDescriptors)
+    {
+        var property = prop as Property;
+        if (property == null)
+        {
+            continue;
+        }
+
+        var converter = "XmlConvert.ToString(this." + property.Name +")";
+        if (property.Type == "string")
+        {
+            converter = "this." + property.Name;
+        }
+
+        if (!string.IsNullOrEmpty(property.DefaultValue))
+        {
+            #>
+
+            if (this.<#= property.Name #> != <#= property.GetEscapedDefaultValue() #>)
+            {
+                writer.WriteAttributeString("<#= property.Name #>", <#= converter #>);
+            }
+<#+
+        }
+        else
+        {
+            #>
+
+            writer.WriteAttributeString("<#= property.Name #>", <#= converter #>);
+<#+
+        }
+    }
+
+    
+}
+ public DataViewModelEntityDescriptor GetDataViewModelDescriptor(string descriptorName)
+    {
+        if (string.IsNullOrEmpty(descriptorName))
+        {
+            return null;
+        }
+
+        foreach (var ns in this.templates.NamespaceEntityDescriptors)
+        {
+            foreach (var dataViewModelDescriptor in ns.FilteredDataViewModelEntityDescriptors)
+            {
+                if (dataViewModelDescriptor.Name == descriptorName)
+                {
+                    return dataViewModelDescriptor;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void GetComplexProperty(DataViewModelEntityDescriptor dataViewModelDescriptor, out ListProperty complexListProperty, out CompositeProperty singleEvalProperty)
+{
+    complexListProperty = null;
+    singleEvalProperty = null;
+     foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+        {
+            var listProperty = property as ListProperty;
+            if (listProperty != null && (listProperty.ElementType.EndsWith("Base") || listProperty.ElementType == "MatchDynamicProperty" || listProperty.ElementType == "CaseDynamicProperty"))
+            {
+                complexListProperty = listProperty;
+                break;
+            }
+
+            var complexProperty = property as CompositeProperty;
+            if (complexProperty != null && (complexProperty.Type.EndsWith("Base") || complexProperty.Type == "MatchDynamicProperty" || complexProperty.Type == "CaseDynamicProperty"))
+            {
+                singleEvalProperty = complexProperty;
+                break;
+            }
+        }
+}
+#>

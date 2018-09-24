@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HardwareManager>
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="true">
+    <PollingInterval>PT0.1S</PollingInterval>
+    <GPIO>
+      <Pin Index="0">Address0</Pin>
+      <Pin Index="1">Address1</Pin>
+      <Pin Index="2">Address2</Pin>
+      <Pin Index="3">Address3</Pin>
+      <Pin Index="4">LastUnit</Pin>
+      <Pin Index="5">Pin5</Pin>
+      <Pin Index="6">Pin6</Pin>
+      <Pin Index="7">Pin7</Pin>
+    </GPIO>
+    <Button>Button</Button>
+    <UpdateLed>UpdateLed</UpdateLed>
+    <DviLevelShifters>
+      <DviLevelShifter Index="2">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+    </DviLevelShifters>
+  </Mgi>
+  <SNTP Enabled="false" Host="2.europe.pool.ntp.org" Port="123" Version="4" />
+  <VDV301 Enabled="false" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="false" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions>
+        <IO Name="Ignition" Value="1"/>
+        <IO Name="Address0" Value="1"/>
+        <IO Name="Address1" Value="0"/>
+        <IO Name="Address2" Value="0"/>
+        <IO Name="Address3" Value="0"/>
+        <IO Name="LastUnit" Value="0"/>
+      </Conditions>
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>UTC</TimeZone>
+      <IPAddress>192.168.10.41</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+    </Setting>
+    <Setting>
+      <Conditions>
+        <IO Name="Ignition" Value="1"/>
+        <IO Name="Address0" Value="0"/>
+        <IO Name="Address1" Value="1"/>
+        <IO Name="Address2" Value="0"/>
+        <IO Name="Address3" Value="0"/>
+        <!-- <IO Name="LastUnit" Value="0"/> is ignored as Last unit can be 0 or 1 -->
+      </Conditions>
+      <HostnameSource>MacAddress</HostnameSource>
+      <IPAddress>192.168.10.42</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+    </Setting>
+    <Setting>
+      <Conditions>
+        <IO Name="Ignition" Value="1"/>
+        <IO Name="Address0" Value="1"/>
+        <IO Name="Address1" Value="1"/>
+        <IO Name="Address2" Value="0"/>
+        <IO Name="Address3" Value="0"/>
+        <IO Name="LastUnit" Value="0"/>
+      </Conditions>
+      <HostnameSource>MacAddress</HostnameSource>
+      <IPAddress>192.168.10.43</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+    </Setting>
+    <Setting>
+      <Conditions>
+        <IO Name="Ignition" Value="1"/>
+        <IO Name="Address0" Value="0"/>
+        <IO Name="Address1" Value="0"/>
+        <IO Name="Address2" Value="0"/>
+        <IO Name="Address3" Value="0"/>
+        <IO Name="LastUnit" Value="0"/>
+      </Conditions>
+      <HostnameSource>MacAddress</HostnameSource>
+      <IPAddress>192.168.10.44</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+    </Setting>
+  </Settings>
+</HardwareManager>

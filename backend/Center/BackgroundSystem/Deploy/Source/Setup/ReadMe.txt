@@ -1,0 +1,11 @@
+The script requires the following folders and contents to work:
+- Binaries folder, containing the output of the following projects:
+    - Gorba.Center.Admin.SoftwareDescription
+    - Gorba.Common.Configuration.HardwareDescription
+- Cmdlets folder, containing the output of the following project:
+    - Gorba.Center.BackgroundSystem.PowerShell
+- Software folder, containing the software to add as packages and relative descriptors (serialized Gorba.Center.Admin.SoftwareDescription.SoftwarePackageDescriptor object). Examples:
+    - HardwareManager-1.6.1410.7915 (Folder)
+    - HardwareManager-1.6.1410.7915.xml (Descriptor)
+    - Protran-2.4.1410.7890 (Folder)
+    - Protran-2.4.1410.7890.xml (Descriptor)

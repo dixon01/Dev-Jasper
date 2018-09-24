@@ -1,0 +1,37 @@
+﻿<#+
+	private void WriteAddCmdlet(EntitySpace.Entity entity)
+	{#>
+
+	[Cmdlet(VerbsCommon.Add, CmdletNouns.<#= entity.Name #>)]
+	public partial class Add<#= entity.Name #> : <#= entity.Name #>CmdletBaseWithInputObject
+	{
+        protected override void ProcessRecord()
+        {
+			using (var channelScope = this.CreateDataChannelScope<I<#= entity.Name #>DataService>())
+			{<#+
+				if (entity.HasChangeTracking)
+				{
+				    #>
+<#+
+				}
+				else
+				{
+				    #>
+
+				if (this.ParameterSetName == "Multiple")
+				{
+					channelScope.Channel.AddRangeAsync(this.InputObjects).Wait();
+					return;
+				}
+<#+
+				}
+#>
+
+				var result = channelScope.Channel.AddAsync(this.InputObject).Result;
+				this.WriteObject(result);
+			}
+        }
+	}
+<#+
+	}
+#>

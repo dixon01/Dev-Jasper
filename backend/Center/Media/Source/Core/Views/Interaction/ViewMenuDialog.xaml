@@ -1,0 +1,51 @@
+﻿<interaction:InteractionDialogBase x:Class="Gorba.Center.Media.Core.Views.Interaction.ViewMenuDialog"
+                                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                   xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+                                   xmlns:interaction1="clr-namespace:Gorba.Center.Media.Core.Interaction"
+                                   xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                   xmlns:presentation="clr-namespace:Gorba.Common.Configuration.Infomedia.Presentation;assembly=Gorba.Common.Configuration.Infomedia"
+                                   xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                   mc:Ignorable="d" 
+                                   x:Name="Root"
+                                   d:DesignHeight="165" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction1:ViewMenuPrompt}"
+                                   BorderThickness="1" BorderBrush="{StaticResource MainMenuBorderColorBrush}">
+    <interaction:InteractionDialogBase.Resources>
+        <converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+        <Style TargetType="MenuItem">
+            <Setter Property="Opacity" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </interaction:InteractionDialogBase.Resources>
+    <Border Background="{StaticResource PopupBackgroundColorBrush}">
+        <ItemsControl>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <MenuItem Header="{x:Static resources:MediaStrings.ViewMenu_ShowSimulation}" Command="{Binding ShowSimulationToggleCommandWrapper, ElementName=Root}"
+                      IsChecked="{Binding Shell.SimulationIsVisible}"
+                      IsEnabled="{Binding Shell.MediaApplicationState.CurrentPhysicalScreen.Type.Value, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static presentation:PhysicalScreenType.TFT}}"
+                      Style="{StaticResource MainMenuItem}" 
+                      Template="{StaticResource MainMenuItemTemplate}" 
+                      InputGestureText="{x:Static resources:MediaStrings.ViewMenu_ShowSimulationShortcut}"
+                      ToolTip="{x:Static resources:MediaStrings.ViewMenu_ShowSimulationToolTip}"/>
+            
+            <MenuItem Header="{x:Static resources:MediaStrings.ViewMenu_UseEdgeSnap}" Command="{Binding UseEdgeSnapToggleCommandWrapper, ElementName=Root}"
+                      IsEnabled ="{Binding Shell.Editor.SnapConfiguration.IsAvailable}"
+					  IsChecked="{Binding Shell.MediaApplicationState.UseEdgeSnap}"
+                      Style="{StaticResource MainMenuItem}"
+                      Template="{StaticResource MainMenuItemTemplate}"
+                      InputGestureText="{x:Static resources:MediaStrings.ViewMenu_UseEdgeSnapShortcut}"
+                      ToolTip="{x:Static resources:MediaStrings.ViewMenu_UseEdgeSnapToolTip}"/>
+        </ItemsControl>
+    </Border>
+</interaction:InteractionDialogBase>

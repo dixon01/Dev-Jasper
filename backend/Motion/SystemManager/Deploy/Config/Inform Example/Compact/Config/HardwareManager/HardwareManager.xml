@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HardwareManager>
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="true">
+    <PollingInterval>PT0.1S</PollingInterval>
+    <GPIO>
+      <Pin Index="0">Pin0</Pin>
+      <Pin Index="1">Pin1</Pin>
+      <Pin Index="2">Pin2</Pin>
+      <Pin Index="3">Pin3</Pin>
+      <Pin Index="4">Pin4</Pin>
+      <Pin Index="5">Pin5</Pin>
+      <Pin Index="6">Speaker</Pin>
+      <Pin Index="7">Speaker1</Pin>
+    </GPIO>
+    <Button>Button</Button>
+    <UpdateLed>UpdateLed</UpdateLed>
+    <RS485Interface>Cpu</RS485Interface>
+    <DviLevelShifters>
+      <DviLevelShifter Index="2">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+    </DviLevelShifters>
+  </Mgi>
+  <SNTP Enabled="false" Host="2.europe.pool.ntp.org" Port="123" Version="4" />
+  <VDV301 Enabled="false" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="false" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions/>
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>UTC</TimeZone>
+      <IPAddress>192.168.1.216</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+      <Gateway>192.168.1.254</Gateway>
+      <Display Mode="Clone">
+        <Screens>
+          <Screen Adapter="0" Width="1368" Height="768" Orientation="Landscape" IsMainDisplay="true"/>
+          <Screen Adapter="1" Width="1368" Height="768" Orientation="Landscape" IsMainDisplay="false"/>
+        </Screens>
+      </Display>
+    </Setting>
+  </Settings>
+</HardwareManager>

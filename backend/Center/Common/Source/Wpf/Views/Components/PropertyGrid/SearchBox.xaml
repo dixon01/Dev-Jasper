@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Gorba.Center.Common.Wpf.Views.Components.PropertyGrid.SearchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignWidth="300" Name="PARTS_SEARCHBOX" Focusable="True">
+    
+    <Grid Margin="0 2 0 2">
+
+        <TextBox Name="ItemSearchBox" VerticalContentAlignment="Center" KeyDown="OnSearchBoxKeyDown" KeyUp="OnSearchBoxKeyUp" TextChanged="OnSearchBoxTextChanged"
+                 Text="{Binding Text, ElementName=PARTS_SEARCHBOX}" Tag="{Binding HelpText, ElementName=PARTS_SEARCHBOX,FallbackValue='Sample Help Text'}"
+                 BorderBrush="#11000000" Height="24">
+            <TextBox.Template>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="22"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+                            <TextBlock x:Name="InternalWatermarkLabel" 
+                                       Text="{TemplateBinding Tag}" 
+                                       Visibility="Collapsed" Focusable="False"
+                                       VerticalAlignment="Top" Margin=" 5 1 0 0"
+                                       Foreground="#B2000000"
+                                       Background="Transparent"/>
+
+                            <Button Grid.Column="1" Height="22" Width="22" Click="OnSearchButtonClick" IsTabStop="False" VerticalAlignment="Center">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="True">
+                                            <Image x:Name="icon" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/search_dark_16x16.png" Width="16" Height="16" SnapsToDevicePixels="True" Stretch="None"
+                                                   RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" TargetName="border" Value="#11000000"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonHiglightBackgroundBrush}"/>
+                                            </Trigger>
+                                            <DataTrigger Binding="{Binding HasSearched, ElementName=PARTS_SEARCHBOX}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Grid.Column="1" Height="22" Width="22" Click="OnClearSearchButtonClick" IsTabStop="False">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="True">
+                                            <Image x:Name="icon" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/remove_dark_16x16.png" Width="16" Height="16" SnapsToDevicePixels="True" Stretch="None"
+                                                   RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" TargetName="border" Value="#11000000"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonHiglightBackgroundBrush}"/>
+                                            </Trigger>
+                                            <DataTrigger Binding="{Binding HasSearched, ElementName=PARTS_SEARCHBOX}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="False" />
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Visibility" TargetName="InternalWatermarkLabel"
+                                        Value="Visible" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                            <Setter Property="Foreground" TargetName="InternalWatermarkLabel" Value="#CC000000"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+    </Grid>
+</UserControl>

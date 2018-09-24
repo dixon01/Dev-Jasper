@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WebMedia Version="1.2" Created="2013-03-17 15:42:18">
+  <Cycles>
+    <Cycle Name="Conditional">
+      <Enabled>
+        <StringCompare Value="Hello World">
+          <Generic Language="0" Table="12" Column="4" Row="0" />
+        </StringCompare>
+      </Enabled>
+
+      <Image Name="An image" Duration="PT15S" Frame="1" Filename="_content_321_.jpg" />
+      <Video Name="A video" Duration="PT19S" Frame="0" VideoUri="_content_322_.wmv">
+        <Enabled>
+          <IntegerCompare Begin="55" End="55">
+            <Generic Language="0" Table="12" Column="4" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+      </Video>
+    </Cycle>
+    <Cycle Name="Main Cycle">
+      <Image Name="Another image" Duration="PT20S" Frame="0" Filename="_content_324_.jpg" />
+      <Layout Name="Full Layout" Duration="PT25S" Frame="0">
+        <Image X="100" Y="100" Width="200" Height="200" ZIndex="-10" Filename="_content_328_.png" />
+        <Video X="20" Y="100" Width="720" Height="500" ZIndex="10" VideoUri="_content_329_.wmv" />
+      </Layout>
+    </Cycle>
+  </Cycles>
+</WebMedia>

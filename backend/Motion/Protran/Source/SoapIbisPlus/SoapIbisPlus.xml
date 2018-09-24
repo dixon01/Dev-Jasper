@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SoapIbisPlus>
+  <Service Port="9091" URI="MFDCustomerService.soap" Timeout="PT30S">
+    <ConnectionStatusUsedFor Table="SystemStatus" Column="RemotePC" Row="0"/>
+  </Service> 
+
+  <TimeSync Enabled="true">
+    <DateUsedFor Table="SystemStatus" Column="Date" Row="0" />
+    <TimeUsedFor Table="SystemStatus" Column="Time" Row="0" />
+  </TimeSync>
+
+  <TripInfo Enabled="true">
+    <StopNumber TransfRef="Default" Enabled="false">
+      <UsedFor Table="Stops" Column="StopInfo" Row="{0}" />
+    </StopNumber>
+    <StopName TransfRef="Default" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" />
+    </StopName>
+    <StopDescription TransfRef="Default" Enabled="false">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" />
+    </StopDescription>
+    <StopSymbol TransfRef="Default" Enabled="true">
+      <UsedFor Table="Stops" Column="StopInfo" Row="{0}" />
+    </StopSymbol>
+    <StopArrivalTime Enabled="false">
+      <UsedForRelativeTime Table="Stops" Column="StopTime" Row="{0}" />
+      <UsedForAbsoluteTime Table="Stops" Column="StopInfo" Row="{0}" />
+    </StopArrivalTime>
+    <StopDepartureTime Enabled="false">
+      <UsedForRelativeTime Table="Stops" Column="StopTime" Row="{0}" />
+      <UsedForAbsoluteTime Table="Stops" Column="StopInfo" Row="{0}" />
+    </StopDepartureTime>
+    
+    <RouteNumber TransfRef="Default" Enabled="true">
+      <UsedFor Table="Route" Column="Line" Row="0" />
+    </RouteNumber>
+    <RunNumber TransfRef="Default" Enabled="true">
+      <UsedFor Table="Route" Column="Run" Row="0" />
+    </RunNumber>
+    <BlockNumber TransfRef="Default" Enabled="true">
+      <UsedFor Table="Route" Column="Block" Row="0" />
+    </BlockNumber>
+    <Direction TransfRef="Default" Enabled="false">
+      <UsedFor Table="Route" Column="Region" Row="0" />
+    </Direction>
+
+    <DestinationNumber TransfRef="Default" Enabled="false">
+      <UsedFor Table="Destination" Column="DestinationInfo" Row="0" />
+    </DestinationNumber>
+    <DestinationName TransfRef="Default" Enabled="true">
+      <UsedFor Table="Destination" Column="DestinationName" Row="0" />
+    </DestinationName>
+    <DestinationDescription TransfRef="Default" Enabled="false">
+      <UsedFor Table="Destination" Column="DestinationName" Row="0" />
+    </DestinationDescription>
+    <DestinationSymbol TransfRef="Default" Enabled="true">
+      <UsedFor Table="Destination" Column="DestinationInfo" Row="0" />
+    </DestinationSymbol>
+    <DestinationArrivalTime Enabled="false">
+      <UsedForRelativeTime Table="Destination" Column="DestinationTime" Row="0" />
+      <UsedForAbsoluteTime Table="Destination" Column="DestinationInfo" Row="0" />
+    </DestinationArrivalTime>
+    <DestinationDepartureTime Enabled="false">
+      <UsedForRelativeTime Table="Destination" Column="DestinationTime" Row="0" />
+      <UsedForAbsoluteTime Table="Destination" Column="DestinationInfo" Row="0" />
+    </DestinationDepartureTime>
+  </TripInfo>
+
+  <TransferInfo Enabled="true">
+    <!-- Information about the stop for which the transfer information is shown -->
+    <StopNumber TransfRef="Default" Enabled="false">
+      <UsedFor Table="ConnectionReference" Column="ConnectionReferenceStopInfo" Row="0" />
+    </StopNumber>
+    <StopName TransfRef="Default" Enabled="true">
+      <UsedFor Table="ConnectionReference" Column="ConnectionReferenceStopName" Row="0" />
+    </StopName>
+    <StopDescription TransfRef="Default" Enabled="false">
+      <UsedFor Table="ConnectionReference" Column="ConnectionReferenceStopName" Row="0" />
+    </StopDescription>
+    <StopSymbol TransfRef="Default" Enabled="true">
+      <UsedFor Table="ConnectionReference" Column="ConnectionReferenceStopInfo" Row="0" />
+    </StopSymbol>
+    <StopArrivalTime Enabled="false">
+      <UsedForRelativeTime Table="ConnectionReference" Column="ConnectionReferenceStopTime" Row="0" />
+      <UsedForAbsoluteTime Table="ConnectionReference" Column="ConnectionReferenceStopInfo" Row="0" />
+    </StopArrivalTime>
+    <StopDepartureTime Enabled="false">
+      <UsedForRelativeTime Table="ConnectionReference" Column="ConnectionReferenceStopTime" Row="0" />
+      <UsedForAbsoluteTime Table="ConnectionReference" Column="ConnectionReferenceStopInfo" Row="0" />
+    </StopDepartureTime>
+
+    <!-- Actual transfer information -->
+    <PlannedDepartureTime TransfRef="Default" Enabled="false">
+      <UsedForRelativeTime Column="ConnectionTime" Row="{0}" />
+      <UsedForAbsoluteTime Column="ConnectionInfo" Row="{0}" />
+    </PlannedDepartureTime>
+    <CalculatedDepartureTime TransfRef="Default" Enabled="true">
+      <UsedForRelativeTime Column="ConnectionTime" Row="{0}" />
+      <UsedForAbsoluteTime Column="ConnectionInfo" Row="{0}" />
+    </CalculatedDepartureTime>
+    <RouteNumber TransfRef="Default" Enabled="true">
+      <UsedFor Table="Connections" Column="ConnectionLineNumber" Row="{0}" />
+    </RouteNumber>
+    <DestinationText TransfRef="Default" Enabled="true">
+      <UsedFor Table="Connections" Column="ConnectionDestinationName" Row="{0}" />
+    </DestinationText>
+    <TrackText TransfRef="Default" Enabled="true">
+      <UsedFor Table="Connections" Column="ConnectionPlatform" Row="{0}" />
+    </TrackText>
+  </TransferInfo>
+
+  <PassengerInfo Enabled="true">
+    <Body TransfRef="Default" Enabled="true">
+      <UsedFor Table="PassengerMessages" Column="MessageText" Row="{0}" />
+    </Body>
+  </PassengerInfo>
+
+  <Transformations>
+    <Chain id="Default" />
+  </Transformations>
+</SoapIbisPlus>

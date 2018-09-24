@@ -1,0 +1,70 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="AccessExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Access" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions =
+        entitySpace.Partitions.Where(partition => partition.Entities.Any(e => !e.HasChangeTracking))
+            .OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).Where(e => !e.HasChangeTracking);
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Access
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Data.SqlClient;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EntityFramework.BulkInsert.Extensions;
+
+    using Gorba.Center.BackgroundSystem.Data.Model;
+<#
+    foreach (var partition in partitions)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    }
+    #>
+    
+    public static partial class BulkDeleteCommandExtensions
+    {
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteEntity(entity);
+    }
+    #>
+    }
+}<#+
+
+    private static readonly PluralizationService PluralizationService =
+        System.Data.Entity.Design.PluralizationServices.PluralizationService.CreateService(
+            CultureInfo.GetCultureInfo("en-US"));
+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var pluralizedName = PluralizationService.Pluralize(entity.Name);
+#>
+        public static string BuildBulkDeleteCommand(this CenterDataContext context, <#= entity.Name #>Filter filter)
+        {
+            var query = context.<#= pluralizedName #>.ToObjectQuery();
+            return query.CreateDeleteCommand(filter, "<#= pluralizedName #>");
+        }
+<#+
+    }
+#>

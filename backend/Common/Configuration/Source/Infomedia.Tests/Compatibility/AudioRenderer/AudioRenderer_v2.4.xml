@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AudioRenderer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="file:///. AudioRenderer.xsd">
+  <IO>
+    <VolumePort Name="SystemVolume" />
+  </IO>
+  <AudioChannels>
+    <AudioChannel Id="1">
+      <SpeakerPort Name="Speaker" />
+      <SpeakerPort Name="Speaker1" />
+    </AudioChannel>
+    <AudioChannel Id="2">
+      <SpeakerPort Name="Speaker1" />
+    </AudioChannel>
+  </AudioChannels>
+  <TextToSpeech>
+    <API>Acapela</API>
+    <HintPath>D:\Progs\Acapela</HintPath>
+  </TextToSpeech>
+</AudioRenderer>

@@ -1,0 +1,2 @@
+Created,Duration,FileName,Id,IsPlayInterrupted,PassengerCount,PlayStarted,PlayStopped,ResourceId,Route,StartedLatitude,StartedLongitude,StoppedLatitude,StoppedLongitude,Trip,UnitName,VehicleId
+12/21/2017 7:27:16 AM,10,test.png,0,False,0,12/21/2017 7:27:16 AM,12/21/2017 7:27:26 AM,RES123,R1,33.019844,-96.698883,33.019847,-96.698887,T1,TFT-83-40-E1,BUS1

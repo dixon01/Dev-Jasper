@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntitySpace xmlns="http://schemas.gorba.com/Center/EntitySpace" xmlns:data="http://schemas.gorba.com/Center/Data/ExtendedEntitySpace">
+  <Partitions>
+    <Partition name="AccessControl">
+      <Entities>
+        <Entity name="Authorization" displayProperty="DataScope">
+          <Properties>
+            <DataProperty sqlType="tinyint" name="DataScope" type="DataScope" propertyType="Enumeration" xmlns="http://schemas.gorba.com/Center/Data/ExtendedEntitySpace" />
+            <Property name="UserRole" type="UserRole" propertyType="Reference" isRequired="true" />
+            <Property name="Permission" type="Permission" propertyType="Enumeration" />
+          </Properties>
+        </Entity>
+        <Entity name="UserRole" displayProperty="Name">
+          <Properties xmlns:docs="http://schemas.gorba.com/center/documentation">
+            <Property name="Name" type="string" isRequired="true" isUnique="true">
+              <docs:Documentation>
+                <Summary>Gets or sets the name of the user role.</Summary>
+              </docs:Documentation>
+            </Property>
+            <Property name="Description" type="string">
+              <docs:Documentation>
+                <Summary>Gets or sets the description of the user role.</Summary>
+              </docs:Documentation>
+            </Property>
+            <Collection name="Authorizations" itemType="Authorization" inverseProperty="UserRole" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="DataScope">
+          <Members>
+            <!-- AccessControl -->
+            <Member name="AccessControl" value="10" />
+            <!-- Membership -->
+            <Member name="Tenant" value="0" />
+            <Member name="User" value="1" />
+            <!-- Units -->
+            <Member name="ProductType" value="20" />
+            <Member name="Unit" value="2" />
+            <!-- Resource -->
+            <Member name="Resource" value="30" />
+            <!-- Update -->
+            <Member name="Update" value="40" />
+            <!-- Software -->
+            <Member name="Software" value="50" />
+            <!-- Configurations -->
+            <Member name="UnitConfiguration" value="80" />
+            <Member name="MediaConfiguration" value="100" />
+            <!-- Meta -->
+            <Member name="Meta" value="200" />
+            <!-- Applications -->
+            <Member name="CenterAdmin" value="1000" />
+            <Member name="CenterDiag" value="1001" />
+            <Member name="CenterMedia" value="1002" />
+          </Members>
+        </Enum>
+        <Enum name="Permission">
+          <Members>
+            <Member name="Create" value="0" />
+            <Member name="Read" value="1" />
+            <Member name="Write" value="2" />
+            <Member name="Delete" value="3" />
+            <Member name="Interact" value="4" />
+            <Member name="Abort" value="5" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+    <Partition name="Membership">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="Tenant" displayProperty="Name">
+          <Properties>
+            <Property name="Name" type="string" isRequired="true" isUnique="true" />
+            <Property name="Description" type="string" />
+            <Collection name="Users" itemType="User" inverseProperty="OwnerTenant" />
+            <Collection name="UpdateGroups" itemType="Update.UpdateGroup" inverseProperty="Tenant" />
+          </Properties>
+        </Entity>
+        <Entity name="User" displayProperty="Username">
+          <Properties>
+            <Property name="OwnerTenant" type="Tenant" propertyType="Reference" isRequired="true" />
+            <Collection name="AssociationTenantUserUserRoles" itemType="AssociationTenantUserUserRole" inverseProperty="User" />
+            <Property name="Username" type="string" isRequired="true" isUnique="true" />
+            <Property name="Domain" type="string" />
+            <Property name="HashedPassword" type="string" />
+            <Property name="FirstName" type="string" />
+            <Property name="LastName" type="string" />
+            <Property name="Email" type="string" />
+            <Property name="Culture" type="string" />
+            <Property name="TimeZone" type="string" />
+            <Property name="Description" type="string" />
+            <Property name="LastLoginAttempt" type="DateTime?" />
+            <Property name="LastSuccessfulLogin" type="DateTime?" />
+            <Property name="ConsecutiveLoginFailures" type="int" />
+            <Property name="IsEnabled" type="bool" />
+          </Properties>
+        </Entity>
+        <Entity name="AssociationTenantUserUserRole" displayProperty="UserRole">
+          <Properties>
+            <Property name="Tenant" type="Tenant" propertyType="Reference" />
+            <Property name="User" type="User" propertyType="Reference" isRequired="true" />
+            <Property name="UserRole" type="AccessControl.UserRole" propertyType="Reference" isRequired="true" />
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+    <Partition name="Units">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="ProductType" displayProperty="Name">
+          <Properties>
+            <Property name="UnitType" type="UnitTypes" propertyType="Enumeration" />
+            <Collection name="Units" itemType="Unit" inverseProperty="ProductType" />
+            <Property name="Name" type="string" isRequired="true" />
+            <Property name="Description" type="string" />
+            <Property name="HardwareDescriptor" isXmlSerialized="true" />
+          </Properties>
+        </Entity>
+        <Entity name="Unit" displayProperty="Name">
+          <Properties>
+            <Property name="Tenant" type="Membership.Tenant" propertyType="Reference" isRequired="true" />
+            <Property name="ProductType" type="ProductType" propertyType="Reference" isRequired="true" />
+            <Property name="Name" type="string" isRequired="true" />
+            <Property name="NetworkAddress" type="string" />
+            <Property name="Description" type="string" />
+            <Property name="IsConnected" type="bool" isRequired="true" />
+            <Collection name="UpdateCommands" itemType="Update.UpdateCommand" inverseProperty="Unit" />
+            <Property name="UpdateGroup" type="Update.UpdateGroup" propertyType="Reference" isRequired="false" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="UnitTypes">
+          <Members>
+            <Member name="Tft" value="0" description="imotion TFT" />
+            <Member name="Obu" value="1" description="imotion OBU" />
+            <Member name="EPaper" value="2" description="iqube E-Paper" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+    <Partition name="Resources">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="Resource" displayProperty="Hash" isDataServiceAvailable="false">
+          <Properties>
+            <Property name="UploadingUser" type="Membership.User" propertyType="Reference" />
+            <Property name="OriginalFilename" type="string" />
+            <Property name="Description" type="string" />
+            <Property name="Hash" type="string" isUnique="true" />
+            <Property name="ThumbnailHash" type="string" />
+            <Property name="MimeType" type="string" />
+            <Property name="Length" type="long" />
+          </Properties>
+        </Entity>
+        <Entity name="ContentResource" displayProperty="Hash">
+          <Properties>
+            <Property name="UploadingUser" type="Membership.User" propertyType="Reference" />
+            <Property name="OriginalFilename" type="string" />
+            <Property name="Description" type="string" />
+            <Property name="ThumbnailHash" type="string" />
+            <Property name="Hash" type="string" isUnique="true" indexName="IX_HashAndHashType" indexOrder="0" />
+            <Property name="HashAlgorithmType" type="HashAlgorithmTypes" propertyType="Enumeration" isUnique="true" indexName="IX_HashAndHashType" indexOrder="1" />
+            <Property name="MimeType" type="string" />
+            <Property name="Length" type="long" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="HashAlgorithmTypes">
+          <Members>
+            <Member name="MD5" value="0" />
+            <Member name="xxHash64" value="1" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+    <Partition name="Update">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="UpdateGroup" displayProperty="Name">
+          <Properties>
+            <Property name="Name" type="string" isRequired="true" />
+            <Property name="Description" type="string" />
+            <Property name="Tenant" type="Membership.Tenant" propertyType="Reference" isRequired="true" />
+            <Collection name="Units" itemType="Units.Unit" inverseProperty="UpdateGroup" />
+            <Collection name="UpdateParts" itemType="UpdatePart" inverseProperty="UpdateGroup" />
+            <Property name="UnitConfiguration" type="Configurations.UnitConfiguration" propertyType="Reference" />
+            <Property name="MediaConfiguration" type="Configurations.MediaConfiguration" propertyType="Reference" />
+          </Properties>
+        </Entity>
+        <Entity name="UpdatePart" displayProperty="Type">
+          <Properties>
+            <Property name="UpdateGroup" type="UpdateGroup" propertyType="Reference" isRequired="true" />
+            <Property name="Type" type="UpdatePartType" propertyType="Enumeration" isRequired="true" />
+            <Property name="Start" type="DateTime" isRequired="true" />
+            <Property name="End" type="DateTime" isRequired="true" />
+            <Property name="Description" type="string" />
+            <Property name="Structure" isXmlSerialized="true" />
+            <Property name="InstallInstructions" isXmlSerialized="true" />
+            <Property name="DynamicContent" isXmlSerialized="true" />
+            <Collection name="RelatedCommands" itemType="UpdateCommand" />
+          </Properties>
+        </Entity>
+        <Entity name="UpdateCommand" displayProperty="UpdateIndex">
+          <Properties>
+            <Property name="UpdateIndex" type="int" isRequired="true" />
+            <Property name="Unit" type="Units.Unit" propertyType="Reference" isRequired="true" />
+            <Property name="Command" isXmlSerialized="true" />
+            <Property name="WasTransferred" type="bool" isRequired="true" />
+            <Property name="WasInstalled" type="bool" isRequired="true" />
+            <Collection name="IncludedParts" itemType="UpdatePart" />
+            <Collection name="Feedbacks" itemType="UpdateFeedback" inverseProperty="UpdateCommand" />
+          </Properties>
+        </Entity>
+        <Entity name="UpdateFeedback" displayProperty="Timestamp">
+          <Properties>
+            <Property name="UpdateCommand" type="UpdateCommand" propertyType="Reference" isRequired="true" />
+            <Property name="Timestamp" type="DateTime" isRequired="true" />
+            <Property name="State" type="UpdateState" propertyType="Enumeration" isRequired="true" />
+            <Property name="Feedback" isXmlSerialized="true" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="UpdatePartType">
+          <Members>
+            <Member name="Setup" value="0" />
+            <Member name="Presentation" value="1" />
+            <Member name="AutoPresentation" value="2" />
+            <!-- this is presentation content automatically created by the Background System -->
+          </Members>
+        </Enum>
+        <Enum name="UpdateState">
+          <!-- same members as Gorba.Common.Update.ServiceModel.Messages.UpdateState -->
+          <Members>
+            <Member name="Unknown" value="0" />
+            <Member name="Created" value="1" />
+            <Member name="Transferring" value="2" />
+            <Member name="Transferred" value="3" />
+            <Member name="Installing" value="4" />
+            <Member name="Installed" value="10" />
+            <Member name="Ignored" value="11" />
+            <Member name="PartiallyInstalled" value="12" />
+            <Member name="TransferFailed" value="20" />
+            <Member name="InstallationFailed" value="21" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+    <Partition name="Documents">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="Document" displayProperty="Name">
+          <Properties>
+            <Property name="Name" type="string" isRequired="true" />
+            <Property name="Description" type="string" />
+            <Property name="Tenant" type="Membership.Tenant" propertyType="Reference" isRequired="true" />
+            <Collection name="Versions" itemType="DocumentVersion" inverseProperty="Document" />
+          </Properties>
+        </Entity>
+        <Entity name="DocumentVersion" displayProperty="Description">
+          <Properties>
+            <Property name="Document" type="Document" propertyType="Reference" isRequired="true" />
+            <Property name="CreatingUser" type="Membership.User" propertyType="Reference" />
+            <Property name="Major" type="int" />
+            <Property name="Minor" type="int" />
+            <Property name="Content" isXmlSerialized="true" />
+            <Property name="Description" type="string" />
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+    <Partition name="Software">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="Package" displayProperty="ProductName">
+          <Properties>
+            <Property name="PackageId" type="string" isRequired="true" isUnique="true" />
+            <Property name="ProductName" type="string" isRequired="true" isUnique="true" />
+            <Property name="Description" type="string" />
+            <Collection name="Versions" itemType="PackageVersion" inverseProperty="Package" />
+          </Properties>
+        </Entity>
+        <Entity name="PackageVersion" displayProperty="SoftwareVersion">
+          <Properties>
+            <Property name="Package" type="Package" propertyType="Reference" isRequired="true" />
+            <Property name="SoftwareVersion" type="string" />
+            <Property name="Structure" isXmlSerialized="true" />
+            <Property name="Description" type="string" />
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+    <Partition name="Configurations">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="UnitConfiguration" displayProperty="Document">
+          <Properties>
+            <Collection name="UpdateGroups" itemType="Update.UpdateGroup" inverseProperty="UnitConfiguration" />
+            <Property name="Document" type="Documents.Document" isRequired="true" propertyType="Reference" />
+            <Property name="ProductType" type="Units.ProductType" propertyType="Reference" isRequired="true" />
+          </Properties>
+        </Entity>
+        <Entity name="MediaConfiguration" displayProperty="Document">
+          <Properties>
+            <Collection name="UpdateGroups" itemType="Update.UpdateGroup" inverseProperty="MediaConfiguration" />
+            <Property name="Document" type="Documents.Document" isRequired="true" propertyType="Reference" />
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+    <Partition name="Log">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="LogEntry" displayProperty="Message" hasChangeTracking="false">
+          <Properties>
+            <Property name="Unit" type="Units.Unit" propertyType="Reference" />
+            <Property name="Application" type="string" isRequired="true" />
+            <Property name="Timestamp" type="DateTime" isRequired="true" />
+            <Property name="Level" type="Level" propertyType="Enumeration" isRequired="true" />
+            <Property name="Logger" type="string" isRequired="true" />
+            <Property name="Message" type="string" isRequired="true" />
+            <Property name="AdditionalData" type="string" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="Level">
+          <Members>
+            <Member name="Trace" value="0" />
+            <Member name="Debug" value="1" />
+            <Member name="Info" value="2" />
+            <Member name="Warn" value="3" />
+            <Member name="Error" value="4" />
+            <Member name="Fatal" value="5" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+    <Partition name="Meta">
+      <Entities xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Entity name="UserDefinedProperty" displayProperty="Name">
+          <Properties>
+            <!-- Entity would conflict with Entity defined in ChangeTrackingManager classes -->
+            <Property name="OwnerEntity" type="UserDefinedPropertyEnabledEntity" propertyType="Enumeration" />
+            <Property name="Tenant" type="Membership.Tenant" propertyType="Reference" />
+            <Property name="Name" type="string" />
+          </Properties>
+        </Entity>
+        <Entity name="SystemConfig" hasChangeTracking="true" displayProperty="SystemId">
+          <Properties>
+            <Property name="SystemId" type="Guid" />
+            <Property name="Settings" isXmlSerialized="true" />
+          </Properties>
+        </Entity>
+      </Entities>
+      <Enums xmlns:docs="http://schemas.gorba.com/center/documentation">
+        <Enum name="UserDefinedPropertyEnabledEntity">
+          <Members>
+            <Member name="Unit" value="0" />
+            <Member name="User" value="1" />
+            <Member name="Tenant" value="2" />
+            <Member name="UserRole" value="3" />
+            <Member name="UpdateGroup" value="4" />
+          </Members>
+        </Enum>
+      </Enums>
+    </Partition>
+  </Partitions>
+</EntitySpace>

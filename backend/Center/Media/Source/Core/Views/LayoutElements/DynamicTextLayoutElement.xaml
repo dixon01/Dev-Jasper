@@ -1,0 +1,75 @@
+﻿<layoutElements:EditableLayoutElementBase  x:Class="Gorba.Center.Media.Core.Views.LayoutElements.DynamicTextLayoutElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                  xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+                                  xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels"
+                                  xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+                                  xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                  xmlns:layoutElements="clr-namespace:Gorba.Center.Media.Core.Views.LayoutElements"
+                                  mc:Ignorable="d" x:Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance layout:DynamicTextElementDataViewModel}">
+    <layoutElements:EditableLayoutElementBase.Resources>
+        <converters:FontWeightConverter x:Key="FontWeightConverter" />
+        <converters:EvaluationToStringConverter x:Key="EvaluationToStringConverter" />
+        <converters:FontFaceToFontFamilyConverter x:Key="FontFaceToFontFamilyConverter" />
+    </layoutElements:EditableLayoutElementBase.Resources>
+    <Border BorderThickness="1" ToolTip="{Binding Path=Value.Formula, Converter={StaticResource EvaluationToStringConverter}, ConverterParameter=false}">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource LayoutElementBorder}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowAdorner, ElementName=Root}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredSelectedBackgroundBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource LayoutElementSelectedBorder}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Border.Resources>
+            <converters:TableNameTranslationConverter x:Key="TableNameTranslationConverter"/>
+            <converters:ColumnNameTranslationConverter x:Key="ColumnNameTranslationConverter"/>
+        </Border.Resources>
+        <Grid>
+            <TextBlock FontFamily="{Binding FontFace.Value, Converter={StaticResource FontFaceToFontFamilyConverter}}"
+                       FontSize="{Binding FontHeight.Value}"
+                       HorizontalAlignment="{Binding ElementName=Root, Path=HorizontalTextAlignment}" 
+                       VerticalAlignment="{Binding ElementName=Root, Path=VerticalTextAlignment}"
+                       Foreground="{Binding FontColor.Value}"
+                       Text="{Binding Path=Value.Formula, Converter={StaticResource EvaluationToStringConverter}, ConverterParameter=false, Mode=TwoWay}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" >
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Setter Property="IsHitTestVisible" Value="True" />
+                        <Setter Property="FontStyle" Value="Normal" />
+                        <Setter Property="FontWeight" Value="{Binding FontWeight.Value, Converter={StaticResource FontWeightConverter}, Mode=TwoWay}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Root, Path=ViewMode}" Value="Edit">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                             <DataTrigger Binding="{Binding FontItalic.Value}" Value="True">
+                                <Setter Property="FontStyle" Value="Italic" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <!--<StackPanel>
+                <TextBlock Text="Set Testdata:" Foreground="White" />
+                <TextBox Text="{Binding TestData.Value, Mode=TwoWay}" />
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Root, Path=ViewMode}" Value="Edit">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>-->
+        </Grid>
+    </Border>
+</layoutElements:EditableLayoutElementBase>

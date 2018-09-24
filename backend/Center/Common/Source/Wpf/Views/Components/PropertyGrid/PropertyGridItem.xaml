@@ -1,0 +1,104 @@
+﻿<propertyGrid:PropertyGridItemBase x:Class="Gorba.Center.Common.Wpf.Views.Components.PropertyGrid.PropertyGridItem"
+                                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                   xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid"
+                                   mc:Ignorable="d" x:Name="PARTS_PROPERTYGRIDITEMROOT" 
+                                   Background="{StaticResource PropertyGridItemBackgroundColorBorderBrush}"
+                                   Foreground="{StaticResource PropertyGridItemForegroundColorBorderBrush}"
+                                   d:DesignHeight="28" d:DesignWidth="300" Margin="12 2 2 2" Height="26">
+    <propertyGrid:PropertyGridItemBase.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+        
+        <ControlTemplate x:Key="ContextButtonTemplate" TargetType="{x:Type propertyGrid:PropertyGridContextButton}">
+            <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="True">
+                <Rectangle x:Name="icon" Stroke="#717171" StrokeThickness="1" Width="7" Height="7" SnapsToDevicePixels="True"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#11000000"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="White"/>
+                    <Setter Property="Stroke" TargetName="icon" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="Transparent"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                    <Setter Property="Stroke" TargetName="icon" Value="#cccccc"/>
+                    <Setter Property="Fill" TargetName="icon" Value="#cccccc"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </propertyGrid:PropertyGridItemBase.Resources>
+
+    <Grid>
+        <Grid.Resources>
+            <propertyGrid:PropertyGridItemTemplateSelector x:Key="propertyGridItemTemplateSelector"/>
+
+            <DataTemplate x:Key="PropertyGridTextEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridTextEditor Height="24" DataConverter="{Binding ElementName=PARTS_PROPERTYGRIDITEMROOT, Path=DataConverter}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridBoolEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridBoolEditor VerticalAlignment="Center"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridIntEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridTextEditor Height="24" />
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridDateEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <DatePicker SelectedDate="{Binding Path=Value}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridSingleSelectEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridSingleSelectEditor Height="24" />
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridMultiSelectEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridMultiSelectEditor Height="24" />
+            </DataTemplate>
+            <DataTemplate x:Key="PropertyGridActionEditor" DataType="propertyGrid:PropertyGridItemDataSource">
+                <propertyGrid:PropertyGridActionEditor ActionCallback="{Binding ElementName=PARTS_PROPERTYGRIDITEMROOT, Path=ActionCallback}"
+                                                       UpdateCallback="{Binding ElementName=PARTS_PROPERTYGRIDITEMROOT, Path=UpdateCallback}"
+                                                       PropertyGridItem="{Binding ElementName=PARTS_PROPERTYGRIDITEMROOT}"/>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding LabelColumnWidth, ElementName=PARTS_PROPERTYGRIDITEMROOT, FallbackValue=0.5*}"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="{Binding ContextButtonColumnWidth, ElementName=PARTS_PROPERTYGRIDITEMROOT, FallbackValue=16}"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0">
+            <TextBlock Text="{Binding Path=Header, ElementName=PARTS_PROPERTYGRIDITEMROOT}" Margin="5 0 0 0" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
+                       ToolTip="{Binding Path=HeaderToolTip, ElementName=PARTS_PROPERTYGRIDITEMROOT}" VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontStyle" Value="Normal"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=HasMultipleDifferingDataSources, ElementName=PARTS_PROPERTYGRIDITEMROOT}" Value="True">
+                                <Setter Property="FontStyle" Value="Italic"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Border>
+
+        <ContentPresenter Grid.Column="1" Content="{Binding WrappedDataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Mode=TwoWay}" Tag="{Binding EditorTemplate, ElementName=PARTS_PROPERTYGRIDITEMROOT}" 
+                          ContentTemplateSelector="{StaticResource propertyGridItemTemplateSelector}" VerticalAlignment="Center">
+            <ContentPresenter.Style>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="TextBlock.FontWeight" Value="Normal"/>
+                </Style>
+            </ContentPresenter.Style>
+        </ContentPresenter>
+
+        <propertyGrid:PropertyGridContextButton Grid.Column="2" Template="{Binding ContextButtonTemplate, ElementName=PARTS_PROPERTYGRIDITEMROOT}"
+                                                IsTabStop="False" x:Name="ContextButton"
+                                                Visibility="{Binding HasContextButton, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource booleanToVisibilityConverter}}"
+                                                Click="OnContextButtonClicked"/>
+    </Grid>
+</propertyGrid:PropertyGridItemBase>

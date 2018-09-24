@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SystemManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Defaults>
+    <Process UseWatchdog="false">
+      <LaunchDelay>PT0S</LaunchDelay>
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <WindowMode>Minimized</WindowMode>
+      <Priority>Normal</Priority>
+      <ExitTimeout>PT30S</ExitTimeout>
+    </Process>
+  </Defaults>
+  <SplashScreens X="0" Y="0" Width="1366" Height="768">
+    <SplashScreen Name="Boot" Enabled="true" Foreground="#FF000000" Background="#FF97FF9C">
+      <ShowOn>
+        <SystemBoot />
+        <SystemShutdown />
+      </ShowOn>
+      <HideOn>
+        <ApplicationStateChange Application="DirectX Renderer" State="Running" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="IBIS Address" Name="IbisAddress0" />
+        <Management Label="Atmel Controller Version" Application="HardwareManager" Path="\HardwareManager\MGI\At91Rev" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Announcement" Enabled="true" Foreground="Black" Background="Red">
+      <ShowOn>
+        <Input Name="UDCPAnnounce" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Input Name="UDCPAnnounce" Value="0" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="false" Serial="true" />
+        <Network Name="false" Ip="true" Gateway="false" Mac="false" Status="false" StatusFilter="Up" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="HotKey" Enabled="true" Foreground="#FF000000" Background="#FFB54242">
+      <ShowOn>
+        <HotKey Key="S" />
+      </ShowOn>
+      <HideOn>
+        <HotKey Key="S" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="IBIS Address" Name="IbisAddress0" />
+        <Management Label="Atmel Controller Version" Application="HardwareManager" Path="\HardwareManager\MGI\At91Rev" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Button" Enabled="true" Foreground="#FF000000" Background="#FF008DEB">
+      <ShowOn>
+        <Input Unit="*" Name="Button" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Timeout Delay="PT30S" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="IBIS Address" Name="IbisAddress0" />
+        <Management Label="Atmel Controller Version" Application="HardwareManager" Path="\HardwareManager\MGI\At91Rev" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+  </SplashScreens>
+  <System>
+    <ShutDownSplashScreenVisibleTime>PT20S</ShutDownSplashScreenVisibleTime>
+    <IgnitionHoldTime>PT10S</IgnitionHoldTime>
+    <RamLimit Enabled="true">
+      <FreeRamMB>100</FreeRamMB>
+      <Actions>
+        <Reboot />
+      </Actions>
+    </RamLimit>
+    <CpuLimit Enabled="false">
+      <MaxCpuPercentage>98</MaxCpuPercentage>
+      <Actions>
+        <Reboot />
+      </Actions>
+    </CpuLimit>
+    <DiskLimits Enabled="true">
+      <Disk Enabled="true" Path="C:\">
+        <FreeSpaceMB>5</FreeSpaceMB>
+        <Actions>
+          <Reboot />
+        </Actions>
+      </Disk>
+      <Disk Enabled="true" Path="D:\">
+        <FreeSpaceMB>10</FreeSpaceMB>
+        <FreeSpacePercentage>5</FreeSpacePercentage>
+        <Actions>
+          <Purge Path="D:\log\archives\" />
+        </Actions>
+      </Disk>
+    </DiskLimits>
+    <PreventPopups Enabled="true" CheckInterval="PT10S" />
+  </System>
+  <Applications>
+    <Process Name="Hardware Manager" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>..\..\Progs\HardwareManager\HardwareManager.exe</ExecutablePath>
+      <WindowMode>Minimized</WindowMode>
+      <ExitTimeout>PT30S</ExitTimeout>
+      <RamLimit Enabled="true">
+        <MaxRamMB>200</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+      <CpuLimit Enabled="true">
+        <MaxCpuPercentage>30</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </CpuLimit>
+    </Process>
+    <Process Name="Update" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>..\..\Progs\Update\Update.exe</ExecutablePath>
+      <WindowMode>Minimized</WindowMode>
+      <ExitTimeout>PT30S</ExitTimeout>
+      <RamLimit Enabled="true">
+        <MaxRamMB>200</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="DirectX Renderer" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>..\..\Progs\DirectXRenderer\DirectXRenderer.exe</ExecutablePath>
+      <ExitTimeout>PT30S</ExitTimeout>
+      <RamLimit Enabled="true">
+        <MaxRamMB>450</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+    </Process>
+  </Applications>
+</SystemManager>

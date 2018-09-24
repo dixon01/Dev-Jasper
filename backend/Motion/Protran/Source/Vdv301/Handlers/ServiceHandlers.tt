@@ -1,0 +1,502 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\..\..\Common\Configuration\Source\Protran\Vdv301\Vdv301Protocol.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Protran.VDV301;
+using Gorba.Common.Protocols.Ximple;
+
+using Gorba.Common.Protocols.Vdv301.Messages;
+using Gorba.Common.Protocols.Vdv301.Services;
+
+using Gorba.Common.Utility.Core;
+
+using Gorba.Motion.Common.IbisIP;
+
+using Gorba.Motion.Protran.Core.Utils;
+
+using NLog;
+
+namespace Gorba.Motion.Protran.Vdv301.Handlers
+{<#
+    var services = LoadSupportedServices(
+        this.Host.ResolvePath(@"..\..\..\..\..\Common\Configuration\Source\Protran\Vdv301\SupportedServices.xml"));
+    
+    foreach (var service in services)
+    {
+        this.GenerateHttpServiceHandler(service);
+    }
+#>
+
+}
+
+<#+
+private void GenerateHttpServiceHandler(Service service)
+{
+    var operations = service.Operations.Where(o => o.Name.StartsWith("Get")).ToList();
+    #>
+    
+    public partial class <#= service.Name #>Handler : ServiceHandlerBase
+    {
+        private static readonly Logger Logger = LogHelper.GetLogger<<#= service.Name #>Handler>();
+
+        private readonly object serviceLock = new object();
+
+        private readonly DataContext dataContext = new DataContext();
+
+        private IHandlerContext context;
+
+        private <#= service.Name #>Config config;
+<#+
+    foreach (var operation in operations)
+    {
+        #>
+        
+        private <#= operation.Name #>Handler handler<#= operation.Name #>;
+        private ITimer timeout<#= operation.Name #>;
+        <#+
+    }
+    #>
+
+        private I<#= service.Name #> service;
+
+        public override void Configure(IHandlerContext context)
+        {
+            this.context = context;
+            this.config = context.Config.Services.<#= service.Name #>;
+<#+
+    foreach (var operation in operations)
+    {
+        #>
+
+            if (this.config.<#= operation.Name #> != null && this.config.<#= operation.Name #>.Subscribe)
+            {
+                if (this.config.<#= operation.Name #>.SubscriptionTimeout > TimeSpan.Zero)
+                {
+                    this.timeout<#= operation.Name #> = TimerFactory.Current.CreateTimer("Timeout-<#= operation.Name #>");
+                    this.timeout<#= operation.Name #>.Interval = this.config.<#= operation.Name #>.SubscriptionTimeout;
+                    this.timeout<#= operation.Name #>.Elapsed += this.Timeout<#= operation.Name #>OnElapsed;
+                }
+
+                this.handler<#= operation.Name #> = new <#= operation.Name #>Handler(
+                    this.config.<#= operation.Name #>, this.HandlerFactory, context);
+            }
+<#+
+    }
+    #>
+        }
+
+        public override void Start()
+        {
+            this.context.<#= service.Name #>Changed += this.ContextOn<#= service.Name #>Changed;
+
+            if (this.context.<#= service.Name #> == null)
+            {
+                return;
+            }
+
+            this.Subscribe();
+        }
+
+        public override void Stop()
+        {
+            this.context.CustomerInformationServiceChanged -= this.ContextOnCustomerInformationServiceChanged;
+
+            this.Unsubscribe();
+        }
+
+        private void Subscribe()
+        {
+            this.service = this.context.<#= service.Name #>;
+            if (this.service == null)
+            {
+                return;
+            }
+            <#+
+    foreach (var operation in operations)
+    {
+        #>
+
+            if (this.config.<#= operation.Name #> != null && this.config.<#= operation.Name #>.Subscribe)
+            {
+                if (this.timeout<#= operation.Name #> != null)
+                {
+                    this.timeout<#= operation.Name #>.Enabled = true;
+                }
+
+                this.service.<#= operation.Name.Substring(3) #>Changed += this.ServiceOn<#= operation.Name.Substring(3) #>Changed;
+            }
+        <#+
+    }
+            #>
+
+        }
+
+        private void Unsubscribe()
+        {
+            if (this.service == null)
+            {
+                return;
+            }
+            <#+
+    foreach (var operation in operations)
+    {
+        #>
+
+            if (this.config.<#= operation.Name #> != null && this.config.<#= operation.Name #>.Subscribe)
+            {
+                if (this.timeout<#= operation.Name #> != null)
+                {
+                    this.timeout<#= operation.Name #>.Enabled = false;
+                }
+
+                this.service.<#= operation.Name.Substring(3) #>Changed -= this.ServiceOn<#= operation.Name.Substring(3) #>Changed;
+            }
+        <#+
+    }
+            #>
+
+            this.service = null;
+        }
+
+        private void ContextOn<#= service.Name #>Changed(object sender, EventArgs e)
+        {
+            this.Unsubscribe();
+            this.Subscribe();
+        }
+        
+<#+
+    foreach (var operation in operations)
+    {
+        var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+        var shortName = operation.Name.Substring(3);
+        #>
+
+        private void ServiceOn<#= shortName #>Changed(object sender, DataUpdateEventArgs<<#= returnType #>> e)
+        {
+            if (this.timeout<#= operation.Name #> != null)
+            {
+                this.timeout<#= operation.Name #>.Enabled = false;
+                this.timeout<#= operation.Name #>.Enabled = true;
+            }
+
+            this.RaiseDataUpdated(new DataUpdateEventArgs<object>(e.Value));
+            lock (this.serviceLock)
+            {
+                this.handler<#= operation.Name #>.PrepareData(e.Value, 0, this.dataContext);
+                var ximple = new Ximple();
+                this.handler<#= operation.Name #>.HandleData(e.Value, ximple, 0, this.dataContext);
+                if (ximple.Cells.Count > 0)
+                {
+                    this.RaiseXimpleCreated(new XimpleEventArgs(ximple));
+                }
+            }
+        }
+        
+        private void Timeout<#= operation.Name #>OnElapsed(object sender, EventArgs e)
+        {
+            Logger.Warn(
+                "Subscription timeout on <#= operation.Name #> ({0}), re-subscribing to the entire service",
+                this.config.<#= operation.Name #>.SubscriptionTimeout);
+            this.Unsubscribe();
+            this.Subscribe();
+        }
+<#+
+    }
+
+        #>
+
+        /// <summary>
+        /// This class can be extended to share data between the different handlers
+        /// </summary>
+        private partial class DataContext
+        {
+        }
+
+<#+
+        
+    foreach (var operation in operations)
+    {
+        var complex = operation.Return.ElementSchemaType as XmlSchemaComplexType;
+        if (complex == null)
+        {
+            continue;
+        }
+
+        this.GenerateComplexTypeHandler(complex, operation.Name, service);
+    }
+
+    var dataTypes = GetDataTypes(operations);
+    foreach (var dataType in dataTypes)
+    {
+        this.GenerateComplexTypeHandler(dataType, dataType.Name, service);
+    }
+        #>
+
+    }
+    <#+
+}
+
+private void GenerateComplexTypeHandler(XmlSchemaComplexType type, string structureName, Service service)
+{
+    var particle = type.Particle as XmlSchemaGroupBase;
+    if (particle == null)
+    {
+        return;
+    }
+    
+    var children = GetChildren(particle);
+
+    #>
+        private partial class <#= structureName #>Handler
+        {
+            private readonly <#= service.Name #>Config.<#= structureName #>Config config;
+
+<#+
+    foreach (var child in children)
+    {
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            #>
+            private readonly List<<#= this.GetHandlerClassName(child) #>> handlers<#= child.Name #>;
+
+<#+
+        }
+        else
+        {
+        #>
+            private readonly <#= child.ElementSchemaType.Name #>Handler handler<#= child.Name #>;
+
+<#+
+        }
+    }
+#>
+            public <#= structureName #>Handler(
+                <#= service.Name #>Config.<#= structureName #>Config config,
+                IElementHandlerFactory handlerFactory,
+                IHandlerConfigContext context)
+            {
+                this.config = config;
+                
+<#+
+    foreach (var child in children)
+    {
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            var handlerType = this.GetHandlerClassName(child);
+            #>
+                if (this.config.<#= child.Name #> != null && this.config.<#= child.Name #>.Count > 0)
+                {
+                    this.handlers<#= child.Name #> = new List<<#= handlerType #>>(this.config.<#= child.Name #>.Count);
+                    foreach (var child in this.config.<#= child.Name #>)
+                    {
+                        this.handlers<#= child.Name #>.Add(handlerFactory.Create<#= handlerType #>(child, context));
+                    }
+                }
+
+<#+
+        }
+        else
+        {
+        #>
+                if (this.config.<#= child.Name #> != null)
+                {
+                    this.handler<#= child.Name #> = new <#= child.ElementSchemaType.Name #>Handler(
+                        this.config.<#= child.Name #>, handlerFactory, context);
+                }
+
+<#+
+        }
+    }
+#>
+            }
+
+            public void PrepareData(<#= GetClassName(type.Name) #> data, int row, DataContext dataContext)
+            {<#+
+    var preparedWritten = false;
+    foreach (var child in children)
+    {
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            #>
+
+                this.Prepare<#= child.Name #>(data.<#= child.Name #>, row, dataContext);
+<#+
+        }
+        else
+        {
+            var propertyName = child.Name;
+            var conditions = "data." + child.Name + " != null";
+            if (child.MaxOccurs > 1)
+            {
+                propertyName += "[0]";
+                conditions += " && data." + child.Name + ".Length > 0";
+            }
+            
+            if (!preparedWritten)
+            {
+                preparedWritten = true;
+                #>
+
+                bool prepared = false;
+<#+
+            }
+            else
+            {
+                #>
+
+                prepared = false;
+<#+
+            }
+            #>
+                this.Prepare<#= child.Name #>(data.<#= child.Name #>, row, dataContext, ref prepared);
+                if (!prepared && this.handler<#= child.Name #> != null && <#= conditions #>)
+                {
+                    this.handler<#= child.Name #>.PrepareData(data.<#= propertyName #>, row, dataContext);
+                }
+<#+
+        }
+    }
+#>
+            }
+
+            public void HandleData(<#= GetClassName(type.Name) #> data, Ximple ximple, int row, DataContext dataContext)
+            {
+                bool handled;
+<#+
+    foreach (var child in children)
+    {
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            var conditions = String.Empty;
+            if (child.ElementSchemaType is XmlSchemaSimpleType)
+            {
+                if (child.MinOccurs == 0)
+                {
+                    conditions = " && data." + child.Name + "Specified";
+                }
+            }
+            else
+            {
+                conditions = " && data." + child.Name + " != null";
+            }
+            #>
+
+                handled = false;
+                this.Handle<#= child.Name #>(data.<#= child.Name #>, ximple, row, dataContext, ref handled);
+                if (!handled && this.handlers<#= child.Name #> != null<#= conditions #>)
+                {
+                    foreach (var handler in this.handlers<#= child.Name #>)
+                    {
+                        try
+                        {
+                            handler.Handle(data.<#= child.Name #>, "<#= child.Name #>", ximple, row);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Warn(ex, 
+                                "Couldn't transform <#= structureName #>.<#= child.Name #>");
+                        }
+                    }
+                }
+<#+
+        }
+        else
+        {
+            var propertyName = child.Name;
+            var conditions = "data." + child.Name + " != null";
+            if (child.MaxOccurs > 1)
+            {
+                propertyName += "[0]";
+                conditions += " && data." + child.Name + ".Length > 0";
+            }
+            #>
+
+                handled = false;
+                this.Handle<#= child.Name #>(data.<#= child.Name #>, ximple, row, dataContext, ref handled);
+                if (!handled && this.handler<#= child.Name #> != null && <#= conditions #>)
+                {
+                    this.handler<#= child.Name #>.HandleData(data.<#= propertyName #>, ximple, row, dataContext);
+                }
+<#+
+        }
+    }
+#>
+            }
+            
+<#+
+
+    // generate the partial Update...() methods
+    foreach (var child in children)
+    {
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            #>
+
+            partial void Prepare<#= child.Name #>(<#= GetMultipliedClassName(child) #> item, int row, DataContext dataContext);
+<#+
+        }
+        else
+        {
+            #>
+
+            // if implemented, the prepared flag should be set to true to prevent automatic updating of the item by the generated code
+            partial void Prepare<#= child.Name #>(
+                <#= GetMultipliedClassName(child) #> item, int row, DataContext dataContext, ref bool prepared);
+<#+
+        }
+    }
+
+    // generate the partial Handle...() methods
+    foreach (var child in children)
+    {
+        #>
+
+            // if implemented, the handled flag should be set to true to prevent automatic handling of the item by the generated code
+            partial void Handle<#= child.Name #>(
+                <#= GetMultipliedClassName(child) #> item, Ximple ximple, int row, DataContext dataContext, ref bool handled);
+<#+
+    }
+#>
+        }
+
+<#+
+}
+
+private string GetMultipliedClassName(XmlSchemaElement element)
+{
+    var array = element.MaxOccurs > 1 ? "[]" : string.Empty;
+    return GetClassName(element.ElementSchemaType.Name) + array;
+}
+
+private string GetHandlerClassName(XmlSchemaElement element)
+{
+    if (this.IsInternationalText(element))
+    {
+        return "TranslatedElementHandler";
+    }
+
+    return element.MaxOccurs > 1 ? "ArrayElementHandler" : "ElementHandler";
+}
+
+private bool IsInternationalText(XmlSchemaElement element)
+{
+    return element.MaxOccurs > 1 && element.ElementSchemaType.Name == "InternationalTextType";
+}
+#>

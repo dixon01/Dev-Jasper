@@ -1,0 +1,142 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#+
+public class Entities
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+
+    [XmlElement("Namespace")]
+    public List<Namespace> Namespaces { get; set; }
+
+    public static Entities LoadFrom(string fileName)
+    {
+        var serializer = new XmlSerializer(typeof(Entities));
+        using (var input = File.OpenRead(fileName))
+        {
+            return (Entities)serializer.Deserialize(input);
+        }
+    }
+
+    public Class GetClass(string className)
+    {
+        if (string.IsNullOrEmpty(className))
+        {
+            return null;
+        }
+
+        foreach (var ns in this.Namespaces)
+        {
+            foreach (var clazz in ns.Classes)
+            {
+                if (clazz.Name == className)
+                {
+                    return clazz;
+                }
+            }
+        }
+
+        return null;
+    }
+}
+
+public class Namespace
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlElement("Class", typeof(Class))]
+    [XmlElement("ElementClass", typeof(ElementClass))]
+    public List<Class> Classes { get; set; }
+}
+
+public class Class
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlAttribute]
+    public string Base { get; set; }
+    
+    [XmlElement("Property", typeof(Property))]
+    [XmlElement("CompositeProperty", typeof(CompositeProperty))]
+    [XmlElement("ReferenceProperty", typeof(ReferenceProperty))]
+    [XmlElement("ListProperty", typeof(ListProperty))]
+    public List<PropertyBase> Properties { get; set; }
+}
+
+public class ElementClass : Class
+{
+    [XmlAttribute]
+    public string ChildElementsType { get; set; }
+    
+    [XmlAttribute]
+    public string SupportedScreenTypes { get; set; }
+}
+
+public abstract class PropertyBase
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlAttribute]
+    public string XmlName { get; set; }
+    
+    // this property is only valid for properties of elements
+    [XmlAttribute]
+    public string SupportedScreenTypes { get; set; }
+}
+
+public abstract class TypedProperty : PropertyBase
+{
+    [XmlAttribute]
+    public string Type { get; set; }
+}
+
+public class CompositeProperty : TypedProperty
+{
+}
+
+public class ReferenceProperty : TypedProperty
+{
+    [XmlAttribute]
+    public string Reference { get; set; }
+}
+
+public class ListProperty : PropertyBase
+{
+    [XmlAttribute]
+    public string ElementType { get; set; }
+    
+    [XmlAttribute]
+    public bool Inline { get; set; }
+}
+
+public class Property : TypedProperty
+{
+    [XmlAttribute]
+    public string DefaultValue { get; set; }
+    
+    [XmlAttribute]
+    public bool Dynamic { get; set; }
+    
+    [XmlAttribute]
+    public bool Animated { get; set; }
+    
+    [XmlAttribute]
+    public string Format { get; set; }
+    
+    public string GetEscapedDefaultValue()
+    {
+        if (this.Type == "string")
+        {
+            return '"' + this.DefaultValue + '"';
+        }
+
+        return this.DefaultValue;
+    }
+}
+#>

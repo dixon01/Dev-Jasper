@@ -1,0 +1,28 @@
+﻿<#+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+    var userDefinedPropertiesEnabledEntityNames =
+        partition.EntitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+
+        public static class Extensions
+        {<#+
+        foreach (var entity in entities)
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, userDefinedPropertiesEnabled);
+        }
+        #>
+        }
+    }
+<#+
+    }
+#>

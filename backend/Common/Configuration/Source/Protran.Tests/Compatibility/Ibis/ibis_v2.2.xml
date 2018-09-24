@@ -1,0 +1,530 @@
+﻿<Ibis desc="Container of all the settings required by Protran to translate the IBIS protocol."
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="file:///. ibis.xsd">
+  
+  <Behaviour desc="Container of the settings about all the software's behaviours.">
+    <IbisAddress desc="Values admitted: {1 ... 32} Def. 8">8</IbisAddress>
+    <ConnectionTimeOut desc="IBIS master connection timeout">PT60S</ConnectionTimeOut>
+    <ConnectionStatusUsedFor Table="SystemStatus" Column="RemotePC" Row="0"/>
+    <CheckCrc desc="values admitted: {true, false} (case insensitive) Def. true">true</CheckCrc>
+    <ByteType desc="values admitted: {Ascii7, UnicodeBigEndian, Hengartner8}">Ascii7</ByteType>
+    <ProcessPriority desc="Sets the priority of the Protran process in case SerialPort is used.
+      Values admitted: {AboveNormal, BelowNormal, High, Idle, Normal, RealTime }.
+      Default value is AboveNormal">AboveNormal</ProcessPriority>
+  </Behaviour>
+  
+  <Sources Active="SerialPort">
+    <Simulation desc="Container of all the information about the IBIS simulation.">
+      <SimulationFile desc="Free text (case insensitive) Def. ibis.log">./ibisSimulation2.log</SimulationFile>
+      <InitialDelay desc="Initial delay to wait before the simulation starts">PT5S</InitialDelay>
+      <IntervalBetweenTelegrams desc="Time between sending two telegrams.
+        No value means that the simulation will follow specific time stamps. Def. empty">PT1S</IntervalBetweenTelegrams>
+      <TimesToRepeat desc="Values admitted: {0, max int} 0 means infite times. Def. 1">2</TimesToRepeat>
+    </Simulation>
+    <SerialPort>
+      <ComPort desc="Serial port's name. Free text (case insensitive) Def. COM1">COM1</ComPort>
+      <BaudRate desc="Values admitted: {1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200} Def. 1200">1200</BaudRate>
+      <DataBits desc="Values admitted: {5, 6, 7, 8} Def. 7">7</DataBits>
+      <StopBits desc="Values admitted: {None, One, Two, OnePointFive} Def. Two">Two</StopBits>
+      <Parity desc="Values admitted: {Odd, Even, Mark, Space, None} (case insensitive) Def. Even">Even</Parity>
+
+      <RetryCount desc="Tells how many attempts Protran has to do to open the serial port, if it is currently busy.
+        Values admitted: an interger between 0 and 255. 0 means that Protran will not retry.
+        Default value: 0">10</RetryCount>
+      <SerialPortReopen desc="Attempt to reopen serial port due to errors.
+                        Values admitted: {FrameOnly, All, None}. Default value: FrameOnly">FrameOnly</SerialPortReopen>
+    </SerialPort>
+    <UDPServer desc="Use a UDP/IP server to receive IBIS telegrams">
+      <LocalPort desc="Local UDP port, default: 47555">47555</LocalPort>
+      <ReceiveFormat desc="Expected format of received IBIS telegrams. 
+                     Values admitted: {Full, NoChecksum, NoFooter} (case insensitive) Def. Full">NoChecksum</ReceiveFormat>
+      <SendFormat desc="Format of sent IBIS telegrams.
+                  Values admitted: {Full, NoChecksum, NoFooter} (case insensitive) Def. Full">NoFooter</SendFormat>
+    </UDPServer>
+    <JSON desc="Uses JSON interface for IBIS telegrams">
+    </JSON>
+  </Sources>
+  
+  <Recording desc="Container of all the information about a registration on file of a channel.">
+    <Active desc="Values admitted: {true, false} (case insensitive) Def. false">false</Active>
+    <Format desc="The file format for the recording. Values admitted: {Protran,Gismo}">Protran</Format>
+    <FileAbsPath desc="Free text (case insensitive) Def. ./ibis.log">./ibis.log</FileAbsPath>
+  </Recording>
+
+  <TimeSync Enabled="true" desc="Container of the settings about the date-time synchronization process.">
+    <InitialDelay desc="Time to wait before the time sync is started.">PT10S</InitialDelay>
+    <WaitTelegrams desc="Number of telegrams to check before the time is considered valid.">3</WaitTelegrams>
+    <Tolerance desc="Tolerance above which the difference has to be for the time to be synchronized">PT0S</Tolerance>
+    <UpdateInterval desc="Interval for sending time updates.">PT60S</UpdateInterval>
+    <TimeUsedFor Table="SystemStatus" Column="Time" Row="0" />
+  </TimeSync>
+
+  <Telegrams>
+    <DS001 TransfRef="Line" Enabled="true">
+      <UsedFor Table="Route" Column="Line" Row="0" />
+    </DS001>
+    
+    <DS001a TransfRef="Line" Enabled="true">
+      <UsedFor Table="Route" Column="SpecialLine" Row="0" />
+    </DS001a>
+
+    <DS002 TransfRef="Number" Enabled="true">
+      <UsedFor Table="Route" Column="Run" Row="0" />
+    </DS002>
+    
+    <DS003 TransfRef="Number" Enabled="true">
+      <UsedFor Table="Destination" Column="DestinationInfo" Row="0" />
+    </DS003>
+    
+    <DS003a TransfRef="Destination" Enabled="true">
+      <UsedFor Table="Destination" Column="DestinationName" Row="0" />
+    </DS003a>
+
+    <DS003c TransfRef="RemovePadding" Enabled="true">
+      <UsedFor Table="Route" Column="Region" Row="0" />
+    </DS003c>
+
+    <DS005 TransfRef="Time" Enabled="true">
+      <!-- We handle the time now with the IbisTimeSync above, so ignore this
+      <UsedFor Table="SystemStatus" Column="Time" Row="0" />
+      -->
+    </DS005>
+
+    <DS006 TransfRef="Date" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="Date" Row="0" />
+    </DS006>
+
+    <DS006a TransfRef="Default" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="Date" Row="0" />
+    </DS006a>
+
+    <DS008 TransfRef="Default" Enabled="false">
+      <UsedFor Table="Route" Column="Region" Row="0" />
+    </DS008>
+
+    <DS009 TransfRef="RemovePadding" Enabled="false">
+      <UsedFor Table="Route" Column="Region" Row="0" />
+    </DS009>
+
+    <!-- Either enabled DS010 or DS010j, never both at the same time! -->
+    <DS010 TransfRef="Default" Enabled="false">
+      <UsedFor Table="Route" Column="CurrentStopIndex" Row="0" />
+    </DS010>
+
+    <DS010b TransfRef="Number" Enabled="true">
+      <!-- no configuration is required for this telegram since it is handled by the DS021a handler -->
+    </DS010b>
+
+    <!-- Either enabled DS010 or DS010j, never both at the same time! -->
+    <DS010j TransfRef="Number" Enabled="true">
+      <!-- no configuration is required for this telegram since it is handled by the DS021c handler -->
+    </DS010j>
+
+    <DS020 Enabled="true">
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="NoData">3</Response>
+          <Response Status="MissingData">4</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </DS020>
+    
+    <DS021a TransfRef="Stops021a" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" FromBlock="0" />
+      <!-- <UsedForTransfers Table="Stops" Column="StopInfo" Row="{0}" FromBlock="1"  /> -->
+      <UsedForTransferSymbols Table="Stops" Column="StopTransferSymbols" Row="{0}" FromBlock="1" /> <!-- default FromBlock is 2 -->
+      <UsedForRelativeTime Table="Stops" Column="StopTime" Row="{0}" FromBlock="2" /> <!-- default FromBlock is 3 -->
+      <UsedForAbsoluteTime Table="Stops" Column="StopInfo" Row="{0}" FromBlock="2" /> <!-- default FromBlock is 3 -->
+
+      <UsedForDestination Table="Destination" Column="DestinationName" Row="0" />
+      <!-- <UsedForDestinationTransfers Table="Destination" Column="DestinationInfo" Row="0" /> -->
+      <UsedForDestinationTransferSymbols Table="Destination" Column="DestinationTransferSymbols" Row="0" />
+      <UsedForDestinationRelativeTime Table="Destination" Column="DestinationTime" Row="0" />
+      <UsedForDestinationAbsoluteTime Table="Destination" Column="DestinationInfo" Row="0" />
+
+      <UsedForText Table="PassengerMessages" Column="MessageText" Row="{0}" />
+
+      <Connection Enabled="false">
+        <UsedFor Table="Connections" Column="ConnectionDestinationName" Row="{0}" />
+        <UsedForStopName Table="Connections" Column="ConnectionInfo" Row="0" />
+        <UsedForLineNumber Table="Connections" Column="ConnectionLineNumber" Row="{0}" />
+        <UsedForDepartureTime Table="Connections" Column="ConnectionTime" Row="{0}" />
+
+        <LineNumberFormat>D:\Infomedia\Symbols\L{0}.png</LineNumberFormat>
+        <ShowForNextStopOnly>false</ShowForNextStopOnly>
+      </Connection>
+      
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="IncorrectRecord">6</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+      
+      <FlushNumberOfStations
+        desc="Number of stations to collect before sending all of them to the media player.
+        Values admitted: a positive integer value {1; 65535}.
+        Default value: 5">6</FlushNumberOfStations>
+      <FlushTimeout
+        desc="Amount of time to wait before forcing a send of all the current
+        stations collected. Default value: 30 seconds">PT10S</FlushTimeout>
+      <FirstStopIndexValue
+        desc="The value of the index of the first stop.
+        Values admitted {0, 1}. Default value: 0">1</FirstStopIndexValue>
+      <EndingStopValue
+        desc="The value of the stop that has to be considered as the end of a sequence of stops
+        (and not really a proper stop as the others).
+        Values admitted {99 or 999}. Default value: 99">99</EndingStopValue>
+
+      <HideLastStop
+        desc="Tells if the last stop should be shown or not.
+        You might want to hide the last stop if you prefer not to show the destination
+        name twice when aproaching the destination.
+        Values admitted: {true, false}.
+        Default is false.">false</HideLastStop>
+      <HideDestinationBelow
+        desc="the threshold below which the destination has to be hidden.
+        Set this value to one more than the number of stops visible in your 
+        Perlschnur to hide the destination information (see UsedForDestination, ...)
+        if the last stop is visible in the Perlschnur.">6</HideDestinationBelow>
+      <DeleteRouteIndexValue
+        desc="The value of the index to delete a route.
+        Values admitted {-1, 0}. Default value: -1">0</DeleteRouteIndexValue>
+
+      <AbsoluteTimeFormat
+        desc="Format of the UsedForAbsoluteTime and UsedForDestinationAbsoluteTime.
+        Meaningful formats: 'HH:mm' (24-hour format), 'H:mm' (1-digit hour), 'hh:mm' (12-hour format)
+        See http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx for more formats.
+        Default value: 'HH:mm'">HH:mm</AbsoluteTimeFormat>
+    </DS021a>
+
+    <DS021c TransfRef="Stops021c" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" FromBlock="0" />
+      <UsedForTransfers Table="Stops" Column="StopInfo" Row="{0}" FromBlock="1"  />
+      <UsedForTransferSymbols Table="Stops" Column="StopTransferSymbols" Row="{0}" FromBlock="2"  />
+      <UsedForDestination Table="Destination" Column="DestinationName" Row="0" />
+      <UsedForDestinationTransfers Table="Destination" Column="DestinationInfo" Row="0" />
+      <UsedForDestinationTransferSymbols Table="Destination" Column="DestinationTransferSymbols" Row="0" />
+      <AsciiLineNumberUsedFor Table="Route" Column="Line" Row="0" />
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData -->
+          <Response Status="NoData">0</Response>
+          <Response Status="MissingData">0</Response>
+          <DefaultResponse>1</DefaultResponse>
+        </DS120>
+      </Answer>
+      
+      <FlushNumberOfStations
+        desc="Number of stations to collect before sending all of them to the media player.
+        Values admitted: a positive integer value {1; 65535}.
+        Default value: 5">6</FlushNumberOfStations>
+      <FlushTimeout
+        desc="Amount of time to wait before forcing a send of all the current
+        stations collected. Default value: 30 seconds">PT30S</FlushTimeout>
+      <FirstStopIndexValue
+        desc="The value of the index of the first stop.
+        Values admitted {0, 1}. Default value: 1">1</FirstStopIndexValue>
+
+      <HideLastStop
+        desc="Tells if the last stop should be shown or not.
+        You might want to hide the last stop if you prefer not to show the destination
+        name twice when aproaching the destination.
+        Values admitted: {true, false}.
+        Default is false.">false</HideLastStop>
+      <HideDestinationBelow
+        desc="the threshold below which the destination has to be hidden.
+        Set this value to one more than the number of stops visible in your 
+        Perlschnur to hide the destination information (see UsedForDestination, ...)
+        if the last stop is visible in the Perlschnur.">6</HideDestinationBelow>
+
+      <TakeDestinationFromLastStop
+        desc="Tells if the destination should be taken from the last stop
+        in the stop list (true) or from the stop with index 101 (false).
+        Default value: false">false</TakeDestinationFromLastStop>
+    </DS021c>
+
+    <DS080 Enabled="true">
+      <OpenValue>1</OpenValue>
+      <CloseValue>0</CloseValue>
+      <ResetWithDS010b>true</ResetWithDS010b>
+      <UsedFor Table="SystemStatus" Column="DoorStatus" Row="0"/>
+    </DS080>
+
+    <DS081 Enabled="true">
+      <Value>0</Value>
+      <UsedFor Table="SystemStatus" Column="DoorStatus" Row="0"/>
+    </DS081>
+
+    <GO001 TransfRef="Number" Enabled="true">
+      <UsedFor Table="Route" Column="ApproachingStop" Row="0" />
+    </GO001>
+
+    <GO002 TransfRef="RemovePadding" Enabled="true">
+      <CheckLength>true</CheckLength>
+      <StopIndexSize>2</StopIndexSize>
+      <RowNumberSize>1</RowNumberSize>
+      <PictogramSize>1</PictogramSize>
+      <LineNumberSize>5</LineNumberSize>
+      <TrackNumberSize>2</TrackNumberSize>
+      <ScheduleDeviationSize>4</ScheduleDeviationSize>
+      <FirstStopIndex>1</FirstStopIndex>
+      <FirstRowIndex>1</FirstRowIndex>
+      <LastRowIndex>9</LastRowIndex>
+      <PictogramFormat>D:\Infomedia\Symbols\Conn_{0}.png</PictogramFormat>
+      <LineNumberFormat>D:\Infomedia\Symbols\L{0}.png</LineNumberFormat>
+      <ScheduleDeviation>
+        <OnTime>ok</OnTime>
+        <Ahead>{0}' früher</Ahead>
+        <Delayed>{0}' später</Delayed>
+      </ScheduleDeviation>
+      <DeletePassedStops>true</DeletePassedStops>
+      <ShowForNextStopOnly>false</ShowForNextStopOnly>
+
+      <UsedFor Table="Connections" Column="ConnectionDestinationName" Row="{0}" />
+      <UsedForPictogram Table="Connections" Column="ConnectionTransportType" Row="{0}" />
+      <UsedForLineNumber Table="Connections" Column="ConnectionLineSymbol" Row="{0}" />
+      <UsedForDepartureTime Table="Connections" Column="ConnectionTime" Row="{0}" />
+      <UsedForTrackNumber Table="Connections" Column="ConnectionPlatform" Row="{0}" />
+      <UsedForScheduleDeviation Table="Connections" Column="ConnectionDelay" Row="{0}" />
+      
+      <Answer>
+        <DS120 Enabled="true">
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </GO002>
+
+    <GO003 TransfRef="Stops" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" />
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="IncorrectRecord">5</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </GO003>
+
+    <GO004 TransfRef="Messages" Enabled="true">
+      <UsedFor Table="PassengerMessages" Column="MessageText" Row="{0}" />
+      <UsedForTitle Table="PassengerMessages" Column="MessageTitle" Row="{0}" />
+      <UsedForType Table="PassengerMessages" Column="MessageType" Row="{0}" />
+      
+      <Answer>
+        <DS120 Enabled="true">
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </GO004>
+
+    <GO005 TransfRef="Routes" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" />
+      <UsedForDestination Table="Destination" Column="DestinationName" Row="0" />
+      <AsciiLineNumberUsedFor Table="Route" Column="Line" Row="0" />
+
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="IncorrectRecord">6</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+
+      <BufferNextRoute
+        desc="Buffers a newly arriving route until a new stop index with a smaller value
+        is received.
+        Values admitted: {true, false}.
+        Default is true">false</BufferNextRoute>
+
+      <FlushNumberOfStations
+        desc="Number of stations to collect before sending all of them to the media player.
+        Values admitted: a positive integer value {1; 65535}.
+        Default value: 5">6</FlushNumberOfStations>
+      
+      <FlushTimeout
+        desc="Amount of time to wait before forcing a send of all the current
+        stations collected. Default value: 30">PT10S</FlushTimeout>
+
+      <HideLastStop
+        desc="Tells if the last stop should be shown or not.
+        You might want to hide the last stop if you prefer not to show the destination
+        name twice when aproaching the destination.
+        Values admitted: {true, false}.
+        Default is false.">false</HideLastStop>
+      
+      <HideDestinationBelow
+        desc="the threshold below which the destination has to be hidden.
+        Set this value to one more than the number of stops visible in your 
+        Perlschnur to hide the destination information (see UsedForDestination, ...)
+        if the last stop is visible in the Perlschnur.">6</HideDestinationBelow>
+
+      <HideNextStopForIndex
+        desc="Hides the next stop if the given index is received.
+        Values admitted: a positive integer value {0; 9999}.
+        Default value: 999">999</HideNextStopForIndex>
+      <DeleteRoute desc="Indicates whether protran has to delete the route information
+        considering also the run's value, or not. 
+        Values admitted: {true, false}. Default value is true">true</DeleteRoute>
+    </GO005>
+
+    <GO006 TransfRef="CU5Line" Enabled="true">
+      <UsedFor Table="Route" Column="Line" Row="0" />
+    </GO006>
+    
+    <HPW074 TransfRef="Number" Enabled="true">
+      <SpecialTextFile>D:\infomedia\layout\specialtext.csv</SpecialTextFile>
+      <UsedFor Table="PassengerMessages" Column="MessageText" Row="0" />
+
+      <Answer>
+        <DS120 Enabled="true">
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </HPW074>
+  </Telegrams>
+  
+  <Transformations desc="Container of all the transformation that Protran has to do on the IBIS telegrams.">
+    <Chain id="Default" />
+
+    <Chain id="RemovePadding">
+      <RegexMapping>
+        <Mapping desc="Replace the trailing whitespaces with empty string" from="[ \t]+$" to=""/>
+      </RegexMapping>
+    </Chain>
+    
+    <Chain id="Time">
+      <RegexMapping desc="Format HHmm to HH:mm">
+        <Mapping from="^(\d\d)(\d\d)$" to="$1:$2"/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="Date">
+      <RegexMapping desc="Format ddMMYY to dd.MM.YYYY">
+        <Mapping from="^(\d\d)(\d\d)(\d\d)$" to="$1.$2.20$3"/>
+      </RegexMapping>
+    </Chain>
+    
+    <Chain id="Stops">
+      <RegexDivider desc="Devide at newline characters">
+        <Regex>\u000A</Regex>
+      </RegexDivider>
+    </Chain>
+
+    <Chain id="Destination">
+      <RegexMapping>
+        <Mapping desc="Remove the first digit (containing the number of blocks)" from="^[0-9]" to=""/>
+        <Mapping desc="Replace the newline character with whitespace" from="\n" to=" "/>
+      </RegexMapping>
+      <RegexDivider desc="Devide every 16 characters, this will create an empty string followed by 16 characters and so forth">
+        <Regex>(.{16})</Regex>
+      </RegexDivider>
+      <StringMapping desc="IBIS conversion">
+        <Mapping from="{" to="ä"/>
+        <Mapping from="[" to="Ä"/>
+        <Mapping from="|" to="ö"/>
+        <Mapping from="\" to="Ö"/>
+        <Mapping from="}" to="ü"/>
+        <Mapping from="]" to="Ü"/>
+        <Mapping from="~" to="ß"/>
+      </StringMapping>
+      <RegexMapping desc="Remove all the trailing whitespaces from the strings.">
+        <Mapping from=" +$" to=""/>
+      </RegexMapping>
+      <Join Separator="#"/>
+      <RegexMapping desc="Remove all but the first two blocks">
+        <Mapping from="^#([^#]*##[^#]*)##.*$" to="$1"/>
+      </RegexMapping>
+
+      <RegexDivider desc="Split on non-word characters">
+        <Regex>(\W+)</Regex>
+      </RegexDivider>
+      <Capitalize/>
+      <Join/>
+
+      <StringMapping desc="Replace temporary separator (which exists twice) with BBCode new-line">
+        <Mapping from="##" to="[br]"/>
+      </StringMapping>
+    </Chain>
+
+    <Chain id="Stops021a">
+      <RegexDivider desc="Devide at \3, \4, \5 and # characters">
+        <Regex>[\u0003-\u0005#]</Regex>
+      </RegexDivider>
+      <StringMapping desc="IBIS conversion">
+        <Mapping from="{" to="ä"/>
+        <Mapping from="[" to="Ä"/>
+        <Mapping from="|" to="ö"/>
+        <Mapping from="\" to="Ö"/>
+        <Mapping from="}" to="ü"/>
+        <Mapping from="]" to="Ü"/>
+        <Mapping from="~" to="ß"/>
+      </StringMapping>
+    </Chain>
+
+    <Chain id="Stops021c">
+      <LawoString desc="Lawo string conversion equal to TFTPlayer behavior with CharacterCode=1">
+        <CodePage>858</CodePage>
+      </LawoString>
+      <RegexDivider desc="Devide at \3, \4 and \5 characters">
+        <Regex>[\u0003-\u0005]</Regex>
+      </RegexDivider>
+      <StringMapping desc="IBIS conversion">
+        <Mapping from="{" to="ä"/>
+        <Mapping from="[" to="Ä"/>
+        <Mapping from="|" to="ö"/>
+        <Mapping from="\" to="Ö"/>
+        <Mapping from="}" to="ü"/>
+        <Mapping from="]" to="Ü"/>
+        <Mapping from="~" to="ß"/>
+      </StringMapping>
+    </Chain>
+
+    <Chain id="Routes">
+      <RegexMapping desc="Remove all the trailing whitespaces from the strings. Remove \u000A and digits in single quotes.">
+        <Mapping from="\u000A" to=""/>
+        <Mapping from="\'\d+\'" to=""/>
+        <Mapping from="\s*$" to=""/>
+      </RegexMapping>
+      <RegexDivider desc="Devide at \3 and \4 characters">
+        <Regex>[\u0003-\u0004]</Regex>
+      </RegexDivider>
+      <StringMapping desc="IBIS conversion">
+        <Mapping from="{" to="ä"/>
+        <Mapping from="[" to="Ä"/>
+        <Mapping from="|" to="ö"/>
+        <Mapping from="\" to="Ö"/>
+        <Mapping from="}" to="ü"/>
+        <Mapping from="]" to="Ü"/>
+        <Mapping from="~" to="ß"/>
+      </StringMapping>
+    </Chain>
+    
+    <Chain id="Messages">
+      <RegexDivider desc="Devide at newline characters">
+        <Regex>\u0010</Regex>
+      </RegexDivider>
+    </Chain>
+
+    <Chain id="Line">
+      <RegexMapping desc="Remove all the leading zeros from a string.">
+        <Mapping from="^0+" to=""/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="CU5Line">
+      <RegexMapping desc="Remove all the leading zeros from a string, and also the last character.">
+        <Mapping from="^0+" to=""/>
+        <Mapping from="(.$)" to=""/>
+      </RegexMapping>
+    </Chain>
+    
+    <Chain id="Number">
+      <Integer/>
+    </Chain>
+
+  </Transformations>
+</Ibis>

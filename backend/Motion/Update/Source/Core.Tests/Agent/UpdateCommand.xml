@@ -1,0 +1,65 @@
+﻿<?xml version="1.0"?>
+<UpdateCommand Version="2.0">
+  <UpdateId BackgroundSystemGuid="" UpdateIndex="0" />
+  <!-- Hashes in this file are always for the name of the file (i.e. contents = name) -->
+  <Folder Name="Progs">
+    <Folder Name="Protran">
+      <File Name="Protran.exe" Hash="746D4E01A977B58F229755DC78727105" />
+      <File Name="Gorba.Common.Utility.Core.dll" Hash="EAA705D93281BD614259435BBEE590B4" />
+      <File Name="Gorba.Common.Medi.Core.dll" Hash="6ECF82FB307790748081EE086D2CE90C" />
+      <File Name="Gorba.Motion.Protran.Core.dll" Hash="5773122DE4FA8EFC2CCC0F0D24D5A920" />
+      <File Name="Gorba.Motion.Protran.Ibis.dll" Hash="62A524C0EAFD7C23CF9924B188285AB0" />
+      <File Name="Gorba.Motion.Protran.IO.dll" Hash="6E7A6FD86625B3BDFF5F2CF77D094304" />
+    </Folder>
+    <Folder Name="Composer">
+      <File Name="Composer.exe" Hash="A4D6C8C4B7EA1DB4072192E198CD8B34" />
+      <File Name="Gorba.Common.Utility.Core.dll" Hash="EAA705D93281BD614259435BBEE590B4" />
+      <File Name="Gorba.Common.Medi.Core.dll" Hash="6ECF82FB307790748081EE086D2CE90C" />
+      <File Name="Gorba.Motion.Infomedia.Core.dll" Hash="65370A9DE429595B7E06BD802EA90D48" />
+    </Folder>
+    <Folder Name="SystemManager">
+      <File Name="SystemManager.exe" Hash="7690D0A5B8D327FB601F4AED44E5DEF5" />
+      <File Name="Gorba.Common.Utility.Core.dll" Hash="EAA705D93281BD614259435BBEE590B4" />
+      <File Name="Gorba.Common.Medi.Core.dll" Hash="6ECF82FB307790748081EE086D2CE90C" />
+      <File Name="Gorba.Motion.SystemManager.Core.dll" Hash="85DD769810C6FD9DEE1ECC22983EAA40" />
+      <File Name="CommandLineParser.dll" Hash="7B35D3D09FA524D451A780A7BDADC542" />
+    </Folder>
+    <Folder Name="Update">
+      <File Name="Update.exe" Hash="AB8F483060F8C670980AC4C26D28080A" />
+      <File Name="Gorba.Common.Utility.Core.dll" Hash="EAA705D93281BD614259435BBEE590B4" />
+      <File Name="Gorba.Common.Medi.Core.dll" Hash="6ECF82FB307790748081EE086D2CE90C" />
+      <File Name="Gorba.Common.Update.ServiceModel.dll" Hash="1C586BA033D22EC6B21760D7D933156F" />
+      <File Name="CommandLineParser.dll" Hash="7B35D3D09FA524D451A780A7BDADC542" />
+    </Folder>
+  </Folder>
+  <Folder Name="Config">
+    <Folder Name="Protran">
+      <File Name="medi.config" Hash="B9B4333008FCD9182E94F5623BC6A66D" />
+      <File Name="Protran.xml" Hash="425EC79053A83A647186F8BB71943110" />
+      <File Name="ibis.xml" Hash="3E0A120BDA163C3C6A9D338312783437" />
+    </Folder>
+    <Folder Name="Composer">
+      <File Name="medi.config" Hash="B9B4333008FCD9182E94F5623BC6A66D" />
+      <File Name="Composer.xml" Hash="25EFC9B68363C1CAD175E6EEA5A56D76" />
+    </Folder>
+    <Folder Name="SystemManager">
+      <!-- Medi.config with capital M to have a different hash -->
+      <File Name="Medi.config" Hash="69E45EB8EA260E3831F7096348EBA5A8" />
+      <File Name="SystemManager.xml" Hash="F2F23D08EB71CEDD8C32259EC67B4957" />
+    </Folder>
+    <Folder Name="Update">
+      <File Name="medi.config" Hash="B9B4333008FCD9182E94F5623BC6A66D" />
+      <File Name="Update.xml" Hash="0E010F436A6AC8FBE1B2A3285B47A362" />
+    </Folder>
+  </Folder>
+  <Folder Name="Presentation">
+    <File Name="main.im2" Hash="212772E634002A1276095D9DDF6F1C08" />
+    <Folder Name="Images">
+      <File Name="background.png" Hash="9C1385517CBC8860981A2E72E3AD310F" />
+      <File Name="logo.jpg" Hash="F121D135F39F03E48DA5FE5E8CED5B0A" />
+    </Folder>
+    <Folder Name="Videos">
+      <File Name="presentation.mpg" Hash="40315139822E28472BFCDE9389EE45DE" />
+    </Folder>
+  </Folder>
+</UpdateCommand>

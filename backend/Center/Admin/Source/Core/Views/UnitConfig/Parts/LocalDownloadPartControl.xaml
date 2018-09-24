@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Parts.LocalDownloadPartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:parts="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Parts"
+             xmlns:export="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Export"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance parts:LocalDownloadPartViewModel}">
+    
+    <UserControl.Resources>
+        <converters:ToTypeConverter x:Key="ToTypeConverter"/>
+    </UserControl.Resources>
+    
+    <telerik:RadBusyIndicator IsBusy="{Binding IsDownloading}"
+                              BusyContent="{Binding DownloadingFile}"
+                              ProgressValue="{Binding DownloadProgress}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <telerik:RadTreeView Grid.Row="0" ItemsSource="{Binding ExportFolders}">
+                <telerik:RadTreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="export:ExportItemBase"
+                                  ItemsSource="{Binding ChildItems}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Margin=" 0,0,6,0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../../../Resources/Icons/folder_open_16x16.png"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" Value="{x:Type export:ExportResourceFile}">
+                                                <Setter Property="Source" Value="../../../Resources/Icons/file_16x16.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </telerik:RadTreeView.ItemTemplate>
+            </telerik:RadTreeView>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right">
+
+                <telerik:RadButton Content="{x:Static resources:AdminStrings.UnitConfig_Conclusion_LocalDownload_Download}"
+                            Command="{Binding DownloadCommand}"
+                            Margin="0 5"
+                            Padding="5"
+                            Style="{StaticResource RadButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

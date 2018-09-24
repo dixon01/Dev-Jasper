@@ -1,0 +1,146 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Collections" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#@ include file="Cmdlets.Add.ttinclude" #>
+<#@ include file="Cmdlets.Base.ttinclude" #>
+<#@ include file="Cmdlets.Get.ttinclude" #>
+<#@ include file="Cmdlets.New.ttinclude" #>
+<#@ include file="Cmdlets.Remove.ttinclude" #>
+<#@ include file="Cmdlets.Using.ttinclude" #>
+<#@ include file="Cmdlets.Update.ttinclude" #>
+<#
+	var path = this.Host.ResolvePath(@"..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+	var entitySpace = EntitySpace.Load(path);
+	var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+	var entities = partitions.SelectMany(partition => partition.Entities).ToList();
+	foreach (var entity in entities)
+    {
+		// TODO: verify here. Do we still need it?
+		this.keyTypes.Add(entity.Name, entity.IdPropertyType);
+    }
+#>
+namespace Gorba.Center.BackgroundSystem.PowerShell
+{
+	using System;
+	using System.Collections.Generic;
+	using System.Management.Automation;
+	using System.ServiceModel;
+	using System.Xml;
+
+	using Gorba.Center.Common.ServiceModel;
+<#
+	foreach (var partition in partitions)
+    {
+		this.WriteUsing(partition, "Gorba.Center.Common.ServiceModel");
+    }
+#>
+
+	internal static partial class CmdletNouns
+	{<#
+	this.WriteNouns(entities);
+#>
+	}
+
+<#
+	foreach (var entity in entities)
+    {
+		this.WriteBaseCmdlet(entity);
+		this.WriteNewCmdlet(entity);
+		this.WriteAddCmdlet(entity);
+		this.WriteGetCmdlet(entity);
+		this.WriteRemoveCmdlet(entity);
+		this.WriteUpdateCmdlet(entity);
+		this.WriteFilterCmdlet(entity);
+    }
+#>
+}<#+
+
+    private readonly int startingParameterIndex = 3;
+
+	private Dictionary<string, string> keyTypes = new Dictionary<string, string>();
+
+	private void WriteNouns(IEnumerable<EntitySpace.Entity> entities)
+    {
+		foreach (var entity in entities)
+		{#>
+		
+		public const string <#= entity.Name #> = "<#= entity.Name #>";
+		
+		public const string <#= entity.Name #>Filter = "<#= entity.Name #>Filter";
+		
+		public const string <#= entity.Name #>Query = "<#= entity.Name #>Query";
+<#+
+		    var properties =
+		        entity.Properties.OfType<EntitySpace.Property>()
+		            .Where(p => p.PropertyType == EntitySpace.PropertyType.Primitive && !p.IsXmlSerialized);
+		    foreach (var property in properties)
+		    {
+		        #>
+		
+		public const string <#= entity.Name + property.Name #> = "<#= entity.Name + property.Name #>";
+<#+
+		    }
+#>
+<#+
+		}
+    }
+
+    private void WriteFilterCmdlet(EntitySpace.Entity entity)
+    {
+        #>
+
+	[Cmdlet(VerbsCommon.New, CmdletNouns.<#= entity.Name #>Filter)]
+	public partial class New<#= entity.Name #>Filter : PSCmdlet
+	{
+		protected override void ProcessRecord()
+		{
+			this.WriteObject(<#= entity.Name #>Filter.Create());
+		}
+	}
+
+	[Cmdlet(VerbsCommon.New, CmdletNouns.<#= entity.Name #>Query)]
+	public partial class New<#= entity.Name #>Query : PSCmdlet
+	{
+		protected override void ProcessRecord()
+		{
+			this.WriteObject(<#= entity.Name #>Query.Create());
+		}
+	}
+
+<#+
+		var properties =
+		        entity.Properties.OfType<EntitySpace.Property>()
+		            .Where(p => p.PropertyType == EntitySpace.PropertyType.Primitive && !p.IsXmlSerialized);
+        foreach (var property in properties)
+        {
+            #>
+
+	[Cmdlet(VerbsCommon.Select, CmdletNouns.<#= entity.Name + property.Name #>)]
+	public partial class Select<#= entity.Name + property.Name #> : PSCmdlet
+	{
+		[Parameter(Mandatory = true)]
+		public <#= entity.Name #>Filter Filter { get; set; }
+
+		[Parameter(Mandatory = true)]
+		public <#= property.Type #> Value { get; set; }
+
+		protected override void ProcessRecord()
+		{
+			var filter = this.Filter.With<#= property.Name #>(this.Value);
+			this.WriteObject(filter);
+		}
+	}
+<#+
+        }
+		#>
+<#+
+    }
+#>

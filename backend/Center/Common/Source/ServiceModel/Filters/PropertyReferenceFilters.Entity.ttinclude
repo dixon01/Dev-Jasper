@@ -1,0 +1,47 @@
+﻿<#+
+	private void WriteEntity(EntitySpace.Entity entity)
+	{
+		var properties = entity.Properties
+				.OfType<EntitySpace.Property>()
+				.Where(property => property.PropertyType == EntitySpace.PropertyType.Reference)
+				.OrderBy(property => property.Name)
+				.ToList();
+#>
+
+		public static class <#= entity.Name #>PropertyReferenceFilters
+		{<#+
+		if (properties.Any())
+        {
+			foreach (var property in properties)
+			{
+				this.WriteProperty(property);
+			}
+        }
+		else
+		{
+			this.WriteLine(string.Empty);
+        }
+#>
+		}
+<#+
+	}
+
+	private void WriteProperty(EntitySpace.Property property)
+    {
+		if (!this.entityKeyTypes.ContainsKey(property.Type))
+        {
+			throw new KeyNotFoundException("Property '" + property.Type + "' not found");
+        }
+
+		var keyPropertyType = this.entityKeyTypes[property.Type];
+#>
+
+			[DataContract]
+			public class <#= property.Name #>PropertyReferenceFilter : PropertyReferenceFilterBase
+			{
+				[DataMember]
+				public <#= keyPropertyType #> Value { get; set; }
+			}
+<#+
+    }
+#>

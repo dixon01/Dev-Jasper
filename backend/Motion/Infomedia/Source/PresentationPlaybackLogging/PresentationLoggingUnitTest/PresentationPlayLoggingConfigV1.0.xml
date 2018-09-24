@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PresentationPlayLoggingConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ClientConfig>
+    <FileNameRolloverType>Numerical</FileNameRolloverType>
+    <MaxFileSize>0</MaxFileSize>
+    <MaxRecords>5000</MaxRecords>
+    <MaxZipFileEntries>0</MaxZipFileEntries>
+    <RollOverLogOutputFolder>D:\PresentationPlayLogs</RollOverLogOutputFolder>
+    <ZipOutput>false</ZipOutput>
+  </ClientConfig>
+  <ServerConfig>
+    <BadFileFolder>D:\BadFiles</BadFileFolder>
+    <ConnectionStringDebug>Data Source=.\SQLEXPRESS;Initial Catalog=Luminator.Reporting.PresentationPlayLogging;Integrated Security=true;</ConnectionStringDebug>
+    <ConnectionStringRelease />
+    <DestinationsConnectionString />
+    <DestinationsUnitUri />
+    <FileWatchFolder>D:\fptroot</FileWatchFolder>
+    <LookupUnits>false</LookupUnits>
+    <WatchFileFilter>*.csv</WatchFileFilter>
+    <PollingIntervalString>PT30S</PollingIntervalString>
+  </ServerConfig>
+</PresentationPlayLoggingConfig>

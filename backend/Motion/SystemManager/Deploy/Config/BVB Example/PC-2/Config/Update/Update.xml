@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Update xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="file:///. Update.xsd">
+  <Agent Enabled="true">
+    <!--
+    you can change the handled unit name manually by setting it here:
+    <UnitName>MyName</UnitName>
+    -->
+    <RestartApplications>
+      <Dependency Path ="..\..\Presentation\">
+        <ExecutablePath>..\..\Progs\Composer\Composer.exe</ExecutablePath>
+      </Dependency>
+    </RestartApplications>
+  </Agent>
+  <Clients>
+    <USBUpdateClient Name="USB_E">
+      <RepositoryBasePath>E:\Gorba\Update</RepositoryBasePath>
+      <USBDetectionTimeOut>PT3S</USBDetectionTimeOut>
+      <PollInterval>PT20S</PollInterval>
+    </USBUpdateClient>
+    <FTPUpdateClient Name="FTP">
+		  <Host>192.168.1.70</Host>
+		  <Port>21</Port>
+		  <Username>demo</Username>
+		  <Password>demo</Password>
+		  <RepositoryBasePath>/Gorba/Update</RepositoryBasePath>
+		  <PollInterval>PT60S</PollInterval>
+		</FTPUpdateClient>
+  </Clients>
+  <Providers>
+    <MediUpdateProvider Name="MediProvider" />  
+  </Providers>
+  <Visualization HideTimeout="PT30S">
+    <SplashScreen Enabled="true" />
+    <LED Enabled="true" DefaultFrequency="1.25" ErrorFrequency="5" />
+  </Visualization>
+</Update>

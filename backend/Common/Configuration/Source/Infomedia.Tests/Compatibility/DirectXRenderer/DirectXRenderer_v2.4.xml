@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectXRenderer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="file:///. DirectXRenderer.xsd">
+  <WindowMode>Windowed</WindowMode>
+  <Screens>
+    <!-- leave this tag empty for default behavior (running on Topbox) -->
+
+    <Screen Adapter="0" Width="1920" Height="1080">
+      <VisibleRegion Width="1368" Height="768"/>
+      <FallbackImage>D:\Presentation\Images\Fallback.jpg</FallbackImage>
+    </Screen>
+
+    <Screen Adapter="1" Width="1440" Height="900" />
+  </Screens>
+  <Device>
+    <MultiSample>None</MultiSample>
+    <MultiSampleQuality>0</MultiSampleQuality>
+  </Device>
+  <Text>
+    <!-- Possible TextMode values: Font, FontSprite, Gdi* (*= experimental only!) -->
+    <TextMode>FontSprite</TextMode>
+    <!-- Possible FontQuality values: Default, Draft, Proof, NonAntiAliased, AntiAliased, ClearType, ClearTypeNatural -->
+    <FontQuality>AntiAliased</FontQuality>
+  </Text>
+  <Image>
+    <!-- 3600 = 1 hour -->
+    <BitmapCacheTimeout>3600</BitmapCacheTimeout>
+    <!-- 52428800 = 50 MB -->
+    <MaxBitmapCacheBytes>52428800</MaxBitmapCacheBytes>
+    <!-- 1000000 = 500x500 pixels (x4 bytes) -->
+    <MaxCacheBytesPerBitmap>1000000</MaxCacheBytesPerBitmap>
+    </Image>
+  <Video>
+    <!-- Possible VideoMode values: DirectShow, DirectXWindow, VlcWindow -->
+    <VideoMode>DirectXWindow</VideoMode>
+  </Video>
+</DirectXRenderer>

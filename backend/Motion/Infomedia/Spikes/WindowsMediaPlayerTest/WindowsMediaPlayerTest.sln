@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsMediaPlayerTest", "WindowsMediaPlayerTest\WindowsMediaPlayerTest.csproj", "{7B765FE6-B42E-4458-BABD-3CE1B4FF07BE}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WindowsMediaPlayerTestContent", "WindowsMediaPlayerTestContent\WindowsMediaPlayerTestContent.contentproj", "{37FED53E-9E58-4652-AE46-CA4C8ABF830A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WindowsMediaPlayerTest\\WindowsMediaPlayerTest.csproj
+		SccProjectName1 = WindowsMediaPlayerTest
+		SccLocalPath1 = WindowsMediaPlayerTest
+		SccProjectUniqueName2 = WindowsMediaPlayerTestContent\\WindowsMediaPlayerTestContent.contentproj
+		SccProjectName2 = WindowsMediaPlayerTestContent
+		SccLocalPath2 = WindowsMediaPlayerTestContent
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B765FE6-B42E-4458-BABD-3CE1B4FF07BE}.Debug|x86.ActiveCfg = Debug|x86
+		{7B765FE6-B42E-4458-BABD-3CE1B4FF07BE}.Debug|x86.Build.0 = Debug|x86
+		{7B765FE6-B42E-4458-BABD-3CE1B4FF07BE}.Release|x86.ActiveCfg = Release|x86
+		{7B765FE6-B42E-4458-BABD-3CE1B4FF07BE}.Release|x86.Build.0 = Release|x86
+		{37FED53E-9E58-4652-AE46-CA4C8ABF830A}.Debug|x86.ActiveCfg = Debug|x86
+		{37FED53E-9E58-4652-AE46-CA4C8ABF830A}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

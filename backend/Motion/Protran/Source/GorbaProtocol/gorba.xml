@@ -1,0 +1,3 @@
+﻿<Gorba desc="Container of all the settings required by Protran to handle Gorba messages."
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="file:///. ibis.xsd"/>

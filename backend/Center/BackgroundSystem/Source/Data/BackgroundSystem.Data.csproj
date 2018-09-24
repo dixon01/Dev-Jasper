@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.BackgroundSystem.Data</RootNamespace>
+    <AssemblyName>Gorba.Center.BackgroundSystem.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.BulkInsert">
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.BulkInsert-ef6.6.0.2.8\lib\Net45\EntityFramework.BulkInsert.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI">
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.MappingAPI.6.0.0.7\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Access\AccessExtensions.cs" />
+    <Compile Include="Access\BulkDeleteCommandExtensions.cs" />
+    <Compile Include="Access\BulkDeleteCommandExtensions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulkDeleteCommandExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Access\IBulkRepository{T,TFilter}.cs" />
+    <Compile Include="Access\IQueryableRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Access\IRepository.cs" />
+    <Compile Include="Access\WhereExtensions.partial.cs" />
+    <Compile Include="Access\QueryExtensions.partial.cs" />
+    <Compile Include="Access\QueryExtensions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueryExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Access\RepositoryBase.cs" />
+    <Compile Include="Access\UnitOfWork.generated.cs">
+      <DependentUpon>UnitOfWork.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Access\UnitOfWorkFactory.cs" />
+    <Compile Include="Access\WhereExtensions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhereExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="CenterDataContext.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CenterDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CenterDataContext.partial.cs" />
+    <Compile Include="DataContextFactory.cs" />
+    <Compile Include="Migrations\201410090519215_Setup.cs" />
+    <Compile Include="Migrations\201410090519215_Setup.Designer.cs">
+      <DependentUpon>201410090519215_Setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410101414100_AddMediaConfiguration.cs" />
+    <Compile Include="Migrations\201410101414100_AddMediaConfiguration.Designer.cs">
+      <DependentUpon>201410101414100_AddMediaConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410131216410_UserDefinedProperties.cs" />
+    <Compile Include="Migrations\201410131216410_UserDefinedProperties.Designer.cs">
+      <DependentUpon>201410131216410_UserDefinedProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410131250476_RenamedUserDefinedPropertiesKeyToName.cs" />
+    <Compile Include="Migrations\201410131250476_RenamedUserDefinedPropertiesKeyToName.Designer.cs">
+      <DependentUpon>201410131250476_RenamedUserDefinedPropertiesKeyToName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410171259420_DataScopesAndNullableTenantOnAssociation.cs" />
+    <Compile Include="Migrations\201410171259420_DataScopesAndNullableTenantOnAssociation.Designer.cs">
+      <DependentUpon>201410171259420_DataScopesAndNullableTenantOnAssociation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411101306532_LogEntry_SystemConfig_UpdateFixes.cs" />
+    <Compile Include="Migrations\201411101306532_LogEntry_SystemConfig_UpdateFixes.Designer.cs">
+      <DependentUpon>201411101306532_LogEntry_SystemConfig_UpdateFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412030722117_UpdateCommand_WasTransferred.cs" />
+    <Compile Include="Migrations\201412030722117_UpdateCommand_WasTransferred.Designer.cs">
+      <DependentUpon>201412030722117_UpdateCommand_WasTransferred.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503230737502_XmlDataAddSeparateTable.cs" />
+    <Compile Include="Migrations\201503230737502_XmlDataAddSeparateTable.Designer.cs">
+      <DependentUpon>201503230737502_XmlDataAddSeparateTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503230739245_XmlDataMoveData.cs" />
+    <Compile Include="Migrations\201503230739245_XmlDataMoveData.Designer.cs">
+      <DependentUpon>201503230739245_XmlDataMoveData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503230957548_XmlDataRemoveColumns.cs" />
+    <Compile Include="Migrations\201503230957548_XmlDataRemoveColumns.Designer.cs">
+      <DependentUpon>201503230957548_XmlDataRemoveColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200947457_SystemConfigChangeTracking.cs" />
+    <Compile Include="Migrations\201504200947457_SystemConfigChangeTracking.Designer.cs">
+      <DependentUpon>201504200947457_SystemConfigChangeTracking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505041002366_RemoveAllCascadeDelete.cs" />
+    <Compile Include="Migrations\201505041002366_RemoveAllCascadeDelete.Designer.cs">
+      <DependentUpon>201505041002366_RemoveAllCascadeDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505150632389_AdditionalUDPs.cs" />
+    <Compile Include="Migrations\201505150632389_AdditionalUDPs.Designer.cs">
+      <DependentUpon>201505150632389_AdditionalUDPs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505150649077_UdpCleanup.cs" />
+    <Compile Include="Migrations\201505150649077_UdpCleanup.Designer.cs">
+      <DependentUpon>201505150649077_UdpCleanup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505231713453_AddUnitIsConnected.cs" />
+    <Compile Include="Migrations\201505231713453_AddUnitIsConnected.Designer.cs">
+      <DependentUpon>201505231713453_AddUnitIsConnected.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506010954187_AddUpdatePartDynamicContent.cs" />
+    <Compile Include="Migrations\201506010954187_AddUpdatePartDynamicContent.Designer.cs">
+      <DependentUpon>201506010954187_AddUpdatePartDynamicContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506120549263_UpdatePart_Add_InstallInstructions.cs" />
+    <Compile Include="Migrations\201506120549263_UpdatePart_Add_InstallInstructions.Designer.cs">
+      <DependentUpon>201506120549263_UpdatePart_Add_InstallInstructions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510050932435_AddContentResourceTable.cs" />
+    <Compile Include="Migrations\201510050932435_AddContentResourceTable.Designer.cs">
+      <DependentUpon>201510050932435_AddContentResourceTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AddMediaConfiguration.partial.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Setup.partial.cs" />
+    <Compile Include="Migrations\UserDefinedProperties.partial.cs" />
+    <Compile Include="Model\EntityKey.cs" />
+    <Compile Include="Model\EntitySpace.generated.cs">
+      <DependentUpon>EntitySpace.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Model\Extensions.generated.cs">
+      <DependentUpon>Extensions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Model\ModelExtensions.cs" />
+    <Compile Include="Model\XmlData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Access\Repositories.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Access\BulkDeleteCommandExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BulkDeleteCommandExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Access\QueryExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Access\UnitOfWork.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UnitOfWork.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Access\WhereExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WhereExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CenterDataContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CenterDataContext.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Model\EntitySpace.Data.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntitySpace.Data.generated.xml</LastGenOutput>
+    </None>
+    <None Include="Model\EntitySpace.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntitySpace.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Model\Extensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Extensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Access\Repositories.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repositories.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\DynamicQuery\DynamicQuery.csproj">
+      <Project>{435BB0E9-43EA-405F-A62A-F39250C49020}</Project>
+      <Name>DynamicQuery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\HardwareDescription\Configuration.HardwareDescription.csproj">
+      <Project>{8c48ee78-4748-4127-ab41-9b188f98d738}</Project>
+      <Name>Configuration.HardwareDescription</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\EntitySpace.Data.generated.xml">
+      <DependentUpon>EntitySpace.Data.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Designer</SubType>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Model\EntitySpace.extension.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410090519215_Setup.resx">
+      <DependentUpon>201410090519215_Setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410101414100_AddMediaConfiguration.resx">
+      <DependentUpon>201410101414100_AddMediaConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410131216410_UserDefinedProperties.resx">
+      <DependentUpon>201410131216410_UserDefinedProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410131250476_RenamedUserDefinedPropertiesKeyToName.resx">
+      <DependentUpon>201410131250476_RenamedUserDefinedPropertiesKeyToName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171259420_DataScopesAndNullableTenantOnAssociation.resx">
+      <DependentUpon>201410171259420_DataScopesAndNullableTenantOnAssociation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411101306532_LogEntry_SystemConfig_UpdateFixes.resx">
+      <DependentUpon>201411101306532_LogEntry_SystemConfig_UpdateFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412030722117_UpdateCommand_WasTransferred.resx">
+      <DependentUpon>201412030722117_UpdateCommand_WasTransferred.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503230737502_XmlDataAddSeparateTable.resx">
+      <DependentUpon>201503230737502_XmlDataAddSeparateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503230739245_XmlDataMoveData.resx">
+      <DependentUpon>201503230739245_XmlDataMoveData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503230957548_XmlDataRemoveColumns.resx">
+      <DependentUpon>201503230957548_XmlDataRemoveColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200947457_SystemConfigChangeTracking.resx">
+      <DependentUpon>201504200947457_SystemConfigChangeTracking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505041002366_RemoveAllCascadeDelete.resx">
+      <DependentUpon>201505041002366_RemoveAllCascadeDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505150632389_AdditionalUDPs.resx">
+      <DependentUpon>201505150632389_AdditionalUDPs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505150649077_UdpCleanup.resx">
+      <DependentUpon>201505150649077_UdpCleanup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505231713453_AddUnitIsConnected.resx">
+      <DependentUpon>201505231713453_AddUnitIsConnected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506010954187_AddUpdatePartDynamicContent.resx">
+      <DependentUpon>201506010954187_AddUpdatePartDynamicContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506120549263_UpdatePart_Add_InstallInstructions.resx">
+      <DependentUpon>201506120549263_UpdatePart_Add_InstallInstructions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510050932435_AddContentResourceTable.resx">
+      <DependentUpon>201510050932435_AddContentResourceTable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Access\BulkCommands\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Arriva" type="ArrivaConfig" />
+    <xs:complexType name="ArrivaConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The Arriva protocol configuration.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="OBU" type="OBUConfig">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration parameters to communicate with the On-Board-Computer(OBU).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="FTP" type="FTPConfig">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration parameters to get the connectiosn information from FTP server.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="Behaviour" type="BehaviourConfig">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration parameters for the general behaviour of Arriva protocol for connections information.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OBUConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The parameters that are required by Protran to communicate with the Arriva On-Board-Unit(OBU).
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="RemoteIP" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The remote Ip address of the Arriva On-Board-Unit(OBU).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="RemotePort" type="xs:unsignedShort">
+          <xs:annotation>
+            <xs:documentation>
+              The remote port of the Arriva On-Board-Unit(OBU).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FTPConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The parameters that are required by Protran be able to receive the connections information from the
+          Arriva FTP Client.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="PollingEnabled" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>
+              Flag indicating whether to enable the polling of the source directory to check for connections file
+              received from FTP client.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>          
+        <xs:element minOccurs="1" maxOccurs="1" name="SourceDirectory" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The absolute path of the source directory where the connections file from Arriva FTP client will be
+              placed.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="Filename" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The absolute path of the source directory where the connections file from Arriva FTP client will be
+              placed.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BehaviourConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration for the general behaviour regarding the connections information received. It is required to
+          specify the source of the connectiosn information and whether to check for the connections information or not.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="ConnectionsEnabled" type="xs:boolean" >
+          <xs:annotation>
+            <xs:documentation>
+              Flad indicating whether to process the connections information recieved via FTP or not.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="ConnectionSource" type="SourceType">
+          <xs:annotation>
+            <xs:documentation>
+              The different sources from which Protran can receive the connections information.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="MaxDepartures" type="xs:unsignedByte">
+          <xs:annotation>
+            <xs:documentation>
+              The maximum number of departures that can be present in the connections file for the received connections
+              to be processed and sent.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="SourceType">
+      <xs:annotation>
+        <xs:documentation>
+          The type of source from which the connections information is received.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="ArrivaProtocol">
+          <xs:annotation>
+            <xs:documentation>
+              The connections information is received from the Arriva Protocol.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Ftp">
+          <xs:annotation>
+            <xs:documentation>
+              The connections information is received from an FTP server.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Activities" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="O">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Activities" minOccurs="0" name="Activities" nillable="true" type="q1:ArrayOfAc" />
+      <xs:element minOccurs="0" name="ActivityStatus" type="tns:OperationActivityStatus" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateModified" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExecutionOnceStartDateKind" type="tns:TimeSpecification" />
+      <xs:element minOccurs="0" name="ExecutionOnceStopDateKind" type="tns:TimeSpecification" />
+      <xs:element minOccurs="0" name="FavoriteFlag" type="tns:FavoriteFlag" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsRevoked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Priority" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Recurrence" nillable="true" type="tns:WeeklyRecurrence" />
+      <xs:element minOccurs="0" name="Repetition" type="tns:Repetition" />
+      <xs:element minOccurs="0" name="RevokedOn" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="Revoker" nillable="true" type="q2:User" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StopDate" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="Units" nillable="true" type="q3:ArrayOfU" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="User" nillable="true" type="q4:User" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="O" nillable="true" type="tns:O" />
+  <xs:simpleType name="OperationActivityStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Revoking" />
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Transmitting" />
+      <xs:enumeration value="Transmitted" />
+      <xs:enumeration value="Scheduled" />
+      <xs:enumeration value="Ended" />
+      <xs:enumeration value="Revoked" />
+      <xs:enumeration value="Suspended" />
+      <xs:enumeration value="Suspending" />
+      <xs:enumeration value="Updating" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OperationActivityStatus" nillable="true" type="tns:OperationActivityStatus" />
+  <xs:simpleType name="TimeSpecification">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Explicit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TimeSpecification" nillable="true" type="tns:TimeSpecification" />
+  <xs:simpleType name="FavoriteFlag">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Unflagged">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Flagged">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="FavoriteFlag" nillable="true" type="tns:FavoriteFlag" />
+  <xs:complexType name="WeeklyRecurrence">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecutionWeeklyBeginTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExecutionWeeklyEndTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExecutionWeeklyStartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExecutionWeeklyStopDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ExecutionWeeklyStopDateKind" type="tns:TimeSpecification" />
+      <xs:element minOccurs="0" name="StartExecutionDayFri" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDayMon" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDaySat" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDaySun" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDayThu" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDayTue" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StartExecutionDayWed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WeekRepetition" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WeeklyRecurrence" nillable="true" type="tns:WeeklyRecurrence" />
+  <xs:simpleType name="Repetition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Once" />
+      <xs:enumeration value="Daily" />
+      <xs:enumeration value="Weekly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Repetition" nillable="true" type="tns:Repetition" />
+  <xs:complexType name="ArrayOfO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="O" nillable="true" type="tns:O" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfO" nillable="true" type="tns:ArrayOfO" />
+</xs:schema>

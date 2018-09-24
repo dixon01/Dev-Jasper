@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Infomedia Version="2.0">
+  <PhysicalScreens>
+    <PhysicalScreen Name="FrontLED" Type="LED" Id="1" Width="112" Height="16" />
+    <PhysicalScreen Name="InteriorLED" Type="LED" Id="7" Width="96" Height="8" />
+    <PhysicalScreen Name="ColorLED" Type="LED" Id="13" Width="34" Height="20" />
+  </PhysicalScreens>
+
+  <VirtualDisplays>
+    <VirtualDisplay Name="FrontLED" CyclePackage="LedPackage" Width="112" Height="16"/>
+    <VirtualDisplay Name="InteriorLED" CyclePackage="LedPackage" Width="96" Height="8"/>
+    <VirtualDisplay Name="ColorLED" CyclePackage="LedPackage" Width="34" Height="20"/>
+  </VirtualDisplays>
+
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MasterCycle">
+        <MasterSection Duration="70000" Layout="MasterLayout" />
+      </MasterCycle>
+    </MasterCycles>
+
+    <MasterEventCycles />
+
+    <MasterLayouts>
+      <MasterLayout Name="MasterLayout">
+        <PhysicalScreen Ref="FrontLED">
+          <VirtualDisplay Ref="FrontLED" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="InteriorLED">
+          <VirtualDisplay Ref="InteriorLED" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="ColorLED">
+          <VirtualDisplay Ref="ColorLED" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+
+  <CyclePackages>
+    <CyclePackage Name="LedPackage">
+      <StandardCycles>
+        <StandardCycle Ref="MainCycle" />
+      </StandardCycles>
+
+      <EventCycles>
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="MainCycle">
+        <StandardSection Duration="10" Layout="TextLayout" />
+        <StandardSection Duration="10" Layout="ScrollTextLayout" />
+        <StandardSection Duration="10" Layout="ImageLayout" />
+      </StandardCycle>
+    </StandardCycles>
+
+    <EventCycles>
+    </EventCycles>
+  </Cycles>
+
+  <Layouts>
+    <Layout Name="TextLayout">
+      <Resolution Width="96" Height="8">
+        <Text Overflow="Extend" Value="This is a normal text">
+          <Font />
+        </Text>
+      </Resolution>
+      <Resolution Width="112" Height="16">
+        <Text X="0" Y="0" Width="112" Height="16" Align="Center" VAlign="Middle" Overflow="Wrap" Value="Hello World with some more text on 2 lines.">
+          <Font Face="G08X05U1" Color="#FFFFFF" />
+        </Text>
+      </Resolution>
+      <Resolution Width="34" Height="20">
+        <Text X="1" Y="1" Width="32" Height="18" Align="Center" VAlign="Middle" Overflow="Wrap" Value="125">
+          <Font Face="G16X07_2" Color="Yellow" OutlineColor="Black" />
+        </Text>
+        <Rectangle X="1" Y="1" Width="32" Height="18" ZIndex="-10" Color="Green" />
+        <Rectangle X="0" Y="0" Width="34" Height="20" ZIndex="-20" Color="Red" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="ScrollTextLayout">
+      <Resolution Width="96" Height="8">
+        <Text Overflow="ScrollAlways" Value="This is a scrolling text" ScrollSpeed="-1">
+          <Font />
+        </Text>
+      </Resolution>
+      <Resolution Width="112" Height="16">
+        <Image X="1" Y="0" Scaling="Fixed" Filename="Images\D_Lok.egl" />
+        <Text X="25" Y="0" Width="87" Height="8" Align="Center" VAlign="Middle" Overflow="Extend" Value="Fixed text">
+          <Font Face="G08X05U1" Color="#FFFFFF" />
+        </Text>
+        <Text X="25" Y="8" Width="87" Height="8" Align="Center" VAlign="Middle" Overflow="ScrollAlways" Value="Very, very long scrolling text">
+          <Font Face="G08X05U1" Color="#FFFFFF" />
+        </Text>
+      </Resolution>
+      <Resolution Width="34" Height="20">
+        <Text X="1" Y="1" Width="32" Height="18" Align="Center" VAlign="Middle" Overflow="Wrap" Value="125">
+          <Font Face="G16X07_2" Color="Yellow" OutlineColor="Black" />
+        </Text>
+        <Rectangle X="1" Y="1" Width="32" Height="18" ZIndex="-10" Color="Green" />
+        <Rectangle X="0" Y="0" Width="34" Height="20" ZIndex="-20" Color="Red" />
+      </Resolution>
+    </Layout>
+
+    <Layout Name="ImageLayout">
+      <Resolution Width="96" Height="8">
+        <Text Overflow="Extend" Value="No image support">
+          <Font />
+        </Text>
+      </Resolution>
+      <Resolution Width="112" Height="16">
+        <Image X="1" Y="0" Scaling="Fixed" Filename="Images\D_Lok.egl" />
+        <Image X="25" Y="0" Scaling="Fixed" Filename="Images\EILKURS.EGR" />
+        <Text X="70" Y="0" Width="42" Height="16" Align="Left" VAlign="Middle" Overflow="Extend" Value="A [img=Images/Horn.egl] B">
+          <Font Face="G16X07_2" Color="#FFFFFF" />
+        </Text>
+      </Resolution>
+      <Resolution Width="34" Height="20">
+        <Image X="-1" Y="0" Scaling="Fixed" Filename="Images\REGENBOGEN3.EGF" />
+      </Resolution>
+    </Layout>
+  </Layouts>
+
+  <Pools>
+  </Pools>
+
+  <Fonts>
+    <Font Path="Fonts\G08X05U1_GORBA_V2.FON" />
+    <Font Path="Fonts\G16X07_2_GORBA_V2.FON" />
+  </Fonts>
+</Infomedia>

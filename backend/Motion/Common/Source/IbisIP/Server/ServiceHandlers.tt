@@ -1,0 +1,457 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Protocols.Vdv301.Messages;
+using Gorba.Common.Protocols.Vdv301.Services;
+
+using Gorba.Common.Utility.Core;
+
+using NLog;
+
+<#
+    var services = LoadServices(this.Host.ResolvePath(@"..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.xml"));
+    
+    #>
+namespace Gorba.Motion.Common.IbisIP.Server
+{
+    internal abstract partial class HttpServiceHandlerBase
+    {
+        public static HttpServiceHandlerBase Create<TService>(TService service)
+            where TService : IVdv301HttpService
+        {
+            if (!(service is IVdv301ServiceImpl))
+            {
+                throw new ArgumentException("Service must implement IVdv301ServiceImpl");
+            }
+            <#
+
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            continue;
+        }
+        
+        var varialbeName = char.ToLower(service.Name[0]) + service.Name.Substring(1);
+         #>
+
+            var <#= varialbeName #> = service as I<#= service.Name #>;
+            if (<#= varialbeName #> != null)
+            {
+                return new <#= service.Name #>Handler(<#= varialbeName #>);
+            }
+         <#
+    }
+    #>
+
+            throw new NotSupportedException(string.Format("Service {0} not supported", service.GetType().FullName));
+        }
+    }
+    
+    internal abstract partial class UdpServiceHandlerBase
+    {
+        public static UdpServiceHandlerBase Create<TService>(TService service)
+            where TService : IVdv301UdpService
+        {
+            if (!(service is IVdv301ServiceImpl))
+            {
+                throw new ArgumentException("Service must implement IVdv301ServiceImpl");
+            }
+            <#
+
+    foreach (var service in services)
+    {
+        if (!service.IsMulticast)
+        {
+            continue;
+        }
+        
+        var varialbeName = char.ToLower(service.Name[0]) + service.Name.Substring(1);
+         #>
+
+            var <#= varialbeName #> = service as I<#= service.Name #>;
+            if (<#= varialbeName #> != null)
+            {
+                return new <#= service.Name #>Handler(<#= varialbeName #>);
+            }
+         <#
+    }
+    #>
+
+            throw new NotSupportedException(string.Format("Service {0} not supported", service.GetType().FullName));
+        }
+    }
+    <#
+
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            this.GenerateUdpServiceHandler(service);
+            continue;
+        }
+        
+        this.GenerateHttpServiceHandler(service);
+    }
+    #>
+}
+
+<#+
+private void GenerateUdpServiceHandler(Service service)
+{
+    var multicastType = GetClassName(service.MulticastType.Name);
+    var eventName = service.Name.Replace("Service", string.Empty) + "Changed";
+    #>
+    
+
+    internal partial class <#= service.Name #>Handler : UdpServiceHandlerBase
+    {
+        private readonly I<#= service.Name #> service;
+
+        public <#= service.Name #>Handler(I<#= service.Name #> service)
+        {
+            this.service = service;
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "<#= service.Name #>";
+            }
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            this.service.<#= eventName #> += this.ServiceOn<#= eventName #>;
+        }
+
+        public override void Stop()
+        {
+            this.service.<#= eventName #> -= this.ServiceOn<#= eventName #>;
+            base.Stop();
+        }
+
+        private void ServiceOn<#= eventName #>(object sender, DataUpdateEventArgs<<#= multicastType #>> e)
+        {
+            this.SendDatagram(e.Value);
+        }
+    }<#+
+}
+
+private void GenerateHttpServiceHandler(Service service)
+{
+    #>
+    
+
+    internal partial class <#= service.Name #>Handler : HttpServiceHandlerBase
+    {
+        private readonly I<#= service.Name #> service;<#+
+    foreach (Operation operation in service.Operations)
+    {
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var resultWrapperType = GetClassName(operation.ResponseType.Name);
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+        private readonly List<Subscription<<#= resultWrapperType #>>> subscriptions<#= baseName #>;<#+
+        }
+    }
+    #>
+
+
+        public <#= service.Name #>Handler(I<#= service.Name #> service)
+        {
+            this.service = service;<#+
+    foreach (Operation operation in service.Operations)
+    {
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var resultWrapperType = GetClassName(operation.ResponseType.Name);
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+            this.subscriptions<#= baseName #> = new List<Subscription<<#= resultWrapperType #>>>();<#+
+        }
+    }
+    #>
+
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "<#= service.Name #>";
+            }
+        }
+
+        public override void HandleListRequest(HttpServer.Request request)
+        {
+            using (var writer = new StreamWriter(request.GetResponse().GetResponseStream()))
+            {
+                writer.WriteLine("<html>");
+                writer.WriteLine("<head><title>Operations of <#= service.Name #></title></head>");
+                writer.WriteLine("<body>");
+                writer.WriteLine("<h1>Operations of <#= service.Name #></h1>");
+                writer.WriteLine("<ul>");<#+
+    foreach (Operation operation in service.Operations)
+    {
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+                writer.WriteLine("<li><a href=\"<#= operation.Name #>\"><#= operation.Name #></a></li>");
+                writer.WriteLine("<li><a href=\"post.html?Subscribe<#= baseName #>\">Subscribe<#= baseName #></a></li>");
+                writer.WriteLine("<li><a href=\"post.html?Unsubscribe<#= baseName #>\">Unsubscribe<#= baseName #></a></li>");<#+
+        }
+        else
+        {
+            var post = operation.RequestType == null ? "" : "post.html?";
+            #>
+
+                writer.WriteLine("<li><a href=\"<#= post #><#= operation.Name #>\"><#= operation.Name #></a></li>");<#+
+        }
+    }
+    #>
+
+                writer.WriteLine("</ul>");
+                writer.WriteLine("</body>");
+                writer.WriteLine("</html>");
+            }
+        }
+
+        public override void HandleRequest(string operationName, HttpServer.Request request)
+        {
+            switch (operationName)
+            {<#+
+    foreach (Operation operation in service.Operations)
+    {
+        #>
+
+                case "<#= operation.Name #>":
+                    this.Handle<#= operation.Name #>(request);
+                    break;<#+
+
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+                case "Subscribe<#= baseName #>":
+                    this.HandleSubscribe<#= baseName #>(request);
+                    break;
+                case "Unsubscribe<#= baseName #>":
+                    this.HandleUnsubscribe<#= baseName #>(request);
+                    break;<#+
+        }
+    }
+    #>
+
+                default:
+                    throw new NotSupportedException("Operation " + operationName + " is not supported by <#= service.Name #>");
+            }
+        }
+        
+        protected override object GetDefaultPostObject(string operationName)
+        {
+            if (operationName.StartsWith("Subscribe"))
+            {
+                return this.CreateDefaultPostObject<SubscribeRequestStructure>();
+            }
+
+            if (operationName.StartsWith("Unsubscribe"))
+            {
+                return this.CreateDefaultPostObject<UnsubscribeRequestStructure>();
+            }
+            
+            switch (operationName)
+            {<#+
+    foreach (Operation operation in service.Operations)
+    {
+        if (operation.RequestType == null)
+        {
+            continue;
+        }
+        
+        var requestType = GetClassName(operation.RequestType.Name);
+        #>
+
+                case "<#= operation.Name #>":
+                    return this.CreateDefaultPostObject<<#= requestType #>>();<#+
+    }
+    #>
+
+                default:
+                    throw new NotSupportedException("Operation " + operationName + " is not supported by <#= service.Name #>");
+            }
+        }
+        <#+
+
+    foreach (Operation operation in service.Operations)
+    {
+        var resultWrapperType = "DataAcceptedResponseStructure";
+        var arguments = new StringBuilder();
+        var requestType = string.Empty;
+        foreach (var arg in operation.Arguments)
+        {
+            if (arguments.Length > 0)
+            {
+                arguments.Append(", ");
+            }
+
+            arguments.Append("args.");
+            arguments.Append(arg.Name);
+        }
+        
+        if (operation.RequestType != null)
+        {
+            requestType = GetClassName(operation.RequestType.Name);
+        }
+        
+        if (operation.ResponseType != null)
+        {
+            resultWrapperType = GetClassName(operation.ResponseType.Name);
+        }
+        #>
+
+
+        private void Handle<#= operation.Name #>(HttpServer.Request request)
+        {
+            var resultWrapper = new <#= resultWrapperType #>();
+            try
+            {<#+
+        if (operation.RequestType != null)
+        {
+        #>
+
+                if (request.Method != "POST")
+                {
+                    throw new NotSupportedException("<#= operation.Name #> only supports POST");
+                }
+
+                <#= requestType #> args;
+                using (var input = request.GetRequestStream())
+                {
+                    args = this.Deserialize<<#= requestType #>>(input);
+                }
+                <#+
+        }
+        else
+        {
+            #>
+
+                if (request.Method != "GET")
+                {
+                    throw new NotSupportedException("<#= operation.Name #> only supports GET");
+                }
+            <#+
+        }
+        
+        #>
+
+                var result = this.service.<#= operation.Name #>(<#= arguments #>);
+                resultWrapper.Item = result;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Warn(ex, "Exception while dispatching <#= operation.Name #>, returning error");
+                resultWrapper.Item = new IBISIPstring
+                    {
+                        Value = ex.GetType().Name + ": " + ex.Message
+                    };
+            }
+            
+            var response = request.GetResponse();
+            response.ContentType = "text/xml";
+            using (var output = response.GetResponseStream())
+            {
+                this.Serialize(output, resultWrapper);
+            }
+        }<#+
+        
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+
+        private void HandleSubscribe<#= baseName #>(HttpServer.Request request)
+        {
+            var subscription = this.AddSubscription(this.subscriptions<#= baseName #>, request);
+            if (subscription == null)
+            {
+                return;
+            }
+
+            if (this.subscriptions<#= baseName #>.Count == 1)
+            {
+                this.service.<#= baseName #>Changed += this.ServiceOn<#= baseName #>Changed;
+            }
+
+            var value = new <#= resultWrapperType #>();
+            value.Item = this.service.<#= operation.Name #>();
+            subscription.Notify(value);
+        }
+            
+        private void HandleUnsubscribe<#= baseName #>(HttpServer.Request request)
+        {
+            this.RemoveSubscription(this.subscriptions<#= baseName #>, request);
+            if (this.subscriptions<#= baseName #>.Count == 0)
+            {
+                this.service.<#= baseName #>Changed -= this.ServiceOn<#= baseName #>Changed;
+            }
+        }<#+
+        }
+    }
+
+    foreach (Operation operation in service.Operations)
+    {
+        if (operation.Name.StartsWith("Get"))
+        {
+            // add Subscribe and Unsubscribe
+            var resultWrapperType = GetClassName(operation.ResponseType.Name);
+            var baseName = operation.Name.Substring(3);
+            #>
+            
+
+        private void ServiceOn<#= baseName #>Changed(object sender, DataUpdateEventArgs<<#= GetClassName(operation.Return.ElementSchemaType.Name) #>> e)
+        {
+            var value = new <#= resultWrapperType #>();
+            value.Item = e.Value;
+            this.NotifySubscriptions(this.subscriptions<#= baseName #>, value);
+        }<#+
+        }
+    }
+    #>
+
+    }
+<#+
+}
+#>

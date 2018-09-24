@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{043E6147-0C0A-4027-868A-B53E0505F831}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.Controls</RootNamespace>
+    <AssemblyName>Gorba.Motion.Protran.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ApplySendButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS021AControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DS021AControl.Designer.cs">
+      <DependentUpon>DS021AControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenericDataTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericDataTabPage.Designer.cs">
+      <DependentUpon>GenericDataTabPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataEventArgs.cs" />
+    <Compile Include="DS021ARowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DS021ARowControl.designer.cs">
+      <DependentUpon>DS021ARowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DS021CRowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DS021CRowControl.Designer.cs">
+      <DependentUpon>DS021CRowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenericDataTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericDataTabControl.Designer.cs">
+      <DependentUpon>GenericDataTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GO002RowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GO002RowControl.Designer.cs">
+      <DependentUpon>GO002RowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GO004RowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GO004RowControl.Designer.cs">
+      <DependentUpon>GO004RowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GO005RowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GO005RowControl.Designer.cs">
+      <DependentUpon>GO005RowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuggestTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TelegramCreationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TelegramCreationControl.Designer.cs">
+      <DependentUpon>TelegramCreationControl.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DS021AControl.resx">
+      <DependentUpon>DS021AControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericDataTabPage.resx">
+      <DependentUpon>GenericDataTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DS021ARowControl.resx">
+      <DependentUpon>DS021ARowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DS021CRowControl.resx">
+      <DependentUpon>DS021CRowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericDataTabControl.resx">
+      <DependentUpon>GenericDataTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GO002RowControl.resx">
+      <DependentUpon>GO002RowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GO004RowControl.resx">
+      <DependentUpon>GO004RowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GO005RowControl.resx">
+      <DependentUpon>GO005RowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelegramCreationControl.resx">
+      <DependentUpon>TelegramCreationControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

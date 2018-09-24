@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AhdlcRenderer" type="AhdlcRendererConfig" />
+  <xs:complexType name="AhdlcRendererConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The AHDLC Renderer configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Channel" type="ChannelConfig">
+        <xs:annotation>
+          <xs:documentation>
+            List of all channels used in the renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Text" type="TextConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Settings related to the rendering of text.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChannelConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a channel. A channel is a single serial port connected
+        to one or more signs. All signs on this channel must have unique addresses.
+        This allows to use the AHDLC Renderer with multiple RS485 connections on a single unit.
+        Usually there is exactly one channel configured.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SerialPort" type="SerialPortConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the serial (COM) port used by this channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Signs" type="ArrayOfSignConfig">
+        <xs:annotation>
+          <xs:documentation>
+            List of all signs connected to this channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SerialPortConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a serial (COM) port.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ComPort" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The serial port's name, e.g. &quot;COM1&quot;.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="BaudRate" type="xs:int" default="38400">
+        <xs:annotation>
+          <xs:documentation>
+            The baud rate to be used on the serial port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DataBits" type="xs:int" default="8">
+        <xs:annotation>
+          <xs:documentation>
+            The number of data bits to be used on the serial port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="StopBits" type="StopBits" default="Two">
+        <xs:annotation>
+          <xs:documentation>
+            The number of stop bits to be used on the serial port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Parity" type="Parity" default="None">
+        <xs:annotation>
+          <xs:documentation>
+            The parity to be used on the serial port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RTSMode" type="RtsMode" default="Default">
+        <xs:annotation>
+          <xs:documentation>
+            The behavior how to set the serial port's RTS signal when transmitting data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IsHighSpeed" type="xs:boolean" default="true">
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating if the port is using AHDLC high-speed mode.
+            If this flag is set to true, block numbers will occupy 2 bytes.
+            Set this to true for signs that are running over RS-485 and to false if
+            the signs are connected via an Alphabus converter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IgnoreFrameStart" type="xs:boolean" default="false">
+        <xs:annotation>
+          <xs:documentation>
+            Flag value indicating whether to ignore the frame start.
+            If the frame start is ignored, the AHDLC Renderer will still decode a frame even if its
+            start marker is missing. This can be used in cases where the first
+            bit(s) of the response are crippled because of timing issues.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IgnoreResponses" type="xs:boolean" default="false">
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating whether to ignore responses.
+            If responses are ignored, the AHDLC Renderer will just send data
+            (estimating the wait time for possible responses, but not reading any responses).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IgnoreResponseTime" type="xs:positiveInteger" default="10">
+        <xs:annotation>
+          <xs:documentation>
+            Time to wait in milliseconds when IgnoreResponses is set to true.
+            This wait time will always be added to the estimated wait time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--<xs:element minOccurs="0" maxOccurs="1" name="RetryCount" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SerialPortReopen" type="SerialPortReopen" />-->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Parity">
+    <xs:annotation>
+      <xs:documentation>
+        Specifies the parity bit for a serial port.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>
+            No parity check occurs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Odd">
+        <xs:annotation>
+          <xs:documentation>
+            Sets the parity bit so that the count of bits set is an odd number.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Even">
+        <xs:annotation>
+          <xs:documentation>
+            Sets the parity bit so that the count of bits set is an even number.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Mark">
+        <xs:annotation>
+          <xs:documentation>
+            Leaves the parity bit set to 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Space">
+        <xs:annotation>
+          <xs:documentation>
+            Leaves the parity bit set to 0.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StopBits">
+    <xs:annotation>
+      <xs:documentation>
+        Specifies the number of stop bits used on the serial port.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>
+            No stop bits are used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="One">
+        <xs:annotation>
+          <xs:documentation>
+            One stop bit is used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OnePointFive">
+        <xs:annotation>
+          <xs:documentation>
+            1.5 stop bits are used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Two">
+        <xs:annotation>
+          <xs:documentation>
+            Two stop bits are used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RtsMode">
+    <xs:annotation>
+      <xs:documentation>
+        The behavior how to set the serial port's RTS signal when transmitting data.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default">
+        <xs:annotation>
+          <xs:documentation>
+            The default behavior for the given hardware platform.
+            This is &quot;EnableForTx&quot; on InfoVision TFT products and &quot;Auto&quot; for VM.cu.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Auto">
+        <xs:annotation>
+          <xs:documentation>
+            The RTS line is automatically toggled by the hardware.
+            This is currently only supported on VM.cu.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Enabled">
+        <xs:annotation>
+          <xs:documentation>
+            The RTS line is enabled at startup and never changed thereafter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Disabled">
+        <xs:annotation>
+          <xs:documentation>
+            The RTS line is disabled at startup and never changed thereafter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EnableForTx">
+        <xs:annotation>
+          <xs:documentation>
+            The RTS line is disabled at startup,
+            then enabled by the software before sending data and disabled again after sending data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DisableForTx">
+        <xs:annotation>
+          <xs:documentation>
+            The RTS line is enabled at startup,
+            then disabled by the software before sending data and enabled again after sending data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- <xs:simpleType name="SerialPortReopen">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="FrameOnly" />
+      <xs:enumeration value="All" />
+    </xs:restriction>
+  </xs:simpleType> -->
+  <xs:complexType name="ArrayOfSignConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Sign" type="SignConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SignConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single exterior or interior sign connected to a serial port.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The identifier for this sign towards Composer. This can be used to address same-size screens on
+          the address on different systems. If this attribute is omitted, the ID will be the same as the address below.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Address" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The AHDLC address (1..15) of the sign.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1"/>
+          <xs:maxInclusive value="15"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Mode" type="SignMode" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The mode in which the sign is to be used.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The width in pixels of the sign (usually a multiple of 14 for monochrome exterior signs).
+          This attribute has to be specified but is ignored for interior signs.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The height in pixels of the sign (usually a multiple of 8 for monochrome exterior signs).
+          This attribute has to be specified but is ignored for interior signs.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Brightness" type="Brightness" default="Default">
+      <xs:annotation>
+        <xs:documentation>
+          The brightness with which to display content on the sign.
+          This attribute is only considered for monochrome exterior signs.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="SignMode">
+    <xs:annotation>
+      <xs:documentation>
+        The mode in which a sign is to be used.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Monochrome">
+        <xs:annotation>
+          <xs:documentation>
+            The sign should be sent monochrome bitmaps only.
+            In this mode, colors are converted to black/white where anything not black is considered white.
+            Use this mode for monochrome exterior signs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Color">
+        <xs:annotation>
+          <xs:documentation>
+            The sign should be sent color bitmaps only.
+            In this mode, no scrolling texts are supported.
+            Use this mode for color exterior signs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Text">
+        <xs:annotation>
+          <xs:documentation>
+            The sign should be sent texts only.
+            In this mode, no bitmaps are supported and text is aligned by the sign,
+            not according to the values defined in the .im2 file.
+            Use this mode for interior signs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Brightness">
+    <xs:annotation>
+      <xs:documentation>
+        The brightness of a Gorba exterior sign.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default">
+        <xs:annotation>
+          <xs:documentation>
+            The default value (0).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Brightness1">
+        <xs:annotation>
+          <xs:documentation>
+            The first brightness level (darkest, 10).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Brightness2">
+        <xs:annotation>
+          <xs:documentation>
+            The second brightness level (11).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Brightness3">
+        <xs:annotation>
+          <xs:documentation>
+            The third brightness level (brightest, 12).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TextConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Settings related to the rendering of text.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AlternationInterval" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the interval at which alternating text should be changed.
+            Alternating text is sent to the renderer using the [a]...[|]...[/a] syntax.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

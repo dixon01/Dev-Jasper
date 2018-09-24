@@ -1,0 +1,1058 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="2.0" Created="2017-07-17 16:56:41">
+  <PhysicalScreens>
+    <PhysicalScreen Name="1920x1080" Type="TFT" Width="1920" Height="1080" />
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="TFT Display_1" CyclePackage="CyclePackage TFT 1920x1080" Width="1920" Height="1080" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="Master cycle">
+        <MasterSection Duration="P1D" Layout="Standard Master Layout" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="Standard Master Layout">
+        <PhysicalScreen Ref="1920x1080">
+          <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations>
+    <Evaluation Name="DoorClose">
+      <And>
+        <StringCompare Value="0">
+          <Generic Lang="0" Table="105" Column="0" Row="0" />
+        </StringCompare>
+        <StringCompare Value="0">
+          <Generic Lang="0" Table="105" Column="1" Row="0" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="DoorOpen">
+      <Or>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="0" Row="0" />
+        </StringCompare>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="1" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="Line0">
+      <IntegerCompare Begin="0" End="0">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="LineBlank">
+      <StringCompare Value="">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="MissingIBIS">
+      <StringCompare Value="0">
+        <Generic Lang="0" Table="0" Column="2" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="SpecialLinePicture">
+      <CodeConversion FileName="codeconversion.csv" UseImage="true" />
+    </Evaluation>
+    <Evaluation Name="SpecialLineText">
+      <CodeConversion FileName="codeconversion.csv" UseImage="false" />
+    </Evaluation>
+    <Evaluation Name="StopIndex1to89">
+      <IntegerCompare Begin="1" End="89">
+        <Generic Lang="0" Table="10" Column="4" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="StopRequest">
+      <Or>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="2" Row="0" />
+        </StringCompare>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="3" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="ConnectionsAvailable">
+      <Or>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="1" />
+          </StringCompare>
+        </Not>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="FullStrip">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="EndStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="LastStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="Stops">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+      </And>
+    </Evaluation>
+    <Evaluation Name="DisplayVersion">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="DestinationAvailable">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="11" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="Stop">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="BoardingFullStrip">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="BoardingEndStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="NextStopT2S">
+      <Format Format="Next stop is: {0}">
+        <Evaluation Ref="ExpandStopAbbrevs" />
+      </Format>
+    </Evaluation>
+    <Evaluation Name="BoardingLastStripLine">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="1" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="OffRoute">
+      <Generic Lang="0" Table="10" Column="12" Row="0" />
+    </Evaluation>
+    <Evaluation Name="OnRoute">
+      <Not>
+        <Generic Lang="0" Table="10" Column="12" Row="0" />
+      </Not>
+    </Evaluation>
+    <Evaluation Name="NewDoorOpen">
+      <Or>
+        <Generic Lang="0" Table="105" Column="0" Row="0" />
+        <Generic Lang="0" Table="105" Column="1" Row="0" />
+      </Or>
+    </Evaluation>
+    <Evaluation Name="InteriorAudioZone">
+      <Or>
+        <StringCompare Value="0" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+        <StringCompare Value="interior" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="ExteriorAudioZone">
+      <Or>
+        <StringCompare Value="1" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+        <StringCompare Value="exterior" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="IntExtAudioZone">
+      <Or>
+        <StringCompare Value="2" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+        <StringCompare Value="both" IgnoreCase="true">
+          <Generic Lang="0" Table="101" Column="1" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="TempIntAudioZone">
+      <StringCompare Value="0" IgnoreCase="true">
+        <Generic Lang="0" Table="101" Column="1" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="ExpandStopAbbrevs">
+      <Format Format="{0}">
+        <RegexReplace Pattern="\bTERM(s?)\b" Replacement=" TERMINAL$1">
+          <RegexReplace Pattern="#" Replacement=" number ">
+            <RegexReplace Pattern="\bCO-OP(s?)\b" Replacement=" co-op$1">
+              <RegexReplace Pattern="\bHOSP(s?)\b" Replacement=" HOSPITAL$1">
+                <RegexReplace Pattern="KISSENA" Replacement=" kisseena">
+                  <RegexReplace Pattern="\bS\b" Replacement=" south ">
+                    <RegexReplace Pattern="\bN\b" Replacement=" north ">
+                      <RegexReplace Pattern="\bE\b" Replacement=" east ">
+                        <RegexReplace Pattern="\bW\b" Replacement=" west ">
+                          <RegexReplace Pattern="/" Replacement=" AND ">
+                            <RegexReplace Pattern="\bSQ(s?)\b" Replacement="SQUARE$1">
+                              <RegexReplace Pattern="\bPLZ(s?)\b" Replacement="PLAZA$1">
+                                <RegexReplace Pattern="\bPK(s?)\b" Replacement="PARK$1">
+                                  <RegexReplace Pattern="\bPKWY(s?)\b" Replacement="PARKWAY$1">
+                                    <RegexReplace Pattern="\bPT(s?)\b" Replacement="POINT$1">
+                                      <RegexReplace Pattern="\bHWY(s?)\b" Replacement="HIGHWAY$1">
+                                        <RegexReplace Pattern="\bEXP(s?)\b" Replacement="EXPRESSWAY$1">
+                                          <RegexReplace Pattern="\bRD(s?)\b" Replacement="ROAD$1">
+                                            <RegexReplace Pattern="\bTPK(s?)\b" Replacement="TURNPIKE$1">
+                                              <RegexReplace Pattern="\bDR(s?)\b" Replacement="DRIVE$1">
+                                                <RegexReplace Pattern="\bBLVD(s?)\b" Replacement="BOULEVARD$1">
+                                                  <RegexReplace Pattern="\bBL(s?)\b" Replacement="BOULEVARD$1">
+                                                    <RegexReplace Pattern="\bAV(s?)\b" Replacement="AVENUE$1">
+                                                      <RegexReplace Pattern="\bST(s?)\b" Replacement="STREET$1">
+                                                        <RegexReplace Pattern="(3)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1RD">
+                                                          <RegexReplace Pattern="(2)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1ND">
+                                                            <RegexReplace Pattern="(13)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                              <RegexReplace Pattern="(12)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                <RegexReplace Pattern="(1)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1st">
+                                                                  <RegexReplace Pattern="(11)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                    <RegexReplace Pattern="([0456789])\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL)(\b|$))" Replacement="$1TH">
+                                                                      <Generic Lang="0" Table="12" Column="0" Row="0" />
+                                                                    </RegexReplace>
+                                                                  </RegexReplace>
+                                                                </RegexReplace>
+                                                              </RegexReplace>
+                                                            </RegexReplace>
+                                                          </RegexReplace>
+                                                        </RegexReplace>
+                                                      </RegexReplace>
+                                                    </RegexReplace>
+                                                  </RegexReplace>
+                                                </RegexReplace>
+                                              </RegexReplace>
+                                            </RegexReplace>
+                                          </RegexReplace>
+                                        </RegexReplace>
+                                      </RegexReplace>
+                                    </RegexReplace>
+                                  </RegexReplace>
+                                </RegexReplace>
+                              </RegexReplace>
+                            </RegexReplace>
+                          </RegexReplace>
+                        </RegexReplace>
+                      </RegexReplace>
+                    </RegexReplace>
+                  </RegexReplace>
+                </RegexReplace>
+              </RegexReplace>
+            </RegexReplace>
+          </RegexReplace>
+        </RegexReplace>
+      </Format>
+    </Evaluation>
+    <Evaluation Name="ApproachingStop">
+      <Or>
+        <Generic Lang="0" Table="105" Column="18" Row="0" />
+        <Generic Lang="0" Table="105" Column="19" Row="0" />
+      </Or>
+    </Evaluation>
+  </Evaluations>
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="Hi-Res Cycle">
+        <StandardSection Duration="PT10S" Layout="Stops Layout (1920x1080)">
+          <Enabled>
+            <Or>
+              <Not>
+                <Evaluation Ref="LineBlank" />
+              </Not>
+              <Evaluation Ref="DestinationAvailable" />
+              <Evaluation Ref="Stop" />
+            </Or>
+          </Enabled>
+        </StandardSection>
+        <StandardSection Duration="PT10S" Layout="Balloons Layout (1920x1080)" />
+        <StandardSection Duration="PT10S" Layout="Logo Layout (1920x1080)" />
+        <StandardSection Duration="PT27S" Layout="Video Layout (1920x1080)" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles>
+      <EventCycle Name="Status Screen Event Cycle">
+        <Enabled>
+          <Evaluation Ref="DisplayVersion" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </Trigger>
+        <StandardSection Duration="PT23H59M59.9S" Layout="Status Layout (1920x1080)" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="CyclePackage TFT 1920x1080">
+      <StandardCycles>
+        <StandardCycle Ref="Hi-Res Cycle" />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="Status Screen Event Cycle" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+  <Pools />
+  <Layouts>
+    <Layout Name="Status Layout (1920x1080)">
+      <Resolution Width="1920" Height="1080">
+        <Image X="189" Y="1023" Width="188" Height="50" ZIndex="35" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="14" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="189" Y="1024" Width="188" Height="50" ZIndex="36" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="RadioSpkrNonMute">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="-2" Y="1023" Width="188" Height="50" ZIndex="33" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="13" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="1" Y="1023" Width="188" Height="50" ZIndex="34" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ExtSpkrNonMute">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="564" Y="974" Width="188" Height="50" ZIndex="31" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="12" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="564" Y="973" Width="188" Height="50" ZIndex="32" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="IntSpkrNonMuted">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="377" Y="974" Width="188" Height="50" ZIndex="29" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="11" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="376" Y="973" Width="188" Height="50" ZIndex="30" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Rad Spkr Muted">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="186" Y="974" Width="188" Height="50" ZIndex="27" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="10" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="188" Y="973" Width="188" Height="50" ZIndex="28" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Ext Spkr Muted">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="-2" Y="973" Width="188" Height="50" ZIndex="25" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="9" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="1" Y="973" Width="188" Height="50" ZIndex="26" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Int Spkr Mute">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="564" Y="923" Width="188" Height="50" ZIndex="23" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="7" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="564" Y="923" Width="188" Height="50" ZIndex="24" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Odometer">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="376" Y="923" Width="188" Height="50" ZIndex="21" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="6" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="376" Y="923" Width="188" Height="50" ZIndex="22" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Exterior Act">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="188" Y="923" Width="188" Height="50" ZIndex="19" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="5" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="189" Y="923" Width="188" Height="50" ZIndex="20" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Interior Act">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="1" Y="923" Width="188" Height="50" ZIndex="17" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="4" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="1" Y="923" Width="188" Height="50" ZIndex="18" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Push To Talk">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="564" Y="873" Width="188" Height="50" ZIndex="15" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="3" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="564" Y="873" Width="188" Height="50" ZIndex="16" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ADA Stop Req">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="376" Y="873" Width="188" Height="50" ZIndex="13" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="2" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="376" Y="873" Width="188" Height="50" ZIndex="14" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Stop Request">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="188" Y="873" Width="188" Height="50" ZIndex="11" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="1" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="188" Y="873" Width="188" Height="50" ZIndex="12" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door2">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="1" Y="873" Width="188" Height="50" ZIndex="9" Filename="Images\LargeGpioOn.png">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="0" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="0" Y="873" Width="188" Height="50" ZIndex="10" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door1">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="750" Y="597" Width="1165" Height="301" ZIndex="6" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="95" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="750" Y="898" Width="1165" Height="177" ZIndex="7" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="96" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="800" Width="750" Height="73" ZIndex="8" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Ver: High res. template.  18-Jul-2017">
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="-2" Y="0" Width="1920" Height="1080" ZIndex="0" Filename="Images\LargeStatusBackground.png" />
+        <Text X="-2" Y="0" Width="1920" Height="100" ZIndex="1" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="90" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1372" Y="98" Width="546" Height="498" ZIndex="2" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="94" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="750" Y="98" Width="624" Height="498" ZIndex="3" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="93" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="473" Width="750" Height="327" ZIndex="4" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="92" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="0" Y="100" Width="750" Height="373" ZIndex="5" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="24" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="91" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="Stops Layout (1920x1080)">
+      <Resolution Width="1920" Height="1080">
+        <Text X="416" Y="23" Width="1482" Height="140" ZIndex="7" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#FFFFFF" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="11" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="20" Y="23" Width="381" Height="140" ZIndex="8" Align="Center" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#0ecd99" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="10" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="63" Y="271" Width="52" Height="700" ZIndex="9" Filename="Images\DefaultStopLadder.png" />
+        <Text X="156" Y="872" Width="1720" Height="140" ZIndex="2" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="4" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="156" Y="710" Width="1720" Height="140" ZIndex="3" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="3" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="156" Y="548" Width="1720" Height="140" ZIndex="4" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="156" Y="386" Width="1720" Height="140" ZIndex="5" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="156" Y="224" Width="1720" Height="140" ZIndex="6" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="0" Width="1920" Height="1080" ZIndex="0" Filename="Images\LargeStatusBackground.png" Scaling="Scale" />
+        <Image X="0" Y="0" Width="1920" Height="180" ZIndex="1" Filename="Images\Head (1).png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Logo Layout (1920x1080)">
+      <Resolution Width="1920" Height="1080">
+        <Image X="0" Y="0" Width="1920" Height="1080" ZIndex="0" Filename="Images\LargeLuminatorLogo.png" />
+        <Text X="471" Y="907" Width="1021" Height="173" ZIndex="1" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="Stop Requested">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#FFFF0000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="Balloons Layout (1920x1080)">
+      <Resolution Width="1920" Height="1080">
+        <Text X="471" Y="907" Width="1021" Height="173" ZIndex="1" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="Stop Requested">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+          <Font Face="Arial" Height="140" Weight="100" Italic="false" Color="#FFFF0000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="0" Width="1920" Height="1080" ZIndex="0" Filename="Images\LargePlanoBalloons.png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Video Layout (1920x1080)">
+      <Resolution Width="1920" Height="1080">
+        <Video X="0" Y="0" Width="1920" Height="1080" ZIndex="0" VideoUri="Videos\Cat - 1297.mp4" FallbackImage="" />
+      </Resolution>
+    </Layout>
+  </Layouts>
+  <Fonts />
+</Infomedia>

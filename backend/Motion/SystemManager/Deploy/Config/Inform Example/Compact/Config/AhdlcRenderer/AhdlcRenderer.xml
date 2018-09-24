@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AhdlcRenderer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="file:///. AhdlcRenderer.xsd">
+  <Channel>
+    <SerialPort>
+      <ComPort>COM3</ComPort>
+      <BaudRate>38400</BaudRate>
+      <DataBits>8</DataBits>
+      <StopBits>Two</StopBits>
+      <Parity>None</Parity>
+      <RTSMode>Default</RTSMode>
+      <IsHighSpeed>true</IsHighSpeed>
+      <IgnoreFrameStart>false</IgnoreFrameStart>
+      <IgnoreResponses>false</IgnoreResponses>
+      <IgnoreResponseTime>10</IgnoreResponseTime>
+      <!-- currently not supported:
+      <RetryCount desc="Tells how many attempts Protran has to do to open the serial port, if it is currently busy.
+        Values admitted: an interger between 0 and 255. 0 means that Protran will not retry.
+        Default value: 0">10</RetryCount>
+      <SerialPortReopen desc="Attempt to reopen serial port due to errors.
+                        Values admitted: {FrameOnly, All, None}. Default value: FrameOnly">FrameOnly</SerialPortReopen>-->
+    </SerialPort>
+    <Signs>
+      <Sign Address="1" Mode="Monochrome" Width="98" Height="16" />
+      <Sign Address="2" Mode="Monochrome" Width="98" Height="16" />
+      <Sign Address="12" Mode="Color" Width="34" Height="20" />
+    </Signs>
+  </Channel>
+</AhdlcRenderer>

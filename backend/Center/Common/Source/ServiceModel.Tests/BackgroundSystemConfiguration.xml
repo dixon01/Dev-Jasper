@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BackgroundSystemConfiguration>
+  <NotificationsConnectionString>medi://endpoint.cloudapp.net:1596</NotificationsConnectionString>
+  <ApiHostPort>8080</ApiHostPort>
+  <DataServices>
+    <Protocol>Tcp</Protocol>
+    <Host>endpoint.cloudapp.net</Host>
+  </DataServices>
+</BackgroundSystemConfiguration>

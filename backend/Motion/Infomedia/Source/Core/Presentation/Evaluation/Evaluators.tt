@@ -1,0 +1,378 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\Entities\Screen\ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Eval;
+
+<#
+	var entitiesFile = @"..\..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+	this.entities = Entities.LoadFrom(Host.ResolvePath(entitiesFile));
+
+	// this template is only about the "Layout" namespace
+	var evalNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Eval");
+
+	#>
+namespace Gorba.Motion.Infomedia.Core.Presentation.Evaluation
+{
+	public static class EvaluatorFactory
+	{
+		public static EvaluatorBase CreateEvaluator(EvalBase eval, IPresentationContext context)
+		{
+			if (eval == null)
+			{
+				return null;
+			}
+
+			var reference = eval as EvaluationEval;
+			if (reference != null)
+			{
+				var config = context.Config.Config.Evaluations.Find(e => e.Name == reference.Reference);
+				if (config == null)
+				{
+					throw new KeyNotFoundException("Couldn't find referenced evaluation: " + reference.Reference);
+				}
+
+				// create the evaluator with the referenced evaluation
+				return CreateEvaluator(config.Evaluation, context);
+			}
+
+<#
+	// generate all classes in this namespace
+	foreach (var clazz in evalNamespace.Classes)
+	{
+		if (clazz == null || clazz.Name.Contains("Base") || !clazz.Base.Contains("Base") || clazz.Name == "Evaluation")
+		{
+			continue;
+		}
+		
+		var evalClass = GetEvalClassName(clazz.Name);
+		var evaluatorClass = GetEvaluatorClassName(clazz.Name);
+		#>
+
+			var eval<#= clazz.Name #> = eval as <#= evalClass #>;
+			if (eval<#= clazz.Name #> != null)
+			{
+				return new <#= evaluatorClass #>(eval<#= clazz.Name #>, context);
+			}
+		<#
+	}
+	#>
+	
+			throw new NotSupportedException(string.Format("Unknown evaluation: {0}", eval.GetType().Name));
+		}
+	}
+
+	<#
+	// generate all classes in this namespace
+	foreach (var clazz in evalNamespace.Classes)
+	{
+		this.GenerateClass(clazz);
+	}
+	#>
+
+}
+
+<#+
+private Entities entities;
+
+private void GenerateClass(Class clazz)
+{
+	if (string.IsNullOrEmpty(clazz.Base) || !clazz.Base.Contains("Base") || clazz.Name == "Evaluation")
+	{
+		// don't generate EvaluatorBase, that class was created manually
+		// also ignore all special dynamic property classes
+		return;
+	}
+	
+	var isAbstract = clazz.Name.Contains("Base");
+	var evalClass = GetEvalClassName(clazz.Name);
+	var evaluatorClass = GetEvaluatorClassName(clazz.Name);
+	var baseClass = GetEvaluatorClassName(clazz.Base);
+
+	var needsHandler = false;
+	#>
+
+	public <#= isAbstract ? "abstract" : "sealed" #> partial class <#= evaluatorClass #> : <#= baseClass #>
+	{
+		public <#= evaluatorClass #>(<#= evalClass #> eval, IPresentationContext context)
+			: base(eval, context)
+		{
+		<#+
+	
+		foreach (var property in clazz.Properties)
+		{
+			var list = property as ListProperty;
+			if (list != null)
+			{
+				if (list.ElementType == "Base")
+				{#>
+
+			this.Evals<#= list.Name #> = new List<EvaluatorBase>();
+				<#+
+					needsHandler = true;
+				}
+				else if (this.IsDynamicPropertyClass(list.ElementType))
+				{#>
+
+			this.Handlers<#= list.Name #> = new List<DynamicPropertyHandler>();
+				<#+
+					needsHandler = true;
+				}
+				continue;
+			}
+		}
+		#>
+
+			this.<#= evalClass #> = eval;
+	<#+
+	
+	foreach (var property in clazz.Properties)
+	{
+		var composite = property as CompositeProperty;
+		if (composite != null)
+		{
+			if (composite.Type == "Base")
+			{#>
+
+			this.Eval<#= composite.Name #> = EvaluatorFactory.CreateEvaluator(eval.<#= composite.Name #>, context);
+			this.Eval<#= composite.Name #>.ValueChanged += this.HandlerOnValueChanged;
+			<#+
+			}
+			else if (this.IsDynamicPropertyClass(composite.Type))
+			{#>
+
+			this.Handler<#= composite.Name #> = new DynamicPropertyHandler(eval.<#= composite.Name #>, string.Empty, context);
+			this.Handler<#= composite.Name #>.ValueChanged += this.HandlerOnValueChanged;
+			<#+
+			}
+			continue;
+		}
+		
+		var list = property as ListProperty;
+		if (list != null)
+		{
+			if (list.ElementType == "Base")
+			{#>
+
+			foreach (var item in eval.<#= list.Name #>)
+			{
+				var eval<#= list.Name #> = EvaluatorFactory.CreateEvaluator(item, context);
+				eval<#= list.Name #>.ValueChanged += this.HandlerOnValueChanged;
+				this.Evals<#= list.Name #>.Add(eval<#= list.Name #>);
+			}
+			<#+
+			}
+			else if (this.IsDynamicPropertyClass(list.ElementType))
+			{#>
+			
+			foreach (var item in eval.<#= list.Name #>)
+			{
+				var handler = new DynamicPropertyHandler(item, string.Empty, context);
+				handler.ValueChanged += this.HandlerOnValueChanged;
+				this.Handlers<#= list.Name #>.Add(handler);
+			}
+			<#+
+			}
+			continue;
+		}
+	}
+	#>
+
+			this.Initialize();<#+
+	if (!isAbstract)
+	{
+	#>
+
+			this.InitializeValue();<#+
+	}
+	#>
+
+		}
+
+		public <#= evalClass #> <#= evalClass #> { get ; private set; }
+
+	<#+
+	
+	foreach (var property in clazz.Properties)
+	{
+		var composite = property as CompositeProperty;
+		if (composite != null)
+		{
+			if (composite.Type == "Base")
+			{#>
+
+		public EvaluatorBase Eval<#= composite.Name #> { get; private set; }
+			<#+
+				needsHandler = true;
+			}
+			else if (this.IsDynamicPropertyClass(composite.Type))
+			{#>
+
+		public DynamicPropertyHandler Handler<#= composite.Name #> { get; private set; }
+			<#+
+				needsHandler = true;
+			}
+			continue;
+		}
+		
+		var list = property as ListProperty;
+		if (list != null)
+		{
+			if (list.ElementType == "Base")
+			{#>
+
+		public List<EvaluatorBase> Evals<#= list.Name #> { get; private set; }
+			<#+
+				needsHandler = true;
+			}
+			else if (this.IsDynamicPropertyClass(list.ElementType))
+			{#>
+
+		public List<DynamicPropertyHandler> Handlers<#= list.Name #> { get; private set; }
+			<#+
+				needsHandler = true;
+			}
+			continue;
+		}
+	}
+	#>
+		
+		public override void Dispose()
+		{
+			this.Deinitialize();<#+
+	
+	foreach (var property in clazz.Properties)
+	{
+		var composite = property as CompositeProperty;
+		if (composite != null)
+		{
+			if (composite.Type == "Base")
+			{#>
+			
+			this.Eval<#= composite.Name #>.ValueChanged -= this.HandlerOnValueChanged;
+			this.Eval<#= composite.Name #>.Dispose();
+			<#+
+			}
+			else if (this.IsDynamicPropertyClass(composite.Type))
+			{#>
+
+			this.Handler<#= composite.Name #>.ValueChanged -= this.HandlerOnValueChanged;
+			this.Handler<#= composite.Name #>.Dispose();
+			<#+
+			}
+			continue;
+		}
+		
+		var list = property as ListProperty;
+		if (list != null)
+		{
+			if (list.ElementType == "Base")
+			{#>
+
+			foreach (var eval<#= list.Name #> in this.Evals<#= list.Name #>)
+			{
+				eval<#= list.Name #>.ValueChanged -= this.HandlerOnValueChanged;
+				eval<#= list.Name #>.Dispose();
+			}
+			<#+
+			}
+			else if (this.IsDynamicPropertyClass(list.ElementType))
+			{#>
+			
+			foreach (var handler in this.Handlers<#= list.Name #>)
+			{
+				handler.ValueChanged -= this.HandlerOnValueChanged;
+				handler.Dispose();
+			}
+			<#+
+			}
+			continue;
+		}
+	}
+	
+		#>
+
+			base.Dispose();
+		}
+
+		protected override void InitializeValue()
+		{
+			base.InitializeValue();
+			this.UpdateValue();
+		}
+		<#+
+		
+	if (needsHandler)
+	{#>
+
+		private void HandlerOnValueChanged(object sender, EventArgs e)
+		{
+			this.UpdateValue();
+		}
+		<#+
+	}
+	#>
+
+		partial void Initialize();
+
+		partial void UpdateValue();
+
+		partial void Deinitialize();
+	}
+	<#+
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetEvalClassName(string className)
+{
+	return GetClassName(className, "Eval");
+}
+
+/// <summary>
+/// Creates the real element class name for an element.
+/// <summary>
+private static string GetEvaluatorClassName(string className)
+{
+	return GetClassName(className, "Evaluator");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetClassName(string className, string category)
+{
+	return className.EndsWith("Base") ? className.Replace("Base", category + "Base") : className + category;
+}
+
+private bool IsDynamicPropertyClass(string className)
+{
+	if (className == "DynamicProperty")
+	{
+		return true;
+	}
+
+	var clazz = this.entities.GetClass(className);
+	if (clazz == null)
+	{
+		return false;
+	}
+
+	return IsDynamicPropertyClass(clazz.Base);
+}
+#>

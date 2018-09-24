@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DeploymentConfiguration>
+    <ServiceName>icenter-lef</ServiceName>
+		<Description>icenter-lef production slot</Description>
+    <StorageAccountName>icenterlef</StorageAccountName>
+    <StorageAccountKey>7sYbPrUVzZtu7gAuCYIsL723ZyPXXlpkooxApLusVoDoIc4jZ3LYwkbYSDM8iep9eVJDFdH1v+aPqPMfc8NTCA==</StorageAccountKey>
+    <SubscriptionName>Visual Studio Professional with MSDN</SubscriptionName>
+    <Slot>Production</Slot>
+		<!--<HttpsCertificatePath>..\..\..\..\..\..\..\..\..\Sandbox\Lef\BackgroundSystem2.x\icenter-lef.Https.pfx</HttpsCertificatePath>-->
+</DeploymentConfiguration>  

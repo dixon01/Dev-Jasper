@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39A71702-827B-40F8-962F-E4D17B2FA6A5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.SystemManager.ConsoleApp</RootNamespace>
+    <AssemblyName>SystemManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\..\SystemManager\Icons\systemmanager.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLineParser">
+      <HintPath>..\..\..\..\3rdParty\CommandLineParser\2.6.0.2\net-20\CommandLineParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManagerConsoleApplication.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Ports\Medi.Ports.csproj">
+      <Project>{6699BC63-C44D-46B4-962E-A40F55171F6E}</Project>
+      <Name>Medi.Ports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Resources\Medi.Resources.csproj">
+      <Project>{31D9EAD4-9A25-48A1-8491-940C2A711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Core\SystemManagement.Core.csproj">
+      <Project>{60C6BEB8-CAFE-BA5E-AFFE-33C532614524}</Project>
+      <Name>SystemManagement.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\SystemManager.Core.csproj">
+      <Project>{60C6BEB8-9BEE-4C77-A400-33C532614524}</Project>
+      <Name>SystemManager.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Master\SystemManagerInfoTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Master\SystemManager.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Production\SystemManagerSlave.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Production\SystemManagerMaster.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Production\SystemManager.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Server Config\SystemManager.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Slave\SystemManagerInfoTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Slave\SystemManager.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="Master\mediInfoTest.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Master\medi.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Server Config\medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Production\mediSlave.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Production\mediMaster.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Production\medi.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Slave\mediInfoTest.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Slave\medi.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

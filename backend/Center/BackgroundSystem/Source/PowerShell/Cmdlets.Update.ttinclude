@@ -1,0 +1,19 @@
+﻿<#+
+	private void WriteUpdateCmdlet(EntitySpace.Entity entity)
+	{#>
+
+	[Cmdlet(VerbsData.Update, CmdletNouns.<#= entity.Name #>)]
+	public partial class Update<#= entity.Name #> : <#= entity.Name #>CmdletBaseWithInputObject
+	{
+        protected override void ProcessRecord()
+        {
+			using (var channelScope = this.CreateDataChannelScope<I<#= entity.Name #>DataService>())
+			{
+				var result = channelScope.Channel.UpdateAsync(this.InputObject).Result;
+				this.WriteObject(result);
+			}
+        }
+	}
+<#+
+	}
+#>

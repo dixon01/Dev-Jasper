@@ -1,0 +1,27 @@
+﻿<#+
+	private void WritePartition(EntitySpace.Partition partition)
+	{
+	    this.Warning("partition");
+		var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+#>
+
+	namespace <#= partition.Name #>
+	{
+		using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+		using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+		foreach (var entity in entities)
+        {
+			this.WriteEntity(entity);
+        }
+		#>
+	}
+<#+
+	}
+
+    private void WriteUsings(EntitySpace.Partition partition)
+    {#>
+	using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+<#+
+    }
+#>

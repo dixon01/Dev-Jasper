@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MainUnit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" FirmwareHash="" OperationDayStartUtc="04:00:00">
+  <DisplayUnits>
+    <DisplayUnit FirmwareHash="" />
+  </DisplayUnits>
+  <LCD RefreshInterval="PT5M" />
+</MainUnit>

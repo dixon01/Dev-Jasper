@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97494912-F942-409B-B2E3-F4AB259076CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Media.Core.Tests</RootNamespace>
+    <AssemblyName>Gorba.Center.Media.Core.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\..\..\3rdParty\ClosedXml\v0.69.1\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\DirectShowLib\2.1\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\3rdParty\Moq\v4\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\System.Windows.Interactivity\v2.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Compatibility\FeatureComponentRequirementsTest.cs" />
+    <Compile Include="Compatibility\CompatibilityCheckerTest.cs" />
+    <Compile Include="Compatibility\SoftwareComponentVersionTest.cs" />
+    <Compile Include="CompositionBootstrapperTest.cs" />
+    <Compile Include="Controllers\CycleControllerCommandsTest.cs" />
+    <Compile Include="Controllers\EditorControllerCommandsTest.cs" />
+    <Compile Include="Controllers\ProjectControllerTest.cs" />
+    <Compile Include="Controllers\ProjectStates\NoProjectStateTest.cs" />
+    <Compile Include="Controllers\ProjectStates\ModifiedProjectStateTest.cs" />
+    <Compile Include="Controllers\ProjectStates\ProjectStateHelpers.cs" />
+    <Compile Include="Controllers\ResourceControllerTest.cs" />
+    <Compile Include="Controllers\ChangeHistoryControllerTest.cs" />
+    <Compile Include="Controllers\UnitConfigurationReaderTest.cs" />
+    <Compile Include="Controllers\ZoomCalculatorTest.cs" />
+    <Compile Include="Controllers\MediaShellControllerTest.cs" />
+    <Compile Include="DataViewModels\DataViewModelCloneTest.cs" />
+    <Compile Include="FormulaTestBase.cs" />
+    <Compile Include="FormulaToStringTest.cs" />
+    <Compile Include="DataViewModels\DataModelToDataViewModelTest.cs" />
+    <Compile Include="DataViewModels\InfomediaConfigDataViewModelTest.cs" />
+    <Compile Include="DataViewModels\MediaProjectDataViewModelTest.cs" />
+    <Compile Include="Extensions\ExtendedObservableCollectionTest.cs" />
+    <Compile Include="FormulaGrammarTest.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="History\AddListElementHistoryEntryTest.cs" />
+    <Compile Include="History\ChangeHistoryTest.cs" />
+    <Compile Include="History\CreateLayoutElementHistoryEntryTest.cs" />
+    <Compile Include="History\DeleteLayoutElementHistoryEntryTest.cs" />
+    <Compile Include="History\MoveLayoutElementHistoryEntryTest.cs" />
+    <Compile Include="DataViewModels\LayoutConfigDataViewModelTest.cs" />
+    <Compile Include="History\OrderLayerHistoryEntryTest.cs" />
+    <Compile Include="History\PasteElementsHistoryEntryTest.cs" />
+    <Compile Include="History\OrderAudioElementsHistoryEntryTest.cs" />
+    <Compile Include="History\CreateSectionHistoryEntryTest.cs" />
+    <Compile Include="History\DeleteSectionHistoryEntryTest.cs" />
+    <Compile Include="History\CreateCycleReferenceHistoryEntryTest.cs" />
+    <Compile Include="History\DeleteCyclesHistoryEntryTest.cs" />
+    <Compile Include="History\UpdateViewModelHistoryEntryTest.cs" />
+    <Compile Include="MediaApplicationStateTest.cs" />
+    <Compile Include="Configuration\MediaConfigurationSerializationTest.cs" />
+    <Compile Include="ProjectManagement\ProjectFileTest.cs" />
+    <Compile Include="Models\MediaProjectSerializationTest.cs" />
+    <Compile Include="ProjectManagement\ProjectManagerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProjectManagement\ResourceManagerTest.cs" />
+    <Compile Include="CheckinTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Microsoft.Windows.Shell\Microsoft.Windows.Shell.csproj">
+      <Project>{55D5297C-F1DF-4B76-A3C1-D82CC294EEBB}</Project>
+      <Name>Microsoft.Windows.Shell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Irony\Irony.Interpreter\015.Irony.Interpreter.2010.csproj">
+      <Project>{321A7F5D-00C2-4095-9970-075CDEE8C139}</Project>
+      <Name>015.Irony.Interpreter.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Irony\Irony\010.Irony.2010.csproj">
+      <Project>{D81F5C91-D7DB-46E5-BC99-49488FB6814C}</Project>
+      <Name>010.Irony.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\FilesTesting\Utility.FilesTesting.csproj">
+      <Project>{709EB99C-2F8F-4061-90BF-D859C43DDCDD}</Project>
+      <Name>Utility.FilesTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Client.Tests\Wpf.Client.Tests.csproj">
+      <Project>{f230d6c1-90cd-4be9-90ad-ad180daf378a}</Project>
+      <Name>Wpf.Client.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Client\Wpf.Client.csproj">
+      <Project>{fbdea493-698e-4f44-9d46-1b3ea374d7e0}</Project>
+      <Name>Wpf.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Core\Wpf.Core.csproj">
+      <Project>{ADE176C8-B499-4597-B13F-F638EC70D090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Framework\Wpf.Framework.csproj">
+      <Project>{A279B0CB-74CC-4296-8734-BA8AA45B17BF}</Project>
+      <Name>Wpf.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Views\Wpf.Views.csproj">
+      <Project>{AA87EDAF-179F-4784-B39C-1F2E8C2055C9}</Project>
+      <Name>Wpf.Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Media.Core.csproj">
+      <Project>{4FA22905-460B-4016-8F84-F0AA961785E6}</Project>
+      <Name>Media.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProjectManagement\Resource3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectManagement\Resource2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectManagement\Resource.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controllers\ProjectStates\local16.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Controllers\TestFonts\BrokenFont.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\FonUnicodeArab.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\FonFont.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\CUxFont.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\FntFont.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\FonUnicodeHebrew.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Controllers\TestFonts\FonUnicodeChines.rx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="ProjectManagement\ProjectWithResource2AndResource3.icm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ProjectManagement\ProjectWithResource.icm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

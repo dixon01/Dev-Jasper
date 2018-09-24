@@ -1,0 +1,986 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="2.0" Created="2017-09-21 09:31:38">
+  <PhysicalScreens>
+    <PhysicalScreen Name="1920x540" Type="TFT" Width="1920" Height="540" />
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="TFT Display_1" CyclePackage="CyclePackage TFT 1920x540" Width="1920" Height="540" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="Master cycle">
+        <MasterSection Duration="P1D" Layout="Standard Master Layout" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="Standard Master Layout">
+        <PhysicalScreen Ref="1920x540">
+          <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations>
+    <Evaluation Name="DoorClose">
+      <StringCompare Value="0">
+        <Generic Lang="0" Table="0" Column="4" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="DoorOpen">
+      <StringCompare Value="1">
+        <Generic Lang="0" Table="0" Column="4" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="Line0">
+      <IntegerCompare Begin="0" End="0">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="LineBlank">
+      <StringCompare Value="">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="MissingIBIS">
+      <StringCompare Value="0">
+        <Generic Lang="0" Table="0" Column="2" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="SpecialLinePicture">
+      <CodeConversion FileName="codeconversion.csv" UseImage="true" />
+    </Evaluation>
+    <Evaluation Name="SpecialLineText">
+      <CodeConversion FileName="codeconversion.csv" UseImage="false" />
+    </Evaluation>
+    <Evaluation Name="StopIndex1to89">
+      <IntegerCompare Begin="1" End="89">
+        <Generic Lang="0" Table="10" Column="4" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="StopRequest">
+      <Or>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="2" Row="0" />
+        </StringCompare>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="3" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="DisplayVersion">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="DestinationAvailable">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="11" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="Stop">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="NextStopT2S">
+      <Format Format="Next stop is: {0}">
+        <Evaluation Ref="ExpandStopAbbrevs" />
+      </Format>
+    </Evaluation>
+    <Evaluation Name="ExpandStopAbbrevs">
+      <Format Format="{0}">
+        <RegexReplace Pattern="\bTERM(s?)\b" Replacement=" TERMINAL$1">
+          <RegexReplace Pattern="#" Replacement=" number ">
+            <RegexReplace Pattern="\bCO-OP(s?)\b" Replacement=" co-op`$1">
+              <RegexReplace Pattern="\bHOSP(s?)\b" Replacement=" HOSPITAL$1">
+                <RegexReplace Pattern="OLIVET" Replacement=" olivette">
+                  <RegexReplace Pattern="LGA" Replacement=" laguardia">
+                    <RegexReplace Pattern="JORALEMON" Replacement=" jorallemhan">
+                      <RegexReplace Pattern="KISSENA" Replacement=" kisseena">
+                        <RegexReplace Pattern="CORTELYOU" Replacement=" cortellyou">
+                          <RegexReplace Pattern="\bS\b" Replacement=" south ">
+                            <RegexReplace Pattern="\bN\b" Replacement=" north ">
+                              <RegexReplace Pattern="\bE\b" Replacement=" east ">
+                                <RegexReplace Pattern="\bW\b" Replacement=" west ">
+                                  <RegexReplace Pattern="\bAVENUE S\b" Replacement=" avenue s ">
+                                    <RegexReplace Pattern="\bAVENUE N\b" Replacement=" avenue n ">
+                                      <RegexReplace Pattern="\bAVENUE E\b" Replacement=" avenue e ">
+                                        <RegexReplace Pattern="\bAVENUE W\b" Replacement=" avenue w ">
+                                          <RegexReplace Pattern="/" Replacement=" AND ">
+                                            <RegexReplace Pattern="\bTPK(s?)\b" Replacement="TURNPIKE$1">
+                                              <RegexReplace Pattern="\bTER(s?)\b" Replacement="TERRACE$1">
+                                                <RegexReplace Pattern="\bSQ(s?)\b" Replacement="SQUARE$1">
+                                                  <RegexReplace Pattern="\bSTA(s?)\b" Replacement="STATION$1">
+                                                    <RegexReplace Pattern="\bSTAT(s?)\b" Replacement="STATION$1">
+                                                      <RegexReplace Pattern="\bSVC(s?)\b" Replacement="SERVICE$1">
+                                                        <RegexReplace Pattern="\bPLZ(s?)\b" Replacement="PLAZA$1">
+                                                          <RegexReplace Pattern="\bPZ(s?)\b" Replacement="PLAZA$1">
+                                                            <RegexReplace Pattern="\bPL(s?)\b" Replacement="PLACE$1">
+                                                              <RegexReplace Pattern="\bPK(s?)\b" Replacement="PARK$1">
+                                                                <RegexReplace Pattern="\bPED(s?)\b" Replacement="PEDESTRIAN$1">
+                                                                  <RegexReplace Pattern="\bPY(s?)\b" Replacement="PARKWAY$1">
+                                                                    <RegexReplace Pattern="\bPKY(s?)\b" Replacement="PARKWAY$1">
+                                                                      <RegexReplace Pattern="\bPKWY(s?)\b" Replacement="PARKWAY$1">
+                                                                        <RegexReplace Pattern="\bRVR(s?)\b" Replacement="RIVER$1">
+                                                                          <RegexReplace Pattern="\bPT(s?)\b" Replacement="POINT$1">
+                                                                            <RegexReplace Pattern="\bMT(s?)\b" Replacement="MOUNT$1">
+                                                                              <RegexReplace Pattern="\bLTD(s?)\b" Replacement="LIMITED$1">
+                                                                                <RegexReplace Pattern="\bLP(s?)\b" Replacement="LOOP$1">
+                                                                                  <RegexReplace Pattern="\bLA(s?)\b" Replacement="LANE$1">
+                                                                                    <RegexReplace Pattern="\bLN(s?)\b" Replacement="LANE$1">
+                                                                                      <RegexReplace Pattern="\bHWY(s?)\b" Replacement="HIGHWAY$1">
+                                                                                        <RegexReplace Pattern="\bEXPWY(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                                          <RegexReplace Pattern="\bEXPY(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                                            <RegexReplace Pattern="\bEXP(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                                              <RegexReplace Pattern="\bEX(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                                                <RegexReplace Pattern="\bENT(s?)\b" Replacement="ENTRANCE$1">
+                                                                                                  <RegexReplace Pattern="\bRDY(s?)\b" Replacement="ROADWAY$1">
+                                                                                                    <RegexReplace Pattern="\bRD(s?)\b" Replacement="ROAD$1">
+                                                                                                      <RegexReplace Pattern="\bDR(s?)\b" Replacement="DRIVE$1">
+                                                                                                        <RegexReplace Pattern="\bCRES(s?)\b" Replacement="CRESCENT$1">
+                                                                                                          <RegexReplace Pattern="\bCTR(s?)\b" Replacement="CENTER$1">
+                                                                                                            <RegexReplace Pattern="\bCOURS(s?)\b" Replacement="COURSE$1">
+                                                                                                              <RegexReplace Pattern="\bBLVD(s?)\b" Replacement="BOULEVARD$1">
+                                                                                                                <RegexReplace Pattern="\bBL(s?)\b" Replacement="BOULEVARD$1">
+                                                                                                                  <RegexReplace Pattern="\bBLDG(s?)\b" Replacement="BUILDING$1">
+                                                                                                                    <RegexReplace Pattern="\bAL(s?)\b" Replacement="ALLEY$1">
+                                                                                                                      <RegexReplace Pattern="\bAVE(s?)\b" Replacement="AVENUE$1">
+                                                                                                                        <RegexReplace Pattern="\bAV(s?)\b" Replacement="AVENUE$1">
+                                                                                                                          <RegexReplace Pattern="\bST(s?)\b" Replacement="STREET$1">
+                                                                                                                            <RegexReplace Pattern="(3)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1RD">
+                                                                                                                              <RegexReplace Pattern="(2)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1ND">
+                                                                                                                                <RegexReplace Pattern="(13)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                                                                  <RegexReplace Pattern="(12)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                                                                    <RegexReplace Pattern="(1)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1st">
+                                                                                                                                      <RegexReplace Pattern="(11)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                                                                        <RegexReplace Pattern="([0456789])\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL)(\b|$))" Replacement="$1TH">
+                                                                                                                                          <Generic Lang="0" Table="12" Column="0" Row="0" />
+                                                                                                                                        </RegexReplace>
+                                                                                                                                      </RegexReplace>
+                                                                                                                                    </RegexReplace>
+                                                                                                                                  </RegexReplace>
+                                                                                                                                </RegexReplace>
+                                                                                                                              </RegexReplace>
+                                                                                                                            </RegexReplace>
+                                                                                                                          </RegexReplace>
+                                                                                                                        </RegexReplace>
+                                                                                                                      </RegexReplace>
+                                                                                                                    </RegexReplace>
+                                                                                                                  </RegexReplace>
+                                                                                                                </RegexReplace>
+                                                                                                              </RegexReplace>
+                                                                                                            </RegexReplace>
+                                                                                                          </RegexReplace>
+                                                                                                        </RegexReplace>
+                                                                                                      </RegexReplace>
+                                                                                                    </RegexReplace>
+                                                                                                  </RegexReplace>
+                                                                                                </RegexReplace>
+                                                                                              </RegexReplace>
+                                                                                            </RegexReplace>
+                                                                                          </RegexReplace>
+                                                                                        </RegexReplace>
+                                                                                      </RegexReplace>
+                                                                                    </RegexReplace>
+                                                                                  </RegexReplace>
+                                                                                </RegexReplace>
+                                                                              </RegexReplace>
+                                                                            </RegexReplace>
+                                                                          </RegexReplace>
+                                                                        </RegexReplace>
+                                                                      </RegexReplace>
+                                                                    </RegexReplace>
+                                                                  </RegexReplace>
+                                                                </RegexReplace>
+                                                              </RegexReplace>
+                                                            </RegexReplace>
+                                                          </RegexReplace>
+                                                        </RegexReplace>
+                                                      </RegexReplace>
+                                                    </RegexReplace>
+                                                  </RegexReplace>
+                                                </RegexReplace>
+                                              </RegexReplace>
+                                            </RegexReplace>
+                                          </RegexReplace>
+                                        </RegexReplace>
+                                      </RegexReplace>
+                                    </RegexReplace>
+                                  </RegexReplace>
+                                </RegexReplace>
+                              </RegexReplace>
+                            </RegexReplace>
+                          </RegexReplace>
+                        </RegexReplace>
+                      </RegexReplace>
+                    </RegexReplace>
+                  </RegexReplace>
+                </RegexReplace>
+              </RegexReplace>
+            </RegexReplace>
+          </RegexReplace>
+        </RegexReplace>
+      </Format>
+    </Evaluation>
+    <Evaluation Name="OffRoute">
+      <Generic Lang="0" Table="10" Column="12" Row="0" />
+    </Evaluation>
+    <Evaluation Name="OnRoute">
+      <Not>
+        <Generic Lang="0" Table="10" Column="12" Row="0" />
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ServiceAlert">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ServiceAlert1">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="1" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ServiceAlert2">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="2" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ServiceAlert3">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="3" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ApproachingStop">
+      <Or>
+        <Generic Lang="0" Table="105" Column="18" Row="0" />
+        <Generic Lang="0" Table="105" Column="19" Row="0" />
+      </Or>
+    </Evaluation>
+    <Evaluation Name="Departing">
+      <Generic Lang="0" Table="105" Column="20" Row="0" />
+    </Evaluation>
+    <Evaluation Name="WelcomeAboard">
+      <StringCompare Value="1" IgnoreCase="true">
+        <Generic Lang="0" Table="10" Column="5" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="LeavingStop">
+      <Or>
+        <Generic Lang="0" Table="105" Column="20" Row="0" />
+        <Generic Lang="0" Table="105" Column="21" Row="0" />
+      </Or>
+    </Evaluation>
+    <Evaluation Name="Stops">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+      </And>
+    </Evaluation>
+    <Evaluation Name="ConnectionsAvailable">
+      <Or>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="1" />
+          </StringCompare>
+        </Not>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="FullStrip">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="EndStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="LastStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="LineSet">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="10" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="ExpandDestAbbrevs">
+      <Format Format="{0}">
+        <RegexReplace Pattern="\bTERM(s?)\b" Replacement=" TERMINAL$1">
+          <RegexReplace Pattern="via" Replacement=", via">
+            <RegexReplace Pattern="VIA" Replacement=",  VIA">
+              <RegexReplace Pattern="-" Replacement=",">
+                <RegexReplace Pattern="#" Replacement=" number ">
+                  <RegexReplace Pattern="\bCO-OP(s?)\b" Replacement=" co-op$1">
+                    <RegexReplace Pattern="\bHOSP(s?)\b" Replacement=" HOSPITAL$1">
+                      <RegexReplace Pattern="KISSENA" Replacement=" kisseena">
+                        <RegexReplace Pattern="\bS\b" Replacement=" south ">
+                          <RegexReplace Pattern="\bN\b" Replacement=" north ">
+                            <RegexReplace Pattern="\bE\b" Replacement=" east ">
+                              <RegexReplace Pattern="\bW\b" Replacement=" west ">
+                                <RegexReplace Pattern="\bAVENUE S\b" Replacement=" avenue s ">
+                                  <RegexReplace Pattern="\bAVENUE N\b" Replacement=" avenue n ">
+                                    <RegexReplace Pattern="\bAVENUE E\b" Replacement=" avenue e ">
+                                      <RegexReplace Pattern="\bAVENUE W\b" Replacement=" avenue w ">
+                                        <RegexReplace Pattern="/" Replacement=" AND ">
+                                          <RegexReplace Pattern="\bSQ(s?)\b" Replacement="SQUARE$1">
+                                            <RegexReplace Pattern="\bPLZ(s?)\b" Replacement="PLAZA$1">
+                                              <RegexReplace Pattern="\bPK(s?)\b" Replacement="PARK$1">
+                                                <RegexReplace Pattern="\bPY(s?)\b" Replacement="PARKWAY$1">
+                                                  <RegexReplace Pattern="\bPKY(s?)\b" Replacement="PARKWAY$1">
+                                                    <RegexReplace Pattern="\bPKWY(s?)\b" Replacement="PARKWAY$1">
+                                                      <RegexReplace Pattern="\bRVR(s?)\b" Replacement="RIVER$1">
+                                                        <RegexReplace Pattern="\bPT(s?)\b" Replacement="POINT$1">
+                                                          <RegexReplace Pattern="\bLA(s?)\b" Replacement="LANE$1">
+                                                            <RegexReplace Pattern="\bLN(s?)\b" Replacement="LANE$1">
+                                                              <RegexReplace Pattern="\bHWY(s?)\b" Replacement="HIGHWAY$1">
+                                                                <RegexReplace Pattern="\bEXPWY(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                  <RegexReplace Pattern="\bEXPY(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                    <RegexReplace Pattern="\bEXP(s?)\b" Replacement="EXPRESSWAY$1">
+                                                                      <RegexReplace Pattern="\bRD(s?)\b" Replacement="ROAD$1">
+                                                                        <RegexReplace Pattern="\bTPK(s?)\b" Replacement="TURNPIKE$1">
+                                                                          <RegexReplace Pattern="\bDR(s?)\b" Replacement="DRIVE$1">
+                                                                            <RegexReplace Pattern="\bBKLYN(s?)\b" Replacement="BROOKLYN$1">
+                                                                              <RegexReplace Pattern="\bBLVD(s?)\b" Replacement="BOULEVARD$1">
+                                                                                <RegexReplace Pattern="\bBL(s?)\b" Replacement="BOULEVARD$1">
+                                                                                  <RegexReplace Pattern="\bAV(s?)\b" Replacement="AVENUE$1">
+                                                                                    <RegexReplace Pattern="\bST(s?)\b" Replacement="STREET$1">
+                                                                                      <RegexReplace Pattern="(3)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1RD">
+                                                                                        <RegexReplace Pattern="(2)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1ND">
+                                                                                          <RegexReplace Pattern="(13)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                            <RegexReplace Pattern="(12)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                              <RegexReplace Pattern="(1)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1st">
+                                                                                                <RegexReplace Pattern="(11)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL))" Replacement="$1TH">
+                                                                                                  <RegexReplace Pattern="([0456789])\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD|PL)(\b|$))" Replacement="$1TH">
+                                                                                                    <Generic Lang="0" Table="11" Column="0" Row="0" />
+                                                                                                  </RegexReplace>
+                                                                                                </RegexReplace>
+                                                                                              </RegexReplace>
+                                                                                            </RegexReplace>
+                                                                                          </RegexReplace>
+                                                                                        </RegexReplace>
+                                                                                      </RegexReplace>
+                                                                                    </RegexReplace>
+                                                                                  </RegexReplace>
+                                                                                </RegexReplace>
+                                                                              </RegexReplace>
+                                                                            </RegexReplace>
+                                                                          </RegexReplace>
+                                                                        </RegexReplace>
+                                                                      </RegexReplace>
+                                                                    </RegexReplace>
+                                                                  </RegexReplace>
+                                                                </RegexReplace>
+                                                              </RegexReplace>
+                                                            </RegexReplace>
+                                                          </RegexReplace>
+                                                        </RegexReplace>
+                                                      </RegexReplace>
+                                                    </RegexReplace>
+                                                  </RegexReplace>
+                                                </RegexReplace>
+                                              </RegexReplace>
+                                            </RegexReplace>
+                                          </RegexReplace>
+                                        </RegexReplace>
+                                      </RegexReplace>
+                                    </RegexReplace>
+                                  </RegexReplace>
+                                </RegexReplace>
+                              </RegexReplace>
+                            </RegexReplace>
+                          </RegexReplace>
+                        </RegexReplace>
+                      </RegexReplace>
+                    </RegexReplace>
+                  </RegexReplace>
+                </RegexReplace>
+              </RegexReplace>
+            </RegexReplace>
+          </RegexReplace>
+        </RegexReplace>
+      </Format>
+    </Evaluation>
+  </Evaluations>
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="Standard Cycle">
+        <StandardSection Duration="PT10S" Layout="Logo Layout" />
+        <StandardSection Duration="PT10S" Layout="Plano Layout" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles>
+      <EventCycle Name="Status Screen">
+        <Enabled>
+          <Evaluation Ref="DisplayVersion" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </Trigger>
+        <StandardSection Duration="PT23H59M59.9S" Layout="Status Layout" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="CyclePackage TFT 1920x540">
+      <StandardCycles>
+        <StandardCycle Ref="Standard Cycle" />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="Status Screen" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+  <Pools />
+  <Layouts>
+    <Layout Name="Status Layout">
+      <Resolution Width="1920" Height="540">
+        <Text X="1258" Y="8" Width="657" Height="54" ZIndex="36" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Ver: Adjusted status layout.  21-Sept-2017 ">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="132" Y="445" Width="132" Height="27" ZIndex="35" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="RadioSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="132" Y="446" Width="132" Height="27" ZIndex="34" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="13" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="0" Y="445" Width="132" Height="27" ZIndex="33" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ExtSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="-1" Y="445" Width="132" Height="27" ZIndex="32" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="12" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="396" Y="418" Width="132" Height="27" ZIndex="31" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="IntSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="396" Y="419" Width="132" Height="27" ZIndex="30" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="11" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="264" Y="418" Width="132" Height="27" ZIndex="29" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Radio Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="265" Y="419" Width="132" Height="27" ZIndex="28" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="10" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="132" Y="418" Width="132" Height="27" ZIndex="27" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Ext. Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="132" Y="419" Width="132" Height="27" ZIndex="26" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="9" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="0" Y="418" Width="132" Height="27" ZIndex="25" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Int. Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="419" Width="132" Height="27" ZIndex="24" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="8" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="396" Y="392" Width="132" Height="27" ZIndex="23" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Odometer">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="396" Y="392" Width="132" Height="27" ZIndex="22" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="7" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="265" Y="392" Width="132" Height="27" ZIndex="20" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="6" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="265" Y="392" Width="132" Height="27" ZIndex="21" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Exterior Active">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="396" Y="365" Width="132" Height="27" ZIndex="15" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ADA Stop Request">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="132" Y="392" Width="132" Height="27" ZIndex="19" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Interior Active">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="133" Y="392" Width="132" Height="27" ZIndex="18" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="5" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="0" Y="392" Width="132" Height="27" ZIndex="17" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Push To Talk">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="392" Width="132" Height="27" ZIndex="16" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="4" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="396" Y="365" Width="132" Height="27" ZIndex="14" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="3" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="264" Y="365" Width="132" Height="27" ZIndex="13" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Stop Request">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="265" Y="365" Width="132" Height="27" ZIndex="12" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="2" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="132" Y="365" Width="132" Height="27" ZIndex="11" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door2">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="133" Y="365" Width="132" Height="27" ZIndex="10" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="1" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="0" Y="365" Width="132" Height="27" ZIndex="9" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door1">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="365" Width="132" Height="27" ZIndex="8" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="0" Row="0" />
+          </Visible>
+        </Image>
+        <Text X="45" Y="11" Width="1198" Height="53" ZIndex="7" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="90" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="43" Y="71" Width="492" Height="196" ZIndex="6" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="91" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="24" Y="494" Width="1333" Height="41" ZIndex="5" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="96" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="803" Y="101" Width="490" Height="304" ZIndex="3" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="93" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="43" Y="271" Width="489" Height="89" ZIndex="4" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="92" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1358" Y="371" Width="559" Height="164" ZIndex="1" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="95" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1357" Y="79" Width="558" Height="261" ZIndex="2" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="94" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="0" Width="1920" Height="540" ZIndex="0" Filename="Images\StatusBackground.png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Plano Layout">
+      <Resolution Width="1920" Height="540">
+        <Image X="0" Y="0" Width="1920" Height="540" ZIndex="0" Filename="Images\PlanoDart29Inch540.png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Logo Layout">
+      <Resolution Width="1920" Height="540">
+        <Image X="0" Y="0" Width="1920" Height="540" ZIndex="0" Filename="Images\LuminatorLogo29.png" />
+      </Resolution>
+    </Layout>
+  </Layouts>
+  <Fonts />
+</Infomedia>

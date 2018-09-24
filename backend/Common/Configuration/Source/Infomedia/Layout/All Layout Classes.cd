@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AnalogClockElement">
+    <Position X="12.75" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAABAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.DrawableElementBase" Collapsed="true">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.GroupElement" Collapsed="true">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <AssociationLine Name="Elements" Type="Gorba.Common.Configuration.Infomedia.Layout.GraphicalElementBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="2.75" />
+        <Point X="8.5" Y="1.846" />
+        <Point X="11.5" Y="1.846" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAQAAEAAIAAAAAEAAAIAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Elements" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.ImageElement" Collapsed="true">
+    <Position X="10.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAMAQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.ImageListElement">
+    <Position X="14.75" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Overflow" Type="Gorba.Common.Configuration.Infomedia.Layout.TextOverflow">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="4.775" Y="0.113" Height="0.182" Width="0.945" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Align" Type="Gorba.Common.Configuration.Infomedia.Layout.HorizontalAlignment">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="4.191" Y="0.13" Height="0.182" Width="0.653" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AACAEAAAAAABBAAAACAAQAIgAAAIAgAEAAAgAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Overflow" />
+      <Property Name="Align" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.ElementBase" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.TextElement" Collapsed="true">
+    <Position X="16.75" Y="4.25" Width="1.5" />
+    <AssociationLine Name="Align" Type="Gorba.Common.Configuration.Infomedia.Layout.HorizontalAlignment" ManuallyRouted="true">
+      <Path>
+        <Point X="17.5" Y="4.941" />
+        <Point X="17.5" Y="6.945" />
+        <Point X="23.75" Y="6.945" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="VAlign" Type="Gorba.Common.Configuration.Infomedia.Layout.VerticalAlignment" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="18" Y="4.941" />
+        <Point X="18" Y="6.311" />
+        <Point X="23.75" Y="6.311" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAEAAAQAAIAgAAAAAAEIAAgAAACAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Align" />
+      <Property Name="VAlign" />
+      <Property Name="Overflow" />
+      <Property Name="Font" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.VideoElement" Collapsed="true">
+    <Position X="19" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEAAAAEAAAAAAAAAAAIAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Scaling" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.Font" Collapsed="true">
+    <Position X="21" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAEAAAABAAAACAAAACACAAAgAAAAAE=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.GraphicalElementBase" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAYAAAAAAAAYAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.FrameElement" Collapsed="true">
+    <Position X="8.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AudioElementBase" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AudioFileElement" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AudioOutputElement" Collapsed="true">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAEAAAQAAEAAIAAAAAEAAIIAAAAAIA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Elements" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AudioPauseElement" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.PlaybackElementBase" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.TextToSpeechElement" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAABAAg=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.AnalogClockHandElement" Collapsed="true">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.RectangleElement" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.AnalogClockHandMode" Collapsed="true">
+    <Position X="10.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAgAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\AnalogClockHandMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.VerticalAlignment" Collapsed="true">
+    <Position X="23.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Layout\VerticalAlignment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.HorizontalAlignment" Collapsed="true">
+    <Position X="23.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAIAAA=</HashCode>
+      <FileName>Layout\HorizontalAlignment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.TextOverflow" Collapsed="true">
+    <Position X="23.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAgIAAAMAA=</HashCode>
+      <FileName>Layout\TextOverflow.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.ElementScaling" Collapsed="true">
+    <Position X="23.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQAABAAAA=</HashCode>
+      <FileName>Layout\ElementScaling.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Gorba.Common.Configuration.Infomedia.Layout.TextDirection" Collapsed="true">
+    <Position X="23.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Layout\TextDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

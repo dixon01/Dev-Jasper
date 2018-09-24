@@ -1,0 +1,273 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\EntitySpace.xml");
+    this.entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.ServiceModel.ChangeTracking
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Gorba.Center.Common.ServiceModel.Collections;
+<#
+    foreach (var partition in this.entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private EntitySpace entitySpace;
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+        var userDefinedPropertiesEnabledEntityNames =
+            partition.EntitySpace.Partitions.Single(p => p.Name == "Meta")
+                .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities)
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, userDefinedPropertiesEnabled);
+        }
+        #>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => !property.IsXmlSerialized
+                && (property.PropertyType == EntitySpace.PropertyType.Primitive
+                    || property.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>().Where(property => property.IsXmlSerialized);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+#>
+
+        public partial class <#= entity.Name #>DeltaMessage : DeltaMessageBase
+        {
+            public <#= entity.Name #>DeltaMessage()
+            {
+            }
+
+            public <#= entity.Name #>DeltaMessage(<#= entity.Name #>Delta delta)
+                : base (delta)
+            {
+                this.Id = delta.Id;
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferencePropertyInitialization(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WritePropertyInitialization(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlPropertyInitialization(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                this.UserDefinedProperties = delta.UserDefinedProperties.Select(
+                    udp => new Property { Name = udp.Key, Value = udp.Value }).ToList();
+<#+
+        }
+#>
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            public List<Property> UserDefinedProperties { get; set; }
+<#+
+        }
+#>
+
+            public <#= entity.IdPropertyType #> Id { get; set; }
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceProperty(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlProperty(property);
+        }
+#>
+
+            public <#= entity.Name #>Delta CreateDelta()
+            {
+                var delta = new <#= entity.Name #>Delta(this.Id, this.DeltaOperation);
+                this.FillDelta(delta);
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteCreateDeltaReference(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteCreateDelta(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteCreateDeltaXml(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+				if (this.UserDefinedProperties != null)
+				{
+					foreach (var udp in this.UserDefinedProperties)
+					{
+						delta.UserDefinedPropertiesDelta[udp.Name] = udp.Value;
+					}
+				}
+<#+
+        }
+#>
+
+                return delta;
+            }
+        }
+<#+
+    }
+
+    private void WritePropertyInitialization(EntitySpace.Property property)
+    {
+#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    this.<#= property.Name #> = delta.<#= property.Name #>.Value;
+                    this.<#= property.Name #>Changed = true;
+                }
+<#+
+    }
+
+    private void WriteXmlPropertyInitialization(EntitySpace.Property property)
+    {
+#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    this.<#= property.Name #>Xml = delta.<#= property.Name #>.Value.Xml;
+                    this.<#= property.Name #>Type = delta.<#= property.Name #>.Value.Type;
+                    this.<#= property.Name #>Changed = true;
+                }
+<#+
+    }
+
+    private void WriteReferencePropertyInitialization(EntitySpace.Property property)
+    {#>
+                if (delta.<#= property.Name #> != null)
+                {
+                    this.<#= property.Name #>Id = delta.<#= property.Name #>.ReferenceId;
+                    this.<#= property.Name #>Changed = true;
+                }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {
+#>
+    
+            public <#= property.Type #> <#= property.Name #> { get; set; }
+    
+            public bool <#= property.Name #>Changed { get; set; }
+<#+
+    }
+
+    private void WriteXmlProperty(EntitySpace.Property property)
+    {
+#>
+    
+            public string <#= property.Name #>Xml { get; set; }
+    
+            public string <#= property.Name #>Type { get; set; }
+    
+            public bool <#= property.Name #>Changed { get; set; }
+<#+
+    }
+
+    private void WriteReferenceProperty(EntitySpace.Property property)
+    {
+        var idType =
+            this.entitySpace.GetIdPropertyType(
+                property.Type.GetPropertyPartition(property.Entity.Partition.Name),
+                property.Type.GetLastPart());
+#>
+
+            public <#= idType #>? <#= property.Name #>Id { get; set; }
+    
+            public bool <#= property.Name #>Changed { get; set; }
+<#+
+    }
+
+    private void WriteCreateDeltaReference(EntitySpace.Property property)
+    {#>
+    
+                if (this.<#= property.Name #>Changed)
+                {
+                    delta.Change<#= property.Name #>(this.<#= property.Name #>Id);
+                }
+<#+
+    }
+
+    private void WriteCreateDelta(EntitySpace.Property property)
+    {#>
+    
+                if (this.<#= property.Name #>Changed)
+                {
+                    delta.Change<#= property.Name #>(this.<#= property.Name #>);
+                }
+<#+
+    }
+
+    private void WriteCreateDeltaXml(EntitySpace.Property property)
+    {#>
+    
+                if (this.<#= property.Name #>Changed)
+                {
+                    delta.Change<#= property.Name #>(new XmlData(this.<#= property.Name #>Xml, this.<#= property.Name #>Type));
+                }
+<#+
+    }
+#>

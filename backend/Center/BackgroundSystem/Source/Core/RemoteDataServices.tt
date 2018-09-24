@@ -1,0 +1,227 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).ToList();
+    foreach (var entity in entities)
+    {
+        this.keyTypes.Add(entity.Name, entity.IdPropertyType);
+    }
+#>
+namespace Gorba.Center.BackgroundSystem.Core
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+    using System.Xml;
+    
+    using Gorba.Center.BackgroundSystem.Core.Utility;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.BackgroundSystem.Data.Access;
+    using Gorba.Center.BackgroundSystem.Data.Model;
+<#
+    foreach (var partition in partitions)
+    {
+#>
+    using Gorba.Center.BackgroundSystem.Data.Model.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    }
+#>
+
+    using NLog;
+
+    public static class RemoteDataServicesUtility
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public static IEnumerable<ServiceHost> SetupRemoteDataServices()
+        {
+<#
+    var excluded = new []{"UnitType"};
+    foreach (var entity in entities.Where(e => !excluded.Contains(e.Name)))
+    {#>
+            yield return CreateServiceHost<I<#= entity.Name #>DataService>(new <#= entity.Name #>RemoteDataService(new <#= entity.Name #>ConcurrentDataService(new <#= entity.Name #>DataService())), "<#= entity.Name #>");
+<#
+    }
+#>	
+        }
+
+        private static ServiceHost CreateServiceHost<T>(object instance, string name)
+        {
+            var configuration = BackgroundSystemConfigurationProvider.Current.GetConfiguration();
+            var endpoint = configuration.DataServices.CreateDataServicesEndpoint<T>(name);
+            Logger.Debug("Creating endpoint for type <{0}> named '{1}'", typeof(T).Name, name);
+            var serviceHost = new ServiceHost(instance);
+            serviceHost.AddServiceEndpoint(endpoint);
+            return serviceHost;
+        }
+    }
+
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteDataService(entity);
+    }
+    #>
+}
+<#+
+    private Dictionary<string, string> keyTypes = new Dictionary<string, string>();
+
+    private void WriteDataService(EntitySpace.Entity entity)
+    {
+#>
+
+    [ErrorHandler]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
+    public sealed class <#= entity.Name #>RemoteDataService : RemoteDataServiceBase, I<#= entity.Name #>DataService
+    {
+        private I<#= entity.Name #>DataService dataService;
+
+        public <#= entity.Name #>RemoteDataService(I<#= entity.Name #>DataService dataService)
+        {
+            this.dataService = dataService;
+        }
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> AddAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            try
+            {
+                this.Logger.Trace("Adding entity {0}", entity);
+                return await this.dataService.AddAsync(entity);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+<#+
+        if (!entity.HasChangeTracking)
+        {
+            #>
+
+        public async Task AddRangeAsync(IEnumerable<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> entities)
+        {
+            try
+            {
+                var list = entities.ToList();
+                this.Logger.Trace("Adding {0} item(s)", list.Count);
+                await this.dataService.AddRangeAsync(list);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+
+        public async Task<int> DeleteAsync(<#= entity.Name #>Filter filter)
+        {
+            try
+            {
+                this.Logger.Trace("Deleting items");
+                var deletedItems = await this.dataService.DeleteAsync(filter);
+                this.Logger.Trace("Deleted {0} item(s)", deletedItems);
+                return deletedItems;
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+<#+
+        }
+#>
+
+        public async Task DeleteAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            try
+            {
+                this.Logger.Trace("Deleting entity {0}");
+                await this.dataService.DeleteAsync(entity);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+
+        public async Task<IEnumerable<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>>> QueryAsync(<#= entity.Name #>Query query = null)
+        {
+            try
+            {
+                this.Logger.Trace("Querying entities");
+                return await this.dataService.QueryAsync(query);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+
+        public async Task<int> CountAsync(<#= entity.Name #>Query query = null)
+        {
+            try
+            {
+                this.Logger.Trace("Counting entities");
+                return await this.dataService.CountAsync(query);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> GetAsync(<#= entity.IdPropertyType #> id)
+        {
+            try
+            {
+                this.Logger.Trace("Getting entity '{0}'", id);
+                return await this.dataService.GetAsync(id);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> UpdateAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            try
+            {
+                this.Logger.Trace("Updating entity {0}", entity);
+                return await this.dataService.UpdateAsync(entity);
+            }
+            catch (Exception exception)
+            {
+                this.OnError(exception);
+                throw new FaultException(exception.Message);
+            }
+        }
+    }
+<#+
+    }
+#>

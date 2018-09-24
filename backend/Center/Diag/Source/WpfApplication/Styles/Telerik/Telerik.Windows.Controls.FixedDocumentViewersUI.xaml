@@ -1,0 +1,416 @@
+<ResourceDictionary
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="http://schemas.telerik.com/2008/xaml/compile"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="c"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:localConverters="clr-namespace:Telerik.Windows.Controls.FixedDocumentViewersUI.Converters;assembly=Telerik.Windows.Controls.FixedDocumentViewersUI"
+        xmlns:converters="clr-namespace:Telerik.Windows.Documents.Converters;assembly=Telerik.Windows.Controls.FixedDocumentViewers"
+        xmlns:fixedDocumentViewersUI="clr-namespace:Telerik.Windows.Controls.FixedDocumentViewersUI;assembly=Telerik.Windows.Controls.FixedDocumentViewersUI"
+        xmlns:dialogs="clr-namespace:Telerik.Windows.Controls.FixedDocumentViewersUI.Dialogs;assembly=Telerik.Windows.Controls.FixedDocumentViewersUI"
+        xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+        xmlns:telerik1="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+        xmlns:animation="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+        xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation">
+    <ResourceDictionary.MergedDictionaries>
+        <telerik:Windows8ResourceDictionary/>
+    </ResourceDictionary.MergedDictionaries>
+    <telerik1:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <SolidColorBrush x:Key="WindowBorderBackground" Color="#FFCCE4FC"/>
+    <SolidColorBrush x:Key="WindowModalBackground" Color="#333333FF"/>
+    <Thickness x:Key="WindowButtonPadding">4 1</Thickness>
+    <Thickness x:Key="WindowButtonMargin">1 3 0 2</Thickness>
+    <ControlTemplate x:Key="GroupTemplate" TargetType="telerikNavigation:RadMenuGroupItem">
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="HeaderStates">
+                    <VisualState x:Name="EmptyHeader">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="VisibleHeader"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Header" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Margin="1 1 1 0">
+                    <ContentPresenter x:Name="Content"
+                            Margin="4 2"
+                            TextBlock.FontFamily="Segoe UI Semibold"
+                            TextBlock.Foreground="{telerik:Windows8Resource ResourceKey=MainBrush}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            ContentSource="Header"/>
+                </Border>
+                <ScrollViewer x:Name="PART_ScrollViewer"
+                        Grid.Row="1"
+                        Margin="0"
+                        BorderThickness="0"
+                        Padding="0"
+                        Background="Transparent"
+                        HorizontalScrollBarVisibility="{Binding (ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}"
+                        VerticalScrollBarVisibility="{Binding (ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}"
+                        Focusable="False">
+                    <ItemsPresenter/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="RadMenuItemBaseStyle" TargetType="telerikNavigation:RadMenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="{telerik:Windows8Resource ResourceKey=FontSize}"/>
+        <Setter Property="FontFamily" Value="{telerik:Windows8Resource ResourceKey=FontFamily}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+    <Style x:Key="RadMenuGroupItemStyle" TargetType="telerikNavigation:RadMenuGroupItem" BasedOn="{StaticResource RadMenuItemBaseStyle}">
+        <Setter Property="telerik:SharedSizeScope.IsSharedSizeScope" Value="True"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=MarkerBrush}"/>
+        <Setter Property="Background" Value="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+        <Setter Property="BorderBrush" Value="{telerik:Windows8Resource ResourceKey=BasicBrush}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="Template" Value="{StaticResource GroupTemplate}"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+    </Style>
+    <Style x:Key="WindowButtonStyle" TargetType="telerik:RadButton">
+        <Setter Property="Padding" Value="{StaticResource WindowButtonPadding}"/>
+        <Setter Property="Margin" Value="{StaticResource WindowButtonMargin}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:RadButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity" To="0.7"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity" To="0.3"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity" To="1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle Fill="Transparent" x:Name="Rectangle"/>
+                        <ContentPresenter x:Name="Content" Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="WindowResizeThumbStyle" TargetType="Thumb">
+        <Setter Property="MinWidth" Value="5"/>
+        <Setter Property="MinHeight" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Rectangle Fill="Transparent"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="RadWindowTemplate" TargetType="telerikNavigation:RadWindow">
+        <Grid x:Name="LayoutRoot">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled"/>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused"/>
+                    <VisualState x:Name="Unfocused"/>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="DragStates">
+                    <VisualState x:Name="NotDragging"/>
+                    <VisualState x:Name="Dragging"/>
+                    <VisualState x:Name="Resizing"/>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="WindowStates">
+                    <VisualState x:Name="NormalWindow"/>
+                    <VisualState x:Name="MaximizedRestricted"/>
+                    <VisualState x:Name="Maximized">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentOuterBorder" Storyboard.TargetProperty="Margin">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Thickness>0</Thickness>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WindowOuterBorder" Storyboard.TargetProperty="BorderThickness">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Thickness>0</Thickness>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderButtons" Storyboard.TargetProperty="Margin">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Thickness>0</Thickness>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Minimized">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderButtons" Storyboard.TargetProperty="Margin">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Thickness>0</Thickness>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="HorizontalAlignment">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <HorizontalAlignment>Left</HorizontalAlignment>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="VerticalAlignment">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <VerticalAlignment>Top</VerticalAlignment>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="WindowOuterBorder" Grid.RowSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" MinHeight="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="Header" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Thumb x:Name="titleThumb" Grid.ColumnSpan="2" Style="{StaticResource WindowResizeThumbStyle}"/>
+                            <Grid Grid.Column="0" Margin="2 0 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter x:Name="IconContent"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding Icon}"
+                                        ContentTemplate="{TemplateBinding IconTemplate}"
+                                        Margin="2"/>
+                                <ContentControl x:Name="HeaderContent"
+                                        Grid.Column="1"
+                                        IsTabStop="False"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Stretch"
+                                        Content="{TemplateBinding Header}"
+                                        ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                        SnapsToDevicePixels="True"
+                                        ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                        FontSize="{telerik:Windows8Resource ResourceKey=FontSizeL}"
+                                        FontFamily="{telerik:Windows8Resource ResourceKey=FontFamilyLight}"
+                                        Foreground="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+                            </Grid>
+                            <Border x:Name="PART_HeaderButtonsBorder" Grid.Column="1">
+                                <StackPanel x:Name="HeaderButtons" Grid.Column="1" Orientation="Horizontal" Margin="0 0 3 0">
+                                    <telerik:RadButton x:Name="PART_MinimizeButton"
+                                            Command="{x:Static telerik:WindowCommands.Minimize}"
+                                            Style="{StaticResource WindowButtonStyle}"
+                                            Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <ToolTipService.ToolTip>
+                                            <ToolTip telerik:LocalizationManager.ResourceKey="Minimize"/>
+                                        </ToolTipService.ToolTip>
+                                        <Path Data="M0,0 L10,0 L10,2 L0,2 z" Height="2" Width="10" VerticalAlignment="Bottom" Margin="0 0 0 6" Fill="{telerik1:Windows8Resource ResourceKey=MainBrush}"/>
+                                    </telerik:RadButton>
+                                    <telerik:RadButton x:Name="PART_RestoreButton"
+                                            Command="{x:Static telerik:WindowCommands.Restore}"
+                                            Style="{StaticResource WindowButtonStyle}"
+                                            Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <ToolTipService.ToolTip>
+                                            <ToolTip telerik:LocalizationManager.ResourceKey="Restore"/>
+                                        </ToolTipService.ToolTip>
+                                        <Path
+                                                Fill="{telerik:Windows8Resource ResourceKey=MainBrush}"
+                                                Width="10"
+                                                Height="10"
+                                                Data="M0,2.0009768 L8,2.0009768 L8,10.000977 L0,10.000977 z M1.0026064,0 L10.000999,0.015881581 L10.000999,9.0009928 L9.0009499,9.0010004 L9.0006638,1.0009757 L0.98699945,0.99989343 z"/>
+                                    </telerik:RadButton>
+                                    <telerik:RadButton x:Name="PART_MaximizeButton"
+                                            Command="{x:Static telerik:WindowCommands.Maximize}"
+                                            Style="{StaticResource WindowButtonStyle}"
+                                            Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <ToolTipService.ToolTip>
+                                            <ToolTip telerik:LocalizationManager.ResourceKey="Maximize"/>
+                                        </ToolTipService.ToolTip>
+                                        <Path Data="M1,1 L9,1 L9,9 L1,9 z" Stroke="{telerik1:Windows8Resource ResourceKey=MainBrush}" StrokeThickness="2" Width="10" Height="10"/>
+                                    </telerik:RadButton>
+                                    <telerik:RadButton x:Name="PART_CloseButton"
+                                            Command="{x:Static telerik:WindowCommands.Close}"
+                                            Style="{StaticResource WindowButtonStyle}"
+                                            Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <ToolTipService.ToolTip>
+                                            <ToolTip telerik:LocalizationManager.ResourceKey="Close"/>
+                                        </ToolTipService.ToolTip>
+                                        <Path Data="M1,1 L9,9 M1.0000687,9.0000982 L9.0000687,1.0000986" Stroke="{telerik:Windows8Resource ResourceKey=MainBrush}" StrokeThickness="2" Width="10" Height="10"/>
+                                    </telerik:RadButton>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Border x:Name="ContentOuterBorder" Grid.Row="1" Margin="{TemplateBinding BorderThickness}">
+                            <ContentPresenter x:Name="ContentElement" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </Grid>
+                </AdornerDecorator>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="RadWindowStyle" TargetType="telerikNavigation:RadWindow">
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+        <Setter Property="BorderBrush" Value="{telerik:Windows8Resource ResourceKey=BasicBrush}"/>
+        <Setter Property="BorderThickness" Value="2 0 2 2"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="BorderBackground" Value="{StaticResource WindowBorderBackground}"/>
+        <Setter Property="ModalBackground" Value="{StaticResource WindowModalBackground}"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Header" Value="RadWindow"/>
+        <Setter Property="WindowStartupLocation" Value="Manual"/>
+        <Setter Property="WindowState" Value="Normal"/>
+        <Setter Property="Template" Value="{StaticResource RadWindowTemplate}"/>
+        <Setter Property="CaptionHeight" Value="28"/>
+        <Setter Property="ResizeBorder" Value="5"/>
+        <Setter Property="animation:AnimationManager.AnimationSelector">
+            <Setter.Value>
+                <animation:AnimationSelector>
+                    <animation:AnimationGroup AnimationName="Show">
+                        <animation:FadeAnimation Direction="In" TargetElementName="LayoutRoot"/>
+                        <animation:ScaleAnimation Direction="In" TargetElementName="LayoutRoot" MinScale="0.9"/>
+                    </animation:AnimationGroup>
+                    <animation:AnimationGroup AnimationName="Hide">
+                        <animation:FadeAnimation Direction="Out" TargetElementName="LayoutRoot"/>
+                        <animation:ScaleAnimation Direction="Out" TargetElementName="LayoutRoot" MinScale="0.9"/>
+                    </animation:AnimationGroup>
+                </animation:AnimationSelector>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="navigation:RadWindowInteropHelper.OpaqueWindowBackground" Value="{StaticResource WindowBorderBackground}"/>
+        <Style.Triggers>
+            <Trigger Property="navigation:RadWindowInteropHelper.AllowTransparency" Value="False">
+                <Setter Property="animation:AnimationManager.IsAnimationEnabled" Value="False"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <telerik:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
+    <localConverters:DoubleToPercentConverter x:Key="DoubleToPercentConverter"/>
+    <localConverters:ScaleModeToBooleanConverter x:Key="ScaleModeToBooleanConverter"/>
+    <converters:DoubleToStringPercentConverter x:Key="DoubleToStringPercentConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <Style x:Key="PercentComboBoxStyle" TargetType="fixedDocumentViewersUI:PercentComboBox">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="FontFamily" Value="{telerik:Windows8Resource ResourceKey=FontFamily}"/>
+        <Setter Property="FontSize" Value="{telerik:Windows8Resource ResourceKey=FontSize}"/>
+        <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=MarkerBrush}"/>
+        <Setter Property="MinHeight" Value="22"/>
+        <Setter Property="MinWidth" Value="95"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="fixedDocumentViewersUI:PercentComboBox">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_textBox"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    VerticalContentAlignment="Center"
+                                    Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=Explicit, Converter={StaticResource DoubleToStringPercentConverter}}"/>
+                            <telerik:RadDropDownButton Grid.Column="1" Margin="-1 0 0 0" Width="15">
+                                <telerik:RadDropDownButton.DropDownContent>
+                                    <telerik:RadContextMenu x:Name="PART_contextMenu" BorderThickness="0">
+                                        <fixedDocumentViewersUI:RadRadioMenuGroupItem
+                                                ItemsSource="{TemplateBinding PercentValues}"
+                                                SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DoubleToPercentConverter}}"
+                                                Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PercentItemsGroupIsDisplayed, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                BorderThickness="0 0 0 1"/>
+                                        <telerik:RadMenuGroupItem Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AdditionalGroupIsDisplayed, Converter={StaticResource BoolToVisibilityConverter}}" BorderThickness="0">
+                                            <telerik:RadMenuItem
+                                                    Header="Zoom to Page Level"
+                                                    IsCheckable="{Binding IsChecked, Converter={StaticResource InvertedBooleanConverter}}"
+                                                    IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RadPdfViewer.ScaleMode, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource ScaleModeToBooleanConverter}, ConverterParameter=FitToPage}"
+                                                    Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowFitToPage, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RadPdfViewer.CommandDescriptors.FitToPageCommandDescriptor.Command}"/>
+                                            <telerik:RadMenuItem
+                                                    Header="Fit Width"
+                                                    IsCheckable="{Binding IsChecked, Converter={StaticResource InvertedBooleanConverter}}"
+                                                    IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RadPdfViewer.ScaleMode, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource ScaleModeToBooleanConverter}, ConverterParameter=FitToWidth}"
+                                                    Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowFitToWidth, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RadPdfViewer.CommandDescriptors.FitToWidthCommandDescriptor.Command}"/>
+                                        </telerik:RadMenuGroupItem>
+                                    </telerik:RadContextMenu>
+                                </telerik:RadDropDownButton.DropDownContent>
+                            </telerik:RadDropDownButton>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="fixedDocumentViewersUI:PercentComboBox" BasedOn="{StaticResource PercentComboBoxStyle}"/>
+    <Style TargetType="dialogs:FindDialog" BasedOn="{StaticResource RadWindowStyle}"/>
+    <Style TargetType="fixedDocumentViewersUI:RadRadioMenuGroupItem" BasedOn="{StaticResource RadMenuGroupItemStyle}"/>
+</ResourceDictionary>

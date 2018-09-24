@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="EntitySpace"
+    targetNamespace="http://schemas.gorba.com/Center/EntitySpace"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.gorba.com/Center/EntitySpace"
+    xmlns:mstns="http://schemas.gorba.com/Center/EntitySpace"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="EntitySpaceType">
+    <xs:sequence>
+      <xs:element name="Partitions" type="PartitionsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartitionsType">
+    <xs:sequence>
+      <xs:element name="Partition" type="PartitionType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartitionType">
+    <xs:sequence>
+      <xs:element name="Entities" type="EntitiesType"/>
+    </xs:sequence>
+    <xs:attribute name="name"/>
+  </xs:complexType>
+  <xs:complexType name="EntitiesType">
+    <xs:sequence>
+      <xs:element name="Entity" type="EntityType"/>
+    </xs:sequence>
+    <xs:attribute name="name"/>
+  </xs:complexType>
+  <xs:complexType name="EntityType">
+    <xs:sequence>
+      <xs:element name="Properties" type="PropertiesType"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="displayProperty" type="xs:string"/>
+    <xs:attribute name="isDataServiceAvailable" type="xs:boolean"/>
+  </xs:complexType>
+  <xs:complexType name="PropertiesType">
+    <xs:sequence>
+      <xs:element name="Property" type="PropertyType"/>
+    </xs:sequence>
+    <xs:attribute name="name"/>
+  </xs:complexType>
+  <xs:complexType name="PropertyType">
+    <xs:attribute name="name"/>
+    <xs:attribute name="type"/>
+  </xs:complexType>
+  <xs:element name="EntitySpace" type="EntitySpaceType"/>
+</xs:schema>

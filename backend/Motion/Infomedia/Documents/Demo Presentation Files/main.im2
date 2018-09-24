@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Presentation Version="2.0">
+  <Display>
+    <Width>1440</Width>
+    <Height>900</Height>
+  </Display>
+  
+  <StandardCycles>
+    <StandardCycle Name="DemoCycle1">
+      <Enabled>
+        <IntegerCompare Begin="100" End="199">
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </IntegerCompare>
+      </Enabled>
+      
+      <StandardSection Duration="10" Layout="DemoLayout1" />
+    </StandardCycle>
+
+    <StandardCycle Name="DemoCycle2">
+      <Enabled>
+        <IntegerCompare Begin="200" End="299">
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </IntegerCompare>
+      </Enabled>
+
+      <StandardSection Duration="10" Layout="DemoLayout2" />
+    </StandardCycle>
+
+    <StandardCycle Name="DemoCycle3">
+      <Enabled>
+        <IntegerCompare Begin="300" End="399">
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </IntegerCompare>
+      </Enabled>
+
+      <StandardSection Duration="10" Layout="DemoLayout3" />
+    </StandardCycle>
+
+    <StandardCycle Name="DemoCycle4">
+      <Enabled>
+        <IntegerCompare Begin="400" End="499">
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </IntegerCompare>
+      </Enabled>
+
+      <StandardSection Duration="10" Layout="DemoLayout4" />
+    </StandardCycle>
+
+    <StandardCycle Name="DemoCycle5">
+      <Enabled>
+        <IntegerCompare Begin="500" End="599">
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </IntegerCompare>
+      </Enabled>
+
+      <StandardSection Duration="10" Layout="DemoLayout5" />
+    </StandardCycle>
+
+    <StandardCycle Name="MainCycle">
+      <StandardSection Duration="30" Layout="DemoLayout1" />
+      <StandardSection Duration="30" Layout="DemoLayout2" />
+      <StandardSection Duration="30" Layout="DemoLayout3" />
+      <StandardSection Duration="30" Layout="DemoLayout4" />
+      <StandardSection Duration="30" Layout="DemoLayout5" />
+    </StandardCycle>
+  </StandardCycles>
+  
+    <Layouts>
+      <Layout Name="DemoLayout1">
+        <!-- Background picture on the left -->
+        <Image X="0" Y="0" Width="720" Height="900" Filename="images\Tulips.jpg" />
+        <!-- Ticker 2 on the left -->
+        <Text X="0" Y="0" Width="720" Height="50" ZIndex="10" Align="Right" Overflow="ScrollAlways" ScrollSpeed="-60" Value="Ticker 2 scrolling right to left">
+          <Font Face="Arial" Height="50" Weight="100" Italic="false" Color="#FF0000" />
+        </Text>
+        <!-- Pool of images in the presentation -->
+        <Presentation X="300" Y="100" Width="360" Height="200" ZIndex="10" Filename="nested_1.im2" />
+        <!-- Dynamic texts -->
+        <Text X="20" Y="60" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+        </Text>
+
+        <Text X="20" Y="120" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+        </Text>
+
+        <Text X="20" Y="180" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+        </Text>
+
+        <Text X="20" Y="240" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="3" />
+          </Value>
+        </Text>
+        
+        <!-- Video on the right side -->
+        <Video X="720" Y="0" Width="720" Height="900" VideoUri="videos/Wildlife.wmv" />
+        <!-- Ticker 1 over entire layout -->
+        <Text X="0" Y="850" Width="1440" Height="50" ZIndex="10" Align="Left" Overflow="ScrollAlways" ScrollSpeed="60" Value="Ticker 1 scrolling left to right">
+          <Font Face="Arial" Height="50" Weight="100" Italic="false" Color="#FFFFFF" />
+        </Text>
+      </Layout>
+
+      <Layout Name="DemoLayout2">
+        <!-- Video fullscreen -->
+        <Video X="0" Y="0" Width="1440" Height="900" VideoUri="videos/Wildlife.wmv" />
+      </Layout>
+
+      <Layout Name="DemoLayout3">
+        <!-- Video fullscreen -->
+        <Video X="0" Y="0" Width="1440" Height="900" VideoUri="videos/Wildlife.wmv" />
+        <!-- Dynamic texts -->
+        <Text X="20" Y="60" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+        </Text>
+
+        <Text X="20" Y="120" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FF0000" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+        </Text>
+        
+        <!-- Picture on the right -->
+        <Image X="1000" Y="100" Width="400" Height="200" ZIndex="10" Filename="images\Tulips.jpg" />
+        <!-- Ticker 1 over entire layout -->
+        <Text X="0" Y="850" Width="1440" Height="50" ZIndex="10" Align="Left" Overflow="ScrollAlways" ScrollSpeed="60" Value="Ticker scrolling left to right">
+          <Font Face="Arial" Height="50" Weight="100" Italic="false" Color="#FFFFFF" />
+        </Text>
+      </Layout>
+
+      <Layout Name="DemoLayout4">
+        <Text X="0" Y="0" Width="1440" Height="900" Align="Left" Overflow="ScrollAlways" ScrollSpeed="60" Value="Ticker scrolling left to right">
+          <Font Face="Arial" Height="900" Weight="100" Italic="false" Color="#FFFFFF" />
+        </Text>
+      </Layout>
+
+      <Layout Name="DemoLayout5">
+        <!-- Background picture on the left -->
+        <Image X="0" Y="0" Width="1440" Height="900" Filename="images\Tulips.jpg" />
+        <!-- Video 1 -->
+        <Video X="100" Y="50" Width="500" Height="250" ZIndex="10" VideoUri="videos/Wildlife.wmv" />
+        <!-- Video 2 -->
+        <Video X="800" Y="300" Width="500" Height="250" ZIndex="10" VideoUri="videos/Wildlife.wmv" />
+        <!-- Dynamic texts -->
+        <Text X="500" Y="720" Width="200" Height="40" ZIndex="10" Align="Center" Overflow="Scale">
+          <Font Face="Arial" Height="40" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value AnimationType="FadeThroughNothing" AnimationDuration="1500">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+        </Text>
+       </Layout>
+      
+    </Layouts>
+ </Presentation>

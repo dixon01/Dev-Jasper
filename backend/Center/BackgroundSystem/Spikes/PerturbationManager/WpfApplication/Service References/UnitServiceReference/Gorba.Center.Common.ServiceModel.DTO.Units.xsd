@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Alarms" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Realtime" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="LayoutIdentifier">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Value" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LayoutIdentifier" nillable="true" type="tns:LayoutIdentifier" />
+  <xs:complexType name="U">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlarmStatus" type="tns:UnitAlarmStatus" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Alarms" minOccurs="0" name="Alarms" nillable="true" type="q1:ArrayOfAl" />
+      <xs:element minOccurs="0" name="CommunicationStatus" type="tns:UnitCommunicationStatus" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" minOccurs="0" name="DisplayDataFilters" nillable="true" type="q2:ArrayOfDisplayDataFilter" />
+      <xs:element minOccurs="0" name="DisplayLayout" nillable="true" type="tns:UnitDisplayLayout" />
+      <xs:element minOccurs="0" name="GatewayAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastRestartRequestDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastSeenOnline" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastTimeSyncRequestDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastTimeSyncValue" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Lines" nillable="true" type="tns:ArrayOfLine" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NetworkAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OperationStatus" type="tns:UnitOperationStatus" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" minOccurs="0" name="Operations" nillable="true" type="q3:ArrayOfO" />
+      <xs:element minOccurs="0" name="ProductType" nillable="true" type="tns:ProductType" />
+      <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SystemName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="Tenant" nillable="true" type="q4:Tenant" />
+      <xs:element minOccurs="0" name="TimeZoneInfoId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnitGroups" nillable="true" type="tns:ArrayOfUnitGroup" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="U" nillable="true" type="tns:U" />
+  <xs:simpleType name="UnitAlarmStatus">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Unknown">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MajorAlarms">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TechnicalAlarms">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="OperationalAlarms">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="UnitAlarmStatus" nillable="true" type="tns:UnitAlarmStatus" />
+  <xs:simpleType name="UnitCommunicationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Connected" />
+      <xs:enumeration value="Disconnected" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UnitCommunicationStatus" nillable="true" type="tns:UnitCommunicationStatus" />
+  <xs:complexType name="ArrayOfU">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="U" nillable="true" type="tns:U" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfU" nillable="true" type="tns:ArrayOfU" />
+  <xs:complexType name="UnitDisplayLayout">
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Realtime" minOccurs="0" name="FieldLayouts" nillable="true" type="q5:ArrayOfDisplayFieldLayout" />
+      <xs:element minOccurs="0" name="Height" type="xs:int" />
+      <xs:element minOccurs="0" name="LayoutId" type="xs:int" />
+      <xs:element minOccurs="0" name="RowCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Width" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitDisplayLayout" nillable="true" type="tns:UnitDisplayLayout" />
+  <xs:complexType name="ArrayOfLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Line" nillable="true" type="tns:Line" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLine" nillable="true" type="tns:ArrayOfLine" />
+  <xs:complexType name="Line">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferenceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Line" nillable="true" type="tns:Line" />
+  <xs:simpleType name="UnitOperationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Revoking" />
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Transmitting" />
+      <xs:enumeration value="Transmitted" />
+      <xs:enumeration value="Scheduled" />
+      <xs:enumeration value="Ended" />
+      <xs:enumeration value="Revoked" />
+      <xs:enumeration value="Suspended" />
+      <xs:enumeration value="Suspending" />
+      <xs:enumeration value="Updating" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UnitOperationStatus" nillable="true" type="tns:UnitOperationStatus" />
+  <xs:complexType name="ProductType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnitType" nillable="true" type="tns:UnitType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductType" nillable="true" type="tns:ProductType" />
+  <xs:complexType name="UnitType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductTypes" nillable="true" type="tns:ArrayOfProductType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitType" nillable="true" type="tns:UnitType" />
+  <xs:complexType name="ArrayOfProductType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductType" nillable="true" type="tns:ProductType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductType" nillable="true" type="tns:ArrayOfProductType" />
+  <xs:complexType name="ArrayOfUnitGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnitGroup" nillable="true" type="tns:UnitGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnitGroup" nillable="true" type="tns:ArrayOfUnitGroup" />
+  <xs:complexType name="UnitGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupType" nillable="true" type="tns:UnitGroupType" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SystemName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="Tenant" nillable="true" type="q6:Tenant" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UnitIds" nillable="true" type="q7:ArrayOfint" />
+      <xs:element minOccurs="0" name="Units" nillable="true" type="tns:ArrayOfU" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitGroup" nillable="true" type="tns:UnitGroup" />
+  <xs:complexType name="UnitGroupType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitGroupType" nillable="true" type="tns:UnitGroupType" />
+  <xs:complexType name="Layout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateModified" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Definition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Layout" nillable="true" type="tns:Layout" />
+  <xs:complexType name="StopPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" minOccurs="0" name="DisplayDataFilters" nillable="true" type="q8:ArrayOfDisplayDataFilter" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LocationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferenceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeZoneId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Units" nillable="true" type="tns:ArrayOfU" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StopPoint" nillable="true" type="tns:StopPoint" />
+  <xs:complexType name="UnitOnlineStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CommunicationStatus" type="tns:UnitCommunicationStatus" />
+      <xs:element minOccurs="0" name="IsOnline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastSeenOnline" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UnitId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitOnlineStatus" nillable="true" type="tns:UnitOnlineStatus" />
+  <xs:complexType name="ArrayOfUnitOnlineStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnitOnlineStatus" nillable="true" type="tns:UnitOnlineStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnitOnlineStatus" nillable="true" type="tns:ArrayOfUnitOnlineStatus" />
+  <xs:complexType name="ArrayOfUnitType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnitType" nillable="true" type="tns:UnitType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnitType" nillable="true" type="tns:ArrayOfUnitType" />
+  <xs:complexType name="ArrayOfUnitStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnitStatus" nillable="true" type="tns:UnitStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnitStatus" nillable="true" type="tns:ArrayOfUnitStatus" />
+  <xs:complexType name="UnitStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsOnline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NetworkAddress" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnitStatus" nillable="true" type="tns:UnitStatus" />
+  <xs:complexType name="ArrayOfStopPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StopPoint" nillable="true" type="tns:StopPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStopPoint" nillable="true" type="tns:ArrayOfStopPoint" />
+  <xs:complexType name="ArrayOfLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Layout" nillable="true" type="tns:Layout" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLayout" nillable="true" type="tns:ArrayOfLayout" />
+  <xs:complexType name="AssociationUnitUnitGroupIdentifier">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Value" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AssociationUnitUnitGroupIdentifier" nillable="true" type="tns:AssociationUnitUnitGroupIdentifier" />
+</xs:schema>

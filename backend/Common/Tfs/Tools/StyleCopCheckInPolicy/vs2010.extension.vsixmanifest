@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="055351d8-8e2f-447b-b34a-dae171ed7698">
+    <Name>Gorba StyleCop Check-in Policy (VS 2010)</Name>
+    <Author>Gorba AG</Author>
+    <Version>1.0</Version>
+    <Description xml:space="preserve">Installs the VS 2010 version of the Gorba StyleCop Check-in Policy.</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+        <Edition>Pro</Edition>
+        <Edition>IntegratedShell</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <Content>
+    <VsPackage>StyleCopCheckInPolicy.pkgdef</VsPackage>
+  </Content>
+</Vsix>

@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Editors.GenericUsageDS021BaseEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:editors1="clr-namespace:Gorba.Center.Admin.Core.Views.UnitConfig.Editors"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance editors:GenericUsageDS021BaseEditorViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <editors1:GenericUsageEditorControl Grid.Column="0"
+                                              DataContext="{Binding}" />
+        
+        <editors1:SelectionEditorControl Grid.Column="1"
+                                           DataContext="{Binding BlockSelection}"
+                                           ToolTip="{x:Static resources:AdminStrings.UnitConfig_Ibis_DS021Base_FromBlock}"/>
+    </Grid>
+</UserControl>

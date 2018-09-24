@@ -1,0 +1,84 @@
+﻿@using System.Linq
+@model Gorba.Center.Portal.Host.Middlewares.PageModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - icenter Portal</title>
+    {Meta}
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">icenter Portal</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/About">About</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+                {Login}
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+
+
+
+<h2>System requirements on customer side</h2>
+<div>The following software must be installed on customer's machines before proceeding with download of all applications</div>
+<ul>
+    <li><a href="http://go.microsoft.com/fwlink/?LinkId=321326">.NET 4.5.2  (http://go.microsoft.com/fwlink/?LinkId=321326)</a></li>
+</ul>
+<h2>Additional icenter.media prerequisites</h2>
+<div>The following software must be installed on customer's machines before proceeding with download of icenter.Media application</div>
+<ul>
+    <li><a href="http://go.microsoft.com/fwlink/?linkid=56513">DirectX 9c (http://go.microsoft.com/fwlink/?linkid=56513)</a></li>
+</ul>
+
+
+        <h2>Applications</h2>
+        @if (this.Model.CenterApplications.Any())
+        {
+            //var beta = this.Model.ClickOnceUseBeta ? "BETA_" : string.Empty;
+            var beta = true ? "BETA_" : string.Empty;
+            <ul>
+                @foreach (var application in this.Model.CenterApplications)
+                {
+                    <li><a href="/ClickOnce/@(application.Path)/@(beta)icenter.@(application.Key).application">@(application.DisplayName)</a></li>
+                }
+                @{ string currentUrl = @Request.Url.GetLeftPart(UriPartial.Path); }
+                @if (@currentUrl.Contains("swdev230") || @currentUrl.Contains("10.210.1.230"))
+                { // meaning that the viewing user has not been saved
+                    <div>
+                        <li><a href="http://swdev230/ClickOnce/assetspackager/Luminator.Gui.AssetPackager.application">  Assets Packager </a></li>
+                    </div>
+                }
+            </ul>
+        }
+        else
+        {
+            <div>No application is available</div>
+        }
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2016 - Gorba AG</p>
+        </footer>
+    </div>
+
+    
+</body>
+</html>

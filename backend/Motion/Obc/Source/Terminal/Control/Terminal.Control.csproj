@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F6DDF442-8E12-47F1-AEED-8A88E713BB40}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Obc.Terminal.Control</RootNamespace>
+    <AssemblyName>Gorba.Motion.Obc.Terminal.Control</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\3rdParty\NLog\2.0.0.2000.netfx20\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ActionHandler.cs" />
+    <Compile Include="Alarm\AlarmHandler.cs" />
+    <Compile Include="Alarm\GenericAlarms.cs" />
+    <Compile Include="Announcement\AnnouncementHandler.cs" />
+    <Compile Include="Announcement\AnnouncementList.cs" />
+    <Compile Include="Commands\ChangeBrightness.cs" />
+    <Compile Include="Commands\ChangeLanguage.cs" />
+    <Compile Include="Commands\ChangeTtsVolume.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\Detour.cs" />
+    <Compile Include="Commands\DriverChange.cs" />
+    <Compile Include="Commands\InformationMessages.cs" />
+    <Compile Include="Commands\LogOffAll.cs" />
+    <Compile Include="Commands\LogOffDrive.cs" />
+    <Compile Include="Commands\MainFieldCommandBase.cs" />
+    <Compile Include="Commands\None.cs" />
+    <Compile Include="Commands\PassengerCount.cs" />
+    <Compile Include="Commands\ProcessCommandBase.cs" />
+    <Compile Include="Commands\Quit.cs" />
+    <Compile Include="Commands\Razzia.cs" />
+    <Compile Include="Commands\ShowAlarms.cs" />
+    <Compile Include="Commands\ShowAnnouncement.cs" />
+    <Compile Include="Commands\SpeechGsm.cs" />
+    <Compile Include="Commands\SpeechIra.cs" />
+    <Compile Include="Commands\SystemCode.cs" />
+    <Compile Include="Communication\IraHandler.cs" />
+    <Compile Include="Communication\PhoneBook.cs" />
+    <Compile Include="Communication\WanManager.cs" />
+    <Compile Include="Config\ConfigHandler.cs" />
+    <Compile Include="Config\ConfigPaths.cs" />
+    <Compile Include="Data\DriverBlocks.cs" />
+    <Compile Include="Data\IListItem.cs" />
+    <Compile Include="Data\MultiLangListItem.cs" />
+    <Compile Include="Data\SimpleListItem.cs" />
+    <Compile Include="Data\SpecialDestinationList.cs" />
+    <Compile Include="Dfa\Context.cs" />
+    <Compile Include="Dfa\DriveSelect.cs" />
+    <Compile Include="Dfa\DutyBlock.cs" />
+    <Compile Include="Dfa\DutySpecialDestination.cs" />
+    <Compile Include="Dfa\IContext.cs" />
+    <Compile Include="Dfa\InputAlphabet.cs" />
+    <Compile Include="Dfa\State.cs" />
+    <Compile Include="Handlers\StateVisualizationHandler.cs" />
+    <Compile Include="IUpdateable.cs" />
+    <Compile Include="MainFieldHandler.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Message\MessageHandler.cs" />
+    <Compile Include="Message\MessageStringDefinitions.cs" />
+    <Compile Include="MlString.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\AlarmScreen.cs" />
+    <Compile Include="Screens\AnnouncementScreen.cs" />
+    <Compile Include="Screens\BlockAutoCompletionScreen.cs" />
+    <Compile Include="Screens\BlockDriveWaitScreen.cs" />
+    <Compile Include="Screens\BlockDrivingScreen.cs" />
+    <Compile Include="Screens\BrightnessScreen.cs" />
+    <Compile Include="Screens\DriveScreen.cs" />
+    <Compile Include="Screens\DriveSelectionScreen.cs" />
+    <Compile Include="Screens\EnterBlockNumberScreen.cs" />
+    <Compile Include="Screens\EnterDriverBlockNumberScreen.cs" />
+    <Compile Include="Screens\EnterLoginNumberScreen.cs" />
+    <Compile Include="Screens\IqubeRadioScreen.cs" />
+    <Compile Include="Screens\IScreen.cs" />
+    <Compile Include="Screens\LanguageScreen.cs" />
+    <Compile Include="Screens\ListScreen.cs" />
+    <Compile Include="Screens\MainFieldKey.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\MessageListScreen.cs" />
+    <Compile Include="Screens\NumberInputBaseScreen.cs" />
+    <Compile Include="Screens\NumberInputScreen.cs" />
+    <Compile Include="Screens\PassengerCountScreen.cs" />
+    <Compile Include="Screens\PassengerCountTripNumberScreen.cs" />
+    <Compile Include="Screens\PhoneCallScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\SimpleListScreen.cs" />
+    <Compile Include="Screens\SpecialDestinationDriveScreen.cs" />
+    <Compile Include="Screens\SpecialDestinationSelectionInputScreen.cs" />
+    <Compile Include="Screens\SpecialDestinationSelectionListScreen.cs" />
+    <Compile Include="Screens\StatusInfoScreen.cs" />
+    <Compile Include="Screens\SystemCodeScreen.cs" />
+    <Compile Include="Screens\TtsVolumeScreen.cs" />
+    <Compile Include="StatusInfo\BlockDrive.cs" />
+    <Compile Include="StatusInfo\BlockDriveLoad.cs" />
+    <Compile Include="StatusInfo\DelayCalculator.cs" />
+    <Compile Include="StatusInfo\DriveInfo.cs" />
+    <Compile Include="StatusInfo\DriveType.cs" />
+    <Compile Include="StatusInfo\GpsInfo.cs" />
+    <Compile Include="StatusInfo\SavedStatus.cs" />
+    <Compile Include="StatusInfo\SpecialDestinationLoad.cs" />
+    <Compile Include="StatusInfo\StatusFieldConfig.cs" />
+    <Compile Include="StatusInfo\StatusHandler.cs" />
+    <Compile Include="TerminalControlApplication.cs" />
+    <Compile Include="Validator\BusValidator.cs" />
+    <Compile Include="Validator\EvDutyValidator.cs" />
+    <Compile Include="Validator\ValidationDoneEventArgs.cs" />
+    <Compile Include="Validator\ValidationState.cs" />
+    <Compile Include="Validator\Validator.cs" />
+    <Compile Include="Validator\ValidatorHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Configuration\Source\Obc\Configuration.Obc.csproj">
+      <Project>{939F1E2A-B8EA-43BE-878C-DD9E4FCBA28F}</Project>
+      <Name>Configuration.Obc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Csv\Utility.Csv.csproj">
+      <Project>{D45E1B42-A4F6-4602-93C3-93938DCF0871}</Project>
+      <Name>Utility.Csv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Obc.Common.csproj">
+      <Project>{7A557595-773B-4909-8D87-1DE06B015B9C}</Project>
+      <Name>Obc.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\C74\Terminal.C74.csproj">
+      <Project>{9F0D4FEB-C022-4557-B07D-9E3DB3440D47}</Project>
+      <Name>Terminal.C74</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Terminal.Core.csproj">
+      <Project>{431C55F4-BF15-4C3A-9328-150096551886}</Project>
+      <Name>Terminal.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gui\Terminal.Gui.csproj">
+      <Project>{12DA777B-8C84-4400-9B14-4961D568D8F8}</Project>
+      <Name>Terminal.Gui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MultiLang.de.resx" />
+    <EmbeddedResource Include="MultiLang.en.resx" />
+    <EmbeddedResource Include="MultiLang.fr.resx" />
+    <EmbeddedResource Include="MultiLang.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfigMenu.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfigShortKey.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ConfigStatusField.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

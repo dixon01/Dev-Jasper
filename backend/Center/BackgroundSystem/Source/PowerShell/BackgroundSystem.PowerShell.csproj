@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.BackgroundSystem.PowerShell</RootNamespace>
+    <AssemblyName>Gorba.Center.BackgroundSystem.PowerShell</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Nito.AsyncEx, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Nito.AsyncEx.3.0.0\lib\net45\Nito.AsyncEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Nito.AsyncEx.3.0.0\lib\net45\Nito.AsyncEx.Concurrent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Nito.AsyncEx.3.0.0\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\System.Management.Automation\v1.0.0.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AsyncCmdlet.cs" />
+    <Compile Include="Base\AsyncDataServiceCmdletBase.cs" />
+    <Compile Include="Base\AsyncServiceCmdletBase.cs" />
+    <Compile Include="CmdletNouns.partial.cs" />
+    <Compile Include="Configuration\DisableAzureUpdateProvider.cs" />
+    <Compile Include="Configuration\EnableAzureUpdateProvider.cs" />
+    <Compile Include="DataServiceCmdletBase.cs" />
+    <Compile Include="GetBackgroundSystemConfiguration.cs" />
+    <Compile Include="AddWritableModel.generated.cs">
+      <DependentUpon>AddWritableModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ImportDocumentVersionXmlProperties.cs" />
+    <Compile Include="InvokeDocumentVersionCommitAndVerify.cs" />
+    <Compile Include="RemoveLogEntry.partial.cs" />
+    <Compile Include="RemoveReadableModel.generated.cs">
+      <DependentUpon>RemoveReadableModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GetReadableModel.cs" />
+    <Compile Include="GetReadableModel.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetReadableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvokeUnitCommitAndVerify.cs" />
+    <Compile Include="Resources\ImportContentResource.cs" />
+    <Compile Include="ServiceCmdletBase.cs" />
+    <Compile Include="Cmdlets.generated.cs">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NewUserCredentials.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ImportResource.cs" />
+    <Compile Include="SetMediNotificationManagerFactory.cs" />
+    <Compile Include="Software\ImportPackageVersion.cs" />
+    <Compile Include="StartChangeTrackingManagers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BackgroundSystemCmdlets.psd1">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundSystemCmdlets.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BackgroundSystemCmdlets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BackgroundSystemCmdlets.psd1</LastGenOutput>
+    </None>
+    <None Include="Cmdlets.Remove.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="Cmdlets.Add.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="Cmdlets.Base.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="Cmdlets.Get.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+      <RunCustomToolOn>Cmdlets.tt</RunCustomToolOn>
+    </None>
+    <None Include="Cmdlets.New.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="Cmdlets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Cmdlets.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Cmdlets.Update.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="Cmdlets.Using.ttinclude">
+      <DependentUpon>Cmdlets.tt</DependentUpon>
+    </None>
+    <None Include="AddWritableModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddWritableModel.generated.cs</LastGenOutput>
+    </None>
+    <None Include="RemoveReadableModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RemoveReadableModel.generated.cs</LastGenOutput>
+    </None>
+    <None Include="GetReadableModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GetReadableModel.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Client\Center.Common.Client.csproj">
+      <Project>{5FC54EA9-187A-471E-889D-3D983E65B217}</Project>
+      <Name>Center.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\MediNotifications\Center.Common.MediNotifications.csproj">
+      <Project>{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}</Project>
+      <Name>Center.Common.MediNotifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Utils\Center.Common.Utils.csproj">
+      <Project>{e9ccf902-5e1c-48da-a764-988d59032232}</Project>
+      <Name>Center.Common.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

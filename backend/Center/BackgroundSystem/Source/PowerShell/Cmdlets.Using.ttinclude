@@ -1,0 +1,8 @@
+﻿<#+
+	private void WriteUsing(EntitySpace.Partition partition, string baseNamespace)
+	{#>
+	using <#= baseNamespace #>.<#= partition.Name #>;
+	using <#= baseNamespace #>.Filters.<#= partition.Name #>;
+<#+
+	}
+#>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MediaConfiguration>
+    <ResourceSettings>
+        <LocalResourcePath />
+        <MaxUsedDiskSpace>1000000000</MaxUsedDiskSpace>
+        <MinRemainingDiskSpace>100000000</MinRemainingDiskSpace>
+        <RemoveLocalResourceAfter>P30D</RemoveLocalResourceAfter>
+    </ResourceSettings>
+    <PhysicalScreenSettings>
+        <ScreenType Name="TFT">
+            <AvailableResolutions>
+                <Resolution Width="1368" Height="768"/>
+                <Resolution Width="1366" Height="768"/>
+                <Resolution Width="1920" Height="1080">
+                    <MasterLayouts>
+                        <MasterLayout Name="Normal" Columns="*" HorizontalGaps="0" Rows="*" VerticalGaps="0" />
+                        <MasterLayout Name="Split" Columns="*;*" HorizontalGaps="10" Rows="*" VerticalGaps="0" />
+                    </MasterLayouts>
+                </Resolution>
+                <Resolution Width="1920" Height="630">
+                    <MasterLayouts>
+                        <MasterLayout Name="Normal" Columns="*" HorizontalGaps="0" Rows="*" VerticalGaps="0" />
+                        <MasterLayout Name="Split" Columns="*;*" HorizontalGaps="10" Rows="*" VerticalGaps="0" />
+                    </MasterLayouts>
+                </Resolution>
+				<Resolution Width="1920" Height="540">
+					<MasterLayouts>
+						<MasterLayout Name="Normal" Columns="*" HorizontalGaps="0" Rows="*" VerticalGaps="0" />
+						<MasterLayout Name="Split" Columns="*;*" HorizontalGaps="10" Rows="*" VerticalGaps="0" />
+					</MasterLayouts>
+				</Resolution>
+				<Resolution Width="1440" Height="900" />
+                <Resolution Width="1280" Height="800" />
+            </AvailableResolutions>    
+        </ScreenType>
+        <ScreenType Name="Audio" />
+        <ScreenType Name="LED Monochrome">
+            <AvailableResolutions>
+              <Resolution Height="8" Width="96"/>
+              <Resolution Height="16" Width="28"/>
+              <Resolution Height="16" Width="32"/>
+              <Resolution Height="16" Width="96"/>
+              <Resolution Height="16" Width="112"/>
+              <Resolution Height="16" Width="128"/>
+              <Resolution Height="16" Width="140"/>
+              <Resolution Height="16" Width="168"/>
+              <Resolution Height="20" Width="40"/>
+              <Resolution Height="20" Width="80"/>
+              <Resolution Height="20" Width="100"/>
+              <Resolution Height="20" Width="120"/>
+              <Resolution Height="20" Width="140"/>
+              <Resolution Height="20" Width="160"/>
+              <Resolution Height="26" Width="36"/>
+              <Resolution Height="26" Width="48"/>
+              <Resolution Height="26" Width="144"/>
+              <Resolution Height="26" Width="180"/>
+              <Resolution Height="26" Width="192"/>
+              <Resolution Height="26" Width="216"/>
+              <Resolution Height="32" Width="160"/>
+              <Resolution Height="32" Width="192"/>
+              <Resolution Height="32" Width="224"/>
+            </AvailableResolutions>
+        </ScreenType>
+        <ScreenType Name="LED Color">
+            <AvailableResolutions>
+                <Resolution Height="20" Width="34"/>
+            </AvailableResolutions>
+        </ScreenType>
+    </PhysicalScreenSettings>
+  <DirectXRendererSettings>
+    <WindowMode>FullScreenWindowed</WindowMode>
+    <Screens>
+      <Screen Adapter="0" Width="1366" Height="768">
+      </Screen>
+    </Screens>
+    <Device>
+      <MultiSample>None</MultiSample>
+      <MultiSampleQuality>0</MultiSampleQuality>
+    </Device>
+    <Text>
+      <!-- Possible TextMode values: Font, FontSprite, Mesh*, Gdi* (*= experimental only!) -->
+      <TextMode>FontSprite</TextMode>
+      <!-- Possible FontQuality values: Default, Draft, Proof, NonAntiAliased, AntiAliased, ClearType, ClearTypeNatural -->
+      <FontQuality>AntiAliased</FontQuality>
+    </Text>
+    <Image>
+      <!-- 3600 = 1 hour -->
+      <BitmapCacheTimeout>3600</BitmapCacheTimeout>
+      <!-- 104857600 = 100 MB -->
+      <MaxBitmapCacheBytes>4048576000</MaxBitmapCacheBytes>
+      <!-- 1000000 = 500x500 pixels (x4 bytes) -->
+      <MaxCacheBytesPerBitmap>80000000</MaxCacheBytesPerBitmap>
+    </Image>
+    <Video>
+      <!-- Possible VideoMode values: DirectShow, DirectXWindow, VlcWindow -->
+      <VideoMode>DirectXWindow</VideoMode>
+    </Video>
+  </DirectXRendererSettings>
+</MediaConfiguration>

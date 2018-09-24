@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeploymentConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Slot>Production</Slot>
+  <ServiceName>icenter-rem</ServiceName>
+  <StorageAccountName>icenterrem</StorageAccountName>
+  <StorageAccountKey />
+  <SubscriptionName>Visual Studio Premium mit MSDN</SubscriptionName>
+  <DeploymentLabelFormat />
+</DeploymentConfiguration>

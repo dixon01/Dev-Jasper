@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.Entities</RootNamespace>
+    <AssemblyName>Gorba.Motion.Infomedia.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Messages\AudioZoneTypes.cs" />
+    <Compile Include="Messages\CannedMessageEncodingType.cs" />
+    <Compile Include="Messages\CannedPlaybackMessage.cs" />
+    <Compile Include="Messages\AudioPlaybackEvent.cs" />
+    <Compile Include="Messages\DrawableComposerInitMessage.cs" />
+    <Compile Include="Messages\VehicleInfo.cs" />
+    <Compile Include="Messages\IVehiclePositionMessage.cs" />
+    <Compile Include="Messages\VehicleUnitInfo.cs" />
+    <Compile Include="Messages\ScreenChangeRelayedMessage.cs" />
+    <Compile Include="Messages\UnitsFeedBackMessage.cs" />
+    <Compile Include="Messages\GpioState.cs" />
+    <Compile Include="Messages\GpioStateChanged.cs" />
+    <Compile Include="Messages\MessageActions.cs" />
+    <Compile Include="Messages\SplashScreenMessage.cs" />
+    <Compile Include="Messages\VehiclePositionMessage.cs" />
+    <Compile Include="Messages\VolumeChangeRequest.cs" />
+    <Compile Include="Messages\VolumeSettingsMessage.cs" />
+    <Compile Include="Messages\VolumeSettings.cs" />
+    <Compile Include="Messages\LastVisibleLocation.cs" />
+    <Compile Include="Messages\VideoPlaybackEvent.cs" />
+    <Compile Include="Messages\NetworkChangedMessage.cs" />
+    <Compile Include="Messages\AudioStatusResponse.cs" />
+    <Compile Include="Messages\VolumeSettingsRequestMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screen\AnalogClockHandItem.cs" />
+    <Compile Include="Screen\AnalogClockItem.cs" />
+    <Compile Include="AnimatedPropertyChangedEventArgs.cs" />
+    <Compile Include="Screen\AudioFileItem.cs" />
+    <Compile Include="Screen\AudioPauseItem.cs" />
+    <Compile Include="Screen\ImageItem.cs" />
+    <Compile Include="Screen\ImageListItem.cs" />
+    <Compile Include="Screen\IncludeItem.cs" />
+    <Compile Include="Screen\ItemBase.cs" />
+    <Compile Include="Screen\ItemUpdate.cs" />
+    <Compile Include="Messages\ScreenChange.cs" />
+    <Compile Include="Messages\ScreenChanges.cs" />
+    <Compile Include="Messages\ScreenId.cs" />
+    <Compile Include="Messages\ScreenRequest.cs" />
+    <Compile Include="Messages\ScreenRequests.cs" />
+    <Compile Include="Screen\RectangleItem.cs" />
+    <Compile Include="Screen\RootItem.cs" />
+    <Compile Include="Messages\ScreenUpdate.cs" />
+    <Compile Include="Screen\ScreenItems.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScreenItems.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Screen\ScreenRoot.cs" />
+    <Compile Include="Screen\TextItem.cs" />
+    <Compile Include="Screen\TextToSpeechItem.cs" />
+    <Compile Include="Screen\VideoItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Screen\All Screen Classes.cd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Screen\ScreenItems.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ScreenItems.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Screen\ScreenItems.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screen\ScreenItems.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

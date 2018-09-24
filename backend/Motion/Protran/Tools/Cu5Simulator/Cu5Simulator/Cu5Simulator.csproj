@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.Tools.Cu5Simulator</RootNamespace>
+    <AssemblyName>Cu5Simulator</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Source\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Downloads\DownloadMng.cs" />
+    <Compile Include="Downloads\StateMachine\CleaningResourcesState.cs" />
+    <Compile Include="Downloads\StateMachine\Context.cs" />
+    <Compile Include="Downloads\StateMachine\DownloadingFilesState.cs" />
+    <Compile Include="Downloads\StateMachine\DownloadingRemaingFilesState.cs" />
+    <Compile Include="Downloads\StateMachine\RebootingState.cs" />
+    <Compile Include="Downloads\StateMachine\SendDownloadResponseEmptySuccessState.cs" />
+    <Compile Include="Downloads\StateMachine\SendDownloadResponseState.cs" />
+    <Compile Include="Downloads\StateMachine\SendDownloadResponseWithAllSuccessState.cs" />
+    <Compile Include="Downloads\StateMachine\State.cs" />
+    <Compile Include="Forms\StateMachineUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StateMachineUi.Designer.cs">
+      <DependentUpon>StateMachineUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Downloads\StateMachine\Utils\DownloadFileNotificationEventArgs.cs" />
+    <Compile Include="Downloads\StateMachine\Utils\ErrorContainer.cs" />
+    <Compile Include="Downloads\StateMachine\Utils\FileToDownloader.cs" />
+    <Compile Include="Downloads\StateMachine\Utils\LogMessageEventArgs.cs" />
+    <Compile Include="Downloads\StateMachine\WaitDownloadRequestState.cs" />
+    <Compile Include="Downloads\StateMachine\WaitingForCtuState.cs" />
+    <Compile Include="Downloads\StateMachine\Utils\TripletsProducedEventArgs.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\StateMachineUi.resx">
+      <DependentUpon>StateMachineUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Protocols\Source\Ftp\Protocols.Ftp.csproj">
+      <Project>{544A70C1-68F7-4F03-A487-1D9297C860A5}</Project>
+      <Name>Protocols.Ftp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Protocols\Source\Ctu\Protocols.Ctu.csproj">
+      <Project>{31CDBD33-6A2C-4850-BE80-2ADA677D1564}</Project>
+      <Name>Protocols.Ctu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{7DE464C7-E5FD-43B2-879F-5FE6E0490060}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- For more information on using transformations 
+     see the web.config examples at http://go.microsoft.com/fwlink/?LinkId=214134. -->
+<AbuDhabi xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <CU5>
+    <IPAddress Descr="The IP address (only IPv4 style) of the CU5 device." xdt:Transform="Replace">192.168.0.50</IPAddress>
+  </CU5>
+  
+  <ISI>
+    <IPAddress Descr="The IP address (only IPv4 style) of the ISI TCP/IP ISI server." xdt:Transform="Replace">127.0.0.1</IPAddress>
+  </ISI>
+  
+  <ISM>
+    <IPAddress Descr="The IP address (only IPv4 style) of the ISM FTP server." xdt:Transform="Replace">10.0.20.69</IPAddress>
+    <Behaviour>
+      <PollTime Descr="Polling time for ISM FTP client (in seconds)" xdt:Transform="Replace">10</PollTime>
+    </Behaviour>
+  </ISM>
+</AbuDhabi>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<title>Die Nachrichten des Bayerischen Rundfunks   </title>
+<link>http://www.br.de/nachrichten/meldungen/index.html</link>
+<description> </description>
+<sy:updateBase>2015-07-10T07:17:26+02:00</sy:updateBase>
+<item>
+<title>Griechische Regierung schickt geforderte Reformliste an Euro-Partner </title>
+<description>Athen:
+Die griechische Regierung hat wie gefordert gestern Abend die Liste mit Spar- und Reformvorschlägen an die Partner der Eurozone geschickt. Ein Sprecher von Eurogruppen-Chef Dijsselbloem bestätigte, dass ein 13-seitiges Konzept eingegangen sei. Griechenland hatte bis Mitternacht Zeit, die Vorschläge zu unterbreiten, um ein neues Hilfspaket im Umfang von gut 53 Milliarden Euro beantragen zu können. Wie Dijsselbloems Sprecher weiter mitteilte, stellt die Vorschlagsliste einen deutlichen Kurswechsel der Regierung von Ministerpräsident Tsipras dar. Athen erklärt sich zu zahlreichen Steuerreformen bereit, unter anderem umfassende Erhöhungen der Mehrwertsteuer. So müssen etwa viele Touristeninseln um ihre Vergünstigungen bangen. Außerdem gibt es Einschnitte bei den Militärausgaben. Und die Zahl der Frührentner soll deutlich sinken.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n1</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>SPD-Politiker Scholz will weitere Balkanländer als sichere Herkunftsstaaten einstufen</title>
+<description>Hamburg:
+Der stellvertretende SPD-Bundesvorsitzende Scholz ist dafür, weitere Balkanstaaten als sichere Herkunftsländer einzustufen. Der Tageszeitung "Die Welt" sagte er wörtlich: "Es ergibt auch Sinn, dass wir unterstellen: Länder, die eine Beitrittsperspektive für die Europäische Union haben, können nicht gleichzeitig Länder sein, aus denen viele Flüchtlinge kommen." Erst im März war Bayern im Bundesrat mit einem Vorstoß gescheitert, neben Albanien und Montenegro auch das Kosovo zum "sicheren Herkunftsstaat" zu machen. In der Frage einer gerechteren Verteilung von Flüchtlingen in der EU sind sich die Mitgliedsländer weiter uneinig. Nach einem Treffen mit seinen EU-Kollegen sagte Bundesinnenminister de Maizière, Deutschland sei bereit, rund 12.000 Menschen aufzunehmen. Andere Länder wie Großbritannien wollen sich gar nicht beteiligen.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n2</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Tarifeinheitsgesetz ist in Kraft</title>
+<description>Berlin:
+Seit heute ist das umstrittene Tarifeinheitsgesetz in Kraft. Damit kehrt Deutschland zu dem Prinzip "ein Betrieb - ein Tarifvertrag" zurück. Künftig gilt in Betrieben nur der Tarifvertrag der Gewerkschaft, die die meisten Mitglieder vertritt. Das Gesetz dämmt die Macht kleiner Spartengewerkschaften ein. Mehrere Gewerkschafte sehen das Streikrecht eingeschränkt. Die Ärztegewerkschaft Marburger Bund und die Pilotenvereinigung Cockpit haben unmittelbar nach Inkrafttreten Beschwerde beim Bundesverfassungsgericht in Karlsruhe eingereicht.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n3</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>AfD-Gründer Lucke will heute seinen Austritt aus der Partei  vollziehen</title>
+<description>Berlin:
+AfD-Gründer Lucke will heute seinen Austritt aus der Partei  vollziehen. Gleichzeitig trifft sich der neue Bundesvorstand der AfD in Berlin zu seiner konstituierenden Sitzung. Ihm gehören inzwischen fast ausschließlich Mitglieder des national-konservativen Flügels an. Nach dem Parteitag der AfD  am vergangenen Wochenende hatten Hunderte von Mitgliedern ihren Austritt verkündet, weil sie die Wahl von Frauke Petry zur Vorsitzenden als Rechtsruck empfinden.  </description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n4</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Bundesrat kommt zu letzter Sitzung vor der Sommerpause zusammen</title>
+<description>Berlin:
+Der Bundesrat kommt am Vormittag zu seiner letzten Sitzung vor der Sommerpause zusammen. Mehr als 60 Punkte stehen auf der Tagesordnung.
+So sollen das Kindergeld und der Kinderzuschlag steigen, außerdem der Kinderfreibetrag in zwei Schritten um rund 240 Euro.  Wohlfahrtsverbände kritisieren die Bundesregierung, weil vor allem Besserverdienende davon profitieren werden. Auch berät der Bundesrat über eine Initiative grüner Landwirtschaftsminister, den Anbau von Genpflanzen deutschlandweit zu verbieten.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n5</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Papst pocht auf tiefgreifenden Veränderungen des globalen Wirtschaftssystems</title>
+<description>Santa Cruz:
+Bei seinem Bolivien-Besuch hat der Papst dafür geworben, das weltweite Wirtschaftssystem grundlegend zu verändern. Bei einem Treffen mit indigenen Gruppen und Aktivisten kritisierte Franziskus einen ausartenden Kapitalismus. Es gebe zu viele Besitz- und Obdachlose, zu viele sinnlose Kriege und zu viel Umweltzerstörung, sagte der Papst in der Millionenmetropole Santa Cruz de la Sierra. Gleichzeitig entschuldigte er sich bei den Ureinwohnern für frühere Verbrechen der katholischen Kirche. Für Sünden in der Kolonialzeit bitte er - so wörtlich - "demütig um Vergebung", sagte der gebürtige Argentinier. Franziskus wies darauf hin, dass sich bereits Papst Johannes Paul II. dafür entschuldigt hatte.  </description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n6</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>30-Jähriger wird bei Explosion in Kartbahn schwer verletzt</title>
+<description>Marktzeuln:
+Bei einer Explosion in einer Go-Kart-Bahn im Landkreis Lichtenfels ist ein 30-Jähriger schwer verletzt worden. Der Mann fuhr mit Freunden auf der Bahn, als es an seinem mit Gas betriebenen Kart zu einer Verpuffung kam. Er erlitt schwere Brandverletzungen. Durch die Explosion ging die gesamte Arena in Flammen auf. 200 Feuerwehrleute kämpften vergeblich gegen den Großbrand, sie mussten die Halle kontrolliert abbrennen lassen. Der Sachschaden geht in die Hunderttausende. </description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n7</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Urteil im Mordfall von Bad Reichenhall wird verkündet</title>
+<description>Traunstein:
+Ein Jahr nach dem Mord an einem Rentner und dem Mordversuch an einer jungen Frau in Bad Reichenhall verkündet das Landgericht Traunstein am Vormittag sein Urteil. Angeklagt ist ein früherer Bundeswehrsoldat aus Rheinland-Pfalz. Er soll den 72-Jährigen auf der Straße aus reiner Mordlust erstochen und die 17-Jährige mit Messerstichen lebensgefährlich verletzt haben. Die Auszubildende ist seitdem auf einem Auge blind. Beide Taten geschahen vor rund einem Jahr - in der Nacht, als die deutsche Fußball-Nationalmannschaft Weltmeister wurde. Nach Gutachteraussagen kann der damals 20-Jährige darauf hoffen, nach Jugendstrafrecht verurteilt zu werden. Die Höchststrafe für Mord läge in dem Fall bei 15 Jahren. </description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n8</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>"Tour"-Spitzenreiter Tony Martin gibt nach Sturz auf</title>
+<description>
+Le Havre:
+Die Tour de France ist für Spitzenreiter Tony Martin vorzeitig beendet. Wie sein Team am Abend bekannt gab, wird der deutsche Radprofi morgen nicht mehr antreten. Grund ist ein Sturz Martins kurz vor dem Ziel der heutigen sechsten Etappe. Dabei zog er sich einen Bruch des Schlüsselbeins zu. Am Dienstag hatte Martin das Gelbe Trikot des Führenden der Gesamtwertung erobert.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n9</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Petzschner verpasst Einzug ins Wimbledon-Doppelfinale</title>
+<description>London:
+Der Bayreuther Tennisprofi Philipp Petzschner hat den Einzug ins Doppel-Finale von Wimbledon verpasst. Er verlor mit seinem Partner Jonathan Erlich aus Israel das Halbfinale gegen das englisch-australische Duo Jamie Murray und John Peers.
+Die US-Amerikanerin Serena Williams steht im Finale des Tennisturniers von Wimbledon. Die an Nummer eins gesetzte Williams gewann ihr Halbfinale gegen Maria Scharapowa aus Russland glatt in zwei Sätzen. Im Endspiel am Samstag trifft Williams auf die Spanierin Garbine Muguruza.  </description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n10</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+<item>
+<title>Das Wetter in Bayern: heute viel Sonne, bis 25 Grad</title>
+<description>Das Wetter in Bayern:
+Heute viel Sonne bei 18 bis 25 Grad. Morgen weiter sonnig mit 26 bis 31 Grad. Am Sonntag einige Wolken, am Alpenrand steigt die Gewitterneigung. Es bleibt sommerlich warm.
+</description>
+<link>http://www.br.de/nachrichten/meldungen/index.html#n11</link>
+<dc:date>2015-07-10T07:17:26+02:00</dc:date>
+</item>
+</channel>
+</rss>

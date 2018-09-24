@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AhdlcRenderer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="file:///. AhdlcRenderer.xsd">
+  <Channel>
+    <SerialPort>
+      <ComPort>COM20</ComPort>
+      
+      <!-- Possible values: {1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200} Def. 38400-->
+      <BaudRate>38400</BaudRate>
+      <!-- Possible values: {5, 6, 7, 8} Def. 8 -->
+      <DataBits>8</DataBits>
+      <!-- Possible values: {None, One, Two, OnePointFive} Def. Two -->
+      <StopBits>Two</StopBits>
+      <!-- Possible values: {Odd, Even, Mark, Space, None} (case insensitive) Def. None -->
+      <Parity>None</Parity>
+
+      <!-- Possible values: { Default, Auto, Enabled, Disabled, EnableForTx, DisableForTx } -->
+      <RTSMode>Default</RTSMode>
+
+      <!-- Possible values: true (default, used for AHDLC over RS-485), false (used for AHDLC over Alphabus) -->
+      <IsHighSpeed>false</IsHighSpeed>
+      <!-- Possible values: false (default), true -->
+      <IgnoreFrameStart>false</IgnoreFrameStart>
+      <!-- Possible values: false (default, wait for answers from signs), true (ignore answers and just send data) -->
+      <IgnoreResponses>false</IgnoreResponses>
+      <!-- Possible values: positive integer, unit: milliseconds  -->
+      <IgnoreResponseTime>10</IgnoreResponseTime>
+    </SerialPort>
+    <Signs>
+      <Sign Address="1" Mode="Monochrome" Width="112" Height="16" />
+      <Sign Address="7" Mode="Text" Width="96" Height="8" />
+      <Sign Address="13" Mode="Color" Width="34" Height="20" />
+    </Signs>
+  </Channel>
+</AhdlcRenderer>

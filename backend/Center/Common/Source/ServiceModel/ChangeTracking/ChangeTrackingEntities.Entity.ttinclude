@@ -1,0 +1,559 @@
+﻿<#@ import namespace="System.Security.Cryptography.X509Certificates" #>
+<#+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        this.WriteTrackingManagerInterface(entity);
+        this.WriteReadableModel(entity, userDefinedPropertiesEnabled);
+        this.WriteWritableModel(entity, userDefinedPropertiesEnabled);
+    }
+
+    private void WriteTrackingManagerInterface(EntitySpace.Entity entity)
+    {
+#>
+
+        public partial interface I<#= entity.Name #>ChangeTrackingManager : IChangeTrackingManager
+        {
+            event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Added;
+
+            event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Removed;
+
+            Task AddAsync(<#= entity.Name #>WritableModel writableModel);
+
+            Task DeleteAsync(<#= entity.Name #>ReadableModel model);
+
+            Task<<#= entity.Name #>ReadableModel> GetAsync(<#= entity.IdPropertyType #> id);
+
+            Task<IEnumerable<<#= entity.Name #>ReadableModel>> QueryAsync(<#= entity.Name #>Query query = null);
+            
+            Task<<#= entity.Name #>ReadableModel> CommitAndVerifyAsync(<#= entity.Name #>WritableModel writableModel);
+
+            <#= entity.Name #>ReadableModel Wrap(<#= entity.Name #> entity);
+
+            <#= entity.Name #>WritableModel Create();
+
+            <#= entity.Name #>WritableModel CreateCopy(<#= entity.Name #>ReadableModel model);
+        }
+<#+
+    }
+
+    private void WriteWritableModel(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => !property.IsXmlSerialized
+                && (property.PropertyType == EntitySpace.PropertyType.Primitive
+                    || property.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>().Where(property => property.IsXmlSerialized);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+#>
+
+        public partial class <#= entity.Name #>WritableModel : WritableModelBase<<#= entity.Name #>Delta>
+        {<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteWritableModelReferenceField(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteWritableModelField(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteWritableModelXmlField(property);
+        }
+#>
+
+            internal protected <#= entity.Name #>WritableModel(<#= entity.Name #>ReadableModel readableModel)
+                : base(readableModel.Version)
+            {
+                if (readableModel == null)
+                {
+                    throw new ArgumentNullException("readableModel");
+                }
+
+                this.ReadableModel = readableModel;
+<#+
+        foreach (var property in properties.Union(referenceProperties).Union(xmlProperties))
+        {
+            this.WriteWritableModelFieldInitialization(property);
+        }
+#>
+                this.Delta = new <#= entity.Name #>Delta(readableModel);<#+
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+
+                foreach (var udp in readableModel.UserDefinedProperties)
+                {
+                    this.Delta.UserDefinedPropertiesDelta[udp.Key] = udp.Value;
+                }<#+
+
+        }
+#>
+
+            }
+
+            public <#= entity.Name #>WritableModel()
+                : base(new Version(0))
+            {
+                this.Delta = new <#= entity.Name #>Delta();
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            public IDictionary<string, string> UserDefinedProperties
+            {
+                get
+                {
+                    return this.Delta.UserDefinedPropertiesDelta;
+                }
+            } 
+<#+
+        }
+#>
+
+            public <#= entity.IdPropertyType #> Id
+            {
+                get
+                {
+                    return this.ReadableModel == null ? default(<#= entity.IdPropertyType #>) : this.ReadableModel.Id;
+                }
+            }
+<#+
+        foreach (var property in properties)
+        {
+            this.WriteWritableModelProperty(property);
+        }
+        
+        foreach (var property in xmlProperties)
+        {
+            this.WriteWritableModelXmlProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteWritableModelReferenceProperty(property);
+        }
+#>
+
+            public <#= entity.Name #>ReadableModel ReadableModel { get; private set; }
+
+            public static <#= entity.Name #>WritableModel CreateCopyFrom(<#= entity.Name #>ReadableModel readableModel)
+            {
+                var model = new <#= entity.Name #>WritableModel();
+<#+
+        foreach (var property in properties.Union(referenceProperties).Union(xmlProperties))
+        {
+            this.WriteWritableModelCopyPropertyInitialization(property);
+        }
+#>
+                return model;
+            }
+            
+            public override bool HasChanges()
+            {
+                var delta = this.Delta.GetChangedDelta();
+                return delta != null;
+            }
+        }
+<#+
+    }
+
+    private void WriteWritableModelReferenceField(EntitySpace.Property property)
+    {#>
+
+            private <#= property.Type #>ReadableModel <#= property.Name.GetFieldName() #>;
+<#+
+    }
+
+    private void WriteWritableModelField(EntitySpace.Property property)
+    {
+        #>
+            private <#= property.Type #> <#= property.Name.GetFieldName() #>;
+<#+
+    }
+
+    private void WriteWritableModelXmlField(EntitySpace.Property property)
+    {#>
+            private XmlData <#= property.Name.GetFieldName() #>;
+<#+
+    }
+
+    private void WriteWritableModelFieldInitialization(EntitySpace.Property property)
+    {#>
+                this.<#= property.Name.GetFieldName() #> = readableModel.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteWritableModelCopyPropertyInitialization(EntitySpace.Property property)
+    {#>
+                model.<#= property.Name #> = readableModel.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteWritableModelProperty(EntitySpace.Property property)
+    {
+#>
+
+            public <#= property.Type #> <#= property.Name #>
+            {
+                get
+                {
+                    return this.<#= property.Name.GetFieldName() #>;
+                }
+
+                set
+                {
+                    this.<#= property.Name.GetFieldName() #> = value;
+                    this.Delta.Change<#= property.Name #>(value);
+                }
+            }
+<#+
+    }
+
+    private void WriteWritableModelXmlProperty(EntitySpace.Property property)
+    {
+#>
+
+            public XmlData <#= property.Name #>
+            {
+                get
+                {
+                    return this.<#= property.Name.GetFieldName() #>;
+                }
+
+                set
+                {
+                    this.<#= property.Name.GetFieldName() #> = value;
+                    this.Delta.Change<#= property.Name #>(value);
+                }
+            }
+<#+
+    }
+
+    private void WriteWritableModelReferenceProperty(EntitySpace.Property property)
+    {#>
+
+            public <#= property.Type #>ReadableModel <#= property.Name #>
+            {
+                get
+                {
+                    return this.<#= property.Name.GetFieldName() #>;
+                }
+
+                set
+                {
+                    this.<#= property.Name.GetFieldName() #> = value;
+                    this.Delta.Change<#= property.Name #>(value);
+                }
+            }
+<#+
+    }
+
+    private void WriteReadableModel(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => !property.IsXmlSerialized
+                && (property.PropertyType == EntitySpace.PropertyType.Primitive
+                    || property.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>().Where(property => property.IsXmlSerialized);
+        var collectionProperties = entity
+            .Properties.OfType<EntitySpace.CollectionProperty>();
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+#>
+
+        public partial class <#= entity.Name #>ReadableModel : ReadableModelBase<<#= entity.Name #>Delta>
+        {
+<#+
+            foreach (var property in collectionProperties)
+            {#>
+            protected readonly ObservableReadOnlyCollection<<#= property.ItemType #>ReadableModel> <#= property.Name.GetFieldName() #> =
+                new ObservableReadOnlyCollection<<#= property.ItemType #>ReadableModel>();
+<#+
+            }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            protected readonly ObservableReadOnlyDictionary<string, string> userDefinedProperties;
+<#+
+        }
+#>
+
+            protected readonly <#= entity.Name #> <#= entity.Name #>;
+
+            protected readonly object locker = new object();
+
+            private volatile bool populated;
+
+            public <#= entity.Name #>ReadableModel(<#= entity.Name #> entity)
+            {
+                this.<#= entity.Name #> = entity;
+<#+
+        if (userDefinedPropertiesEnabled)
+        {#>
+                if (entity.UserDefinedProperties == null)
+                {
+                    this.userDefinedProperties = new ObservableReadOnlyDictionary<string, string>();
+                }
+                else
+                {
+                    this.userDefinedProperties = new ObservableReadOnlyDictionary<string, string>(entity.UserDefinedProperties);
+                }
+<#+
+        }
+#>
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {#>
+
+            public IObservableReadOnlyDictionary<string, string> UserDefinedProperties
+            {
+                get
+                {
+                    return this.userDefinedProperties;
+                }
+            }
+<#+
+        }
+#>
+
+            public <#= entity.IdPropertyType #> Id { get; private set; }
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReadableModelReferenceProperty(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteReadableModelCollectionProperty(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteReadableModelProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteReadableModelXmlProperty(property);
+        }
+#>
+
+            public override async Task ApplyAsync(<#= entity.Name #>Delta delta)
+            {<#+
+            
+        foreach (var property in properties.Union(xmlProperties))
+        {
+            this.WriteReadableModelApplyProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReadableModelApplyReferenceProperty(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                if (delta.UserDefinedProperties != null)
+                {
+                    foreach (var key in delta.UserDefinedProperties.Keys)
+                    {
+                        var newValue = delta.UserDefinedProperties[key];
+                        string oldValue;
+                        if (!this.userDefinedProperties.TryGetValue(key, out oldValue) || oldValue != newValue)
+                        {
+                            this.userDefinedProperties[key] = newValue;
+                            this.OnPropertyChanged(key);
+                        }
+                    }
+                }
+<#+
+        }
+#>
+
+                await base.ApplyAsync(delta);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (object.ReferenceEquals(null, obj))
+                {
+                    return false;
+                }
+
+                if (object.ReferenceEquals(this, obj))
+                {
+                    return true;
+                }
+
+                if (obj.GetType() != this.GetType())
+                {
+                    return false;
+                }
+
+                return this.Equals((<#= entity.Name #>ReadableModel)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
+
+            protected bool Equals(<#= entity.Name #>ReadableModel other)
+            {
+                return this.Id == other.Id;
+            }
+
+            protected void Populate()
+            {
+                if (this.populated)
+                {
+                    return;
+                }
+
+                lock (this.locker)
+                {
+                    if (this.populated)
+                    {
+                        return;
+                    }
+
+                    this.populated = true;
+                }
+
+                this.Id = this.<#= entity.Name #>.Id;
+<#+
+        foreach (var property in properties.Union(xmlProperties))
+        {
+            this.WriteReadableModelPopulateProperty(property);
+        }
+#>
+                this.CreatedOn = this.<#= entity.Name #>.CreatedOn;
+                this.LastModifiedOn = this.<#= entity.Name #>.LastModifiedOn;
+                this.Version = new Version(this.<#= entity.Name #>.Version);
+            }
+
+            public <#= entity.Name #>WritableModel ToChangeTrackingModel()
+            {
+                var model = new <#= entity.Name #>WritableModel(this);
+                this.OnChangeTrackingModelCreated(model);
+                return model;
+            }
+        }
+<#+
+    }
+
+    private void WriteReadableModelProperty(EntitySpace.Property property)
+    {
+#>
+
+            public <#= property.Type #> <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WriteReadableModelXmlProperty(EntitySpace.Property property)
+    {#>
+    
+            public virtual XmlData <#= property.Name #> { get; protected set; }
+<#+
+    }
+
+    private void WriteReadableModelCollectionProperty(EntitySpace.CollectionProperty property)
+    {#>
+
+            public virtual IObservableReadOnlyCollection<<#= property.ItemType #>ReadableModel> <#= property.Name #>
+            {
+                get
+                {
+                    return this.<#= property.Name.GetFieldName() #>;
+                }
+            }
+<#+
+    }
+
+    private void WriteReadableModelReferenceProperty(EntitySpace.Property property)
+    {#>
+
+            public virtual <#= property.Type #>ReadableModel <#= property.Name #> { get; protected set; }
+<#+
+    }
+
+    private void WriteReadableModelCollectionPropertyInitialization(EntitySpace.CollectionProperty property)
+    {#>
+                this.<#= property.Name #> = new ObservableCollection<<#= property.ItemType #>ReadableModel>();
+<#+
+    }
+
+    private void WriteReadableModelApplyProperty(EntitySpace.Property property)
+    {#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    this.<#= property.Name #> = delta.<#= property.Name #>.Value;
+                    this.OnPropertyChanged("<#= property.Name #>");
+                }
+<#+
+    }
+
+    private void WriteReadableModelApplyReferenceProperty(EntitySpace.Property property)
+    {#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    var <#= property.Name.GetVariableName() #>ChangeTrackingManager = DependencyResolver.Current.Get<<#= property.Type.GetContainingPartition() #>I<#= property.Type.GetLastPart() #>ChangeTrackingManager>();
+                    var id = delta.<#= property.Name #>.ReferenceId;
+                    this.<#= property.Name #> = id.HasValue ? await <#= property.Name.GetVariableName() #>ChangeTrackingManager.GetAsync(id.Value) : null;
+                    this.OnPropertyChanged("<#= property.Name #>");
+                }
+<#+
+    }
+
+    private void WriteReadableModelPopulateProperty(EntitySpace.Property property)
+    {#>
+                this.<#= property.Name #> = this.<#= property.Entity.Name #>.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteReadableModelPopulateCollectionProperty(EntitySpace.CollectionProperty property)
+    {#>
+
+                    var list<#= property.Name #> = <#= property.Entity.Name #>.<#= property.Name #>.ToList();
+                    var manager<#= property.Name #> = DependencyResolver.Current.Get<<#= property.ItemType.GetContainingPartition() #>I<#= property.ItemType.GetLastPart() #>ChangeTrackingManager>();
+                    foreach (var item in list<#= property.Name #>)
+                    {
+                        var model = await manager<#= property.Name #>.GetAsync(item.Id);
+                        this.<#= property.Name.GetFieldName() #>.Add(model);
+                    }
+<#+
+    }
+
+    private void WriteReadableModelPopulateReferenceProperty(EntitySpace.Property property)
+    {#>
+
+                    if (this.<#= property.Entity.Name #>.<#= property.Name #> != null)
+                    {
+                        var manager<#= property.Name #> = DependencyResolver.Current.Get<<#= property.Type.GetContainingPartition() #>I<#= property.Type.GetLastPart() #>ChangeTrackingManager>();
+                        this.<#= property.Name #> = await manager<#= property.Name #>.GetAsync(this.<#= property.Entity.Name #>.<#= property.Name #>.Id);
+                        await this.<#= property.Name #>.Populate();
+                    }
+
+<#+
+    }
+#>

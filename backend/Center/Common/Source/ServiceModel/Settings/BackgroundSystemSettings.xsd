@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BackgroundSystemSettings" nillable="true" type="BackgroundSystemSettings" />
+  <xs:element name="UploadsPath" nillable="true" type="xs:string" />
+  <xs:complexType name="BackgroundSystemSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FtpUpdateProvider" type="FtpUpdateProviderConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MaintenanceMode" type="MaintenanceModeType" />
+    </xs:sequence>
+    <xs:attribute name="resourcesPath" type="xs:string" />
+  </xs:complexType>
+  
+  <xs:complexType name="FtpUpdateProviderConfig">
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateProviderConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Compression" type="CompressionAlgorithm" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Host" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" default="21" name="Port" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Username" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RepositoryBasePath" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PollInterval" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="UpdateProviderConfigBase" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowVisualization" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" />
+  </xs:complexType>
+  
+  <xs:simpleType name="CompressionAlgorithm">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="GZIP" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="MaintenanceModeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Reason" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attribute name="IsEnabled" type="xs:boolean"/>
+</xs:schema>

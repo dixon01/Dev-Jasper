@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5C752D3-15E6-4140-ABB3-B65DA9D88467}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Luminator.PeripheralProtocol.Core</RootNamespace>
+    <AssemblyName>Luminator.PeripheralProtocol.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AudioSwitchPeripheral\AudioPeripheralContext.cs" />
+    <Compile Include="AudioSwitchPeripheral\AudioSwitchSerialClient.cs" />
+    <Compile Include="AudioSwitchPeripheral\AudioSwitchPeripheralConfig.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioSwitchAck.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioSwtichBaseMessage.cs" />
+    <Compile Include="Interfaces\IPeripheralBaseMessageType.cs" />
+    <Compile Include="Interfaces\IPeripheralRequestVersion.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioSwtichBaseMessage.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralRequestStatus.cs" />
+    <Compile Include="Interfaces\IAudioSwitchSerialClient.cs" />
+    <Compile Include="Interfaces\IPeripheralHandler.cs" />
+    <Compile Include="Interfaces\IPeripheralConfig.cs" />
+    <Compile Include="Interfaces\IPeripheralSerialClient.cs" />
+    <Compile Include="Interfaces\IPeripheralState.cs" />
+    <Compile Include="Interfaces\IPeripheralImageUpdateStart.cs" />
+    <Compile Include="Interfaces\IPeripheralImageRecordMessage.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralHeaderAudioSwitch.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioSwitchNak.cs" />
+    <Compile Include="Models\PeripheralBaseMessageType.cs" />
+    <Compile Include="Models\PeripheralHeaderType.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralImageUpdateInfoEventArgs.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralImageStatus.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralImageRecordMessage.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralImageUpdateCancel.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralImageUpdateStart.cs" />
+    <Compile Include="Models\GpioInfo.cs" />
+    <Compile Include="Interfaces\IPeripheralVersionsInfo.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralGpioEventArg.cs" />
+    <Compile Include="Models\PeripheralDataReceivedEventArgs.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioSwitchFactory.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralRequestVersion.cs" />
+    <Compile Include="Models\PeripheralRequestVersion.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralContextAudioSwtich.cs" />
+    <Compile Include="PeripheralSerialClient.cs" />
+    <Compile Include="PeripheralState.cs" />
+    <Compile Include="CheckSumUtil.cs" />
+    <Compile Include="Interfaces\IChecksum.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioEnable.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioGpioStatus.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioStatus.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioVersions.cs" />
+    <Compile Include="Interfaces\IPeripheralHeader.cs" />
+    <Compile Include="Interfaces\IPeripheralSetVolume.cs" />
+    <Compile Include="Interfaces\IPeripheralAudioConfig.cs" />
+    <Compile Include="Interfaces\ISerialPortSettings.cs" />
+    <Compile Include="Models\PeripheralMessageReceivedEventArgs.cs" />
+    <Compile Include="Models\Constants.cs" />
+    <Compile Include="OrderAttribute.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioVersions.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioEnable.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioGpioStatus.cs" />
+    <Compile Include="Models\PeripheralVersionsInfo.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralSetVolume.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="PeripheralConfig.cs" />
+    <Compile Include="PeripheralHandler.cs" />
+    <Compile Include="SerialPortSettings.cs" />
+    <Compile Include="Types\ActiveSpeakerZone.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioStatus.cs" />
+    <Compile Include="Interfaces\IPeripheralBaseMessage.cs" />
+    <Compile Include="AudioSwitchPeripheral\PeripheralAudioConfig.cs" />
+    <Compile Include="Models\PeripheralAck.cs" />
+    <Compile Include="Models\PeripheralNak.cs" />
+    <Compile Include="Models\PeripheralPoll.cs" />
+    <Compile Include="Models\PeripheralBaseMessage.cs" />
+    <Compile Include="Types\AudioSourcePriority.cs" />
+    <Compile Include="Types\PeripheralAudioSwitchMessageType.cs" />
+    <Compile Include="Types\PeripheralGpioType.cs" />
+    <Compile Include="Types\PeripheralSystemMessageType.cs" />
+    <Compile Include="Models\PeripheralHeader.cs" />
+    <Compile Include="AudioSwitchPeripheral\AudioSwitchHandler.cs" />
+    <Compile Include="PeripheralContext.cs" />
+    <Compile Include="Interfaces\IAudioSwitchHandler.cs" />
+    <Compile Include="Interfaces\IPeripheralContext.cs" />
+    <Compile Include="Types\PeripheralMessageType.cs" />
+    <Compile Include="Types\PeripheralStatusType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\PeripherialImageStatusType.cs" />
+    <Compile Include="Types\PeripherialImageUpdateType.cs" />
+    <Compile Include="WriteModelWithAck.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{e53548fe-1d9d-4a99-8fc0-f02b661d964f}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2b005d69-e10b-4ce6-b9e8-3f3fd1f2c874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{e11fbc4e-2eb6-461c-9310-094b6ade9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\Common\Protocols\Source\Ximple\Generic\dictionary.xml">
+      <Link>dictionary.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AudioSwitchConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="PeripheralAudioConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AudioSwitchPeripheral\Testing\" />
+    <Folder Include="Messages\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

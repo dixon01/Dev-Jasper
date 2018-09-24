@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{16B3C7A4-9EFD-41CF-92EE-BE4B75145BC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.HardwareManager.Core</RootNamespace>
+    <AssemblyName>Gorba.Motion.HardwareManager.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\..\..\..\3rdParty\NAudio\1.6.0.0\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Common\SystemTimeOutput.FX20.cs">
+      <DependentUpon>SystemTimeOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\TemperatureObserver.FX20.cs">
+      <DependentUpon>TemperatureObserver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UdcpHandler.cs" />
+    <Compile Include="Common\VolumeWrapperBase.FX20.cs">
+      <DependentUpon>VolumeWrapperBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\NAudioVolumeWrapper.FX20.cs" />
+    <Compile Include="Common\SystemTimeUpdate.cs" />
+    <Compile Include="Common\TemperatureObserver.cs" />
+    <Compile Include="Gps\GpsClientBase.cs" />
+    <Compile Include="Gps\GpsEventArgs.cs" />
+    <Compile Include="Gps\GpsPilotClient.cs" />
+    <Compile Include="Gps\GpsSerialClient.cs" />
+    <Compile Include="HardwareHandlerFactory.FX20.cs">
+      <DependentUpon>HardwareHandlerFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mgi\LevelShifterLevelPort.FX20.cs" />
+    <Compile Include="Mgi\BinaryEnumMgiPort.FX20.cs" />
+    <Compile Include="Mgi\MgiPortBase.FX20.cs" />
+    <Compile Include="Settings\DaylightSavingHandler.FX20.cs" />
+    <Compile Include="Settings\DisplaySettingsHandler.FX20.cs" />
+    <Compile Include="Settings\FixedSettingsHandler.FX20.cs" />
+    <Compile Include="Settings\SettingsHandler.FX20.cs">
+      <DependentUpon>SettingsHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\HostnameSettingsHandler.FX20.cs" />
+    <Compile Include="Settings\IpSettingsHandler.FX20.cs" />
+    <Compile Include="Settings\ISettingsPartHandler.cs" />
+    <Compile Include="Settings\SettingsHandler.cs" />
+    <Compile Include="Common\SystemTimeOutput.cs" />
+    <Compile Include="Common\VolumeWrapperBase.cs" />
+    <Compile Include="Common\VolumeInputOutput.cs" />
+    <Compile Include="Common\WinMmVolumeWrapper.FX20.cs" />
+    <Compile Include="HardwareHandlerFactory.cs" />
+    <Compile Include="HardwareManagementController.cs" />
+    <Compile Include="HardwareManagerApplication.cs" />
+    <Compile Include="IHardwareHandler.cs" />
+    <Compile Include="Mgi\MgiHardwareHandler.FX20.cs" />
+    <Compile Include="Mgi\BinaryPort.FX20.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\TimeZoneSettingsHandler.FX20.cs" />
+    <Compile Include="TimeSync\SntpTimeSyncController.cs" />
+    <Compile Include="TimeSync\SntpTimeSyncControllerBase.cs" />
+    <Compile Include="Vdv301\DeviceManagementService.cs" />
+    <Compile Include="Vdv301\DeviceManagementServicePersistence.cs" />
+    <Compile Include="Vdv301\DnsSdIbisServiceLocator.cs" />
+    <Compile Include="Vdv301\IbisIpServiceController.cs" />
+    <Compile Include="Vdv301\IbisIpTimeSyncController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\NMEAParser\NMEA.csproj">
+      <Project>{750e7b2e-8096-4831-b318-b1f1fafd6ae4}</Project>
+      <Name>NMEA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\HardwareManager\Configuration.HardwareManager.csproj">
+      <Project>{48E2DEB9-E45A-484E-B2D6-4B480ADBFF65}</Project>
+      <Name>Configuration.HardwareManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Obc\Configuration.Obc.csproj">
+      <Project>{939f1e2a-b8ea-43be-878c-dd9e4fcba28f}</Project>
+      <Name>Configuration.Obc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Persistence\Configuration.Persistence.csproj">
+      <Project>{0FA444B9-B876-47EB-A78D-BB4BEBC9740D}</Project>
+      <Name>Configuration.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\SystemManager\Configuration.SystemManager.csproj">
+      <Project>{A95FB6D7-9160-47C1-A80C-65C63AB38BDF}</Project>
+      <Name>Configuration.SystemManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Alarming\Protocols.Alarming.csproj">
+      <Project>{0BE751C3-9AE0-4956-BE49-FD80E5DF29DC}</Project>
+      <Name>Protocols.Alarming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\DnsServiceDiscovery\Protocols.DnsServiceDiscovery.csproj">
+      <Project>{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}</Project>
+      <Name>Protocols.DnsServiceDiscovery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Sntp\Protocols.Sntp.csproj">
+      <Project>{0E1FA4A7-7256-4269-B2FA-93A378E818FF}</Project>
+      <Name>Protocols.Sntp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Udcp\Protocols.Udcp.csproj">
+      <Project>{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}</Project>
+      <Name>Protocols.Udcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Vdv301\Protocols.Vdv301.csproj">
+      <Project>{60B1A687-3802-499E-B03F-B4BC1829B932}</Project>
+      <Name>Protocols.Vdv301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Entities\Motion.Common.Entities.csproj">
+      <Project>{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}</Project>
+      <Name>Motion.Common.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\IbisIP\Common.IbisIP.csproj">
+      <Project>{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}</Project>
+      <Name>Common.IbisIP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Mgi\AtmelControl\Mgi.AtmelControl.csproj">
+      <Project>{365DB5DB-40ED-4418-B19B-286CCEA083A1}</Project>
+      <Name>Mgi.AtmelControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Mgi\IO\Mgi.IO.csproj">
+      <Project>{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}</Project>
+      <Name>Mgi.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HardwareManager.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

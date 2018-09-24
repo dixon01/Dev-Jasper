@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxLibrary", "RxLibrary\RxLibrary.csproj", "{61F11884-2695-4236-9865-07D2B6164E22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{899322BE-34DE-4570-9000-DA98BA23FC49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{89D7E503-5C21-4DE9-8432-00B66BF3142A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RxLibrary\\RxLibrary.csproj
+		SccProjectName1 = RxLibrary
+		SccLocalPath1 = RxLibrary
+		SccProjectUniqueName2 = TestConsole\\TestConsole.csproj
+		SccProjectName2 = TestConsole
+		SccLocalPath2 = TestConsole
+		SccProjectUniqueName3 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = RxTests.sln
+		SccProjectName3 = ../../../../Common/Utility/Source/Core
+		SccLocalPath3 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61F11884-2695-4236-9865-07D2B6164E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F11884-2695-4236-9865-07D2B6164E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F11884-2695-4236-9865-07D2B6164E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F11884-2695-4236-9865-07D2B6164E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899322BE-34DE-4570-9000-DA98BA23FC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899322BE-34DE-4570-9000-DA98BA23FC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899322BE-34DE-4570-9000-DA98BA23FC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899322BE-34DE-4570-9000-DA98BA23FC49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {89D7E503-5C21-4DE9-8432-00B66BF3142A}
+	EndGlobalSection
+EndGlobal

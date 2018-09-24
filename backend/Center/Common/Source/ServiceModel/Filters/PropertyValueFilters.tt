@@ -1,0 +1,48 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs;PropertyValueFilterDefinition.ttcode.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel.Filters" #>
+<#@ output extension=".generated.cs" #>
+<#@ include file="FilterDefinitions.ttinclude" #>
+<#
+    var filters = GetFilterDefinitions();
+#>
+namespace Gorba.Center.Common.ServiceModel.Filters
+{
+    using System;
+    using System.Runtime.Serialization;
+<#
+    foreach (var filter in filters)
+    {
+        this.WriteFilter(filter);
+    }
+#>
+}
+<#+
+    private void WriteFilter(PropertyValueFilterDefinition filter)
+    {#>
+
+    [DataContract]
+    public partial class <#= filter.Name #>PropertyValueFilter : PropertyValueFilterBase
+    {
+        /// <summary>
+        /// Gets or sets the comparison.
+        /// </summary>
+        [DataMember]
+        public <#= filter.Name #>Comparison Comparison { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether value.
+        /// </summary>
+        [DataMember]
+        public <#= filter.Type #> Value { get; set; }
+    }
+<#+
+    }
+#>

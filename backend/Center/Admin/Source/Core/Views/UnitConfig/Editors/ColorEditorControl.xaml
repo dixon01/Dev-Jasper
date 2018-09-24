@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Editors.ColorEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance editors:ColorEditorViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <telerik:RadDropDownButton HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Stretch"
+                               VerticalContentAlignment="Stretch">
+        <telerik:RadDropDownButton.DropDownContent>
+            <telerik:RadColorEditor SelectedColor="{Binding Color, Mode=TwoWay}"
+                                    HistoryCapacity="8" />
+        </telerik:RadDropDownButton.DropDownContent>
+
+        <Border Margin="2"
+                BorderThickness="1"
+                BorderBrush="Black">
+            <Rectangle Stroke="White"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding Color, Mode=TwoWay}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+    </telerik:RadDropDownButton>
+</UserControl>

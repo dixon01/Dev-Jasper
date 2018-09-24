@@ -1,0 +1,366 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplatingExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Core" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.BackgroundSystem.Core
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WriteUsings(partition);
+    }
+#>
+
+    using Version = Gorba.Center.Common.ServiceModel.ChangeTracking.Version;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WritePartition(partition, userDefinedPropertiesEnabledEntityNames);
+    }
+#>
+}
+<#+
+
+    private void WritePartition(EntitySpace.Partition partition, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    {#>
+
+    namespace <#= partition.Name #>
+    {<#+
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, userDefinedPropertiesEnabled);
+        }
+#>
+    }
+<#+
+    }
+
+    private void WriteUsings(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(p => !p.IsXmlSerialized
+                    && (p.PropertyType == EntitySpace.PropertyType.Primitive || p.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties =
+            entity.Properties.OfType<EntitySpace.Property>().Where(p => p.IsXmlSerialized);
+        var referenceProperties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(p => p.PropertyType == EntitySpace.PropertyType.Reference);
+        var name = entity.Name;
+        #>
+
+        public partial class <#= name #>ChangeTrackingDataService
+        {
+            protected override IEnumerable<Tuple<string, INotificationManager>> GetReferenceNotificationManagers()
+            {
+<#+
+        if (referenceProperties.Any())
+        {#>
+                INotificationManager manager;
+                NotificationManagerConfiguration notificationManagerConfiguration;<#+
+            foreach (var property in referenceProperties)
+            {
+                this.GetReferenceNotificationManager(property);
+            }
+        }
+        else
+        {#>
+                return Enumerable.Empty<Tuple<string, INotificationManager>>();
+<#+
+        }
+        #>
+            }
+
+            private async Task OnErrorAsync(
+                int id,
+                DeltaNotificationType notificationType = DeltaNotificationType.PropertiesChanged)
+            {
+                var notification = new <#= name #>DeltaNotification
+                {
+                    EntityId = id,
+                    NotificationType = notificationType,
+                    WasAccepted = false
+                };
+                Logger.Trace("Sending error for notification type '{0}'", notificationType);
+                await this.PostNotificationAsync(notification);
+            }
+
+            protected override async Task OnNotification(Notification notification)
+            {
+                var deltaNotification = notification as <#= name #>DeltaNotification;
+                if (deltaNotification == null)
+                {
+                    throw new NotSupportedException();
+                }
+
+                Logger.Trace("Handling notification '{0}'", notification.Id);
+                await this.OnNotificationAsync(deltaNotification);
+            }
+
+            private async Task OnEntityAddedAsync(<#= name #> entity)
+            {
+                Logger.Trace("Entity {0} was added", entity.Id);
+                var delta = new <#= name #>Delta(entity.Id, DeltaOperation.Created);<#+
+        foreach (var property in referenceProperties)
+        {
+            this.OnEntityAddedReferenceProperty(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                foreach (var userDefinedProperty in entity.UserDefinedProperties)
+                {
+                    delta.UserDefinedPropertiesDelta.Add(userDefinedProperty.Key, userDefinedProperty.Value);
+                }
+<#+
+        }
+#>
+
+                var notification = new <#= name #>DeltaNotification
+                {
+                    Delta = new <#= name #>DeltaMessage(delta),
+                    EntityId = entity.Id,
+                    NotificationType = DeltaNotificationType.EntityAdded,
+                    WasAccepted = true
+                };
+                await this.PostNotificationAsync(notification);
+            }
+
+            private async Task OnEntityDeletedAsync(<#= entity.Name #> entity)
+            {
+                Logger.Trace("Entity {0} was deleted", entity.Id);
+                var delta = new <#= entity.Name #>Delta(entity.Id, DeltaOperation.Deleted);
+                var notification = new <#= entity.Name #>DeltaNotification
+                                        {
+                                            Delta = new <#= name #>DeltaMessage(delta),
+                                            EntityId = entity.Id,
+                                            NotificationType = DeltaNotificationType.EntityRemoved,
+                                            WasAccepted = true
+                                        };
+                await this.PostNotificationAsync(notification);
+            }
+
+            private async Task OnEntityUpdatedAsync(<#= name #> original, <#= name #> entity)
+            {
+                Logger.Trace("Entity {0} was updated", entity.Id);
+                var delta = new <#= name #>Delta(original);
+<#+
+        foreach (var property in properties.Union(xmlProperties))
+        {
+            this.OnPropertyUpdated(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.OnReferencePropertyUpdated(property);
+        }
+            #>
+                delta.SetLastModifiedOn(entity.LastModifiedOn);
+
+                var changeNotification = new <#= name #>DeltaNotification 
+                {
+                    Delta = new <#= name #>DeltaMessage(delta),
+                    EntityId = entity.Id,
+                    WasAccepted = true
+                };
+                await this.PostNotificationAsync(changeNotification);
+            }
+
+            private async Task OnNotificationAsync(<#= name #>DeltaNotification notification)
+            {
+                var delta = notification.Delta.CreateDelta();
+                if (delta.Version == null)
+                {
+                    throw new InvalidDataException("Version can't be null on delta");
+                }
+
+                var model = (await this.dataService.QueryAsync(<#= name #>Query.Create().WithId(delta.Id)).ConfigureAwait(false)).Single();
+<#+
+        foreach (var property in properties.Union(xmlProperties))
+        {
+            this.OnPropertyNotification(property);
+        }
+        
+        foreach (var property in referenceProperties)
+        {
+            this.OnReferencePropertyNotification(property);
+        }
+#>
+
+                if (model.Version + 1 != delta.Version.Value)
+                {
+                    // TODO: not accepted!
+                    this.Logger.Debug(
+                        "Model version ({0} + 1) != delta version ({1})",
+                        model.Version,
+                        delta.Version.Value);
+                    var reply = new <#= entity.Name #>DeltaNotification
+                    {
+                        Delta = notification.Delta,
+                        EntityId = notification.EntityId,
+                        ReplyTo = notification.Id.ToString(),
+                        WasAccepted = false
+                    };
+                    await this.PostNotificationAsync(reply);
+                    return;
+                }
+
+                model.Version = delta.Version.Value;
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                foreach (var userDefinedProperty in delta.UserDefinedProperties)
+                {
+                    model.UserDefinedProperties[userDefinedProperty.Key] = userDefinedProperty.Value;
+                }
+
+<#+
+        }
+#>
+                var saved = await this.dataService.UpdateAsync(model);
+                if (!saved.LastModifiedOn.HasValue)
+                {
+                    throw new InvalidOperationException();
+                }
+                
+                delta.SetLastModifiedOn(saved.LastModifiedOn);
+                var acceptedReply = new <#= entity.Name #>DeltaNotification
+                {
+                    Delta = new <#= entity.Name #>DeltaMessage(delta),
+                    EntityId = notification.EntityId,
+                    ReplyTo = notification.Id.ToString(),
+                    WasAccepted = true
+                };
+                await this.PostNotificationAsync(acceptedReply);
+            }
+        }
+<#+
+    }
+
+    private void OnPropertyUpdated(EntitySpace.Property property)
+    {
+        var propertyName = property.Name;
+#>
+
+                if (original.<#= propertyName #> != entity.<#= propertyName #>)
+                {
+                    delta.Change<#= propertyName #>(entity.<#= propertyName #>);
+                }
+<#+
+    }
+
+    private void OnReferencePropertyUpdated(EntitySpace.Property property)
+    {
+        var propertyName = property.Name;
+#>
+
+                var original<#= propertyName #>Id = original.<#= propertyName #> == null ?  (int?)null : original.<#= propertyName #>.Id;
+                var entity<#= propertyName #>Id = entity.<#= propertyName #> == null ?  (int?)null : entity.<#= propertyName #>.Id;
+                if (original<#= propertyName #>Id != entity<#= propertyName #>Id)
+                {
+                    delta.Change<#= propertyName #>(entity<#= propertyName #>Id);
+                }
+<#+
+    }
+
+    private void OnEntityAddedReferenceProperty(EntitySpace.Property property)
+    {#>
+
+                if (entity.<#= property.Name #> != null)
+                {
+                    delta.Change<#= property.Name #>(entity.<#= property.Name #>.Id);
+                }
+<#+
+    }
+
+    private void OnPropertyNotification(EntitySpace.Property property)
+    {
+        var propertyName = property.Name;
+        #>
+
+                if (delta.<#= propertyName #> != null)
+                {
+                    model.<#= propertyName #> = delta.<#= propertyName #>.Value;
+                }
+<#+
+    }
+
+    private void OnReferencePropertyNotification(EntitySpace.Property property)
+    {
+        var propertyName = property.Name;
+        #>
+
+                if (delta.<#= propertyName #> != null)
+                {
+                    if (!delta.<#= propertyName #>.ReferenceId.HasValue)
+                    {
+                        model.<#= propertyName #> = <#= property.Type.GetLastPart() #>.Null;
+                    }
+                    else
+                    {
+                        model.<#= propertyName #> = new <#= property.Type.GetLastPart() #> { Id = delta.<#= propertyName #>.ReferenceId.Value };
+                    }
+                }
+<#+
+    }
+
+    private void GetReferenceNotificationManager(EntitySpace.Property property)
+    {
+        var propertyName = property.Name;
+        var notificationPath = property.Type.GetLastPart().Pluralize();
+        #>
+
+                notificationManagerConfiguration = new NotificationManagerConfiguration
+                                                           {
+                                                               ConnectionString =
+                                                                   this.BackgroundSystemConfiguration
+                                                                   .NotificationsConnectionString,
+                                                               Path = "<#= notificationPath #>"
+                                                           };
+                manager = NotificationManagerFactory.Current.Create(notificationManagerConfiguration);
+                yield return new Tuple<string, INotificationManager>("<#= notificationPath #>", manager);
+<#+
+    }
+#>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="XimpleConfig">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Enabled" type="xsd:boolean" />
+        <xsd:element name="EnableResponse" type="xsd:boolean" />
+        <xsd:element name="EnableXimpleOnlyResponse" type="xsd:boolean" />
+        <xsd:element name="InfoTainmentAudioStatusTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="InfoTainmentCannedMsgPlayTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="InfoTainmentSystemStatusTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="InfoTainmentVolumeSettingsTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="NetworkChangedMessageTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="NetworkFileAccessSettingsTableIndex" type="xsd:unsignedByte" />
+        <xsd:element name="NetworkFtpSettings">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Enabled" type="xsd:boolean" />
+              <xsd:element name="Password" type="xsd:string" />
+              <xsd:element name="Uri" type="xsd:string" />
+              <xsd:element name="UserName" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Port" type="xsd:unsignedShort" default="1600" />
+        <xsd:element name="AudioZonePresentationValues" minOccurs="0" maxOccurs="1" >
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Interior" type="xsd:unsignedByte" default="0" />
+              <xsd:element name="Exterior" type="xsd:unsignedByte" default="1"/>
+              <xsd:element name="Both" type="xsd:unsignedByte" default="2"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="XimpleServerMonitorTimerInterval" type="xsd:unsignedByte" default="60"/>
+        <xsd:element name="MaxXimpleServerFailuresBeforeRestart" type="xsd:unsignedByte" default="2"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

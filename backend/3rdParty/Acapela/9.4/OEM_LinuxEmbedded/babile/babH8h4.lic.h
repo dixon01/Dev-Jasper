@@ -1,0 +1,1 @@
+const char babLicense[]="\"8625 0 H8h4 #COMMERCIAL#LuminatorUSA-Plano-UnitedStatesofAmerica\"\nYShTWm4!coKpeSo6yzs4E$$26gyHxnbBkGYpTrMol%!FYAbIZhKV%JOK5rAteAQ!6lf%NWYtLAeqboUVhpq2hId#\nXKHX6H9tlFfDLOLJpyjQIA%xQ%aSXVnANajDMSQu@DmvCRnF\nWOGY5QawrgI4FaqOG9xU5Q##\n";

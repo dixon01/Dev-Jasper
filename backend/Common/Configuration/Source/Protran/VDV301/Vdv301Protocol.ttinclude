@@ -1,0 +1,169 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.ttinclude" #>
+<#+
+public static List<Service> LoadSupportedServices(string supportedServicesXml)
+{
+    var servicesXml = Path.Combine(
+        Path.GetDirectoryName(supportedServicesXml), @"..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.xml");
+    var services = LoadServices(servicesXml);
+    
+    var serializer = new XmlSerializer(typeof(SupportedServices));
+    SupportedServices supported;
+    using (var input = File.OpenRead(supportedServicesXml))
+    {
+        supported = (SupportedServices)serializer.Deserialize(input);
+    }
+
+    return services.Where(s => supported.Services.Find(supp => supp == s.Name) != null).ToList();
+}
+
+
+[XmlRoot("SupportedServices")]
+public class SupportedServices
+{
+    [XmlElement("string")]
+    public List<string> Services { get; set; }
+}
+
+///////// Helper methods for creating config elements ////////
+
+public static List<XmlSchemaComplexType> GetDataTypes(List<Operation> operations)
+{
+    var dataTypes = new List<XmlSchemaComplexType>();
+    foreach (var operation in operations)
+    {
+        AddDataTypes(operation.Return.ElementSchemaType, dataTypes);
+    }
+
+    return dataTypes;
+}
+
+public static List<XmlSchemaElement> GetChildren(XmlSchemaGroupBase particle)
+{
+    var children = new List<XmlSchemaElement>();
+    AddChildren(particle, children);
+    return children;
+}
+
+public static bool IsSimpleIbisIpType(XmlSchemaType type)
+{
+    return type.Name == "InternationalTextType"
+            || type.Name.StartsWith("IBIS-IP.")
+            || type is XmlSchemaSimpleType;
+}
+
+private static void AddChildren(XmlSchemaGroupBase particle, List<XmlSchemaElement> children)
+{
+    foreach (XmlSchemaParticle child in particle.Items)
+    {
+        var groupRef = child as XmlSchemaGroupRef;
+        if (groupRef != null)
+        {
+            var groupSchema = ResolveGroupRef(groupRef);
+            AddChildren(groupSchema.Particle, children);
+            continue;
+        }
+
+        var element = child as XmlSchemaElement;
+        if (element == null)
+        {
+            continue;
+        }
+
+        children.Add(element);
+    }
+}
+
+private static void AddDataTypes(XmlSchemaObject obj, List<XmlSchemaComplexType> dataTypes)
+{
+    var complex = obj as XmlSchemaComplexType;
+    if (complex != null)
+    {
+        AddDataTypes(complex.Particle, dataTypes);
+        return;
+    }
+
+    var sequence = obj as XmlSchemaSequence;
+    if (sequence != null)
+    {
+        foreach (var item in sequence.Items)
+        {
+            AddDataTypes(item, dataTypes);
+        }
+
+        return;
+    }
+
+    var choice = obj as XmlSchemaChoice;
+    if (choice != null)
+    {
+        foreach (var item in choice.Items)
+        {
+            AddDataTypes(item, dataTypes);
+        }
+
+        return;
+    }
+
+    var groupRef = obj as XmlSchemaGroupRef;
+    if (groupRef != null)
+    {
+        var groupSchema = ResolveGroupRef(groupRef);
+        AddDataTypes(groupSchema, dataTypes);
+        return;
+    }
+
+    var element = obj as XmlSchemaElement;
+    if (element != null)
+    {
+        if (IsSimpleIbisIpType(element.ElementSchemaType))
+        {
+            // don't dig into those types
+            return;
+        }
+
+        if (dataTypes.Any(t => t.QualifiedName == element.ElementSchemaType.QualifiedName))
+        {
+            return;
+        }
+
+        dataTypes.Add((XmlSchemaComplexType)element.ElementSchemaType);
+
+        AddDataTypes(element.ElementSchemaType, dataTypes);
+        return;
+    }
+}
+
+private static XmlSchemaGroup ResolveGroupRef(XmlSchemaGroupRef groupRef)
+{
+    XmlSchema schema = null;
+    var parent = groupRef.Parent;
+    while (schema == null && parent != null)
+    {
+        schema = parent as XmlSchema;
+        parent = parent.Parent;
+    }
+
+    if (schema == null)
+    {
+        throw new Exception("Couldn't find schema");
+    }
+
+    var groupSchema = schema.Groups[groupRef.RefName] as XmlSchemaGroup;
+    if (groupSchema == null)
+    {
+        throw new Exception("Couldn't find schema of " + groupRef.RefName);
+    }
+
+    return groupSchema;
+}
+#>

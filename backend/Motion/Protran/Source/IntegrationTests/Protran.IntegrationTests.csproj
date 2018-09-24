@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E2A5DB44-77E4-47B1-BC89-CBBB2A03EBDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.IntegrationTests</RootNamespace>
+    <AssemblyName>Gorba.Motion.Protran.IntegrationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Arriva\ArrivaFtpClient.cs" />
+    <Compile Include="Arriva\ArrivaServer.cs" />
+    <Compile Include="Arriva\DepartureFiles\DepartureFile.cs" />
+    <Compile Include="Arriva\DepartureFiles\Invalid\CorruptedDepFile.cs" />
+    <Compile Include="Arriva\DepartureFiles\Invalid\EmptyDepFile.cs" />
+    <Compile Include="Arriva\DepartureFiles\Invalid\ExpiredDepFile.cs" />
+    <Compile Include="Arriva\DepartureFiles\Invalid\InvalidDepartureFile.cs" />
+    <Compile Include="Arriva\DepartureFiles\Valid\GoodFirst.cs" />
+    <Compile Include="Arriva\DepartureFiles\Valid\GoodSecond.cs" />
+    <Compile Include="Arriva\DepartureFiles\Valid\GoodThird.cs" />
+    <Compile Include="Arriva\DepartureFiles\Valid\ValidDepartureFile.cs" />
+    <Compile Include="Ctu\CtuServer.cs" />
+    <Compile Include="Ibis\SerialIbisOutput.cs" />
+    <Compile Include="Ibis\Telegram.cs" />
+    <Compile Include="Isi\IsiOutput.cs" />
+    <Compile Include="Json\JsonRpcServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ximple\CellCheckBase.cs" />
+    <Compile Include="Ximple\CellCheck.cs" />
+    <Compile Include="Ximple\Expectation.cs" />
+    <Compile Include="Ximple\XimpleReceiver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Protran\Configuration.Protran.csproj">
+      <Project>{159CE797-E084-488F-87B3-23857049BE50}</Project>
+      <Name>Configuration.Protran</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ctu\Protocols.Ctu.csproj">
+      <Project>{31CDBD33-6A2C-4850-BE80-2ADA677D1564}</Project>
+      <Name>Protocols.Ctu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Isi\Protocols.Isi.csproj">
+      <Project>{9F6F6B85-9B4D-4FA5-932B-48F95C6419AF}</Project>
+      <Name>Protocols.Isi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ed8c6acb-e53b-4278-b9ac-485709e6294d}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{7DE464C7-E5FD-43B2-879F-5FE6E0490060}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Mgi\AtmelControl\Mgi.AtmelControl.csproj">
+      <Project>{365DB5DB-40ED-4418-B19B-286CCEA083A1}</Project>
+      <Name>Mgi.AtmelControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbuDhabi\Protran.AbuDhabi.csproj">
+      <Project>{A5E85D05-3D3D-4E32-BA1A-F30799CA42C9}</Project>
+      <Name>Protran.AbuDhabi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arriva\Protran.Arriva.csproj">
+      <Project>{DDE32D73-E34A-4E5F-9B22-2EA3CF0967CF}</Project>
+      <Name>Protran.Arriva</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConsoleApp\Protran.ConsoleApp.csproj">
+      <Project>{1F7C2E8C-AED2-45F8-95F5-EFDA418B10A7}</Project>
+      <Name>Protran.ConsoleApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Protran.Core.csproj">
+      <Project>{C3036BE3-1D3C-4B40-87BB-DDBE33F53568}</Project>
+      <Name>Protran.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ibis\Protran.Ibis.csproj">
+      <Project>{38767532-4E74-4EB6-9911-1B58BCFB967D}</Project>
+      <Name>Protran.Ibis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IO\Protran.IO.csproj">
+      <Project>{10046E67-00E6-4A80-8E23-069741191B21}</Project>
+      <Name>Protran.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

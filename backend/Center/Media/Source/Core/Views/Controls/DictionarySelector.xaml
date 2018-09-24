@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.Controls.DictionarySelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             xmlns:dataViewModel="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Dictionary"
+             xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+             xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid;assembly=Gorba.Center.Common.Wpf.Views"
+             xmlns:generic="clr-namespace:Gorba.Common.Protocols.Ximple.Generic;assembly=Gorba.Common.Protocols.Ximple"
+             xmlns:converters1="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Converters"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             mc:Ignorable="d" Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300" 
+             d:DataContext="{d:DesignInstance interaction:DictionarySelectorPrompt}">
+    <UserControl.Resources>
+        <converters1:TableNameTranslationConverter x:Key="TableNameTranslationConverter"/>
+        <converters1:ColumnNameTranslationConverter x:Key="ColumnNameTranslationConverter"/>
+        <converters1:LanguageNameTranslationConverter x:Key="LanguageNameTranslationConverter"/>
+        <converters1:NotZeroConverter x:Key="NotZeroConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource EditDynamicTextPopupSearchBackgroundColorBrush}" Padding="3">
+            <propertyGrid:SearchBox x:Name="SearchBox" Searched="OnDictionarySearched" ClearSearch="OnClearDictionarySearch" />
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" Name="RecentlyListHeight"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RecentDictionaryValues.Count}" Value="0">
+                                    <Setter Property="Height" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SearchText.Length, ElementName=Root, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                    <Setter Property="Height" Value="0" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{x:Static resources:MediaStrings.EditDynamicTextPopup_RecentlyUsed}"
+                               Foreground="{StaticResource EditDynamicTextPopupColorBrush}" VerticalAlignment="Center"
+                               Margin="5 0 0 0" FontWeight="Bold"/>
+
+                    <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource EditDynamicTextPopupSeparatorColorBrush}"
+                            Margin="0 0 0 5" Padding="0 0 0 5" Height="100">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RecentDictionaryValues.Count}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <ListView Name="RecentValuesList" BorderThickness="0" ItemsSource="{Binding RecentDictionaryValues}" SelectionChanged="OnRecentSelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="layout:DictionaryValueDataViewModel">
+                                    <Control>
+                                        <Control.Template>
+                                            <ControlTemplate TargetType="Control">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Table.Name, Converter={StaticResource TableNameTranslationConverter}}" />
+                                                    <TextBlock Text=":" Margin="5 0 5 0" />
+                                                    <TextBlock Text="{Binding Column.Name, Converter={StaticResource ColumnNameTranslationConverter}}" />
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Control.Template>
+                                    </Control>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Border>
+                </StackPanel>
+
+                <TreeView Name="DictionaryView" Grid.Row="1" BorderThickness="0" SelectedItemChanged="OnSelectedColumnChanged"
+                          ItemsSource="{Binding DictionaryTables}" ItemContainerStyle="{StaticResource TreeViewItemStyle}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Columns}" DataType="generic:Table">
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate DataType="generic:Column">
+                                    <TextBlock Text="{Binding Name, Converter={StaticResource ColumnNameTranslationConverter}}"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+
+                            <TextBlock Text="{Binding Name, Converter={StaticResource TableNameTranslationConverter}}" FontWeight="Bold"/>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
+                <TextBlock Text="{Binding SelectedDictionaryValue.Table.Name, Converter={StaticResource TableNameTranslationConverter}}" 
+                           Foreground="{StaticResource EditDynamicTextPopupColorBrush}" FontWeight="Bold"/>
+                <TextBlock Text="/" Margin="5 0 5 0" Foreground="{StaticResource EditDynamicTextPopupColorBrush}" FontWeight="Bold" />
+                <TextBlock Text="{Binding SelectedDictionaryValue.Column.Name, Converter={StaticResource ColumnNameTranslationConverter}}" 
+                           Foreground="{StaticResource EditDynamicTextPopupColorBrush}" FontWeight="Bold" />
+            </StackPanel>
+
+            <StackPanel Margin="5">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem.Table.MultiLanguage, ElementName=DictionaryView}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <TextBlock Text="{x:Static resources:MediaStrings.EditDynamicTextPopup_Language}"/>
+                <ComboBox Name="LanguageComboBox" Margin="0 5 0 0" ItemsSource="{Binding Shell.Dictionary.Languages}"
+                          SelectedItem="{Binding SelectedDictionaryValue.Language, Mode=TwoWay}"
+                          SelectionChanged="OnLanguageSelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="dataViewModel:LanguageDataViewModel">
+                            <TextBlock Text="{Binding Name, Converter={StaticResource LanguageNameTranslationConverter}, Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Margin="5">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem.Table.MultiRow, ElementName=DictionaryView}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <TextBlock Text="{x:Static resources:MediaStrings.EditDynamicTextPopup_Row}"/>
+                <telerik:RadNumericUpDown Margin="0 5 0 0" Value="{Binding SelectedDictionaryValue.Row, Mode=TwoWay}" HorizontalAlignment="Left"
+                                          ValueChanged="OnRowChanged" x:Name="RowTextBox" IsInteger="True" Maximum="99" NullValue="0" PreviewMouseDoubleClick="OnPreviewMouseDoubleClick"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

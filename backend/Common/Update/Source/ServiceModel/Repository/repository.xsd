@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="Repository">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Config">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Compression" type="xsd:string" />
+              <xsd:element name="ResourceDirectory" type="xsd:string" />
+              <xsd:element name="CommandsDirectory" type="xsd:string" />
+              <xsd:element name="FeedbackDirectory" type="xsd:string" />
+              <xsd:element name="UploadsDirectory" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="ValidFrom" type="xsd:decimal" use="required" />
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

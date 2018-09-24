@@ -1,0 +1,344 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Parts.InstallationActionPartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Client.Converters;assembly=Gorba.Center.Common.Wpf.Client"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:parts="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Parts"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:export="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Export"
+             d:DataContext="{d:DesignInstance parts:InstallationActionPartViewModel}"
+             d:DesignHeight="400"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:TypeOfConverter x:Key="TypeOfConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style x:Key="InstallationActionButtonStyle" TargetType="telerik:RadButton">
+                    <Setter Property="Width" Value="150" />
+                    <Setter Property="Height" Value="32" />
+                    <Setter Property="Margin" Value="0 3 3 3" />
+
+                </Style>
+
+                <Style x:Key="InstallationActionButtonImageStyle" TargetType="Image">
+                    <Setter Property="Width" Value="16" />
+                    <Setter Property="Height" Value="16" />
+                    <Setter Property="Margin" Value="3" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+
+                <Style x:Key="InstallationActionItemImageStyle" TargetType="Image">
+                    <Setter Property="Width" Value="16" />
+                    <Setter Property="Height" Value="16" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+
+                <Style x:Key="InstallationActionSubTitleStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Margin" Value="0 3 0 3" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="FontWeight" Value="DemiBold" />
+                </Style>
+
+                <Style x:Key="RadCellTextBoxStyle" TargetType="TextBox">
+                    <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                </Style>
+
+                <Style x:Key="RadCellTextBlockStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                </Style>
+            </ResourceDictionary>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Margin="0 0 6 0"
+                       Style="{StaticResource InstallationActionSubTitleStyle}"
+                       Text="{x:Static resources:AdminStrings.Editors_InstallationAction_ActionsTitle}" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text="(" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text="{Binding Actions.Count}" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text=")" />
+        </StackPanel>
+
+        <telerik:RadGridView x:Name="ActionsGridView"
+                             Grid.Row="2"
+                             Margin="6 0 0 0"
+                             MouseDown="ActionsGridView_OnMouseDown"
+                             AllowDrop="True"
+                             AutoGenerateColumns="False"
+                             CanUserSortColumns="False"
+                             GridLinesVisibility="None"
+                             IsFilteringAllowed="False"
+                             ItemsSource="{Binding Actions}"
+                             RowIndicatorVisibility="Collapsed"
+                             SelectedItem="{Binding SelectedActionViewModel,
+                                                    Mode=TwoWay}"
+                             SelectionUnit="FullRow"
+                             ShowGroupPanel="False"
+                             VirtualizingStackPanel.IsVirtualizing="False">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Width="32"
+                                            IsReadOnly="True"
+                                            IsResizable="False">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image x:Name="RowIcon"
+                                   MinWidth="16"
+                                   MinHeight="16">
+                                <Image.Style>
+                                    <Style BasedOn="{StaticResource InstallationActionItemImageStyle}" TargetType="{x:Type Image}">
+                                        <Setter Property="Source" Value="../../../Resources/Icons/document.png" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:LocalExecutableInstallationActionViewModel}">
+                                                <Setter Property="Source" Value="../../../Resources/Icons/document-gear.png" />
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:UnitExecutableInstallationActionViewModel}">
+                                                <Setter Property="Source" Value="../../../Resources/Icons/window_gear.png" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+
+                <!--  Action column  -->
+                <telerik:GridViewDataColumn Width="1.5*"
+                                            DataMemberBinding="{Binding DisplayName}"
+                                            Header="{x:Static resources:AdminStrings.Editors_InstallationAction_ColumnActionsTitle}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName, Mode=TwoWay}">
+                                <TextBlock.Style>
+                                    <Style BasedOn="{StaticResource RadCellTextBlockStyle}" TargetType="TextBlock">
+                                        <Setter Property="ToolTip" Value="{x:Null}" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:LocalExecutableInstallationActionViewModel}">
+                                                <Setter Property="ToolTip" Value="{x:Static resources:AdminStrings.Editors_InstallationAction_AddLocalExecutableTooltip}" />
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:UnitExecutableInstallationActionViewModel}">
+                                                <Setter Property="ToolTip" Value="{x:Static resources:AdminStrings.Editors_InstallationAction_AddUnitExecutableTooltip}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <TextBox BorderBrush="Transparent"
+                                     BorderThickness="0"
+                                     Text="{Binding DisplayName,
+                                                    Mode=TwoWay}">
+                                <TextBox.Style>
+                                    <Style  TargetType="TextBox">
+                                        <Setter Property="IsReadOnly" Value="True" />
+                                        <Setter Property="ToolTip" Value="{x:Null}" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:LocalExecutableInstallationActionViewModel}">
+                                                <Setter Property="IsReadOnly" Value="True" />
+                                                <Setter Property="ToolTip" Value="{x:Static resources:AdminStrings.Editors_InstallationAction_AddLocalExecutableTooltip}" />
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding Converter={StaticResource TypeOfConverter}}" Value="{x:Type export:UnitExecutableInstallationActionViewModel}">
+                                                <Setter Property="IsReadOnly" Value="False" />
+                                                <Setter Property="ToolTip" Value="{x:Static resources:AdminStrings.Editors_InstallationAction_AddUnitExecutableTooltip}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+
+                </telerik:GridViewDataColumn>
+
+                <!--  Arguments column  -->
+                <telerik:GridViewDataColumn Width="*"
+                                            DataMemberBinding="{Binding Arguments}"
+                                            Header="{x:Static resources:AdminStrings.Editors_InstallationAction_ColumnArgumentsTitle}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource RadCellTextBlockStyle}"
+                                     Text="{Binding Arguments}"
+                                     ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_ArgumentTooltip}">
+                            </TextBlock>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                    
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <TextBox Style="{StaticResource RadCellTextBoxStyle}"
+                                     Text="{Binding Arguments, Mode=TwoWay}"
+                                     ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_ArgumentTooltip}">
+                            </TextBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Width="32"
+                                            Header=""
+                                            IsResizable="False">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button HorizontalAlignment="Center"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{Binding DataContext.DeleteInstallationActionCommand,
+                                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                         AncestorType={x:Type telerik:RadGridView}}}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_RemoveActionTooltip}">
+                                    <Image Source="../../../Resources/Icons/delete_16x16.png" Style="{StaticResource InstallationActionItemImageStyle}" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+            </telerik:RadGridView.Columns>
+
+            <telerik:RadGridView.Resources>
+                <Style TargetType="{x:Type telerik:GridViewCell}">
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Padding" Value="3 0" />
+                </Style>
+
+                <DataTemplate x:Key="DraggedItemTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CurrentDraggedItem.DisplayName}" FontWeight="Bold" />
+                    </StackPanel>
+                </DataTemplate>
+
+            </telerik:RadGridView.Resources>
+
+            <telerik:RadGridView.RowStyle>
+                <Style TargetType="telerik:GridViewRow">
+                    <Setter Property="telerik:DragDropManager.AllowDrag" Value="True" />
+                    <Setter Property="telerik:DragDropManager.TouchDragTrigger" Value="TapAndHold" />
+                </Style>
+            </telerik:RadGridView.RowStyle>
+        </telerik:RadGridView>
+
+        <StackPanel Grid.Row="3"
+                    Margin="6 0 0 0"
+                    Orientation="Horizontal">
+            <telerik:RadButton Command="{Binding AddLocalExecutableCommand}"
+                               Style="{StaticResource InstallationActionButtonStyle}"
+                               ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_AddLocalExecutableTooltip}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../../Resources/Icons/document-gear.png" Style="{StaticResource InstallationActionButtonImageStyle}" />
+
+                    <TextBlock Margin="3"
+                               VerticalAlignment="Center"
+                               Text="{x:Static resources:AdminStrings.Editors_InstallationAction_AddLocalExecutable}" />
+                </StackPanel>
+            </telerik:RadButton>
+            <telerik:RadButton Command="{Binding AddUnitExecutableCommand}"
+                               Style="{StaticResource InstallationActionButtonStyle}"
+                               ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_AddUnitExecutableTooltip}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../../Resources/Icons/window_gear.png" Style="{StaticResource InstallationActionButtonImageStyle}" />
+
+                    <TextBlock Margin="3"
+                               VerticalAlignment="Center"
+                               Text="{x:Static resources:AdminStrings.Editors_InstallationAction_AddUnitExecutable}" />
+                </StackPanel>
+            </telerik:RadButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Margin="0 0 6 0"
+                       Style="{StaticResource InstallationActionSubTitleStyle}"
+                       Text="{x:Static resources:AdminStrings.Editors_InstallationAction_AdditionalFilesTitle}" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text="(" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text="{Binding Files.Count}" />
+            <TextBlock Style="{StaticResource InstallationActionSubTitleStyle}" Text=")" />
+        </StackPanel>
+
+        <telerik:RadListBox x:Name="AdditionalFilesListBox"
+                            Grid.Row="5"
+                            Margin="6 0 0 0"
+                            ItemsSource="{Binding Files}">
+            <telerik:RadListBox.Resources>
+                <DataTemplate DataType="{x:Type export:InstallationActionAdditionalFileViewModel}">
+                    <DockPanel ToolTip="{Binding FileName}">
+                        <Image Source="../../../Resources/Icons/document.png" Style="{StaticResource InstallationActionItemImageStyle}" />
+                        <TextBlock MinWidth="150"
+                                   Margin="3 0"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding DisplayName}" />
+                        <Button HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding ElementName=AdditionalFilesListBox,
+                                                  Path=DataContext.RemoveAdditionalFileCommand}"
+                                CommandParameter="{Binding}"
+                                ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_RemoveAdditionalFileTooltip}">
+                            <Image Source="../../../Resources/Icons/delete_16x16.png" Style="{StaticResource InstallationActionItemImageStyle}" />
+                        </Button>
+                    </DockPanel>
+                </DataTemplate>
+            </telerik:RadListBox.Resources>
+
+            <telerik:RadListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type export:InstallationActionViewModelBase}">
+                    <ContentPresenter x:Name="ActionContentPresenter" Content="{Binding}" />
+                </DataTemplate>
+            </telerik:RadListBox.ItemTemplate>
+        </telerik:RadListBox>
+
+        <StackPanel Grid.Row="6"
+                    Margin="6 0 0 0"
+                    Orientation="Horizontal">
+            <telerik:RadButton Command="{Binding AddFileCommand}"
+                               Style="{StaticResource InstallationActionButtonStyle}"
+                               ToolTip="{x:Static resources:AdminStrings.Editors_InstallationAction_AddFileTooltip}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../../Resources/Icons/document.png" Style="{StaticResource InstallationActionButtonImageStyle}" />
+                    <TextBlock Margin="3"
+                               VerticalAlignment="Center"
+                               Text="{x:Static resources:AdminStrings.Editors_InstallationAction_AddFile}" />
+                </StackPanel>
+            </telerik:RadButton>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

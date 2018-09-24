@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--  Drawing  -->
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Drawing/Brushes.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Drawing/Animations.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Drawing/Vectors.xaml" />
+        <!--  Controls  -->
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\Accordian.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\Buttons.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\CheckBox.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\ComboBoxes.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\ContentControl.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\Datagrids.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\DatePickers.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\HyperlinkButtons.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\ScrollBars.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\ScrollViewers.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\Expander.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\ListBox.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\Misc.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\RadioButtons.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\TabControls.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources\Controls\TextBlocks.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Controls/TextBoxes.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Controls/ToolTips.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Controls/Windows.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Controls/Layouts.xaml" />
+        <ResourceDictionary Source="/Luminator.ResourceLibrary;component/Resources/Controls/ChildWindows.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

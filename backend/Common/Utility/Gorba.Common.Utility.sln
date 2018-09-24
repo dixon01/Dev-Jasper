@@ -1,0 +1,152 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.ConcurrentPriorityQueue", "Source\ConcurrentPriorityQueue\Utility.ConcurrentPriorityQueue.csproj", "{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C43A32F9-9FD0-4AA5-9ECC-94D74C1C7702}"
+	ProjectSection(SolutionItems) = preProject
+		Source\SolutionAssemblyProductInfo.cs = Source\SolutionAssemblyProductInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Csv", "Source\Csv\Utility.Csv.csproj", "{D45E1B42-A4F6-4602-93C3-93938DCF0871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.SocketAsyncServer", "Source\SocketAsyncServer\Utility.SocketAsyncServer.csproj", "{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core.Tests", "Source\Core.Tests\Utility.Core.Tests.csproj", "{437D58CB-3502-42F4-95DD-42EE8B35DA59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.IntegrationTests", "Source\IntegrationTests\Utility.IntegrationTests.csproj", "{76238410-7421-4CB6-B395-A8DC23E51DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Files", "Source\Files\Utility.Files.csproj", "{93AAE312-ADC9-4F65-BEAF-4266D171D348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.FilesTesting", "Source\FilesTesting\Utility.FilesTesting.csproj", "{709EB99C-2F8F-4061-90BF-D859C43DDCDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Win32", "Source\Win32\Utility.Win32.csproj", "{817BB42A-324A-4243-9639-33C99F4F883C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.OSWrappers", "Source\OSWrappers\Utility.OSWrappers.csproj", "{5202B147-B5CB-49D2-AF14-F3887E2210B1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Source\\ConcurrentPriorityQueue\\Utility.ConcurrentPriorityQueue.csproj
+		SccProjectName1 = Source/ConcurrentPriorityQueue
+		SccLocalPath1 = Source\\ConcurrentPriorityQueue
+		SccProjectUniqueName2 = Source\\Csv\\Utility.Csv.csproj
+		SccProjectName2 = Source/Csv
+		SccLocalPath2 = Source\\Csv
+		SccProjectUniqueName3 = Source\\SocketAsyncServer\\Utility.SocketAsyncServer.csproj
+		SccProjectName3 = Source/SocketAsyncServer
+		SccLocalPath3 = Source\\SocketAsyncServer
+		SccProjectUniqueName4 = Source\\Core\\Utility.Core.csproj
+		SccProjectName4 = Source/Core
+		SccLocalPath4 = Source\\Core
+		SccProjectUniqueName5 = Source\\Core.Tests\\Utility.Core.Tests.csproj
+		SccProjectName5 = Source/Core.Tests
+		SccLocalPath5 = Source\\Core.Tests
+		SccProjectUniqueName6 = Source\\IntegrationTests\\Utility.IntegrationTests.csproj
+		SccProjectName6 = Source/IntegrationTests
+		SccLocalPath6 = Source\\IntegrationTests
+		SccProjectUniqueName7 = Source\\Files\\Utility.Files.csproj
+		SccProjectName7 = Source/Files
+		SccLocalPath7 = Source\\Files
+		SccProjectUniqueName8 = Source\\FilesTesting\\Utility.FilesTesting.csproj
+		SccProjectName8 = Source/FilesTesting
+		SccLocalPath8 = Source\\FilesTesting
+		SccProjectUniqueName9 = Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectName9 = Source/Compatibility
+		SccLocalPath9 = Source\\Compatibility
+		SccProjectUniqueName10 = Source\\Win32\\Utility.Win32.csproj
+		SccProjectName10 = Source/Win32
+		SccLocalPath10 = Source\\Win32
+		SccProjectUniqueName11 = Source\\OSWrappers\\Utility.OSWrappers.csproj
+		SccProjectName11 = Source/OSWrappers
+		SccLocalPath11 = Source\\OSWrappers
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}.Release|x86.ActiveCfg = Release|Any CPU
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Debug|x86.ActiveCfg = Debug|x86
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Debug|x86.Build.0 = Debug|x86
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Release|x86.ActiveCfg = Release|x86
+		{D45E1B42-A4F6-4602-93C3-93938DCF0871}.Release|x86.Build.0 = Release|x86
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F93DFC04-8743-4EBF-8388-A2C8D33DE11A}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437D58CB-3502-42F4-95DD-42EE8B35DA59}.Release|x86.ActiveCfg = Release|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76238410-7421-4CB6-B395-A8DC23E51DCE}.Release|x86.ActiveCfg = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|x86.ActiveCfg = Release|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709EB99C-2F8F-4061-90BF-D859C43DDCDD}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|x86.ActiveCfg = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0"?>
+<SystemManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="file:///. ../ServiceModel/Config/SystemManager.xsd">
+  <Defaults>
+    <Process>
+      <LaunchDelay>PT0S</LaunchDelay>
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <WindowMode>Normal</WindowMode>
+      <Priority>Normal</Priority>
+      <KillIfRunning>true</KillIfRunning>
+    </Process>
+  </Defaults>
+
+  <SplashScreens>
+    <SplashScreen Name="Boot" Enabled="true" Foreground="Black" Background="#E6ECF0">
+      <ShowOn>
+        <SystemBoot />
+      </ShowOn>
+      <HideOn>
+        <ApplicationStateChange Application="Renderer" State="Running" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="false" Serial="true" />
+	<Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" StatusFilter="Up" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+  </SplashScreens>
+
+  <System>
+    <RebootAt>01:55:00</RebootAt>
+    <RebootAfter>PT23H59M</RebootAfter>
+    <KickWatchdog>true</KickWatchdog>
+    <RamLimit Enabled="true">
+      <FreeRamMB>100</FreeRamMB>
+      <Actions>
+        <Relaunch Application="Renderer"/>
+        <Reboot/>
+      </Actions>
+    </RamLimit>    
+    <CpuLimit Enabled="true">
+      <MaxCpuPercentage>98</MaxCpuPercentage>
+      <Actions>
+        <Reboot/>
+      </Actions>
+    </CpuLimit>
+    <DiskLimits Enabled="true">
+      <Disk Path="C:\" Enabled="true">
+        <FreeSpaceMB>5</FreeSpaceMB>
+        <Actions>
+          <Reboot/>
+        </Actions>
+      </Disk>
+      <Disk Path="D:\" Enabled="true">
+        <FreeSpaceMB>10</FreeSpaceMB>
+        <FreeSpacePercentage>5</FreeSpacePercentage>
+        <Actions>
+          <Purge Path="D:\temp\"/>
+          <Purge Path="..\..\log\archives\"/>
+        </Actions>
+      </Disk>
+    </DiskLimits>
+    <PreventPopups Enabled="true" CheckInterval="PT10S">
+    </PreventPopups>
+  </System>
+
+  <Applications>
+    <Process Name="Update" Enabled="true" UseWatchdog="true">
+      <RelaunchDelay>PT1S</RelaunchDelay>
+      <ExecutablePath>..\..\Progs\Update\Update.exe</ExecutablePath>
+      <WindowMode>Minimized</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>200</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="HardwareManager" Enabled="true" UseWatchdog="true">
+      <RelaunchDelay>PT1S</RelaunchDelay>    
+      <ExecutablePath>..\..\Progs\HardwareManager\HardwareManager.exe</ExecutablePath>
+      <WindowMode>Minimized</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>150</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+      <CpuLimit Enabled="true">
+        <MaxCpuPercentage>30</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </CpuLimit>
+    </Process>
+    <Process Name="Protran" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>..\..\Progs\Protran\Protran.exe</ExecutablePath>
+      <WindowMode>Minimized</WindowMode>
+      <Priority>AboveNormal</Priority>
+      <RamLimit Enabled="true">
+        <MaxRamMB>200</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+      <CpuLimit Enabled="true">
+        <MaxCpuPercentage>60</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </CpuLimit>
+    </Process>
+    <Process Name="Composer" Enabled="true" UseWatchdog="true">
+      <RelaunchDelay>PT2S</RelaunchDelay>
+      <ExecutablePath>..\..\Progs\Composer\Composer.exe</ExecutablePath>
+      <Arguments>..\..\Presentation\main.im2</Arguments>
+      <WindowMode>Minimized</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>200</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="Renderer" Enabled="true" UseWatchdog="true">
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <ExecutablePath>..\..\Progs\Renderer\DirectXRenderer.exe</ExecutablePath>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>300</MaxRamMB>
+        <Actions>
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </RamLimit>
+    </Process>
+  </Applications>
+</SystemManager>

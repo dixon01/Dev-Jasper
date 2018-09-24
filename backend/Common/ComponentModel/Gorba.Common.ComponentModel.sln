@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentModel.Base", "Source\Base\ComponentModel.Base.csproj", "{720C7F4E-E958-4CA4-A5E4-7403DAA697C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3877E822-9BDB-4548-A690-FAA92181E7E7}"
+	ProjectSection(SolutionItems) = preProject
+		Source\SolutionAssemblyProductInfo.cs = Source\SolutionAssemblyProductInfo.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccProjectUniqueName0 = Source\\Base\\ComponentModel.Base.csproj
+		SccProjectName0 = Source/Base
+		SccLocalPath0 = Source\\Base
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{720C7F4E-E958-4CA4-A5E4-7403DAA697C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720C7F4E-E958-4CA4-A5E4-7403DAA697C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720C7F4E-E958-4CA4-A5E4-7403DAA697C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720C7F4E-E958-4CA4-A5E4-7403DAA697C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

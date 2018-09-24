@@ -1,0 +1,15 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating.Extensibility" #>
+<#@ output extension=".generated.xml" #>
+<#
+	var path = this.Host.ResolvePath(@"..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+	var extensionPath = this.Host.ResolvePath(@".\EntitySpace.extension.xml");
+	var s = path.ExtendAsString(extensionPath);
+	this.Write(s);
+#>

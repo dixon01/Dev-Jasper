@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Activities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Activities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfAc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ac" nillable="true" type="tns:Ac" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAc" nillable="true" type="tns:ArrayOfAc" />
+  <xs:complexType name="Ac">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActiveActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EndedActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ErrorActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastRealTaskCreationDateTime" type="xs:dateTime" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Operations" minOccurs="0" name="Operation" nillable="true" type="q1:O" />
+      <xs:element minOccurs="0" name="OperationId" type="xs:int" />
+      <xs:element minOccurs="0" name="RealTaskId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemovedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RevokedActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="RevokingActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ScheduledActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="SchedulingActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="TransmittedActivityInstancesCount" type="xs:int" />
+      <xs:element minOccurs="0" name="TransmittingActivityInstancesCount" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Ac" nillable="true" type="tns:Ac" />
+  <xs:complexType name="ActivityBusLineOnOff">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ac">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActivationMode" type="tns:BusLineActivationMode" />
+          <xs:element minOccurs="0" name="Line" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SpecialText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityBusLineOnOff" nillable="true" type="tns:ActivityBusLineOnOff" />
+  <xs:simpleType name="BusLineActivationMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AllOff" />
+      <xs:enumeration value="DepartureTimeOff" />
+      <xs:enumeration value="SpecialTextOff" />
+      <xs:enumeration value="AllOn" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="BusLineActivationMode" nillable="true" type="tns:BusLineActivationMode" />
+  <xs:complexType name="ActivityDisplayOnOff">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ac">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NewState" type="tns:DisplayState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityDisplayOnOff" nillable="true" type="tns:ActivityDisplayOnOff" />
+  <xs:simpleType name="DisplayState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Off" />
+      <xs:enumeration value="On" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DisplayState" nillable="true" type="tns:DisplayState" />
+  <xs:complexType name="ActivityDeleteTrips">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ac">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ItcsDirectionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ItcsProviderId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LineId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TripId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityDeleteTrips" nillable="true" type="tns:ActivityDeleteTrips" />
+  <xs:complexType name="ActivityInfoText">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ac">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Alignment" type="tns:InfoTextAlignment" />
+          <xs:element minOccurs="0" name="Blink" type="xs:boolean" />
+          <xs:element minOccurs="0" name="DisplayText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DisplayedScreenSide" type="tns:ScreenSide" />
+          <xs:element minOccurs="0" name="ExpirationDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Font" type="tns:Fonts" />
+          <xs:element minOccurs="0" name="InfoRowId" type="xs:short" />
+          <xs:element minOccurs="0" name="LineNumber" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityInfoText" nillable="true" type="tns:ActivityInfoText" />
+  <xs:simpleType name="InfoTextAlignment">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InfoTextAlignment" nillable="true" type="tns:InfoTextAlignment" />
+  <xs:simpleType name="ScreenSide">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Front" />
+      <xs:enumeration value="Rear" />
+      <xs:enumeration value="Both" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ScreenSide" nillable="true" type="tns:ScreenSide" />
+  <xs:simpleType name="Fonts">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FontDefault" />
+      <xs:enumeration value="FontH07B4" />
+      <xs:enumeration value="FontH07B5" />
+      <xs:enumeration value="FontH16B6" />
+      <xs:enumeration value="FontH16B7" />
+      <xs:enumeration value="FontH11B6" />
+      <xs:enumeration value="Font09FUB6" />
+      <xs:enumeration value="Font09SUB4" />
+      <xs:enumeration value="FontB09FUB6" />
+      <xs:enumeration value="FontB09SUB6" />
+      <xs:enumeration value="FontB10FUB6" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Fonts" nillable="true" type="tns:Fonts" />
+  <xs:complexType name="ActivityAnnouncementText">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ac">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Interval" type="ser:duration" />
+          <xs:element minOccurs="0" name="Repetition" type="xs:int" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Texts" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityAnnouncementText" nillable="true" type="tns:ActivityAnnouncementText" />
+</xs:schema>

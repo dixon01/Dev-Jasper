@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Transit.Realtime", "Google.Transit.Realtime.csproj", "{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Google.Transit.Realtime.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

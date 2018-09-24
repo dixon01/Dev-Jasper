@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ProjectConversion>
+  <AdditionalAssemblyReference>..\..\..\..\3rdParty\SmartDeviceFramework\2.3.12004\OpenNETCF.dll</AdditionalAssemblyReference>
+  <AdditionalAssemblyReference>..\..\..\..\3rdParty\SmartDeviceFramework\2.3.12004\OpenNETCF.Net.dll</AdditionalAssemblyReference>
+  <AdditionalAssemblyReference>..\..\..\..\3rdParty\SmartDeviceFramework\2.3.12004\OpenNETCF.WindowsCE.dll</AdditionalAssemblyReference>
+</ProjectConversion>

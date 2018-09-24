@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<IO>
+  <SerialPorts>
+    <SerialPort Name="COM1">
+      <RTS>Speaker</RTS>
+      <CTS>SpecialInput</CTS>
+    </SerialPort>
+    <SerialPort Name="COM2">
+      <CTS>StopRequest</CTS>
+    </SerialPort>
+  </SerialPorts>
+
+  <Inputs>
+    <Input Name="StopRequest" TransfRef="Default" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="StopRequestedState" Row="0"/>
+    </Input>
+  </Inputs>
+
+  <Transformations>
+    <Chain id="Default" />
+  </Transformations>
+</IO>

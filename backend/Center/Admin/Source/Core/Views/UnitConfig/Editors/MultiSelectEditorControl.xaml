@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Editors.MultiSelectEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             Name="Root"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance editors:MultiSelectEditorViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ListBox ItemsSource="{Binding Options}" BorderThickness="0" MinHeight="100">
+        <ListBox.Style>
+            <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ListBox.Style>
+        
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding ItemImage, ElementName=Root}" />
+                        <TextBlock Text="{Binding Label}" />
+                    </StackPanel>
+                </CheckBox>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>

@@ -1,0 +1,27 @@
+﻿<#+
+	private void WriteRemoveCmdlet(EntitySpace.Entity entity)
+	{#>
+
+	[Cmdlet(VerbsCommon.Remove, CmdletNouns.<#= entity.Name #>)]
+	public partial class Remove<#= entity.Name #> : <#= entity.Name #>CmdletBaseWithInputObject
+	{
+        partial void OnRemoving(ref bool shouldStop);
+
+        protected override void ProcessRecord()
+        {
+            var shouldStop = false;
+            this.OnRemoving(ref shouldStop);
+            if (shouldStop)
+            {
+                return;
+            }
+
+			using (var channelScope = this.CreateDataChannelScope<I<#= entity.Name #>DataService>())
+			{
+			    channelScope.Channel.DeleteAsync(this.InputObject).Wait();
+			}
+        }
+	}
+<#+
+	}
+#>

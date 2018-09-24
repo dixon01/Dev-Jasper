@@ -1,0 +1,136 @@
+﻿<#+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(
+                    property =>
+                    !property.IsXmlSerialized
+                    && (property.PropertyType == EntitySpace.PropertyType.Primitive
+                        || property.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>().Where(property => property.IsXmlSerialized);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var idProperty = entity.IdPropertyType;
+#>
+
+            public static <#= entity.Name #> ToDto(this <#= entity.Name #>WritableModel model)
+            {
+                var context = new Dictionary<EntityKey, object>();
+                return model.ToDto(context);
+            }
+
+            internal static <#= entity.Name #> ToDto(this <#= entity.Name #>WritableModel model, Dictionary<EntityKey, object> context)
+            {
+                var key = new EntityKey(model.Id, ReferenceTypes.<#= entity.Name #>);
+                if (context.ContainsKey(key))
+                {
+                    return (<#= entity.Name #>)context[key];
+                }
+
+                var dto = new <#= entity.Name #> { Id = model.Id };
+<#+
+        foreach (var property in properties)
+        {
+            this.WriteEntityProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteEntityXmlProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteEntityReferenceProperty(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                dto.UserDefinedProperties = new Dictionary<string, string>(model.UserDefinedProperties);
+<#+
+        }
+#>
+
+                context.Add(key, dto);
+                return dto;
+            }
+
+            public static <#= entity.Name #> ToDto(this <#= entity.Name #>ReadableModel model)
+            {
+                var context = new Dictionary<EntityKey, object>();
+                return model.ToDto(context);
+            }
+
+            internal static <#= entity.Name #> ToDto(this <#= entity.Name #>ReadableModel model, Dictionary<EntityKey, object> context)
+            {
+                var key = new EntityKey(model.Id, ReferenceTypes.<#= entity.Name #>);
+                if (context.ContainsKey(key))
+                {
+                    return (<#= entity.Name #>)context[key];
+                }
+
+                var dto = new <#= entity.Name #> { Id = model.Id };
+<#+
+        foreach (var property in properties)
+        {
+            this.WriteEntityProperty(property);
+        }
+        
+        foreach (var property in xmlProperties)
+        {
+            this.WriteEntityXmlProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteEntityReferenceProperty(property);
+        }
+#>
+
+                context.Add(key, dto);
+                return dto;
+            }
+<#+
+    }
+
+    private void WriteEntityProperty(EntitySpace.Property property)
+    {#>
+                dto.<#= property.Name #> = model.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteEntityXmlProperty(EntitySpace.Property property)
+    {#>
+
+                try
+                {
+                    dto.<#= property.Name #>Xml = model.<#= property.Name #>.Xml;
+                    dto.<#= property.Name #>XmlType = model.<#= property.Name #>.Type;
+                }
+                catch (ChangeTrackingException)
+                {
+                    // the property was probably not loaded, so let's leave it at null
+                }
+<#+
+    }
+
+    private void WriteEntityReferenceProperty(EntitySpace.Property property)
+    {#>
+
+                try
+                {
+                    if (model.<#= property.Name #> != null)
+                    {
+                        dto.<#= property.Name #> = <#= property.Type.GetContainingPartition() #>Extensions.ToDto(model.<#= property.Name #>, context);
+                    }
+                }
+                catch (ChangeTrackingException)
+                {
+                    // the property was probably not loaded, so let's leave it at null
+                }
+<#+
+    }
+#>

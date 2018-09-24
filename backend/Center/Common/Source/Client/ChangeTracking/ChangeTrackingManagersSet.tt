@@ -1,0 +1,98 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var entities =
+        entitySpace.Partitions
+        .SelectMany(partition => partition.Entities.Where(entity => entity.HasChangeTracking))
+        .ToList();
+#>
+namespace Gorba.Center.Common.Client.ChangeTracking
+{
+    using System;
+    using System.Threading.Tasks;
+
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {#>
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+<# 
+    }
+	#>
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<# 
+    }
+	#>
+
+	public partial interface IChangeTrackingManagersSet
+	{<#
+    foreach (var entity in entities)
+    {
+        this.WriteInterfaceProperty(entity);
+    }
+#>
+	}
+
+	public partial class ChangeTrackingManagersSet : IChangeTrackingManagersSet
+	{<#
+    foreach (var entity in entities)
+    {
+        this.WriteProperty(entity);
+    }
+#>
+	}
+
+	public static class ChangeTrackingManagersSetExtensions
+	{
+		public static IChangeTrackingManagersSet ToSet(this ChangeTrackingManagementBootstrapperResult result)
+		{
+			var set = new ChangeTrackingManagersSet();
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteSetProperty(entity);
+    }
+#>
+			return set;
+		}
+	}
+}
+<#+
+
+    private void WriteInterfaceProperty(EntitySpace.Entity entity)
+    {
+        #>
+
+		I<#= entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager { get; set; }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Entity entity)
+    {
+        #>
+
+		public I<#= entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager { get; set; }
+<#+
+    }
+
+    private void WriteSetProperty(EntitySpace.Entity entity)
+    {
+        #>
+			set.<#= entity.Name #>ChangeTrackingManager = result.<#= entity.Name #>ChangeTrackingManager;
+<#+
+    }
+#>

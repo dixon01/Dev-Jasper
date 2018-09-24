@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestInstall", "TestInstall\TestInstall.csproj", "{A60820CA-4C50-4E19-8202-AA823BA0193D}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup1", "Setup1\Setup1.isproj", "{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A60820CA-4C50-4E19-8202-AA823BA0193D} = {A60820CA-4C50-4E19-8202-AA823BA0193D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{A60820CA-4C50-4E19-8202-AA823BA0193D}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.Debug|Any CPU.ActiveCfg = SingleImage
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.Debug|Any CPU.Build.0 = SingleImage
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.DVD-5|Any CPU.Build.0 = DVD-5
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.Release|Any CPU.ActiveCfg = SingleImage
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.Release|Any CPU.Build.0 = SingleImage
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{F8B5AB7D-A0F4-48F6-A30D-E2680CB389CF}.SingleImage|Any CPU.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TestInstall\\TestInstall.csproj
+		SccProjectName1 = TestInstall
+		SccLocalPath1 = TestInstall
+		SccProjectUniqueName2 = Setup1\\Setup1.isproj
+		SccProjectName2 = Setup1
+		SccLocalPath2 = Setup1
+	EndGlobalSection
+EndGlobal

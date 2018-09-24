@@ -1,0 +1,286 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.Wpf.Client.Tests.Mocks
+{
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;	
+    
+    using Gorba.Center.Common.Client;
+    using Gorba.Center.Common.Client.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Exceptions;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WriteUsing(partition);
+    }
+
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(e => e.HasChangeTracking))
+        {
+            this.WriteEntity(entity);
+        }
+    }
+    #>
+}
+
+<#+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {
+#>
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var referenceProperties = entity.Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>();
+        #>
+
+    public class <#= entity.Name #>ChangeTrackingManagerMock : I<#= entity.Name #>ChangeTrackingManager
+    {
+        private readonly List<<#= entity.Name #>ReadableModel> models = new List<<#= entity.Name #>ReadableModel>();
+
+        private int nextId = 1;
+
+        public event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Added;
+
+        public event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Removed;
+
+        public async Task AddAsync(<#= entity.Name #>WritableModel writableModel)
+        {
+            await this.DoAddAsync(writableModel);
+        }
+
+        public Task DeleteAsync(<#= entity.Name #>ReadableModel model)
+        {
+            var deleting = this.models.FirstOrDefault(e => e.Id == model.Id);
+            if (deleting == null)
+            {
+                throw new ChangeTrackingException("Couldn't find " + model.Id);
+            }
+
+            this.models.Remove(deleting);
+            this.RaiseRemoved(new ReadableModelEventArgs<<#= entity.Name #>ReadableModel>(deleting));
+            return Task.FromResult(0);
+        }
+
+        public Task<<#= entity.Name #>ReadableModel> GetAsync(int id)
+        {
+            var model = this.models.FirstOrDefault(e => e.Id == id);
+            return Task.FromResult(model);
+        }
+
+        public Task<IEnumerable<<#= entity.Name #>ReadableModel>> QueryAsync(<#= entity.Name #>Query query = null)
+        {
+            return Task.FromResult<IEnumerable<<#= entity.Name #>ReadableModel>>(this.models.ToList().AsQueryable().Apply(query));
+        }
+
+        public async Task<<#= entity.Name #>ReadableModel> CommitAndVerifyAsync(<#= entity.Name #>WritableModel writableModel)
+        {
+            if (writableModel.Id == 0)
+            {
+                return await this.DoAddAsync(writableModel);
+            }
+
+            writableModel.Commit();
+            return await this.GetAsync(writableModel.Id);
+        }
+
+        public <#= entity.Name #>ReadableModel Wrap(<#= entity.Name #> entity)
+        {
+            return this.models.Single(e => e.Id == entity.Id);
+        }
+
+        public <#= entity.Name #>WritableModel Create()
+        {
+            var model = new <#= entity.Name #>WritableModel();
+            model.Committed += this.EntityOnCommitted;
+            return model;
+        }
+
+        public <#= entity.Name #>WritableModel CreateCopy(<#= entity.Name #>ReadableModel readableModel)
+        {
+            var model = <#= entity.Name #>WritableModel.CreateCopyFrom(readableModel);
+            model.Committed += this.EntityOnCommitted;
+            return model;
+        }
+
+        public void ChangeCredentials(UserCredentials credentials)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Dispose()
+        {
+            this.models.Clear();
+        }
+
+        protected virtual void RaiseAdded(ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+        {
+            var handler = this.Added;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void RaiseRemoved(ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+        {
+            var handler = this.Removed;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private async Task<<#= entity.Name #>ReadableModel> DoAddAsync(<#= entity.Name #>WritableModel writableModel)
+        {
+            var dto = writableModel.ToDto();
+            dto.Id = Interlocked.Increment(ref this.nextId);
+            var readableModel = new <#= entity.Name #>ReadableModelMock(dto);
+            await readableModel.LoadReferencePropertiesAsync();
+            readableModel.ChangeTrackingModelCreated += this.ReadableModelOnChangeTrackingModelCreated;
+            this.models.Add(readableModel);
+            this.RaiseAdded(new ReadableModelEventArgs<<#= entity.Name #>ReadableModel>(readableModel));
+            return readableModel;
+        }
+
+        private void ReadableModelOnChangeTrackingModelCreated(object sender, ChangeTrackingModelCreatedEventArgs<<#= entity.Name #>Delta> e)
+        {
+            e.TrackingModel.Committed += this.EntityOnCommitted;
+        }
+
+        private async void EntityOnCommitted(object sender, ModelUpdatedEventArgs<<#= entity.Name #>Delta> e)
+        {
+            var writableModel = (<#= entity.Name #>WritableModel)sender;
+            if (e.Delta.Id == 0)
+            {
+                await this.DoAddAsync(writableModel);
+                return;
+            }
+
+            var readableModel = this.models.Single(m => m.Id == writableModel.Id);
+            await readableModel.ApplyAsync(e.Delta);
+        }
+
+        private class <#= entity.Name #>ReadableModelMock : <#= entity.Name #>ReadableModel
+        {
+<#+
+        foreach (var property in referenceProperties.Cast<EntitySpace.PropertyBase>().Concat(collectionProperties))
+        {
+            #>
+            private bool loaded<#= property.Name #>;
+<#+
+
+        }
+#>
+
+            public <#= entity.Name #>ReadableModelMock(<#= entity.Name #> entity)
+                : base(entity)
+            {
+                this.Populate();
+            }
+
+            public async override Task LoadReferencePropertiesAsync()
+            {
+<#+
+        foreach (var property in referenceProperties)
+        {
+            var type = property.Type;
+            type = type.Substring(type.LastIndexOf('.') + 1);
+            #>
+
+                if (!this.loaded<#= property.Name #>)
+                {
+                    this.loaded<#= property.Name #> = true;
+                    if (this.<#= entity.Name #>.<#= property.Name #> != null)
+                    {
+                        var manager = DependencyResolver.Current.Get<I<#= type #>ChangeTrackingManager>();
+                        this.<#= property.Name #> = await manager.GetAsync(this.<#= entity.Name #>.<#= property.Name #>.Id);
+                    }
+                }
+<#+
+
+        }
+#>
+            }
+
+            public async override Task LoadNavigationPropertiesAsync()
+            {
+                await this.LoadReferencePropertiesAsync();
+<#+
+        foreach (var property in collectionProperties.Where(p => p.InverseProperty != null))
+        {
+            var itemType = property.ItemType;
+            itemType = itemType.Substring(itemType.LastIndexOf('.') + 1);
+            var fieldName = char.ToLower(property.Name[0]) + property.Name.Substring(1);
+            #>
+
+                if (!this.loaded<#= property.Name #>)
+                {
+                    this.loaded<#= property.Name #> = true;
+
+                    var manager = DependencyResolver.Current.Get<I<#= itemType #>ChangeTrackingManager>();
+                    manager.Added += (s, e) =>
+                        {
+                            if (e.Model.<#= property.InverseProperty #> != null && e.Model.<#= property.InverseProperty #>.Id == this.Id)
+                            {
+                                this.<#= fieldName #>.Add(e.Model);
+                            }
+                        };
+                    manager.Removed += (s, e) =>
+                        {
+                            var found = this.<#= fieldName #>.FirstOrDefault(m => m.Id == e.Model.Id);
+                            if (found != null)
+                            {
+                                this.<#= fieldName #>.Remove(found);
+                            }
+                        };
+                    foreach (
+                        var model in
+                            (await manager.QueryAsync()).Where(
+                            e => e.<#= property.InverseProperty #> != null && e.<#= property.InverseProperty #>.Id == this.Id))
+                    {
+                        this.<#= fieldName #>.Add(model);
+                    }
+                }
+<#+
+
+        }
+#>
+            }
+
+            public override Task LoadXmlPropertiesAsync()
+            {
+                return Task.FromResult(0);
+            }
+        }
+    }
+<#+
+    }
+    #>

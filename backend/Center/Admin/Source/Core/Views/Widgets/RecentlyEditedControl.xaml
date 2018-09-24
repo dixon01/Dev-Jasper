@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Widgets.RecentlyEditedControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:widgets="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Widgets"
+             xmlns:widgetViews="clr-namespace:Gorba.Center.Admin.Core.Views.Widgets"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance widgets:RecentlyEditedWidgetViewModel}" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+        </Grid.Resources>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" 
+                      BorderThickness="0" Background="Transparent">
+            <ItemsControl ItemsSource="{Binding RecentlyEditedEntities}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="widgets:RecentlyEditedEntityViewModel">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Source="{Binding Reference.Entity, Converter={StaticResource StringFormatConverter}, ConverterParameter=../../Resources/Icons/EntityTypes/EntityTypes_{0}_16x16.png}"/>
+
+                            <TextBlock Margin="5 0 0 0">
+                                <Hyperlink Command="{Binding DataContext.NavigateToRecentEntityCommand, RelativeSource={RelativeSource AncestorType=widgetViews:RecentlyEditedControl}}"
+                                           CommandParameter="{Binding .}">
+                                    <TextBlock Text="{Binding DisplayName}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

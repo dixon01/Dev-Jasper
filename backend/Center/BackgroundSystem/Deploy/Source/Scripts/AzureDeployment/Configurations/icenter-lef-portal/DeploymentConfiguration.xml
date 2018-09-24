@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DeploymentConfiguration>
+    <WorkerRole>Portal.WorkerRole</WorkerRole>
+    <ServiceName>icenter-lef</ServiceName>
+    <Description>icenter-lef portal on production slot</Description>
+    <StorageAccountName>icenterlef</StorageAccountName>
+    <StorageAccountKey>7sYbPrUVzZtu7gAuCYIsL723ZyPXXlpkooxApLusVoDoIc4jZ3LYwkbYSDM8iep9eVJDFdH1v+aPqPMfc8NTCA==</StorageAccountKey>
+    <SubscriptionName>Visual Studio Professional with MSDN</SubscriptionName>
+    <Slot>Production</Slot>
+    <PackageLocation>..\..\..\..\..\..\..\Portal\Source\AzureCloudService\bin\Release\app.publish\Portal.AzureCloudService.cspkg</PackageLocation>
+    <ServiceDefinitionPath>..\..\..\..\..\..\..\Portal\Source\AzureCloudService\ServiceDefinition.csdef</ServiceDefinitionPath>
+    <DeploymentLabelFormat>Center_Portal_{0:yyyMMdd-HH\:mm\:ss}</DeploymentLabelFormat>
+	<HttpsCertificatePath>..\..\..\..\..\..\..\..\..\Sandbox\Lef\BackgroundSystem2.x\icenter-lef.Https.pfx</HttpsCertificatePath>
+</DeploymentConfiguration>

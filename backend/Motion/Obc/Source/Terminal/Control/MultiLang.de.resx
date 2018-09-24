@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="_1" xml:space="preserve">
+    <value>Ansagen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_2" xml:space="preserve">
+    <value>Keine Haltestellenliste vorhanden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_3" xml:space="preserve">
+    <value>Keine Fahrt geladen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_4" xml:space="preserve">
+    <value>Kein Umlauf geladen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_7" xml:space="preserve">
+    <value>Warnung</value>
+    <comment>2</comment>
+  </data>
+  <data name="_8" xml:space="preserve">
+    <value>Umlauf validiert. Noch keine Fahrt geladen.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_13" xml:space="preserve">
+    <value>Abgemeldet</value>
+    <comment>2</comment>
+  </data>
+  <data name="_14" xml:space="preserve">
+    <value>Abmeldung durch Zentrale</value>
+    <comment>2</comment>
+  </data>
+  <data name="_15" xml:space="preserve">
+    <value>Auswahl</value>
+    <comment>2</comment>
+  </data>
+  <data name="_17" xml:space="preserve">
+    <value>Fahrer abmelden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_18" xml:space="preserve">
+    <value>Umlauf</value>
+    <comment>2</comment>
+  </data>
+  <data name="_19" xml:space="preserve">
+    <value>Sonderziel</value>
+    <comment>2</comment>
+  </data>
+  <data name="_20" xml:space="preserve">
+    <value>Ungültige Umlaufnummer</value>
+    <comment>2</comment>
+  </data>
+  <data name="_21" xml:space="preserve">
+    <value>Keine gültige Zeit (GPS)</value>
+    <comment>2</comment>
+  </data>
+  <data name="_22" xml:space="preserve">
+    <value>Umlauf</value>
+    <comment>2</comment>
+  </data>
+  <data name="_23" xml:space="preserve">
+    <value>Umlauf Nummer</value>
+    <comment>2</comment>
+  </data>
+  <data name="_24" xml:space="preserve">
+    <value>Überprüfe Umlauf</value>
+    <comment>2</comment>
+  </data>
+  <data name="_27" xml:space="preserve">
+    <value>Fahrer Nummer</value>
+    <comment>2</comment>
+  </data>
+  <data name="_28" xml:space="preserve">
+    <value>Überprüfe Fahrer</value>
+    <comment>2</comment>
+  </data>
+  <data name="_30" xml:space="preserve">
+    <value>Umlauf Nummer bereits angemeldet. Umlauf: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_31" xml:space="preserve">
+    <value>Fahrzeug bereits angemeldet.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_32" xml:space="preserve">
+    <value>Fahrer bereits angemeldet. Fahrer Nummer: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_33" xml:space="preserve">
+    <value>Ungültige Umlauf Nummer (Leitstelle). Umlauf: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_34" xml:space="preserve">
+    <value>Ungültige Fahrer Nummer: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_35" xml:space="preserve">
+    <value>Fahrzeug Nummer ungültig</value>
+    <comment>2</comment>
+  </data>
+  <data name="_36" xml:space="preserve">
+    <value>Ungültige Daten Version: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_37" xml:space="preserve">
+    <value>Unbekannter System Fehler (Leitstelle)</value>
+    <comment>2</comment>
+  </data>
+  <data name="_38" xml:space="preserve">
+    <value>Unbekannter Fehler (Leitstelle)</value>
+    <comment>2</comment>
+  </data>
+  <data name="_39" xml:space="preserve">
+    <value>Information</value>
+    <comment>2</comment>
+  </data>
+  <data name="_40" xml:space="preserve">
+    <value>Das ausgewählte Element konnte nicht bearbeitet werden. Konfigurationsfehler</value>
+    <comment>2</comment>
+  </data>
+  <data name="_43" xml:space="preserve">
+    <value>ERG: Ungültige Kassendaten</value>
+    <comment>2</comment>
+  </data>
+  <data name="_44" xml:space="preserve">
+    <value>ERG: Fehler Entwerter</value>
+    <comment>2</comment>
+  </data>
+  <data name="_45" xml:space="preserve">
+    <value>Empfangene Meldungen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_11" xml:space="preserve">
+    <value>Dunkel</value>
+    <comment>2</comment>
+  </data>
+  <data name="_12" xml:space="preserve">
+    <value>Bildschirmhelligkeit</value>
+    <comment>2</comment>
+  </data>
+  <data name="_50" xml:space="preserve">
+    <value>Die Liste enthält keine Elemente...</value>
+    <comment>2</comment>
+  </data>
+  <data name="_51" xml:space="preserve">
+    <value>Wechsle System Sprache</value>
+    <comment>2</comment>
+  </data>
+  <data name="_52" xml:space="preserve">
+    <value>Der angeforderte Bildschirm ist nicht vorhanden. Konfiguration nicht korrekt.</value>
+    <comment>7</comment>
+  </data>
+  <data name="_53" xml:space="preserve">
+    <value>Anschluss SBB abwarten</value>
+    <comment>2</comment>
+  </data>
+  <data name="_54" xml:space="preserve">
+    <value>Einfahrt via Waschstrasse</value>
+    <comment>2</comment>
+  </data>
+  <data name="_55" xml:space="preserve">
+    <value>Fahrzeug kommt</value>
+    <comment>2</comment>
+  </data>
+  <data name="_57" xml:space="preserve">
+    <value>Falsche Meldung gesendet</value>
+    <comment>2</comment>
+  </data>
+  <data name="_58" xml:space="preserve">
+    <value>Meldung verstanden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_59" xml:space="preserve">
+    <value>Polizei kommt</value>
+    <comment>2</comment>
+  </data>
+  <data name="_60" xml:space="preserve">
+    <value>Sanität kommt</value>
+    <comment>2</comment>
+  </data>
+  <data name="_61" xml:space="preserve">
+    <value>Wagen waschen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_62" xml:space="preserve">
+    <value>Zentrale telefonieren</value>
+    <comment>2</comment>
+  </data>
+  <data name="_63" xml:space="preserve">
+    <value>Zurückhalten</value>
+    <comment>2</comment>
+  </data>
+  <data name="_64" xml:space="preserve">
+    <value>Zwangs abmelden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_65" xml:space="preserve">
+    <value>Störung Entwerter 1</value>
+    <comment>2</comment>
+  </data>
+  <data name="_66" xml:space="preserve">
+    <value>Störung Billetautomat 2</value>
+    <comment>2</comment>
+  </data>
+  <data name="_67" xml:space="preserve">
+    <value>Störung Entwerter 1</value>
+    <comment>2</comment>
+  </data>
+  <data name="_68" xml:space="preserve">
+    <value>Störung Entwerter 2</value>
+    <comment>2</comment>
+  </data>
+  <data name="_69" xml:space="preserve">
+    <value>Störung Entwerter 3</value>
+    <comment>2</comment>
+  </data>
+  <data name="_70" xml:space="preserve">
+    <value>Vorwarnung Kasse 1</value>
+    <comment>2</comment>
+  </data>
+  <data name="_71" xml:space="preserve">
+    <value>Vorwarnung Kasse 2</value>
+    <comment>2</comment>
+  </data>
+  <data name="_72" xml:space="preserve">
+    <value>Vorwarnung Papier 1</value>
+    <comment>2</comment>
+  </data>
+  <data name="_73" xml:space="preserve">
+    <value>Vorwarnung Papier 2</value>
+    <comment>2</comment>
+  </data>
+  <data name="_74" xml:space="preserve">
+    <value>Überprüfung fehlerhaft</value>
+    <comment>2</comment>
+  </data>
+  <data name="_76" xml:space="preserve">
+    <value>Bereits ein Anruf vorhanden. Dieser Anruf muss beendet werden bevor ein neuer Anruf getätigt werden kann.</value>
+    <comment>7</comment>
+  </data>
+  <data name="_77" xml:space="preserve">
+    <value>Information</value>
+    <comment>2</comment>
+  </data>
+  <data name="_78" xml:space="preserve">
+    <value>Keine Nummer gefunden. Anruf kann nicht getätigt werden.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_79" xml:space="preserve">
+    <value>Rufaufbau</value>
+    <comment>2</comment>
+  </data>
+  <data name="_81" xml:space="preserve">
+    <value>Anruf abgebrochen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_82" xml:space="preserve">
+    <value>Konnte die Nummer nicht wählen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_83" xml:space="preserve">
+    <value>Telefonbuch</value>
+    <comment>2</comment>
+  </data>
+  <data name="_84" xml:space="preserve">
+    <value>Konfigurationsfehler. Keine Telefon Funktionalität vorhanden.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_85" xml:space="preserve">
+    <value>Sonderziel</value>
+    <comment>2</comment>
+  </data>
+  <data name="_86" xml:space="preserve">
+    <value>Fehler</value>
+    <comment>2</comment>
+  </data>
+  <data name="_87" xml:space="preserve">
+    <value>Der ausgewählte Index ist nicht gültig</value>
+    <comment>2</comment>
+  </data>
+  <data name="_88" xml:space="preserve">
+    <value>Das Sonderziel wurde nicht gefunden (extraservices.csv)</value>
+    <comment>2</comment>
+  </data>
+  <data name="_89" xml:space="preserve">
+    <value>Sehr Laut</value>
+    <comment>2</comment>
+  </data>
+  <data name="_90" xml:space="preserve">
+    <value>Laut</value>
+    <comment>2</comment>
+  </data>
+  <data name="_91" xml:space="preserve">
+    <value>Mittel</value>
+    <comment>2</comment>
+  </data>
+  <data name="_92" xml:space="preserve">
+    <value>Leise</value>
+    <comment>2</comment>
+  </data>
+  <data name="_93" xml:space="preserve">
+    <value>Sehr Leise</value>
+    <comment>2</comment>
+  </data>
+  <data name="_94" xml:space="preserve">
+    <value>Stumm</value>
+    <comment>2</comment>
+  </data>
+  <data name="_95" xml:space="preserve">
+    <value>Ansage Lautstärke</value>
+    <comment>2</comment>
+  </data>
+  <data name="_96" xml:space="preserve">
+    <value>Keine Antwort erhalten</value>
+    <comment>2</comment>
+  </data>
+  <data name="_97" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+    <comment>2</comment>
+  </data>
+  <data name="_98" xml:space="preserve">
+    <value>Das ist nur ein Test</value>
+    <comment>2</comment>
+  </data>
+  <data name="_99" xml:space="preserve">
+    <value>Menü</value>
+    <comment>3</comment>
+  </data>
+  <data name="_101" xml:space="preserve">
+    <value>Funktionen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_102" xml:space="preserve">
+    <value>Kommunikation</value>
+    <comment>2</comment>
+  </data>
+  <data name="_103" xml:space="preserve">
+    <value>Einstellungen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_104" xml:space="preserve">
+    <value>Beenden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_105" xml:space="preserve">
+    <value>Fahrer wechseln</value>
+    <comment>2</comment>
+  </data>
+  <data name="_106" xml:space="preserve">
+    <value>Umlauf abmelden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_107" xml:space="preserve">
+    <value>Spezial Ansagen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_108" xml:space="preserve">
+    <value>Umleitung</value>
+    <comment>2</comment>
+  </data>
+  <data name="_110" xml:space="preserve">
+    <value>Sprache</value>
+    <comment>2</comment>
+  </data>
+  <data name="_111" xml:space="preserve">
+    <value>Helligkeit</value>
+    <comment>2</comment>
+  </data>
+  <data name="_112" xml:space="preserve">
+    <value>Funk (IRA)</value>
+    <comment>2</comment>
+  </data>
+  <data name="_113" xml:space="preserve">
+    <value>Keine Empfänger ausgewählt</value>
+    <comment>2</comment>
+  </data>
+  <data name="_114" xml:space="preserve">
+    <value>Zu viele Empfänger ausgewählt. Maximal vier Empfänger können selektiert werden.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_115" xml:space="preserve">
+    <value>Sprechwunsch</value>
+    <comment>2</comment>
+  </data>
+  <data name="_116" xml:space="preserve">
+    <value>U</value>
+    <comment>2</comment>
+  </data>
+  <data name="_117" xml:space="preserve">
+    <value>L</value>
+    <comment>2</comment>
+  </data>
+  <data name="_118" xml:space="preserve">
+    <value>K</value>
+    <comment>2</comment>
+  </data>
+  <data name="_119" xml:space="preserve">
+    <value>R</value>
+    <comment>2</comment>
+  </data>
+  <data name="_121" xml:space="preserve">
+    <value>Zi</value>
+    <comment>2</comment>
+  </data>
+  <data name="_122" xml:space="preserve">
+    <value>F</value>
+    <comment>2</comment>
+  </data>
+  <data name="_125" xml:space="preserve">
+    <value>Kein Umlauf geladen</value>
+    <comment>2</comment>
+  </data>
+  <data name="_126" xml:space="preserve">
+    <value>Ziel: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_127" xml:space="preserve">
+    <value>GSM ist nicht aktiviert</value>
+    <comment>2</comment>
+  </data>
+  <data name="_128" xml:space="preserve">
+    <value>IRA ist nicht aktiviert</value>
+    <comment>2</comment>
+  </data>
+  <data name="_129" xml:space="preserve">
+    <value>Alarm ist nicht aktiviert</value>
+    <comment>2</comment>
+  </data>
+  <data name="_130" xml:space="preserve">
+    <value>Konfigurationsfehler. </value>
+    <comment>2</comment>
+  </data>
+  <data name="_9" xml:space="preserve">
+    <value>Hell</value>
+    <comment>2</comment>
+  </data>
+  <data name="_25" xml:space="preserve">
+    <value>Anmeldung</value>
+    <comment>2</comment>
+  </data>
+  <data name="_131" xml:space="preserve">
+    <value>Fehlalarm</value>
+    <comment>2</comment>
+  </data>
+  <data name="_132" xml:space="preserve">
+    <value>Ja</value>
+    <comment>2</comment>
+  </data>
+  <data name="_133" xml:space="preserve">
+    <value>Nein</value>
+    <comment>3</comment>
+  </data>
+  <data name="_134" xml:space="preserve">
+    <value>Sende Anfrage</value>
+    <comment>2</comment>
+  </data>
+  <data name="_135" xml:space="preserve">
+    <value>Kein Kanal frei</value>
+    <comment>2</comment>
+  </data>
+  <data name="_136" xml:space="preserve">
+    <value>Funkkanal ist zur Zeit besetzt. Versuchen Sie später.</value>
+    <comment>2</comment>
+  </data>
+  <data name="_137" xml:space="preserve">
+    <value>ERG: Fehlercode: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_138" xml:space="preserve">
+    <value>Lade vorherigen Zustand</value>
+    <comment>2</comment>
+  </data>
+  <data name="_139" xml:space="preserve">
+    <value>Laden der Daten fehlgeschlagen. Bitte nochmals anmelden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_140" xml:space="preserve">
+    <value>Lade Sonderziel</value>
+    <comment>2</comment>
+  </data>
+  <data name="_141" xml:space="preserve">
+    <value>Erzwungener Dienstbeginn</value>
+    <comment>2</comment>
+  </data>
+  <data name="_142" xml:space="preserve">
+    <value>Spezialfahrt. ID: </value>
+    <comment>2</comment>
+  </data>
+  <data name="_143" xml:space="preserve">
+    <value>Fahrer Abmelden</value>
+    <comment>2</comment>
+  </data>
+  <data name="_150" xml:space="preserve">
+    <value>Fahrgast Zählung</value>
+    <comment>2</comment>
+  </data>
+  <data name="_151" xml:space="preserve">
+    <value>Anzahl Fahrgäste</value>
+    <comment>2</comment>
+  </data>
+  <data name="_152" xml:space="preserve">
+    <value>Verarbeiten...</value>
+    <comment>2</comment>
+  </data>
+  <data name="_100" xml:space="preserve">
+    <value>Dienst</value>
+    <comment>2</comment>
+  </data>
+  <data name="_41" xml:space="preserve">
+    <value>ERG: Fehler Kasse</value>
+    <comment>2</comment>
+  </data>
+  <data name="_155" xml:space="preserve">
+    <value>Anzahl Fahrgäste wurde abgeschickt: {0}</value>
+    <comment>2</comment>
+  </data>
+  <data name="_156" xml:space="preserve">
+    <value>Sonderziel auswählen:</value>
+    <comment>2</comment>
+  </data>
+  <data name="_120" xml:space="preserve">
+    <value>Zo</value>
+    <comment>2</comment>
+  </data>
+  <data name="_158" xml:space="preserve">
+    <value>Kein GPS</value>
+    <comment>3</comment>
+  </data>
+  <data name="_159" xml:space="preserve">
+    <value>Es ist kein GPS Signal vorhanden.
+Momentan können Sie sich nur mit einem Sonderziel anmelden.</value>
+    <comment>7</comment>
+  </data>
+  <data name="_250" xml:space="preserve">
+    <value>Fahrtnummer</value>
+    <comment>3</comment>
+  </data>
+  <data name="_255" xml:space="preserve">
+    <value>Anzahl Fahrgäste: {0}, Fahrtnummer: {1} wurde übermittelt</value>
+    <comment>4</comment>
+  </data>
+  <data name="_257" xml:space="preserve">
+    <value>Störung Billetautomat 1</value>
+    <comment>2</comment>
+  </data>
+  <data name="_258" xml:space="preserve">
+    <value>Störung Entwerter 2</value>
+    <comment>2</comment>
+  </data>
+  <data name="_256" xml:space="preserve">
+    <value>Störung Entwerter 3</value>
+    <comment>2</comment>
+  </data>
+</root>

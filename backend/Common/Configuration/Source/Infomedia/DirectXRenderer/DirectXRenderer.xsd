@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DirectXRenderer" type="RendererConfig" />
+  <xs:complexType name="RendererConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration structure for Infomedia DirectX Renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="WindowMode" type="WindowMode" default="FullScreenWindowed">
+        <xs:annotation>
+          <xs:documentation>
+            Defines the window mode in which to start the DirectX Renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="FallbackTimeout" type="xs:duration" default="PT30S">
+        <xs:annotation>
+          <xs:documentation>
+            The timeout after which the Fallback Screen (see below) or the splash screen
+            is shown if no data is received from the Composer. A value of PT0S disables the fallback timeout.
+            Do not set this value below 20 seconds since the keep-alive time of Composer is set to 15 seconds
+            and you would see the screen constantly switching between fallback and regular content.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Screens" type="ArrayOfScreenConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Definition of the screens to be used by the Renderer.
+            If this element is left empty, the Renderer will automatically detect all screens
+            attached to the system and show a render window on each of them.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Device" type="DeviceConfig">
+        <xs:annotation>
+          <xs:documentation>
+            DirectX device specific settings. Do not change these settings without approval from Software Development.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Text" type="TextConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Settings related to the display of text. Do not change these settings without approval from Software Development.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Image" type="ImageConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Settings related to the display of images and the caching of images in RAM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Video" type="VideoConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Settings related to the display of videos.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="EnablePresentationLogging" type="xs:boolean" default="true">
+        <xs:annotation>
+          <xs:documentation>Proof of Play presentation flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WindowMode">
+    <xs:annotation>
+      <xs:documentation>
+        Mode how the render window(s) is/are shown at start-up. The mode of the render window can also be
+        changed at run-time by pressing Alt-Enter. The mode will cycle through the possible options.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Windowed">
+        <xs:annotation>
+          <xs:documentation>
+            The window(s) is/are shown in a normal OS window that can be resized and moved.
+            This mode should only be used for testing and not on productive configurations.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FullScreenExclusive">
+        <xs:annotation>
+          <xs:documentation>
+            This mode is only possible if only a single screen is used.
+            The window is in fullscreen on the given screen.
+            If this mode is set while the renderer is configured to show multiple screens,
+            it will automatically fall back to FullScreenWindowed mode.
+            This mode is the most efficient mode as DirectX is directly handling the graphics buffer,
+            but it is not compatible with the video modes DirectXWindow and VlcWindow (see below).
+            Use this mode whenever you are not showing videos.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FullScreenWindowed">
+        <xs:annotation>
+          <xs:documentation>
+            The window(s) is/are shown in fullscreen on the respective screens,
+            but DirectX draws to a fully extended, frameless window.
+            This mode is considerably slower than FullScreenExclusive but is the only option when
+            using multiple screens and/or video modes DirectXWindow or VlcWindow.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfScreenConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Screen" nillable="true" type="ScreenConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ScreenConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single screen used by the Renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="VisibleRegion" type="VisibleRegionConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The area where the content of the DirectX Renderer is shown.
+            If this element is not set (default), the entire screen size is used.
+            Only set this for special cases when the Renderer should only use part of the screen (e.g. wide-screen).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="FallbackImage" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Relative or absolute path to the image to be shown on that screen in fallback mode (no data
+            is received from Composer). See also FallbackTimeout above.
+            If this element is not specified or the given file doesn't exist,
+            the DirectX Renderer splash screen will be shown instead.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Adapter" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The adapter index (starting from 0) as the screens are defined in the operating system.
+          If this attribute is omitted, the screens get their adapter index from the position in the config file.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The identifier for this screen towards Composer. This can be used to address same-size screens on
+          the same adapter on different systems. If this attribute is omitted,
+          the ID will be the same as the Adapter index.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The native width of the screen in pixels. This should always match the physical width of the screen
+          (as well as the one configured in the OS settings). If this attribute is omitted (default),
+          the width is determined from the adapter.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The native height of the screen in pixels. This should always match the physical height of the screen
+          (as well as the one configured in the OS settings). If this attribute is omitted (default),
+          the height is determined from the adapter.
+          Important: for wide-screen, set this to 1080 since the screen is natively 1920x1080 even thought only
+          1920x630 pixels are visible. See VisibleRegionConfig for more information.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="VisibleRegionConfig">
+    <xs:attribute name="X" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The horizontal position where the image should be rendered on the physical screen.
+          Do not use this attribute without approval from Software Development.
+          If this attribute is omitted (default), the image is rendered starting from the very left (x=0).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Y" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The vertical position where the image should be rendered on the physical screen.
+          Do not use this attribute without approval from Software Development.
+          If this attribute is omitted (default), the image is rendered starting from the very top (x=0).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The width of the region where the image should be rendered on the physical screen.
+          Do not use this attribute without approval from Software Development.
+          If this attribute is omitted (default), the image is rendered on the entire screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The width of the region where the image should be rendered on the physical screen.
+          This parameter can be used e.g. on wide-screen TFTs that have a vertical resolution of 
+          1080 pixels, but only the top most 630 pixels are visible (in this example this Height would be 630).
+          If this attribute is omitted (default), the image is rendered on the entire screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DeviceConfig">
+    <xs:annotation>
+      <xs:documentation>
+        DirectX device specific settings. Do not change these settings without approval from Software Development.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" default="Discard" name="SwapEffect" type="SwapEffect">
+        <xs:annotation>
+          <xs:documentation>
+            Definition how buffers are swapped.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="true" name="MultiThreaded" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flag to set whether DirectX should be multi-threading safe or not.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="None" name="MultiSample" type="MultiSampleType">
+        <xs:annotation>
+          <xs:documentation>
+            The sampling mode.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="0" name="MultiSampleQuality" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            The sampling quality.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="One" name="PresentationInterval" type="PresentInterval">
+        <xs:annotation>
+          <xs:documentation>
+            Value indicating how often the screen should be refreshed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="None" name="PresentFlag" type="PresentFlag">
+        <xs:annotation>
+          <xs:documentation>
+            DirectX presentation flags.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SwapEffect">
+    <xs:annotation>
+      <xs:documentation>
+        Definition how buffers are swapped.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Discard">
+        <xs:annotation>
+          <xs:documentation>
+            The buffers are not swapped, but simply discarded.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Copy">
+        <xs:annotation>
+          <xs:documentation>
+            The buffers are copied.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Flip">
+        <xs:annotation>
+          <xs:documentation>
+            The buffers are flipped.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MultiSampleType">
+    <xs:annotation>
+      <xs:documentation>
+        The sampling mode.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SixteenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 16 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FifteenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 15 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FourteenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 14 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ThirteenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 13 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TwelveSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 12 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ElevenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 11 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 10 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NineSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 9 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EightSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 8 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SevenSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 7 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SixSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 6 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FiveSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 5 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FourSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 4 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ThreeSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 3 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TwoSamples">
+        <xs:annotation>
+          <xs:documentation>
+            Enables 2 levels of full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NonMaskable">
+        <xs:annotation>
+          <xs:documentation>
+            Enables the multisample quality value.
+          </xs:documentation>
+        </xs:annotation></xs:enumeration>
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies no full-scene multisampling.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PresentInterval">
+    <xs:annotation>
+      <xs:documentation>
+        Screen refresh interval.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default">
+        <xs:annotation>
+          <xs:documentation>
+            Uses the default system timer resolution.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Immediate">
+        <xs:annotation>
+          <xs:documentation>
+            The runtime updates the window client area immediately and
+            might do so more than once during the adapter refresh period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="One">
+        <xs:annotation>
+          <xs:documentation>
+            The driver will wait for the vertical retrace period.
+            Present operations will not be affected more frequently than the screen refresh;
+            the runtime will complete at most one Present operation per adapter refresh period.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Two">
+        <xs:annotation>
+          <xs:documentation>
+            The driver will wait for the vertical retrace period.
+            Present operations will not be affected more frequently than every second screen refresh.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Three">
+        <xs:annotation>
+          <xs:documentation>
+            The driver will wait for the vertical retrace period.
+            Present operations will not be affected more frequently than every third screen refresh.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Four">
+        <xs:annotation>
+          <xs:documentation>
+            The driver will wait for the vertical retrace period.
+            Present operations will not be affected more frequently than every fourth screen refresh.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PresentFlag">
+    <xs:annotation>
+      <xs:documentation>
+        DirectX presentation flags.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:documentation>
+                No special parameters are used
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Video">
+            <xs:annotation>
+              <xs:documentation>
+                This is a hint to the driver that the back buffers will contain video data.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DeviceClip">
+            <xs:annotation>
+              <xs:documentation>
+                Clip a windowed Present blit into the window client area,
+                within the monitor screen area of the video adapter that created the Direct3D device.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DiscardDepthStencil">
+            <xs:annotation>
+              <xs:documentation>
+                If this flag is set, the contents of the depth stencil buffer will be invalidated.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LockableBackBuffer">
+            <xs:annotation>
+              <xs:documentation>
+                Set this flag if the application requires the ability to lock the back buffer directly.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="TextConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Settings related to the display of text. Do not change these settings without approval from Software Development.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" default="FontSprite" name="TextMode" type="TextMode">
+        <xs:annotation>
+          <xs:documentation>
+            Mode in which text is rendered.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="AntiAliased" name="FontQuality" type="FontQuality">
+        <xs:annotation>
+          <xs:documentation>
+            Quality of the font rendering.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="PT3S" name="AlternationInterval" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Interval at which alternating text should change by default.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="PT0.5S" name="BlinkInterval" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Interval at which blinking text should change.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TextMode">
+    <xs:annotation>
+      <xs:documentation>
+        Modes in which text can be rendered.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Font">
+        <xs:annotation>
+          <xs:documentation>
+            The text is rendered using DirectX fonts but without a sprite caching the rendered triangles.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FontSprite">
+        <xs:annotation>
+          <xs:documentation>
+            The text is rendered using DirectX fonts using a sprite to cache the rendered triangles.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gdi">
+        <xs:annotation>
+          <xs:documentation>
+            The text is rendered using GDI to a bitmap which is then rendered using a texture.
+            This mode is only experimental and should only be used when rotated fonts are required.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FontQuality">
+    <xs:annotation>
+      <xs:documentation>
+        Quality of the font rendering.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default">
+        <xs:annotation>
+          <xs:documentation>
+            The font appearance does not matter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ClearTypeNatural">
+        <xs:annotation>
+          <xs:documentation>
+            Text is rendered using the Microsoft ClearType antialiasing (smoothing) method when possible.
+            The font quality is given more importance than maintaining the text size; thus, the text width can change.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ClearType">
+        <xs:annotation>
+          <xs:documentation>
+            Text is rendered using the ClearType antialiasing method when possible.
+            The font quality is given less importance than maintaining the text size.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AntiAliased">
+        <xs:annotation>
+          <xs:documentation>
+            Text is rendered using the antialiasing method when possible.
+            The font quality is given less importance than maintaining the text size.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NonAntiAliased">
+        <xs:annotation>
+          <xs:documentation>
+            The font is never antialiased.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Proof">
+        <xs:annotation>
+          <xs:documentation>
+            Font's character quality is given more importance than exact matching of the logical-font attributes.
+            For Windows Graphics Device Interface (GDI) raster fonts, scaling is disabled and
+            the font closest in size is chosen. Although this size might not correspond exactly when Proof is used,
+            the font's quality is high and its appearance is not distorted.
+            Bold, italic, underline, and strikeout fonts are synthesized if necessary.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Draft">
+        <xs:annotation>
+          <xs:documentation>
+            The font appearance is given less importance than when the Proof value is used.
+            Scaling is enabled for Microsoft Windows Graphics Device Interface (GDI) raster fonts,
+            which means that more font sizes are available, but their quality might be lower.
+            Bold, italic, underline, and strikeout fonts are synthesized if necessary.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ImageConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Settings related to the display of images and the caching of images in RAM.
+        DirectX Renderer will keep a certain amount of images in a RAM cache so it doesn't have
+        to reload the images every time from the disk when using them.
+        The three parameters define how that caching is done and when cached bitmaps are
+        discarded to free up memory.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="BitmapCacheTimeout" type="xs:string" default="PT1H">
+        <xs:annotation>
+          <xs:documentation>
+            Bitmap cache timeout. A bitmap is kept unused in a RAM cache at maximum that amount of time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="MaxBitmapCacheBytes" type="xs:long" default="52428800">
+        <xs:annotation>
+          <xs:documentation>
+            Maximum size of the bitmap cache (in bytes). This is the approximate maximum amount of RAM used
+            by DirectX Renderer to cache images. Once that limit is reached, the oldest (unused) bitmaps
+            are removed from the cache. The default value is 50 MB.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="MaxCacheBytesPerBitmap" type="xs:int" default="1000000">
+        <xs:annotation>
+          <xs:documentation>
+            Maximum size of a bitmap (in bytes) to keep in RAM. The size of the bitmap is simply calculated by
+            width x height x 4 (32 bit color). If an image is bigger than the given attribute,
+            the image is never kept in the cache. The default value is equivalent to 500 x 500 pixels,
+            this means that many smaller images are cached, but background and other full-screen images are always
+            loaded from disk.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreloadDirectory" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            One or more directories from which images should be pre-loaded.
+            All known image types from the given directories are loaded when DirectX Renderer starts.
+            The pre-loading is limited by the MaxBitmapCacheBytes and MaxCacheBytesPerBitmap values and
+            pre-loaded images are discarded after BitmapCacheTimeout when not used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VideoConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Settings related to the display of videos.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="VideoMode" type="VideoMode" default="DirectShow">
+        <xs:annotation>
+          <xs:documentation>
+            The mode how videos are shown by DirectX Renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="VideoMode">
+    <xs:annotation>
+      <xs:documentation>
+        The mode how videos are shown by DirectX Renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DirectShow">
+        <xs:annotation>
+          <xs:documentation>
+            The renderer uses DirectShow on a DirectX texture. This mode allows for
+            full-screen exclusive rendering as well as rendering other elements (images, text, ...)
+            on top of a video.
+            This mode does not support streaming videos.
+            This mode is considerably slower than the other modes and should only be used in the
+            above mentioned cases.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DirectXWindow">
+        <xs:annotation>
+          <xs:documentation>
+            The video is shown in a borderless window on top of the rendering window.
+            This mode is not compatible with full-screen exclusive mode.
+            This mode does not support streaming videos.
+            It is also not possible to draw on top of this video; other graphical elements
+            will always appear below the video, independent of their relaitve z-index.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VlcWindow">
+        <xs:annotation>
+          <xs:documentation>
+            The video is shown in a borderless window on top of the rendering window.
+            The video is rendered using VideoLAN VLC media player;
+            using this mode requires VLC to be installed on the target system.
+            This mode is not compatible with full-screen exclusive mode.
+            This mode supports streaming videos.
+            It is also not possible to draw on top of this video; other graphical elements
+            will always appear below the video, independent of their relaitve z-index.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

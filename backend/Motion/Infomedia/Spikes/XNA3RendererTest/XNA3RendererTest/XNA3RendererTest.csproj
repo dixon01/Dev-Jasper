@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7609A572-11DF-40A4-8B42-492C1AAF350B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XNA3RendererTest</RootNamespace>
+    <AssemblyName>XNA3RendererTest</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gorba.Common.Medi.Core">
+      <HintPath>..\..\..\..\Protran\Source\ConsoleApp\bin\Debug\Gorba.Common.Medi.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gorba.Motion.Infomedia.BbCode">
+      <HintPath>..\..\..\Source\BbCode\bin\Debug\Gorba.Motion.Infomedia.BbCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Gorba.Motion.Infomedia.Entities">
+      <HintPath>..\..\..\Source\Entities\bin\Debug\Gorba.Motion.Infomedia.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Gorba.Motion.Infomedia.RendererBase">
+      <HintPath>..\..\..\Source\RendererBase\bin\Debug\Gorba.Motion.Infomedia.RendererBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageRenderEngine.cs" />
+    <Compile Include="ImageSprite.cs" />
+    <Compile Include="IXnaRenderContext.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderEngineBase.cs" />
+    <Compile Include="Renderer.cs" />
+    <Compile Include="RenderManagerFactory.cs" />
+    <Compile Include="TextRenderEngine.cs" />
+    <Compile Include="TextSprite.cs" />
+    <Compile Include="XnaImagePart.cs" />
+    <Compile Include="XnaPart.cs" />
+    <Compile Include="XnaTextFactory.cs" />
+    <Compile Include="XnaTextPart.cs" />
+    <Compile Include="XnaVideoPart.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="medi.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

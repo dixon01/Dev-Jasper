@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Editors.FtpServerEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:meta="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Meta"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:interaction="clr-namespace:Gorba.Center.Admin.Core.Interaction"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance meta:FtpServerDataViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <telerik:RadPropertyGrid Grid.Row="0"
+                                 Name="PropertyGrid" Item="{Binding}"
+                                 AutoGeneratePropertyDefinitions="False"
+                                 Margin="0 0 5 0" HorizontalAlignment="Stretch"
+                                 DescriptionPanelVisibility="Collapsed"
+                                 Validation.ErrorTemplate="{x:Null}">
+            <telerik:RadPropertyGrid.Resources>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Padding" Value="1" />
+                </Style>
+
+            </telerik:RadPropertyGrid.Resources>
+            <telerik:RadPropertyGrid.PropertyDefinitions>
+                <telerik:PropertyDefinition Binding="{Binding Host, UpdateSourceTrigger=PropertyChanged}" DisplayName="Host" OrderIndex="1" />
+                <telerik:PropertyDefinition Binding="{Binding Port, UpdateSourceTrigger=PropertyChanged}" DisplayName="Port" OrderIndex="2" />
+                <telerik:PropertyDefinition Binding="{Binding Username, UpdateSourceTrigger=PropertyChanged}" DisplayName="Username" OrderIndex="3" />
+                <!--<telerik:PropertyDefinition Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" DisplayName="Password" OrderIndex="4" />-->
+                <telerik:PropertyDefinition  DisplayName="Password" OrderIndex="4">
+                    <telerik:PropertyDefinition.EditorTemplate>
+                        <DataTemplate>
+                            <PasswordBox PasswordChar="*"  interaction:PasswordUtility.Attach="True" 
+                                         interaction:PasswordUtility.Password="{Binding Password, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </telerik:PropertyDefinition.EditorTemplate>
+                </telerik:PropertyDefinition>
+                <telerik:PropertyDefinition Binding="{Binding RepositoryBasePath, UpdateSourceTrigger=PropertyChanged}" DisplayName="Repository Base Path" OrderIndex="5" />
+                <telerik:PropertyDefinition Binding="{Binding PollInterval, UpdateSourceTrigger=PropertyChanged}" DisplayName="Poll Interval" OrderIndex="6" />
+                <telerik:PropertyDefinition Binding="{Binding Compression, UpdateSourceTrigger=PropertyChanged}" DisplayName="Compression" OrderIndex="7" />
+            </telerik:RadPropertyGrid.PropertyDefinitions>
+        </telerik:RadPropertyGrid>
+
+        <telerik:RadButton Grid.Row="1"
+                           HorizontalAlignment="Right"
+                           Margin="3"
+                           Command="{Binding VerifyFtpServerCommand}"
+                           CommandParameter="{Binding}"
+                           Validation.ErrorTemplate="{x:Null}">
+            <telerik:RadButton.Style>
+                <Style TargetType="telerik:RadButton">
+                    <Setter Property="IsEnabled" Value="True"/>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding VerificationState}" Value="{x:Static meta:VerificationState.Verifying}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </telerik:RadButton.Style>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Margin="3" VerticalAlignment="Center" ToolTip="{Binding VerificationMessage}">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="../../Resources/Icons/archive_info_32x32.png"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding VerificationState}" Value="{x:Static meta:VerificationState.Verifying}">
+                                    <Setter Property="Source" Value="../../Resources/Icons/archive_update_32x32.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding VerificationState}" Value="{x:Static meta:VerificationState.Ok}">
+                                    <Setter Property="Source" Value="../../Resources/Icons/archive_ok_32x32.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding VerificationState}" Value="{x:Static meta:VerificationState.Error}">
+                                    <Setter Property="Source" Value="../../Resources/Icons/archive_error_32x32.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <TextBlock Margin="3" VerticalAlignment="Center" Text="{x:Static resources:AdminStrings.Editors_FtpServer_Verify}"/>
+            </StackPanel>
+        </telerik:RadButton>
+    </Grid>
+</UserControl>

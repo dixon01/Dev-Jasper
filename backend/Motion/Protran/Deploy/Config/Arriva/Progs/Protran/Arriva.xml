@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Arriva>
+  <OBU>
+    <RemoteIP>192.168.0.1</RemoteIP>
+    <RemotePort>35001</RemotePort>
+  </OBU>
+  
+  <FTP>
+    <PollingEnabled>true</PollingEnabled>
+    <SourceDirectory>C:\Departures\Gorba\Xml</SourceDirectory>
+    <Filename>departures.xml</Filename>
+  </FTP>
+
+  <Behaviour>
+   <ConnectionsEnabled>true</ConnectionsEnabled>
+   <ConnectionSource>Ftp</ConnectionSource>
+   <MaxDepartures>100</MaxDepartures>
+   </Behaviour>
+</Arriva>

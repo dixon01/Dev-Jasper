@@ -1,0 +1,97 @@
+﻿<layoutElements:EditableLayoutElementBase x:Class="Gorba.Center.Media.Core.Views.LayoutElements.AudioFileLayoutElement"
+                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                 xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+                                 xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+                                 xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                 xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                 xmlns:layoutElements="clr-namespace:Gorba.Center.Media.Core.Views.LayoutElements"
+                                 mc:Ignorable="d" 
+                                 x:Name="Root"
+                                 d:DataContext="{d:DesignInstance layout:AudioFileElementDataViewModel}">
+    <layoutElements:EditableLayoutElementBase.Resources>
+        <converters:EvaluationToStringConverter x:Key="EvaluationToStringConverter" />
+        <converters:HasFormulaConverter x:Key="HasFormulaConverter" />
+    </layoutElements:EditableLayoutElementBase.Resources>
+
+    <Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="ToolTip" Value="{Binding Filename.Value}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Filename.Formula, Converter={StaticResource HasFormulaConverter}}" Value="true">
+                        <Setter Property="ToolTip" Value="{Binding Filename.Formula, Converter={StaticResource EvaluationToStringConverter}}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Image Name="AudioIcon" Grid.Column="0"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Left"
+                ToolTip="{x:Static resources:MediaStrings.LayoutElement_AudioFileToolTip}"
+                Width="48" Height="48"
+                Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/audiodata_dark_48x48.png">
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Opacity" Value="1.0" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Enabled.Value}" Value="false" />
+                                <Condition Binding="{Binding Enabled.Formula, Converter={StaticResource HasFormulaConverter}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Opacity" Value="0.5" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+       
+        <TextBlock Grid.Column="1"
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
+                       Margin="3"
+                       TextTrimming="CharacterEllipsis"
+                       FontFamily="FontAwesome" FontSize="16"
+                       Foreground="{StaticResource AudioElementForegroundColorBrush}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" >
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Setter Property="IsHitTestVisible" Value="True" />
+                        <Setter Property="Text" Value="{Binding Filename.Value}" />
+                         <Setter Property="Opacity" Value="1" />
+                        <Setter Property="TextDecorations" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Filename.Formula, Converter={StaticResource HasFormulaConverter}}" Value="true">
+                                <Setter Property="Text" Value="{Binding Filename.Formula, Converter={StaticResource EvaluationToStringConverter}}" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Enabled.Value}" Value="false" />
+                                <Condition Binding="{Binding Enabled.Formula, Converter={StaticResource HasFormulaConverter}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                                 <Setter Property="TextDecorations" Value="Strikethrough" />
+                             <Setter Property="Opacity" Value="0.5" />
+                        </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+        </TextBlock>
+
+        <views:QuickEditAdorner Grid.Row="0" Grid.Column="2" Margin="0 0 6 0"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="QuickEdit"
+                                    Command="{Binding Parent.ShowElementEditPopupCommand}" 
+                                    CommandParameter="{Binding}" Background="{StaticResource AudioElementSelectedQuickeditBackgroundBrush}"/>
+
+    </Grid>
+    <!--</Border>-->
+</layoutElements:EditableLayoutElementBase>

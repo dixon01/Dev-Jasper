@@ -1,0 +1,1037 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "BabTTSNet.64"
+    </assembly>
+    <members>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTTS.DictImportEmptyWordHandler">
+            <summary>Events when importing text dictionary</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnTextBegin">
+            <summary>Received at the start of a new text</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnSentence">
+            <summary>Received on each new sentence</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnWord">
+            <summary>Received on each new word</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnUserMrk">
+            <summary>Received on a mrk tag</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnPhone">
+            <summary>Received on each new phoneme</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnTextEnd">
+            <summary>Received at the end of a text</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnResume">
+            <summary>Synthesis is resumed</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnPause">
+            <summary>Synthesis is paused</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnEnd">
+            <summary>Received at the end of synthesys</summary>
+        </member>
+        <member name="E:AcapelaGroup.BabTTSNet.BabTTS.OnSpeak">
+            <summary>Received on start of synthesis</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterPresets">
+            <summary>Semi-colon separated list of existing presets for filter</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.InstanceInfo">
+            <summary>Information about the current voice</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.DictDefList">
+            <summary>Default dictionaries for the voice</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Paused">
+            <summary>Pause/Resume the speech</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterPreset">
+            <summary>Filter preset name</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.VoiceList">
+            <summary>Array of available voices</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Pauses(AcapelaGroup.BabTTSNet.BabTtsPauseType)">
+            <summary>Pause length for specified type of pause</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.AudioBoost">
+            <summary>Limiter gain</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.LastError">
+            <summary>Last error code</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.PauseSpell">
+            <summary>Pause length in spelling mode</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.PauseBracket">
+            <summary>Pause length got Brackets</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.PauseComma">
+            <summary>Pause length for Comma</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.PauseSemicolon">
+            <summary>Pause length for Semicolon</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.PausePunct">
+            <summary>Pause length for Punctuations</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterValue4">
+            <summary>Amplification/Attenuation of the fourth filter band, range: 0 -&gt; -10 dB, 100=0 dB, 200=+10 dB</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterValue3">
+            <summary>Amplification/Attenuation of the third filter band, range: 0 -&gt; -10 dB, 100=0 dB, 200=+10 dB</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterValue2">
+            <summary>Amplification/Attenuation of the second filter band, range: 0 -&gt; -10 dB, 100=0 dB, 200=+10 dB</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterValue1">
+            <summary>Amplification/Attenuation of the first filter band, range: 0 -&gt; -10 dB, 100=0 dB, 200=+10 dB</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.FilterValue(System.Byte)">
+            <summary>Amplification/Attenuation of the nth (1-4) filter band, range: 0 -&gt; -10 dB, 100=0 dB, 200=+10 dB</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.MsgMask">
+            <summary>Mask for events of interest</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.ReadingMode">
+            <summary>Read mode (text, word, letter...)</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.WaveFormat">
+            <summary>Select the output format of the audio file</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Device">
+            <summary>Device identidier of the audio output</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.UseFilter">
+            <summary>Activate the Equalizer</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.TrailingSilence">
+            <summary>Duration of silence at the end of a sentence in ms</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.LeadingSilence">
+            <summary>Duration of silence at the beginning of a sentence in ms</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.VolumeRatio">
+            <summary>Volume ratio of the voice in %</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Voice">
+            <summary>Sampling rate of the voice</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.MaxPitch">
+            <summary>Maximum allowed pitch</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.MinPitch">
+            <summary>Minimum allowed pitch</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Speed">
+            <summary>Voice Speed</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Pitch">
+            <summary>Voice Pitch</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Dictionaries">
+            <summary>List of dictionaries</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.Dictionary(System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>Get the n-th dictionary</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.DictionaryLoad(System.String)">
+            <summary>Load a dictionary</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.PhoGetViseme(System.UInt32!System.Runtime.CompilerServices.IsLong,System.UInt32!System.Runtime.CompilerServices.IsLong@)">
+            <summary>Viseme code for a Phoneme</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.PhoGetDuration(System.UInt32!System.Runtime.CompilerServices.IsLong,System.UInt32!System.Runtime.CompilerServices.IsLong@)">
+            <summary>Duration of a Phoneme</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.PhoGetMouth(System.UInt32!System.Runtime.CompilerServices.IsLong,AcapelaGroup.BabTTSNet.BABTTSMOUTH@)">
+            <summary>Get the Mouth structure information about a phoneme</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.VMSaveSettings">
+            <summary>Save the settings for a custom voice</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.PhonetizeWordInExtSampaSet(System.String,System.String@,System.UInt32!System.Runtime.CompilerServices.IsLong@,System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>Phonetize a word</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.DictGetNumLoaded">
+            <summary>Number of dictionaries loaded in BabTTS engine</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabTTS.DictGetMax">
+            <summary>Maximum number of loadable dictionaries</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.ReadBuffer(System.Array@,System.UInt32)">
+            <summary>Pull a number of audio samples from the engine</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.InsertText(System.String,AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags)">
+            <summary>Add a text, audio samples can be read by ReadBuffer</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Write(System.String,System.String,AcapelaGroup.BabTTSNet.BabTtsWriteFlags)">
+            <summary>Synthesize a text to a file</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Resume">
+            <summary>Resume the speech output</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Pause">
+            <summary>Pause the speech output</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Reset">
+            <summary>Perform a Reset of the engine</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Dialog(AcapelaGroup.BabTTSNet.BabTtsDlg)">
+            <summary>Display a dialog (Lexicon, Voice Manager...)</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetInstanceInfoEx(AcapelaGroup.BabTTSNet.BABTTSINFO2@)">
+            <summary>Get (extended) info about the current voice</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetInstanceInfo(AcapelaGroup.BabTTSNet.BABTTSINFO@)">
+            <summary>Get info about the current voice</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetSettings(AcapelaGroup.BabTTSNet.BabTtsParam,System.UInt32@)">
+            <summary>Get settings of the engine</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.SetSettings(AcapelaGroup.BabTTSNet.BabTtsParam,System.UInt32)">
+            <summary>Change settings of the engine</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Speak(System.String,AcapelaGroup.BabTTSNet.BabTtsSpeakFlags)">
+            <summary>Speak a text according to SpeakFlags</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Open(System.String,AcapelaGroup.BabTTSNet.BabTtsOpenModes)">
+            <summary>Open a voice</summary>
+            <param name="sVoice">Voice/speechfont to open</param>
+            <param name="dwOpenMode">OpenMode flags</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Close">
+            <summary>Close the object and release resource</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.Create">
+            <summary>Create an instance of BabTTS</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetVoiceLicense(System.String,AcapelaGroup.BabTTSNet.BABTTSLICINFO@)">
+            <summary>Static function to get info about the License of a voice</summary>
+            <param name="sVoice">Name of the voice/speechfont</param>
+            <param name="licinfo">Structure with the requested license information [OUT]</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetVoiceInfoEx(System.String,AcapelaGroup.BabTTSNet.BABTTSINFO2@)">
+            <summary>Static function to get (extended) info about a voice</summary>
+            <param name="sVoice">Name of the voice/speechfont</param>
+            <param name="info">Structure with the requested information [OUT]</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabTTS.GetVoiceInfo(System.String,AcapelaGroup.BabTTSNet.BABTTSINFO@)">
+            <summary>Static function to get info about a voice</summary>
+            <param name="sVoice">Name of the voice/speechfont</param>
+            <param name="info">Structure with the requested information [OUT]</param>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTTS">
+            <summary>BabTTS Object</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionaries.Max">
+            <summary>Maximum number of dictionaries</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionaries.NumLoaded">
+            <summary>Number of loaded dictionaries</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionaries.Count">
+            <summary>Number of loaded dictionaries</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionaries.UnloadAll">
+            <summary>Unloads all dictionaries from BabTTS engine</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionaries.SaveAll">
+            <summary>Save all loaded dictionaries</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionaries.Load(System.String)">
+            <summary>Load a new dictionary</summary>
+            <param name="filename">Filename of the dictionary file</param>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabDictionaries">
+            <summary>List of dictionaries</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabDictionaryEntries">
+            <summary>List of words in a dictionary</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.Entries">
+            <summary>List of words</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.Info">
+            <summary>Dictionary info structure</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.Enabled">
+            <summary>Enable/Disable the dictionary</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.IsModified">
+            <summary>Indicates if dictionary is modified</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.LastError">
+            <summary>Last error code fromp operations on the dictionary</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.BabDictionary.NumEntries">
+            <summary>Number of words in the dictionary</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.GetWordTransEx(System.String,System.String@,AcapelaGroup.BabTTSNet.BabTtsWordType@)">
+            <summary>Get the transcription and WordType of a word</summary>
+            <param name="word">Word existing in the dictionary</param>
+            <param name="transcription">Transcription of that word [OUT], or 'sayas' if used when added</param>
+            <param name="wordtype">Grammatical nature of the word [OUT]</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.RemoveWordEx(System.String)">
+            <summary>Remove a word witgh 'encoding'</summary>
+            <param name="word">Word to remove from the dictionary</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.AddWordEx(System.String,System.String,AcapelaGroup.BabTTSNet.BabTtsWordType)">
+            <summary>Add a word with 'encoding', transcription, sayas and WordType to the dictionary
+</summary>
+            <param name="word">Word to add in the dictionary</param>
+            <param name="transcription">Transcription of that word</param>
+            <param name="wordtype">Grammatical nature of the word </param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.GetWordTrans(System.String,System.String@,AcapelaGroup.BabTTSNet.BabTtsWordType@)">
+            <summary>Get the transcription and WordType of a word</summary>b
+<param name="word">Word existing in the dictionary</param><param name="transcription">Transcription of that word [OUT]</param><param name="wordtype">Grammatical nature of the word [OUT]</param></member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.RemoveWord(System.String)">
+            <summary>Remove a word</summary>
+            <param name="word">Word to remove from the dictionary</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.AddWord(System.String,System.String,AcapelaGroup.BabTTSNet.BabTtsWordType)">
+            <summary>Add a word with transcription and WordType to the dictionary
+</summary>
+            <param name="word">Word to add in the dictionary</param>
+            <param name="transcription">Transcription of that word</param>
+            <param name="wordtype">Grammatical nature of the word </param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.SetPassword(System.String,System.String)">
+            <summary>Set the passwords</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.Save(System.String)">
+            <summary>Save to specified filename
+</summary>
+            <param name="filename">new filename for the dictionary</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.Save">
+            <summary>Save the dictionary to the same filename</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.BabDictionary.Unload">
+            <summary>Unload the dictionary from BabTTS</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabDictionary">
+            <summary>Dictionary object</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.TTSCantCreateException">
+            <summary>Exception if the TTS object can't be created</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.Diconame">
+            <summary>User-specified name</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.Description">
+            <summary>User description</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.dwProperties">
+Indicates if the dictionary can be edited by user
+			  * @remarks combination of BABTTS_DICTPROPERTIES flag
+
+<summary>Properties of the dictionary (structure)</summary></member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.tModified">
+            <summary>Modified date</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.tCreated">
+            <summary>Creation date</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.dwRevision">
+            <summary>Revision number</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.dwNumEntries">
+            <summary>Number of entries</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.Version">
+            <summary>Internal version</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.Language">
+            <summary>Language of this dictionary</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSDICTINFO.Filename">
+            <summary>Filename of the dictionary</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSDICTINFO">
+            <summary>Information about a dictionary</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsDictProperties">
+            <summary>Properties of the dictionary</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_MODIFIED">
+            <summary>The dictionary has been modified</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_PASSWORD">
+            <summary>The dictionary is password protected</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_SYSTEM">
+            <summary>It's a system dictionary, not enumerated</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_WRITE">
+            <summary>The user cannot alter the dictionary</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_READ">
+            <summary>The user cannot read the content</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDictProperties.BABTTS_DICT_ENABLED">
+            <summary>The dictionary is enabled</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsWordType">
+            <summary>Grammatical type of word in the user dictionary</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSPHONEINFO">
+            <summary>Info about a phoneme with Viseme</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSMOUTH">
+            <summary>Information about a Viseme</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.LanguagePath">
+            <summary>Path to the directory where the data for the language is located</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Path">
+            <summary>Path to the directory where the data for the speech font is located</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.dwSpeed">
+            <summary>Speech rate of the speech font in words/minute</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Style">
+            <summary>Style of the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.dwCodePage">
+            <summary>Win32 code page associated with the language (for UTF-8: CP_UTF8 is 65001)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.wLangID">
+            <summary>Win32 language ID (`MAKELANGID(LANG, SUBLANG)`)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Dialect">
+            <summary>Name of the dialect</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.LanguageISOCode">
+            <summary>ISO code for the language</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.LanguageCode">
+            <summary>Code for the language</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Age">
+            <summary>Age of the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Gender">
+            <summary>Gender of the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Synth">
+            <summary>Synthesizer used by the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Type">
+            <summary>Type of speech font (user or global)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Freq">
+            <summary>Sampling rate of the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.NlpEngineVersion">
+            <summary>Version of the engine (major, minor, reserved)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.DataVersion">
+            <summary>Version of the data</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.LanguageDisplay">
+            <summary>Name of the language in the language (for humans)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Language">
+            <summary>Name of the language in English (for humans)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.NlpEngine">
+            <summary>Name of the language engine (for computers)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Base">
+            <summary>Name of the base speech font of this speech font, if any (empty if this speech font isn't a derivate)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Speaker">
+            <summary>Name of the speaker</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.Name">
+            <summary>Name of the speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.dwStructVersion">
+            <summary>Version of the structure</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO2.dwStructSize">
+            <summary>Size of the structure</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSINFO2">
+            <summary>Extended structured information about a speech font</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.wLangID">
+            <summary>Windows LanguageID (LANG,SUBLANG)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.dwSpeed">
+            <summary>Speed of speech in words/minute</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.dwCharset">
+            <summary>Character set (to display the text in the language)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.dwCodePage">
+            <summary>Code page for the language</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Style">
+            <summary>Optional speech style</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Dialect">
+            <summary>Optional dialect</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Age">
+            <summary>Age class (Enum)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Gender">
+            <summary>Gender (Enum)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Synth">
+            <summary>Synthesizer technology (Enum)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Type">
+            <summary>Type of speechfont (Enum)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Freq">
+            <summary>Sampling rate (Enum)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Version">
+            <summary>Version of engine</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Language">
+            <summary>Language of the speechfont</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Speaker">
+            <summary>Name of Speaker</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSINFO.Name">
+            <summary>Name of SpeechFont</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSINFO">
+            <summary>Information on the SpeechFont</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsAge">
+            <summary>Age class of the speaker</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsGender">
+            <summary>Gender of the SpeechFont</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsSamplingRate">
+            <summary>Possible sampling rates of the SpeechFont</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_44KHZ">
+            <summary>44 KHz (reserved)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_32KHZ">
+            <summary>32 kHz</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_22KHZ">
+            <summary>22 KHz (for multimedia)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_16KHZ">
+            <summary>16 KHz (for multimedia)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_11KHZ">
+            <summary>11 KHz (for telephony)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_8KHZ">
+            <summary>8 KHz (for trelephony)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SAMP_6KHZ">
+            <summary>6 KHz</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsSynth">
+            <summary>Synthesizer technology</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SYNTH_COLIBRI">
+            <summary>Colibri</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SYNTH_SELECTOR">
+            <summary>Selector</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SYNTH_BRIGHTSPEECH">
+            <summary>BrightSpeech</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_SYNTH_BABIL">
+            <summary>Babil</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsType">
+            <summary>Type of SpeechFont</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsType.BABTTS_TYPE_USER">
+            <summary>Specific to this user</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsType.BABTTS_TYPE_GLOBAL">
+            <summary>Global for all users</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsPauseType">
+            <summary>The supported kinds of Pauses</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsPauseType.PAUSESPELL">
+            <summary>Pause between letters in spelling mode</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsPauseType.PAUSEBRACKET">
+            <summary>Bracket like [] {} ()</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsPauseType.PAUSECOMMA">
+            <summary>Comma like , :</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsPauseType.PAUSESEMICOLON">
+            <summary>Semicolon</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsPauseType.PAUSEPUNCT">
+            <summary>Punctuation like . ! ?</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsPause">
+            <summary>The supported lengths of Pauses</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsMsgMask">
+            <summary>Flags for selecting events of interest</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_PHONE">
+            <summary>Phoneme info</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_TEXTEND">
+            <summary>Last phoneme of a text</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_TEXTBEGIN">
+            <summary>First phoneme of a text</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_USERMRK">
+            <summary>A usermark has been reached</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_SENTENCE">
+            <summary>Phoneme is a sentence boundary (first silence generally)</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.BABTTS_EVENT_WORD">
+            <summary>Phoneme is a word boundary</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSUNITINFO.dwDuration">
+            <summary>Duration of item</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSUNITINFO.dwTimeStamp">
+            <summary>Timestamp of event</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSUNITINFO.dwLength">
+            <summary>Length of item</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BABTTSUNITINFO.dwPos">
+            <summary>Position in text</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BABTTSUNITINFO">
+            <summary>Information regarding an event, like a phoneme, sentence or word</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsWordEncoding">
+            <summary>Encoding used by Extended dictionary functions</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWordEncoding.BABTTS_WORDENCODING_UTF8">
+            <summary>Extended Dictionary encoding flags</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsReadingMode">
+            <summary>Text reading mode</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsReadingMode.BABTTS_READ_LETTER">
+            <summary>Letter by letter reading mode</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsReadingMode.BABTTS_READ_WORD">
+            <summary>Word by word reading mode</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsReadingMode.BABTTS_READ_TEXT">
+            <summary>Text reading mode</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsReadingMode.BABTTS_READ_DEFAULT">
+            <summary>Default reading mode</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsFormat">
+            <summary>Supported audio samples formats</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsParam">
+            <summary>Supported parameters</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_VOCALTRACT">
+            <summary />
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_FILTERVALUE4">
+            <summary>Attenuation/amplification in band 4</summary>
+            <remarks>upto 10dB. 0 means -10dB, 100 means 0dB, 200 means +10dB</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_FILTERVALUE3">
+            <summary>Attenuation/amplification in band 3</summary>
+            <remarks>upto 10dB. 0 means -10dB, 100 means 0dB, 200 means +10dB</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_FILTERVALUE2">
+            <summary>Attenuation/amplification in band 2</summary>
+            <remarks>upto 10dB. 0 means -10dB, 100 means 0dB, 200 means +10dB</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_FILTERVALUE1">
+            <summary>Attenuation/amplification in band 1</summary>
+            <remarks>upto 10dB. 0 means -10dB, 100 means 0dB, 200 means +10dB</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_USEFILTER">
+            <summary>Use of the equalizer, range: 0-1</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PAUSESPELL">
+            <summary>Duration of pause in spelling mode, range from BABTTS_PAUSE_VERYSHORT to BABTTS_PAUSE_VERYLONG</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PAUSEBRACKET">
+            <summary>Duration of pause for Brackeetsd, range from BABTTS_PAUSE_VERYSHORT to BABTTS_PAUSE_VERYLONG</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PAUSECOMMA">
+            <summary>Duration of pause for Comma, range from BABTTS_PAUSE_VERYSHORT to BABTTS_PAUSE_VERYLONG</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PAUSESEMICOLON">
+            <summary>Duration of pause for SemiColons, range from BABTTS_PAUSE_VERYSHORT to BABTTS_PAUSE_VERYLONG</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PAUSEPUNCT">
+            <summary>Duration of pause for Punctuations, range from BABTTS_PAUSE_VERYSHORT to BABTTS_PAUSE_VERYLONG</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_READINGMODE">
+            <summary>Reading mode of the text: Text, word by word or letter by letter</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_MSGMASK">
+            <summary>Event message mask</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_DEVICE">
+            <summary>Device identifier for audio output</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_TRAILINGSILENCE">
+            <summary />
+            <summary>Length of pause at the end of a sentence</summary>
+            <remarks>Range: 20 ms - 10 sec, default: 50 ms</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_LEADINGSILENCE">
+            <summary>Length of pause at the beginning of a sentence</summary>
+            <remarks>Range: 20 ms - 10 sec, default: 50 ms</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_CBINSTANCE">
+            <summary>Callback instance value (user-specific)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_VOLUMERATIO">
+            <summary>Applies a ratio (in %) to the output of the TTS in order to change the volume. Range: 0-150%</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_MINPITCH">
+            <summary>Minimum allowed pitch in Hz</summary>
+            <remarks>Not supported for HQ voices</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_MAXPITCH">
+            <summary>Maximum allowed pitch in Hz</summary>
+            <remarks>Not supported for HQ voices</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_VOLUME">
+            <summary />
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_WAVEFORMAT">
+            <summary>Coding scheme applied to the output</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_SPEED">
+            <summary>Reading speed in % of the default value, range 30-300%</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_PITCH">
+            <summary>Sets the baseline pitch (in Hz) of the voice, range 30-500 Hz</summary>
+            <remarks>Not supported for HQ voices</remarks>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsParam.BABTTS_PARAM_VOICE">
+            <summary>Actual sampling rate of the voice, like 4000, 8000, 11025, 22050, 44100 Hz</summary>
+            <remarks>Read-only</remarks>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsError">
+            <summary>Possible errors returned by the functions</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.W_BABTTS_NOMOREDATA">
+            <summary>No more data</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.W_BABTTS_NOTFULLYPROCESSED">
+            <summary>The processing was not fully processed. Need to call the function one more time to complete the process</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.W_BABTTS_NOTPROCESSED">
+            <summary>The processing was not done</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOERROR">
+            <summary>No error</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOMEM">
+            <summary>No memory for allocation</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_MEMFREE">
+            <summary>Problem when freeing memory</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_ISPLAYING">
+            <summary>Already in play mode or currently processing text (obsolete)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_SPEAKERROR">
+            <summary>Error while Speaking or processing text</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_WAVEOUTWRITE">
+            <summary>Can't write to the output device</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_WAVEOUTNOTFREE">
+            <summary>Can't open the output device</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_PROCESSERROR">
+            <summary>"Generic"/unhandled error</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_REGISTRYERROR">
+            <summary>Bad information in the registry</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOREGISTRY">
+            <summary>The required registry keys are not valid / do not exist</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOTVALIDPARAMETER">
+            <summary>A parameter/argument is not valid</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_THREADERROR">
+            <summary>Error when attempting to start a new thread</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NONLP">
+            <summary>The NLP object is invalid/doesn't exist</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_INVALIDTAG">
+            <summary>The inserted tag is invalid (obsolette)</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_FILEWRITE">
+            <summary>Error when attempting to write to a file</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_FILEOPEN">
+            <summary>Error when opening a file</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_BADPHO">
+            <summary>An incorrect phoneme was introduced</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_DICT_OPEN">
+            <summary>The specified dictionary doesn't exist</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_DICT_WRITE">
+            <summary>Error when attempting to write to the file</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_DICT_READ">
+            <summary>Error reading the lexicon file</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_DICT_NOENTRY">
+            <summary>The user lexicon is empty</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOTIMPLEMENTED">
+            <summary>The function is not yet implemented</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NODBA">
+            <summary>A data file is missing</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NODICT">
+            <summary>No dictionary </summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_NOTVALIDLICENSE">
+            <summary>The license key is not valid for the requested function</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_LIBNOTINITIALIZED">
+            <summary />
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsError.E_BABTTS_DICT_BADVERSION">
+            <summary>The dictionary version is too old ... Use the conversion tool</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags">
+            <summary>Flags useable with the InsertText function</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_READ_LETTER">
+            <summary>Text read mode: letter by letter</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_READ_WORD">
+            <summary>Text read mode: word by word</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_READ_TEXT">
+            <summary>Text read mode: as text</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_READ_DEFAULT">
+            <summary>Text read mode: default</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TAG_SAPI">
+            <summary>Process SAPI tags</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TAG_NO">
+            <summary>No SAPI tags processing</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TXT_MACROMAN">
+            <summary>Encoding: MacRoman</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TXT_UTF8">
+            <summary>Encoding: UTF8</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TXT_UC2">
+            <summary>Encoding: Unicode16</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TXT_OEM">
+            <summary>Encoding: OEM</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TXT_ANSI">
+            <summary>Encoding: ANSI</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_FILE">
+            <summary>Argument is a filename</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsInsertTextFlags.BABTTS_TEXT">
+            <summary>Argument is the Text</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsWriteFlags">
+            <summary>Flags useable with the Write function</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_READ_LETTER">
+            <summary>Text read mode: letter by letter</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_READ_WORD">
+            <summary>Text read mode: word by word</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_READ_TEXT">
+            <summary>Text read mode: as text</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_READ_DEFAULT">
+            <summary>Text read mode: default</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE_AIFF">
+            <summary>AIFF file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE_VOX">
+            <summary>VOX file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE_AU">
+            <summary>Sun AU file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE_WAV">
+            <summary>WAV audio file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE_RAW">
+            <summary>Audio file type: RAW, headerless</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TAG_SAPI">
+            <summary>Process SAPI tags</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TAG_NO">
+            <summary>No SAPI tags processing</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TXT_MACROMAN">
+            <summary>Encoding: MacRoman</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TXT_UTF8">
+            <summary>Encoding: UTF8</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TXT_UC2">
+            <summary>Encoding: Unicode16</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TXT_OEM">
+            <summary>Encoding: OEM</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TXT_ANSI">
+            <summary>Encoding: ANSI</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_FILE">
+            <summary>Argument is a filename</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsWriteFlags.BABTTS_TEXT">
+            <summary>Argument is the Text</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags">
+            <summary>Flags useable with the Speak function</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_READ_LETTER">
+            <summary>Text read mode: letter by letter</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_READ_WORD">
+            <summary>Text read mode: word by word</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_READ_TEXT">
+            <summary>Text read mode: as text</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_READ_DEFAULT">
+            <summary>Text read mode: default</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE_AIFF">
+            <summary>AIFF file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE_VOX">
+            <summary>VOX file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE_AU">
+            <summary>Sun AU file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE_WAV">
+            <summary>WAV audio file type</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE_RAW">
+            <summary>Audio file type: RAW, headerless</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TAG_SAPI">
+            <summary>Process SAPI tags</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TAG_NO">
+            <summary>No SAPI tags processing</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TXT_MACROMAN">
+            <summary>Encoding: MacRoman</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TXT_UTF8">
+            <summary>Encoding: UTF8</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TXT_UC2">
+            <summary>Encoding: Unicode16</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TXT_OEM">
+            <summary>Encoding: OEM</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TXT_ANSI">
+            <summary>Encoding: ANSI</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_FILE">
+            <summary>Argument is a filename</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_TEXT">
+            <summary>Argument is the Text</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_ASYNC">
+            <summary>Asynchronous speech</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsSpeakFlags.BABTTS_SYNC">
+            <summary>Synchronous speech</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsOpenModes.BABTTS_USEDEFDICT">
+            <summary>Open voice with default dictionaries</summary>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.BabTtsDlg">
+            <summary>Possible kinds of Dialog in BabTTS object</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDlg.BABTTS_DLG_VOICEMANAGER">
+            <summary>Voice Manager dialog</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDlg.BABTTS_DLG_ALL_LEXICON">
+            <summary>Lexicon Manager dialog</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDlg.BABTTS_DLG_PROPERTIES">
+            <summary>Voice Property dialog</summary>
+        </member>
+        <member name="F:AcapelaGroup.BabTTSNet.BabTtsDlg.BABTTS_DLG_LEXICON">
+            <summary>Lexicon editor dialog</summary>
+        </member>
+        <member name="P:AcapelaGroup.BabTTSNet.Helpers.AcaTTSPath">
+            <summary>AcaTTSPath
+<value>Property specifying the path to the AcaTTS.dll file</value></summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.Helpers.FindAcaTTS">
+            <summary>Tries to locate the acatts.dll file somewhere in the parents of the current directory,
+as it's assumed that the caller is located in a subfolder of the product</summary>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.Helpers.Bundle(System.String)">
+            <summary>Function to prepare the Bundling</summary>
+            <param name="licstring">Correcly formatted license string provided by Acapela Group</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.Helpers.GetEnumValue(System.Type,System.String)">
+            <summary>Returns the Enum Value inside a Type from a Description</summary>
+            <param name="type">A type reference to the wanted Enum Type</param>
+            <param name="description">Description String of one of the existing values of the Enum</param>
+        </member>
+        <member name="M:AcapelaGroup.BabTTSNet.Helpers.GetEnumDescription(System.Enum)">
+            <summary>
+Returns the Description field (if present) from an Enum Value
+</summary>
+            <param name="en">Enum value</param>
+        </member>
+        <member name="T:AcapelaGroup.BabTTSNet.Helpers">
+            <summary>Various static helpers functions</summary>
+        </member>
+    </members>
+</doc>

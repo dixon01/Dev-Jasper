@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<MultiLangListItem index="0">
+  <Labels>
+    <string>Menü</string>
+    <string>Menu</string>
+    <string>Menu</string>
+  </Labels>
+  <Children>
+    <MultiLangListItem index="1">
+      <Labels>
+        <string>Dienst</string>
+        <string>Service</string>
+        <string>Duty</string>
+      </Labels>
+      <Children>
+        <MultiLangListItem index="1">
+          <Labels>
+            <string>Fahrer abmelden</string>
+            <string>Fin de service</string>
+            <string>Log off driver</string>
+          </Labels>
+          <Command>LogOffAll</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="2">
+          <Labels>
+            <string>Fahrer wechseln</string>
+            <string>Changement de conducteur</string>
+            <string>Driver change</string>
+          </Labels>
+          <Command>DriverChange</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="3">
+          <Labels>
+            <string>Umlauf abmelden</string>
+            <string>Fin de course</string>
+            <string>Log off block</string>
+          </Labels>
+          <Command>LogOffDrive</Command>
+        </MultiLangListItem>
+      </Children>
+    </MultiLangListItem>
+    <MultiLangListItem index="2">
+      <Labels>
+        <string>Funktionen</string>
+        <string>Fonctions</string>
+        <string>Functions</string>
+      </Labels>
+      <Children>
+        <MultiLangListItem index="1">
+          <Labels>
+            <string>Spezial Ansagen</string>
+            <string>Annonce sonore spéciale</string>
+            <string>Special announcment</string>
+          </Labels>
+          <Command>ShowAnnouncement</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="2">
+          <Labels>
+            <string>Umleitung</string>
+            <string>Déviation</string>
+            <string>Detour</string>
+          </Labels>
+          <Command>Detour</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="3">
+          <Labels>
+            <string>Razzia</string>
+            <string>Contrôle</string>
+            <string>Razzia</string>
+          </Labels>
+          <Command>Razzia</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="4">
+          <Labels>
+            <string>Fahrgast Zählung</string>
+            <string>Comptage de passagers</string>
+            <string>Passenger count</string>
+          </Labels>
+          <Command>PassengerCount</Command>
+        </MultiLangListItem>
+      </Children>
+    </MultiLangListItem>
+    <MultiLangListItem index="3">
+      <Labels>
+        <string>Kommunikation</string>
+        <string>Communication</string>
+        <string>Communication</string>
+      </Labels>
+      <Children>
+        <MultiLangListItem index="1">
+          <Labels>
+            <string>Telefonbuch</string>
+            <string>Annuaire</string>
+            <string>Phonebook</string>
+          </Labels>
+          <Command>SpeechGsm</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="2">
+          <Labels>
+            <string>Funk (IRA)</string>
+            <string>iqube.Radio</string>
+            <string>Iqube Radio</string>
+          </Labels>
+          <Command>SpeechIra</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="3">
+          <Labels>
+            <string>Empfangene Meldungen</string>
+            <string>Messages reçus</string>
+            <string>Received Messages</string>
+          </Labels>
+          <Command>InformationMessages</Command>
+        </MultiLangListItem>
+      </Children>
+    </MultiLangListItem>
+    <MultiLangListItem index="4">
+      <Labels>
+        <string>Einstellungen</string>
+        <string>Paramètres</string>
+        <string>Settings</string>
+      </Labels>
+      <Children>
+        <MultiLangListItem index="1">
+          <Labels>
+            <string>Sprache</string>
+            <string>Langage</string>
+            <string>Language</string>
+          </Labels>
+          <Command>ChangeLanguage</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="2">
+          <Labels>
+            <string>Helligkeit</string>
+            <string>Luminosité</string>
+            <string>Brightness</string>
+          </Labels>
+          <Command>ChangeBrightness</Command>
+        </MultiLangListItem>
+        <MultiLangListItem index="3">
+          <Labels>
+            <string>Ansage Lautstärke</string>
+            <string>Volume d'annonce</string>
+            <string>Announcement volume</string>
+          </Labels>
+          <Command>ChangeTtsVolume</Command>
+        </MultiLangListItem>
+      </Children>
+    </MultiLangListItem>
+    <MultiLangListItem index="5">
+      <Labels>
+        <string>Beenden</string>
+        <string>Quitter</string>
+        <string>Quit</string>
+      </Labels>
+      <Command>Quit</Command>
+    </MultiLangListItem>
+  </Children>
+</MultiLangListItem>

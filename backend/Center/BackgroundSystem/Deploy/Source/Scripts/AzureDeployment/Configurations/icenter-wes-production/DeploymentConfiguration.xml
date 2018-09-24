@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeploymentConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Slot>Production</Slot>
+  <ServiceName>icenter-wes</ServiceName>
+  <StorageAccountName>icenterwes</StorageAccountName>
+  <StorageAccountKey>lCPan3VYPzQp2s6DwWMm2DaG6to2NKBu6xWB2BXAcLSfNjQsabTWUsC2B0XYQVM3+z4yJpRg/S7DukQxYJ4WDw==</StorageAccountKey>
+  <SubscriptionName>Visual Studio Professional mit MSDN</SubscriptionName>
+  <DeploymentLabelFormat>Center_BackgroundSystem_{0}</DeploymentLabelFormat>
+</DeploymentConfiguration>

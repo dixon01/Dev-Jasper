@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHost", "ConsoleHost\ConsoleHost.csproj", "{BC4FA926-3701-4670-968C-314488E253BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "WpfApplication\WpfApplication.csproj", "{97921F7D-5678-43FC-9513-88425B5602B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{7352332F-0FFB-41F3-82B5-DAC6100FD95C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Tests", "Library.Tests\Library.Tests.csproj", "{746C46AB-3652-4610-884E-A9A336F2D0A3}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConsoleHost\\ConsoleHost.csproj
+		SccProjectName1 = ConsoleHost
+		SccLocalPath1 = ConsoleHost
+		SccProjectUniqueName2 = WpfApplication\\WpfApplication.csproj
+		SccProjectName2 = WpfApplication
+		SccLocalPath2 = WpfApplication
+		SccProjectUniqueName3 = Library\\Library.csproj
+		SccProjectName3 = Library
+		SccLocalPath3 = Library
+		SccProjectUniqueName4 = Library.Tests\\Library.Tests.csproj
+		SccProjectName4 = Library.Tests
+		SccLocalPath4 = Library.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC4FA926-3701-4670-968C-314488E253BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4FA926-3701-4670-968C-314488E253BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4FA926-3701-4670-968C-314488E253BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4FA926-3701-4670-968C-314488E253BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97921F7D-5678-43FC-9513-88425B5602B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97921F7D-5678-43FC-9513-88425B5602B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97921F7D-5678-43FC-9513-88425B5602B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97921F7D-5678-43FC-9513-88425B5602B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7352332F-0FFB-41F3-82B5-DAC6100FD95C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7352332F-0FFB-41F3-82B5-DAC6100FD95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7352332F-0FFB-41F3-82B5-DAC6100FD95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7352332F-0FFB-41F3-82B5-DAC6100FD95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{746C46AB-3652-4610-884E-A9A336F2D0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{746C46AB-3652-4610-884E-A9A336F2D0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{746C46AB-3652-4610-884E-A9A336F2D0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{746C46AB-3652-4610-884E-A9A336F2D0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

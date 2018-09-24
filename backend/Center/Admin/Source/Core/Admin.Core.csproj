@@ -1,0 +1,1280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54B3A878-29A9-4910-927F-8F7F896E52F0}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Admin.Core</RootNamespace>
+    <AssemblyName>Gorba.Center.Admin.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\AvalonEdit_4.3.1\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\..\..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\..\..\3rdParty\Mono.Cecil\0.9.5.2\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\..\..\..\3rdParty\Ookii.Dialogs\1.0.0.0\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\System.Windows.Interactivity\v2.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewers, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.FixedDocumentViewers.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Documents.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Documents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Documents.Fixed.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Xaml, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Documents.FormatProviders.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AdminBootstrapper.cs" />
+    <Compile Include="CommandCompositionKeys.cs" />
+    <Compile Include="Controllers\AdminApplicationController.cs" />
+    <Compile Include="Controllers\AdminShellController.partial.cs" />
+    <Compile Include="Controllers\Entities\Meta\BackgroundSystemSettingsStageController.cs" />
+    <Compile Include="Controllers\Entities\AccessControl\AuthorizationStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\AccessControl\AuthorizationValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\AccessControl\UserRoleDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\AccessControl\UserRoleStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\AccessControl\UserRoleValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\MediaConfigurationDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\MediaConfigurationValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\UnitConfigurationStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\MediaConfigurationStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\UnitConfigurationDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Configurations\UnitConfigurationValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\DataController.partial.cs" />
+    <Compile Include="Controllers\Entities\DataControllerBase.cs" />
+    <Compile Include="Controllers\Entities\DataControllers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataControllers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Entities\Documents\DocumentDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Documents\DocumentStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Documents\DocumentValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Documents\DocumentVersionDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Documents\DocumentVersionStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Documents\DocumentVersionValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\IReadOnlyEntityCollection.cs" />
+    <Compile Include="Controllers\Entities\Membership\AssociationTenantUserUserRoleStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\AssociationTenantUserUserRoleDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\AssociationTenantUserUserRoleValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\TenantStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\TenantValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\UserDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Membership\UserStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\EntityStageControllerBase.cs" />
+    <Compile Include="Controllers\Entities\EntityStageControllers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityStageControllers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AdminShellController.generated.cs">
+      <DependentUpon>AdminShellController.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers\Entities\Membership\UserValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Meta\FtpServerDataController.cs" />
+    <Compile Include="Controllers\Entities\Meta\FtpServerStageController.cs" />
+    <Compile Include="Controllers\Entities\Meta\UserDefinedPropertyDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Meta\UserDefinedPropertyStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Meta\UserDefinedPropertyValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\ReadOnlyEntityCollection.cs" />
+    <Compile Include="Controllers\Entities\Resources\ResourceStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Software\PackageStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Software\PackageValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Software\PackageVersionDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Software\PackageVersionStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Software\PackageVersionValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\ProductTypeDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\ProductTypeStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\UnitStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\UnitDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\ProductTypeValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Units\UnitValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateCommandStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateCommandDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateCommandValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateFeedbackStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateFeedbackDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateFeedbackValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateGroupStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateGroupDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdateGroupValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdatePartStageController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdatePartDataController.partial.cs" />
+    <Compile Include="Controllers\Entities\Update\UpdatePartValidator.partial.cs" />
+    <Compile Include="Controllers\Entities\Validators.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validators.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IAdminApplicationController.cs" />
+    <Compile Include="Controllers\IAdminShellController.cs" />
+    <Compile Include="Controllers\PartialAsync.cs" />
+    <Compile Include="Controllers\RemovableMedia\RemovableMediaController.cs" />
+    <Compile Include="Controllers\RemovableMedia\RemovableMediaListController.cs" />
+    <Compile Include="Controllers\RemovableMedia\ServerResourceProvider.cs" />
+    <Compile Include="Controllers\UnitConfig\AhdlcRenderer\AhdlcGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\AhdlcRenderer\AhdlcRendererCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\AhdlcRenderer\AhdlcSignPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\AudioRenderer\AcapelaPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\AudioRenderer\AudioChannelPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\AudioRenderer\AudioGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\AudioRenderer\AudioRendererCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\LamExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\MainUnitExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\BusModuleExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\IbisControlExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\McuExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\TerminalExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\DisplayOrientationPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\MainUnit\DisplayUnitPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\MainUnit\MainUnitCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\MainUnit\MainUnitConfigPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\ThorebC90\IbisControlPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\ThorebC90\TerminalPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\ThorebC90\ThorebC90CategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\ThorebC90\BusPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\CategoryControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Composer\ComposerCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Composer\ComposerGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\ExportExecutionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\PostInstallationActionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\PreInstallationActionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\LocalDownloadPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\InstallationActionPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\SoftwareVersionsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\DirectXRenderer\DirectXGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\DirectXRenderer\DirectXImagePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\DirectXRenderer\DirectXRendererCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\DirectXRenderer\DirectXTextPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\DirectXRenderer\DirectXVideoPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\AcapelaExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\AhdlcRendererExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\AudioRendererExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\ComposerExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\ConfigAdjuster.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\DirectXRendererExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\ExportControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\ConclusionController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\HardwareManagerExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\IAssemblyResolver.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\ProtranExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\SystemManagerExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\UpdateExportController.cs" />
+    <Compile Include="Controllers\UnitConfig\Export\ConfigAdjusterProxy.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\DisplayBrightnessPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\DviLevelShiftersPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Conclusion\ExportPreparationPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\HardwareCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\InputsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\MultiScreenPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\OutputsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\RebootPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\Rs485ModePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\ScreenResolutionsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Hardware\TransceiversPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\IFilteredPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Init\InitializationCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Init\LoadDataPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\MultiEditorPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\MultiSelectPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\PartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\PartControllerBase{TViewModel}.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\AnswerWithDS120TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\AnswerWithDS130TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS021AConnectionsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS021ATelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS021CTelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS021TelegramPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS080TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS081TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\GO003TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\GO004TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\GO005TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\GO007TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\HPW074TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\LastStopMode.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\OptionalDataTelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\TelegramType.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\DataItemPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\DataItemPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\DataItemPartControllerBase{T}.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\DataItemSelectionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\DateTimeDataItemPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\DS020TelegramPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisProtocolCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisSimulationPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisSourcePartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisTelegramPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisTelegramPartControllerBase{T}.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisTelegramSelectionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\IbisUdpServerPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\IO\InputHandlerPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\InternationalTextDataItemPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\IO\IoProtocolCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\IO\IoProtocolGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\PersistencePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\ProtranCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Ibis\SimpleTelegramPartController{T}.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\TransformationPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\TransformationsCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\FilteredPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\TransformationSelectionController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\TransformationsGeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\Vdv301GeneralPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\Vdv301LanguagesPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\Vdv301PartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\Vdv301ProtocolCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Protran\Vdv301\Vdv301ServicePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SoftwareVersions.cs" />
+    <Compile Include="Controllers\UnitConfig\Software\BackgroundSystemConnectionPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Software\IncomingPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Software\MediSlavePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Software\OutgoingPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Software\SoftwareCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\SplashScreens\ButtonSplashScreenPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SplashScreens\HotKeySplashScreenPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SplashScreens\SplashScreenPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\SplashScreens\SplashScreensCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\SplashScreens\StartUpSplashScreenPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\ConfigModePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\GlobalSystemConfigPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\IOSystemConfigPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\SingleSystemConfigPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\SystemConfigCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\SystemConfig\SystemConfigPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\XmlEditorPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\IbisTimeSyncPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\SntpTimeSyncPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\SntpTimeSyncPartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\TimeSourcePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\TimeSyncCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\TimeSync\Vdv301TimeSyncPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\AzureUpdatePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\FtpUpdatePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\MediMasterUpdatePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\MediSlaveUpdatePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\UpdateAgentPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\UpdateCategoryController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\UpdateMethodsPartController.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\UpdatePartControllerBase.cs" />
+    <Compile Include="Controllers\UnitConfig\Update\UsbUpdatePartController.cs" />
+    <Compile Include="Controllers\UnitConfig\VersionedSettingValidator.cs" />
+    <Compile Include="Converters\ErrorListToTooltipConverter.cs" />
+    <Compile Include="Converters\PathToFilenameConverter.cs" />
+    <Compile Include="Converters\ReadOnlyDataViewModelCollectionPropertiesConverter.cs" />
+    <Compile Include="Converters\TimeSpanToDateTimeConverter.cs" />
+    <Compile Include="Converters\VersionToStringConverter.cs" />
+    <Compile Include="DataViewModels\AccessControl\AuthorizationFlagDataViewModel.cs" />
+    <Compile Include="DataViewModels\AccessControl\AuthorizationMatrixDataViewModel.cs" />
+    <Compile Include="DataViewModels\AccessControl\AuthorizationReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\AccessControl\UserRoleDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Configurations\UnitConfigurationDataViewModel.cs" />
+    <Compile Include="DataViewModels\Configurations\UnitConfigurationReadOnlyDataViewModel.cs" />
+    <Compile Include="DataViewModels\DataViewModelFactory.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataViewModelFactory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataViewModels\DataViewModelWithUdpBase.cs" />
+    <Compile Include="DataViewModels\Documents\DocumentVersionReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\EntityCollection.cs" />
+    <Compile Include="DataViewModels\EntityCollectionBase.cs" />
+    <Compile Include="DataViewModels\EntityReference.cs" />
+    <Compile Include="DataViewModels\ItemSelectionViewModel.cs" />
+    <Compile Include="DataViewModels\ItemSelectionViewModelBase.cs" />
+    <Compile Include="DataViewModels\Membership\AssociationTenantUserUserRoleReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Membership\UserDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Meta\FtpServerDataViewModel.cs" />
+    <Compile Include="DataViewModels\Meta\FtpServerReadOnlyDataViewModel.cs" />
+    <Compile Include="DataViewModels\Meta\VerificationState.cs" />
+    <Compile Include="DataViewModels\ReadOnlyDataViewModelWithUdpBase.cs" />
+    <Compile Include="DataViewModels\SelectionProperty.cs" />
+    <Compile Include="DataViewModels\Software\FileItem.cs" />
+    <Compile Include="DataViewModels\Software\FileSystemItemBase.cs" />
+    <Compile Include="DataViewModels\Software\FolderItem.cs" />
+    <Compile Include="DataViewModels\Software\PackageVersionDataViewModel.cs" />
+    <Compile Include="DataViewModels\Update\UpdateCommandReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Update\UpdateFeedbackReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Update\UpdateGroupReadOnlyDataViewModel.cs" />
+    <Compile Include="DataViewModels\Update\UpdatePartReadOnlyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Update\UpdatePartsTimelineViewModel.cs" />
+    <Compile Include="DataViewModels\UserDefinedPropertyDescriptor.cs" />
+    <Compile Include="DataViewModels\XmlDataViewModel.cs" />
+    <Compile Include="Extensions\UnitConfigExtensions.cs" />
+    <Compile Include="Interaction\PasswordUtility.cs" />
+    <Compile Include="Interaction\PropertyDisplayParameters.cs" />
+    <Compile Include="Models\UnitConfig\IncomingData.cs" />
+    <Compile Include="Models\UnitConfig\OutgoingData.cs" />
+    <Compile Include="Models\UnitConfig\ScreenOrientation.cs" />
+    <Compile Include="Models\UnitConfig\ScreenResolution.cs" />
+    <Compile Include="Controllers\UnitConfig\UnitConfigKeys.cs" />
+    <Compile Include="Controllers\UnitConfig\UnitConfiguratorController.cs" />
+    <Compile Include="DataViewModels\DataViewModelBase.cs" />
+    <Compile Include="DataViewModels\DataViewModels.generated.cs">
+      <DependentUpon>DataViewModels.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataViewModels\ReadOnlyDataViewModelBase.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Interaction\ColumnVisibilityParameters.cs" />
+    <Compile Include="Interaction\FileMenuPrompt.cs" />
+    <Compile Include="Models\AdminApplicationState.cs" />
+    <Compile Include="Models\IAdminApplicationState.cs" />
+    <Compile Include="Models\RecentlyEditedEntityReference.cs" />
+    <Compile Include="Models\StageModel.cs" />
+    <Compile Include="Models\UnitConfig\SettingItemMode.cs" />
+    <Compile Include="Models\UnitConfig\UnitConfigCategory.cs" />
+    <Compile Include="Models\UnitConfig\UnitConfigContainer.cs" />
+    <Compile Include="Models\UnitConfig\UnitConfigData.cs" />
+    <Compile Include="Models\UnitConfig\UnitConfigPart.cs" />
+    <Compile Include="Models\UnitConfig\UnitConfigPartValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\AdminStrings.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminStrings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Entities\EntityValidatorBase.cs" />
+    <Compile Include="Resources\AdminStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdminStrings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminStrings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\TextMarkerService.cs" />
+    <Compile Include="Services\XmlValidator.cs" />
+    <Compile Include="ViewModels\AdminShell.cs" />
+    <Compile Include="ViewModels\AdminShellFactory.cs" />
+    <Compile Include="ViewModels\Editor\EntityEditorViewModel.cs" />
+    <Compile Include="ViewModels\IAdminShell.cs" />
+    <Compile Include="ViewModels\Navigator\NavigatorEntityViewModel.cs" />
+    <Compile Include="ViewModels\Navigator\NavigatorViewModel.cs" />
+    <Compile Include="ViewModels\Navigator\NavigatorViewModelBase.cs" />
+    <Compile Include="ViewModels\Navigator\PartitionViewModel.cs" />
+    <Compile Include="ViewModels\Navigator\RemovableMediaViewModel.cs" />
+    <Compile Include="ViewModels\RemovableMedia\UnitSelectionViewModel.cs" />
+    <Compile Include="ViewModels\RemovableMedia\UpdateGroupSelectionViewModel.cs" />
+    <Compile Include="ViewModels\Stages\Meta\BackgroundSystemSettingsViewModel.cs" />
+    <Compile Include="ViewModels\Stages\EntityStageViewModelBase.cs" />
+    <Compile Include="ViewModels\Stages\EntityStageViewModels.generated.cs">
+      <DependentUpon>EntityStageViewModels.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Stages\HomeStageViewModel.cs" />
+    <Compile Include="ViewModels\Stages\Meta\FtpServerStageViewModel.cs" />
+    <Compile Include="ViewModels\Stages\RemovableMediaStageViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\DirtyViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\DataErrorViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\CheckableEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\CheckableOptionViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\CheckableTreeEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\CheckableTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\ColorEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\DateTimeEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\EditableSelectionEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\GenericUsageDS021BaseEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\GenericUsageEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\MulitLineTextEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\MultiSelectEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\EditorViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\NamedElement.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\ResourceUploadEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\TextEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\TimeSpanEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\TitleEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\NamedListEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\XmlEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\ErrorState.cs" />
+    <Compile Include="ViewModels\UnitConfig\ErrorItem.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportConfigFileBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportExecutionEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportFileBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportFolder.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportResourceFile.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportPreparationEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportTextConfigFile.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\IExportableFile.cs" />
+    <Compile Include="ViewModels\UnitConfig\Init\LoadDataEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Init\LoadDataPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\MainUnit\DisplayUnitEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\MainUnit\DisplayUnitPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\CheckableTreePartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\ExportExecutionPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\ExportPreparationPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportXmlConfigFile.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\ExportItemBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\InstallationActionAdditionalFileViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\UnitExecutableInstallationActionViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\LocalExecutableInstallationActionViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Export\InstallationActionViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\LocalDownloadPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\MultiEditorPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\NumberEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\MultiSelectPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\InstallationActionPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\NamedListPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\PartViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\PlainTextPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\SelectionOptionViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\SelectionEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\SingleEditorPartViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\Editors\TransformationEditorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\TransformationPartViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\CapitalizeDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\ChainRefDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\ExceptionDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\JoinDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\LawoStringDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\MappingTransformationDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\MappingDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\RegexDividerDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\RegexMappingDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\ReplaceDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\ReverseDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\StringMappingDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\SymbolDividerDataViewModel.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\TransformationDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\UnitConfig\Transformations\TransformationDataViewModelBase{TConfig}.cs" />
+    <Compile Include="ViewModels\UnitConfig\Parts\XmlPartViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\UnitConfigTreeNodeViewModelBase.cs" />
+    <Compile Include="ViewModels\UnitConfig\UnitConfiguratorViewModel.cs" />
+    <Compile Include="ViewModels\UnitConfig\UnitConfiguratorWindowFactory.cs" />
+    <Compile Include="ViewModels\Widgets\RecentlyEditedEntityViewModel.cs" />
+    <Compile Include="ViewModels\Widgets\RecentlyEditedWidgetViewModel.cs" />
+    <Compile Include="ViewModels\Stages\StageViewModelBase.cs" />
+    <Compile Include="ViewModels\Widgets\WidgetViewModelBase.cs" />
+    <Compile Include="Views\AdminShellWindow.xaml.cs">
+      <DependentUpon>AdminShellWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\FileEditor.xaml.cs">
+      <DependentUpon>FileEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\AuthorizationMatrixEditor.xaml.cs">
+      <DependentUpon>AuthorizationMatrixEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\EntityEditorControl.xaml.cs">
+      <DependentUpon>EntityEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\FtpServerEditor.xaml.cs">
+      <DependentUpon>FtpServerEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\PackageVersionEditor.xaml.cs">
+      <DependentUpon>PackageVersionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\UnitConfigurationEditor.xaml.cs">
+      <DependentUpon>UnitConfigurationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\FileMenuDialog.xaml.cs">
+      <DependentUpon>FileMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NavigatorControl.xaml.cs">
+      <DependentUpon>NavigatorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StagesControl.xaml.cs">
+      <DependentUpon>StagesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\BackgroundSystemSettingsStageControl.xaml.cs">
+      <DependentUpon>BackgroundSystemSettingsStageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\HourIntervalFormatter.cs" />
+    <Compile Include="Views\Stages\UnitConfigurationDetailsControl.xaml.cs">
+      <DependentUpon>UnitConfigurationDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\EntityDetailsControl.xaml.cs">
+      <DependentUpon>EntityDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\EntityStageControl.xaml.cs">
+      <DependentUpon>EntityStageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\HomeStageControl.xaml.cs">
+      <DependentUpon>HomeStageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\RemovableMediaStageControl.xaml.cs">
+      <DependentUpon>RemovableMediaStageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\UpdateGroupDetailsControl.xaml.cs">
+      <DependentUpon>UpdateGroupDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\CheckableEditorControl.xaml.cs">
+      <DependentUpon>CheckableEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\CheckableTreeEditorControl.xaml.cs">
+      <DependentUpon>CheckableTreeEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\ColorEditorControl.xaml.cs">
+      <DependentUpon>ColorEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\DateTimeEditorControl.xaml.cs">
+      <DependentUpon>DateTimeEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\EditableSelectionEditorControl.xaml.cs">
+      <DependentUpon>EditableSelectionEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\ExportExecutionPartControl.xaml.cs">
+      <DependentUpon>ExportExecutionPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\ExportPreparationPartControl.xaml.cs">
+      <DependentUpon>ExportPreparationPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\GenericUsageDS021BaseEditorControl.xaml.cs">
+      <DependentUpon>GenericUsageDS021BaseEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\GenericUsageEditorControl.xaml.cs">
+      <DependentUpon>GenericUsageEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\DisplayUnitPartControl.xaml.cs">
+      <DependentUpon>DisplayUnitPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\RowReorderBehavior.cs" />
+    <Compile Include="Views\UnitConfig\Parts\ListBoxCloneDragDropBehavior.cs" />
+    <Compile Include="Views\UnitConfig\Parts\LoadDataPartControl.xaml.cs">
+      <DependentUpon>LoadDataPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\LocalDownloadPartControl.xaml.cs">
+      <DependentUpon>LocalDownloadPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\MultiLineTextEditorControl.xaml.cs">
+      <DependentUpon>MultiLineTextEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\MultiEditorPartControl.xaml.cs">
+      <DependentUpon>MultiEditorPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\MultiSelectEditorControl.xaml.cs">
+      <DependentUpon>MultiSelectEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\InstallationActionPartControl.xaml.cs">
+      <DependentUpon>InstallationActionPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\NamedListPartControl.xaml.cs">
+      <DependentUpon>NamedListPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\NumberEditorControl.xaml.cs">
+      <DependentUpon>NumberEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\PartControl.xaml.cs">
+      <DependentUpon>PartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\ResourceUploadEditorControl.xaml.cs">
+      <DependentUpon>ResourceUploadEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\SelectionEditorControl.xaml.cs">
+      <DependentUpon>SelectionEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\TextEditorControl.xaml.cs">
+      <DependentUpon>TextEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Editors\TimeSpanEditorControl.xaml.cs">
+      <DependentUpon>TimeSpanEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\Parts\TransformationPartControl.xaml.cs">
+      <DependentUpon>TransformationPartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitConfig\UnitConfiguratorWindow.xaml.cs">
+      <DependentUpon>UnitConfiguratorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Widgets\EntityCollectionWidget.xaml.cs">
+      <DependentUpon>EntityCollectionWidget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Widgets\ItemSelectionEditor.xaml.cs">
+      <DependentUpon>ItemSelectionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Widgets\EntityXmlEditor.xaml.cs">
+      <DependentUpon>EntityXmlEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Widgets\RecentlyEditedControl.xaml.cs">
+      <DependentUpon>RecentlyEditedControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Widgets\XmlEditor.xaml.cs">
+      <DependentUpon>XmlEditor.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdminStrings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminStrings.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdminStrings.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminStrings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdminStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>AdminStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Controllers\Entities\DataControllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataControllers.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Controllers\Entities\EntityStageControllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityStageControllers.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Controllers\AdminShellController.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AdminShellController.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Controllers\Entities\Validators.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Validators.generated.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\DefaultNLog.config" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\SystemManagerNLog.config" />
+    <None Include="DataViewModels\DataViewModelFactory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataViewModelFactory.generated.cs</LastGenOutput>
+    </None>
+    <None Include="DataViewModels\DataViewModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataViewModels.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="ViewModels\Stages\EntityStageViewModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityStageViewModels.generated.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resources\FrutigerLTCom-Bold.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-BoldItalic.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-Light.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-LightItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\EPaper\Configuration.EPaper.csproj">
+      <Project>{cb13bae8-dcb8-44d4-8aa1-85eee4a64d32}</Project>
+      <Name>Configuration.EPaper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Microsoft.Windows.Shell\Microsoft.Windows.Shell.csproj">
+      <Project>{55d5297c-f1df-4b76-a3c1-d82cc294eebb}</Project>
+      <Name>Microsoft.Windows.Shell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\HardwareDescription\Configuration.HardwareDescription.csproj">
+      <Project>{8C48EE78-4748-4127-AB41-9B188F98D738}</Project>
+      <Name>Configuration.HardwareDescription</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\HardwareManager\Configuration.HardwareManager.csproj">
+      <Project>{48E2DEB9-E45A-484E-B2D6-4B480ADBFF65}</Project>
+      <Name>Configuration.HardwareManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Obc\Configuration.Obc.csproj">
+      <Project>{939f1e2a-b8ea-43be-878c-dd9e4fcba28f}</Project>
+      <Name>Configuration.Obc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Protran\Configuration.Protran.csproj">
+      <Project>{159ce797-e084-488f-87b3-23857049be50}</Project>
+      <Name>Configuration.Protran</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\SystemManager\Configuration.SystemManager.csproj">
+      <Project>{a95fb6d7-9160-47c1-a80c-65c63ab38bdf}</Project>
+      <Name>Configuration.SystemManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5bf74cbc-e88c-459e-b0dc-34069552a0a3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Ftp\Common.Update.Ftp.csproj">
+      <Project>{F9F814B5-3FF3-440E-A110-4353C6E65D89}</Project>
+      <Name>Common.Update.Ftp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Usb\Common.Update.Usb.csproj">
+      <Project>{c2d59b4d-2366-496d-ac39-dd795deb64db}</Project>
+      <Name>Common.Update.Usb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Client\Center.Common.Client.csproj">
+      <Project>{5FC54EA9-187A-471E-889D-3D983E65B217}</Project>
+      <Name>Center.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Utils\Center.Common.Utils.csproj">
+      <Project>{e9ccf902-5e1c-48da-a764-988d59032232}</Project>
+      <Name>Center.Common.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Client\Wpf.Client.csproj">
+      <Project>{FBDEA493-698E-4F44-9D46-1B3EA374D7E0}</Project>
+      <Name>Wpf.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Core\Wpf.Core.csproj">
+      <Project>{ADE176C8-B499-4597-B13F-F638EC70D090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Framework\Wpf.Framework.csproj">
+      <Project>{a279b0cb-74cc-4296-8734-ba8aa45b17bf}</Project>
+      <Name>Wpf.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Views\Wpf.Views.csproj">
+      <Project>{AA87EDAF-179F-4784-B39C-1F2E8C2055C9}</Project>
+      <Name>Wpf.Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareDescription\Admin.SoftwareDescription.csproj">
+      <Project>{1a361fed-c1a3-4896-890c-2e0dc65bd98b}</Project>
+      <Name>Admin.SoftwareDescription</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit_cancel_24x24.png" />
+    <Resource Include="Resources\Icons\edit_commit_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\progicon_placeholder_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AdminShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FileEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editors\AuthorizationMatrixEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editors\EntityEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editors\FtpServerEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editors\PackageVersionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editors\UnitConfigurationEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu\FileMenuDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NavigatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StagesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\BackgroundSystemSettingsStageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\UnitConfigurationDetailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Stages\EntityDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\EntityStageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\HomeStageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\RemovableMediaStageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\UpdateGroupDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\CheckableEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\CheckableTreeEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\ColorEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\DateTimeEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\EditableSelectionEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\ExportExecutionPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\ExportPreparationPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\GenericUsageDS021BaseEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\GenericUsageEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\DisplayUnitPartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\LoadDataPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\LocalDownloadPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\MultiLineTextEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\MultiEditorPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\MultiSelectEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\InstallationActionPartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\NamedListPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\NumberEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\PartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\ResourceUploadEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\SelectionEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\TextEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Editors\TimeSpanEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\Parts\TransformationPartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitConfig\UnitConfiguratorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Widgets\EntityCollectionWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Widgets\ItemSelectionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Widgets\EntityXmlEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Widgets\RecentlyEditedControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Widgets\XmlEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\select_columns_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\config_error_missing_16x16.png" />
+    <Resource Include="Resources\Icons\config_error_warning_16x16.png" />
+    <Resource Include="Resources\Icons\config_error_ok_16x16.png" />
+    <Resource Include="Resources\Icons\config_error_error_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Authorization_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Authorization_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_User_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_User_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_DocumentVersion_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_DocumentVersion_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Document_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Document_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Package_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Package_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_ProductType_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Resource_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Resource_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Tenant_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Tenant_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UnitConfiguration_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UnitConfiguration_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Unit_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UserRole_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_ProductType_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_Unit_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UserRole_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateCommand_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateCommand_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateFeedback_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateFeedback_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdatePart_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdatePart_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateGroup_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UpdateGroup_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_PackageVersion_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_PackageVersion_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\add_24x24.png" />
+    <Resource Include="Resources\Icons\delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\thumbdrive_16x16.png" />
+    <Resource Include="Resources\Icons\thumbdrive_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\add_dark_24x24.png" />
+    <Resource Include="Resources\Icons\delete_dark_24x24.png" />
+    <Resource Include="Resources\Icons\edit_dark_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit_create_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit_cancel_dark_24x24.png" />
+    <Resource Include="Resources\Icons\edit_commit_dark_24x24.png" />
+    <Resource Include="Resources\Icons\edit_create_dark_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_MediaConfiguration_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_MediaConfiguration_48x48.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UserDefinedProperty_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_UserDefinedProperty_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\copy_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\copy_dark_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_AssociationTenantUserUserRole_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_AssociationTenantUserUserRole_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\xml_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\eject_color_16x16.png" />
+    <Resource Include="Resources\Icons\eject_dark_16x16.png" />
+    <Resource Include="Resources\Icons\eject_light_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\thumbdrive_info_16x16.png" />
+    <Resource Include="Resources\Icons\thumbdrive_info_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\file_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\export_24x24.png" />
+    <Resource Include="Resources\Icons\import_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\feedback_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\folder_new_16x16.png" />
+    <Resource Include="Resources\Icons\upload_ascii_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\delete_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\folder_open_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Icons\admin_16x16.png">
+      <Link>Resources\admin_16x16.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\admin_196x196.png">
+      <Link>Resources\admin_196x196.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\admin_32x32.png">
+      <Link>Resources\admin_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\admin_48x48.png">
+      <Link>Resources\admin_48x48.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\admin_64x64.png">
+      <Link>Resources\admin_64x64.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Icons\admin.ico">
+      <Link>Resources\admin.ico</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\Common\Protocols\Source\Ximple\Generic\dictionary.xml">
+      <Link>dictionary.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Controllers\UnitConfig\MainUnit\MainUnit.xml" />
+    <EmbeddedResource Include="Controllers\UnitConfig\ThorebC90\ibis.xml" />
+    <EmbeddedResource Include="Controllers\UnitConfig\ThorebC90\Bus.xml" />
+    <EmbeddedResource Include="Controllers\UnitConfig\ThorebC90\Terminal.xml" />
+    <Resource Include="Resources\Icons\open_dark_10x10.png" />
+    <Resource Include="Resources\Icons\document-gear.png" />
+    <Resource Include="Resources\Icons\document.png" />
+    <Resource Include="Resources\Icons\window_gear.png" />
+    <Resource Include="Resources\Icons\edit_password_16x16.png" />
+    <Resource Include="Resources\Icons\collapse_all_16x16.png" />
+    <Resource Include="Resources\Icons\expand_all_16x16.png" />
+    <Resource Include="Resources\Icons\unit_config_export_dark_24x24.png" />
+    <Resource Include="Resources\Icons\unit_config_export_24x24.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_BackgroundSystemSettings_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_BackgroundSystemSettings_48x48.png" />
+    <Resource Include="Resources\Icons\archive_error_32x32.png" />
+    <Resource Include="Resources\Icons\archive_info_32x32.png" />
+    <Resource Include="Resources\Icons\archive_ok_32x32.png" />
+    <Resource Include="Resources\Icons\archive_update_32x32.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_FtpServer_16x16.png" />
+    <Resource Include="Resources\Icons\EntityTypes\EntityTypes_FtpServer_48x48.png" />
+    <Resource Include="Resources\Icons\goto_16x16.png" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.HardwareDescription.dll" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.HardwareManager.dll" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.Infomedia.dll" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.Protran.dll" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.SystemManager.dll" />
+    <EmbeddedResource Include="Controllers\UnitConfig\Export\Bin\Gorba.Common.Configuration.Update.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and '$(Configuration)' == 'DEBUG'" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

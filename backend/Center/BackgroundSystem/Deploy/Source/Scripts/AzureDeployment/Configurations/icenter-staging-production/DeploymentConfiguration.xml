@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DeploymentConfiguration>
+    <ServiceName>icenter-staging</ServiceName>
+		<Description>icenter-staging production slot</Description>
+    <StorageAccountName>icenterstaging</StorageAccountName>
+    <StorageAccountKey>JOILvLN8Cwy8LpmuTgSxtcNsX6E88ntkh5FfIuWBDlNk1VatVNODblk8BvoWtMzYp6eISH/KJITOWKsu2/rDlg==</StorageAccountKey>
+    <SubscriptionName>Visual Studio Professional with MSDN</SubscriptionName>
+    <Slot>Production</Slot>
+</DeploymentConfiguration>

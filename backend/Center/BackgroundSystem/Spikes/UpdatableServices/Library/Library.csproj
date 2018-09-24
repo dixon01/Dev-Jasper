@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7352332F-0FFB-41F3-82B5-DAC6100FD95C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Library</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.27\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceBus, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx">
+      <HintPath>..\packages\Nito.AsyncEx.2.1.3\lib\net45\Nito.AsyncEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent">
+      <HintPath>..\packages\Nito.AsyncEx.2.1.3\lib\net45\Nito.AsyncEx.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment">
+      <HintPath>..\packages\Nito.AsyncEx.2.1.3\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsyncPump.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Client\TenantTrackingProxy.cs" />
+    <Compile Include="Client\UpdatableDataServiceManager.cs" />
+    <Compile Include="Client\UpdatableTenantDataServiceProxy.cs" />
+    <Compile Include="Client\UpdatableUserDataServiceProxy.cs" />
+    <Compile Include="ConnectionStrings.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Model\Tenant.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\ITenantTrackingService.cs" />
+    <Compile Include="Server\TenantTrackingService.cs" />
+    <Compile Include="ServiceBusConfiguration.cs" />
+    <Compile Include="ServiceBusExtensions.cs" />
+    <Compile Include="ServiceModel\Extensions.cs" />
+    <Compile Include="ServiceModel\ITransactionManager.cs" />
+    <Compile Include="ServiceModel\IUserDataService.cs" />
+    <Compile Include="ServiceModel\User.cs" />
+    <Compile Include="ServiceModel\UserUpdatableDataViewModel.cs" />
+    <Compile Include="ServiceModel\ViewModelBase.cs" />
+    <Compile Include="ServiceModel\Delta.cs" />
+    <Compile Include="ServiceModel\ITenantDataService.cs" />
+    <Compile Include="ServiceModel\ITransactionalNotifyPropertyChanged.cs" />
+    <Compile Include="ServiceModel\TenantDataViewModel.cs" />
+    <Compile Include="ServiceModel\TenantDataViewModelClone.cs" />
+    <Compile Include="ServiceModel\TenantDelta.cs" />
+    <Compile Include="Services\UserDataService.cs" />
+    <Compile Include="Services\TenantDataService.cs" />
+    <Compile Include="Services\UpdatableDataManager.cs" />
+    <Compile Include="Tracking\TenantReadableModel.cs" />
+    <Compile Include="Tracking\TenantWritableModel.cs" />
+    <Compile Include="Tracking\TrackingModelBase.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="ViewModel\ReadOnlyTenantDataViewModel.cs" />
+    <Compile Include="ViewModel\TenantDataViewModel.cs" />
+    <Compile Include="ViewModel\TrackingDataViewModelBase{T}.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Transaction\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<PeripheralConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1">
+  <Enabled>true</Enabled>
+  <PeripheralHeaderInNetworkByteOrder>true</PeripheralHeaderInNetworkByteOrder>
+  <SerialPortSettings>
+    <ComPort>COM2</ComPort>
+    <BufferSize>4096</BufferSize>
+    <BaudRate>9600</BaudRate>
+    <DataBits>8</DataBits>
+    <Parity>None</Parity>
+    <StopBits>One</StopBits>
+    <DtrControl>false</DtrControl>
+    <RtsControl>false</RtsControl>
+    <ReceivedBytesThreshold>7</ReceivedBytesThreshold>
+    <EnableBackgroundReader>true</EnableBackgroundReader>
+  </SerialPortSettings>
+  <DefaultMaxPeripheralFramingBytes>1</DefaultMaxPeripheralFramingBytes>
+  <DimmerProcessorTuningParams>
+    <Range1Upper>52428</Range1Upper>
+    <Range2Lower>19660</Range2Lower>
+    <Range2Upper>52428</Range2Upper>
+    <Range3Lower>19660</Range3Lower>
+    <Range3Upper>52428</Range3Upper>
+    <Range4Lower>19660</Range4Lower>
+    <Steps>8</Steps>
+    <IntervalDelay>25</IntervalDelay>
+    <InvertBrightness>true</InvertBrightness>
+    <DimmerProcessorDebugMode>false</DimmerProcessorDebugMode>
+  </DimmerProcessorTuningParams>
+  <DimmerSensorRequestInterval>1000</DimmerSensorRequestInterval>
+  <MinimumPercentage>10</MinimumPercentage>
+  <MaximumPercentage>90</MaximumPercentage>
+</PeripheralConfig>

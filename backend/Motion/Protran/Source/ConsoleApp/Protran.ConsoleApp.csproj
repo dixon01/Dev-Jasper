@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F7C2E8C-AED2-45F8-95F5-EFDA418B10A7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.ConsoleApp</RootNamespace>
+    <AssemblyName>Protran</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\Icons\protran.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arriva\Protran.Arriva.csproj">
+      <Project>{DDE32D73-E34A-4E5F-9B22-2EA3CF0967CF}</Project>
+      <Name>Protran.Arriva</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GorbaProtocol\Protran.GorbaProtocol.csproj">
+      <Project>{7cf516a7-8998-4f8b-ab07-6f0e3b44b741}</Project>
+      <Name>Protran.GorbaProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IO\Protran.IO.csproj">
+      <Project>{10046E67-00E6-4A80-8E23-069741191B21}</Project>
+      <Name>Protran.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbuDhabi\Protran.AbuDhabi.csproj">
+      <Project>{A5E85D05-3D3D-4E32-BA1A-F30799CA42C9}</Project>
+      <Name>Protran.AbuDhabi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Protran.Core.csproj">
+      <Project>{C3036BE3-1D3C-4B40-87BB-DDBE33F53568}</Project>
+      <Name>Protran.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ibis\Protran.Ibis.csproj">
+      <Project>{38767532-4E74-4EB6-9911-1B58BCFB967D}</Project>
+      <Name>Protran.Ibis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PeripherialProtocol.Core\Luminator.PeripheralProtocol.Core.csproj">
+      <Project>{a5c752d3-15e6-4140-abb3-b65da9d88467}</Project>
+      <Name>Luminator.PeripheralProtocol.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protran.AdHocMessagingProtocol\Luminator.Protran.AdHocMessagingProtocol.csproj">
+      <Project>{1fc86963-44e7-4882-9388-9d43efae108e}</Project>
+      <Name>Luminator.Protran.AdHocMessagingProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protran.PeripherialProtocol\Luminator.Protran.PeripherialProtocol.csproj">
+      <Project>{a01978ae-c73f-4d48-bf12-66121ecb65aa}</Project>
+      <Name>Luminator.Protran.PeripherialProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoapIbisPlus\Protran.SoapIbisPlus.csproj">
+      <Project>{C4EA174B-F696-4169-93E3-7C81DDE1EB46}</Project>
+      <Name>Protran.SoapIbisPlus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vdv301\Protran.Vdv301.csproj">
+      <Project>{794D19AD-FC86-498D-BF2E-7767EDE7A5EB}</Project>
+      <Name>Protran.Vdv301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XimpleProtocol\Luminator.Protran.XimpleProtocol.csproj">
+      <Project>{e2eaf924-e3bc-414b-96e6-ee9fdfe8b80a}</Project>
+      <Name>Luminator.Protran.XimpleProtocol</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

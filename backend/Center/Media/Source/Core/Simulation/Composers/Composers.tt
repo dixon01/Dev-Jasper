@@ -1,0 +1,307 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="Microsoft.CSharp" #>
+
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.CSharp.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\Mono.Cecil\0.9.5.2\net40\Mono.Cecil.dll" #>
+<#@ assembly name="$(SolutionDir)Source\T4Templating\bin\Debug\Gorba.Center.Media.T4Templating.dll" #>
+
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="ICSharpCode.NRefactory.CSharp" #>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#@ include file="..\..\..\..\..\..\Motion\Infomedia\Source\Entities\Screen\ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+using Gorba.Common.Configuration.Infomedia.Layout;
+
+using Gorba.Motion.Infomedia.Entities;
+using Gorba.Motion.Infomedia.Entities.Screen;
+
+using Gorba.Center.Media.Core.DataViewModels.Layout;
+
+<#
+    var screenItemsFileName = @"..\..\..\..\..\..\Motion\Infomedia\Source\Entities\Screen\ScreenItems.xml";
+    this.screenItems = ScreenItems.LoadFrom(Host.ResolvePath(screenItemsFileName));
+    
+    var entitiesFileName = @"..\..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+    var fileName = @"..\..\DataViewModels\DataViewModels.xml";
+    var templates = DataViewModelTemplatedEntities.Load(Host.ResolvePath(entitiesFileName), Host.ResolvePath(fileName));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = templates.NamespaceEntityDescriptors.Where(n => n.Name == "Layout").First();
+    var test = layoutNamespace.DataViewModelEntityDescriptors;
+    #>
+namespace Gorba.Center.Media.Core.Simulation.Composers
+{
+    public static class ComposerFactory
+    {
+        public static IComposer CreateComposer(
+            IComposerContext context, IComposer parent, GraphicalElementDataViewModelBase viewModel)
+        {
+            var viewModelFrame = viewModel as FrameElementDataViewModel;
+            if (viewModelFrame != null)
+            {
+                return new FrameComposer(context, parent, viewModelFrame);
+            }
+
+			var viewModelRssTicker = viewModel as RssTickerElementDataViewModel;
+			if (viewModelRssTicker != null)
+			{
+				return new RssTickerComposer(context, parent, viewModelRssTicker);
+			}
+<#
+    // generate all classes in this namespace
+    foreach (var entity in layoutNamespace.FilteredDataViewModelEntityDescriptors)
+    {
+        if (entity.Name.Contains("Base") || entity.Base == null || !entity.Base.Contains("Base") || entity.Name.Contains("Audio") || entity.Name.Contains("TextToSpeech"))
+        {
+            continue;
+        }
+
+        var itemModification = this.screenItems.GetItem(entity.Name);
+        if (itemModification != null && itemModification.Action == ItemAction.Remove)
+        {
+            continue;
+        }
+        
+        var composerClass = GetComposerClassName(entity.Name);
+        #>
+
+            var viewModel<#= entity.Name #> = viewModel as <#= entity.ViewModelName #>;
+            if (viewModel<#= entity.Name #> != null)
+            {
+                return new <#= composerClass #>(context, parent, viewModel<#= entity.Name #>);
+            }
+<#
+    }
+    #>
+            throw new NotSupportedException(
+                string.Format("Unsupported layout element {0}", viewModel.GetType().FullName));
+        }
+    }
+
+<#
+    // generate all classes in this namespace
+    foreach (var entity in layoutNamespace.FilteredDataViewModelEntityDescriptors)
+    {
+        this.GenerateClass(entity);
+    }
+    #>
+
+}
+
+<#+
+private ScreenItems screenItems;
+
+private void GenerateClass(DataViewModelEntityDescriptor entity)
+{
+    if (string.IsNullOrEmpty(entity.Base) || !entity.Base.Contains("Base"))
+    {
+        // we ignore non-elements, the base class and special classes that inherit from another element
+        // (currently only AnalogClockHand)
+        return;
+    }
+
+    var itemModification = this.screenItems.GetItem(entity.Name);
+    if (itemModification != null && itemModification.Action == ItemAction.Remove)
+    {
+        // remove all classes marked for removal
+        return;
+    }
+
+    // if a composer is "presentable", it has a ScreenItem assigned to it, otherwise not (e.g. Group is not presentable)
+    var presentable = itemModification == null || itemModification.Presentable;
+    var parentModification = this.screenItems.GetItem(entity.Base);
+    var parentPresentable = parentModification == null || parentModification.Presentable;
+    
+    var className = GetComposerClassName(entity.Name);
+    var inheritance = " : " + GetComposerClassName(entity.Base);
+    var isAbstract = entity.Name.Contains("Base");
+    var itemClass = GetItemClassName(entity.Name);
+
+    var fullClassName = className;
+    var wheres = string.Empty;
+    if (isAbstract)
+    {
+        fullClassName += presentable ? "<TViewModel, TItem>" : "<TViewModel>";
+        inheritance += parentPresentable ? "<TViewModel, TItem>" : "<TViewModel>";
+        wheres = "\r\n        where TViewModel : " + entity.ViewModelName;
+        if (presentable)
+        {
+            wheres += "\r\n        where TItem : " + itemClass + ", new()";
+        }
+    }
+    else
+    {
+        inheritance += "<" + entity.ViewModelName;
+        if (parentPresentable)
+        {
+            inheritance += ", " + itemClass;
+        }
+
+        inheritance += ">";
+    }
+
+    if (presentable && !parentPresentable)
+    {
+        inheritance += ", IPresentableComposer";
+    }
+    #>
+
+    public <#= isAbstract ? "abstract " : "" #>partial class <#= fullClassName #><#= inheritance #><#= wheres #>
+    {
+        public <#= className #>(IComposerContext context, IComposer parent, <#= isAbstract ? "TViewModel" : entity.ViewModelName #> viewModel)
+            : base(context, parent, viewModel)
+        {
+<#+
+    if (presentable && !parentPresentable)
+    {
+    #>
+            this.Item = new TItem();
+<#+
+    }
+    
+    if (presentable)
+    {
+        foreach (var property in this.GetStandardProperties(entity))
+        {
+            #>
+            this.Item.<#= property.Name #> = this.ViewModel.<#= property.Name #>.Value;
+<#+
+        }
+    }
+    
+    #>
+            this.Initialize();
+        }
+    <#+
+    if (presentable && !parentPresentable)
+    {
+        // create the class members that are needed for the first presentable class in the hierarchy
+        #>
+        
+        public TItem Item { get; private set; }
+
+        ScreenItemBase IPresentableComposer.Item
+        {
+            get
+            {
+                return this.Item;
+            }
+        }
+        <#+
+    }
+    #>
+
+        public override void Dispose()
+        {
+            this.Deinitialize();
+            base.Dispose();
+        }
+        
+        partial void Initialize();
+
+        partial void PreHandlePropertyChange(string propertyName, ref bool handled);
+
+        partial void Deinitialize();
+
+        protected override void HandlePropertyChange(string propertyName)
+        {
+            var handled = false;
+            this.PreHandlePropertyChange(propertyName, ref handled);
+            if (handled)
+            {
+                return;
+            }
+
+            switch (propertyName)
+            {
+<#+
+    if (presentable)
+    {
+        foreach (var property in this.GetStandardProperties(entity))
+        {
+            #>
+                case "<#= property.Name #>":
+                    this.Item.<#= property.Name #> = this.ViewModel.<#= property.Name #>.Value;
+                    break;
+<#+
+        }
+    }
+#>
+                default:
+                    base.HandlePropertyChange(propertyName);
+                    break;
+            }
+        }
+    }
+    <#+
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetComposerClassName(string className)
+{
+    return GetClassName(className, "Composer");
+}
+
+/// <summary>
+/// Creates the real screen item class name for an element.
+/// <summary>
+private static string GetItemClassName(string className)
+{
+    return GetClassName(className, "Item");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetClassName(string className, string category)
+{
+    return className.EndsWith("Base") ? className.Replace("Base", category + "Base") : className + category;
+}
+
+private IEnumerable<Gorba.Center.Media.T4Templating.PropertyBase> GetStandardProperties(DataViewModelEntityDescriptor entity)
+{
+    foreach (var property in entity.PropertyDescriptors)
+    {
+        var prop = property as Gorba.Center.Media.T4Templating.Property;
+        if (prop != null && prop.Dynamic)
+        {
+            continue;
+        }
+
+        var composite = property as Gorba.Center.Media.T4Templating.CompositeProperty;
+        if (composite != null)
+        {
+            continue;
+        }
+        
+        var propModif = this.screenItems.GetProperty(entity.Name, property.Name);
+        if (propModif != null && propModif.Action == PropertyAction.Remove)
+        {
+            continue;
+        }
+
+        yield return property;
+    }
+}
+#>

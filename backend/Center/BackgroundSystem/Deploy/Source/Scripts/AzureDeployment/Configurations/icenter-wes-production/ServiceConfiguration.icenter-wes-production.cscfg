@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="BackgroundSystem.WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="BackgroundSystem.CenterDataContext" value="Server=tcp:wmlq71o30z.database.windows.net,1433;Database=icenter-wes;User ID=icenter@wmlq71o30z;Password=wf59jW3um4r;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=icenterwes;AccountKey=lCPan3VYPzQp2s6DwWMm2DaG6to2NKBu6xWB2BXAcLSfNjQsabTWUsC2B0XYQVM3+z4yJpRg/S7DukQxYJ4WDw==" />
+      <Setting name="BackgroundSystem.NotificationsConnectionString" value="medi://icenter-wes.cloudapp.net" />
+      <Setting name="ActiveDirectory.Tenant" value="" />
+      <Setting name="ActiveDirectory.ClientId" value="" />
+      <Setting name="Portal.EnableHttps" value="False" />
+      <Setting name="Wcf.ConnectionLimit" value="512" />
+      <Setting name="ActiveDirectory.AuthorizationUrl" value="" />
+      <Setting name="BackgroundSystem.StartPortalHost" value="True" />
+      <Setting name="BackgroundSystem.Host" value="icenter-wes.cloudapp.net" />
+      <Setting name="Center.StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=icenterwes;AccountKey=lCPan3VYPzQp2s6DwWMm2DaG6to2NKBu6xWB2BXAcLSfNjQsabTWUsC2B0XYQVM3+z4yJpRg/S7DukQxYJ4WDw==" />
+      <Setting name="Portal.ClickOnceUseBeta" value="True" />
+      <Setting name="Diagnostics.LogLevel" value="Off" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Https" thumbprint="33570DF2118BCAEB1EA11D0294A6C3D29E7332B8" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Update" type="UpdateConfig" />
+  <xs:complexType name="UpdateConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Update configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Agent" type="AgentConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            All configuration parameters for the Update Agent.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Clients" type="ArrayOfUpdateClientConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all Update Clients that are available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Providers" type="ArrayOfUpdateProviderConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all Update Providers that are available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Visualization" type="VisualizationConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            All configuration parameters for all visualization shown by Update like splash screen and LED.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="CacheLimits" type="CacheLimitsConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            All configuration parameters for the folder limit.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SharedFilesConfig" type="SharedFilesConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Optional Shared files settings.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AgentConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Update Agent handles the actual process of updating a Unit. The configuration specifies if the Update Agent
+        which must update the local system or just forward the received update to other Units and not update the local
+        system. It also specified the restart of applications upon completion of an update based on the configuration.
+        In certain situations, it might be required to run multiple Update applications on one system (e.g. to simulate
+        the update of an entire fleet). For this purpose, the “Agent” tag contains two additional sub-tags.
+        These sub-tags should never be used on a productive system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UnitName" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the Unit on which the Agent is present when it is other than the machine name.
+            It allows overriding the use of the Machine Name as the local unit name.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="InstallationRoot" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The installation root directory name. It must be left empty.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RestartApplications" type="RestartApplicationsConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all applications to be restarted for specific folder updates.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowVisualization" type="xs:boolean" >
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating if the progress of an update is to be shown by Update visually with Splash screen or LED or both.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the Update Agent is enabled.
+          If the agent is disabled, this application will only forward updates for other applications, but not actually update the local system.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="RestartApplicationsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The update of a foler or file can be used as a trigger to restart applications.
+        The applications are restarted automatically without any special configuration when its configuration files or binaries are updated.
+        This configuration is relevant when an update of an unrelated folder or file to an application must trigger its restart.
+        For example, the update of the "Presentation" folder must restart the "Composer.exe" application.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Dependency" type="DependencyConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of dependencies of folders or files updates which trigger an application restart configured under it.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DependencyConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the dependancy of the update of a folder or file specified in the "Path" attribute which triggers the
+        restart of the application specified in the "ExecutablePath".
+        For a single dependancy, more than one application can be specified for restart by using multiple "ExecutablePath" configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="ExecutablePath" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            List of executable paths of the applications to be restarted if an update of folder or file present in the
+            attribute Path occurs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Path" type="xs:string" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Path of the folder or file whose update triggers the restart of the applications present at the executable paths.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUpdateClientConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Update application can be configured to have differemt Update Clients. An Update Client is specific for a
+        particular type of transfer protocol like USB, FTP, Medi etc. The Update Client is responsible for receiving the
+        updates for the current Unit and one or more other Units and the transfer of Update State Infos and log files
+        from the Units.
+        If the Unit is to receive updates from a FTP server, then a FTPUpdateClient must be configured.
+        If the Unit is to receive updates from a USB stick, then an USBUpdateClient must be configured.
+        If the Unit is to receive updates from another Unit, then a MediUpdateClient must be configured.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="FTPUpdateClient" nillable="true" type="FtpUpdateClientConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            FTP Update Client that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="MediUpdateClient" nillable="true" type="MediUpdateClientConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Medi Update Client that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="USBUpdateClient" nillable="true" type="UsbUpdateClientConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            USB Update Client that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="AzureUpdateClient" nillable="true" type="AzureUpdateClientConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Azure Update Client that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="UpdateClientConfig" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowVisualization" type="xs:boolean" >
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating if the progress of an update is to be shown by Update visually with Splash screen or LED or both.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          The unique name of the update client. It must contain only alpha-numeric characters. It is case-insensitive.
+          It is a compulsory to define the name.
+          If the name changes, all cached data for the client will be lost.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="FtpUpdateClientConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A FTPUpdateClient must be configured for each of the FTP servers from which the Unit can receive an update.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateClientConfig">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="EnableMulticastIP" type="xs:boolean" default="false" >
+            <xs:annotation>
+              <xs:documentation>
+                The optional flag to enable using the Multicast IP when found for Ftp updates.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Host" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The  DNS host name or IP address of the FTP server used for FTP updates.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="LocalFtpHomePath" type="xs:string" default="" >
+            <xs:annotation>
+              <xs:documentation>
+                The local home ftp root folder.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Password" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The FTP server login password. Mandatory, even if anonymous login is used.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="RequireWifiNetworkConnection" type="xs:boolean" default="false" >
+            <xs:annotation>
+              <xs:documentation>
+                The optional flag to require a wifi connection in processing.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="PollInterval" type="xs:duration" default="PT5M" >
+            <xs:annotation>
+              <xs:documentation>
+                The interval (expressed as XML duration) at which the repository of update is scanned.
+                The admitted values are positive non-zero durations.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="21" name="Port" type="xs:int" >
+            <xs:annotation>
+              <xs:documentation>
+                The value of the FTP server TCP port.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="RepositoryBasePath" type="xs:string" default="" >
+            <xs:annotation>
+              <xs:documentation>
+                The source path of the update (on FTP server) to be installed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Username" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The FTP server login username.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UsbUpdateClientConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A UsbUpdateClient must be configured if the Unit has to receive updates via the USB stick. The Update command for
+        a Unit on USB stick is deleted once an update is performed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateClientConfig">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="RepositoryBasePath" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The source path of the update (on the USB stick) to be installed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="USBDetectionTimeOut" type="xs:duration" default="PT20S" >
+            <xs:annotation>
+              <xs:documentation>
+                The time to wait (expressed as XML duration) for the detection of the USB stick to ensure that it is
+                definitely present before starting the update process.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="PollInterval" type="xs:duration" >
+            <xs:annotation>
+              <xs:documentation>
+                The interval (expressed as XML duration) at which the repository of update is scanned.
+                The admitted values are positive non-zero durations.
+                The poll interval value must be higher than the USBDetectionTimeOut value.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AzureUpdateClientConfig">
+    <xs:annotation>
+      <xs:documentation>
+        An AzureUpdateClient must be configured if the Unit has to receive live updates via a direct connection to the background system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateClientConfig">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="RepositoryUrl" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The URL where information about the repository structure can be found.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MediUpdateClientConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A MediUpdateClient must be configured if the Unit can receive an update from another Unit.
+        This is usually required in a Master-Slave environment. The slave Unit must have a MediUpdateClient configured if
+        it has to receive updates from the master Unit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateClientConfig" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUpdateProviderConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Update application can be configured to have differemt Update Providers. An Update Provider is specific for a
+        particular type of transfer protocol like USB, FTP, Medi etc. The Update Provider is responsible for sending Update
+        Commands to a Unit and receiving Update State Infos as well as log files from a Unit. An Update Provider always
+        communicates with an Update Client.
+        If the Unit is to send updates to other Units, then a MediUpdateProvider must be configured.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="USBUpdateProvider" nillable="true" type="UsbUpdateProviderConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            USB Update Provider that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="FTPUpdateProvider" nillable="true" type="FtpUpdateProviderConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            FTP Update Provider that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="MediUpdateProvider" nillable="true" type="MediUpdateProviderConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Medi Update Provider that is available in Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="UsbUpdateProviderConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A UsbUpdateProvider must be configured if the Unit has to send updates to a USB stick. It is not configured on a Unit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateProviderConfig">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="RepositoryBasePath" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The repository base path in which the repository.xml file can be found.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UpdateProviderConfig" abstract="true" >
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowVisualization" type="xs:boolean" >
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating if the progress of an update is to be shown by Update visually with Splash screen or LED or both.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation>
+          The unique name of the Update Provider. It must contain only alpha-numeric characters. It is case-insensitive.
+          It is a compulsory to define the name.
+          If the name changes, all cached data for the Provider will be lost.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="MediUpdateProviderConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A MediUpdateProvider must be configured if the Unit has to send updates to other Units. This configuration is
+        required on a Master Unit in a Master-Slave setup of Units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateProviderConfig" >
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="RegistrationTimeOut" type="xs:duration" default="PT24H" >
+            <xs:annotation>
+              <xs:documentation>
+                The time (expressed as XML duration) after which the registration done by a Slave unit expires.
+                The admitted values are positive non-zero durations.
+                After the timeout, the Slave unit registers to the Master unit once again.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FtpUpdateProviderConfig">
+    <xs:annotation>
+      <xs:documentation>
+        A FtpUpdateProvider must be configured if the Unit has to send updates to an FTP server. It is not configured on a Unit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="UpdateProviderConfig">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Host" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The host name of the FTP server.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="21" name="Port" type="xs:int" >
+            <xs:annotation>
+              <xs:documentation>
+                The value of the FTP server TCP port.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Username" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The FTP server login username.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Password" type="xs:string" >
+            <xs:annotation>
+              <xs:documentation>
+                The FTP server login password.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="RepositoryBasePath" type="xs:string" default="" >
+            <xs:annotation>
+              <xs:documentation>
+                The source path of the update to be installed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="PollInterval" type="xs:duration" default="PT5M" >
+            <xs:annotation>
+              <xs:documentation>
+                The interval at which the repository is scanned.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="Compression" type="CompressionAlgorithm" default="None" >
+            <xs:annotation>
+              <xs:documentation>
+                The compression mode to be used by the FTP provider.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CompressionAlgorithm">
+    <xs:annotation>
+      <xs:documentation>
+        Possible compression algorithms.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" >
+        <xs:annotation>
+          <xs:documentation>
+            No compression is applied on the files.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GZIP" >
+        <xs:annotation>
+          <xs:documentation>
+            The files are compressed using the GZIP algorithm (see RFC 1952).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VisualizationConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration for the Update progress visualization. There are two options to visualize the progress of an
+        update. The Splash screen and the Update LED. If the Unit has a Physical screen, the Splash screen visualization
+        can be enabled. The Update LED is available on the InfoVision PC-2 and InfoVision Compact hardware.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SplashScreen" type="SplashScreenVisualizationConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the splash screen that can be shown by Update.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="LED" type="LedVisualizationConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the Update LED on InfoVision PC-2 and Infovision Compact hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="HideTimeout" type="xs:duration" default="PT30S"  >
+      <xs:annotation>
+        <xs:documentation>
+          The time after which any of the visualizations are hidden upon completion of the update progress.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SplashScreenVisualizationConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen of the update progress can be configured to be shown or not.
+        The location of the splash screen on the TFT can be configured so that it fits any type of display like widescreen etc.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the splash screen is to be shown by Update.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="X" type="xs:int" >
+      <xs:annotation>
+        <xs:documentation>
+          The horizontal location in pixels of the splash screen on the screen.
+          If this attribute is not defined, the splash screen is shown at the very right of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Y" type="xs:int" >
+      <xs:annotation>
+        <xs:documentation>
+          The vertical location in pixels of the splash screen on the screen.
+          If this attribute is not defined, the splash screen is shown at the very top of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int" >
+      <xs:annotation>
+        <xs:documentation>
+          The width of the splash screen in pixels.
+          If this attribute is not defined, the splash screen is shown across the entire width of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int" >
+      <xs:annotation>
+        <xs:documentation>
+          The height of the splash screen in pixels.
+          If this attribute is not defined, the splash screen is shown across the entire height of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="LedVisualizationConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Update LED visualization can be configured to be available or not.
+        The Update LED gives a constant indication of the status of the update.
+        When files are being transferred, the Update LED blinks at a specific frequency (configurable).
+        When an upadte is being installed, the Update LED is on steadily.
+        If an error occurs during update, the Update LED blinks at a specific frequency (configurable).
+        it is recommeded to configure the transfer and the error frequency of the LED blinking differently.
+        •	Normal blinking – Indicates that the update is reading from/writing to the USB stick.
+        •	Slow blinking – Indicates that there was an error during an update.
+        •	Steady on – Indicates that an update is being processed.
+        •	Steady off – Indicates that the update is complete.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the LED is to be switched to indicate the update status by Update.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DefaultFrequency" type="xs:double" default="1.25" >
+      <xs:annotation>
+        <xs:documentation>
+          The default blink frequency in Hz at which the LED is switched to indicate transfer of update.
+          Default value is 1.25 Hz means a change every 400 ms.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ErrorFrequency" type="xs:double" default="5" >
+      <xs:annotation>
+        <xs:documentation>
+          The error frequency in Hz at which the LED is switched to indicate update errors.
+          Default value is 5 Hz means a change every 100 ms.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CacheLimitsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration for the folder limit to be used on the folder Data\Update\Pool.
+        The checks are done on the folder size and the number of files present in the folder.
+        If one of the limits are reached, the folder is first purged of log and feedback files
+        older than a month. If the limits are still reached, all the log and feedback files are purged.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="FreeSpaceMB" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            If less than the given amount megabytes is available on the folder,
+            the log and feedback files are deleted.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="NumberOfFiles" type="xs:int" >
+        <xs:annotation>
+          <xs:documentation>
+            If the number of files in the folder is greater that the configured number,
+            the log and feedback files are deleted.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the folder limit should be checked by Update.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SharedFilesConfig">
+    <xs:annotation>
+      <xs:documentation>
+        This configuration is used for the designation of a shared folder between system for common files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Password" default=""/>
+      <xs:element name="SharedUri" default=""/>
+      <xs:element name="UserName" default=""/>
+      <xs:element name="FilePrefix" default=""/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

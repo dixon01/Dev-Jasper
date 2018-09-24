@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><SerialPortSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ComPort>COM4</ComPort>
+  <BufferSize>4096</BufferSize>
+  <BaudRate>9600</BaudRate>
+  <DataBits>8</DataBits>
+  <Parity>None</Parity>
+  <StopBits>One</StopBits>
+  <DtrControl>false</DtrControl>
+  <RtsControl>false</RtsControl>
+  <ReceivedBytesThreshold>1</ReceivedBytesThreshold>
+</SerialPortSettings>

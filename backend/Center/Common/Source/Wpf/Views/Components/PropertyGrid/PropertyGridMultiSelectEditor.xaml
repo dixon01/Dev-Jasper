@@ -1,0 +1,65 @@
+﻿<propertyGrid:PropertyGridEditor x:Class="Gorba.Center.Common.Wpf.Views.Components.PropertyGrid.PropertyGridMultiSelectEditor"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                             xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid"
+                             mc:Ignorable="d"
+                             d:DataContext="{d:DesignInstance propertyGrid:PropertyGridItemDataSource}"
+                                 x:Name="Root">
+    <propertyGrid:PropertyGridEditor.Resources>
+        <CollectionViewSource x:Key="ItemsViewSource" Source="{Binding Items, ElementName=Root}" />
+        <CompositeCollection x:Key="ItemsCollection">
+            <CollectionContainer Collection="{Binding Source={StaticResource ItemsViewSource}}" />
+            <ComboBoxItem IsHitTestVisible="False">
+                <Separator Background="{StaticResource PropertyGridSeparatorBrush}" IsHitTestVisible="False" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Button Content="{Binding NavigateButtonText}"
+                        HorizontalContentAlignment="Left"
+                        Click="OnNavigateButtonClicked" Style="{StaticResource FlatButton}" />
+            </ComboBoxItem>
+        </CompositeCollection>
+        <DataTemplate x:Key="ComboboxItemTemplate">
+            <CheckBox IsChecked="{Binding IsChecked}"
+                      Checked="ToggleButtonOnChecked" Unchecked="ToggleButtonOnUnchecked"
+                      HorizontalAlignment="Left" Margin="2, 0, 2, 0" VerticalAlignment="Stretch">
+                <TextBlock Text="{Binding Value}" />
+            </CheckBox>
+        </DataTemplate>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundColorBrush}"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="SelectionBrush" Value="{StaticResource TextBoxHighlightFrameColorBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" BorderThickness="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </propertyGrid:PropertyGridEditor.Resources>
+    <ComboBox HorizontalAlignment="Stretch" IsReadOnly="True" IsEditable="True"
+              Name="ValueComboBox" ItemTemplate="{StaticResource ComboboxItemTemplate}"
+              Text="{Binding SelectedItemsText, ElementName=Root}" ToolTip="{Binding SelectedItemsText, ElementName=Root}"
+              DropDownClosed="ValueComboBoxOnDropDownClosed">
+        <ComboBox.Style>
+            <Style BasedOn="{StaticResource FlatStyleCombobox}" TargetType="ComboBox">
+                <Setter Property="ItemsSource" Value="{StaticResource ItemsCollection}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding NavigateButtonCommand}" Value="{x:Null}">
+                        <Setter Property="ItemsSource" Value="{Binding DomainObject}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ComboBox.Style>
+    </ComboBox>
+</propertyGrid:PropertyGridEditor>

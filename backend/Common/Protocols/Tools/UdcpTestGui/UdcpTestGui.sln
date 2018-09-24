@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdcpTestGui", "UdcpTestGui.csproj", "{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{CEBDDEFF-B9B0-4340-BB30-AA4C885D036D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Udcp", "..\..\Source\Udcp\Protocols.Udcp.csproj", "{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Udcp.Tests", "..\..\Source\Udcp.Tests\Protocols.Udcp.Tests.csproj", "{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = UdcpTestGui.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\..\\Source\\Udcp\\Protocols.Udcp.csproj
+		SccProjectTopLevelParentUniqueName2 = UdcpTestGui.sln
+		SccProjectName2 = ../../Source/Udcp
+		SccLocalPath2 = ..\\..\\Source\\Udcp
+		SccProjectUniqueName3 = ..\\..\\Source\\Udcp.Tests\\Protocols.Udcp.Tests.csproj
+		SccProjectTopLevelParentUniqueName3 = UdcpTestGui.sln
+		SccProjectName3 = ../../Source/Udcp.Tests
+		SccLocalPath3 = ..\\..\\Source\\Udcp.Tests
+		SccProjectUniqueName4 = ..\\..\\..\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName4 = UdcpTestGui.sln
+		SccProjectName4 = ../../../Utility/Source/Core
+		SccLocalPath4 = ..\\..\\..\\Utility\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Debug|x86.ActiveCfg = Debug|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Debug|x86.Build.0 = Debug|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Release|Any CPU.ActiveCfg = Release|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Release|Mixed Platforms.Build.0 = Release|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Release|x86.ActiveCfg = Release|x86
+		{4B03731C-30B7-4272-8B3F-3E6E9E3F04B4}.Release|x86.Build.0 = Release|x86
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD243842-2ED9-4E77-9BE3-3BF5C2C129C1} = {CEBDDEFF-B9B0-4340-BB30-AA4C885D036D}
+		{2CDCCB33-3738-4BE7-A862-61BBF6F7572F} = {CEBDDEFF-B9B0-4340-BB30-AA4C885D036D}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {CEBDDEFF-B9B0-4340-BB30-AA4C885D036D}
+	EndGlobalSection
+EndGlobal

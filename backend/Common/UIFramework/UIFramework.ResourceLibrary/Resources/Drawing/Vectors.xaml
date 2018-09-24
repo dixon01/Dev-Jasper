@@ -1,0 +1,307 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+    <Style x:Key="DeleteIcon" TargetType="{x:Type ContentControl}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="16" Height="16">
+                        <Grid Width="100" Height="100">
+                            <Ellipse Width="100"
+                                     Height="100"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Fill="Black"
+                                     Stroke="Black" />
+                            <Path Margin="20"
+                                  Data="M0,0 L100,100"
+                                  Fill="White"
+                                  Stretch="Fill"
+                                  Stroke="White"
+                                  StrokeThickness="15"
+                                  UseLayoutRounding="False" />
+                            <Path Margin="20"
+                                  Data="M100,0 L0,100"
+                                  Fill="White"
+                                  Stretch="Fill"
+                                  Stroke="White"
+                                  StrokeThickness="15"
+                                  UseLayoutRounding="False" />
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="WindowEffectNone" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="16" Height="16">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="No Effect">
+                            <Rectangle Margin="1"
+                                       Fill="White"
+                                       StrokeThickness="10">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF454545" />
+                                        <GradientStop Offset="1" Color="#FF727272" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UpNavigate" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="16" Height="16">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="No Effect">
+                            <Path Canvas.Left="30.0833"
+                                  Canvas.Top="22.1667"
+                                  Width="70"
+                                  Height="90"
+                                  Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "
+                                  Fill="White"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Fill">
+                                <Path.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </Path.Effect>
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="-90" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PlayIcon" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="32" Height="32">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="Play">
+                            <Path Canvas.Left="30.0833"
+                                  Canvas.Top="22.1667"
+                                  Width="20.5832"
+                                  Height="31.6667"
+                                  Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "
+                                  Fill="White"
+                                  Stretch="Fill">
+                                <Path.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </Path.Effect>
+                            </Path>
+                            <Rectangle Width="100"
+                                       Height="100"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Fill="White"
+                                       Opacity="0.25" />
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="StopIcon" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="32" Height="32">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="Stop">
+                            <Rectangle Canvas.Left="23.75"
+                                       Canvas.Top="23.75"
+                                       Width="28.5"
+                                       Height="28.5"
+                                       Fill="White"
+                                       Stretch="Fill">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <Rectangle Width="100"
+                                       Height="100"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Fill="White"
+                                       Opacity="0.25" />
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PauseIcon" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="32" Height="32">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="Pause">
+                            <Path Canvas.Left="26.9167"
+                                  Canvas.Top="23.75"
+                                  Width="22.1667"
+                                  Height="28.5"
+                                  Data="F1 M 26.9167,23.75L 33.25,23.75L 33.25,52.25L 26.9167,52.25L 26.9167,23.75 Z M 42.75,23.75L 49.0833,23.75L 49.0833,52.25L 42.75,52.25L 42.75,23.75 Z "
+                                  Fill="White"
+                                  Stretch="Fill">
+                                <Path.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </Path.Effect>
+                            </Path>
+                            <Rectangle Width="100"
+                                       Height="100"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Fill="White"
+                                       Opacity="0.25" />
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DownNavigate" TargetType="ContentControl">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox Width="16" Height="16">
+                        <Grid Width="100"
+                              Height="100"
+                              ToolTipService.ToolTip="No Effect">
+                            <Path Canvas.Left="30.0833"
+                                  Canvas.Top="22.1667"
+                                  Width="70"
+                                  Height="90"
+                                  Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "
+                                  Fill="White"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Fill">
+                                <Path.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </Path.Effect>
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="90" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="TalkIcon">
+        <Grid Width="32" Height="32">
+            <Viewbox Width="32"
+                     Height="32"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
+                <Canvas Width="147" Height="298">
+
+                    <Path Canvas.Left="2"
+                          Canvas.Top="142"
+                          Width="143"
+                          Height="156"
+                          Data="F1 M2.5,142 L14,142.5 C14.2616,160.567 11.2613,180.04201 18.7187,196.5 C30.102501,221.623 70.746399,239.50999 95.5,227.34399 C108.298,221.054 120.302,211.039 127.094,198.5 C136.121,181.834 133.455,160.95399 133.5,142 L145,142.5 C144.634,167.75301 144.369,196.66901 128.729,216.5 C121.053,226.233 110.011,233.558 98.5,238.15601 C93.129303,240.302 86.237717,240.8277 81.056816,243.39771 C76.170013,245.8217 80.1166,252.483 80.1875,257.93701 C80.291603,265.95801 76.405403,275.10199 80.5,282 C82.762901,285.81201 89.192101,284.091 93.625,284.14801 C102.75,284.26599 111.875,284.383 121,284.5 L120.5,298 L26,297.5 L26.5,284 C35.875,283.875 45.25,283.75 54.625,283.625 C58.808201,283.569 65.337898,285.37 67,281.53101 C69.551598,275.63699 66.833298,268.68701 66.75,262.26599 C66.666603,255.84399 70.894455,247.68396 66.5,243 C62.619297,238.86365 57.568699,242.13 53.5,240.40601 C45.731201,237.11501 37.624298,234.03799 31,228.812 C15.5239,216.605 3.2386501,196.69701 2.5,177 L2,176.5 L2.5,142 z"
+                          Fill="#FF000000"
+                          Stretch="Fill"
+                          UseLayoutRounding="False" />
+                    <Path Canvas.Left="30"
+                          Canvas.Top="2.93164"
+                          Width="87.8016"
+                          Height="213.137"
+                          Data="F1 M 30.5,174L 30,173.5C 30.1218,141.955 30.2436,110.41 30.3654,78.8654C 30.4525,56.298 29.9278,28.8106 46.0312,13C 56.8471,2.38077 77.0956,0.215118 91,6.25C 108.092,13.6684 116.741,36.8806 117.437,55.5C 118.471,83.1349 116.998,110.807 116.779,138.46C 116.603,160.595 118.165,187.031 103.375,203.5C 93.7393,214.23 75.2131,218.839 61.5,214.375C 45.3656,209.123 30.8029,190.965 30.5,174 Z "
+                          Stretch="Fill">
+                        <Path.Fill>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="White" />
+                                <GradientStop Offset="1" Color="Black" />
+                                <GradientStop Offset="0.543" Color="#FF7D7D7D" />
+                                <GradientStop Offset="0.546" Color="Black" />
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                    <Rectangle Canvas.Left="45"
+                               Canvas.Top="55"
+                               Width="55"
+                               Height="4"
+                               StrokeThickness="3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="White" />
+                                <GradientStop Offset="1" Color="Black" />
+                                <GradientStop Offset="0.543" Color="#FF7D7D7D" />
+                                <GradientStop Offset="0.546" Color="Black" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Canvas.Left="45"
+                               Canvas.Top="63"
+                               Width="55"
+                               Height="4"
+                               StrokeThickness="3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="White" />
+                                <GradientStop Offset="1" Color="Black" />
+                                <GradientStop Offset="0.543" Color="#FF7D7D7D" />
+                                <GradientStop Offset="0.546" Color="Black" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Canvas.Left="45"
+                               Canvas.Top="72"
+                               Width="55"
+                               Height="4"
+                               StrokeThickness="3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="White" />
+                                <GradientStop Offset="1" Color="Black" />
+                                <GradientStop Offset="0.543" Color="#FF7D7D7D" />
+                                <GradientStop Offset="0.546" Color="Black" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Canvas>
+            </Viewbox>
+        </Grid>
+    </DataTemplate>
+
+
+</ResourceDictionary>

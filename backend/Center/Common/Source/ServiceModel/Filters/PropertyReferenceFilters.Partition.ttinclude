@@ -1,0 +1,10 @@
+﻿<#+
+	private void WritePartition(EntitySpace.Partition partition)
+	{
+		var entities = partition.Entities.OrderBy(entity => entity.Name);
+		foreach (var entity in entities)
+        {
+			this.WriteEntity(entity);
+        }
+	}
+#>

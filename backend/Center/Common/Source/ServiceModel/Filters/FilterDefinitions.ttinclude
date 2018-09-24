@@ -1,0 +1,73 @@
+﻿<#+
+	public static PropertyValueFilterDefinition[] GetFilterDefinitions()
+	{
+		var enumPropertyValueFilter = new PropertyValueFilterDefinition("Enum", "Enum")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThanOrEqualTo,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThanOrEqualTo
+				}
+		};
+		var dateTimePropertyValueFilter = new PropertyValueFilterDefinition("DateTime", "DateTime")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThanOrEqualTo,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThanOrEqualTo
+				}
+		};
+		var intPropertyValueFilter = new PropertyValueFilterDefinition("Int32", "int")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThanOrEqualTo,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThanOrEqualTo
+				}
+		};
+		var longPropertyValueFilter = new PropertyValueFilterDefinition("Int64", "long")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThanOrEqualTo,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThanOrEqualTo
+				}
+		};
+		var nullableDateTimePropertyValueFilter = new PropertyValueFilterDefinition("NullableDateTime", "DateTime?")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.GreaterThanOrEqualTo,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThan,
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.LessThanOrEqualTo
+				}
+		};
+		var stringPropertyValueFilter = new PropertyValueFilterDefinition("String", "string")
+		{
+			AdditionalComparisonOperators =
+				{
+					PropertyValueFilterDefinition.AdditionalComparisonOperator.CaseInsensitiveMatch
+				}
+		};
+		return new []
+			{
+				enumPropertyValueFilter,
+				new PropertyValueFilterDefinition("Boolean", "bool"),
+				dateTimePropertyValueFilter,
+				new PropertyValueFilterDefinition("Guid", "Guid"),
+				intPropertyValueFilter,
+				longPropertyValueFilter,
+				nullableDateTimePropertyValueFilter,
+				stringPropertyValueFilter
+			};
+	}
+#>

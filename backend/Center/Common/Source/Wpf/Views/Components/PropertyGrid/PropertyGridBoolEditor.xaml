@@ -1,0 +1,10 @@
+<propertyGrid:PropertyGridEditor x:Class="Gorba.Center.Common.Wpf.Views.Components.PropertyGrid.PropertyGridBoolEditor"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                             xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid"
+                             mc:Ignorable="d"
+                             d:DataContext="{d:DesignInstance propertyGrid:PropertyGridItemDataSource}">
+    <CheckBox Style="{StaticResource FlatStyleCheckbox}"  IsChecked="{Binding Path=Value}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+</propertyGrid:PropertyGridEditor>

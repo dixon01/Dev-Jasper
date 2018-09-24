@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Arriva>
+	<OBU Descr="Container of all the required information useful to connect to Arriva OBU.">
+		<RemoteIP Descr="IP address of the OBU">127.0.0.1</RemoteIP>
+		<RemotePort Descr="TCP port on the OBU for the Arriva protocol">35001</RemotePort>
+	</OBU>
+	<FTP Descr="Container of all the required information useful for the FTP transfer from Arriva.">
+		<PollingEnabled>true</PollingEnabled>
+		<SourceDirectory Descr="path of the local directory to find the file for connections.">C:\Departures\Gorba\Xml</SourceDirectory>
+		<Filename Descr="name of the file to use for connections.">departures.xml</Filename>
+		<PollTime Descr="Polling time to check directory for connections file (in seconds)">5</PollTime>
+	</FTP>
+
+	<Behaviour>
+	 <ConnectionsEnabled>true</ConnectionsEnabled>
+	 <ConnectionSource desc="connection source for transfer set.
+			values admitted: {ArrivaProtocol, Ftp}">Ftp</ConnectionSource>
+	 <MaxDepartures
+			desc="maximum connections in the departures file.
+			Values admitted {1; 100}. Default value: 100">100</MaxDepartures>
+	 </Behaviour>
+</Arriva>

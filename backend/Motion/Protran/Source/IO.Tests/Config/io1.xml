@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IO>
+  <SerialPorts>
+    <SerialPort Name="COM1" Enabled="false">
+      <RTS>Speaker</RTS>
+      <CTS>SpecialInput</CTS>
+      <DTR>COM1.DTR</DTR>
+      <DSR>COM1.DSR</DSR>
+    </SerialPort>
+    <SerialPort Name="COM2" Enabled="true">
+      <RTS>COM2.RTS</RTS>
+      <CTS>StopRequest</CTS>
+      <DTR>COM2.DTR</DTR>
+      <DSR>COM2.DSR</DSR>
+    </SerialPort>
+  </SerialPorts>
+
+  <Inputs>
+    <Input Application="Protran" Name="StopRequest" TransfRef="Default" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="StopRequestedState" Row="0"/>
+    </Input>
+    <Input Unit="TFT-2" Name="SpecialInput" TransfRef="Default" Enabled="false">
+      <UsedFor Table="SystemStatus" Column="SpecialInput" Row="0"/>
+    </Input>
+  </Inputs>
+
+  <Transformations desc="Container of all the transformation that Protran has to do on the inputs.">
+    <Chain id="Default" />
+  </Transformations>
+</IO>

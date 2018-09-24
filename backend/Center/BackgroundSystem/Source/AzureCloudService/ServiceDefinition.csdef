@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WorkerRole name="BackgroundSystem.WorkerRole" vmsize="Small">
+    <Imports>
+    </Imports>
+    <Endpoints>
+      <InputEndpoint name="BackgroundSystem.Services" protocol="tcp" port="808" localPort="808" />
+      <InputEndpoint name="Medi" protocol="tcp" port="1596" localPort="1596" />
+      <InputEndpoint name="Portal.HttpEndpoint" protocol="http" port="80" localPort="80" />
+      <InputEndpoint name="Portal.HttpsEndpoint" protocol="https" port="443" localPort="443" certificate="Https" />
+    </Endpoints>
+    <ConfigurationSettings>
+      <Setting name="BackgroundSystem.CenterDataContext" />
+      <Setting name="BackgroundSystem.NotificationsConnectionString" />
+      <Setting name="ActiveDirectory.Tenant" />
+      <Setting name="ActiveDirectory.ClientId" />
+      <Setting name="Portal.EnableHttps" />
+      <Setting name="Wcf.ConnectionLimit" />
+      <Setting name="ActiveDirectory.AuthorizationUrl" />
+      <Setting name="BackgroundSystem.StartPortalHost" />
+      <Setting name="BackgroundSystem.Host" />
+      <Setting name="Center.StorageConnectionString" />
+      <Setting name="Portal.ClickOnceUseBeta" />
+      <Setting name="Diagnostics.LogLevel" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="Resources" cleanOnRoleRecycle="false" sizeInMB="50000" />
+      <LocalStorage name="Logs" cleanOnRoleRecycle="false" sizeInMB="5000" />
+      <LocalStorage name="Portal.AppData" cleanOnRoleRecycle="false" sizeInMB="2000" />
+    </LocalResources>
+    <Certificates>
+      <Certificate name="Https" storeLocation="LocalMachine" storeName="My" />
+    </Certificates>
+  </WorkerRole>
+</ServiceDefinition>

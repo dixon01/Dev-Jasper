@@ -1,0 +1,236 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplateExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.Client.ChangeTracking" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.Client.ChangeTracking
+{
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;	
+
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities)
+        {
+            this.WriteEntity(entity);
+        }
+        #>
+    }
+<#+
+    }
+	
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var idPropertyType = entity.IdPropertyType;
+		
+#>
+
+    public partial class <#= entity.Name #>ChangeTrackingManager : ChangeTrackingManagerBase, I<#= entity.Name #>ChangeTrackingManager
+    {
+        private readonly ConcurrentDictionary<<#= idPropertyType #>, Internal<#= entity.Name #>ReadableModel> models =
+            new ConcurrentDictionary<<#= idPropertyType #>, Internal<#= entity.Name #>ReadableModel>();
+
+        public event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Added;
+
+        public event EventHandler<ReadableModelEventArgs<<#= entity.Name #>ReadableModel>> Removed;
+
+        public <#= entity.Name #>ChangeTrackingManager(
+            NotificationSubscriptionConfiguration configuration, UserCredentials userCredentials)
+            : base(configuration, userCredentials)
+        {
+        }
+
+        public <#= entity.Name #>WritableModel Create()
+        {
+            var model = new <#= entity.Name #>WritableModel();
+            model.Committed += this.TrackingModelOnCommitted;
+            return model;
+        }
+
+        public <#= entity.Name #>WritableModel CreateCopy(<#= entity.Name #>ReadableModel readableModel)
+        {
+            var model = <#= entity.Name #>WritableModel.CreateCopyFrom(readableModel);
+            model.Committed += this.TrackingModelOnCommitted;
+            return model;
+        }
+
+        public async Task AddAsync(<#= entity.Name #>WritableModel model)
+        {
+            if (model.Id != default(<#= idPropertyType #>))
+            {
+                throw new Exception();
+            }
+            
+            await this.WaitReadyAsync();
+            var entity = model.ToDto();
+            using (var channelScope = this.CreateChannelScope())
+            {
+                await channelScope.Channel.AddAsync(entity);
+            }
+        }
+
+        public async Task DeleteAsync(<#= entity.Name #>ReadableModel model)
+        {
+            await this.WaitReadyAsync();
+            var entity = model.ToDto();
+            using (var channelScope = this.CreateChannelScope())
+            {
+                await channelScope.Channel.DeleteAsync(entity);
+            }
+        }
+
+        public virtual async Task<IEnumerable<<#= entity.Name #>ReadableModel>> QueryAsync(<#= entity.Name #>Query query = null)
+        {
+            if (query == null)
+            {
+                query = <#= entity.Name #>Query.Create();
+            }
+
+            var list = new List<<#= entity.Name #>ReadableModel>();
+            await this.WaitReadyAsync();
+            var entities = await this.QueryEntitiesAsync(query);
+            return entities.Select(entity => this.Wrap(entity, true)).ToList();
+        }
+        
+        private ChannelScope<I<#= entity.Name #>DataService> CreateChannelScope()
+        {
+            return this.CreateChannelScope<I<#= entity.Name #>DataService>();
+        }
+
+        private void Release(<#= entity.IdPropertyType #> id)
+        {
+            Internal<#= entity.Name #>ReadableModel value;
+            if (this.models.TryRemove(id, out value))
+            {
+                value.ChangeTrackingModelUpdated -= this.TrackingModelOnCommitted;
+            }
+        }
+
+        private void Track(Internal<#= entity.Name #>ReadableModel readableModel)
+        {
+            this.models[readableModel.Id] = readableModel;
+            readableModel.ChangeTrackingModelCreated += this.ReadableModelOnChangeTrackingModelCreated;
+        }
+
+        private void ReadableModelOnChangeTrackingModelCreated(
+            object sender,
+            ChangeTrackingModelCreatedEventArgs<<#= entity.Name #>Delta> writableModelCreatedEventArgs)
+        {
+            writableModelCreatedEventArgs.TrackingModel.Committed += this.TrackingModelOnCommitted;
+        }
+
+        private async void TrackingModelOnCommitted(
+            object sender,
+            ModelUpdatedEventArgs<<#= entity.Name #>Delta> writableModelUpdatedEventArgs)
+        {
+            Logger.Trace("Changes committed");
+            var model = (<#= entity.Name #>WritableModel)sender;
+            model.Committed -= this.TrackingModelOnCommitted;
+            if (writableModelUpdatedEventArgs.Delta.Id == default(<#= entity.IdPropertyType #>))
+            {
+                try
+                {
+                    var dto = model.ToDto();
+                    using (var channelScope = this.CreateChannelScope())
+                    {
+                        await channelScope.Channel.AddAsync(dto);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    this.Logger.Error(exception, "Error during commit");
+                    this.RaiseOperationCompleted(model.Id, false);
+                }
+
+                return;
+            }
+
+            var delta = writableModelUpdatedEventArgs.Delta.GetChangedDelta();
+            if (delta == null)
+            {
+                return;
+            }
+
+            var notification = new <#= entity.Name #>DeltaNotification
+            {
+                Delta = new <#= entity.Name #>DeltaMessage(delta),
+                EntityId = model.Id,
+                WasAccepted = true
+            };
+            await this.PostNotificationAsync(notification).ConfigureAwait(false);
+        }
+
+        private void RaiseAdded(ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+        {
+			var newProperty = string.Empty;
+            var handler = this.Added;
+            if (handler == null)
+            {
+                return;
+            }
+
+            try
+            {
+                handler(this, e);
+            }
+            catch(Exception exception)
+            {
+                this.Logger.WarnException("Error while calling Added handler", exception);
+            }
+        }
+
+        private void RaiseRemoved(ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+        {
+            var handler = this.Removed;
+            if (handler == null)
+            {
+                return;
+            }
+
+            try
+            {
+                handler(this, e);
+            }
+            catch(Exception exception)
+            {
+                this.Logger.WarnException("Error while calling Removed handler", exception);
+            }
+        }
+    }
+<#+
+    }
+#>

@@ -1,0 +1,33 @@
+﻿<Window x:Class="Gorba.Common.Medi.MediChatTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid Background="#FFECECEC">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+            <RowDefinition Height="74"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="SendButton" Content="Send" HorizontalAlignment="Center" Margin="0,0,0,42" VerticalAlignment="Bottom" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Grid.Row="2" Grid.Column="2" Height="22" Click="SendButtonClick"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="100" Grid.Row="2" Grid.Column="2" Height="22" Click="CloseButtonClick"/>
+        <ListBox x:Name="SentAndReceivedMessagesListBox" Margin="10,10,0,74" Grid.Row="1" Grid.RowSpan="2"
+                 Grid.Column="0" BorderThickness="2" >
+            <ListBox.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="2"/>
+            </ListBox.Effect>
+        </ListBox>
+        <TextBox x:Name="MessageToSendTextBox" HorizontalAlignment="Left" Height="53" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="358" ClipToBounds="True" SnapsToDevicePixels="True" BorderThickness="2" KeyDown="MessageToSendTextBoxKeyDown">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="3" ShadowDepth="3"/>
+            </TextBox.Effect>
+        </TextBox>
+        <TextBox x:Name="ConfigFileNameTextBox" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0,10,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="medi.config" VerticalAlignment="Top" Width="130" KeyDown="ConfigFileNameTextBoxKeyDown"/>
+        <Button x:Name="ConfigureButton" Content="Configure" Grid.Column="2" HorizontalAlignment="Center" Margin="0,47,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="130" Click="ConfigureButtonClick"/>
+
+    </Grid>
+</Window>

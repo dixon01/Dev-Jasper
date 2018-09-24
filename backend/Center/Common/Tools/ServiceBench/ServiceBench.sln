@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceBench", "Center.Common.ServiceBench.csproj", "{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{8BB1BE3A-097C-4CBC-9097-19BF697E2DCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceModel", "..\..\Source\ServiceModel\Center.Common.ServiceModel.csproj", "{768079A3-523C-492B-8822-1655594BA3F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Core", "..\..\Source\Wpf\Core\Wpf.Core.csproj", "{ADE176C8-B499-4597-B13F-F638EC70D090}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Center.Common.ServiceBench.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\..\\Source\\ServiceModel\\Center.Common.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName2 = ServiceBench.sln
+		SccProjectName2 = ../../Source/ServiceModel
+		SccLocalPath2 = ..\\..\\Source\\ServiceModel
+		SccProjectUniqueName3 = ..\\..\\Source\\Wpf\\Core\\Wpf.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = ServiceBench.sln
+		SccProjectName3 = ../../Source/Wpf/Core
+		SccLocalPath3 = ..\\..\\Source\\Wpf\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Debug|x86.ActiveCfg = Debug|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Debug|x86.Build.0 = Debug|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Release|Any CPU.ActiveCfg = Release|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Release|Mixed Platforms.Build.0 = Release|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Release|x86.ActiveCfg = Release|x86
+		{AC937E4F-4AF0-4652-A068-0F8377B6C2F7}.Release|x86.Build.0 = Release|x86
+		{768079A3-523C-492B-8822-1655594BA3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{768079A3-523C-492B-8822-1655594BA3F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ADE176C8-B499-4597-B13F-F638EC70D090}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{768079A3-523C-492B-8822-1655594BA3F7} = {8BB1BE3A-097C-4CBC-9097-19BF697E2DCF}
+		{ADE176C8-B499-4597-B13F-F638EC70D090} = {8BB1BE3A-097C-4CBC-9097-19BF697E2DCF}
+	EndGlobalSection
+EndGlobal

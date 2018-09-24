@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<XimpleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Enabled>true</Enabled>
+  <EnableResponse>false</EnableResponse>
+  <EnableXimpleOnlyResponse>false</EnableXimpleOnlyResponse>
+  <InfoTainmentAudioStatusTableIndex>104</InfoTainmentAudioStatusTableIndex>
+  <InfoTainmentCannedMsgPlayTableIndex>101</InfoTainmentCannedMsgPlayTableIndex>
+  <InfoTainmentSystemStatusTableIndex>105</InfoTainmentSystemStatusTableIndex>
+  <InfoTainmentVolumeSettingsTableIndex>100</InfoTainmentVolumeSettingsTableIndex>
+  <NetworkChangedMessageTableIndex>102</NetworkChangedMessageTableIndex>
+  <NetworkFileAccessSettingsTableIndex>103</NetworkFileAccessSettingsTableIndex>
+  <NetworkFtpSettings>
+    <Enabled>true</Enabled>
+    <Password>L1v3rwur5t</Password>
+    <Uri>ftp://localhost/Updates</Uri>
+    <UserName>gorba</UserName>
+  </NetworkFtpSettings>
+  <Port>1600</Port>
+  <AudioZonePresentationValues>
+    <Interior>0</Interior>
+    <Exterior>1</Exterior>
+    <Both>2</Both>
+  </AudioZonePresentationValues>
+  <XimpleServerMonitorTimerInterval>60</XimpleServerMonitorTimerInterval>
+  <MaxXimpleServerFailuresBeforeRestart>2</MaxXimpleServerFailuresBeforeRestart>
+</XimpleConfig>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="BackgroundSystem.WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="BackgroundSystem.CenterDataContext" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="BackgroundSystem.NotificationsConnectionString" value="" />
+      <Setting name="ActiveDirectory.Tenant" value="" />
+      <Setting name="ActiveDirectory.ClientId" value="" />
+      <Setting name="Portal.EnableHttps" value="False" />
+      <Setting name="Wcf.ConnectionLimit" value="512" />
+      <Setting name="ActiveDirectory.AuthorizationUrl" value="" />
+      <Setting name="BackgroundSystem.StartPortalHost" value="True" />
+      <Setting name="BackgroundSystem.Host" value="" />
+      <Setting name="Center.StorageConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Portal.ClickOnceUseBeta" value="False" />
+      <Setting name="Diagnostics.LogLevel" value="Off" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Https" thumbprint="3351774E7348C1EE8DAA554FD2D6BAD8217E6677" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

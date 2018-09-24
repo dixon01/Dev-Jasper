@@ -1,0 +1,220 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="Vdv301Protocol.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Protran.VDV301;
+
+using Gorba.Common.Utility.Core;
+
+using NLog;
+
+namespace Gorba.Common.Configuration.Protran.VDV301
+{<#
+    var services = LoadSupportedServices(this.Host.ResolvePath(@"SupportedServices.xml"));
+    #>
+
+    [Serializable]
+    public class ServicesConfig
+    {
+        public ServicesConfig()
+        {<#
+    foreach (var service in services)
+    {
+        #>
+
+            this.<#= service.Name #> = new <#= service.Name #>Config();<#
+    }
+#>
+
+        }
+        <#
+    foreach (var service in services)
+    {
+        #>
+
+        public <#= service.Name #>Config <#= service.Name #> { get; set; }<#
+    }
+#>
+
+
+        [XmlAttribute]
+        [DefaultValue(false)]
+        public bool ValidateHttpRequests { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(false)]
+        public bool ValidateHttpResponses { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(false)]
+        public bool VerifyVersion { get; set; }
+    }
+    <#
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            continue;
+        }
+        
+        this.GenerateHttpServiceConfig(service);
+    }
+#>
+}
+
+<#+
+private void GenerateHttpServiceConfig(Service service)
+{
+    var operations = service.Operations.Where(o => o.Name.StartsWith("Get")).ToList();
+    #>
+
+    [Serializable]
+    public partial class <#= service.Name #>Config : ServiceConfigBase
+    {<#+ 
+    foreach (var operation in operations)
+    {
+        #>
+
+        public <#= operation.Name #>Config <#= operation.Name #> { get; set; }
+<#+
+    }
+    
+    foreach (var operation in operations)
+    {
+        var complex = operation.Return.ElementSchemaType as XmlSchemaComplexType;
+        if (complex == null)
+        {
+            continue;
+        }
+
+        #>
+
+        [Serializable]
+        public class <#= operation.Name #>Config : OperationConfigBase
+        {
+<#+
+        this.GenerateConfigConstructor(complex, operation.Name + "Config");
+        this.GenerateConfigProperties(complex);
+        #>
+        }
+<#+
+    }
+
+    var dataTypes = GetDataTypes(operations);
+    foreach (var dataType in dataTypes)
+    {
+        #>
+
+        [Serializable]
+        public class <#= dataType.Name #>Config
+        {
+<#+
+        this.GenerateConfigConstructor(dataType, dataType.Name + "Config");
+        this.GenerateConfigProperties(dataType);
+        #>
+        }
+<#+
+    }
+        #>
+    }
+    <#+
+}
+
+private void GenerateConfigConstructor(XmlSchemaComplexType type, string name)
+{
+    var particle = type.Particle as XmlSchemaGroupBase;
+    if (particle == null)
+    {
+        return;
+    }
+    
+    var children = GetChildren(particle);
+    
+    #>
+            public <#= name #>()
+            {
+<#+
+    foreach (var child in children.Where(c => IsSimpleIbisIpType(c.ElementSchemaType)))
+    {
+        string configType;
+        if (child.ElementSchemaType.Name == "IBIS-IP.dateTime")
+        {
+            configType = "DateTimeDataItemConfig";
+        }
+        else if (child.ElementSchemaType.Name == "InternationalTextType")
+        {
+            configType = "InternationalTextDataItemConfig";
+        }
+        else
+        {
+            configType = "DataItemConfig";
+        }
+        #>
+                this.<#= child.Name #> = new List<<#= configType #>>();
+<#+
+    }
+    #>
+            }
+<#+
+}
+
+private void GenerateConfigProperties(XmlSchemaComplexType type)
+{
+    var particle = type.Particle as XmlSchemaGroupBase;
+    if (particle == null)
+    {
+        return;
+    }
+    
+    var children = GetChildren(particle);
+
+    foreach (var child in children)
+    {
+        var configType = child.ElementSchemaType.Name + "Config";
+        if (!IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            #>
+            public <#= configType #> <#= child.Name #> { get; set; }
+
+<#+
+        }
+        else
+        {
+            if (child.ElementSchemaType.Name == "IBIS-IP.dateTime")
+            {
+                configType = "DateTimeDataItemConfig";
+            }
+            else if (child.ElementSchemaType.Name == "InternationalTextType")
+            {
+                configType = "InternationalTextDataItemConfig";
+            }
+            else
+            {
+                configType = "DataItemConfig";
+            }
+            #>
+            [XmlElement("<#= child.Name #>")]
+            public List<<#= configType #>> <#= child.Name #> { get; set; }
+
+<#+
+        }
+    }
+}
+#>

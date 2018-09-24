@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Gorba.Center.Diag.Core.Views.RemoteViewerTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:helpers="clr-namespace:Gorba.Center.Common.Wpf.Framework.Helpers;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:unit="clr-namespace:Gorba.Center.Diag.Core.ViewModels.Unit"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance unit:RemoteViewerSectionViewModel}"
+             d:DesignHeight="300" d:DesignWidth="600"
+             x:Name="Root">
+    <UserControl.Resources>
+        <telerik:InvertedBooleanConverter x:Key="InvertedBoolConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <PasswordBox Margin="3" Width="120"
+                         VerticalAlignment="Center"
+                         IsEnabled="{Binding IsConnected, Converter={StaticResource InvertedBoolConverter}}"
+                         helpers:PasswordBoxAssistant.BindPassword="True"
+                         helpers:PasswordBoxAssistant.BoundPassword="{Binding Mode=TwoWay, Path=Password}" />
+            <telerik:RadToggleButton Margin="3"
+                                     VerticalAlignment="Center"
+                                     Content="{x:Static resources:DiagStrings.UnitMenu_Connect}"
+                                     Name="ConnectButton"
+                                     IsChecked="{Binding IsConnected, Mode=TwoWay}"
+                                     Click="ConnectButtonOnClick" />
+            
+            <telerik:RadToggleButton Margin="9 3 9 3"
+                                     VerticalAlignment="Center"
+                                     Width="Auto"
+                                     Content="{x:Static resources:DiagStrings.RemoteViewer_FitToScreen}"
+                                     IsChecked="{Binding IsFitToScreen}"
+                                     Name="FitToScreenToggleButton" />
+
+            <CheckBox Margin="3 3 30 3"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding IsInteractive}"
+                      IsEnabled="{Binding SupportsInteractive}"
+                      Content="{x:Static resources:DiagStrings.RemoteViewer_IsInteractive}" />
+            
+            <telerik:RadToggleButton Margin="3"
+                                     VerticalAlignment="Center"
+                                     Width="40"
+                                     Content="{x:Static resources:DiagStrings.RemoteViewer_Shift}"
+                                     IsEnabled="{Binding IsInteractive}"
+                                     IsChecked="{Binding IsShiftPressed}"
+                                     Name="ShiftToggleButton" />
+            <telerik:RadToggleButton Margin="3"
+                                     VerticalAlignment="Center"
+                                     Width="40"
+                                     Content="{x:Static resources:DiagStrings.RemoteViewer_Ctrl}"
+                                     IsEnabled="{Binding IsInteractive}"
+                                     IsChecked="{Binding IsCtrlPressed}"
+                                     Name="CtrlToggleButton" />
+            <telerik:RadToggleButton Margin="3"
+                                     VerticalAlignment="Center"
+                                     Width="40"
+                                     Content="{x:Static resources:DiagStrings.RemoteViewer_Win}"
+                                     IsEnabled="{Binding IsInteractive}"
+                                     IsChecked="{Binding IsWinPressed}"
+                                     Name="WinToggleButton" />
+            <telerik:RadToggleButton Margin="3"
+                                     VerticalAlignment="Center"
+                                     Width="40"
+                                     Content="{x:Static resources:DiagStrings.RemoteViewer_Alt}"
+                                     IsEnabled="{Binding IsInteractive}"
+                                     IsChecked="{Binding IsAltPressed}"
+                                     Name="AltToggleButton" />
+            
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="{Binding ScrollMode}" VerticalScrollBarVisibility="{Binding ScrollMode}">
+            <Viewbox  StretchDirection="DownOnly" Stretch="{Binding StretchMode}">
+                <Border BorderThickness="1" BorderBrush="Black">
+                    <Border.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Source, ElementName=ImageBox}" Value="{x:Null}">
+                                    <Setter Property="Border.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                
+                    <Image Stretch="None" Name="ImageBox" Focusable="True"/>
+                </Border>
+            </Viewbox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
+ 

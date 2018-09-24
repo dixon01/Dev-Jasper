@@ -1,0 +1,5 @@
+[From http://nlog-project.org/]
+
+NLog is open source software, distributed under the terms of BSD license.
+
+BSD license: http://opensource.org/licenses/bsd-license.php
