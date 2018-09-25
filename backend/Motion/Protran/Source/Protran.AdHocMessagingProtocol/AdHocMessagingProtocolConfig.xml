@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<AdHocMessagingProtocolConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdHocApiUri>
+    <HostUri>http://swdevicntrweb.luminatorusa.com</HostUri>
+  </AdHocApiUri>
+  <AdHocMessageTimerSettings>
+    <Interval>PT1M</Interval>
+  </AdHocMessageTimerSettings>
+  <ApiTimeout>30000</ApiTimeout>
+  <DestinationsApiUri>
+    <HostUri>http://swdevicntrapp.luminatorusa.com</HostUri>
+  </DestinationsApiUri>
+  <EnableUnitRegistration>true</EnableUnitRegistration>
+  <MaxAdHocMessages>6</MaxAdHocMessages>
+  <MaxAdhocRegistrationAttempts>3</MaxAdhocRegistrationAttempts>
+  <RegisterUnitTimerSettings>
+    <Interval>PT1M</Interval>
+  </RegisterUnitTimerSettings>
+  <RequestUnitInfoTimerSettings>
+    <Interval>PT1M</Interval>
+  </RequestUnitInfoTimerSettings>
+</AdHocMessagingProtocolConfig>

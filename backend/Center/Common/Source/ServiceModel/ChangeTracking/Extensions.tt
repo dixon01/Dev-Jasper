@@ -1,0 +1,118 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#@ include file="Extensions.Partition.ttinclude" #>
+<#@ include file="Extensions.Entity.ttinclude" #>
+<#
+    var path = this.Host.ResolvePath(@"..\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var entities = entitySpace.Partitions.SelectMany(p => p.Entities).Where(entity => entity.HasChangeTracking).ToList();
+#>
+namespace Gorba.Center.Common.ServiceModel.ChangeTracking
+{
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Exceptions;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+
+    internal enum ReferenceTypes
+    {
+<#
+    entities.Select((e, i) => new { Entity = e, Index = i, Comma = i < entities.Count - 1 ? "," : string.Empty })
+        .ToList().ForEach(type =>
+    {
+        #>
+        <#= type.Entity.Name #> = <#= type.Index + type.Comma #>
+<#
+    });
+    #>
+    }
+
+    internal class EntityKey
+    {
+        public EntityKey(object id, ReferenceTypes type)
+        {
+            this.Id = id;
+            this.Type = type;
+        }
+
+        public object Id { get; private set; }
+
+        public ReferenceTypes Type { get; private set; }
+
+        public bool Equals(EntityKey other)
+        {
+            if (object.ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id.Equals(other.Id) && this.Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (object.ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((EntityKey)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (this.Id.GetHashCode() * 397) ^ (int)this.Type;
+            }
+        }
+    }
+}
+<#+
+
+    private enum Types
+    {
+        Model = 0,
+
+        Dto = 1
+    }
+
+    private string GetAlias(Types type, EntitySpace.Entity entity)
+    {
+        return type + entity.Partition.Name + entity.Name;
+    }
+#>

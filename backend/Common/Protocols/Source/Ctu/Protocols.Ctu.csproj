@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31CDBD33-6A2C-4850-BE80-2ADA677D1564}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Protocols.Ctu</RootNamespace>
+    <AssemblyName>Gorba.Common.Protocols.Ctu</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="CtuDatagram.cs" />
+    <Compile Include="CtuSerializer.cs" />
+    <Compile Include="Datagram\Header.cs" />
+    <Compile Include="Datagram\HeaderFlags.cs" />
+    <Compile Include="Datagram\Payload.cs" />
+    <Compile Include="Datagram\TagName.cs" />
+    <Compile Include="Datagram\TagType.cs" />
+    <Compile Include="Datagram\Triplet.cs" />
+    <Compile Include="Notifications\CountdownNumber.cs" />
+    <Compile Include="Notifications\DisplayStatus.cs" />
+    <Compile Include="Notifications\DisplayStatusCode.cs" />
+    <Compile Include="Notifications\DownloadAbort.cs" />
+    <Compile Include="Notifications\DownloadStart.cs" />
+    <Compile Include="Notifications\ExtendedLineInfo.cs" />
+    <Compile Include="Notifications\ExteriorSignTexts.cs" />
+    <Compile Include="Notifications\LineInfo.cs" />
+    <Compile Include="Notifications\LogMessage.cs" />
+    <Compile Include="Notifications\SpecialInputInfo.cs" />
+    <Compile Include="Notifications\Status.cs" />
+    <Compile Include="Notifications\StatusCode.cs" />
+    <Compile Include="Notifications\TripInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\DeviceInfoRequest.cs" />
+    <Compile Include="Requests\DownloadProgressRequest.cs" />
+    <Compile Include="Responses\DeviceInfoResponse.cs" />
+    <Compile Include="Responses\DownloadProgressResponse.cs" />
+    <Compile Include="Responses\DownloadStatusCode.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

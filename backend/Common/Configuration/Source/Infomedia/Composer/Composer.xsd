@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Composer" type="ComposerConfig" />
+  <xs:complexType name="ComposerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Contains the entire configuration of the Infomedia Composer application.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="EnableTimeSync" type="xs:boolean" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            This is obselete.
+            Indicates whether time sync using Ximple should be enabled.
+            If this is set to true, composer will change the system date and time (using Hardware Manager)
+            to the date and time sent through Ximple (table SystemStatus, columns Date and Time).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="XimpleInactivity" minOccurs="1" maxOccurs="1" type="XimpleInactivityConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Defines the timeout behavior when not receiving Ximple data from Protran.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="EnablePresentationLogging" type="xs:boolean" default="true">
+        <xs:annotation>
+          <xs:documentation>Proof of Play presentation flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="XimpleInactivityConfig">
+    <xs:attribute name="Timeout" type="xs:duration" default="PT60S">
+      <xs:annotation>
+        <xs:documentation>
+          Defines the amount of time no Ximple data was received from Protran before the
+          remote computer status (table SystemStatus, column RemotePC) is set to 0.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AtStartup" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>
+          If this flag is set to true, the remote computer status (table SystemStatus, column RemotePC)
+          is set to 0 at the start-up of Composer and only set to 1 once valid Ximple data was received.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

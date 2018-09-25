@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.MainMenu.ExportScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Client.Converters;assembly=Gorba.Center.Common.Wpf.Client"
+             xmlns:converters2="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:commandParameters="clr-namespace:Gorba.Center.Media.Core.ViewModels.CommandParameters"
+             xmlns:consistency="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Consistency"
+             mc:Ignorable="d" 
+             x:Name="Root"
+             d:DesignHeight="300" d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:ExportScreenViewModel}">
+    <UserControl.Resources>
+        <converters:ImageCacheConverter x:Key="ImageCacheConverter"/>
+        <converters:NotNullConverter x:Key="NotNullConverter" />
+        <converters:EqualsConverter x:Key="EqualsConverter" />
+        <converters2:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
+        <converters:ResourceProgressConverter x:Key="ResourceProgressConverter" />
+        <converters2:UtcToUiTimeConverter x:Key="UtcToUiTimeConverter" />
+    </UserControl.Resources>
+    
+    <TabControl TabStripPlacement="Top"
+                Style="{StaticResource TopFullWidthTabControl}" 
+                ItemContainerStyle="{StaticResource OfficeLikeTabItemStyle}" Margin="0 0 8 8">
+        <TabItem x:Name="LocalExportTabItem">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_ExportLocalHeader}"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+                
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15 5 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_LocalHelp}" TextWrapping="Wrap" Margin="0 0 0 5"/>
+                <Border Grid.Row="2" BorderThickness="0 1 0 0" Margin="-7 0 0 0" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+                    <Button Style="{StaticResource FlatHighlightButton}"
+                        MinWidth="70" HorizontalAlignment="Right" Margin="0 5 0 0"
+                         Content="{x:Static resources:MediaStrings.ExportScreen_ExportButton}"
+                        Command="{Binding ExportCommandWrapper, ElementName=Root}" />
+                </Border>
+               
+            </Grid>
+        </TabItem>
+        
+        <TabItem x:Name="ServerExportTabItem">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_ExportServerHeader}"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+
+            <Grid IsSharedSizeScope="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15 5 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_ServerHelp}" TextWrapping="Wrap" Margin="0 0 0 5"/>
+                <TextBlock Grid.Row="1" Text="{x:Static resources:MediaStrings.ExportScreen_UpdateGroupsHeader}"  FontWeight="Bold"/>
+                <telerik:RadListBox Grid.Row="2" ItemsSource="{Binding UpdateGroups}"
+                                    SelectionMode="Multiple" Name="UpdateGroupListBox"
+                                    ItemContainerStyle="{StaticResource RadListBoxCheckBoxItemStyle}">
+                    <telerik:RadListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch">
+                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Item.Name}" DockPanel.Dock="Left" />
+                                <Image Width="16" Height="16" HorizontalAlignment="Right" Margin="6 0" DockPanel.Dock="Right" >
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/error_16x16.png" />
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding HasCompatibilityIssue}" Value="true">
+                                                    <Setter Property="Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/warning_16x16.png" />
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Setter Property="ToolTip" Value="{x:Static resources:MediaStrings.ExportScreen_UpdateGroupsCompatibilityIssue_Tooltop}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </DockPanel>
+                        </DataTemplate>
+                    </telerik:RadListBox.ItemTemplate>
+                </telerik:RadListBox>
+
+                <CheckBox x:Name="StartDateCheckBox" Grid.Row="3" Margin="0,5,170,0" IsChecked="{Binding IsStartDateChecked, Mode=TwoWay}">
+                    <CheckBox.Content>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="DateColumn" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_StartDateHeader}" VerticalAlignment="Center"  FontWeight="Bold"/>
+                            <telerik:RadDateTimePicker Grid.Column="1" Width="120" x:Name="StartDatePicker"
+                                                       SelectedValue="{Binding StartDate, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Converter={StaticResource UtcToUiTimeConverter}}">
+                                <telerik:RadDateTimePicker.Style>
+                                    <Style TargetType="telerik:RadDateTimePicker">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=StartDateCheckBox, Path=IsChecked}" Value="False">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </telerik:RadDateTimePicker.Style>
+                            </telerik:RadDateTimePicker>
+                        </Grid>
+                    </CheckBox.Content>
+                </CheckBox>
+                <CheckBox x:Name="EndDateCheckBox" Grid.Row="4" Margin="0,5,170,5" IsChecked="{Binding IsEndDateChecked, Mode=TwoWay}">
+                    <CheckBox.Content>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="DateColumn" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_EndDateHeader}" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <telerik:RadDateTimePicker Grid.Column="1" Width="120" x:Name="EndDatePicker"
+                                                       SelectedValue="{Binding EndDate, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Converter={StaticResource UtcToUiTimeConverter}}">
+                                <telerik:RadDateTimePicker.Style>
+                                    <Style TargetType="telerik:RadDateTimePicker">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=EndDateCheckBox, Path=IsChecked}" Value="False">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </telerik:RadDateTimePicker.Style>
+                            </telerik:RadDateTimePicker>
+                        </Grid>
+                    </CheckBox.Content>
+                </CheckBox>
+                <TextBlock Grid.Row="5" Text="{x:Static resources:MediaStrings.ExportScreen_DescriptionHeader}" FontWeight="Bold" />
+                <TextBox Grid.Row="6" Text="{Binding Description}" Height="40" AcceptsReturn="True" Style="{StaticResource MediaTextBoxStyle}"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0 0 0 5" KeyUp="OnKeyUpHandleEnter"/>
+                <Border Grid.Row="7" BorderThickness="0 1 0 0" Margin="-7 0 0 0" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+                    <Button Style="{StaticResource FlatHighlightButton}"
+                        MinWidth="70" HorizontalAlignment="Right"
+                    Margin="0 5 0 0" Content="{x:Static resources:MediaStrings.ExportScreen_ExportButton}"
+                        Command="{Binding ExportCommandWrapper, ElementName=Root}" />
+                </Border>
+                
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="TransferTabItem">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_TransferHeader}"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15 5 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{x:Static resources:MediaStrings.ExportScreen_TransferHelp}" TextWrapping="Wrap" Margin="0 0 0 5"/>
+                <Border Grid.Row="2" BorderThickness="0 1 0 0" Margin="-15 0 0 0"
+                        BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+                    <Button Style="{StaticResource FlatHighlightButton}"
+                        MinWidth="70" HorizontalAlignment="Right" Margin="0 5 0 0"
+                         Content="{x:Static resources:MediaStrings.ExportScreen_ExportButton}"
+                        Command="{Binding ExportCommandWrapper, ElementName=Root}" />
+                </Border>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

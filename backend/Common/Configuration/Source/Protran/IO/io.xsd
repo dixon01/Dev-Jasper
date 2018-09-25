@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IO" type="IOConfig" />
+    <xs:complexType name="IOConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The IO Protocol configuration.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="SerialPorts" type="ArrayOfSerialPortsConfig">
+          <xs:annotation>
+            <xs:documentation>
+              List of serial ports that must be configured on the hardware.
+            </xs:documentation>
+          </xs:annotation>
+         </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="Inputs" type="InputsConfigList">
+          <xs:annotation>
+            <xs:documentation>
+              List of all inputs that are available.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="Transformations" type="TransformationsList">
+          <xs:annotation>
+            <xs:documentation>
+              List of all transformations available.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ArrayOfSerialPortsConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration for the different serial ports that are available on the hardware.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="SerialPort" type="SerialPortConfig">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration of a serial port.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SerialPortConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration of a serial port with its COM port and how the pins CTS, RTS, DTS and DRS
+          are used.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="RTS" type="xs:string" >
+          <xs:annotation>
+            <xs:documentation>
+              The name given to the input which comes from the RTS pin of the serial port. 
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="CTS" type="xs:string" >
+          <xs:annotation>
+            <xs:documentation>
+              The name given to the input which comes from the CTS pin of the serial port. 
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="DTR" type="xs:string" >
+          <xs:annotation>
+            <xs:documentation>
+              The name given to the input which comes from the DTS pin of the serial port. 
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="DSR" type="xs:string" >
+          <xs:annotation>
+            <xs:documentation>
+              The name given to the input which comes from the DSR pin of the serial port. 
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Name" type="xs:string" use="required" >
+          <xs:annotation>
+            <xs:documentation>
+              The name of the COM port used by the serial port. 
+            </xs:documentation>
+          </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+          <xs:annotation>
+            <xs:documentation>
+              Flag indicating whether the serial port is to be used or not.
+            </xs:documentation>
+          </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="InputsConfigList">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration for the different inputs pins that are availble on the hardware.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Input" type="InputConfig">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration of an input available from a serial port or GPIO on the hardware.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InputConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration of an input available from a serial port or GPIO on the hardware.
+          The input can be available from a different unit or from the current unit.
+          The input can also be available from a specific application which can be configured.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage">
+          <xs:annotation>
+            <xs:documentation>
+              The configuration for which generic coordinate is filled with the value received from the input.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Unit" type="xs:string" use="optional" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the Unit from which the input is available.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Application" type="xs:string" use="optional" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the Application from which the input is available.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Name" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the input.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="TransfRef" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the transformation chain to be used to transform the received input value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Enabled" type="xs:boolean" use="optional" default="true">
+        <xs:annotation>
+          <xs:documentation>
+            Flag indicating whether the input is available or not.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="GenericUsage">
+      <xs:annotation>
+        <xs:documentation>
+          The generic coordinate with the Language, Table, Column and Row which is filled with the value received from the input.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="Language" type="xs:string" use="optional" >
+        <xs:annotation>
+          <xs:documentation>
+            The language that the input updates. This can either be a name that is looked up in the dictionary or a 
+            number which is then used directly to address the language.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Table" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The table that the input updates. This can either be a name that is looked up in the dictionary or a 
+            number which is then used directly to address the table.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Column" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The column that the input updates. This can either be a name that is looked up in the dictionary or a 
+            number which is then used directly to address the column.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Row" type="xs:unsignedByte" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            the row that the input updates. This can either be a number which is then used directly to address the 
+            column or for some telegrams this can also be the format string {0}  to be replaced by the index of the item.
+            Default value is 0.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="RowOffset" type="xs:int" use="optional" >
+        <xs:annotation>
+          <xs:documentation>
+            The offset added to the index for rows.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="TransformationsList">
+      <xs:annotation>
+        <xs:documentation>
+          The list of transformations that can be applied to the input values received.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Chain" type="TransformationChain">
+          <xs:annotation>
+            <xs:documentation>
+              The transformation chain which can be applied to an input value.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TransformationChain">
+      <xs:annotation>
+        <xs:documentation>
+          The transformation chain which can be applied to an input value.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Capitalize" nillable="true" type="CapitalizeConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ChainRef" nillable="true" type="ChainRefConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Integer" nillable="true" type="IntegerConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Join" nillable="true" type="JoinConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="LawoString" nillable="true" type="LawoStringConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="RegexDivider" nillable="true" type="RegexDividerConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="RegexMapping" nillable="true" type="RegexMappingConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Replace" nillable="true" type="ReplaceConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="StringMapping" nillable="true" type="StringMappingConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SymbolDivider" nillable="true" type="SymbolDividerConfig" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Utf8" nillable="true" type="Utf8Config" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+    <xs:complexType name="ArrayOfString">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="CapitalizeMode">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="UpperLower" />
+        <xs:enumeration value="UpperOnly" />
+        <xs:enumeration value="LowerOnly" />
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="CapitalizeConfig">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Exceptions" type="ArrayOfString" />
+      </xs:sequence>
+      <xs:attribute name="Mode" type="CapitalizeMode" />
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="ChainRefConfig">
+      <xs:attribute name="TransfRef" type="xs:QName" use="required" />
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:simpleType name="NumberStyles">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="None" />
+        <xs:enumeration value="AllowLeadingWhite" />
+        <xs:enumeration value="AllowTrailingWhite" />
+        <xs:enumeration value="AllowLeadingSign" />
+        <xs:enumeration value="AllowTrailingSign" />
+        <xs:enumeration value="AllowParentheses" />
+        <xs:enumeration value="AllowDecimalPoint" />
+        <xs:enumeration value="AllowThousands" />
+        <xs:enumeration value="AllowExponent" />
+        <xs:enumeration value="AllowCurrencySymbol" />
+        <xs:enumeration value="AllowHexSpecifier" />
+        <xs:enumeration value="Integer" />
+        <xs:enumeration value="HexNumber" />
+        <xs:enumeration value="Number" />
+        <xs:enumeration value="Float" />
+        <xs:enumeration value="Currency" />
+        <xs:enumeration value="Any" />
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="IntegerConfig">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="NumberStyle" type="NumberStyles" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="JoinConfig">
+      <xs:attribute name="Separator" type="xs:string" />
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="LawoStringConfig">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CodePage" type="IntWithDescription" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:simpleType name="RegexOptions">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="None" />
+        <xs:enumeration value="IgnoreCase" />
+        <xs:enumeration value="Multiline" />
+        <xs:enumeration value="ExplicitCapture" />
+        <xs:enumeration value="Compiled" />
+        <xs:enumeration value="Singleline" />
+        <xs:enumeration value="IgnorePatternWhitespace" />
+        <xs:enumeration value="RightToLeft" />
+        <xs:enumeration value="ECMAScript" />
+        <xs:enumeration value="CultureInvariant" />
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="RegexDividerConfig">
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="Regex" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="Options" type="RegexOptions" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="Mapping">
+      <xs:attribute name="from" type="xs:string" />
+      <xs:attribute name="to" type="xs:string" />
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="RegexMappingConfig">
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="ReplaceConfig">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CaseSensitive" type="xs:boolean" />
+        <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="StringMappingConfig">
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="SymbolDividerConfig">
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="Symbol" type="xs:boolean" />
+      </xs:sequence>
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="Utf8Config">
+      <xs:attribute name="desc" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="IntWithDescription">
+      <xs:simpleContent>
+        <xs:extension base="xs:int">
+          <xs:attribute name="desc" type="xs:string" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

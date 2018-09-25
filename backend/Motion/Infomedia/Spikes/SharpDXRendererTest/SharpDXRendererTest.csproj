@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7FE018F4-F60A-4817-A273-F6AA726E0931}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.SharpDXRendererTest</RootNamespace>
+    <AssemblyName>SharpDXRendererTest</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005">
+      <HintPath>..\..\..\..\3rdParty\DirectShowLib\2.1\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\NLog\2.0.0.2000.netfx20\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=2.4.2.0, Culture=neutral, PublicKeyToken=627a3d6d1956f55a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\SharpDX\2.4.2-net20\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=2.4.2.0, Culture=neutral, PublicKeyToken=627a3d6d1956f55a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\SharpDX\2.4.2-net20\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Config\ConfigService.cs" />
+    <Compile Include="Config\DeviceConfig.cs" />
+    <Compile Include="Config\RendererConfig.cs" />
+    <Compile Include="Config\ScreenConfig.cs" />
+    <Compile Include="Config\TextConfig.cs" />
+    <Compile Include="Config\TextMode.cs" />
+    <Compile Include="Config\VideoConfig.cs" />
+    <Compile Include="DxExtensions\SharpDxExtensions.cs" />
+    <Compile Include="DxExtensions\TextMetric.cs" />
+    <Compile Include="DxExtensions\TextureFactory.cs" />
+    <Compile Include="Engine\AnalogClockHandRenderEngine.cs" />
+    <Compile Include="DxExtensions\FontCache.cs" />
+    <Compile Include="Engine\Text\DxGdiTextPart.cs" />
+    <Compile Include="Engine\Text\DxImagePart.cs" />
+    <Compile Include="Engine\Text\DxPart.cs" />
+    <Compile Include="Engine\Text\DxTextFactory.cs" />
+    <Compile Include="Engine\Text\DxFontTextPart.cs" />
+    <Compile Include="Engine\Text\DxTextPartBase.cs" />
+    <Compile Include="Engine\Text\DxVideoPart.cs" />
+    <Compile Include="Engine\Image\ImageRenderEngine.cs" />
+    <Compile Include="Engine\RenderEngineBase.cs" />
+    <Compile Include="DxExtensions\FontEx.cs" />
+    <Compile Include="Engine\Text\TextRenderEngine.cs" />
+    <Compile Include="Engine\Video\VideoRenderEngine.cs" />
+    <Compile Include="Engine\Video\DirectShowVideoSprite.cs" />
+    <Compile Include="Engine\Video\DirectShowVideoTexture.cs" />
+    <Compile Include="Engine\Video\VideoSpriteBase.cs" />
+    <Compile Include="Engine\Video\WindowedVideoSprite.cs" />
+    <Compile Include="Renderer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\IDxRenderContext.cs" />
+    <Compile Include="Engine\Image\ImageSprite.cs" />
+    <Compile Include="Engine\Text\TextSprite.cs" />
+    <Compile Include="RenderManagerFactory.cs" />
+    <Compile Include="Config\VideoMode.cs" />
+    <Compile Include="WindowMode.cs" />
+    <Compile Include="RenderWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenderWindow.Designer.cs">
+      <DependentUpon>RenderWindow.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="RenderWindow.resx">
+      <DependentUpon>RenderWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\BbCode\BbCode.csproj">
+      <Project>{D9E310CB-7DB7-46D2-8F0D-8A799660A106}</Project>
+      <Name>BbCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\RendererBase\RendererBase.csproj">
+      <Project>{646028B8-57A6-4017-BEE2-0064B2F78B0A}</Project>
+      <Name>RendererBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SharpDXRenderer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

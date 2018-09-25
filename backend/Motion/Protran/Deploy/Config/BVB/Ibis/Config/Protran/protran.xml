@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Protran Version="2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Protocols>
+    <Protocol Name="IbisProtocol" Enabled="true" description="This is the IBIS protocol"/>
+  </Protocols>
+  <Persistence description="Allows Protran to store/load information in/from the hard disk in order
+    to reuse them in case of restart.">
+    <IsEnabled desc="Flag that indicates whether the persistence service is enabled or not.
+      Admitted values are: true, false.
+      Default value: false">false</IsEnabled>
+    <PersistenceFile description="Absolute file name for the file that
+      will be used by Protran for the stored information.">persistence.xml</PersistenceFile>
+    <DefaultValidity description="The default amount of seconds
+      for the information's validity. Default is 10 minutes.">PT10M</DefaultValidity>
+  </Persistence>
+</Protran>

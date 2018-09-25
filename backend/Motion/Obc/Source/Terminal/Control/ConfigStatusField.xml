@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<StatusFieldConfig 
+  Description="Define a maximum of four fields. Possible values: None, BlockNumber, RouteNumber, RunNumber, RoutePathNumber, ZoneNumber, DestinationNumber, DriverNumber, GpsStatus">
+  <Fields>
+    <StatusFieldType>ZoneNumber</StatusFieldType>
+    <StatusFieldType>RouteNumber</StatusFieldType>
+    <StatusFieldType>DriverNumber</StatusFieldType>
+    <StatusFieldType>BlockNumber</StatusFieldType>
+  </Fields>
+</StatusFieldConfig>

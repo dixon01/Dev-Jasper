@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<TerminalConfig>
+  <GsmConfig>
+    <SpeakerIoInverted Description="Set to true if the output is inverted">
+      <Value>false</Value>
+    </SpeakerIoInverted>
+    <SpeakerEnableOutput Description="Turns off or on the speaker. The IO from the Buco. Negative value: disabled">
+      <Value>-1</Value>
+    </SpeakerEnableOutput>
+    <SpeakerVolume Description="Volume from the speaker. Between 0 and 100%">
+      <Value>50</Value>
+    </SpeakerVolume>
+    <MicVolume Description="Microphone volume. Between 0 and 100%">
+      <Value>50</Value>
+    </MicVolume>
+  </GsmConfig>
+  <AlarmInput Description="VTi3/Buco input name. Set value to empty string to disable alarms. Set to 0 to enable alarms, but disable the IO.">
+    <Value />
+  </AlarmInput>
+  <ICenterValidation Description="ICenter Validation. Duty and DutyACK event. Used in iMotion and IRA.">
+    <Value>false</Value>
+  </ICenterValidation>
+  <DriverPinCode Description="Display Driver PIN code screen">
+    <Value>false</Value>
+  </DriverPinCode>
+  <DriverBlock Description="Use driver blocks (service-agents)">
+    <Value>false</Value>
+  </DriverBlock>
+  <DriverBlock_AutoCompletion Description="Driver blocks (service-agents) auto completion">
+    <Value>true</Value>
+  </DriverBlock_AutoCompletion>
+  <DB_Btn1 Description="Driver bloc button (up to 8). If empty, button is disabled." />
+  <DB_Btn2 />
+  <DB_Btn3 />
+  <DB_Btn4 />
+  <DB_Btn5 />
+  <DB_Btn6 />
+  <DB_Btn7 />
+  <DB_Btn8 />
+  <DB_Btn1ShortName />
+  <DB_Btn2ShortName />
+  <DB_Btn3ShortName />
+  <DB_Btn4ShortName />
+  <DB_Btn5ShortName />
+  <DB_Btn6ShortName />
+  <DB_Btn7ShortName />
+  <DB_Btn8ShortName />
+  <ThirdPartyPS Description="Third party block assignement">
+    <Value>false</Value>
+  </ThirdPartyPS>
+  <HandleGprs Description="true: Creates and manages the GPRS connection. Make sure not start GPRSNetup.exe. For using GSM calls this value has to be true.">
+    <Value>false</Value>
+  </HandleGprs>
+  <SpeechType Description="Possible values: None, Gsm, Radio">
+    <Value>Gsm</Value>
+  </SpeechType>
+  <Languages Description="Languages the driver can choose from. The first item is the default/startup language. Possible values: de,fr,en">
+    <Value>de</Value>
+    <Value>fr</Value>
+    <Value>en</Value>
+  </Languages>
+  <Announcment Description="Announcement. If you enable this, you need the config file(s). Possible values: None, Tts, Mp3">
+    <Value>None</Value>
+  </Announcment>
+</TerminalConfig>

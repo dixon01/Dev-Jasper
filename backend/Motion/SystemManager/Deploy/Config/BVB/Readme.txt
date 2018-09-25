@@ -1,0 +1,1 @@
+The "Presentation" folder is the same for Compact and PC-2.

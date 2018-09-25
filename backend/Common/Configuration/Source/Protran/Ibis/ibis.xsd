@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema" />
+
+  <xs:complexType name="BoolWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:boolean">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StringWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:int">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TimeSpanWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:duration">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="Ibis" nillable="true" type="IbisConfig" />
+  <xs:complexType name="IbisConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Behaviour" type="Behaviour" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Sources" type="IbisSourcesConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Recording" type="RecordingConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TimeSync" type="TimeSyncConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Telegrams" type="ArrayOfTelegramConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Transformations" type="ArrayOfChain" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="IbisSourcesConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Simulation" type="SimulationConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SerialPort" type="SerialPortConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UDPServer" type="UdpServerConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="JSON" type="JSONConfig" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+    <xs:attribute name="Active" type="IbisSourceType" />
+  </xs:complexType>
+  <xs:complexType name="SimulationConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SimulationFile" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InitialDelay" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IntervalBetweenTelegrams" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TimesToRepeat" type="IntWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="SerialPortConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ComPort" type="StringWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BaudRate" type="IntWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DataBits" type="IntWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StopBits">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="StopBits">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Parity">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="Parity">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RetryCount" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SerialPortReopen">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="SerialPortReopen">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="Parity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Odd" />
+      <xs:enumeration value="Even" />
+      <xs:enumeration value="Mark" />
+      <xs:enumeration value="Space" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StopBits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="One" />
+      <xs:enumeration value="Two" />
+      <xs:enumeration value="OnePointFive" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GenericUsage">
+    <xs:attribute name="Language" type="xs:string" />
+    <xs:attribute name="Table" type="xs:string" />
+    <xs:attribute name="Column" type="xs:string" />
+    <xs:attribute name="Row" type="xs:string" />
+    <xs:attribute default="1" name="ColumnOffset" type="xs:int" />
+    <xs:attribute default="0" name="RowOffset" type="xs:int" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="GenericUsageDS021Base">
+    <xs:attribute name="Language" type="xs:string" />
+    <xs:attribute name="Table" type="xs:string" />
+    <xs:attribute name="Column" type="xs:string" />
+    <xs:attribute name="Row" type="xs:string" />
+    <xs:attribute default="1" name="ColumnOffset" type="xs:int" />
+    <xs:attribute default="0" name="RowOffset" type="xs:int" />
+    <xs:attribute name="FromBlock" type="xs:int" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="UdpServerConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LocalPort" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReceiveFormat">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="TelegramFormat">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SendFormat">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="TelegramFormat">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="JSONConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="IPAddress" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Port" type="IntWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="TelegramFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Full" />
+      <xs:enumeration value="NoChecksum" />
+      <xs:enumeration value="NoFooter" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SerialPortReopen">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="FrameOnly" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Behaviour">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="IbisAddress" type="IntWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConnectionTimeOut" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionStatusUsedFor" type="GenericUsage" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CheckCrc" type="BoolWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ByteType">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="ByteType">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="ProcessPriority">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="ProcessPriorityClass">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="ByteType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ascii7" />
+      <xs:enumeration value="Hengartner8" />
+      <xs:enumeration value="UnicodeBigEndian" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IbisSourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Simulation" />
+      <xs:enumeration value="SerialPort" />
+      <xs:enumeration value="UDPServer" />
+      <xs:enumeration value="JSON" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProcessPriorityClass">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Idle" />
+      <xs:enumeration value="High" />
+      <xs:enumeration value="RealTime" />
+      <xs:enumeration value="BelowNormal" />
+      <xs:enumeration value="AboveNormal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RecordingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Active" type="BoolWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Format">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="RecordingFormat">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="FileAbsPath" type="StringWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="RecordingFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Protran" />
+      <xs:enumeration value="Gismo" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TimeSyncConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="InitialDelay" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="WaitTelegrams" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Tolerance" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UpdateInterval" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TimeUsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  
+  <xs:complexType name="ArrayOfTelegramConfig">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS001" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS001a" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS002" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS003" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS003a" nillable="true" type="DS003AConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS003c" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS005" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS006" nillable="true" type="DS006Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS006a" nillable="true" type="DS006AConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS008" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS009" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS010" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS010b" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS010j" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS020" nillable="true" type="DS020Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS021" nillable="true" type="DS021Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS021a" nillable="true" type="DS021AConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS021c" nillable="true" type="DS021CConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS030" nillable="true" type="DS030Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS036" nillable="true" type="DS036Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS080" nillable="true" type="DS080Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="DS081" nillable="true" type="DS081Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO001" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO002" nillable="true" type="GO002Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO003" nillable="true" type="GO003Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO004" nillable="true" type="GO004Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO005" nillable="true" type="GO005Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO006" nillable="true" type="TelegramConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="GO007" nillable="true" type="GO007Config" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="HPW074" nillable="true" type="HPW074Config" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Answer">
+    <xs:sequence>
+      <xs:element name="DS120" minOccurs="0" maxOccurs="1" type="DS120Config" />
+      <xs:element name="DS130" minOccurs="0" maxOccurs="1" type="DS130Config" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TelegramStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="NoData" />
+      <xs:enumeration value="MissingData" />
+      <xs:enumeration value="IncorrectRecord" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Encoding">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UTF-8" />
+      <xs:enumeration value="UTF-16" />
+      <xs:enumeration value="ASCII" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ConnectionConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForStopName" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForLineNumber" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDepartureTime" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LineNumberFormat" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowForNextStopOnly" type="BoolWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="TelegramConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS003AConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SplitByBlock" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SplitByChar" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ControlChar">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="ControlChar">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="ControlChar">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Siemens" />
+      <xs:enumeration value="Krüger" />
+      <xs:enumeration value="AvlLuxembourg" />
+      <xs:enumeration value="ConnectionFormatMaster" />
+      <xs:enumeration value="Syntus" />
+      <xs:enumeration value="Arriva" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DS006Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="InitialYear" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OutputFormat" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS006AConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="OutputFormat" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS020Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS021Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS021AConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTransfers" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTransferSymbols" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForRelativeTime" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForAbsoluteTime" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestination" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationTransfers" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationTransferSymbols" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationRelativeTime" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationAbsoluteTime" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForText" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Connection" type="ConnectionConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushNumberOfStations" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushTimeout" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstStopIndexValue" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EndingStopValue" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideLastStop" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideDestinationBelow" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowPastStops" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DeleteRouteIndexValue" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AbsoluteTimeFormat" type="StringWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS021CConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTransfers" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTransferSymbols" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestination" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationTransfers" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationTransferSymbols" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AsciiLineNumberUsedFor" type="GenericUsageDS021Base" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushNumberOfStations" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushTimeout" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstStopIndexValue" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideLastStop" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideDestinationBelow" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowPastStops" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TakeDestinationFromLastStop" type="BoolWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS030Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS036Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AutoReset" type="BoolWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS080Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="OpenValue" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CloseValue" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ResetWithDS010b" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS081Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS120Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Response">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:int">
+              <xs:attribute name="Status" type="TelegramStatus" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DefaultResponse" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DS130Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Response">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:int">
+              <xs:attribute name="Status" type="TelegramStatus" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DefaultResponse" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ScheduleDeviation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="OnTime" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Ahead" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Delayed" type="StringWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="GO002Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CheckLength" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StopIndexSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RowNumberSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PictogramSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LineNumberSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TrackNumberSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ScheduleDeviationSize" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstStopIndex" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstRowIndex" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LastRowIndex" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PictogramFormat" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LineNumberFormat" type="StringWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ScheduleDeviation" type="ScheduleDeviation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DeletePassedStops" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowForNextStopOnly" type="BoolWithDescription" />
+
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForPictogram" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForLineNumber" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDepartureTime" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTrackNumber" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForScheduleDeviation" type="GenericUsage" />
+
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GO003Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GO004Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTitle" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForType" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GO005Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestination" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AsciiLineNumberUsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BufferNextRoute" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushNumberOfStations" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FlushTimeout" type="TimeSpanWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideLastStop" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideDestinationBelow" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowPastStops" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideNextStopForIndex" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DeleteRoute" type="BoolWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GO007Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForTransfers" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestination" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForDestinationTransfers" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedForLineNumber" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideLastStop" type="BoolWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HideDestinationBelow" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ShowPastStops" type="BoolWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="HPW074Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SpecialTextFile" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Encoding" type="Encoding" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UsedFor" type="GenericUsage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Answer" type="Answer" />
+    </xs:sequence>
+    <xs:attribute name="TransfRef" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ArrayOfChain">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Chain" type="TransformationChain" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="TransformationChain">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Capitalize" nillable="true" type="CapitalizeConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="ChainRef" nillable="true" type="ChainRefConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Integer" nillable="true" type="IntegerConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Join" nillable="true" type="JoinConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="LawoString" nillable="true" type="LawoStringConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="RegexDivider" nillable="true" type="RegexDividerConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="RegexMapping" nillable="true" type="RegexMappingConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Replace" nillable="true" type="ReplaceConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="StringMapping" nillable="true" type="StringMappingConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="SymbolDivider" nillable="true" type="SymbolDividerConfig" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Utf8" nillable="true" type="Utf8Config" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:QName" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CapitalizeMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UpperLower" />
+      <xs:enumeration value="UpperOnly" />
+      <xs:enumeration value="LowerOnly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CapitalizeConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Exceptions" type="ArrayOfString" />
+    </xs:sequence>
+    <xs:attribute name="Mode" type="CapitalizeMode" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ChainRefConfig">
+    <xs:attribute name="TransfRef" type="xs:QName" use="required" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="NumberStyles">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="AllowLeadingWhite" />
+      <xs:enumeration value="AllowTrailingWhite" />
+      <xs:enumeration value="AllowLeadingSign" />
+      <xs:enumeration value="AllowTrailingSign" />
+      <xs:enumeration value="AllowParentheses" />
+      <xs:enumeration value="AllowDecimalPoint" />
+      <xs:enumeration value="AllowThousands" />
+      <xs:enumeration value="AllowExponent" />
+      <xs:enumeration value="AllowCurrencySymbol" />
+      <xs:enumeration value="AllowHexSpecifier" />
+      <xs:enumeration value="Integer" />
+      <xs:enumeration value="HexNumber" />
+      <xs:enumeration value="Number" />
+      <xs:enumeration value="Float" />
+      <xs:enumeration value="Currency" />
+      <xs:enumeration value="Any" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="IntegerConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="NumberStyle" type="NumberStyles" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="JoinConfig">
+    <xs:attribute name="Separator" type="xs:string" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LawoStringConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CodePage" type="IntWithDescription" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="RegexOptions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="IgnoreCase" />
+      <xs:enumeration value="Multiline" />
+      <xs:enumeration value="ExplicitCapture" />
+      <xs:enumeration value="Compiled" />
+      <xs:enumeration value="Singleline" />
+      <xs:enumeration value="IgnorePatternWhitespace" />
+      <xs:enumeration value="RightToLeft" />
+      <xs:enumeration value="ECMAScript" />
+      <xs:enumeration value="CultureInvariant" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RegexDividerConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Regex" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Options" type="RegexOptions" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Mapping">
+    <xs:attribute name="from" type="xs:string" />
+    <xs:attribute name="to" type="xs:string" />
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegexMappingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ReplaceConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CaseSensitive" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="StringMappingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="SymbolDividerConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Symbol" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Utf8Config">
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

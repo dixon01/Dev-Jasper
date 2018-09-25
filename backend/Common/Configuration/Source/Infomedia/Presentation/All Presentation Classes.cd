@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.InfomediaConfig" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YBAAAAAAIACIBQAAAAIAAAAAAABABAgABAAACAAAQAA=</HashCode>
+      <FileName>Presentation\InfomediaConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MasterPresentation" />
+      <Property Name="Cycles" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PhysicalScreens" />
+      <Property Name="VirtualDisplays" />
+      <Property Name="Evaluations" />
+      <Property Name="CyclePackages" />
+      <Property Name="Pools" />
+      <Property Name="Layouts" />
+      <Property Name="Fonts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.CyclePackageConfig" Collapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAIAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="EventCycles" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.CyclesConfig" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAIAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="StandardCycles" />
+      <Property Name="EventCycles" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.EvaluationConfig" Collapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAQAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Presentation\EvaluationConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.FontConfig" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.LayoutConfig" Collapsed="true">
+    <Position X="2" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Resolutions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.MasterLayoutConfig" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="PhysicalScreens" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.MasterPresentationConfig" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAIBA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="MasterCycles" />
+      <Property Name="MasterLayouts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.PhysicalScreenConfig" Collapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAQAAAAAAAEQAAAAAAAAYAQAAQAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.PhysicalScreenRefConfig" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.PoolConfig" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.ResolutionConfig" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAARAACAAQAEEBAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Elements" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.VirtualDisplayConfig" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAAQAAAAAAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.VirtualDisplayRefConfig" Collapsed="true">
+    <Position X="6.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.CycleConfigBase" Collapsed="true">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAZAACAAAAAUBAABAAAAEAEAIAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sections" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.CycleRefConfigBase" Collapsed="true">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.EventCycleConfig" Collapsed="true">
+    <Position X="11" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.EventCycleConfigBase" Collapsed="true">
+    <Position X="10" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAARAAAAAAAAABAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Cycle\EventCycleConfigBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Trigger" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.EventCycleRefConfig" Collapsed="true">
+    <Position X="7.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.GenericTriggerConfig" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAERAAAAAAAAEAIAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Presentation\Cycle\GenericTriggerConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.MasterCycleConfig" Collapsed="true">
+    <Position X="6.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.MasterEventCycleConfig" Collapsed="true">
+    <Position X="9.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.StandardCycleConfig" Collapsed="true">
+    <Position X="11.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Cycle.StandardCycleRefConfig" Collapsed="true">
+    <Position X="10" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.ImageSectionConfig" Collapsed="true">
+    <Position X="2.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.MasterSectionConfig" Collapsed="true">
+    <Position X="7" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.MultiSectionConfig" Collapsed="true">
+    <Position X="11.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACJAAASAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.PoolSectionConfig" Collapsed="true">
+    <Position X="13.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAQAAAAAAAAAAAAAACAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.SectionConfigBase" Collapsed="true">
+    <Position X="9.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAYAAAAAAAAAAAAAAAAAMAQAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.StandardSectionConfig" Collapsed="true">
+    <Position X="16" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.VideoSectionConfig" Collapsed="true">
+    <Position X="4.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAABAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.Section.WebmediaSectionConfig" Collapsed="true">
+    <Position X="9.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.ElementBase" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Presentation.LayoutConfigBase" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentation\Presentation.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.DrawableElementBase" Collapsed="true">
+    <Position X="1.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Layout.GraphicalElementBase" Collapsed="true">
+    <Position X="1.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAYAAAAAAAAYAA=</HashCode>
+      <FileName>Layout\Elements.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

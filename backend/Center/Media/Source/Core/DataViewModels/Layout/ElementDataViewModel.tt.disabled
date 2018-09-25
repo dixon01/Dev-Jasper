@@ -1,0 +1,186 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#@ import namespace="System.ComponentModel" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="$(SolutionDir)Source\T4Templating\bin\Debug\Gorba.Center.Media.T4Templating.dll" #>
+
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#
+	var entitiesFileName = "../../../../../../Common/Configuration/Source/Infomedia/Entities.xml";
+
+	var fileName = "../DataViewModels.xml";
+	var templates = DataViewModelTemplatedEntities.Load(this.Host.ResolvePath(entitiesFileName), this.Host.ResolvePath(fileName));
+	var namespaces = templates.NamespaceEntityDescriptors;
+    var ns = namespaces.Single(n => n.Name == "Layout");
+#>
+
+namespace Gorba.Center.Media.Core.DataViewModels.Layout
+{<#
+    foreach (var entityDescriptor in ns.DataViewModelEntityDescriptors.Where(e => e.Name != "Font"))
+    {
+        this.RenderEntity(entityDescriptor);
+    }
+#>
+}<#+
+
+    private void RenderPartialMethod(CompositeProperty propertyDescriptor)
+    {
+        foreach (var property in propertyDescriptor.TypeDataViewModel.PropertyDescriptors)
+        {
+			var name = propertyDescriptor.Name + property.Name;
+			this.RenderPartialMethod(name);
+        }
+    }
+
+    private void RenderPartialMethod(Property propertyDescriptor)
+    {
+		this.RenderPartialMethod(propertyDescriptor.Name);
+    }
+
+    private void RenderPartialMethod(string name)
+    {#>
+
+        partial void Validate<#= name #>(object dataValue, ref string errorMessage);
+<#+
+    }
+
+    private void RenderPartialMethod(PropertyBase propertyDescriptor)
+    {
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			return;
+		}
+
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+			return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.RenderPartialMethod(compositeProperty);
+			return;
+		}
+
+		var typedProperty = propertyDescriptor as Property;
+		if (typedProperty != null)
+		{
+			this.RenderPartialMethod(typedProperty);
+			return;
+		}
+
+		throw new ArgumentOutOfRangeException("propertyDescriptor", "Can't handle property type");
+    }
+
+    private void RenderProperty(CompositeProperty propertyDescriptor)
+    {
+        foreach (var property in propertyDescriptor.TypeDataViewModel.PropertyDescriptors)
+        {
+			var name = propertyDescriptor.Name + property.Name;
+			this.RenderProperty(name);
+        }
+    }
+
+    private void RenderProperty(Property propertyDescriptor)
+    {
+		this.RenderProperty(propertyDescriptor.Name);
+    }
+
+    private void RenderProperty(string name)
+    {#>
+
+			if (propertyName == "<#= name #>")
+			{
+				this.Validate<#= name #>(dataValue, ref errorMessage);
+				return errorMessage;
+			}
+<#+
+    }
+
+    private void RenderProperty(PropertyBase propertyDescriptor)
+    {
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			return;
+		}
+
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+			return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.RenderProperty(compositeProperty);
+			return;
+		}
+
+		var typedProperty = propertyDescriptor as Property;
+		if (typedProperty != null)
+		{
+			this.RenderProperty(typedProperty);
+			return;
+		}
+
+		throw new ArgumentOutOfRangeException("propertyDescriptor", "Can't handle property type");
+    }
+
+	private void RenderEntity(DataViewModelEntityDescriptor entity)
+    {
+	    if (!entity.PropertyDescriptors.Any())
+	    {
+			this.Warning("empty entity '" + entity.Name + "'");
+	        return;
+	    }
+
+	    var name = entity.Name.EndsWith("Base") ? entity.Name.Substring(0, entity.Name.Length - 4) : entity.Name;
+	    var suffix = entity.Name.EndsWith("Base") ? "Base" : string.Empty;
+        #>
+
+	public partial class <#= name #>ElementDataViewModel<#= suffix #>
+	{
+        /// <summary>
+        /// If overridden this method validates a property before it is definitely set.
+        /// </summary>
+        /// <param name="propertyName">
+        /// The property name.
+        /// </param>
+        /// <param name="dataValue">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The error string if the value is invalid.
+        /// </returns>
+        public override string IsValid(string propertyName, object dataValue)
+        {
+			string errorMessage = null;
+<#+
+	    foreach (var propertyDescriptor in entity.PropertyDescriptors)
+	    {
+	        this.RenderProperty(propertyDescriptor);
+	    }
+#>
+
+            return base.IsValid(propertyName, dataValue);
+		}
+<#+
+
+	    foreach (var propertyDescriptor in entity.PropertyDescriptors)
+	    {
+	        this.RenderPartialMethod(propertyDescriptor);
+	    }
+#>
+	}
+<#+
+    }
+#>

@@ -1,0 +1,342 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\Entities\Screen\ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+using Gorba.Common.Configuration.Infomedia.Layout;
+
+using Gorba.Motion.Infomedia.Entities;
+using Gorba.Motion.Infomedia.Entities.Screen;
+
+using Gorba.Motion.Infomedia.RendererBase.Engine;
+using Gorba.Motion.Infomedia.RendererBase.Manager;
+
+<#
+    var entitiesFile = @"..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(entitiesFile));
+    
+    var screenItemsFile = @"..\Entities\Screen\ScreenItems.xml";
+    this.changes = ScreenItems.LoadFrom(Host.ResolvePath(screenItemsFile));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Layout");
+    
+    this.screenItems = this.changes.ApplyTo(layoutNamespace.Classes.OfType<ElementClass>());
+    #>
+namespace Gorba.Motion.Infomedia.RendererBase
+{
+    public abstract partial class RenderManagerFactoryBase<TContext>
+        where TContext : IRenderContext
+    {
+        internal IScreenItemRenderManager<TContext> CreateRenderManager(ScreenItemBase item)
+        {
+            var itemInclude = item as IncludeItem;
+            if (itemInclude != null)
+            {
+                return Connect<IncludeItem, IncludeRenderManager<TContext>, IIncludeRenderEngine<TContext>>(
+                    new IncludeRenderManager<TContext>(itemInclude, this), this.CreateEngine);
+            }
+        <#
+
+    foreach (var clazz in this.screenItems)
+    {
+        if (string.IsNullOrEmpty(clazz.Base) || clazz.Name.EndsWith("Base"))
+        {
+            continue;
+        }
+
+        var modif = this.changes.GetItem(clazz.Name);
+        if (modif != null && !modif.Presentable)
+        {
+            continue;
+        }
+        #>
+
+            var item<#= clazz.Name #> = item as <#= clazz.Name #>Item;
+            if (item<#= clazz.Name #> != null)
+            {
+                return Connect<<#= clazz.Name #>Item, <#= clazz.Name #>RenderManager<TContext>, I<#= clazz.Name #>RenderEngine<TContext>>(
+                    new <#= clazz.Name #>RenderManager<TContext>(item<#= clazz.Name #>, this), this.CreateEngine);
+            }
+        <#
+    }
+    #>
+
+            throw new NotSupportedException("Type not supported: " + item.GetType().FullName);
+        }
+    
+    <#
+    foreach (var clazz in this.screenItems)
+    {
+        if (string.IsNullOrEmpty(clazz.Base) || clazz.Name.EndsWith("Base"))
+        {
+            continue;
+        }
+
+        var modif = this.changes.GetItem(clazz.Name);
+        if (modif != null && !modif.Presentable)
+        {
+            continue;
+        }
+        #>
+        
+        /// <summary>
+        /// Creates an <see cref="I<#= clazz.Name #>RenderEngine{TContext}"/> for the given manager.
+        /// </summary>
+        /// <param name="manager">
+        /// The manager.
+        /// </param>
+        /// <returns>
+        /// The newly created engine or null if no rendering is required.
+        /// </returns>
+        protected virtual I<#= clazz.Name #>RenderEngine<TContext> CreateEngine(<#= clazz.Name #>RenderManager<TContext> manager)
+        {
+            throw new NotSupportedException("<#= clazz.Name #>Item rendering not supported");
+        }
+        <#
+    }
+    #>
+
+    }
+}
+
+<#+
+private Entities entities;
+private ScreenItems changes;
+private List<ElementClass> screenItems;
+
+private void GenerateClass(ElementClass clazz)
+{
+    if (string.IsNullOrEmpty(clazz.Base) || !clazz.Base.EndsWith("Base"))
+    {
+        return;
+    }
+
+    var isAbstract = clazz.Name.EndsWith("Base");
+    var renderManagerClassName = GetRenderManagerClassName(clazz.Name);
+    var baseClass = GetRenderManagerClassName(clazz.Base);
+    var itemClassName = GetItemClassName(clazz.Name);
+    
+    var modif = this.changes.GetItem(clazz.Name);
+    if (!isAbstract && modif != null && !modif.Presentable)
+    {
+        return;
+    }
+
+    var genericArguments = "TItem, TContext, TEngine";
+    var baseGenericArguments = "TItem, TContext, TEngine";
+    var wheres = "where TItem : " + itemClassName + "\r\n        where TContext : IRenderContext\r\n        where TEngine : class, IRenderEngine<TContext>";
+
+    if (!isAbstract)
+    {
+        genericArguments = "TContext";
+        baseGenericArguments = itemClassName + ", TContext, I" + clazz.Name + "RenderEngine<TContext>";
+        wheres = "where TContext : IRenderContext";
+    }
+
+    var properties = clazz.Properties.OfType<TypedProperty>();
+
+    #>
+    
+    public <#= isAbstract ? "abstract " : string.Empty #>partial class <#= renderManagerClassName #><<#= genericArguments #>>
+        : <#= baseClass #><<#= baseGenericArguments #>>
+        <#= wheres #>
+    {<#+
+    foreach (var property in properties.OfType<Property>().Where(p => p.Dynamic && p.Animated))
+    {
+        var fieldName = GetFieldName(property.Name);
+        var animatorType = GetAnimatorClassName(property);
+        #>
+
+        private <#= animatorType #> <#= fieldName #>Animator;<#+
+    }
+    #>
+    
+
+        internal <#= renderManagerClassName #>(<#= isAbstract ? "TItem" : itemClassName #> item, RenderManagerFactoryBase<TContext> factory)
+            : base(item, factory)
+        {<#+
+    foreach (var property in properties.OfType<Property>().Where(p => p.Dynamic && p.Animated))
+    {
+        var fieldName = GetFieldName(property.Name);
+        var animatorType = GetAnimatorClassName(property);
+        var defaultValue = "item." + property.Name;
+        if (property.Type == "bool")
+        {
+            defaultValue += " ? 1 : 0";
+        }
+        #>
+
+            this.<#= fieldName #>Animator = new <#= animatorType #>(<#= defaultValue #>);<#+
+    }
+    #>
+
+            this.Initialize();
+        }<#+
+    foreach (var property in properties)
+    {
+        if (property is CompositeProperty)
+        {
+            if (this.screenItems.Find(i => i.Name == property.Type) != null)
+            {
+                continue;
+            }
+        }
+
+        var prop = property as Property;
+        var fieldName = GetFieldName(property.Name);
+        var propertyType = property.Type;
+        var getter = "this.Item." + property.Name;
+        if (prop != null && prop.Dynamic && prop.Animated)
+        {
+            if (propertyType == "bool")
+            {
+                propertyType = "double";
+            }
+            
+            if (propertyType == "int" || propertyType == "double")
+            {
+                getter = "(" + propertyType + ")this." + fieldName + "Animator.Value";
+            }
+            else
+            {
+                propertyType = GetAnimatorClassName(prop);
+                getter = "this." + fieldName + "Animator";
+            }
+        }
+
+        #>
+
+
+        public virtual <#= propertyType #> <#= property.Name #>
+        {
+            get
+            {
+                return <#= getter #>;
+            }
+        }<#+
+    }
+    #>
+
+
+        public override void Update(TContext context)
+        {<#+
+    foreach (var property in properties.OfType<Property>().Where(p => p.Dynamic && p.Animated))
+    {
+        var fieldName = GetFieldName(property.Name);
+        #>
+
+            this.<#= fieldName #>Animator.Update(context);<#+
+    }
+    #>
+
+            this.DoUpdate(context);
+            base.Update(context);
+        }
+
+        protected override void HandlePropertyChange(AnimatedPropertyChangedEventArgs change)
+        {
+            switch (change.PropertyName)
+            {<#+
+    foreach (var property in properties.OfType<Property>().Where(p => p.Dynamic && p.Animated))
+    {
+        var fieldName = GetFieldName(property.Name);
+        var newValue = "this.Item." + property.Name;
+        if (property.Type == "bool")
+        {
+            newValue += " ? 1 : 0";
+        }
+        #>
+
+                case "<#= property.Name #>":
+                    this.<#= fieldName #>Animator.Animate(change.Animation, <#= newValue #>);
+                    break;<#+
+    }
+    #>
+
+                default:
+                    base.HandlePropertyChange(change);
+                    break;
+            }
+        }
+        
+        partial void Initialize();
+        
+        partial void DoUpdate(TContext context);
+    }
+    <#+
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetItemClassName(string className)
+{
+    if (className == "Base")
+    {
+        return "ScreenItemBase";
+    }
+
+    return GetClassName(className, "Item");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetRenderManagerClassName(string className)
+{
+    if (className == "Base")
+    {
+        return "ScreenItemRenderManagerBase";
+    }
+
+    return GetClassName(className, "RenderManager");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetClassName(string className, string category)
+{
+    return className.EndsWith("Base") ? className.Replace("Base", category + "Base") : className + category;
+}
+
+/// <summary>
+/// Creates the backing field name for a property.
+/// <summary>
+private static string GetFieldName(string propertyName)
+{
+    if (string.IsNullOrEmpty(propertyName))
+    {
+        return propertyName;
+    }
+
+    return char.ToLower(propertyName[0]) + propertyName.Substring(1);
+}
+
+private static string GetAnimatorClassName(Property property)
+{
+    if (property.Type == "int" || property.Type == "bool")
+    {
+        return "ValueAnimator";
+    }
+    
+    return "AlphaAnimator<" + property.Type + ">";
+}
+#>

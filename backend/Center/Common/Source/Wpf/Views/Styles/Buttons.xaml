@@ -1,0 +1,381 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+                    mc:Ignorable="d">
+
+    <converters1:ToTypeConverter x:Key="ToTypeConverter"/>
+
+    <!-- Control Styles -->
+    <Style x:Key="ButtonReset" TargetType="Button">
+        <Setter Property="FontFamily" Value="/Gorba.Center.Media.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                            Background="{TemplateBinding Background}"
+                            x:Name="Border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+
+                        <Grid>
+                            <ContentPresenter x:Name="ButtonContent"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                                              Content="{TemplateBinding Content}"
+                                              RecognizesAccessKey="True" />
+
+                            <TextBlock x:Name="ButtonTextBlock"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Text="{TemplateBinding Content}"
+                                              Visibility="Collapsed"/>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefault" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{x:Null}"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding ElementName=ButtonContent, Path=Content, Converter={StaticResource ToTypeConverter}}" Value="{x:Type system:String}">
+                            <Setter TargetName="ButtonContent" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ButtonTextBlock" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FlatHighlightButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonHiglightBackgroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HighlightButtonHoverBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource HighlightButtonHoverForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource HighlightButtonDisabledForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource HighlightButtonDisabledBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource HoverButtonBackgroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatDarkButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonDarkForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonDarkBackgroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource HoverButtonDarkBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatIconButton" BasedOn="{StaticResource FlatButton}" TargetType="Button">
+        <Setter Property="Margin" Value="2 0 2 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Resources/fontawesome.ttf"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="{x:Static TextFormattingMode.Display}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FontSize" Value="18" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource FlatIconButtonHoverHighlightBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatImageButton" BasedOn="{StaticResource FlatButton}" TargetType="Button">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{StaticResource FlatImageButtonBackgroundColorBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource FlatImageButtonHoverBackgroundColorBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource FlatImageButtonPressedBackgroundColorBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BigFlatImageButton" BasedOn="{StaticResource FlatButton}" TargetType="Button">
+        <Setter Property="Width" Value="28" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+
+    <Style x:Key="SmallFlatIconButton" BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+
+    <Style x:Key="ToggleButtonReset" TargetType="ToggleButton">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                            Background="{TemplateBinding Background}"
+                            x:Name="Border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+
+                        <Grid>
+                            <ContentPresenter x:Name="ButtonContent"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                                              Content="{TemplateBinding Content}"
+                                              RecognizesAccessKey="True" />
+
+                            <TextBlock x:Name="ButtonTextBlock"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Text="{TemplateBinding Content}"
+                                              Visibility="Collapsed"/>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ButtonContent, Path=Content, Converter={StaticResource ToTypeConverter}}" Value="{x:Type system:String}">
+                            <Setter TargetName="ButtonContent" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ButtonTextBlock" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FlatToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonReset}">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HoverButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource CheckedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource CheckedButtonBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatIconToggleButton" BasedOn="{StaticResource FlatToggleButton}" TargetType="ToggleButton">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Margin" Value="2 0 2 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome" />
+    </Style>
+
+    <Style x:Key="HighlightedFlatIconToggleButton" BasedOn="{StaticResource FlatIconToggleButton}" TargetType="ToggleButton">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource FlatImageButtonHoverBackgroundColorBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource CheckedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource FlatImageButtonBackgroundColorBrush}" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatRadioButton" TargetType="RadioButton">
+        <Setter Property="Background" Value="{StaticResource ToolbarButtonColorBrush}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="Transparent" TextBlock.Foreground="{TemplateBinding Foreground}">
+                        <Border Background="{TemplateBinding Background}" TextBlock.Foreground="{TemplateBinding Foreground}">
+                            <ContentPresenter Margin="2" RecognizesAccessKey="True" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverToolbarButtonColorBrush}" />
+                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CheckedToolbarButtonColorBrush}" />
+                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource PressedToolbarButtonColorBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FlatIconRadioButton" BasedOn="{StaticResource FlatRadioButton}" TargetType="RadioButton">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Margin" Value="2 0 2 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome" />
+    </Style>
+
+    <Style x:Key="CycleNavigationButton" TargetType="ToggleButton">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0 0 0 5"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource CycleNavigationForegroundColorBrush}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="../Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com" />
+        <Setter Property="Focusable" Value="False" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="Background" CornerRadius="0" BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"/>
+
+                            <Rectangle x:Name="DisabledVisualElement" RadiusX="3" RadiusY="3" Fill="#FFFFFFFF" Opacity="0" IsHitTestVisible="false" />
+                            <Rectangle x:Name="FocusVisualElement" RadiusX="2" RadiusY="2" Margin="1" Stroke="#FF6DBDD1" StrokeThickness="1" Opacity="0" IsHitTestVisible="false" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource CycleNavigationButtonHighlightBorderBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource CycleNavigationButtonPressedBorderBrush}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource CycleNavigationButtonSelectedButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource CycleNavigationButtonSelectedButtonForegroundBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource CycleNavigationButtonCheckedBorderBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+</ResourceDictionary>

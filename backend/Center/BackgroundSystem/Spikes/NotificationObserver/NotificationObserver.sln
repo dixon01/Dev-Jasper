@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationObserver", "NotificationObserver\NotificationObserver.csproj", "{2D94E79C-99BB-4263-9BE8-8B8E83FA6CAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{4B352087-BADB-4F5A-931A-C2BA26DE7B64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus", "..\..\..\Common\Source\ServiceBus\ServiceBus.csproj", "{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Client", "..\..\..\Common\Source\Client\Center.Common.Client.csproj", "{5FC54EA9-187A-471E-889D-3D983E65B217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel", "..\..\..\Common\Source\ServiceModel\ServiceModel.csproj", "{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NotificationObserver\\NotificationObserver.csproj
+		SccProjectName1 = NotificationObserver
+		SccLocalPath1 = NotificationObserver
+		SccProjectUniqueName2 = ..\\..\\..\\Common\\Source\\ServiceBus\\ServiceBus.csproj
+		SccProjectTopLevelParentUniqueName2 = NotificationObserver.sln
+		SccProjectName2 = ../../../Common/Source/ServiceBus
+		SccLocalPath2 = ..\\..\\..\\Common\\Source\\ServiceBus
+		SccProjectUniqueName3 = ..\\..\\..\\Common\\Source\\Client\\Center.Common.Client.csproj
+		SccProjectTopLevelParentUniqueName3 = NotificationObserver.sln
+		SccProjectName3 = ../../../Common/Source/Client
+		SccLocalPath3 = ..\\..\\..\\Common\\Source\\Client
+		SccProjectUniqueName4 = ..\\..\\..\\Common\\Source\\ServiceModel\\ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName4 = NotificationObserver.sln
+		SccProjectName4 = ../../../Common/Source/ServiceModel
+		SccLocalPath4 = ..\\..\\..\\Common\\Source\\ServiceModel
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName5 = NotificationObserver.sln
+		SccProjectName5 = ../../../../Common/Configuration/Source/Core
+		SccLocalPath5 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName6 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName6 = NotificationObserver.sln
+		SccProjectName6 = ../../../../Common/Utility/Source/Compatibility
+		SccLocalPath6 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D94E79C-99BB-4263-9BE8-8B8E83FA6CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D94E79C-99BB-4263-9BE8-8B8E83FA6CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D94E79C-99BB-4263-9BE8-8B8E83FA6CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D94E79C-99BB-4263-9BE8-8B8E83FA6CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2} = {4B352087-BADB-4F5A-931A-C2BA26DE7B64}
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {4B352087-BADB-4F5A-931A-C2BA26DE7B64}
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {4B352087-BADB-4F5A-931A-C2BA26DE7B64}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {4B352087-BADB-4F5A-931A-C2BA26DE7B64}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {4B352087-BADB-4F5A-931A-C2BA26DE7B64}
+	EndGlobalSection
+EndGlobal

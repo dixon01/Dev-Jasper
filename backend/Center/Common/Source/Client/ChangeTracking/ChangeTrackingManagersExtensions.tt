@@ -1,0 +1,772 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplateExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.Client.ChangeTracking" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.Client.ChangeTracking
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using NLog;
+    
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.Collections;
+    using Gorba.Center.Common.ServiceModel.Exceptions;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WriteUsings(partition);
+    }
+
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+
+}
+<#+
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {#>
+
+    namespace <#= partition.Name #>
+    {<#+
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteEntity(entity);
+            this.WriteFilterExtensions(entity);
+        }
+#>	
+    }	
+<#+
+    }
+
+    private void WriteUsings(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var xmlProperties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized);
+        var referenceProperties = entity.Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>();
+#>
+
+        public partial class <#= entity.Name #>ChangeTrackingManager
+        {
+            public async Task<<#= entity.Name #>ReadableModel> GetAsync(<#= entity.IdPropertyType #> id)
+            {
+                Internal<#= entity.Name #>ReadableModel model;
+                if (this.models.TryGetValue(id, out model))
+                {
+                    await model.LoadReferencePropertiesAsync();
+                    return model;
+                }
+
+                var query = <#= entity.Name #>Query.Create().WithId(id);
+                var entity = await this.QueryEntityAsync(query);
+                if (entity == null)
+                {
+                    return null;
+                }
+
+                return this.Wrap(entity, true);
+            }
+
+            public <#= entity.Name #>ReadableModel Wrap(<#= entity.Name #> entity)
+            {
+                return this.Wrap(entity, false);
+            }
+            
+            private <#= entity.Name #>ReadableModel Wrap(<#= entity.Name #> entity, bool containsAllReferences)
+            {
+                Internal<#= entity.Name #>ReadableModel model;
+                if (!this.models.TryGetValue(entity.Id, out model))
+                {
+                    model = new Internal<#= entity.Name #>ReadableModel(this, entity);
+                    model.PopulateInternal();
+                    this.Track(model);
+                }
+
+                if (!model.XmlPropertiesLoaded)
+                {<#+
+        foreach (var property in xmlProperties)
+        {#>
+
+                    if (entity.<#= property.Name #>Xml != null)
+                    {
+                        model.Set<#= property.Name #>(entity.<#= property.Name #>);
+                    }
+<#+
+        }
+        #>
+                }
+
+                if (!model.NavigationPropertiesLoaded)
+                {
+<#+
+        foreach (var property in collectionProperties)
+        {#>
+                    this.Fill<#= property.Name #>CollectionProperty(model, entity);
+<#+
+        }
+        #>
+                }
+
+                if (model.ReferencePropertiesLoaded)
+                {
+                    return model;
+                }
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteManagerReferenceProperty(property);
+        }
+        #>
+
+                return model;
+            }
+
+            private async Task<<#= entity.Name #>> QueryEntityAsync(<#= entity.Name #>Query query)
+            {
+                return (await this.QueryEntitiesAsync(query)).SingleOrDefault();
+            }
+
+            private async Task<IEnumerable<<#= entity.Name #>>> QueryEntitiesAsync(<#= entity.Name #>Query query)
+            {
+                query = query.IncludeReferences();
+                using (var channelScope = this.CreateChannelScope())
+                {
+                    return await channelScope.Channel.QueryAsync(query);
+                }
+            }
+<#+
+        if (xmlProperties.Any())
+        {
+            #>
+
+            private async Task FillXmlPropertiesAsync(Internal<#= entity.Name #>ReadableModel model)
+            {
+                var query = <#= entity.Name #>Query.Create().WithId(model.Entity.Id).IncludeXmlProperties();
+                var entity = await this.QueryEntityAsync(query);
+<#+
+            foreach (var property in xmlProperties)
+            {
+                #>
+
+                model.Set<#= property.Name #>(entity.<#= property.Name #>);
+<#+
+            }
+            #>
+            }
+<#+
+        }
+        else
+        {#>
+
+            // The entity doesn't have XML properties. Omitting the FillXmlPropertiesAsync method.
+<#+
+        }
+        
+        if (referenceProperties.Any())
+        {
+            #>
+
+            private async Task FillReferencePropertiesAsync(Internal<#= entity.Name #>ReadableModel model)
+            {
+                var query = <#= entity.Name #>Query.Create().WithId(model.Entity.Id);
+                var entity = await this.QueryEntityAsync(query);
+                this.FillReferenceProperties(model, entity);
+            }
+
+            private void FillReferenceProperties(Internal<#= entity.Name #>ReadableModel model, <#= entity.Name #> entity)
+            {
+<#+
+            foreach (var property in referenceProperties)
+            {
+                this.WriteManagerFillReferencePropertyUsage(property);
+            }
+            #>
+            }
+<#+
+            foreach (var property in referenceProperties)
+            {
+                this.WriteManagerFillReferencePropertyMethod(property);
+            }
+        }
+        else
+        {#>
+
+            // The entity doesn't have reference properties. Omitting the FillReferencePropertiesAsync method.
+<#+
+        }
+
+#>
+
+            private async Task FillNavigationPropertiesAsync(Internal<#= entity.Name #>ReadableModel model)
+            {
+                var query = <#= entity.Name #>Query.Create().WithId(model.Entity.Id).IncludeNavigationProperties();
+                var entity = await this.QueryEntityAsync(query);
+
+                Logger.Trace("Filling navigation properties");
+<#+
+        if (referenceProperties.Any())
+        {
+            #>
+                this.FillReferenceProperties(model, entity);
+<#+
+        }
+        else
+        {#>
+
+                // The entity doesn't have reference properties. Omitting the call to FillReferenceProperties
+<#+
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteManagerFillCollectionPropertyUsage(property);
+        }
+#>
+            }
+<#+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteManagerFillCollectionPropertyMethod(property);
+        }
+
+        this.WriteManagerInternalReadableModel(entity);
+        #>
+        } // <#= entity.Name #>ChangeTrackingManager
+<#+
+    }
+
+    private void WriteManagerPropertyLoadedField(EntitySpace.PropertyBase property)
+    {#>
+                private volatile bool property<#= property.Name #>Loaded;
+<#+
+    }
+
+    private void WriteManagerReferenceProperty(EntitySpace.Property property)
+    {#>
+
+                if (entity.<#= property.Name #> != null)
+                {
+                    var changeTrackingManager<#= property.Name #> =
+                        DependencyResolver.Current.Get<I<#= property.Type.GetLastPart() #>ChangeTrackingManager>();
+                    var model<#= property.Name #> = changeTrackingManager<#= property.Name #>.Wrap(entity.<#= property.Name #>);
+                    model.Set<#= property.Name #>(model<#= property.Name #>);
+                }
+                else if (containsAllReferences)
+                {
+                    model.Set<#= property.Name #>(null);
+                }
+<#+
+    }
+
+    private void WriteManagerFillReferencePropertyMethod(EntitySpace.Property property)
+    {#>
+
+            private void Fill<#= property.Name #>ReferenceProperty(Internal<#= property.Entity.Name #>ReadableModel model, <#= property.Entity.Name #> entity)
+            {
+                if (entity.<#= property.Name #> == null)
+                {
+                    model.Set<#= property.Name #>(null);
+                    return;
+                }
+
+                var manager = DependencyResolver.Current.Get<I<#= property.Type.GetLastPart() #>ChangeTrackingManager>();
+                var reference = manager.Wrap(entity.<#= property.Name #>);
+                model.Set<#= property.Name #>(reference);
+            }
+<#+
+    }
+
+    private void WriteManagerFillReferencePropertyUsage(EntitySpace.Property property)
+    {#>
+                this.Fill<#= property.Name #>ReferenceProperty(model, entity);
+<#+
+    }
+
+    private void WriteManagerFillCollectionPropertyMethod(EntitySpace.CollectionProperty property)
+    {#>
+
+            private void Fill<#= property.Name #>CollectionProperty(Internal<#= property.Entity.Name #>ReadableModel model, <#= property.Entity.Name #> entity)
+            {
+                if (entity.<#= property.Name #> == null)
+                {
+                    return;
+                }
+
+                model.Fill<#= property.Name #>(entity.<#= property.Name #>);
+            }
+<#+
+    }
+
+    private void WriteManagerFillCollectionPropertyUsage(EntitySpace.CollectionProperty property)
+    {#>
+                this.Fill<#= property.Name #>CollectionProperty(model, entity);
+<#+
+    }
+
+    private void WriteManagerInternalReadableModel(EntitySpace.Entity entity)
+    {
+        var referenceProperties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var xmlProperties =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized);
+        var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>();
+        var navigationProperties =
+            referenceProperties.OfType<EntitySpace.PropertyBase>()
+                .Union(collectionProperties.OfType<EntitySpace.PropertyBase>());
+        #>
+
+            private class Internal<#= entity.Name #>ReadableModel : <#= entity.Name #>ReadableModel
+            {
+                private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+                private readonly <#= entity.Name #>ChangeTrackingManager manager;
+<#+
+        foreach (var property in navigationProperties.Union(xmlProperties))
+        {
+            this.WriteManagerPropertyLoadedField(property);
+        }
+#>
+
+                public Internal<#= entity.Name #>ReadableModel(<#= entity.Name #>ChangeTrackingManager manager, <#= entity.Name #> entity)
+                    : base(entity)
+                {
+                    this.manager = manager;
+                }
+
+                public bool ReferencePropertiesLoaded
+                {
+                    get
+                    {
+                        return true<#+
+        foreach (var property in referenceProperties)
+        {#>
+
+                            && this.property<#= property.Name #>Loaded<#+
+        }
+        #>;
+                    }
+                }
+
+                public bool NavigationPropertiesLoaded
+                {
+                    get
+                    {
+                        return this.ReferencePropertiesLoaded<#+
+        foreach (var property in collectionProperties)
+        {#>
+
+                            && this.property<#= property.Name #>Loaded<#+
+        }
+        #>;
+                    }
+                }
+
+                public bool XmlPropertiesLoaded
+                {
+                    get
+                    {
+                        return true<#+
+        foreach (var property in xmlProperties)
+        {#>
+
+                            && this.property<#= property.Name #>Loaded<#+
+        }
+        #>;
+                    }
+                }
+
+                internal <#= entity.Name #> Entity
+                {
+                    get
+                    {
+                        return this.<#= entity.Name #>;
+                    }
+                }
+
+                internal void PopulateInternal()
+                {
+                    this.Populate();
+                }
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteManagerInternalReadableModelOverrideReference(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteManagerInternalReadableModelOverrideCollection(property);
+        }
+        
+        foreach (var property in xmlProperties)
+        {
+            this.WriteManagerInternalReadableModelOverrideXml(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteManagerApplyOverload(property);
+        }
+
+        this.WriteManagerLoadReferenceProperties(referenceProperties.Any());
+
+        this.WriteManagerLoadNavigationProperties(referenceProperties.Any());
+        
+        this.WriteManagerLoadXmlProperties(xmlProperties.Any());
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteManagerInternalReadableModelSetReference(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteManagerInternalReadableModelSetCollection(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteManagerInternalReadableModelSetXml(property);
+        }
+#>
+            }
+<#+
+    }
+
+    private void WriteManagerApplyOverload(EntitySpace.CollectionProperty property)
+    {
+        if (string.IsNullOrEmpty(property.InverseProperty))
+        {
+            this.Warning("Property '" + property.Name + "' doesn't have InverseProperty. No Apply method here.");
+            return;
+        }
+#>
+
+                public override async Task ApplyAsync(<#= property.ItemType.GetLastPart() #>Delta delta)
+                {
+                    if (!this.NavigationPropertiesLoaded)
+                    {
+                        Logger.Trace("<#= property.Name #> not requested by the client app. Ignoring delta");
+                        return;
+                    }
+
+                    await base.ApplyAsync(delta);
+                }
+<#+
+    }
+
+    private void WriteManagerInternalReadableModelSetXml(EntitySpace.Property property)
+    {#>
+
+                public void Set<#= property.Name #>(XmlData xmlData)
+                {
+                    if (this.property<#= property.Name #>Loaded)
+                    {
+                        return;
+                    }
+
+                    lock (this.locker)
+                    {
+                        if (this.property<#= property.Name #>Loaded)
+                        {
+                            return;
+                        }
+
+                        this.property<#= property.Name #>Loaded = true;
+                    }
+
+                    Logger.Trace(
+                        "Setting XML property '<#= property.Name #>' ({0}) on entity {1}",
+                        xmlData == null ? "null" : xmlData.Type,
+                        this.Id);
+                    this.<#= property.Name #> = xmlData;
+                }
+<#+
+        
+    }
+
+    private void WriteManagerInternalReadableModelSetReference(EntitySpace.Property property)
+    {#>
+
+                public void Set<#= property.Name #>(<#= property.Type.GetLastPart() #>ReadableModel model)
+                {
+                    if (this.property<#= property.Name #>Loaded)
+                    {
+                        return;
+                    }
+
+                    lock (this.locker)
+                    {
+                        if (this.property<#= property.Name #>Loaded)
+                        {
+                            return;
+                        }
+
+                        this.property<#= property.Name #>Loaded = true;
+                    }
+
+                    Logger.Trace(
+                        "Setting reference property '<#= property.Name #>' ({0}) on entity {1}",
+                        model == null ? "null" : model.Id.ToString(),
+                        this.Id);
+                    this.<#= property.Name #> = model;
+                }
+<#+
+        
+    }
+
+    private void WriteManagerLoadReferenceProperties(bool modelContainsReferenceProperties)
+    {#>
+
+                public override async Task LoadReferencePropertiesAsync()
+                {
+<#+
+                if (modelContainsReferenceProperties)
+                {
+                    #>
+                    if (this.ReferencePropertiesLoaded)
+                    {
+                        return;
+                    }
+                        
+                    await this.manager.FillReferencePropertiesAsync(this);<#+
+                }
+                else
+                {
+                    #>
+                    await Task.FromResult(0);<#+
+                }
+    #>
+
+                }
+<#+
+    }
+
+    private void WriteManagerInternalReadableModelOverrideReference(EntitySpace.Property property)
+    {#>
+
+                public override <#= property.Type.GetLastPart() #>ReadableModel <#= property.Name #>
+                {
+                    get
+                    {
+                        if (!this.property<#= property.Name #>Loaded)
+                        {
+                            throw new ChangeTrackingException("Reference property <#= property.Name #> not loaded. You must call (and await) the LoadReferencePropertiesAsync method");
+                        }
+
+                        return base.<#= property.Name #>;
+                    }
+                }
+<#+
+        
+    }
+
+    private void WriteManagerInternalReadableModelOverrideXml(EntitySpace.Property property)
+    {#>
+
+                public override XmlData <#= property.Name #>
+                {
+                    get
+                    {
+                        if (!this.property<#= property.Name #>Loaded)
+                        {
+                            throw new ChangeTrackingException("XML property <#= property.Name #> not loaded. You must call (and await) the LoadXmlPropertiesAsync method");
+                        }
+
+                        return base.<#= property.Name #>;
+                    }
+                }
+<#+
+        
+    }
+
+    private void WriteManagerLoadNavigationProperties(bool loadReferenceProperties)
+    {#>
+
+                public override async Task LoadNavigationPropertiesAsync()
+                {
+<#+
+        if (loadReferenceProperties)
+        {#>
+                    await this.LoadReferencePropertiesAsync();
+<#+
+        }
+        else
+        {#>
+
+                    // The entity doesn't have reference properties. Omitting call to LoadReferencePropertiesAsync();	
+
+<#+
+        }
+#>
+                    if (this.NavigationPropertiesLoaded)
+                    {
+                        return;
+                    }
+
+                    await this.manager.FillNavigationPropertiesAsync(this);
+                }
+<#+
+    }
+
+    private void WriteManagerLoadXmlProperties(bool loadXmlProperties)
+    {
+        if (loadXmlProperties)
+        {#>
+
+                public override async Task LoadXmlPropertiesAsync()
+                {
+                    if (this.XmlPropertiesLoaded)
+                    {
+                        return;
+                    }
+
+                    await this.manager.FillXmlPropertiesAsync(this);
+                }
+<#+
+        }
+        else
+        {#>
+
+                public override Task LoadXmlPropertiesAsync()
+                {
+                    // The entity doesn't have XML properties. Omitting call to FillXmlPropertiesAsync()
+                    return Task.FromResult(0);
+                }
+<#+
+        }
+    }
+
+    private void WriteManagerInternalReadableModelOverrideCollection(EntitySpace.CollectionProperty property)
+    {#>
+
+                public override IObservableReadOnlyCollection<<#= property.ItemType.GetLastPart() #>ReadableModel> <#= property.Name #>
+                {
+                    get
+                    {
+                        if (!this.property<#= property.Name #>Loaded)
+                        {
+                            throw new ChangeTrackingException("Navigation property <#= property.Name #> not loaded. You must call (and await) the LoadNavigationPropertiesAsync method");
+                        }
+
+                        return base.<#= property.Name #>;
+                    }
+                }
+<#+
+        
+    }
+
+    private void WriteManagerInternalReadableModelSetCollection(EntitySpace.CollectionProperty property)
+    {
+#>
+
+                public void Fill<#= property.Name #>(IEnumerable<<#= property.ItemType.GetLastPart() #>> entities)
+                {
+                    if (this.property<#= property.Name #>Loaded)
+                    {
+                        return;
+                    }
+
+                    lock (this.locker)
+                    {
+                        if (this.property<#= property.Name #>Loaded)
+                        {
+                            return;
+                        }
+
+                        this.property<#= property.Name #>Loaded = true;
+                    }
+
+                    Logger.Trace("Setting collection property '<#= property.Name #>'");
+                    var manager = DependencyResolver.Current.Get<I<#= property.ItemType.GetLastPart() #>ChangeTrackingManager>();
+                    var items = entities.Select(entity => manager.Wrap(entity)).ToList();
+                    Logger.Trace("Found {0} item(s) for collection '<#= property.Name #>'", items.Count);
+                    foreach (var item in items)
+                    {
+                        this.<#= property.Name.GetFieldName() #>.Add(item);
+                    }
+                }
+
+<#+
+    }
+
+    private void WriteFilterExtensions(EntitySpace.Entity entity)
+    {
+        var referenceFiltersString = string.Empty;
+        var referenceFilters =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference)
+                .Select(property => property.Name);
+        foreach (var referenceFilter in referenceFilters)
+        {
+            referenceFiltersString += ".Include" + referenceFilter + "(query." + referenceFilter + ")";
+        }
+
+        var collectionFiltersString = string.Empty;
+        var collectionFilters =
+            entity.Properties.OfType<EntitySpace.CollectionProperty>().Select(property => property.Name);
+        foreach (var collectionFilter in collectionFilters)
+        {
+            collectionFiltersString += ".Include" + collectionFilter + "(query." + collectionFilter + ")";
+        }
+
+        var xmlFiltersString = string.Empty;
+        var xmlFilters =
+            entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized)
+                .Select(property => property.Name);
+        foreach (var xmlFilter in xmlFilters)
+        {
+            xmlFiltersString += ".Include" + xmlFilter + "()";
+        }
+        #>
+
+        internal static class <#= entity.Name #>ReadableModelManagerExtension
+        {
+            public static <#= entity.Name #>Query IncludeReferences(this <#= entity.Name #>Query query)
+            {
+                return query<#= referenceFiltersString #>;
+            }
+
+            public static <#= entity.Name #>Query IncludeNavigationProperties(this <#= entity.Name #>Query query)
+            {
+                return query.IncludeReferences()<#= collectionFiltersString #>;
+            }
+
+            public static <#= entity.Name #>Query IncludeXmlProperties(this <#= entity.Name #>Query query)
+            {
+                return query<#= xmlFiltersString #>;
+            }
+        }
+<#+
+    }
+#>

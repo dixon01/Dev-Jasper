@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PeripheralAudioConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PinMeaning>0102030405060708090A0B0C00000000</PinMeaning>
+  <PinSense>01010101000000010101010000000000</PinSense>
+  <InteriorGain>000102030405060708090A0000000000</InteriorGain>
+  <ExteriorGain>000102030405060708090A0000000000</ExteriorGain>
+  <PriorityTable>020103</PriorityTable>
+  <NoiseLevel>10</NoiseLevel>
+  <InteriorDefaultVolume>70</InteriorDefaultVolume>
+  <ExteriorDefaultVolume>70</ExteriorDefaultVolume>
+  <InteriorMinVolume>0</InteriorMinVolume>
+  <InteriorMaxVolume>100</InteriorMaxVolume>
+  <InteriorMaxAllowedVolume>100</InteriorMaxAllowedVolume>
+  <ExteriorMinVolume>0</ExteriorMinVolume>
+  <ExteriorMaxVolume>100</ExteriorMaxVolume>
+  <ExteriorMaxAllowedVolume>100</ExteriorMaxAllowedVolume>
+  <PushToTalkTimeout>0</PushToTalkTimeout>
+  <PushToTalkLockoutTime>0</PushToTalkLockoutTime>
+  <LineInEnable>0</LineInEnable>
+  <AudioStatusDelay>0</AudioStatusDelay>
+</PeripheralAudioConfig>

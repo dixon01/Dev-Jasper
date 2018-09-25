@@ -1,0 +1,77 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="Alarms.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+
+using Gorba.Common.Utility.Compatibility;
+
+<#
+    var categories = LoadAlarmCategories(this.Host.ResolvePath("Alarms.xml"));
+    
+    #>
+namespace Gorba.Common.Protocols.Alarming
+{<#
+    
+    foreach (var category in categories)
+    {
+    #>
+
+    public static class <#= category.Name #>AlarmFactory
+    {<#
+        foreach (var evnt in category.Events)
+        {
+            #>
+
+        public static Alarm Create<#= evnt.Name #>(<#= category.Name #><#= evnt.Name #>Attribute attr)
+        {
+            return Create<#= evnt.Name #>(attr, null);
+        }
+
+        public static Alarm Create<#= evnt.Name #>(<#= category.Name #><#= evnt.Name #>Attribute attr, string message)
+        {
+            var alarm = new Alarm();
+            alarm.Unit = ApplicationHelper.MachineName;
+            alarm.Category = AlarmCategory.<#= category.Name #>;
+            alarm.Type = AlarmType.<#= category.Name #><#= evnt.Name #>;
+            alarm.Attribute = (int)attr;
+            alarm.Message = message;
+
+            switch (attr)
+            {
+<#
+            foreach (var attribute in evnt.Attributes)
+            {
+                #>
+                case <#= category.Name #><#= evnt.Name #>Attribute.<#= attribute.Name #>:
+                    alarm.Severity = AlarmSeverity.<#= attribute.Severity #>;
+                    break;
+<#
+            }
+#>
+                default:
+                    alarm.Severity = AlarmSeverity.Info;
+                    break;
+            }
+
+            return alarm;
+        }
+<#
+        }
+    #>
+    }
+<#
+    }
+    #>
+}

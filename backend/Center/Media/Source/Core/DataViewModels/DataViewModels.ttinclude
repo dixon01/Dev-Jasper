@@ -1,0 +1,86 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@include file="../../../../../Common/Configuration/Source/infomedia/Entities.ttinclude" #>
+<#+public class DataViewModelEntities
+{
+	[XmlElement("Namespace")]
+    public List<DataViewModelNamespace> Namespaces { get; set; }
+
+    public Entities ModelEntities { get; set; }
+
+    public static DataViewModelEntities LoadFrom(string fileName, Entities entities)
+    {
+		var serializer = new XmlSerializer(typeof(DataViewModelEntities));
+        using (var input = File.OpenRead(fileName))
+        {
+            var dataViewModelEntities = (DataViewModelEntities)serializer.Deserialize(input);
+            dataViewModelEntities.ModelEntities = entities;
+            return dataViewModelEntities;
+        }
+    }
+
+	public DataViewModelEntity FindViewByModel(string modelName)
+	{
+	    var validEntities = new List<DataViewModelEntity>();
+	    foreach (var dataViewModelNamespace in this.Namespaces)
+	    {
+	        var dataViewModelEntity = dataViewModelNamespace.Entities.Find(e => e.ModelName == modelName);
+	        if (dataViewModelEntity != null)
+	        {
+	            validEntities.Add(dataViewModelEntity);
+	        }
+	    }
+
+	    if (validEntities.Count > 1)
+	    {
+	        throw new InvalidDataException(string.Format("Found more than one view for model '{0}'", modelName));
+	    }
+
+	    return validEntities.SingleOrDefault();
+	}
+}
+
+public class DataViewModelNamespace
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+
+	[XmlElement("Entity")]
+    public List<DataViewModelEntity> Entities { get; set; }
+}
+
+public class DataViewModelEntity
+{
+	[XmlAttribute]
+    public string DefaultUserVisibleGroupName { get; set; }
+
+    [XmlAttribute]
+    public string ModelName { get; set; }
+
+	[XmlAttribute]
+    public bool NoModelInheritance { get; set; }
+
+	[XmlElement("Property")]
+    public List<DataViewModelProperty> Properties { get; set; }
+}
+
+public class DataViewModelProperty
+{
+	[XmlAttribute]
+    public bool IsHidden { get; set; }
+
+    [XmlAttribute]
+    public string ModelName { get; set; }
+
+	[XmlAttribute]
+    public string UserVisibleFieldName { get; set; }
+
+	[XmlAttribute]
+    public string UserVisibleGroupName { get; set; }
+}
+    #>

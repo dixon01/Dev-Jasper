@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<MediaProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Authors />
+  <Replacements />
+  <Name>Project</Name>
+  <DateCreated>2015-04-10T12:14:08.3272867Z</DateCreated>
+  <DateLastModified>2015-04-10T12:14:14.584783Z</DateLastModified>
+  <InfomediaConfig Version="2.0" Created="2015-04-10 14:14:08">
+    <PhysicalScreens>
+      <PhysicalScreen DisplayText="1368x768" Name="1368x768" Type="TFT" Id="" Width="1368" Height="768">
+        <SelectedMasterLayout Name="Normal" Columns="*" HorizontalGaps="0" Rows="*" VerticalGaps="0" />
+        <IsMonochromeScreen>false</IsMonochromeScreen>
+      </PhysicalScreen>
+    </PhysicalScreens>
+    <VirtualDisplays>
+      <VirtualDisplay DisplayText="TFT Display_1" Name="TFT Display_1" CyclePackage="Zykluspaket TFT 1368x768" Width="1368" Height="768">
+        <CurrentZoomLevel>75.6578947368421</CurrentZoomLevel>
+        <CurrentLayoutPosition>
+          <X>0</X>
+          <Y>0</Y>
+        </CurrentLayoutPosition>
+      </VirtualDisplay>
+    </VirtualDisplays>
+    <MasterPresentation>
+      <MasterCycles>
+        <MasterCycle Name="Meisterzyklus">
+          <MasterSection Duration="P1D" Layout="Standard Meisterlayout" />
+        </MasterCycle>
+      </MasterCycles>
+      <MasterEventCycles />
+      <MasterLayouts>
+        <MasterLayout Name="Standard Meisterlayout">
+          <PhysicalScreen Ref="1368x768">
+            <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1">
+              <ElementName />
+            </VirtualDisplay>
+          </PhysicalScreen>
+        </MasterLayout>
+      </MasterLayouts>
+    </MasterPresentation>
+    <Evaluations>
+      <Evaluation Name="DoorClose" DisplayText="" ReferenceCount="0">
+        <StringCompare Value="0" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="0" Column="4" Row="0" />
+        </StringCompare>
+      </Evaluation>
+      <Evaluation Name="DoorOpen" DisplayText="" ReferenceCount="0">
+        <StringCompare Value="1" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="0" Column="4" Row="0" />
+        </StringCompare>
+      </Evaluation>
+      <Evaluation Name="Line0" DisplayText="" ReferenceCount="0">
+        <IntegerCompare Begin="0" End="0" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="10" Column="0" Row="0" />
+        </IntegerCompare>
+      </Evaluation>
+      <Evaluation Name="LineBlank" DisplayText="" ReferenceCount="0">
+        <StringCompare Value="" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="10" Column="0" Row="0" />
+        </StringCompare>
+      </Evaluation>
+      <Evaluation Name="MissingIBIS" DisplayText="" ReferenceCount="0">
+        <StringCompare Value="0" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="0" Column="2" Row="0" />
+        </StringCompare>
+      </Evaluation>
+      <Evaluation Name="SpecialLinePicture" DisplayText="" ReferenceCount="0">
+        <CodeConversion FileName="codeconversion.csv" UseImage="true" />
+      </Evaluation>
+      <Evaluation Name="SpecialLineText" DisplayText="" ReferenceCount="0">
+        <CodeConversion FileName="codeconversion.csv" UseImage="false" />
+      </Evaluation>
+      <Evaluation Name="StopIndex1to89" DisplayText="" ReferenceCount="0">
+        <IntegerCompare Begin="1" End="89" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="10" Column="4" Row="0" />
+        </IntegerCompare>
+      </Evaluation>
+      <Evaluation Name="StopRequest" DisplayText="" ReferenceCount="0">
+        <StringCompare Value="1" DisplayText="">
+          <Generic DisplayText="$SystemStatus.Date" Lang="0" Table="0" Column="3" Row="0" />
+        </StringCompare>
+      </Evaluation>
+    </Evaluations>
+    <Cycles>
+      <StandardCycles>
+        <StandardCycle Name="Neuer Zyklus 1">
+          <StandardSection Duration="PT10S" Layout="Layout 0 (1368x768)" />
+        </StandardCycle>
+      </StandardCycles>
+      <EventCycles />
+    </Cycles>
+    <CyclePackages>
+      <CyclePackage Name="Zykluspaket TFT 1368x768">
+        <StandardCycles>
+          <StandardCycle Ref="Neuer Zyklus 1" />
+        </StandardCycles>
+        <EventCycles />
+      </CyclePackage>
+    </CyclePackages>
+    <Pools />
+    <Layouts>
+      <Layout DisplayText="Layout 0 (1368x768)" Name="Layout 0 (1368x768)">
+        <Resolution Width="1368" Height="768">
+          <StaticText X="68" Y="74" Width="252" Height="89" ZIndex="0" Align="Left" Overflow="Scale" Value="StaticText1">
+            <ElementName>StaticText1</ElementName>
+            <Font Face="Arial" Height="120" Weight="100" Italic="false" Color="#FFFF0000" OutlineColor="" />
+          </StaticText>
+        </Resolution>
+      </Layout>
+    </Layouts>
+    <Fonts />
+  </InfomediaConfig>
+  <ProjectId>a2c6a80c-e581-4bcc-8086-79dafb31a3a9</ProjectId>
+  <Resources />
+  <Pools />
+  <ProjectSize>20</ProjectSize>
+</MediaProject>

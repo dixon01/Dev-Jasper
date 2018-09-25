@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharpDXRenderer>
+  <Screens>
+    <!-- leave this tag empty for default behavior (running on Topbox) -->
+    <Screen />
+    <!--
+    define single screen with the default resolution:
+    <Screen />
+    -->
+    <!--
+    define a special resolution on a single screen:
+    <Screen Adapter="0" Width="1440" Height="900" />
+    -->
+    <!--
+    define a special resolution on two screens:
+    <Screen Adapter="0" Width="1280" Height="800" />
+    <Screen Adapter="1" Width="1280" Height="800" />
+    -->
+  </Screens>
+  <Device>
+    <MultiSample>None</MultiSample>
+    <MultiSampleQuality>0</MultiSampleQuality>
+  </Device>
+  <Text>
+    <!-- Possible TextMode values: Font, FontSprite, Mesh*, Gdi* (*= experimental only!) -->
+    <TextMode>FontSprite</TextMode>
+    <!-- Possible FontQuality values: Default, Draft, Proof, NonAntialiased, Antialiased, ClearType, ClearTypeNatural -->
+    <FontQuality>Antialiased</FontQuality>
+  </Text>
+  <Video>
+    <!-- Possible VideoMode values: DirectShow, DirectXWindow -->
+    <VideoMode>DirectShow</VideoMode>
+  </Video>
+</SharpDXRenderer>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VDV301 desc="Container of all the settings required by Protran to translate the IBIS protocol."
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="file:///. ../Vdv301/vdv301.xsd">
+  <Services>
+    <CustomerInformationService desc="The IBIS-IP CustomerInformationService">
+      <GetTripData Subscribe="true">
+        <TripInformation>
+          <StopSequence>
+            <StopPoint>
+              <StopName Enabled="true" Table="Stops" Column="StopName" Row="{0}" />
+              <DisplayContent>
+                <Destination>
+                  <DestinationName Enabled="true" Table="Destination" Column="DestinationName" />
+                </Destination>
+              </DisplayContent>
+              <Connection>
+                <DisplayContent>
+                  <Destination>
+                    <DestinationName Enabled="true" Table="Connections" Column="ConnectionDestinationName" Row="{0}"/>
+                  </Destination>
+                </DisplayContent>
+                <Platform Enabled="true" Table="Connections" Column="ConnectionPlatform" Row="{0}"/>
+                <TransportMode>
+                  <Name Enabled="true" Table="Connections" Column="ConnectionTransportType" Row="{0}"/>
+                </TransportMode>
+              </Connection>
+            </StopPoint>
+          </StopSequence>
+        </TripInformation>
+      </GetTripData>
+    </CustomerInformationService>
+  </Services>
+  <Languages>
+    <Language VDV301="de-DE" Ximple="default" desc="Map all German language texts to the default language in Ximple"/>
+    <Language VDV301="fr-FR" Ximple="fr" desc="Map all French language texts to the 'fr' language in Ximple"/>
+  </Languages>
+  <Transformations>
+    <Chain id="DoorStatus">
+      <Replace>
+        <Mapping from="AllDoorsClosed" to="0"/>
+        <Mapping from="DoorsOpen" to="1"/>
+        <Mapping from="SingleDoorOpen" to="1"/>
+        <Mapping from="SingleDoorClosed" to="1"/>
+      </Replace>
+    </Chain>
+
+    <Chain id="ExitSide">
+      <Replace>
+        <Mapping from="unknown" to="0"/>
+        <Mapping from="right" to="1"/>
+        <Mapping from="left" to="2"/>
+        <Mapping from="both" to="3"/>
+      </Replace>
+    </Chain>
+  </Transformations>
+</VDV301>

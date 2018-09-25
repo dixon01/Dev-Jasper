@@ -1,0 +1,21 @@
+﻿<Window x:Class="Gorba.Center.Common.Wpf.Client.Views.LoadingWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:client="clr-namespace:Gorba.Center.Common.Wpf.Client"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             Height="150" Width="300" Name="Root"
+             WindowStyle="None"
+            
+             d:DesignHeight="300" d:DesignWidth="300" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:IcoConverter x:Key="IcoConverter"/>
+    </Window.Resources>
+    <Window.Icon>
+        <Binding Path="ApplicationIcon" Converter="{StaticResource IcoConverter}" ConverterParameter="16"/>
+    </Window.Icon>
+    <telerik:RadBusyIndicator IsBusy="True" IsIndeterminate="True" BusyContent="{Binding BusyContent}" />
+</Window>

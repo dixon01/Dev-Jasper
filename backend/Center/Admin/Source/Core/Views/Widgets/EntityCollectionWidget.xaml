@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Widgets.EntityCollectionWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Admin.Core.DataViewModels"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance dataViewModels:EntityCollectionBase}" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+        <telerik:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvBoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Border BorderBrush="{StaticResource WidgetBorder}" BorderThickness="1" Margin="5">
+        <Grid HorizontalAlignment="Left" MinWidth="200" MinHeight="100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource WidgetHeaderBackground}" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="16" Height="16" VerticalAlignment="Center"
+                           Source="{Binding EntityName, Converter={StaticResource StringFormatConverter}, ConverterParameter=../../Resources/Icons/EntityTypes/EntityTypes_{0}_16x16.png}"/>
+
+                    <TextBlock Text="{Binding DisplayName}" Margin="5 0 0 0" VerticalAlignment="Center"
+                               Foreground="{StaticResource WidgetHeaderForeground}"/>
+                    <TextBlock Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVisibilityConverter}}"
+                               Foreground="{StaticResource WidgetHeaderForeground}">
+                        <Run Text=" (" /><Run Text="{Binding Entities.Count, Mode=OneWay}" /><Run Text=")" />
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Background="{StaticResource WidgetBackground}" Padding="5">
+                <Grid>
+                    <!--
+                                workaround for RadBusyIndicator not happily interacting with a Hyperlink inside an ItemsControl:
+                                put both in the same place and toggle the visibility
+                                -->
+                    <telerik:RadBusyIndicator IsBusy="True"
+                                              Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                    <ItemsControl ItemsSource="{Binding Entities}"
+                                  Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVisibilityConverter}}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="dataViewModels:ReadOnlyDataViewModelBase">
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.NavigateToEntityCommand, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                               CommandParameter="{Binding .}">
+                                        <TextBlock Text="{Binding DisplayText}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

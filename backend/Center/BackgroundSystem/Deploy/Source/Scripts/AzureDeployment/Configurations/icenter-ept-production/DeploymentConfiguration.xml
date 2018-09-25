@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DeploymentConfiguration>
+    <ServiceName>icenter-ept</ServiceName>
+		<Description>icenter-ept production slot</Description>
+    <StorageAccountName>icenterept</StorageAccountName>
+    <StorageAccountKey>3lYJh9gHOABw7HV2kKun0LGg9pm1NV5YxB3fpVRPf46pcF4D3ItcGlyA3RwcnNDl9KXeVEJkIgtqxw0eJHaBcQ==</StorageAccountKey>
+    <SubscriptionName>Visual Studio Professional mit MSDN</SubscriptionName>
+    <Slot>Production</Slot>
+</DeploymentConfiguration>

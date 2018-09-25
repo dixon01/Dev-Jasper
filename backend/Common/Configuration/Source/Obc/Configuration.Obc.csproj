@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{939F1E2A-B8EA-43BE-878C-DD9E4FCBA28F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Configuration.Obc</RootNamespace>
+    <AssemblyName>Gorba.Common.Configuration.Obc</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Bus\BusConfig.cs" />
+    <Compile Include="Bus\BusInfo.cs" />
+    <Compile Include="Bus\CenterClientConfig.cs" />
+    <Compile Include="Bus\ScheduleConfig.cs" />
+    <Compile Include="Bus\VehicleTypeEnum.cs" />
+    <Compile Include="Common\ConfigItem.cs" />
+    <Compile Include="Common\SerialPortConfig.cs" />
+    <Compile Include="Ibis\Functionality.cs" />
+    <Compile Include="Ibis\GorbaTftUnit.cs" />
+    <Compile Include="Ibis\IbisConfig.cs" />
+    <Compile Include="Ibis\IbisDevices.cs" />
+    <Compile Include="Ibis\IbisTelegrams.cs" />
+    <Compile Include="Ibis\InterfaceSettings.cs" />
+    <Compile Include="Ibis\PassengerCountConfig.cs" />
+    <Compile Include="Ibis\PassengerCountingModel.cs" />
+    <Compile Include="Ibis\Telegrams\DS001Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS002Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS003Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS003CConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS004Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS004AConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS004BConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS004CConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS005Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS006Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS009Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS020Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS036Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS037Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS038Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS070Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS080Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS081Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS084Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS010JConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS021CConfig.cs" />
+    <Compile Include="Ibis\Telegrams\TelegramConfigBase.cs" />
+    <Compile Include="Ibis\TicketingConfig.cs" />
+    <Compile Include="Ibis\TicketingModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terminal\AnnouncementType.cs" />
+    <Compile Include="Terminal\CommandConfigItem.cs" />
+    <Compile Include="Terminal\CommandName.cs" />
+    <Compile Include="Terminal\GsmConfig.cs" />
+    <Compile Include="Terminal\ShortKeyConfig.cs" />
+    <Compile Include="Terminal\SpeechType.cs" />
+    <Compile Include="Terminal\TerminalConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ed8c6acb-e53b-4278-b9ac-485709e6294d}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

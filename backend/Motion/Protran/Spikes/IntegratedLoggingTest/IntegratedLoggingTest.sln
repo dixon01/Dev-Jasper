@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegratedLoggingTest", "IntegratedLoggingTest\IntegratedLoggingTest.csproj", "{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{CB467D4D-3AE1-4645-9638-580BCA06C27A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IntegratedLoggingTest\\IntegratedLoggingTest.csproj
+		SccProjectName1 = IntegratedLoggingTest
+		SccLocalPath1 = IntegratedLoggingTest
+		SccProjectUniqueName2 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName2 = IntegratedLoggingTest.sln
+		SccProjectName2 = ../../../../Common/Configuration/Source/Core
+		SccLocalPath2 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Debug|x86.ActiveCfg = Debug|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Debug|x86.Build.0 = Debug|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Release|Any CPU.ActiveCfg = Release|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Release|x86.ActiveCfg = Release|x86
+		{C1BD2FBA-FA21-4378-A69E-41CE7148E3BB}.Release|x86.Build.0 = Release|x86
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {CB467D4D-3AE1-4645-9638-580BCA06C27A}
+	EndGlobalSection
+EndGlobal

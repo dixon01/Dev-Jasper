@@ -1,0 +1,76 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\Entities\Screen\ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+using Gorba.Common.Configuration.Infomedia.Layout;
+
+using Gorba.Motion.Infomedia.Entities;
+
+<#
+    var entitiesFile = @"..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(entitiesFile));
+    
+    var screenItemsFile = @"..\..\Entities\Screen\ScreenItems.xml";
+    this.changes = ScreenItems.LoadFrom(Host.ResolvePath(screenItemsFile));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Layout");
+    
+    this.screenItems = this.changes.ApplyTo(layoutNamespace.Classes.OfType<ElementClass>());
+    #>
+namespace Gorba.Motion.Infomedia.RendererBase.Engine
+{
+    <#
+    // generate all classes in this namespace
+    foreach (var clazz in this.screenItems)
+    {
+        this.GenerateClass(clazz);
+    }
+    #>
+
+}
+
+<#+
+private Entities entities;
+private ScreenItems changes;
+private List<ElementClass> screenItems;
+
+private void GenerateClass(ElementClass clazz)
+{
+    if (clazz.Name.EndsWith("Base"))
+    {
+        return;
+    }
+    
+    var modif = this.changes.GetItem(clazz.Name);
+    if (modif != null && !modif.Presentable)
+    {
+        return;
+    }
+
+    #>
+
+    public interface I<#= clazz.Name #>RenderEngine<TContext> : IRenderEngine<TContext>
+        where TContext : IRenderContext
+    {
+    }
+    <#+
+}
+#>

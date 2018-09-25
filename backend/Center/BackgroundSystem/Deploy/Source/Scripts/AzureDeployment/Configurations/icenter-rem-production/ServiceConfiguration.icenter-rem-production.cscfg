@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="BackgroundSystem.WorkerRole">
+  <Instances count="1" />
+  <ConfigurationSettings>
+    <Setting name="BackgroundSystem.CenterDataContext" value="Server=tcp:fqbjlo2pwh.database.windows.net,1433;Database=icenter-rem;User ID=rem@fqbjlo2pwh;Password=rr55kill9!!##w;Trusted_Connection=False;Encrypt=True;Connection Timeout=30" />
+    <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="" />
+    <Setting name="BackgroundSystem.NotificationsConnectionString" value="" />
+    <Setting name="ActiveDirectory.Tenant" value="" />
+    <Setting name="ActiveDirectory.ClientId" value="" />
+    <Setting name="Portal.EnableHttps" value="False" />
+    <Setting name="Wcf.ConnectionLimit" value="512" />
+    <Setting name="ActiveDirectory.AuthorizationUrl" value="" />
+    <Setting name="BackgroundSystem.StartPortalHost" value="True" />
+    <Setting name="BackgroundSystem.Host" value="icenter-rem.cloudapp.net" />
+    <Setting name="Center.StorageConnectionString" value="" />
+    <Setting name="Portal.ClickOnceUseBeta" value="" />
+    <Setting name="Diagnostics.LogLevel" value="Warn" />
+  </ConfigurationSettings>
+		<Certificates>
+			<Certificate name="Https" thumbprint="3351774E7348C1EE8DAA554FD2D6BAD8217E6677" thumbprintAlgorithm="sha1" />
+		</Certificates>
+  </Role>
+</ServiceConfiguration>

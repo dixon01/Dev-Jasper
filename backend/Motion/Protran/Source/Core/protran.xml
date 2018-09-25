@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Protran Version="2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Protocols>
+    <Protocol Name="XimpleProtocol" Enabled="true"/>
+    <Protocol Name="PeripheralProtocol" Enabled="true"/>
+    <Protocol Name="AdHocMessagingProtocol" Enabled="true"/>
+  </Protocols>
+  <Persistence>
+    <IsEnabled>false</IsEnabled>
+    <PersistenceFile>persistence.xml</PersistenceFile>
+    <DefaultValidity>PT10M</DefaultValidity>
+  </Persistence>
+</Protran>

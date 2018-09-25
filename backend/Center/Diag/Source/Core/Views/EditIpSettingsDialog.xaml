@@ -1,0 +1,80 @@
+﻿<interaction1:InteractionDialogBase x:Class="Gorba.Center.Diag.Core.Views.EditIpSettingsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             xmlns:interaction1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:extensions="clr-namespace:Gorba.Center.Diag.Core.Extensions"
+             xmlns:interaction="clr-namespace:Gorba.Center.Diag.Core.Interaction"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="160" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction:EditIpSettingsPromptNotification}">
+    
+    <Border Padding="10 18 10 10" Background="{StaticResource WindowBackgroundColorBrush}" BorderBrush="{StaticResource OuterWindowBorderColorBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.Resources>
+                <ControlTemplate x:Key="ValidationTemplate">
+                    <DockPanel>
+                        <TextBlock Foreground="Red" FontSize="20">*</TextBlock>
+                        <Border BorderThickness="1" BorderBrush="Red">
+                            <AdornedElementPlaceholder/>
+                        </Border>
+                    </DockPanel>
+                </ControlTemplate>
+
+                <Style x:Key="TextBoxValidatable" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Margin" Value="0 2 10 0"/>
+                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+                <telerik:InvertedBooleanConverter x:Key="InvertedBoolConverter" />
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static resources:DiagStrings.EditIpSettingsDialog_DhcpEnabled}"
+                       VerticalAlignment="Center" Margin="10 0 0 0" />
+            <CheckBox Grid.Row="0" Grid.Column="1" Name="DhcpCheckBox" IsChecked="{Binding UseDhcp}" IsEnabled="{Binding IsDhcpEnabled}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static resources:DiagStrings.EditIpSettingsDialog_IpAddress}"
+                       VerticalAlignment="Center" Margin="10 0 0 0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Name="IpAddressBox" Style="{StaticResource TextBoxValidatable}"
+                     IsEnabled="{Binding UseDhcp, Converter={StaticResource InvertedBoolConverter}}"
+                     Text="{Binding Path=IpAddress, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static resources:DiagStrings.EditIpSettingsDialog_NetworkMask}"
+                       VerticalAlignment="Center" Margin="10 0 0 0" />
+            <TextBox Grid.Row="2" Grid.Column="1" Name="NetworkMaskBox" Style="{StaticResource TextBoxValidatable}"
+                     IsEnabled="{Binding UseDhcp, Converter={StaticResource InvertedBoolConverter}}"
+                     Text="{Binding Path=NetworkMask, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static resources:DiagStrings.EditIpSettingsDialog_GatewayAddress}"
+                       VerticalAlignment="Center" Margin="10 0 0 0" />
+            <TextBox Grid.Row="3" Grid.Column="1" Name="GatewayBox" Style="{StaticResource TextBoxValidatable}"
+                     IsEnabled="{Binding UseDhcp, Converter={StaticResource InvertedBoolConverter}}"
+                     Text="{Binding Path=GatewayAddress, UpdateSourceTrigger=PropertyChanged}" />
+
+            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Content="{x:Static resources:DiagStrings.Dialog_OK}" Width="80" Margin="10" Click="OnOkClick"
+                        IsEnabled="{Binding HasErrors, Converter={StaticResource InvertedBoolConverter}}"/>
+                <Button Content="{x:Static resources:DiagStrings.Dialog_Cancel}" Width="80" Margin="10" Click="OnCancelClick"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</interaction1:InteractionDialogBase>

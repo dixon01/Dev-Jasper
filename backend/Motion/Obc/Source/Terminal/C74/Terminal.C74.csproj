@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F0D4FEB-C022-4557-B07D-9E3DB3440D47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Obc.Terminal.C74</RootNamespace>
+    <AssemblyName>Gorba.Motion.Obc.Terminal.C74</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="C74Keys.cs" />
+    <Compile Include="C74UiFactory.cs" />
+    <Compile Include="Controls\BlockDriveMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BlockDriveMainField.Designer.cs">
+      <DependentUpon>BlockDriveMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ButtonInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ButtonInput.Designer.cs">
+      <DependentUpon>ButtonInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DriveSelectMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DriveSelectMainField.Designer.cs">
+      <DependentUpon>DriveSelectMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DriveWaitMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DriveWaitMainField.Designer.cs">
+      <DependentUpon>DriveWaitMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IC74Input.cs" />
+    <Compile Include="Controls\IconBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IconBar.Designer.cs">
+      <DependentUpon>IconBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ListMainField.Designer.cs">
+      <DependentUpon>ListMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainField.Designer.cs">
+      <DependentUpon>MainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxControl.Designer.cs">
+      <DependentUpon>MessageBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageField.Designer.cs">
+      <DependentUpon>MessageField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageListMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageListMainField.Designer.cs">
+      <DependentUpon>MessageListMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumberInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NumberInput.Designer.cs">
+      <DependentUpon>NumberInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumberInputMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NumberInputMainField.Designer.cs">
+      <DependentUpon>NumberInputMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PopupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PopupControl.Designer.cs">
+      <DependentUpon>PopupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProgressBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressBoxControl.Designer.cs">
+      <DependentUpon>ProgressBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScrollableListModel.cs" />
+    <Compile Include="Controls\StatusField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StatusField.Designer.cs">
+      <DependentUpon>StatusField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusMainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StatusMainField.Designer.cs">
+      <DependentUpon>StatusMainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToggleButtonInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ToggleButtonInput.Designer.cs">
+      <DependentUpon>ToggleButtonInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RootForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RootForm.Designer.cs">
+      <DependentUpon>RootForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Terminal.Core.csproj">
+      <Project>{431C55F4-BF15-4C3A-9328-150096551886}</Project>
+      <Name>Terminal.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gui\Terminal.Gui.csproj">
+      <Project>{12DA777B-8C84-4400-9B14-4961D568D8F8}</Project>
+      <Name>Terminal.Gui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlockDrive1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\BlockDriveMainField.resx">
+      <DependentUpon>BlockDriveMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ButtonInput.resx">
+      <DependentUpon>ButtonInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DriveSelectMainField.resx">
+      <DependentUpon>DriveSelectMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DriveWaitMainField.resx">
+      <DependentUpon>DriveWaitMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IconBar.resx">
+      <DependentUpon>IconBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ListMainField.resx">
+      <DependentUpon>ListMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainField.resx">
+      <DependentUpon>MainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MessageBoxControl.resx">
+      <DependentUpon>MessageBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MessageField.resx">
+      <DependentUpon>MessageField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MessageListMainField.resx">
+      <DependentUpon>MessageListMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NumberInput.resx">
+      <DependentUpon>NumberInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NumberInputMainField.resx">
+      <DependentUpon>NumberInputMainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PopupControl.resx">
+      <DependentUpon>PopupControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProgressBoxControl.resx">
+      <DependentUpon>ProgressBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StatusField.resx">
+      <DependentUpon>StatusField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RootForm.resx">
+      <DependentUpon>RootForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlockDrive2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlockDrive3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlockDrive4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlockDrive5.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

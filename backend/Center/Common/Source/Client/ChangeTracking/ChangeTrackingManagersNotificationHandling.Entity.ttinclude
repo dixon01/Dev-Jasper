@@ -1,0 +1,338 @@
+﻿<#@ import namespace="System.Globalization" #>
+<#+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var collections = entity.Properties.OfType<EntitySpace.CollectionProperty>().ToList();
+#>
+
+        public partial class <#= entity.Name #>ChangeTrackingManager
+        {
+            private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            public event EventHandler<OperationCompletedEventArgs> OperationCompleted;
+            
+            public async Task<<#= entity.Name #>ReadableModel> CommitAndVerifyAsync(<#= entity.Name #>WritableModel writableModel)
+            {
+                if (!writableModel.HasChanges())
+                {
+                    return writableModel.ReadableModel;
+                }
+
+                await this.WaitReadyAsync();
+
+                var commitVerification = new CommitVerification(this);
+                var id = await commitVerification.CommitAndVerifyAsync(writableModel);
+                return await this.GetAsync(id);
+            }
+            <#+
+                if (collections.Any())
+                {
+                    #>
+
+            protected override IEnumerable<string> GetAdditionalSubscriptions()
+            {
+<#+
+                    foreach (var property in collections)
+                    {
+                        #>
+                yield return "<#= property.ItemType.GetLastPart().Pluralize() #>";
+<#+
+                    }
+#>
+            }
+            <#+
+                }
+            #>
+
+            protected virtual void RaiseOperationCompleted(int entityId, bool succeeded)
+            {
+                var args = new OperationCompletedEventArgs(entityId, succeeded);
+                this.RaiseOperationCompleted(args);
+            }
+
+            private void RaiseOperationCompleted(OperationCompletedEventArgs e)
+            {
+                var handler = this.OperationCompleted;
+                if (handler == null)
+                {
+                    return;
+                }
+
+                try
+                {
+                    handler(this, e);
+                }
+                catch (Exception exception)
+                {
+                    this.Logger.WarnException("Error while calling OperationCompleted handler", exception);
+                }
+            }
+
+            protected override async Task OnNotificationInternalAsync(Notification notification)
+            {<#+
+        foreach (var property in collections)
+        {
+            this.WriteOnNotificationInternalCollectionHandling(property);
+        }
+#>
+
+                var deltaNotification = notification as <#= entity.Name #>DeltaNotification;
+                if (deltaNotification == null)
+                {
+                    return;
+                }
+
+                Logger.Trace("Applying delta notification '{0}' to type '<#= entity.Name #>'", notification.Id);
+                await this.OnNotificationAsync(deltaNotification);
+            }
+
+            private async Task OnNotificationAsync(<#= entity.Name.GetLastPart() #>DeltaNotification notification)
+            {
+                if (!notification.WasAccepted)
+                {
+                    this.Logger.Debug("Changes in notification '{0}' were not accepted", notification.Id);
+                    this.RaiseOperationCompleted(notification.EntityId, false);
+                    return;
+                }
+
+                switch (notification.NotificationType)
+                {
+                    case DeltaNotificationType.PropertiesChanged:
+                        await this.ApplyChangesAsync(notification.Delta.CreateDelta());
+                        break;
+                    case DeltaNotificationType.EntityAdded:
+                        await this.Add<#= entity.Name #>Async(notification.EntityId);
+                        break;
+                    case DeltaNotificationType.EntityRemoved:
+                        this.Remove<#= entity.Name #>Async(notification.EntityId);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                this.RaiseOperationCompleted(notification.EntityId, true);
+            }
+
+            private async Task Add<#= entity.Name #>Async(int entityId)
+            {
+                var model = await this.GetAsync(entityId);
+                if (model == null)
+                {
+                    const string Message = "Received a notification about an added entity (id {0}), but it wasn't"
+                        + " possible to get it back from the service";
+                    throw new ChangeTrackingException(string.Format(Message, entityId));
+                }
+
+                this.RaiseAdded(new ReadableModelEventArgs<<#= entity.Name #>ReadableModel>(model));
+            }
+
+            private void Remove<#= entity.Name #>Async(int entityId)
+            {
+                Internal<#= entity.Name #>ReadableModel model;
+                if (!this.models.TryGetValue(entityId, out model))
+                {
+                    return;
+                }
+
+                this.Release(entityId);
+                this.RaiseRemoved(new ReadableModelEventArgs<<#= entity.Name #>ReadableModel>(model));
+            }
+
+            private async Task ApplyChangesAsync(<#= entity.Name #>Delta content)
+            {
+                Internal<#= entity.Name #>ReadableModel model;
+                if (this.models.TryGetValue(content.Id, out model))
+                {
+                    Logger.Trace("Applying delta for version {0}", content.Version);
+                    await model.ApplyAsync(content);
+                }
+            }
+<#+
+        foreach (var property in collections)
+        {
+            this.WriteInverseProperty(property);
+        }
+#>
+
+            public sealed class OperationCompletedEventArgs
+            {
+                public OperationCompletedEventArgs(int entityId, bool succeeded)
+                {
+                    this.Succeeded = succeeded;
+                    this.EntityId = entityId;
+                }
+
+                public int EntityId { get; private set; }
+
+                public bool Succeeded { get; private set; }
+            }
+
+            private class CommitVerification : CommitVerificationBase<<#= entity.IdPropertyType #>>
+            {
+                private readonly <#= entity.Name #>ChangeTrackingManager manager;
+
+                private <#= entity.IdPropertyType #> id;
+
+                public CommitVerification(<#= entity.Name #>ChangeTrackingManager manager)
+                {
+                    this.manager = manager;
+                    this.manager.OperationCompleted += this.ManagerOnOperationCompleted;
+                }
+
+                public async Task<<#= entity.IdPropertyType #>> CommitAndVerifyAsync(<#= entity.Name #>WritableModel writableModel)
+                {
+                    this.id = writableModel.Id;
+                    writableModel.Commit();
+                    return await this.WaitCompletion();
+                }
+
+                private void ManagerOnOperationCompleted(object sender, OperationCompletedEventArgs e)
+                {
+                    if (e.EntityId != this.id && this.id != default(<#= entity.IdPropertyType #>))
+                    {
+                        return;
+                    }
+
+                    if (e.Succeeded)
+                    {
+                        this.TrySetResult(e.EntityId);
+                    }
+                    else
+                    {
+                        this.TrySetException("Couldn't update <#= entity.Name #> with ID " + this.id);
+                    }
+
+                    this.manager.OperationCompleted -= this.ManagerOnOperationCompleted;
+                }
+            }
+        }
+<#+
+    }
+
+    private void WriteOnNotificationInternalCollectionHandling(EntitySpace.CollectionProperty property)
+    {
+        var notificationVariable = "notification" + property.Name;
+        var name = property.ItemType.GetLastPart();
+#>
+
+                var <#= notificationVariable #> = notification as <#= name #>DeltaNotification;
+                if (<#= notificationVariable #> != null)
+                {
+                    await this.OnNotificationAsync(<#= notificationVariable #>);
+                    return;
+                }
+<#+
+    }
+
+    private void WriteInverseProperty(EntitySpace.CollectionProperty property)
+    {
+        var propertyName = property.Name;
+        var type = property.ItemType.GetLastPart();
+        if (string.IsNullOrEmpty(property.InverseProperty))
+        {
+            #>
+
+            // inverse property missing for collection <#= propertyName #>
+
+            private async Task OnNotificationAsync(<#= type #>DeltaNotification notification)
+            {
+                await Task.FromResult(0);
+                Logger.Trace("Ignoring notification '{0}'. The inverse property is not defined for collection '<#= propertyName #>'");
+            }
+<#+
+            return;
+        }
+
+        var inverseName = property.InverseProperty;
+#>
+
+            private async Task OnNotificationAsync(<#= type #>DeltaNotification notification)
+            {
+                if (notification.Delta == null)
+                {
+                    return;
+                }
+
+                var delta = notification.Delta.CreateDelta();
+                switch (notification.NotificationType)
+                {
+                    case DeltaNotificationType.PropertiesChanged:
+                        await this.On<#= inverseName #>ChangedAsync(delta);
+                        break;
+                    case DeltaNotificationType.EntityAdded:
+                        await this.On<#= inverseName #>AddedAsync(delta);
+                        break;
+                    case DeltaNotificationType.EntityRemoved:
+                        await this.On<#= inverseName #>RemovedAsync(delta);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            private async Task On<#= inverseName #>ChangedAsync(<#= type #>Delta delta)
+            {
+                if (delta.<#= inverseName #> == null)
+                {
+                    return;
+                }
+                
+                Internal<#= property.Entity.Name #>ReadableModel model;
+                if (delta.<#= inverseName #>.OriginalReferenceId.HasValue)
+                {
+                    if (this.models.TryGetValue(delta.<#= inverseName #>.OriginalReferenceId.Value, out model))
+                    {
+                        await model.ApplyAsync(delta);
+                    }
+                }
+
+                if (!delta.<#= inverseName #>.ReferenceId.HasValue)
+                {
+                    return;
+                }
+
+                var removed =
+                    this.models.Values.Where(
+                        m =>
+                        m.NavigationPropertiesLoaded
+                        && m.Id != delta.<#= inverseName #>.ReferenceId.Value
+                        && m.<#= propertyName #>.Any(readableModel => readableModel.Id == delta.Id)).ToList();
+                removed.ForEach(async m => await m.ApplyAsync(delta));
+                if (this.models.TryGetValue(delta.<#= inverseName #>.ReferenceId.Value, out model))
+                {
+                    await model.ApplyAsync(delta);
+                }
+            }
+
+            private async Task On<#= inverseName #>AddedAsync(<#= type #>Delta delta)
+            {
+                if (delta.<#= inverseName #> == null || !delta.<#= inverseName #>.ReferenceId.HasValue)
+                {
+                    return;
+                }
+
+                Internal<#= property.Entity.Name #>ReadableModel model;
+                if (this.models.TryGetValue(delta.<#= inverseName #>.ReferenceId.Value, out model))
+                {
+                    await model.ApplyAsync(delta);
+                }
+            }
+
+            private async Task On<#= inverseName #>RemovedAsync(<#= type #>Delta delta)
+            {
+                var modelsWithNavigationPropertiesLoaded =
+                    this.models.Values.OfType<Internal<#= property.Entity.Name #>ReadableModel>().Where(model => model.NavigationPropertiesLoaded);
+                var parent =
+                    modelsWithNavigationPropertiesLoaded
+                        .SingleOrDefault(model => model.<#= propertyName #>.Any(child => child.Id == delta.Id));
+                if (parent == null)
+                {
+                    Logger.Trace("Couldn't find a parent containing the deleted item {0}", delta.Id);
+                    return;
+                }
+
+                await parent.ApplyAsync(delta);
+            }
+<#+
+    }
+#>

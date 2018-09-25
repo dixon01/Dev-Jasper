@@ -1,0 +1,275 @@
+<AbuDhabi Descr="Container of all the required information for the Abu Dhabi project.">
+  <Behaviour>
+    <ConnectionStatusUsedFor Table="SystemStatus" Column="RemotePC" Row="0"/>
+    <UsedForCycle Table="Route" Column="Region" Row="0"/>
+  </Behaviour>
+  
+  <CU5 Descr="Representation in XML style of an object CU5">
+    <IPAddress Descr="The IP address (only IPv4 style) of the CU5 device.">192.168.0.50</IPAddress>
+    <Port Descr="The port of the CU5 device.
+      Admitted values: integers between 0 and 65535.
+      Default 32021">32021</Port>
+  </CU5>
+
+  <ISI Descr="Container of all the required information useful for the part with the ISI protocol.">
+    <IPAddress Descr="The IP address (only IPv4 style) of the ISI TCP/IP ISI server.">192.168.0.1</IPAddress>
+    <Port Descr="The port of the TCP/IP server.
+    Admitted values: integers between 0 and 65535.
+    Default 51001">51001</Port>
+    <!-- <LogToFile>..\..\logs\isi.log</LogToFile> -->
+  </ISI>
+
+  <ISISimulation>
+    <Enabled>false</Enabled>
+    <SimulationFile>isi.log</SimulationFile>
+  </ISISimulation>
+
+  <ISM Descr="Container of all the required information useful for the part with the ISM protocol.">
+    <IPAddress Descr="The IP address (only IPv4 style) of the ISM FTP server.">192.168.0.1</IPAddress>
+    <Port Descr="The port of the ISM FTP server.
+      Admitted values: integers between 0 and 65535.
+      Default 21">21</Port>
+    <Behaviour>
+      <Authentication Enabled="true">
+        <Login Descr="User's login (alphanumeric string).">GORBA</Login>
+        <Password Descr="User's password (alphanumeric string).">GORBA</Password>
+      </Authentication>
+      <Download>
+        <SourceDirectory Descr="path of the directory to download the files from.">/toveh/GORBA</SourceDirectory>
+        <DestinationDirectory Descr="path of the directory to store downloaded files.">D:\UpdateData</DestinationDirectory>
+        <CuExtension Descr="file extension for CU5 files">.0E0</CuExtension>
+        <CuExtension Descr="file extension for CU5 files">.1E0</CuExtension>
+        <TopboxExtension Descr="file extension for ProTran files">.3E0</TopboxExtension>
+        <TopboxExtension Descr="file extension for ProTran files">.4E0</TopboxExtension>
+      </Download>
+      <PollTime Descr="Polling time for ISM FTP client">PT5M</PollTime>
+    </Behaviour>
+  </ISM>
+
+  <IBIS>
+    <Enabled>true</Enabled>
+    <RestartOnTimeout>true</RestartOnTimeout>
+    <DateUsedFor Table="SystemStatus" Column="Date" Row="0" />
+    <TimeUsedFor Table="SystemStatus" Column="Time" Row="0" />
+  </IBIS>
+
+  <Subscriptions>
+    <Subscription OnChange="*">
+      <GorbaSystemFallbackActive Enabled="true">
+      </GorbaSystemFallbackActive>
+    </Subscription>
+
+    <Subscription>
+      <VehicleNo Enabled="true">
+      </VehicleNo>
+      <Time_ISO8601 Enabled="true">
+      </Time_ISO8601>
+    </Subscription>
+
+    <Subscription OnChange="*">
+      <TickerText Enabled="true" TransfRef="Ticker">
+        <UsedFor Table="PassengerMessages" Column="MessageText" Row="0" />
+      </TickerText>
+      <TickerTextArabic Enabled="true" TransfRef="StopArabic">
+        <UsedFor Table="PassengerMessages" Column="MessageText" Row="0" />
+      </TickerTextArabic>
+    </Subscription>
+
+    <Subscription OnChange="*" Cyclic="60">
+      <DestinationNo Enabled="true">
+      </DestinationNo>
+      <CurrentDirectionNo Enabled="true">
+      </CurrentDirectionNo>
+      
+      <Destination Enabled="true" TransfRef="Destination">
+        <UsedFor Language="en" Table="Destination" Column="DestinationName" Row="0" />
+      </Destination>
+      <DestinationArabic Enabled="true" TransfRef="DestinationArabic">
+        <UsedFor Language="ar" Table="Destination" Column="DestinationName" Row="0" />
+      </DestinationArabic>   
+      
+      <LineNameForDisplay Enabled="true">
+        <UsedFor Table="Route" Column="Line" Row="0" />
+      </LineNameForDisplay>
+      <StopDepartureCountdown Enabled="true">
+      </StopDepartureCountdown>
+      <StopDepartureCountdownState Enabled="true">
+      </StopDepartureCountdownState>
+
+      <Stop-1 Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="0" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="0" />
+      </Stop-1>
+
+      <Stop-1Arabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="0" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="0" />
+      </Stop-1Arabic>
+
+      <CurrentStop Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="1" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="1" />
+      </CurrentStop>
+      <CurrentStopArabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="1" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="1" />
+      </CurrentStopArabic>
+      <CurrentStopConnectionInfo Enabled="true">
+        <UsedForTransferSymbols Language="en" Table="Stops" Column="StopTransferSymbols" Row="1"/>
+        <UsedForConnectionTime Language="en" Table="Connections" Column="ConnectionTime" Row="{0}"/>
+        <UsedForConnectionDestination Language="en" Table="Connections" Column="ConnectionDestinationName" Row="{0}"/>
+        <UsedForConnectionLineNumber Language="en" Table="Connections" Column="ConnectionLineNumber" Row="{0}"/>
+        <UsedForConnectionTransportType Language="en" Table="Connections" Column="ConnectionTransportType" Row="{0}"/>
+
+        <TimeFormat
+          desc="Format of the UsedForConnectionTime.
+          Meaningful formats: 'HH:mm' (24-hour format),'hh:mm' (12-hour format)
+          See http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx for more formats.
+          Default value: 'HH:mm'">HH:mm</TimeFormat>
+        <TransportTypeFormat>D:\Infomedia\Symbols\L{0}.png</TransportTypeFormat>
+      </CurrentStopConnectionInfo>
+      <CurrentStopConnectionInfoArabic Enabled="true">
+        <UsedForTransferSymbols Language="ar" Table="Stops" Column="StopTransferSymbols" Row="1"/>
+        <UsedForConnectionTime Language="ar" Table="Connections" Column="ConnectionTime" Row="{0}"/>
+        <UsedForConnectionDestination Language="ar" Table="Connections" Column="ConnectionDestinationName" Row="{0}"/>
+        <UsedForConnectionLineNumber Language="ar" Table="Connections" Column="ConnectionLineNumber" Row="{0}"/>
+        <UsedForConnectionTransportType Language="ar" Table="Connections" Column="ConnectionTransportType" Row="{0}"/>
+
+        <TimeFormat
+          desc="Format of the UsedForConnectionTime.
+          Meaningful formats: 'HH:mm' (24-hour format),'hh:mm' (12-hour format)
+          See http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx for more formats.
+          Default value: 'HH:mm'">HH:mm</TimeFormat>
+        <TransportTypeFormat>D:\Infomedia\Symbols\L{0}.png</TransportTypeFormat>
+      </CurrentStopConnectionInfoArabic>
+
+      <Stop2 Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="2" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="2" />
+      </Stop2>
+      <Stop2Arabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="2" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="2" />
+      </Stop2Arabic>
+      <Stop2ConnectionInfo Enabled="true">
+        <UsedForTransferSymbols Language="en" Table="Stops" Column="StopTransferSymbols" Row="2"/>
+      </Stop2ConnectionInfo>
+      <Stop2ConnectionInfoArabic Enabled="true">
+        <UsedForTransferSymbols Language="ar" Table="Stops" Column="StopTransferSymbols" Row="2"/>
+      </Stop2ConnectionInfoArabic>
+
+      <Stop3 Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="3" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="3" />
+      </Stop3>
+      <Stop3Arabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="3" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="3" />
+      </Stop3Arabic>
+      <Stop3ConnectionInfo Enabled="true">
+        <UsedForTransferSymbols Language="en" Table="Stops" Column="StopTransferSymbols" Row="3"/>
+      </Stop3ConnectionInfo>
+      <Stop3ConnectionInfoArabic Enabled="true">
+        <UsedForTransferSymbols Language="ar" Table="Stops" Column="StopTransferSymbols" Row="3"/>
+      </Stop3ConnectionInfoArabic>
+
+      <Stop4 Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="4" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="4" />
+      </Stop4>
+      <Stop4Arabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="4" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="4" />
+      </Stop4Arabic>
+      <Stop4ConnectionInfo Enabled="true">
+        <UsedForTransferSymbols Language="en" Table="Stops" Column="StopTransferSymbols" Row="4"/>
+      </Stop4ConnectionInfo>
+      <Stop4ConnectionInfoArabic Enabled="true">
+        <UsedForTransferSymbols Language="ar" Table="Stops" Column="StopTransferSymbols" Row="4"/>
+      </Stop4ConnectionInfoArabic>
+
+      <Stop5 Enabled="true" TransfRef="Stop">
+        <FirstLineUsedFor Language="en" Table="Stops" Column="StopCity" Row="5" />
+        <SecondLineUsedFor Language="en" Table="Stops" Column="StopName" Row="5" />
+      </Stop5>
+      <Stop5Arabic Enabled="true" TransfRef="StopArabic">
+        <FirstLineUsedFor Language="ar" Table="Stops" Column="StopCity" Row="5" />
+        <SecondLineUsedFor Language="ar" Table="Stops" Column="StopName" Row="5" />
+      </Stop5Arabic>
+      <Stop5ConnectionInfo Enabled="true">
+        <UsedForTransferSymbols Language="en" Table="Stops" Column="StopTransferSymbols" Row="5"/>
+      </Stop5ConnectionInfo>
+      <Stop5ConnectionInfoArabic Enabled="true">
+        <UsedForTransferSymbols Language="ar" Table="Arabic" Column="StopTransferSymbols" Row="5"/>
+      </Stop5ConnectionInfoArabic>
+
+      <LastStop Enabled="true">
+      </LastStop>
+      <LastStopArabic Enabled="true" TransfRef="StopArabic">
+      </LastStopArabic>
+      <IsVehicle100mBeforeStopOrAtStop Enabled="true">
+        <UsedFor Table="Route" Column="ApproachingStop" Row="0" />
+      </IsVehicle100mBeforeStopOrAtStop>
+
+    </Subscription>
+  </Subscriptions>
+
+  <Transformations desc="Container of all the transformation that Protran has to do on the IBIS telegrams.">
+    <Chain id="Default" />
+
+    <Chain id="Stop">
+      <RegexMapping>
+        <Mapping from="^([^/]+) / (.+)$" to="$1&#x0A;$2"/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="StopArabic">
+      <RegexDivider>
+        <Regex>( ?[^ \-\u0600-\u06FF]+( (?!/))?)</Regex>
+      </RegexDivider>
+      <Reverse />
+      <Join />
+
+      <ChainRef TransfRef="Stop" />
+      <RegexMapping>
+        <Mapping from="(?&lt;=^[^\x0a]*)(\(?\d+\)?)" to="[face=Calibri bold]$1[/face] "/>
+        <Mapping from="(?&lt;=^[^\x0a]+\x0a.*)(\(?\d+\)?)" to="[face=Calibri]$1[/face] "/>
+        <Mapping from="  +" to=" "/>
+      </RegexMapping>
+
+      <RegexDivider>
+        <Regex>(\u000A)</Regex>
+      </RegexDivider>
+      <Reverse />
+      <Join />
+    </Chain>
+
+    <Chain id="Destination">
+      <RegexMapping>
+        <Mapping from="^(.*?)/ *" to=""/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="DestinationArabic">
+      <RegexDivider>
+        <Regex>( ?[^ \-\u0600-\u06FF]+( (?!/))?)</Regex>
+      </RegexDivider>
+      <Reverse />
+      <Join />
+
+      <RegexMapping>
+        <Mapping from=" */(.*?)$" to=""/>
+      </RegexMapping>
+
+      <RegexMapping>
+        <Mapping from="(\(?\d+\)?)" to="[face=Calibri bold]$1[/face]"/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="Ticker">
+      <RegexMapping>
+        <Mapping from="$" to="[LTR]"/>
+      </RegexMapping>
+    </Chain>
+  </Transformations>
+</AbuDhabi>

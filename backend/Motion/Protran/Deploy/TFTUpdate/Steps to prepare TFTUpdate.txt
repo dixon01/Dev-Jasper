@@ -1,0 +1,20 @@
+1. Take the files and the folder structure from the Deploy directory at Imageupdate
+2. Create a shortcut of Update.exe with the target location D:\Update\*.lnk
+3. Go to the properties of the created shortcut. Change the "Run" property to "Minimized" and click "OK".
+4. Place the latest version of Update.exe application at \Imageupdate\Update\ along with the shortcut for Update.exe prepared in step 2.
+5. Place the latest version of Protran at \Imageupdate\UpdateData\Progs\Protran.
+6. Place the latest version of SystemManager at \Imageupdate\UpdateData\Progs\SystemManager .
+7. Place the latest version of MediServer at \Imageupdate\UpdateData\Progs\MediServer.
+8. Place the latest version of Infomedia at \Imageupdate\UpdateData\Progs\Infomedia.
+9. Place the latest version of FilezillaServer at \Imageupdate\UpdateData\Progs\FilezillaServer.
+10. Place the latest data of Infomedia at \Imageupdate\UpdateData\Infomedia.
+
+
+
+Steps to update Topbox with Update.exe application and all the Topbox software using TFTStartup.
+1. Place the folder Imageupdate at the root of the usb stick
+2. Plug in the usb stick and power the Topbox on.
+3. TFTStartup.bat starts. It starts the Imageupdate.bat batch file which moves the folders Update and UpdateData to D:\ on the Topbox.
+4. The shortcut to Update.exe is placed in startUp. Firewall service is disabled. Fonts are installed. Ip address in changed.Topbox restarts automatically.
+5. Update.exe runs and does an update of all the folders in D:\UpdateData. UPdate.exe takes over the Topbox operation.
+ 

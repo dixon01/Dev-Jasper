@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F97A8817-D488-47CE-A9C1-1D6C3D12BECE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Update.Core</RootNamespace>
+    <AssemblyName>Gorba.Motion.Update.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLineParser">
+      <HintPath>..\..\..\..\3rdParty\CommandLineParser\2.6.0.2\net-20\CommandLineParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Agent\CommandsRunner.cs" />
+    <Compile Include="Agent\InstallationCancelledException.FX20.cs">
+      <DependentUpon>InstallationCancelledException.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Agent\DefaultInstaller.cs" />
+    <Compile Include="Agent\IInstallationEngine.cs" />
+    <Compile Include="Agent\IInstallationHost.cs" />
+    <Compile Include="Agent\InstallationCancelledException.cs" />
+    <Compile Include="Agent\InstallationEngineBase.cs" />
+    <Compile Include="Agent\NullInstaller.cs" />
+    <Compile Include="Agent\SelfConfigInstaller.cs" />
+    <Compile Include="Agent\SelfInstaller.cs" />
+    <Compile Include="Agent\UpdateInstaller.cs" />
+    <Compile Include="Agent\UpdateSelector.cs" />
+    <Compile Include="Agent\UpdateSetFactory.cs" />
+    <Compile Include="Agent\TreeHelper.cs" />
+    <Compile Include="Agent\UpdateFile.cs" />
+    <Compile Include="Agent\UpdateFolder.cs" />
+    <Compile Include="Agent\UpdateStateInfoFactory.cs" />
+    <Compile Include="Agent\UpdateSubNode.cs" />
+    <Compile Include="Agent\UpdateAgent.cs" />
+    <Compile Include="Agent\UpdateSet.cs" />
+    <Compile Include="Agent\ActionType.cs" />
+    <Compile Include="Agent\UpdateValet.cs" />
+    <Compile Include="CommandLineOptions.cs" />
+    <Compile Include="Dispatching\CacheLimitManager.cs" />
+    <Compile Include="Dispatching\UploadFileQueue.cs" />
+    <Compile Include="IUpdateController.cs" />
+    <Compile Include="Persistence\UpdateAgentPersistence.cs" />
+    <Compile Include="Dispatching\UpdateQueueBase.cs" />
+    <Compile Include="Progress\UpdateProgressForm.FX20.cs">
+      <DependentUpon>UpdateProgressForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Progress\UpdateProgressManager.FX20.cs">
+      <DependentUpon>UpdateProgressManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\FormUpdateVisualization.cs" />
+    <Compile Include="Progress\IUpdateVisualization.cs" />
+    <Compile Include="Progress\LedUpdateVisualization.FX20.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\UpdateProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Progress\UpdateProgressForm.Designer.cs">
+      <DependentUpon>UpdateProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\UpdateProgressManager.cs" />
+    <Compile Include="Utility\ProcessFinder.cs" />
+    <Compile Include="Utility\FileUtility.cs" />
+    <Compile Include="SelfUpdate\SelfUpdateController.cs" />
+    <Compile Include="UpdateApplication.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dispatching\UpdateCommandQueue.cs" />
+    <Compile Include="UpdateController.cs" />
+    <Compile Include="Dispatching\UpdateDispatcher.cs" />
+    <Compile Include="Dispatching\UpdateFeedbackQueue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Persistence\Configuration.Persistence.csproj">
+      <Project>{0FA444B9-B876-47EB-A78D-BB4BEBC9740D}</Project>
+      <Name>Configuration.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\SystemManager\Configuration.SystemManager.csproj">
+      <Project>{A95FB6D7-9160-47C1-A80C-65C63AB38BDF}</Project>
+      <Name>Configuration.SystemManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Resources\Medi.Resources.csproj">
+      <Project>{31D9EAD4-9A25-48A1-8491-940C2A711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Medi\Common.Update.Medi.csproj">
+      <Project>{81A45ACB-5C2A-44C9-A8ED-46691B9B5C49}</Project>
+      <Name>Common.Update.Medi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\OSWrappers\Utility.OSWrappers.csproj">
+      <Project>{5202b147-b5cb-49d2-af14-f3887e2210b1}</Project>
+      <Name>Utility.OSWrappers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Mgi\IO\Mgi.IO.csproj">
+      <Project>{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}</Project>
+      <Name>Mgi.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Utility\Motion.Common.Utility.csproj">
+      <Project>{D0DBD79E-9637-4E45-948E-70E8F015295D}</Project>
+      <Name>Motion.Common.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Luminator.Multicast.Core\Luminator.Multicast.Core.csproj">
+      <Project>{13AE873E-B083-48CE-953B-7708522A210C}</Project>
+      <Name>Luminator.Multicast.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\gorba_logo.png" />
+    <None Include="packages.config" />
+    <None Include="Resources\Luminator.png" />
+    <Content Include="Update.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UpdateBackup.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress\UpdateProgressForm.resx">
+      <DependentUpon>UpdateProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

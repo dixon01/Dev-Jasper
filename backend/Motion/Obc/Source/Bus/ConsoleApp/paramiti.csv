@@ -1,0 +1,8 @@
+ver 2;;;;;;;;;;;;;;;
+#Created:14.07.2010;"#DataName:""Bienne""";;;;;;
+#Line;#TripOut;#TripIn;#StopTimeout;#AdvanceLine;#DelayLine;#AdvanceBlock;#DelayBlock;#AdvanceVerify;#DelayVerify;#MessageInterval;#BlockageTime;#BlockageSpeed;#DistanceAnnouncement;#AreaAnnouncment;
+DEF;4;2;100;0;0;19;19;2000;2000;0;0;0;0;0;
+11;4;2;200;0;0;7;7;2000;2000;0;0;0;0;0;
+4;4;2;100;0;0;19;19;2000;2000;0;0;0;0;0;
+1;4;2;100;0;0;25;25;2000;2000;0;0;0;0;0;
+2;4;3;100;0;0;19;19;2000;2000;0;0;0;0;0;

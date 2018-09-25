@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA639013-AA5A-433F-A35B-D3F2ACA34105}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Gioom.Tools.Controls</RootNamespace>
+    <AssemblyName>Gorba.Common.Gioom.Tools.Controls</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="EnumFlagPortStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EnumFlagPortStateControl.Designer.cs">
+      <DependentUpon>EnumFlagPortStateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnumPortStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EnumPortStateControl.Designer.cs">
+      <DependentUpon>EnumPortStateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlagPortStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlagPortStateControl.Designer.cs">
+      <DependentUpon>FlagPortStateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntegerPortStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntegerPortStateControl.Designer.cs">
+      <DependentUpon>IntegerPortStateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalPortsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LocalPortsControl.Designer.cs">
+      <DependentUpon>LocalPortsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PortInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PortInfoControl.Designer.cs">
+      <DependentUpon>PortInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PortStateControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PortStateControlBase.Designer.cs">
+      <DependentUpon>PortStateControlBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PortStateWrapperControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PortStateWrapperControl.Designer.cs">
+      <DependentUpon>PortStateWrapperControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EnumFlagPortStateControl.resx">
+      <DependentUpon>EnumFlagPortStateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnumPortStateControl.resx">
+      <DependentUpon>EnumPortStateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlagPortStateControl.resx">
+      <DependentUpon>FlagPortStateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntegerPortStateControl.resx">
+      <DependentUpon>IntegerPortStateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LocalPortsControl.resx">
+      <DependentUpon>LocalPortsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortInfoControl.resx">
+      <DependentUpon>PortInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortStateWrapperControl.resx">
+      <DependentUpon>PortStateWrapperControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

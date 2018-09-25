@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HardwareManager>
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="false">
+  </Mgi>
+  <SNTP Enabled="false" Host="2.europe.pool.ntp.org" Port="123" Version="4" />
+  <VDV301 Enabled="false" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="false" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions/>
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>UTC</TimeZone>
+    </Setting>
+  </Settings>
+</HardwareManager>

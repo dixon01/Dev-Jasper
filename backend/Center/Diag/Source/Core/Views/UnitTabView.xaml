@@ -1,0 +1,217 @@
+﻿<UserControl x:Class="Gorba.Center.Diag.Core.Views.UnitTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             xmlns:unit="clr-namespace:Gorba.Center.Diag.Core.ViewModels.Unit"
+             xmlns:views="clr-namespace:Gorba.Center.Diag.Core.Views"
+             xmlns:controls="clr-namespace:Gorba.Center.Diag.Core.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800" d:DataContext="{d:DesignInstance unit:UnitTab}"
+             Background="{StaticResource TabViewBackground}">
+    <UserControl.Resources>
+        <converters:EqualsConverter x:Key="EqualsConverter"/>
+
+        <DataTemplate DataType="{x:Type unit:SystemInfoSectionViewModel}">
+            <views:SystemInfoTabView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type unit:FileSystemInfoSectionViewModel}">
+            <views:FileSystemTabView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type unit:RemoteViewerSectionViewModel}">
+            <views:RemoteViewerTabView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type unit:UnitIoInfoSectionViewModel}">
+            <views:UnitIoInfoTabView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type unit:ApplicationInfoSectionViewModel}">
+            <views:ApplicationInfoTabView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource ToolbarBackground}"
+                    BorderBrush="{StaticResource ToolbarBorder}" BorderThickness="0 1 0 1">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="{x:Static resources:DiagStrings.UnitTab_AnnounceUnit}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding Shell.AnnounceUnitCommand}" CommandParameter="{Binding Unit}" />
+                <Button Content="{x:Static resources:DiagStrings.UnitTab_RestartUnit}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding Shell.RebootUnitCommand}" CommandParameter="{Binding Unit}" />
+                <Button Content="{x:Static resources:DiagStrings.UnitTab_DisconnectUnit}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding Shell.DisconnectUnitCommand}" CommandParameter="{Binding Unit}" />
+                <Rectangle VerticalAlignment="Stretch" Width="1" Margin="2" Stroke="{StaticResource ToolbarBorder}" />
+                <Button Content="{x:Static resources:DiagStrings.ApplicationMenu_Launch}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding LaunchApplicationCommand}" CommandParameter="{Binding SelectedApplication}" />
+                <Button Content="{x:Static resources:DiagStrings.ApplicationMenu_Relaunch}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding RelaunchApplicationCommand}" CommandParameter="{Binding SelectedApplication}" />
+                <Button Content="{x:Static resources:DiagStrings.ApplicationMenu_End}" Style="{StaticResource FlatToolbarButton}"
+                            Command="{Binding EndApplicationCommand}" CommandParameter="{Binding SelectedApplication}" />
+            </StackPanel>
+        </Border>
+
+        <telerik:RadBusyIndicator Grid.Row="1" BusyContent="{x:Static resources:DiagStrings.UnitTab_BusyConnecting}" 
+                                  IsBusy="{Binding Unit.ConnectionState, Converter={StaticResource EqualsConverter}, ConverterParameter={x:Static unit:ConnectionState.Connecting}}" 
+                                  IsIndeterminate="True">
+            <Grid>
+                <TabControl TabStripPlacement="Left" ItemsSource="{Binding InfoSections}" SelectedItem="{Binding SelectedInfoSection}" Style="{DynamicResource UnitViewTabControlStyle}">
+                    <TabControl.Resources>
+                        <Style x:Key="TitleBlock" TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="18" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+                            <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"/>
+                        </Style>
+
+                        <Style TargetType="TabItem">
+                            <Setter Property="Header" Value="" />
+                            <Setter Property="HeaderTemplate" Value="{x:Null}"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Background" Value="{StaticResource UnitViewTabControlHeaderBackground}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentControl Content="{Binding}">
+                                                <ContentControl.Resources>
+
+                                                    <DataTemplate DataType="{x:Type unit:SystemInfoSectionViewModel}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Grid.Column="0" Source="../Resources/Icons/InfoSection_SystemInfo_32x32.png" Width="32" Height="32" />
+
+                                                            <TextBlock Grid.Column="1" Text="{x:Static resources:DiagStrings.UnitTabSection_SystemInfo}"
+                                                                   Style="{StaticResource TitleBlock}" VerticalAlignment="Center" />
+                                                        </Grid>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate DataType="{x:Type unit:FileSystemInfoSectionViewModel}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Grid.Column="0" Source="../Resources/Icons/filesystem_dark_32x32.png" Width="32" Height="32" />
+
+                                                            <TextBlock Grid.Column="1" Text="{x:Static resources:DiagStrings.UnitTabSection_FileSystemInfo}"
+                                                                   Style="{StaticResource TitleBlock}" VerticalAlignment="Center" />
+                                                        </Grid>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate DataType="{x:Type unit:RemoteViewerSectionViewModel}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Grid.Column="0" Source="../Resources/Icons/InfoSection_RemoteViewer_32x32.png" Width="32" Height="32" />
+
+                                                            <TextBlock Grid.Column="1" Text="{x:Static resources:DiagStrings.UnitTabSection_RemoteViewer}"
+                                                                   Style="{StaticResource TitleBlock}" VerticalAlignment="Center" />
+                                                        </Grid>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate DataType="{x:Type unit:UnitIoInfoSectionViewModel}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Grid.Column="0" Source="../Resources/Icons/InfoSection_UnitIOs_32x32.png" Width="32" Height="32" />
+
+                                                            <TextBlock Grid.Column="1" Text="{x:Static resources:DiagStrings.UnitTabSection_UnitIoInfo}"
+                                                                   Style="{StaticResource TitleBlock}" VerticalAlignment="Center" />
+                                                        </Grid>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate DataType="{x:Type unit:ApplicationInfoSectionViewModel}">
+                                                        <controls:ApplicationListItem/>
+                                                    </DataTemplate>
+
+                                                </ContentControl.Resources>
+                                            </ContentControl>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource UnitViewTabControlHeaderItemHoverBackground}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource UnitViewTabControlHeaderItemSelectedBackground}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+
+                        <Style x:Key="UnitViewTabControlStyle" TargetType="{x:Type TabControl}">
+                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="{StaticResource UnitViewTabControlBackground}"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabControl}">
+                                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition x:Name="ColumnDefinition0" Width="300"/>
+                                                <ColumnDefinition x:Name="ColumnDefinition1" Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition x:Name="RowDefinition0" Height="*"/>
+                                                <RowDefinition x:Name="RowDefinition1" Height="0"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource UnitViewTabControlHeaderBackground}">
+                                                <TabPanel x:Name="headerPanel" Background="Transparent" IsItemsHost="true"
+            							              Margin="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
+                                            </Border>
+
+                                            <Border x:Name="contentPanel" BorderBrush="{StaticResource UnitViewTabControlHeaderItemSelectedBackground}" BorderThickness="3 0 0 0" 
+                                                    Background="{TemplateBinding Background}" Grid.Column="1"
+            							            Grid.Row="0" KeyboardNavigation.DirectionalNavigation="Contained"
+            							            KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </TabControl.Resources>
+                </TabControl>
+                
+                <Canvas>
+                    <controls:UnitRepresentation Canvas.Bottom="10" Canvas.Left="10" Width="280" Height="120" Unit="{Binding Unit}" />
+                </Canvas>
+            </Grid>
+        </telerik:RadBusyIndicator>
+    </Grid>
+</UserControl>

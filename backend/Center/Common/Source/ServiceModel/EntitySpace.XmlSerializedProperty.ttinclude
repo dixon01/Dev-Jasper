@@ -1,0 +1,28 @@
+﻿<#+
+
+    private void WriteXmlSerializedProperty(EntitySpace.Property property)
+    {
+#>
+
+            [DataMember]
+            public string <#= property.Name #>Xml { get; set; }
+
+            [DataMember]
+            public string <#= property.Name #>XmlType { get; set; }
+
+            public XmlData <#= property.Name #>
+            {
+                get
+                {
+                    return new XmlData(this.<#= property.Name #>Xml, this.<#= property.Name #>XmlType);
+                }
+
+                set
+                {
+                    this.<#= property.Name #>Xml = value.Xml;
+                    this.<#= property.Name #>XmlType = value.Type;
+                }
+            }
+<#+
+    }
+#>

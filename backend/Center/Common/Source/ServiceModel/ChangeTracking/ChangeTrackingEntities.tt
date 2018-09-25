@@ -1,0 +1,37 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#@ include file="ChangeTrackingEntities.Partition.ttinclude" #>
+<#@ include file="ChangeTrackingEntities.Entity.ttinclude" #>
+<#@ include file="ChangeTrackingEntities.Property.ttinclude" #>
+<#
+	var path = this.Host.ResolvePath(@"..\EntitySpace.xml");
+	this.entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.ServiceModel.ChangeTracking
+{
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Collections.ObjectModel;
+	using System.Collections.Specialized;
+	using System.Linq;
+
+	using Gorba.Center.Common.ServiceModel.Collections;
+<#
+	foreach (var partition in entitySpace.Partitions)
+	{
+		this.WritePartition(partition);
+	}
+#>
+}
+<#+
+	private EntitySpace entitySpace;
+#>

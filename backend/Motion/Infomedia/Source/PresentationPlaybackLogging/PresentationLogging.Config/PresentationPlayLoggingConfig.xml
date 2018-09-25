@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PresentationPlayLoggingConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ClientConfig>
+    <LogFilePath>D:\PresentationPlayLogs\PresentationPlay.csv</LogFilePath>
+    <FileNameRolloverType>TimeStampTicks</FileNameRolloverType>
+    <MaxFileSize>0</MaxFileSize>
+    <MaxRecords>100</MaxRecords>
+    <MaxZipFileEntries>0</MaxZipFileEntries>
+    <RollOverLogOutputFolder>D:\Data\Update\Uploads\ProofOfPlay</RollOverLogOutputFolder>
+    <ZipOutput>false</ZipOutput>
+  </ClientConfig>
+  <ServerConfig>
+    <BadFileFolder>D:\PresentationPlayLogs\BadFiles</BadFileFolder>
+    <ConnectionStringDebug>Data Source=.\SQLEXPRESS;Initial Catalog=Luminator.Reporting.PresentationPlayLogging;Integrated Security=true;</ConnectionStringDebug>
+    <ConnectionStringRelease>Data Source=.\SQLEXPRESS;Initial Catalog=Luminator.Reporting.PresentationPlayLogging;Integrated Security=true;</ConnectionStringRelease>
+    <DestinationsConnectionString />
+    <DestinationsUnitUri />
+    <FileWatchFolder>D:\ftproot</FileWatchFolder>
+    <LookupUnits>false</LookupUnits>
+    <WatchFileFilter>*.csv|*.zip</WatchFileFilter>
+    <PollInterval>PT30S</PollInterval>
+  </ServerConfig>
+</PresentationPlayLoggingConfig>

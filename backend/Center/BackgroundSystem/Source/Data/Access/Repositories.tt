@@ -1,0 +1,493 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="AccessExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Security.Cryptography.X509Certificates" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Access" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Access
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Data.SqlClient;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EntityFramework.BulkInsert.Extensions;
+
+    using Gorba.Center.BackgroundSystem.Data.Model;
+<#
+    foreach (var partition in partitions)
+    {#>
+    using Gorba.Center.BackgroundSystem.Data.Model.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    }
+    #>
+
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteEntity(entity, userDefinedPropertiesEnabledEntityNames);
+    }
+    #>
+}
+<#+
+
+    private void WriteEntity(EntitySpace.Entity entity, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    {
+            var name = entity.Name;
+            var referenceProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+            var optionalReferences = referenceProperties.Where(property => !property.IsRequired);
+            var requiredProperties = referenceProperties.Where(property => property.IsRequired);
+            var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>()
+                .OrderBy(property => property.Name).ToList();
+            var xmlProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.IsXmlSerialized);
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+        #>
+
+    public partial class <#= name #>QueryableRepository : RepositoryBase, IQueryableRepository<<#= entity.Name #>>
+    {
+        protected readonly CenterDataContext dataContext;
+
+        public <#= name #>QueryableRepository(CenterDataContext dataContext)
+        {
+            this.dataContext = dataContext;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.dataContext.Dispose();
+            }
+        }
+
+        private void Detach(<#= name #> entity)
+        {
+            var entry = this.dataContext.Entry(entity);
+            entry.State = EntityState.Unchanged;
+        }
+
+        public async Task<<#= entity.Name #>> FindAsync(params object[] keyValues)
+        {
+<#+
+            if (userDefinedPropertiesEnabled)
+            {
+            #>
+            if (keyValues == null || keyValues.Length != 1 || !(keyValues[0] is <#= entity.IdPropertyType #>))
+            {
+                throw new ArgumentException("Key values must contain only the Id value of type '<#= entity.IdPropertyType #>'", "keyValues");
+            }
+
+            var id = (<#= entity.IdPropertyType #>)keyValues[0];
+            var entity = await ExtendQueryWithUserDefinedProperties(this.dataContext.<#= name.Pluralize() #>).SingleOrDefaultAsync(e => e.Id == id);
+<#+
+            }
+            else
+            {
+                #>
+            var entity = this.dataContext.<#= name.Pluralize() #>.Find(keyValues);
+<#+
+            }
+#>
+            if (entity == null)
+            {
+                return null;
+            }
+
+            var clone = entity.Clone();
+            var result = await Task.FromResult(clone);
+            return result;
+        }
+
+        public IQueryable<<#= entity.Name #>> Query()
+        {
+<#+
+            if (userDefinedPropertiesEnabled)
+            {
+                #>
+            return ExtendQueryWithUserDefinedProperties(this.dataContext.<#= name.Pluralize() #>).AsNoTracking();
+<#+
+            }
+            else
+            {
+                #>
+            return this.dataContext.<#= name.Pluralize() #>.AsNoTracking();
+<#+
+            }
+#>
+        }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+#>
+
+        private static IQueryable<<#= entity.Name #>> ExtendQueryWithUserDefinedProperties(IQueryable<<#= entity.Name #>> query)
+        {
+            return query.Include("UserDefinedProperties.PropertyDefinition");
+        }
+<#+
+        }
+#>
+    }
+
+<#+
+            var bulkRepository = entity.HasChangeTracking ? string.Empty : "Bulk";
+        var bulkRepositoryFilterType = entity.HasChangeTracking ? string.Empty : ", " + entity.Name + "Filter";
+#>
+    public partial class <#= name #>Repository : <#= name #>QueryableRepository, I<#= bulkRepository #>Repository<<#= entity.Name + bulkRepositoryFilterType #>>
+    {
+        public <#= name #>Repository(CenterDataContext dataContext)
+            : base(dataContext)
+        {
+        }
+
+        public async Task<<#= entity.Name #>> AddAsync(<#= entity.Name #> entity)
+        {
+<#+
+                foreach (var requiredProperty in requiredProperties)
+                {
+                    #>
+            if (entity.<#= requiredProperty.Name #> == null)
+            {
+                throw new ArgumentException("Property '<#= requiredProperty.Name #>' can't be null");
+            }
+
+            entity.<#= requiredProperty.Name #> = this.dataContext.<#= requiredProperty.Type.GetPluralizedTypeName() #>.Find(entity.<#= requiredProperty.Name #>.Id);
+<#+
+                }
+#>
+<#+
+                foreach (var optionalReference in optionalReferences)
+                {
+                    #>
+            if (entity.<#= optionalReference.Name #> != null)
+            {
+                entity.<#= optionalReference.Name #> = this.dataContext.<#= optionalReference.Type.GetPluralizedTypeName() #>.Find(entity.<#= optionalReference.Name #>.Id);
+            }
+
+<#+
+                }
+
+                foreach (var collectionProperty in collectionProperties)
+                {
+                    #>
+            if (entity.<#= collectionProperty.Name #> != null)
+            {
+                entity.<#= collectionProperty.Name #> = entity.<#= collectionProperty.Name #>.Select(i => this.dataContext.<#= collectionProperty.ItemType.GetPluralizedTypeName() #>.Find(i.Id)).ToList();
+            }
+
+<#+
+                }
+#>
+            this.dataContext.<#= name.Pluralize() #>.Add(entity);
+<#+
+            if (userDefinedPropertiesEnabled)
+            {
+                #>
+            var userDefinedProperties =
+                await this.dataContext.UserDefinedProperties.Where(
+                    property => property.OwnerEntity == UserDefinedPropertyEnabledEntity.<#= name #>).ToListAsync();
+            var validProperties = userDefinedProperties.Select(property => property.Name);
+            if (entity.RawUserDefinedProperties.Keys.Except(validProperties).Any())
+            {
+                throw new InvalidDataException("Found invalid user defined properties");
+            }
+
+            entity.UserDefinedProperties.Clear();
+            foreach (var userDefinedProperty in userDefinedProperties)
+            {
+                var value = entity.RawUserDefinedProperties.ContainsKey(userDefinedProperty.Name)
+                                ? entity.RawUserDefinedProperties[userDefinedProperty.Name]
+                                : null;
+                entity.UserDefinedProperties.Add(new <#= name #>UserDefinedProperty(userDefinedProperty, value));
+            }
+<#+
+            }
+#>
+
+            await this.dataContext.SaveChangesAsync();
+            var added = this.dataContext.<#= name.Pluralize() #>.Find(entity.Id);
+            return added;
+        }
+<#+
+            if (!entity.HasChangeTracking)
+            {#>
+
+        public Task AddRangeAsync(IEnumerable<<#= entity.Name #>> entities)
+        {
+<#+
+                foreach (var requiredProperty in requiredProperties)
+                {
+                    #>
+            if (entity.<#= requiredProperty.Name #> == null)
+            {
+                throw new ArgumentException("Property '<#= requiredProperty.Name #>' can't be null");
+            }
+
+            entity.<#= requiredProperty.Name #> = this.dataContext.<#= requiredProperty.Type.GetPluralizedTypeName() #>.Find(entity.<#= requiredProperty.Name #>.Id);
+<#+
+                }
+#>
+            var options = new BulkInsertOptions
+                              {
+                                  EnableStreaming = true,
+                                  SqlBulkCopyOptions = SqlBulkCopyOptions.CheckConstraints
+                              };
+            this.dataContext.BulkInsert(entities, options);
+            return Task.FromResult(0);
+        }
+
+        public Task<int> DeleteAsync(<#= entity.Name #>Filter filter)
+        {
+            var command = this.dataContext.BuildBulkDeleteCommand(filter);
+            return this.dataContext.Database.ExecuteSqlCommandAsync(command);
+        }
+<#+
+                
+            }
+#>
+
+        public async Task RemoveAsync(<#= entity.Name #> entity)
+        {
+            await Task.FromResult(0);
+            var original = this.dataContext.<#= name.Pluralize() #>.SingleOrDefault(e => e.Id == entity.Id);
+            if (original == null)
+            {
+                return;
+            }
+
+<#+
+    
+            foreach (var property in xmlProperties)
+            {
+                #>
+            this.dataContext.LoadReference(original, "<#= property.Name #>");
+            var original<#= property.Name #> = original.<#= property.Name #>;
+<#+
+            }
+            #>
+            this.dataContext.<#= name.Pluralize() #>.Remove(original);
+<#+
+    
+            foreach (var property in xmlProperties)
+            {
+                #>
+            
+            if (original<#= property.Name #> != null)
+            {
+                this.dataContext.XmlData.Remove(original<#= property.Name #>);
+            }
+
+<#+
+            }
+            #>
+            this.dataContext.SaveChanges();
+        }
+
+        public async Task<<#= entity.Name #>> UpdateAsync(<#= entity.Name #> entity)
+        {
+<#+
+            if (userDefinedPropertiesEnabled)
+            {
+                #>
+            var original =
+                this.dataContext.<#= name.Pluralize() #>.Include("UserDefinedProperties.PropertyDefinition")
+                    .SingleOrDefault(e => e.Id == entity.Id);
+<#+
+            }
+            else
+            {#>
+            var original = this.dataContext.<#= name.Pluralize() #>.Find(entity.Id);
+<#+
+            }
+#>
+            if (original == null)
+            {
+                throw new DataException("Couldn't find an entity '<#= name #>' with Id " + entity.Id);
+            }
+
+            this.dataContext.SetValues(original, entity);
+<#+
+            if (userDefinedPropertiesEnabled)
+            {#>
+
+            var userDefinedProperties =
+                await this.dataContext.UserDefinedProperties.Where(
+                    property => property.OwnerEntity == UserDefinedPropertyEnabledEntity.<#= entity.Name #>).ToListAsync();
+            var validProperties = userDefinedProperties.Select(property => property.Name);
+            if (entity.RawUserDefinedProperties.Keys.Except(validProperties).Any())
+            {
+                throw new InvalidDataException("Found invalid user defined properties");
+            }
+
+            entity.UserDefinedProperties.Clear();
+            foreach (var userDefinedProperty in userDefinedProperties)
+            {
+                var userDefinedPropertyValueEntity =
+                    original.UserDefinedProperties.SingleOrDefault(
+                        property => property.PropertyDefinition.Id == userDefinedProperty.Id);
+                if (userDefinedPropertyValueEntity == null)
+                {
+                    userDefinedPropertyValueEntity = new <#= entity.Name #>UserDefinedProperty(userDefinedProperty, null);
+                    original.UserDefinedProperties.Add(userDefinedPropertyValueEntity);
+                }
+
+                userDefinedPropertyValueEntity.Value =
+                    entity.RawUserDefinedProperties.ContainsKey(userDefinedProperty.Name)
+                        ? entity.RawUserDefinedProperties[userDefinedProperty.Name]
+                        : null;
+            }
+<#+
+            }
+
+            foreach (var property in referenceProperties)
+            {
+                #>
+
+            if (entity.<#= property.Name #> == null)
+            {
+                this.dataContext.LoadReference(original, "<#= property.Name #>");
+            }
+            else if (entity.<#= property.Name #> == <#= property.Type.Substring(property.Type.LastIndexOf('.') + 1) #>.Null)
+            {
+                this.dataContext.SetReference(original, "<#= property.Name #>", null);
+            }
+            else
+            {
+                this.dataContext.SetReference(original, "<#= property.Name #>", this.dataContext.<#= property.Type.GetPluralizedTypeName() #>.Find(entity.<#= property.Name #>.Id));
+            }
+<#+
+            }
+    
+            foreach (var property in xmlProperties)
+            {
+                #>
+            
+            this.dataContext.LoadReference(original, "<#= property.Name #>");
+            if (entity.<#= property.Name #> != null)
+            {
+                if (original.<#= property.Name #> == null)
+                {
+                    original.<#= property.Name #> = entity.<#= property.Name #>;
+                }
+                else
+                {
+                    entity.<#= property.Name #>.Id = original.<#= property.Name #>.Id;
+                    this.dataContext.SetValues(original.<#= property.Name #>, entity.<#= property.Name #>);
+                }
+            }
+<#+
+            }
+
+#>
+
+            await this.dataContext.SaveChangesAsync();
+            return original;
+        }
+    }
+        
+    public abstract class <#= name #>QueryableRepositoryFactory
+    {
+        static <#= name #>QueryableRepositoryFactory()
+        {
+            ResetInstance();
+        }
+
+        public static <#= name #>QueryableRepositoryFactory Current { get; private set; }
+
+        public abstract IQueryableRepository<<#= entity.Name #>> Create();
+
+        public static void ResetInstance()
+        {
+            SetInstance(Default<#= name #>QueryableRepositoryFactory.Instance);
+        }
+
+        public static void SetInstance(<#= name #>QueryableRepositoryFactory instance)
+        {
+            <#= name #>QueryableRepositoryFactory.Current = instance;
+        }
+
+        private sealed class Default<#= name #>QueryableRepositoryFactory : <#= name #>QueryableRepositoryFactory
+        {
+            static Default<#= name #>QueryableRepositoryFactory()
+            {
+                Instance = new Default<#= name #>QueryableRepositoryFactory();
+            }
+
+            public static <#= name #>QueryableRepositoryFactory Instance { get; private set; }
+
+            public override IQueryableRepository<<#= entity.Name #>> Create()
+            {
+                var dataContext = DataContextFactory.Current.Create();
+                return new <#= name #>Repository(dataContext);
+            }
+        }
+    }
+        
+    public abstract class <#= name #>RepositoryFactory
+    {
+        static <#= name #>RepositoryFactory()
+        {
+            ResetInstance();
+        }
+
+        public static <#= name #>RepositoryFactory Current { get; private set; }
+
+        public abstract I<#= bulkRepository #>Repository<<#= entity.Name + bulkRepositoryFilterType #>> Create();
+
+        public static void ResetInstance()
+        {
+            SetInstance(Default<#= name #>RepositoryFactory.Instance);
+        }
+
+        public static void SetInstance(<#= name #>RepositoryFactory instance)
+        {
+            <#= name #>RepositoryFactory.Current = instance;
+        }
+
+        private sealed class Default<#= name #>RepositoryFactory : <#= name #>RepositoryFactory
+        {
+            static Default<#= name #>RepositoryFactory()
+            {
+                Instance = new Default<#= name #>RepositoryFactory();
+            }
+
+            public static <#= name #>RepositoryFactory Instance { get; private set; }
+
+            public override I<#= bulkRepository #>Repository<<#= entity.Name + bulkRepositoryFilterType #>> Create()
+            {
+                var dataContext = DataContextFactory.Current.Create();
+                return new <#= name #>Repository(dataContext);
+            }
+        }
+    }
+    <#+
+    }
+#>

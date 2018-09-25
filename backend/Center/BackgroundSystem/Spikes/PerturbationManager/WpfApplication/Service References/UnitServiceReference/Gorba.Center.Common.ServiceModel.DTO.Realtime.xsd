@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Realtime" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Realtime" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfDisplayFieldLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DisplayFieldLayout" nillable="true" type="tns:DisplayFieldLayout" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDisplayFieldLayout" nillable="true" type="tns:ArrayOfDisplayFieldLayout" />
+  <xs:complexType name="DisplayFieldLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Alignment" type="tns:DisplayFieldAlignment" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Width" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DisplayFieldLayout" nillable="true" type="tns:DisplayFieldLayout" />
+  <xs:simpleType name="DisplayFieldAlignment">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DisplayFieldAlignment" nillable="true" type="tns:DisplayFieldAlignment" />
+</xs:schema>

@@ -1,0 +1,176 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid;assembly=Gorba.Center.Common.Wpf.Views"
+                    xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters;assembly=Gorba.Center.Media.Core">
+    
+    <converters:HasFormulaConverter x:Key="HasFormulaConverter"/>
+    <converters:HasAnimationConverter x:Key="HasAnimationConverter"/>
+    <converters:EvaluationToStringConverter x:Key="EvaluationToStringConverter"/>
+    
+    <Style x:Key="FlatColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="FlatDataGridColumnHeaderStyle">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SeparatorBrush" Value="{StaticResource MainMenuSeperatorColorBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ConsistencyDataGridHeaderForegroundColorBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1" 
+                              Background="Transparent" 
+                              BorderBrush="Transparent" 
+                              Grid.ColumnSpan="2" />
+                        <ContentPresenter Grid.Column="0" Margin="6,3,6,3" VerticalAlignment="Center" />
+                        <Thumb Grid.Column="0" x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" 
+                             Style="{StaticResource FlatColumnHeaderGripperStyle}"/>
+                        <Thumb Grid.Column="0" x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" 
+                             Style="{StaticResource FlatColumnHeaderGripperStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridCell}" x:Key="FlatDataGridCellStyle">
+        <Setter Property="Foreground" Value="{StaticResource TextBlockDefaultForegroundColorBrush}" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="Transparent">
+                        <ContentPresenter Margin="6 0 6 0" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource ConsistencyDataGridHighlightRowColorBrush}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ConsistencyHoverMessageBackgroundColorBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type DataGrid}" x:Key="FlatDataGridStyle">
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource FlatDataGridColumnHeaderStyle}" />
+        <Setter Property="CellStyle" Value="{StaticResource FlatDataGridCellStyle}" />
+    </Style>
+
+    <Style x:Key="DefaultContextButtonPropertyGridItemStyle" TargetType="propertyGrid:PropertyGridItem">
+        <Setter Property="ContextButtonColumnWidth" Value="20"/>
+
+        <Setter Property="ContextButtonTemplate">
+            <Setter.Value>
+                <ControlTemplate TargetType="propertyGrid:PropertyGridContextButton">
+                    <Border x:Name="bd" Width="22" Height="22" SnapsToDevicePixels="True">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PropertyGridItemHasFormulaBackgroundColorBorderBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PropertyGridItemHasFormulaBackgroundColorBorderBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding HasMultipleDifferingDataSources, ElementName=PARTS_PROPERTYGRIDITEMROOT}" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PropertyGridItemHasFormulaBackgroundColorBorderBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Image Name="icon" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality">
+                            <Image.Style>
+                                <Style>
+                                    <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fx_none_16x16.png" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasMultipleDifferingDataSources, ElementName=PARTS_PROPERTYGRIDITEMROOT}" Value="True">
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fx_light_16x16.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True">
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fx_light_16x16.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="True">
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/animation_light_16x16.png"/>
+                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="False"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsMouseOver}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fx_dark_16x16.png"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="False"/>
+                                                <Condition Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsMouseOver}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/animation_dark_16x16.png"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="False"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsMouseOver}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fx_dark_16x16.png"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fxanimation_light_16x16.png"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataSource, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasFormulaConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding ParallelData, ElementName=PARTS_PROPERTYGRIDITEMROOT, Converter={StaticResource HasAnimationConverter}}" Value="True"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsMouseOver}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Image.Source" Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/fxanimation_dark_16x16.png"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="bd" Value="#11000000"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="bd" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="bd" Value="Transparent"/>
+                            <Setter Property="BorderBrush" TargetName="bd" Value="Transparent"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

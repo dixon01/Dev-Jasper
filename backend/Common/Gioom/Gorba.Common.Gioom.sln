@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gioom.Core", "Source\Core\Gioom.Core.csproj", "{7C6B5185-B035-465F-A760-7B7D45B3FBAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{26037F4E-57B6-41DE-B99B-E9345D5155BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medi.Core", "..\Medi\Source\Core\Medi.Core.csproj", "{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gioom.Core.Tests", "Source\Core.Tests\Gioom.Core.Tests.csproj", "{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B43ECF52-C120-4A8E-BADD-3DAF634B4808}"
+	ProjectSection(SolutionItems) = preProject
+		Gorba.Common.Gioom.vsmdi = Gorba.Common.Gioom.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Source\\Core\\Gioom.Core.csproj
+		SccProjectName1 = Source/Core
+		SccLocalPath1 = Source\\Core
+		SccProjectUniqueName2 = ..\\Medi\\Source\\Core\\Medi.Core.csproj
+		SccProjectTopLevelParentUniqueName2 = Gorba.Common.Gioom.sln
+		SccProjectName2 = ../Medi/Source/Core
+		SccLocalPath2 = ..\\Medi\\Source\\Core
+		SccProjectUniqueName3 = ..\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = Gorba.Common.Gioom.sln
+		SccProjectName3 = ../Utility/Source/Core
+		SccLocalPath3 = ..\\Utility\\Source\\Core
+		SccProjectUniqueName4 = Source\\Core.Tests\\Gioom.Core.Tests.csproj
+		SccProjectName4 = Source/Core.Tests
+		SccLocalPath4 = Source\\Core.Tests
+		SccProjectUniqueName5 = ..\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName5 = Gorba.Common.Gioom.sln
+		SccProjectName5 = ../Utility/Source/Compatibility
+		SccLocalPath5 = ..\\Utility\\Source\\Compatibility
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6B5185-B035-465F-A760-7B7D45B3FBAA}.Release|x86.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.ActiveCfg = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.Build.0 = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.ActiveCfg = Release|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.Build.0 = Release|x86
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E9C255-7D9C-4A1D-ABE0-6F408FED334F}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874} = {26037F4E-57B6-41DE-B99B-E9345D5155BA}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {26037F4E-57B6-41DE-B99B-E9345D5155BA}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {26037F4E-57B6-41DE-B99B-E9345D5155BA}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Gorba.Common.Gioom.vsmdi
+	EndGlobalSection
+EndGlobal

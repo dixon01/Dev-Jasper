@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema" />
+  <xs:element name="Gorba" nillable="true" type="GorbaConfig" />
+  <xs:complexType name="GorbaConfig">
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9467818-5495-4F0E-88BB-BFCA564EE5E5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnitManagerConsoleApp</RootNamespace>
+    <AssemblyName>UnitManagerConsoleApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Activities.Extensions.Design">
+      <HintPath>..\..\..\..\..\3rdParty\Microsoft.Activities.Extensions\2.0.6.9\Microsoft.Activities.Extensions.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\..\3rdParty\Moq\v4\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitManagerConfig.cs" />
+    <Compile Include="UnityInitialization.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Source\Core\Center.Common.Core.csproj">
+      <Project>{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}</Project>
+      <Name>Center.Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Client\BackgroundSystem.Client.csproj">
+      <Project>{6D454F7B-CA50-4DC2-AAB3-1020DDE6F40D}</Project>
+      <Name>BackgroundSystem.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Source\Activities\Center.Common.Activities.csproj">
+      <Project>{09EEC281-90AC-4BA4-BCBC-6A636EA04A21}</Project>
+      <Name>Center.Common.Activities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{768079A3-523C-492B-8822-1655594BA3F7}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\CommS\Source\Wcf\ServiceModel\CommS.Wcf.ServiceModel.csproj">
+      <Project>{D54684F4-5F16-4901-A798-C0D7B7480CA0}</Project>
+      <Name>CommS.Wcf.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\ActivityLifecycle\BackgroundSystem.ActivityLifecycle.csproj">
+      <Project>{70B368D6-BAA3-4A1C-98E5-45370195635B}</Project>
+      <Name>BackgroundSystem.ActivityLifecycle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Core\BackgroundSystem.Core.csproj">
+      <Project>{BDFEE004-73EE-40F9-BF20-20B9E28C7639}</Project>
+      <Name>BackgroundSystem.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UnitManagerConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

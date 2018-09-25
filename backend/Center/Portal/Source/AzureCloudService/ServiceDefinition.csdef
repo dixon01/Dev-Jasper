@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WorkerRole name="Portal.WorkerRole" vmsize="Small">
+    <Runtime executionContext="elevated" />
+    <Imports>
+    </Imports>
+    <Endpoints>
+      <InputEndpoint name="Portal.HttpEndpoint" protocol="http" port="80" localPort="80" />
+      <InputEndpoint name="Portal.HttpsEndpoint" protocol="https" port="443" localPort="443" certificate="Https" />
+    </Endpoints>
+    <ConfigurationSettings>
+      <Setting name="Portal.EnableHttps" />
+      <Setting name="Portal.ClickOnceUseBeta" />
+      <Setting name="Diagnostics.LogLevel" />
+      <Setting name="BackgroundSystem.Host" />
+      <Setting name="BackgroundSystem.CenterDataContext" />
+      <Setting name="Wcf.ConnectionLimit" />
+      <Setting name="Center.StorageConnectionString" />
+      <Setting name="BackgroundSystem.NotificationsConnectionString" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="Logs" cleanOnRoleRecycle="false" sizeInMB="1000" />
+      <LocalStorage name="Portal.AppData" cleanOnRoleRecycle="false" sizeInMB="2000" />
+    </LocalResources>
+    <Certificates>
+      <Certificate name="Https" storeLocation="LocalMachine" storeName="My" />
+    </Certificates>
+  </WorkerRole>
+</ServiceDefinition>

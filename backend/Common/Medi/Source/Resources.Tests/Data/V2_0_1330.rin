@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<StoredResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id Hash="AFD0340B3BB29D0EB04125F3AD0CEA17" />
+  <State>Announced</State>
+  <Source Unit="U" App="A" />
+  <IsTemporary>false</IsTemporary>
+  <Size>245</Size>
+  <References />
+  <OriginalFileName>test.txt</OriginalFileName>
+</StoredResource>

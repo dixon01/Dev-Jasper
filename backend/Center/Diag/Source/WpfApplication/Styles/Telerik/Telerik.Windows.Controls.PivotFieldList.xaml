@@ -1,0 +1,826 @@
+<ResourceDictionary
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="http://schemas.telerik.com/2008/xaml/compile"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="c"
+        xmlns:fieldList="clr-namespace:Telerik.Windows.Controls.FieldList;assembly=Telerik.Windows.Controls.PivotFieldList"
+        xmlns:local="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.PivotFieldList"
+        xmlns:tree="clr-namespace:Telerik.Windows.Controls.Pivot;assembly=Telerik.Windows.Controls.Pivot"
+        xmlns:editing="clr-namespace:Telerik.Windows.Controls.FieldList.Editing;assembly=Telerik.Windows.Controls.PivotFieldList">
+    <ResourceDictionary.MergedDictionaries>
+        <telerik:Windows8ResourceDictionary/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="TextBlockTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <fieldList:FieldDragActionToSourceConverter x:Key="IconConverter"
+            ColumnSource="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/DropOnColumns.png"
+            FilterSource="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/DropOnFilters.png"
+            RemoveSource="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Remove.png"
+            RowSource="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/DropOnRows.png"
+            ValueSource="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/DropOnValues.png"/>
+    <editing:BooleanToSortOrderConverter x:Key="BooleanToSortOrderConverter"/>
+    <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+    <editing:ComparisonToVisibleConverter x:Key="ComparisonToVisibleConverter"/>
+    <editing:IntervalComparisonToVisibilityConverter x:Key="IntervalComparisonToVisibilityConverter"/>
+    <editing:NamedToStringConverter x:Key="NamedToStringConverter"/>
+    <editing:Top10FilterTypeToVisibilityConverter x:Key="Top10FilterTypeToVisibilityConverter"/>
+    <fieldList:FieldListContextMenuBehavior x:Key="FieldListContextMenuBehavior"/>
+    <fieldList:WindowDialogHostingBehavior x:Key="WindowDialogHostingBehavior"/>
+    <fieldList:EditorsBehavior x:Key="EditorsBehavior">
+        <fieldList:EditorsBehavior.Editors>
+            <fieldList:SetSumAggregateEditor/>
+            <fieldList:SetAverageAggregateEditor/>
+            <fieldList:SetCountAggregateEditor/>
+            <fieldList:SummarizationEditor/>
+            <fieldList:LabelFilterEditor/>
+            <fieldList:ValueFilterEditor/>
+            <fieldList:Top10FilterEditor/>
+            <fieldList:ClearFilterEditor/>
+            <fieldList:SortingEditor/>
+            <fieldList:SetIndexTotalFormatEditor/>
+            <fieldList:SetPercentOfGrandTotalFormatEditor/>
+            <fieldList:TotalFormatEditor/>
+            <fieldList:ClearTotalFormatEditor/>
+            <fieldList:StringFormatEditor/>
+            <fieldList:ItemsSetFilterEditor/>
+        </fieldList:EditorsBehavior.Editors>
+    </fieldList:EditorsBehavior>
+    <Style x:Key="DropIndicatorStyle" TargetType="fieldList:DropIndicator">
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="fieldList:DropIndicator">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="DropPositions">
+                                <VisualState x:Name="None">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0" To="0" Storyboard.TargetName="PART_DropIndicator" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Over"/>
+                                <VisualState x:Name="Top">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropLine" Storyboard.TargetProperty="VerticalAlignment">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <VerticalAlignment>Top</VerticalAlignment>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Bottom">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropLine" Storyboard.TargetProperty="VerticalAlignment">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <VerticalAlignment>Bottom</VerticalAlignment>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Canvas x:Name="PART_Canvas" IsHitTestVisible="False">
+                                <Border x:Name="PART_DropIndicator">
+                                    <Border x:Name="DropLine" Height="4" Margin="0 -2" BorderThickness="2 0" BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}">
+                                        <Rectangle Height="2" Fill="{telerik:Windows8Resource ResourceKey=AccentBrush}"/>
+                                    </Border>
+                                </Border>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="FieldBoxStyle" TargetType="fieldList:FieldBox">
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="BorderBrush" Value="{telerik:Windows8Resource ResourceKey=BasicBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+        <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=MarkerBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="ItemTemplateSelector">
+            <Setter.Value>
+                <fieldList:FieldContentTemplateSelector>
+                    <fieldList:FieldContentTemplateSelector.Default>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description.DisplayName}"/>
+                        </DataTemplate>
+                    </fieldList:FieldContentTemplateSelector.Default>
+                    <fieldList:FieldContentTemplateSelector.ValuesPosition>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0 0 4 0" Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Values.png" Stretch="None"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Description.DisplayName}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </fieldList:FieldContentTemplateSelector.ValuesPosition>
+                </fieldList:FieldContentTemplateSelector>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="fieldList:FieldBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ContentPresenter Content="{TemplateBinding Header}"/>
+                        <Border
+                                Grid.Row="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                            <fieldList:DropIndicator>
+                                <ScrollViewer x:Name="ScrollViewer"
+                                        Padding="1"
+                                        BorderThickness="0"
+                                        HorizontalScrollBarVisibility="{Binding Path=(ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ItemsPresenter AllowDrop="True"/>
+                                </ScrollViewer>
+                            </fieldList:DropIndicator>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="FieldBoxItemStyle" TargetType="fieldList:FieldBoxItem">
+        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="fieldList:FieldBoxItem">
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <telerik:RadButton x:Name="Button" DataContext="{Binding Description}" Grid.Row="0" Margin="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                            <fieldList:RoutedContextMenuBehavior.Behavior>
+                                <fieldList:RoutedContextMenuBehavior/>
+                            </fieldList:RoutedContextMenuBehavior.Behavior>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0" Margin="2 0"/>
+                                <Path Grid.Column="2" Margin="1" Width="7" Height="4" Data="M0,0 L7,0 3.5,4 Z" Fill="{telerik:Windows8Resource ResourceKey=StrongBrush}"/>
+                            </Grid>
+                        </telerik:RadButton>
+                        <ItemsControl Grid.Row="1" Margin="10 0 0 0" ItemsSource="{Binding Children}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadButton x:Name="SubButton" DataContext="{Binding Description}" Grid.Row="0" Margin="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                        <fieldList:RoutedContextMenuBehavior.Behavior>
+                                            <fieldList:RoutedContextMenuBehavior/>
+                                        </fieldList:RoutedContextMenuBehavior.Behavior>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ContentControl Grid.Column="0" Margin="2 0" Content="{Binding DisplayName}"/>
+                                            <Path Grid.Column="2" Margin="1" Width="7" Height="4" Data="M0,0 L7,0 3.5,4 Z" Fill="Black"/>
+                                        </Grid>
+                                    </telerik:RadButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="DimensionRoleTemplate">
+        <telerik:RadDockPanel>
+            <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Dimension.png" Stretch="None" Margin="0 0 5 0"/>
+            <TextBlock Text="{Binding Data.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TextBlockTitleStyle}"/>
+        </telerik:RadDockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="FolderRoleTemplate">
+        <telerik:RadDockPanel>
+            <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Folder.png" Stretch="None" Margin="0 0 5 0"/>
+            <TextBlock Text="{Binding Data.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TextBlockTitleStyle}"/>
+        </telerik:RadDockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="ValuesRoleTemplate">
+        <telerik:RadDockPanel>
+            <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Values.png" Stretch="None" Margin="0 0 5 0"/>
+            <TextBlock Text="{Binding Data.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TextBlockTitleStyle}"/>
+        </telerik:RadDockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="KpiRoleTemplate">
+        <telerik:RadDockPanel>
+            <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/KPI.png" Stretch="None" Margin="0 0 5 0"/>
+            <TextBlock Text="{Binding Data.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TextBlockTitleStyle}"/>
+        </telerik:RadDockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="OtherRoleTemplate">
+        <telerik:RadDockPanel>
+            <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Other.png" Stretch="None" Margin="0 0 5 0"/>
+            <TextBlock Text="{Binding Data.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TextBlockTitleStyle}"/>
+        </telerik:RadDockPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="SelectableRoleTemplate">
+        <CheckBox telerik:DragDropManager.AllowCapturedDrag="True" IsChecked="{Binding Data.IsUsed, Mode=TwoWay}" Content="{Binding Data.DisplayName}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="NoneRoleTemplate">
+        <TextBlock Text="{Binding Data.DisplayName}"/>
+    </DataTemplate>
+    <fieldList:FieldBoxItemRolePresenterTemplateSelector x:Key="FieldBoxItemTemplateSelector"
+            DimensionRoleTemplate="{StaticResource DimensionRoleTemplate}"
+            FolderRoleTemplate="{StaticResource FolderRoleTemplate}"
+            KpiRoleTemplate="{StaticResource KpiRoleTemplate}"
+            NoneRoleTemplate="{StaticResource NoneRoleTemplate}"
+            OtherRoleTemplate="{StaticResource OtherRoleTemplate}"
+            SelectableRoleTemplate="{StaticResource SelectableRoleTemplate}"
+            ValuesRoleTemplate="{StaticResource ValuesRoleTemplate}"/>
+    <Style x:Key="FieldDragVisualStyle" TargetType="fieldList:FieldDragVisual">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid MinWidth="50">
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Top" Background="White">
+                            <TextBlock Text="{Binding DraggedField.FieldInfo.DisplayName}"/>
+                        </Border>
+                        <Image Margin="37 25 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None" Source="{Binding DragAction, Converter={StaticResource IconConverter}}"/>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="fieldList:FieldDragVisual">
+                    <Border x:Name="BorderVisual"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="1.5">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="RadPivotFieldListTemplate" TargetType="local:RadPivotFieldList">
+        <Border
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                DataContext="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}">
+            <Grid>
+                <telerik:RadBusyIndicator IsBusy="{TemplateBinding Property=IsBusy}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MinWidth="120"/>
+                            <ColumnDefinition Width="*" MinWidth="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.ColumnSpan="2" Foreground="{TemplateBinding Foreground}" telerik:LocalizationManager.ResourceKey="PivotFieldList_ChooseFieldsToAddToReport" Margin="7 5 2 0"/>
+                        <tree:TreeGrid x:Name="PART_Fields"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="5"
+                                QuickStyle="{x:Null}"
+                                ItemsSource="{Binding Fields}"
+                                RowHeaderTemplateSelector="{StaticResource FieldBoxItemTemplateSelector}"
+                                FontWeight="Bold">
+                            <fieldList:DragDropBehavior.Behavior>
+                                <fieldList:FieldsTreeDragDropBehavior/>
+                            </fieldList:DragDropBehavior.Behavior>
+                            <tree:TreeGrid.HierarchyAdapter>
+                                <fieldList:FieldAdapter/>
+                            </tree:TreeGrid.HierarchyAdapter>
+                        </tree:TreeGrid>
+                        <TextBlock
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                Foreground="{TemplateBinding Foreground}"
+                                telerik:LocalizationManager.ResourceKey="PivotFieldList_DragFieldsBetweenAreasBelow"
+                                Margin="7 2 2 0"/>
+                        <fieldList:FieldBox x:Name="ReportFilter" Grid.Row="3" ItemsSource="{Binding Filters}" Margin="5 3 5 3">
+                            <fieldList:DragDropBehavior.Behavior>
+                                <fieldList:FieldBoxDragDropBehavior/>
+                            </fieldList:DragDropBehavior.Behavior>
+                            <fieldList:FieldBox.Header>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Filter.png"/>
+                                    <TextBlock Margin="10 0 0 0" telerik:LocalizationManager.ResourceKey="PivotFieldList_ReportFilter"/>
+                                </StackPanel>
+                            </fieldList:FieldBox.Header>
+                        </fieldList:FieldBox>
+                        <fieldList:FieldBox x:Name="ColumnLabels" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding ColumnLabels}" Margin="0 3 5 3">
+                            <fieldList:DragDropBehavior.Behavior>
+                                <fieldList:FieldBoxDragDropBehavior/>
+                            </fieldList:DragDropBehavior.Behavior>
+                            <fieldList:FieldBox.Header>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Columns.png"/>
+                                    <TextBlock Margin="10 0 0 0" telerik:LocalizationManager.ResourceKey="PivotFieldList_ColumnLabels"/>
+                                </StackPanel>
+                            </fieldList:FieldBox.Header>
+                        </fieldList:FieldBox>
+                        <fieldList:FieldBox x:Name="RowLabels" Grid.Row="4" ItemsSource="{Binding RowLabels}" Margin="5 0 5 5">
+                            <fieldList:DragDropBehavior.Behavior>
+                                <fieldList:FieldBoxDragDropBehavior/>
+                            </fieldList:DragDropBehavior.Behavior>
+                            <fieldList:FieldBox.Header>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Rows.png"/>
+                                    <TextBlock Margin="10 0 0 0" telerik:LocalizationManager.ResourceKey="PivotFieldList_RowLabels"/>
+                                </StackPanel>
+                            </fieldList:FieldBox.Header>
+                        </fieldList:FieldBox>
+                        <fieldList:FieldBox x:Name="Values" Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Values}" Margin="0 0 5 5">
+                            <fieldList:DragDropBehavior.Behavior>
+                                <fieldList:FieldBoxDragDropBehavior/>
+                            </fieldList:DragDropBehavior.Behavior>
+                            <fieldList:FieldBox.Header>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <Image Source="/Telerik.Windows.Controls.PivotFieldList;component/Themes/Icons/Values.png"/>
+                                    <TextBlock Margin="10 0 0 0" telerik:LocalizationManager.ResourceKey="PivotFiledList_Values"/>
+                                </StackPanel>
+                            </fieldList:FieldBox.Header>
+                        </fieldList:FieldBox>
+                        <CheckBox x:Name="DeferUpdatesCheckBox"
+                                Grid.Row="5"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Center"
+                                IsChecked="{Binding DeferUpdates, Mode=TwoWay}"
+                                telerik:LocalizationManager.ResourceKey="PivotFieldList_DeferLayoutUpdate"
+                                Margin="5 0 5 5"/>
+                        <telerik:RadButton x:Name="PART_UpdateButton"
+                                Grid.Row="5"
+                                Grid.ColumnSpan="2"
+                                MinWidth="86"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Command="{Binding UpdateCommand}"
+                                telerik:LocalizationManager.ResourceKey="PivotFieldList_Update"
+                                Margin="5 0 5 5"/>
+                    </Grid>
+                </telerik:RadBusyIndicator>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="PivotFieldListStyle" TargetType="local:RadPivotFieldList">
+        <Setter Property="fieldList:EditorsBehavior.Behavior" Value="{StaticResource EditorsBehavior}"/>
+        <Setter Property="fieldList:WindowDialogHostingBehavior.Behavior" Value="{StaticResource WindowDialogHostingBehavior}"/>
+        <Setter Property="fieldList:FieldListContextMenuBehavior.Behavior" Value="{StaticResource FieldListContextMenuBehavior}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="BorderBrush" Value="{telerik:Windows8Resource ResourceKey=BasicBrush}"/>
+        <Setter Property="Background" Value="{telerik:Windows8Resource ResourceKey=MainBrush}"/>
+        <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=MarkerBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template" Value="{StaticResource RadPivotFieldListTemplate}"/>
+    </Style>
+    <DataTemplate x:Key="NamedObjectTemplate">
+        <TextBlock Text="{Binding Converter={StaticResource NamedToStringConverter}}"/>
+    </DataTemplate>
+    <Style x:Key="ConfirmationFrameStyle" TargetType="editing:ConfirmationFrame">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:ConfirmationFrame">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <telerik:RadBusyIndicator
+                                    IsTabStop="False"
+                                    IsEnabled="{Binding IsAvailable}"
+                                    IsBusy="{Binding IsWorking}"
+                                    Visibility="{Binding RequiresRefresh, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </telerik:RadBusyIndicator>
+                            <ContentControl Visibility="{Binding RequiresRefresh, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsAvailable}" IsTabStop="False">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock HorizontalAlignment="Center" telerik:LocalizationManager.ResourceKey="PivotFieldList_TheActionRequiresMoreRecentInformation"/>
+                                    <TextBlock HorizontalAlignment="Center" telerik:LocalizationManager.ResourceKey="PivotFieldList_PleaseRefreshThePivot"/>
+                                    <telerik:RadButton Margin="10" HorizontalAlignment="Center" Command="{Binding Refresh}" telerik:LocalizationManager.ResourceKey="PivotFieldList_Refresh"/>
+                                </StackPanel>
+                            </ContentControl>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30 6">
+                                <telerik:RadButton MinWidth="84" Margin="2" Command="{Binding Ok}" telerik:LocalizationManager.ResourceKey="Ok" IsDefault="True"/>
+                                <telerik:RadButton MinWidth="84" Margin="2" Command="{Binding Cancel}" telerik:LocalizationManager.ResourceKey="Cancel" IsCancel="True"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DialogBaseStyle" TargetType="Control">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=MarkerBrush}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+    </Style>
+    <Style x:Key="SortingOptionsDialogStyle" TargetType="editing:SortingOptionsDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:SortingOptionsDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_SortOptions" IsTabStop="False">
+                            <StackPanel>
+                                <RadioButton x:Name="None"
+                                        Margin="2"
+                                        IsChecked="{Binding SortOrder, Converter={StaticResource BooleanToSortOrderConverter}, ConverterParameter=None, Mode=TwoWay}"
+                                        telerik:LocalizationManager.ResourceKey="PivotFieldList_None"/>
+                                <RadioButton x:Name="Ascending"
+                                        Margin="2"
+                                        IsChecked="{Binding SortOrder, Converter={StaticResource BooleanToSortOrderConverter}, ConverterParameter=Ascending, Mode=TwoWay}"
+                                        telerik:LocalizationManager.ResourceKey="PivotFieldList_AscendingBy"/>
+                                <telerik:RadComboBox
+                                        Margin="20 4 4 4"
+                                        ItemsSource="{Binding AvailableComparers}"
+                                        DisplayMemberPath="ComparerDescription"
+                                        SelectedItem="{Binding SelectedAscendingComparer, Mode=TwoWay}"
+                                        IsEnabled="{Binding SortOrder, Converter={StaticResource BooleanToSortOrderConverter}}"/>
+                                <RadioButton x:Name="Descending"
+                                        Margin="2"
+                                        IsChecked="{Binding SortOrder, Converter={StaticResource BooleanToSortOrderConverter}, ConverterParameter=Descending, Mode=TwoWay}"
+                                        telerik:LocalizationManager.ResourceKey="PivotFieldList_DescendingBy"/>
+                                <telerik:RadComboBox
+                                        Margin="20 4 4 4"
+                                        ItemsSource="{Binding AvailableComparers}"
+                                        DisplayMemberPath="ComparerDescription"
+                                        SelectedItem="{Binding SelectedDescendingComparer, Mode=TwoWay}"
+                                        IsEnabled="{Binding SortOrder, Converter={StaticResource BooleanToSortOrderConverter}}"/>
+                            </StackPanel>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LabelFilterDialogStyle" TargetType="editing:LabelFilterDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:LabelFilterDialog">
+                    <editing:ConfirmationFrame>
+                        <Grid>
+                            <ContentPresenter x:Name="PART_FilterControlPresenter"/>
+                        </Grid>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ValueFilterDialogStyle" TargetType="editing:ValueFilterDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:ValueFilterDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_ShowItemsForWhich" IsTabStop="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <telerik:RadComboBox Grid.Column="0" ItemsSource="{Binding AvailableValueSources}" SelectedItem="{Binding SelectedValueSource, Mode=TwoWay}" DisplayMemberPath="DisplayName" Margin="4"/>
+                                <telerik:RadComboBox
+                                        Grid.Column="1"
+                                        ItemsSource="{Binding AvailableConditions}"
+                                        ItemTemplate="{StaticResource NamedObjectTemplate}"
+                                        SelectedItem="{Binding SelectedCondition, Mode=TwoWay}"
+                                        Margin="4"/>
+                                <telerik:RadNumericUpDown x:Name="Than"
+                                        Value="{Binding Than, Mode=TwoWay}"
+                                        Grid.Column="2"
+                                        Grid.ColumnSpan="3"
+                                        Margin="4"
+                                        Visibility="{Binding SelectedCondition.Condition, Converter={StaticResource ComparisonToVisibleConverter}}"/>
+                                <Grid Grid.Column="2" Visibility="{Binding SelectedCondition.Condition, Converter={StaticResource IntervalComparisonToVisibilityConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <telerik:RadNumericUpDown x:Name="From" Value="{Binding From, Mode=TwoWay}" Grid.Column="0" Margin="4"/>
+                                    <TextBlock x:Name="And" Grid.Column="1" VerticalAlignment="Center" telerik:LocalizationManager.ResourceKey="PivotFieldList_And"/>
+                                    <telerik:RadNumericUpDown x:Name="To" Value="{Binding To, Mode=TwoWay}" Grid.Column="2" Margin="4"/>
+                                </Grid>
+                            </Grid>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Top10FilterDialogStyle" TargetType="editing:Top10FilterDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:Top10FilterDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_Show" IsTabStop="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+                                <telerik:RadComboBox
+                                        Grid.Column="0"
+                                        ItemsSource="{Binding AvailableSelections}"
+                                        ItemTemplate="{StaticResource NamedObjectTemplate}"
+                                        SelectedItem="{Binding SelectedSelection, Mode=TwoWay}"
+                                        Margin="4"/>
+                                <Grid Grid.Column="1" Margin="4">
+                                    <telerik:RadNumericUpDown x:Name="Items"
+                                            Value="{Binding Items, Mode=TwoWay}"
+                                            Minimum="0"
+                                            IsInteger="True"
+                                            SmallChange="1"
+                                            LargeChange="10"
+                                            Visibility="{Binding SelectedFilterType, Converter={StaticResource Top10FilterTypeToVisibilityConverter}, ConverterParameter=Items}"/>
+                                    <telerik:RadNumericUpDown x:Name="Percent"
+                                            Value="{Binding Percent, Mode=TwoWay}"
+                                            Minimum="0"
+                                            Maximum="1"
+                                            SmallChange="0.01"
+                                            LargeChange="0.1"
+                                            ValueFormat="Percentage"
+                                            NumberDecimalDigits="2"
+                                            IsInteger="False"
+                                            Visibility="{Binding SelectedFilterType, Converter={StaticResource Top10FilterTypeToVisibilityConverter}, ConverterParameter=Percent}"/>
+                                    <telerik:RadNumericUpDown x:Name="Sum"
+                                            Value="{Binding Sum, Mode=TwoWay}"
+                                            Minimum="0"
+                                            NumberDecimalDigits="2"
+                                            SmallChange="10"
+                                            LargeChange="100"
+                                            Visibility="{Binding SelectedFilterType, Converter={StaticResource Top10FilterTypeToVisibilityConverter}, ConverterParameter=Sum}"/>
+                                </Grid>
+                                <telerik:RadComboBox
+                                        Grid.Column="2"
+                                        ItemsSource="{Binding AvailableFilterTypes}"
+                                        ItemTemplate="{StaticResource NamedObjectTemplate}"
+                                        SelectedItem="{Binding SelectedFilterType, Mode=TwoWay}"
+                                        Margin="4"/>
+                                <TextBlock Grid.Column="3" VerticalAlignment="Center" Margin="4" telerik:LocalizationManager.ResourceKey="PivotFieldList_By"/>
+                                <telerik:RadComboBox Grid.Column="4" ItemsSource="{Binding AvailableValueSources}" SelectedItem="{Binding SelectedValueSource, Mode=TwoWay}" DisplayMemberPath="DisplayName" Margin="4"/>
+                            </Grid>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ValueSummarizationDialogStyle" TargetType="editing:ValueSummarizationDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:ValueSummarizationDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_SummarizeValuesBy" IsTabStop="False">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock TextWrapping="Wrap" Margin="4 8" telerik:LocalizationManager.ResourceKey="PivotFieldList_ChooseAggregateFunction"/>
+                                <telerik:RadListBox
+                                        Grid.Row="1"
+                                        ItemsSource="{Binding AvailableAggregateFunctions}"
+                                        ItemTemplate="{StaticResource NamedObjectTemplate}"
+                                        SelectedItem="{Binding SelectedAggregateFunction, Mode=TwoWay}"
+                                        MaxWidth="230"
+                                        Margin="4"
+                                        HorizontalAlignment="Stretch"/>
+                            </Grid>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ValueCalculationsDialogStyle" TargetType="editing:ValueCalculationsDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:ValueCalculationsDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_ShowValuesAs" IsTabStop="False">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <telerik:RadComboBox
+                                        Grid.ColumnSpan="2"
+                                        ItemsSource="{Binding AvailableCalculationOptions}"
+                                        SelectedItem="{Binding SelectedCalculationOption, Mode=TwoWay}"
+                                        DisplayMemberPath="DisplayName"
+                                        Margin="4"/>
+                                <telerik:Label Grid.Row="1" Grid.Column="0" IsEnabled="{Binding RequiresGroupDescription}" telerik:LocalizationManager.ResourceKey="PivotFieldList_BaseField"/>
+                                <telerik:RadListBox
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        IsEnabled="{Binding RequiresGroupDescription}"
+                                        ItemsSource="{Binding AvailableGroupDescriptions}"
+                                        SelectedItem="{Binding SelectedGroupDescription, Mode=TwoWay}"
+                                        DisplayMemberPath="DisplayName"
+                                        Margin="4"/>
+                                <telerik:Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding RequiresGroupName}" telerik:LocalizationManager.ResourceKey="PivotFieldList_BaseItem"/>
+                                <telerik:RadListBox
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        IsEnabled="{Binding RequiresGroupName}"
+                                        ItemsSource="{Binding AvailableGroupNames}"
+                                        ItemTemplate="{StaticResource NamedObjectTemplate}"
+                                        SelectedItem="{Binding SelectedGroupName, Mode=TwoWay}"
+                                        Margin="4"/>
+                            </Grid>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="StringFormatsDialogStyle" TargetType="editing:StringFormatsDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:StringFormatsDialog">
+                    <editing:ConfirmationFrame>
+                        <telerik:GroupBox telerik:LocalizationManager.ResourceKey="PivotFieldList_GeneralFormat" IsTabStop="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <telerik:Label Margin="4" Padding="0" telerik:LocalizationManager.ResourceKey="PivotFieldList_Format"/>
+                                <telerik:RadComboBox
+                                        Grid.Column="1"
+                                        Margin="4"
+                                        ItemsSource="{Binding AvailableFormatOptions}"
+                                        Text="{Binding SelectedFormat, Mode=TwoWay}"
+                                        IsEditable="True"
+                                        SelectedValuePath="StringFormat"
+                                        DisplayMemberPath="StringFormat"/>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="6" TextWrapping="Wrap" telerik:LocalizationManager.ResourceKey="PivotFieldList_StringFormatDescription"/>
+                            </Grid>
+                        </telerik:GroupBox>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ItemsSetFilterDialogStyle" TargetType="editing:ItemsSetFilterDialog" BasedOn="{StaticResource DialogBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:ItemsSetFilterDialog">
+                    <editing:ConfirmationFrame>
+                        <Grid>
+                            <ContentPresenter x:Name="PART_FilterControlPresenter"/>
+                        </Grid>
+                    </editing:ConfirmationFrame>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PivotItemsFilteringControlStyle" TargetType="editing:PivotItemsFilteringControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:PivotItemsFilteringControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <telerik:GroupBox Grid.Row="0" telerik:LocalizationManager.ResourceKey="PivotFieldList_SelectItem">
+                            <ItemsControl x:Name="PART_DistinctFilter" ItemsSource="{Binding Selection, FallbackValue={x:Null}}">
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="ItemsControl">
+                                        <ScrollViewer BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CanContentScroll="True">
+                                            <ItemsPresenter/>
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding FallbackValue={x:Null}}" ContentTemplate="{StaticResource NamedObjectTemplate}" IsChecked="{Binding IsSelected, Mode=TwoWay, FallbackValue={x:Null}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </telerik:GroupBox>
+                        <telerik:GroupBox Grid.Row="1" telerik:LocalizationManager.ResourceKey="PivotFieldList_ItemFilterConditionCaption">
+                            <ContentPresenter x:Name="PART_OtherFilterPlaceholder"/>
+                        </telerik:GroupBox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="OperatorValueFilterControlStyle" TargetType="editing:OperatorValueFilterControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="editing:OperatorValueFilterControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadComboBox ItemsSource="{Binding AvailableConditions}" ItemTemplate="{StaticResource NamedObjectTemplate}" SelectedItem="{Binding SelectedCondition, Mode=TwoWay}" Margin="4"/>
+                        <ContentPresenter x:Name="PART_EditorPresenterThan"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Margin="4"
+                                Visibility="{Binding SelectedCondition.Condition, Converter={StaticResource ComparisonToVisibleConverter}}"/>
+                        <Grid Grid.Column="1" Visibility="{Binding SelectedCondition.Condition, Converter={StaticResource IntervalComparisonToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="PART_EditorPresenterFrom" Grid.Column="0" Margin="4"/>
+                            <TextBlock x:Name="And" Grid.Column="1" VerticalAlignment="Center" telerik:LocalizationManager.ResourceKey="PivotFieldList_And"/>
+                            <ContentPresenter x:Name="PART_EditorPresenterTo" Grid.Column="2" Margin="4"/>
+                        </Grid>
+                        <CheckBox Grid.Row="1" Grid.Column="1" Margin="4 2" IsChecked="{Binding IgnoreCase, Mode=TwoWay}" telerik:LocalizationManager.ResourceKey="PivotFieldList_IgnoreCase"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:RadPivotFieldList" BasedOn="{StaticResource PivotFieldListStyle}"/>
+    <Style TargetType="fieldList:DropIndicator" BasedOn="{StaticResource DropIndicatorStyle}"/>
+    <Style TargetType="fieldList:FieldDragVisual" BasedOn="{StaticResource FieldDragVisualStyle}"/>
+    <Style TargetType="fieldList:FieldBox" BasedOn="{StaticResource FieldBoxStyle}"/>
+    <Style TargetType="fieldList:FieldBoxItem" BasedOn="{StaticResource FieldBoxItemStyle}"/>
+    <Style TargetType="editing:ConfirmationFrame" BasedOn="{StaticResource ConfirmationFrameStyle}"/>
+    <Style TargetType="editing:SortingOptionsDialog" BasedOn="{StaticResource SortingOptionsDialogStyle}"/>
+    <Style TargetType="editing:LabelFilterDialog" BasedOn="{StaticResource LabelFilterDialogStyle}"/>
+    <Style TargetType="editing:ValueFilterDialog" BasedOn="{StaticResource ValueFilterDialogStyle}"/>
+    <Style TargetType="editing:Top10FilterDialog" BasedOn="{StaticResource Top10FilterDialogStyle}"/>
+    <Style TargetType="editing:ValueSummarizationDialog" BasedOn="{StaticResource ValueSummarizationDialogStyle}"/>
+    <Style TargetType="editing:ValueCalculationsDialog" BasedOn="{StaticResource ValueCalculationsDialogStyle}"/>
+    <Style TargetType="editing:StringFormatsDialog" BasedOn="{StaticResource StringFormatsDialogStyle}"/>
+    <Style TargetType="editing:ItemsSetFilterDialog" BasedOn="{StaticResource ItemsSetFilterDialogStyle}"/>
+    <Style TargetType="editing:OperatorValueFilterControl" BasedOn="{StaticResource OperatorValueFilterControlStyle}"/>
+    <Style TargetType="editing:PivotItemsFilteringControl" BasedOn="{StaticResource PivotItemsFilteringControlStyle}"/>
+</ResourceDictionary>

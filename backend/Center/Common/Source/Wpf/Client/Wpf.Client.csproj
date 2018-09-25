@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBDEA493-698E-4F44-9D46-1B3EA374D7E0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Common.Wpf.Client</RootNamespace>
+    <AssemblyName>Gorba.Center.Common.Wpf.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ClientCommandCompositionKeys.cs" />
+    <Compile Include="ClientApplicationBootstrapperBase.cs" />
+    <Compile Include="ConnectedApplicationState.cs" />
+    <Compile Include="Controllers\CheckinTrapBehaviour.cs" />
+    <Compile Include="Controllers\CheckinTrapResult.cs" />
+    <Compile Include="Controllers\CheckinUserDecision.cs" />
+    <Compile Include="Controllers\ClientApplicationControllerBase.cs" />
+    <Compile Include="Controllers\ConnectionController.generated.cs">
+      <DependentUpon>ConnectionController.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers\ConnectionController.partial.cs" />
+    <Compile Include="Controllers\IClientApplicationController.cs" />
+    <Compile Include="Controllers\IConnectionController.partial.cs" />
+    <Compile Include="Controllers\ILoginController.cs" />
+    <Compile Include="Controllers\IPermissionController.cs" />
+    <Compile Include="Controllers\ITenantSelectionController.cs" />
+    <Compile Include="Controllers\IUpdateProgressController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\SaveUserDecision.cs" />
+    <Compile Include="Controllers\TenantSelectionController.cs" />
+    <Compile Include="Controllers\TenantSelectionDialogResult.cs" />
+    <Compile Include="Controllers\UpdateProgressController.cs" />
+    <Compile Include="Converters\TypeOfConverter.cs" />
+    <Compile Include="Converters\UserHasCreatePermissionConverter.cs" />
+    <Compile Include="Converters\UserHasDeletePermissionConverter.cs" />
+    <Compile Include="Converters\UserHasReadPermissionConverter.cs" />
+    <Compile Include="Converters\UserHasWritePermissionConverter.cs" />
+    <Compile Include="IConnectedApplicationState.cs" />
+    <Compile Include="Interaction\ChangePasswordPrompt.cs" />
+    <Compile Include="Interaction\CheckInPrompt.cs" />
+    <Compile Include="Interaction\ConnectionExceptionPrompt.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strings.de.Designer.cs">
+      <DependentUpon>Strings.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ClientShellBase.cs" />
+    <Compile Include="ViewModels\ErrorViewModelBase.cs" />
+    <Compile Include="ViewModels\ILoginViewModel.cs" />
+    <Compile Include="ViewModels\IStartupDialogViewModel.cs" />
+    <Compile Include="ViewModels\LoadingWindowFactory.cs" />
+    <Compile Include="ViewModels\LoadingWindowViewModel.cs" />
+    <Compile Include="ViewModels\LoginInformationViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\LoginFactory.cs" />
+    <Compile Include="ViewModels\ShouldUpdateDialogResult.cs" />
+    <Compile Include="ViewModels\TenantSelectionFactory.cs" />
+    <Compile Include="ViewModels\TenantSelectionViewModel.cs" />
+    <Compile Include="ViewModels\UpdateProgressFactory.cs" />
+    <Compile Include="ViewModels\UpdateProgressViewModel.cs" />
+    <Compile Include="Views\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckInDialog.xaml.cs">
+      <DependentUpon>CheckInDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckinDialogArguments.cs" />
+    <Compile Include="Views\ConnectionExceptionDialog.xaml.cs">
+      <DependentUpon>ConnectionExceptionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ILoginWindowView.cs" />
+    <Compile Include="Views\ITenantSelectionWindowView.cs" />
+    <Compile Include="Views\IUpdateProgressWindowView.cs" />
+    <Compile Include="Views\LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginInformationView.xaml.cs">
+      <DependentUpon>LoginInformationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TenantSelectionWindow.xaml.cs">
+      <DependentUpon>TenantSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateProgressWindow.xaml.cs">
+      <DependentUpon>UpdateProgressWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8a10e3d6-2c5d-4a72-97ef-5a412663920c}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Client\Center.Common.Client.csproj">
+      <Project>{5fc54ea9-187a-471e-889d-3d983e65b217}</Project>
+      <Name>Center.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediNotifications\Center.Common.MediNotifications.csproj">
+      <Project>{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}</Project>
+      <Name>Center.Common.MediNotifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Wpf.Core.csproj">
+      <Project>{ade176c8-b499-4597-b13f-f638ec70d090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Wpf.Framework.csproj">
+      <Project>{a279b0cb-74cc-4296-8734-ba8aa45b17bf}</Project>
+      <Name>Wpf.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Views\Wpf.Views.csproj">
+      <Project>{aa87edaf-179f-4784-b39c-1f2e8c2055c9}</Project>
+      <Name>Wpf.Views</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Controllers\ConnectionController.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConnectionController.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ChangePasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckInDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConnectionExceptionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginInformationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TenantSelectionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UpdateProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F9F814B5-3FF3-440E-A110-4353C6E65D89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Update.Ftp</RootNamespace>
+    <AssemblyName>Gorba.Common.Update.Ftp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\3rdParty\SharpZipLib\0.8.60\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="CompressionFactory.cs" />
+    <Compile Include="FtpHandler.FX20.cs" />
+    <Compile Include="FtpProgressPart.cs" />
+    <Compile Include="FtpUpdateClient.cs" />
+    <Compile Include="MulticastUpdateClientState.cs" />
+    <Compile Include="FtpUpdateProvider.cs" />
+    <Compile Include="GZipReceivedLogFile.cs" />
+    <Compile Include="NetworkConnectionMessageEventsArgs.cs" />
+    <Compile Include="NonClosingStream.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\SystemManager\Source\Core\SystemManager.Core.csproj">
+      <Project>{60C6BEB8-9BEE-4C77-A400-33C532614524}</Project>
+      <Name>SystemManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Update\Source\Core\Update.Core.csproj">
+      <Project>{F97A8817-D488-47CE-A9C1-1D6C3D12BECE}</Project>
+      <Name>Update.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Update\Source\Luminator.Multicast.Core\Luminator.Multicast.Core.csproj">
+      <Project>{13ae873e-b083-48ce-953b-7708522a210c}</Project>
+      <Name>Luminator.Multicast.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183b489-3ab4-4926-9b45-9fddeadb9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{e11fbc4e-2eb6-461c-9310-094b6ade9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SystemManagement\Source\Messages\SystemManagement.Messages.csproj">
+      <Project>{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}</Project>
+      <Name>SystemManagement.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

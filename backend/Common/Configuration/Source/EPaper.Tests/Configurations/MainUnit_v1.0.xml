@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MainUnit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="file:///. MainUnit.xsd" FirmwareHash="1acdd83ae662c3fa">
+  <DisplayUnits>
+    <DisplayUnit FirmwareHash="2bc88d4f2c8a3eff" />
+  </DisplayUnits>
+</MainUnit>

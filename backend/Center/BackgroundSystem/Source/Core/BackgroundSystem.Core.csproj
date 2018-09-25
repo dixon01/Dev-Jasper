@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7418938-BA00-4E78-B57F-EE43C8914711}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.BackgroundSystem.Core</RootNamespace>
+    <AssemblyName>Gorba.Center.BackgroundSystem.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>5ea3dc5b</NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accord, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Accord.3.0.2\lib\net45\Accord.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Accord.Imaging, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Accord.Imaging.3.0.2\lib\net45\Accord.Imaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Accord.MachineLearning, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Accord.MachineLearning.3.0.2\lib\net45\Accord.MachineLearning.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Accord.Math, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Accord.Math.3.0.2\lib\net45\Accord.Math.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Accord.Statistics, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Accord.Statistics.3.0.2\lib\net45\Accord.Statistics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\3rdParty\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET-AnyCPU, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Magick.NET-Q16-HDRI-AnyCPU.7.0.0.0019\lib\net40-client\Magick.NET-AnyCPU.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magick.NET.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\Magick.NET-Q16-HDRI-AnyCPU.7.0.0.0019\lib\net40-client\Magick.NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Json.NET\4.5R10-Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Certificates\CertificatesUtility.cs" />
+    <Compile Include="ChangeTrackingDataServices.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingDataServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTrackingDataServicesNotificationHandling.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingDataServicesNotificationHandling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagementHostBootstrapperResult.cs" />
+    <Compile Include="ChangeTracking\InstanceChannelScopeFactory.cs" />
+    <Compile Include="ChangeTracking\LocalChangeTrackingManagementBootstrapper.cs" />
+    <Compile Include="ConcurrentServiceBase.cs" />
+    <Compile Include="ConcurrentDataServices.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConcurrentDataServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisposableServiceHost.cs" />
+    <Compile Include="Dynamic\EPaper\ConversionResult.cs" />
+    <Compile Include="Dynamic\EPaper\EPaperContentProvider.cs" />
+    <Compile Include="Dynamic\EPaper\EPaperConverter.cs" />
+    <Compile Include="Dynamic\EPaper\IEPaperConverter.cs" />
+    <Compile Include="Dynamic\EPaper\IMainUnitUpdateCommandUpdater.cs" />
+    <Compile Include="Dynamic\EPaper\MainUnitUpdateCommandUpdater.cs" />
+    <Compile Include="Dynamic\LiveUpdateDynamicContentProviderBase.cs" />
+    <Compile Include="Dynamic\NewsFeed\NewsFeed.cs" />
+    <Compile Include="Dynamic\NewsFeed\NewsFeedItem.cs" />
+    <Compile Include="Dynamic\NewsFeed\RssFeedDownloader.cs" />
+    <Compile Include="Dynamic\QueuedMessage.cs" />
+    <Compile Include="Dynamic\NewsFeed\Extensions.cs" />
+    <Compile Include="Dynamic\NewsFeed\NewsFeedContentProviderBase.cs" />
+    <Compile Include="Dynamic\NewsFeed\RssFeedContentProvider.cs" />
+    <Compile Include="Dynamic\ScreenGate\DownloaderBase.cs" />
+    <Compile Include="Dynamic\DynamicContentProviderBase.cs" />
+    <Compile Include="Dynamic\DynamicDataManager.cs" />
+    <Compile Include="Dynamic\ScreenGate\JsonDownloader.cs" />
+    <Compile Include="Dynamic\ScreenGate\ScreenGateContentProvider.cs" />
+    <Compile Include="Dynamic\UpdateGroupDynamicDataController.cs" />
+    <Compile Include="Dynamic\ScreenGate\XmlDownloader.cs" />
+    <Compile Include="IServiceHost.cs" />
+    <Compile Include="Membership\MembershipService.cs" />
+    <Compile Include="Membership\RemoteMembershipService.cs" />
+    <Compile Include="Qube\Configuration\IConfigurationSerializer.cs" />
+    <Compile Include="Qube\Configuration\MainUnitConfigurationSerializer.cs" />
+    <Compile Include="Qube\Configuration\SchedulerSlot.cs" />
+    <Compile Include="Qube\Configuration\SectionType.cs" />
+    <Compile Include="Qube\Configuration\SectionVersion.cs" />
+    <Compile Include="Qube\Content\ImageContentConversionFormat.cs" />
+    <Compile Include="Qube\Content\ImageContentConverter.cs" />
+    <Compile Include="Qube\Content\StreamContentResourceWrapper.cs" />
+    <Compile Include="Qube\Content\TableConversionPart.cs" />
+    <Compile Include="Qube\Content\TableConversionResult.cs" />
+    <Compile Include="Qube\Content\TimeTableContentConverter.cs" />
+    <Compile Include="RemoteDataServiceBase.cs" />
+    <Compile Include="RemoteDataServices.generated.cs">
+      <DependentUpon>RemoteDataServices.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataServices.generated.cs">
+      <DependentUpon>DataServices.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\BackgroundSystemResourceDataStore.cs" />
+    <Compile Include="Resources\BackgroundSystemResourceStore.cs" />
+    <Compile Include="Resources\ContentResourceServiceBase.cs" />
+    <Compile Include="Resources\ContentResourceServiceProvider.cs" />
+    <Compile Include="Resources\LocalContentResourceService.cs" />
+    <Compile Include="Resources\RemoteContentResourceService.cs" />
+    <Compile Include="Resources\RemoteResourceService.cs" />
+    <Compile Include="Resources\LocalResourceService.cs" />
+    <Compile Include="Resources\ResourceServiceBase.cs" />
+    <Compile Include="Resources\ResourceServiceProvider.cs" />
+    <Compile Include="Security\DatabaseLoginValidator.cs" />
+    <Compile Include="Security\DomainLoginValidatorProvider.cs" />
+    <Compile Include="Security\DomainLoginValidator.cs" />
+    <Compile Include="Security\LoginValidatorBase.cs" />
+    <Compile Include="Security\LoginValidatorProvider.cs" />
+    <Compile Include="Security\SecurityExtensions.cs" />
+    <Compile Include="ServiceHostWrapper.cs" />
+    <Compile Include="Setup\ChangeTrackingDataServicesUtility.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingDataServicesUtility.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\DataServicesUtility.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataServicesUtility.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\DataServicesUtility.partial.cs" />
+    <Compile Include="Setup\ServiceHostExtensions.cs" />
+    <Compile Include="TemplatingExtensions.cs" />
+    <Compile Include="ChangeTrackingServiceBase.cs" />
+    <Compile Include="Qube\EPaperFormat.cs" />
+    <Compile Include="Units\IUnitManager.cs" />
+    <Compile Include="Units\UnitController.cs" />
+    <Compile Include="Units\UnitManager.cs" />
+    <Compile Include="Update\Azure\AzureUpdateProvider.cs" />
+    <Compile Include="Update\Azure\LogFileInfo.cs" />
+    <Compile Include="Update\Azure\UnitCommandHandler.cs" />
+    <Compile Include="Update\Azure\LocalLogsFeedbackHandler.cs" />
+    <Compile Include="Update\Azure\LogsFeedbackHandlerBase.cs" />
+    <Compile Include="Update\Azure\LogsFeedbackHandlerProvider.cs" />
+    <Compile Include="Update\RemoteUpdateService.cs" />
+    <Compile Include="Update\UnitLogFileManager.cs" />
+    <Compile Include="Update\UnitUploadFileManager.cs" />
+    <Compile Include="Update\UpdateCommandManager.cs" />
+    <Compile Include="Update\UpdateDataObserver.cs" />
+    <Compile Include="Update\UpdateExtensions.cs" />
+    <Compile Include="Update\UpdateService.cs" />
+    <Compile Include="Update\UpdateTransferController.cs" />
+    <Compile Include="Utility\ErrorHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <EmbeddedResource Include="Certificates\BackgroundSystem.pfx" />
+    <None Include="ChangeTrackingDataServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingDataServices.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTrackingDataServicesNotificationHandling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingDataServicesNotificationHandling.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ConcurrentDataServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConcurrentDataServices.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemoteDataServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RemoteDataServices.generated.cs</LastGenOutput>
+    </None>
+    <None Include="DataServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataServices.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Setup\ChangeTrackingDataServicesUtility.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingDataServicesUtility.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Setup\DataServicesUtility.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataServicesUtility.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\EPaper\Configuration.EPaper.csproj">
+      <Project>{cb13bae8-dcb8-44d4-8aa1-85eee4a64d32}</Project>
+      <Name>Configuration.EPaper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{e976240d-8a45-486d-b485-6d26aef71a0c}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Resources\Medi.Resources.csproj">
+      <Project>{31d9ead4-9a25-48a1-8491-940c2a711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\GorbaProtocol\Protocols.GorbaProtocol.csproj">
+      <Project>{4dd6768d-559f-41c7-8a5c-76695035fe71}</Project>
+      <Name>Protocols.GorbaProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\ScreenGate\Protocols.ScreenGate.csproj">
+      <Project>{1B67473B-AE09-4D82-9A80-523862BF0011}</Project>
+      <Name>Protocols.ScreenGate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\AzureClient\Common.Update.AzureClient.csproj">
+      <Project>{6338eee3-6553-4820-9780-92c13c5e3e20}</Project>
+      <Name>Common.Update.AzureClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Ftp\Common.Update.Ftp.csproj">
+      <Project>{F9F814B5-3FF3-440E-A110-4353C6E65D89}</Project>
+      <Name>Common.Update.Ftp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648ee-7505-44b4-af06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Azure\Center.Common.Azure.csproj">
+      <Project>{4a674db7-2131-4399-b4a0-795ca4afcb39}</Project>
+      <Name>Center.Common.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Client\Center.Common.Client.csproj">
+      <Project>{5fc54ea9-187a-471e-889d-3d983e65b217}</Project>
+      <Name>Center.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel.Tests\Center.Common.ServiceModel.Tests.csproj">
+      <Project>{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}</Project>
+      <Name>Center.Common.ServiceModel.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Utils\Center.Common.Utils.csproj">
+      <Project>{e9ccf902-5e1c-48da-a764-988d59032232}</Project>
+      <Name>Center.Common.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\BackgroundSystem.Data.csproj">
+      <Project>{3b8d7f5f-e79c-4539-8ad3-5fd94f549352}</Project>
+      <Name>BackgroundSystem.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dynamic\README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Alarms\" />
+    <Folder Include="Controllers\Api\" />
+    <Folder Include="Controllers\Data\" />
+    <Folder Include="Controllers\Filters\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\..\3rdParty\packages\Accord.3.0.2\build\Accord.targets" Condition="Exists('..\..\..\..\3rdParty\packages\Accord.3.0.2\build\Accord.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\3rdParty\packages\Accord.3.0.2\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\3rdParty\packages\Accord.3.0.2\build\Accord.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

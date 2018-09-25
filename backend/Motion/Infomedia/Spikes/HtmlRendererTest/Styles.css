@@ -1,0 +1,37 @@
+﻿body {
+    background: black;
+    overflow:hidden;
+    cursor:none;
+    font-family: Arial;
+}
+
+#waiting {
+    color: white;
+}
+
+/* TextOverflow definitions */
+
+.TextOverflowScale {
+    white-space:pre;
+    overflow: hidden;
+}
+
+.TextOverflowOverflow {
+    white-space:pre;
+    overflow: visible;
+}
+
+.TextOverflowClip {
+    white-space:pre;
+    overflow: hidden;
+}
+
+.TextOverflowWrap {
+    white-space:normal;
+    overflow: visible;
+}
+
+.TextOverflowScroll, .TextOverflowScrollAlways {
+    white-space:pre;
+    overflow: hidden;
+}

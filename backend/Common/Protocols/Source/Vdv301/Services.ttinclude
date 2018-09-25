@@ -1,0 +1,121 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#+
+public static List<Service> LoadServices(string xmlFile)
+{
+    var serializer = new XmlSerializer(typeof(ServicesList));
+    using (var input = File.OpenRead(xmlFile))
+    {
+        var services = (ServicesList)serializer.Deserialize(input);
+        LoadTypes(services.Services, Path.GetDirectoryName(xmlFile) ?? string.Empty);
+        return services.Services;
+    }
+}
+
+private static void LoadTypes(List<Service> services, string xsdDirectory)
+{
+    var schemaSet = new XmlSchemaSet();
+    foreach (var xsd in Directory.GetFiles(xsdDirectory, "*.xsd"))
+    {
+        XmlSchema schema;
+        using (var input = File.OpenRead(xsd))
+        {
+            schema = XmlSchema.Read(input, null);
+            schemaSet.Add(schema);
+        }
+    }
+
+    schemaSet.Compile();
+
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            service.MulticastType = (XmlSchemaComplexType)schemaSet.GlobalTypes[new XmlQualifiedName(service.Multicast)];
+            continue;
+        }
+
+        foreach (var operation in service.Operations)
+        {
+            operation.Arguments = new List<XmlSchemaElement>();
+            if (operation.Request != null)
+            {
+                operation.RequestType = (XmlSchemaComplexType)schemaSet.GlobalTypes[new XmlQualifiedName(operation.Request)];
+                var sequence = (XmlSchemaSequence)operation.RequestType.Particle;
+                foreach (XmlSchemaElement item in sequence.Items)
+                {
+                    operation.Arguments.Add(item);
+                }
+            }
+            
+            if (operation.Response != null)
+            {
+                operation.ResponseType = (XmlSchemaComplexType)schemaSet.GlobalTypes[new XmlQualifiedName(operation.Response)];
+                var choice = (XmlSchemaChoice)operation.ResponseType.Particle;
+                operation.Return = (XmlSchemaElement)choice.Items[0];
+            }
+        }
+    }
+}
+
+public static string GetClassName(string xmlName)
+{
+    return xmlName.Replace(".", "").Replace("-", "");
+}
+
+[XmlRoot("Services")]
+public class ServicesList
+{
+    [XmlElement("Service")]
+    public List<Service> Services { get; set; }
+}
+
+public class Service
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+
+    [XmlElement("Operation")]
+    public List<Operation> Operations { get; set; }
+
+    public string Multicast { get; set; }
+
+    [XmlIgnore]
+    public bool IsMulticast
+    {
+        get
+        {
+            return !string.IsNullOrEmpty(this.Multicast);
+        }
+    }
+    
+    [XmlIgnore]
+    public XmlSchemaComplexType MulticastType { get; set; }
+}
+
+public class Operation
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    public string Request { get; set; }
+    public string Response { get; set; }
+    
+    [XmlIgnore]
+    public XmlSchemaComplexType RequestType { get; set; }
+    
+    [XmlIgnore]
+    public XmlSchemaComplexType ResponseType { get; set; }
+
+    [XmlIgnore]
+    public List<XmlSchemaElement> Arguments { get; set; }
+    
+    [XmlIgnore]
+    public XmlSchemaElement Return { get; set; }
+}
+#>

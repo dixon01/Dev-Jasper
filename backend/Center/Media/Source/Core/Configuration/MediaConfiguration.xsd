@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="DirectXRenderer.xsd" />
+    <xs:element name="MediaConfiguration" type="MediaConfiguration">
+        <xs:annotation>
+            <xs:documentation>
+                The icenter.media configuration.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="MediaConfiguration">
+        <xs:sequence>
+            <xs:element name="ResourceSettings" type="ResourceSettingsConfig" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The configuration for resources.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PhysicalScreenSettings" type="PhysicalScreenSettingsConfig" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        The configuration for physical screens.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+          <xs:element name="DirectXRendererSettings" type="RendererConfig" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>
+                The configuration for the simulation.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PhysicalScreenSettingsConfig">
+        <xs:sequence>
+            <xs:element name="ScreenType" type="PhysicalScreenTypeConfig" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        The configuration of a specific physical screen type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PhysicalScreenTypeConfig">
+        <xs:sequence>
+            <xs:element name="AvailableResolutions" type="ResolutionListConfig" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The resolutions for this physical screen type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The name of a physical screen type.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="ResolutionListConfig">
+        <xs:sequence>
+            <xs:element name="Resolution" type="ResolutionConfig" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        The list of available resolutions.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ResolutionConfig">
+        <xs:sequence>
+            <xs:element name="MasterLayouts" type="MasterLayoutsListConfig" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The list of available master layout configurations.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Width" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>
+                    The width of the resolution.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Height" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>
+                    The height of the resolution.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="MasterLayoutsListConfig">
+        <xs:sequence>
+            <xs:element name="MasterLayout" type ="MasterLayoutConfig" maxOccurs="unbounded" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The configuration of a master layout.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MasterLayoutConfig">
+        <xs:attribute name="Name" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The name of a master layout.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Columns" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The columns of a screen. "*" for fullscreen, "*;*" for a split screen.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="HorizontalGaps" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The gap width between the columns. If there are more than 2 columns, the gaps need to be separated
+                    by ";". E.g. 3 columns => "20;50"
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Rows" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The rows of a screen. "*" for fullscreen, "*;*" for a split screen.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="VerticalGaps" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    The gap height between the rows. If there are more than 2 rows, the gaps need to be separated
+                    by ";". E.g. 3 rows => "20;50"
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="ResourceSettingsConfig">
+        <xs:sequence>
+            <xs:element name="LocalResourcePath" maxOccurs="1" minOccurs="0" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        The path where the project resources should be stored on the local machine.
+                        If not set, the local appdata folder of the user will be used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MaxUsedDiskSpace" maxOccurs="1" minOccurs="1" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>
+                        The maximum used disk space for local resources in bytes.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MinRemainingDiskSpace" maxOccurs="1" minOccurs="1" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>
+                        The minimum remaining available local disk space in bytes.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RemoveLocalResourceAfter" maxOccurs="1" minOccurs="1" type="xs:duration">
+                <xs:annotation>
+                    <xs:documentation>
+                        The duration after which a local resource is deleted.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <!--<xs:element name="AvailableResolutions" maxOccurs="1" minOccurs="1" type="stringlist">
+                <xs:annotation>
+                    <xs:documentation>
+                        The list of available resolutions
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>-->
+        </xs:sequence>
+    </xs:complexType>
+    <!--<xs:complexType name='stringlist'>
+        <xs:annotation>
+            <xs:documentation>
+                A resolution string in the format WidthxHeight.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name='item' type='xs:string' maxOccurs='unbounded'/>
+        </xs:sequence>
+    </xs:complexType>-->
+</xs:schema>

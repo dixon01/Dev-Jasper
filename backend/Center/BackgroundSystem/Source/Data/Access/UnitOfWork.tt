@@ -1,0 +1,138 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="AccessExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Access" #>
+<#@ output extension=".generated.cs" #>
+<#
+	var path = this.Host.ResolvePath(@"..\Model\EntitySpace.Data.generated.xml");
+	var entitySpace = EntitySpace.Load(path);
+	var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+	var entities = partitions.SelectMany(partition => partition.Entities);
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Access
+{
+	using System;
+	using System.Transactions;
+
+<#
+		foreach (var partition in partitions)
+        {
+			this.WriteUsing(partition);
+        }
+	#>
+
+	public interface IUnitOfWork : IDisposable
+    {<#
+	foreach (var entity in entities)
+    {
+		this.WriteRepositoryInterface(entity);
+    }
+#>
+
+        void Commit();
+
+        void Rollback();
+
+        void Initialize(CenterDataContext dataContext);
+    }
+
+    public class UnitOfWork : IUnitOfWork
+    {
+        private TransactionScope transactionScope;
+<#
+		foreach (var entity in entities)
+		{
+			this.WriteRepository(entity);
+		}
+#>
+
+        public void Initialize(CenterDataContext dataContext)
+        {
+            this.transactionScope = Transaction.Current == null
+                                        ? new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)
+                                        : new TransactionScope(Transaction.Current, TransactionScopeAsyncFlowOption.Enabled);
+<#
+		foreach (var entity in entities)
+		{
+			this.WriteRepositoryInitialization(entity);
+		}
+#>
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.transactionScope != null)
+                {
+                    this.transactionScope.Dispose();
+                }
+            }
+        }
+
+        public void Commit()
+        {
+            if (this.transactionScope == null)
+            {
+                return;
+            }
+
+            this.transactionScope.Complete();
+        }
+
+        public void Rollback()
+        {
+            if (this.transactionScope == null)
+            {
+                return;
+            }
+
+            this.transactionScope.Dispose();
+        }
+    }
+}<#+
+	private PluralizationService pluralizer =
+		PluralizationService.CreateService(System.Globalization.CultureInfo.GetCultureInfo("en-us"));
+
+	private void WriteRepositoryInitialization(EntitySpace.Entity entity)
+    {
+		#>
+			this.<#= this.pluralizer.Pluralize(entity.Name) #> = new <#= entity.Name #>Repository(dataContext);
+<#+
+    }
+
+	private void WriteRepositoryInterface(EntitySpace.Entity entity)
+    {
+		#>
+
+        IRepository<<#= entity.Name #>> <#= this.pluralizer.Pluralize(entity.Name) #> { get; set; }
+<#+
+    }
+
+	private void WriteRepository(EntitySpace.Entity entity)
+    {
+		#>
+
+        public IRepository<<#= entity.Name #>> <#= this.pluralizer.Pluralize(entity.Name) #> { get; set; }
+<#+
+    }
+
+	private void WriteUsing(EntitySpace.Partition partition)
+    {
+		#>
+	using Gorba.Center.BackgroundSystem.Data.Model.<#= partition.Name #>;
+<#+
+    }
+#>

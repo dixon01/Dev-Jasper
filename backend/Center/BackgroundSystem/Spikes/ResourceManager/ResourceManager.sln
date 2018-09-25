@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceManager", "ResourceManager\ResourceManager.csproj", "{A1231248-BD65-4864-9F5C-3DE4FD480B4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {0C98CA35-4D00-46FC-8C37-63B5C36E4C60}
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {5FC54EA9-187A-471E-889D-3D983E65B217}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{4AE5ACF7-29F8-4D9D-B140-067DA5191B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Client", "..\..\..\Common\Source\Client\Center.Common.Client.csproj", "{5FC54EA9-187A-471E-889D-3D983E65B217}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {0C98CA35-4D00-46FC-8C37-63B5C36E4C60}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceModel", "..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj", "{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Update.ServiceModel", "..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj", "{989648EE-7505-44B4-AF06-432554242964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceUploader", "ResourceUploader\ResourceUploader.csproj", "{5DF2894C-C2F9-447D-8479-21FBBB144C39}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ResourceManager\\ResourceManager.csproj
+		SccProjectName1 = ResourceManager
+		SccLocalPath1 = ResourceManager
+		SccProjectUniqueName2 = ..\\..\\..\\Common\\Source\\Client\\Center.Common.Client.csproj
+		SccProjectTopLevelParentUniqueName2 = ResourceManager.sln
+		SccProjectName2 = ../../../Common/Source/Client
+		SccLocalPath2 = ..\\..\\..\\Common\\Source\\Client
+		SccProjectUniqueName3 = ..\\..\\..\\Common\\Source\\ServiceModel\\Center.Common.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName3 = ResourceManager.sln
+		SccProjectName3 = ../../../Common/Source/ServiceModel
+		SccLocalPath3 = ..\\..\\..\\Common\\Source\\ServiceModel
+		SccProjectUniqueName4 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel\\Common.Update.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName4 = ResourceManager.sln
+		SccProjectName4 = ../../../../Common/Update/Source/ServiceModel
+		SccLocalPath4 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName5 = ResourceManager.sln
+		SccProjectName5 = ../../../../Common/Utility/Source/Core
+		SccLocalPath5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+		SccProjectUniqueName6 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName6 = ResourceManager.sln
+		SccProjectName6 = ../../../../Common/Configuration/Source/Core
+		SccLocalPath6 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName7 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName7 = ResourceManager.sln
+		SccProjectName7 = ../../../../Common/Utility/Source/Compatibility
+		SccLocalPath7 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName8 = ResourceUploader\\ResourceUploader.csproj
+		SccProjectName8 = ResourceUploader
+		SccLocalPath8 = ResourceUploader
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1231248-BD65-4864-9F5C-3DE4FD480B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1231248-BD65-4864-9F5C-3DE4FD480B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1231248-BD65-4864-9F5C-3DE4FD480B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1231248-BD65-4864-9F5C-3DE4FD480B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF2894C-C2F9-447D-8479-21FBBB144C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF2894C-C2F9-447D-8479-21FBBB144C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF2894C-C2F9-447D-8479-21FBBB144C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF2894C-C2F9-447D-8479-21FBBB144C39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+		{989648EE-7505-44B4-AF06-432554242964} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {4AE5ACF7-29F8-4D9D-B140-067DA5191B10}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+﻿Section type 0x10, version 0x00, size 72
+-	Application hash:            99e9d85137db46ef (empty file)
+-	LCD hash:                           99e9d85137db46ef (empty file)
+-	LCD fall back hash:          99e9d85137db46ef (empty file)
+-	Epaper1 hash:                  d754c26638d49e9d
+-	Epaper2 hash:                  c0851098390a3a40
+-	Epaper3 hash:                 99e9d85137db46ef (empty file)
+-	Epaper4 hash:                 99e9d85137db46ef (empty file)
+-	Epaper5 hash:                 99e9d85137db46ef (empty file)
+-	Epaper6 hash:                 99e9d85137db46ef (empty file)
+
+Others files content section
+Section type 0x11, version 0x00, size 8
+-	MU firmware hash:       0123456789ABCDEF
+
+Scheduler Table:
+Section type 0x20, version 0x00, size 84
+-	All Monday slots:            1
+-	All Tuesday slots:            2
+-	All Wednesday slots:     3
+-	All Thursday slots:          4
+-	All Friday slots:                 5
+-	All Saturday slots:           1
+-	All Sunday slots:              2

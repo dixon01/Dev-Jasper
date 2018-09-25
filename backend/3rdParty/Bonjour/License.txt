@@ -1,0 +1,2 @@
+The Bonjour COM wrapper was generated using Visual Studio by WES.
+It doesn't have any license attached since it's only a wrapper DLL.

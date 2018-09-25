@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.FormulaManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:interaction1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+             xmlns:interaction2="clr-namespace:Gorba.Center.Media.Core.Views.Interaction"
+             mc:Ignorable="d" Name="ManagerRoot"
+             d:DesignHeight="300" d:DesignWidth="400" d:DataContext="{d:DesignInstance interaction:FormulaManagerPrompt}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <controls:ReusableList Grid.Column="0" 
+                               NewButtonText="{x:Static resources:MediaStrings.FormulaManager_CreateNewFormula}"
+                               RenameButtonText="{x:Static resources:MediaStrings.FormulaManager_RenameFormula}"
+                               RemoveButtonText="{x:Static resources:MediaStrings.FormulaManager_DeleteFormula}"
+                               CloneButtonText="{x:Static resources:MediaStrings.FormulaManager_CloneFormula}"
+                               Entities="{Binding PredefinedFormulas}"
+                               CreateNewEntity="{Binding CreatePredefinedFormula}"
+                               DeleteEntity="{Binding DeletePredefinedFormula}"
+                               CloneEntity="{Binding ClonePredefinedFormula}"
+                               RenameEntity="{Binding RenamePredefinedFormula}"
+                               HighlightedEntity="{Binding CurrentEvaluation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               HighlightChanged="OnSelectedPredefinedFormulaChanged"
+                               ShowRadioSelector="False" GotFocus="PredefinedFormulaListOnFocus" />
+        <Rectangle Grid.Column="0" Width="1" HorizontalAlignment="Right" Margin="0 3 0 3" VerticalAlignment="Stretch"
+                                       Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}"/>
+        <ContentPresenter Grid.Column="1" Content="{Binding CurrentFormulaPrompt}">
+            <ContentPresenter.Resources>
+                <DataTemplate DataType="{x:Type interaction:FormulaEditorPrompt}">
+                    <controls:FormulaEditor DictionarySelectorCommand="{Binding ElementName=ManagerRoot, Path=DataContext.ShowDictionarySelectorCommand}"
+                                            MaxFormulaDropDownHeight="400" x:Name="FormulaEditor"/>
+                </DataTemplate>
+            </ContentPresenter.Resources>
+        </ContentPresenter>
+        <Canvas Grid.Row="0" Grid.Column="1" x:Name="PopupCan">
+            <i:Interaction.Triggers>
+                <interaction1:InteractionRequestTrigger SourceObject="{Binding DictionarySelectorInteractionRequest}">
+                    <interaction1:InteractionAction Modal="True" Width="360" Height="{Binding ElementName=ManagerRoot, Path=ActualHeight}" CanvasRight="-360" CanvasTop="0" >
+                        <interaction1:InteractionAction.Dialog>
+                            <interaction2:DictionarySelectorDialog x:Name="DictionaryDialog"/>
+                        </interaction1:InteractionAction.Dialog>
+                    </interaction1:InteractionAction>
+                </interaction1:InteractionRequestTrigger>
+            </i:Interaction.Triggers>
+        </Canvas>
+    </Grid>
+</UserControl>

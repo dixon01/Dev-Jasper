@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entities>
+  <Namespace Name="Layout">
+	<Class Name="Font">
+	  <Property Name="Face" Type="string" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Height" Type="int" SupportedScreenTypes="TFT" />
+	  <Property Name="Weight" Type="int" SupportedScreenTypes="TFT" />
+	  <Property Name="Italic" Type="bool" SupportedScreenTypes="TFT" />
+	  <Property Name="Color" Type="string" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="OutlineColor" Type="string" SupportedScreenTypes="LED" />
+	  <Property Name="CharSpacing" Type="int" DefaultValue="1" SupportedScreenTypes="LED" />
+	</Class>
+
+	<!-- ==== Graphical ==== -->
+
+	<ElementClass Name="Base">
+	</ElementClass>
+	
+	<ElementClass Name="GraphicalBase" Base="Base">
+	  <Property Name="X" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Y" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Width" Type="int" DefaultValue="-1" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Height" Type="int" DefaultValue="-1" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Visible" Type="bool" DefaultValue="true" Dynamic="true" Animated="true" SupportedScreenTypes="TFT,LED" />
+	</ElementClass>
+
+	<ElementClass Name="Group" Base="GraphicalBase" ChildElementsType="GraphicalBase" SupportedScreenTypes="TFT,LED">
+	</ElementClass>
+	
+	<ElementClass Name="DrawableBase" Base="GraphicalBase">
+	  <Property Name="ZIndex" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	</ElementClass>
+
+	<ElementClass Name="AnalogClock" Base="DrawableBase" SupportedScreenTypes="TFT">
+	  <CompositeProperty Name="Hour" Type="AnalogClockHand" SupportedScreenTypes="TFT" />
+	  <CompositeProperty Name="Minute" Type="AnalogClockHand" SupportedScreenTypes="TFT" />
+	  <CompositeProperty Name="Seconds" Type="AnalogClockHand" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="AnalogClockHand" Base="Image" SupportedScreenTypes="TFT">
+	  <Property Name="Mode" Type="AnalogClockHandMode" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="CenterX" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="CenterY" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="Frame" Base="DrawableBase" SupportedScreenTypes="TFT">
+	  <Property Name="FrameId" XmlName="Id" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="Image" Base="DrawableBase" SupportedScreenTypes="TFT,LED">
+	  <Property Name="Filename" Type="string" Dynamic="true" Animated="true" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Scaling" Type="ElementScaling" DefaultValue="ElementScaling.Stretch" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="ImageList" Base="DrawableBase" SupportedScreenTypes="TFT">
+	  <Property Name="Overflow" Type="TextOverflow" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Align" Type="HorizontalAlignment" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Direction" Type="TextDirection" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="HorizontalImageGap" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="VerticalImageGap" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="ImageWidth" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="ImageHeight" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Delimiter" Type="string" DefaultValue=";" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="FilePatterns" Type="string" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="FallbackImage" Type="string" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Values" Type="string" Dynamic="true" Animated="false" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="Text" Base="DrawableBase" SupportedScreenTypes="TFT,LED">
+	  <Property Name="Rotation" Type="int" DefaultValue="0" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Align" Type="HorizontalAlignment" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="VAlign" Type="VerticalAlignment" DefaultValue="VerticalAlignment.Top" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Overflow" Type="TextOverflow" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="ScrollSpeed" Type="int" DefaultValue="0" Dynamic="false" Animated="false" SupportedScreenTypes="TFT,LED" />
+	  <CompositeProperty Name="Font" Type="Font" SupportedScreenTypes="TFT,LED" />
+	  <Property Name="Value" Type="string" Dynamic="true" Animated="true" SupportedScreenTypes="TFT,LED" />
+	</ElementClass>
+
+	<ElementClass Name="Video" Base="DrawableBase" SupportedScreenTypes="TFT">
+	  <Property Name="VideoUri" Type="string" Dynamic="true" Animated="true" SupportedScreenTypes="TFT" />
+	  <Property Name="Scaling" Type="ElementScaling" DefaultValue="ElementScaling.Stretch" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="Replay" Type="bool" DefaultValue="true" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	  <Property Name="FallbackImage" Type="string" Dynamic="false" Animated="false" SupportedScreenTypes="TFT" />
+	</ElementClass>
+
+	<ElementClass Name="Rectangle" Base="DrawableBase" SupportedScreenTypes="LED">
+	  <Property Name="Color" Type="string" Dynamic="true" Animated="true" SupportedScreenTypes="LED" />
+	</ElementClass>
+	
+	<!-- ==== Audio ==== -->
+	
+	<ElementClass Name="AudioBase" Base="Base">
+	  <Property Name="Enabled" Type="bool" DefaultValue="true" Dynamic="true" Animated="false" />
+	</ElementClass>
+
+	<ElementClass Name="AudioOutput" Base="AudioBase" ChildElementsType="PlaybackBase" SupportedScreenTypes="Audio">
+	  <Property Name="Volume" Type="int" Dynamic="true" Animated="false" SupportedScreenTypes="Audio" />
+	  <Property Name="Priority" Type="int" Dynamic="false" Animated="false" SupportedScreenTypes="Audio" />
+	</ElementClass>
+
+	<ElementClass Name="PlaybackBase" Base="AudioBase">
+	</ElementClass>
+
+	<ElementClass Name="AudioFile" Base="PlaybackBase" SupportedScreenTypes="Audio">
+	  <Property Name="Filename" Type="string" Dynamic="true" Animated="false" SupportedScreenTypes="Audio" />
+	</ElementClass>
+
+	<ElementClass Name="AudioPause" Base="PlaybackBase" SupportedScreenTypes="Audio">
+	  <Property Name="Duration" Type="TimeSpan" Dynamic="false" Animated="false" SupportedScreenTypes="Audio" />
+	</ElementClass>
+
+	<ElementClass Name="TextToSpeech" Base="PlaybackBase" SupportedScreenTypes="Audio">
+	  <Property Name="Voice" Type="string" Dynamic="true" Animated="false" SupportedScreenTypes="Audio" />
+	  <Property Name="Value" Type="string" Dynamic="true" Animated="false" SupportedScreenTypes="Audio" />
+	</ElementClass>
+  </Namespace>
+
+  <Namespace Name="Presentation">
+	<Class Name="Infomedia">
+	  <Property Name="Version" Type="Version" />
+	  <Property Name="CreationDate" XmlName="Created" Type="DateTime" Format="yyyy-MM-dd HH:mm:ss" />
+	  <ListProperty Name="PhysicalScreens" ElementType="PhysicalScreen" />
+	  <ListProperty Name="VirtualDisplays" ElementType="VirtualDisplay" />
+	  <CompositeProperty Name="MasterPresentation" Type="MasterPresentation" />
+	  <ListProperty Name="Evaluations" ElementType="Evaluation" />
+	  <CompositeProperty Name="Cycles" Type="Cycles" />
+	  <ListProperty Name="CyclePackages" ElementType="CyclePackage" />
+	  <ListProperty Name="Pools" ElementType="Pool" />
+	  <ListProperty Name="Layouts" ElementType="Layout" />
+	  <ListProperty Name="Fonts" ElementType="Font" />
+	</Class>
+
+	<Class Name="CyclePackage">
+	  <Property Name="Name" Type="string" />
+	  <ListProperty Name="StandardCycles" XmlName="StandardCycle" ElementType="Presentation.Cycle.StandardCycleRef" />
+	  <ListProperty Name="EventCycles" XmlName="EventCycle" ElementType="Presentation.Cycle.EventCycleRef" />
+	</Class>
+
+	<Class Name="Cycles">
+	  <ListProperty Name="StandardCycles" XmlName="StandardCycle" ElementType="Presentation.Cycle.StandardCycle" />
+	  <ListProperty Name="EventCycles" XmlName="EventCycle" ElementType="Presentation.Cycle.EventCycle" />
+	</Class>
+
+	<Class Name="Evaluation" Base="Eval.ContainerBase">
+	  <Property Name="Name" Type="string" />
+	</Class>
+
+	<Class Name="Font">
+	  <Property Name="Path" Type="string" />
+	  <Property Name="ScreenType" Type="PhysicalScreenType" DefaultValue="PhysicalScreenType.TFT" />
+	</Class>
+
+	<Class Name="LayoutBase">
+	  <Property Name="Name" Type="string" />
+	</Class>
+
+	<Class Name="Layout" Base="LayoutBase">
+	  <ReferenceProperty Name="BaseLayoutName" Type="string" Reference="Presentation.Layout.Name" />
+	  <ListProperty Name="Resolutions" Inline="true" ElementType="Resolution" />
+	</Class>
+
+	<Class Name="MasterLayout" Base="LayoutBase">
+	  <ListProperty Name="PhysicalScreens" XmlName="PhysicalScreen" Inline="true" ElementType="PhysicalScreenRef" />
+	</Class>
+
+	<Class Name="MasterPresentation">
+	  <ListProperty Name="MasterCycles" XmlName="MasterCycle" ElementType="Presentation.Cycle.MasterCycle" />
+	  <ListProperty Name="MasterEventCycles" XmlName="EventCycle" ElementType="Presentation.Cycle.MasterEventCycle" />
+	  <ListProperty Name="MasterLayouts" ElementType="MasterLayout" />
+	</Class>
+
+	<Class Name="PhysicalScreen">
+	  <Property Name="Name" Type="string" />
+	  <Property Name="Type" Type="PhysicalScreenType" />
+	  <Property Name="Identifier" XmlName="Id" Type="string" SupportedScreenTypes="LED,Audio" />
+	  <Property Name="Width" Type="int" />
+	  <Property Name="Height" Type="int" />
+	  <Property Name="Visible" Type="bool" DefaultValue="true" Dynamic="true" Animated="true" />
+	</Class>
+
+	<Class Name="PhysicalScreenRef">
+	  <ReferenceProperty Name="Reference" XmlName="Ref" Type="string" Reference="Presentation.PhysicalScreen.Name" />
+	  <ListProperty Name="VirtualDisplays" XmlName="VirtualDisplay" Inline="true" ElementType="VirtualDisplayRef" />
+	</Class>
+
+	<Class Name="Pool">
+	  <Property Name="Name" Type="string" />
+	  <Property Name="BaseDirectory" Type="string" />
+	</Class>
+
+	<Class Name="Resolution">
+	  <Property Name="Width" Type="int" />
+	  <Property Name="Height" Type="int" />
+	  <ListProperty Name="Elements" ElementType="Layout.Base" Inline="true" />
+	</Class>
+
+	<Class Name="VirtualDisplay">
+	  <Property Name="Name" Type="string" />
+	  <ReferenceProperty Name="CyclePackage" Type="string" Reference="Presentation.CyclePackage.Name" />
+	  <Property Name="Width" Type="int" />
+	  <Property Name="Height" Type="int" />
+	</Class>
+
+	<Class Name="VirtualDisplayRef" Base="Layout.DrawableBase">
+	  <ReferenceProperty Name="Reference" XmlName="Ref" Type="string" Reference="Presentation.VirtualDisplay.Name" />
+	</Class>
+  </Namespace>
+
+  <Namespace Name="Presentation.Cycle">
+	<Class Name="CycleBase">
+	  <Property Name="Name" Type="string" />
+	  <Property Name="Enabled" Type="bool" DefaultValue="true" Dynamic="true" Animated="false" />
+	  <ListProperty Name="Sections" ElementType="Presentation.Section.SectionBase" Inline="true" />
+	</Class>
+
+	<Class Name="CycleRefBase">
+	  <ReferenceProperty Name="Reference" XmlName="Ref" Type="string" Reference="Presentation.Cycle.CycleBase.Name" />
+	</Class>
+
+	<Class Name="EventCycle" Base="EventCycleBase">
+	</Class>
+
+	<Class Name="EventCycleBase" Base="CycleBase">
+	  <CompositeProperty Name="Trigger" Type="GenericTrigger" />
+	</Class>
+
+	<Class Name="EventCycleRef" Base="CycleRefBase">
+	</Class>
+
+	<Class Name="GenericTrigger">
+	  <ListProperty Name="Coordinates" XmlName="Generic" ElementType="Eval.Generic" Inline="true" />
+	</Class>
+
+	<Class Name="MasterCycle" Base="CycleBase">
+	</Class>
+
+	<Class Name="MasterEventCycle" Base="EventCycleBase">
+	</Class>
+
+	<Class Name="StandardCycle" Base="CycleBase">
+	</Class>
+
+	<Class Name="StandardCycleRef" Base="CycleRefBase">
+	</Class>
+  </Namespace>
+
+  <Namespace Name="Presentation.Section">
+	<Class Name="ImageSection" Base="SectionBase">
+	  <Property Name="Filename" Type="string" />
+	  <Property Name="Frame" Type="int" />
+	</Class>
+
+	<Class Name="MasterSection" Base="SectionBase">
+	</Class>
+
+	<Class Name="MultiSection" Base="SectionBase">
+	  <Property Name="Language" Type="int" />
+	  <Property Name="Table" Type="int" />
+	  <Property Name="RowsPerPage" Type="int" />
+	  <Property Name="MaxPages" Type="int" DefaultValue="-1" />
+	  <Property Name="Mode" Type="PageMode" />
+	</Class>
+
+	<Class Name="PoolSection" Base="SectionBase">
+	  <ReferenceProperty Name="Pool" Type="string" Reference="Presentation.Pool.Name" />
+	  <Property Name="VideoEndMode" Type="VideoEndMode" />
+	  <Property Name="Frame" Type="int" />
+	</Class>
+	
+	<Class Name="SectionBase">
+	  <Property Name="Enabled" Type="bool" DefaultValue="true" Dynamic="true" Animated="false" />
+	  <Property Name="Duration" Type="TimeSpan" />
+	  <ReferenceProperty Name="Layout" Type="string" Reference="Presentation.LayoutBase.Name" />
+	</Class>
+
+	<Class Name="StandardSection" Base="SectionBase">
+	</Class>
+
+	<Class Name="VideoSection" Base="SectionBase">
+	  <Property Name="VideoUri" Type="string" />
+	  <Property Name="VideoEndMode" Type="VideoEndMode" />
+	  <Property Name="Frame" Type="int" />
+	</Class>
+
+	<Class Name="WebmediaSection" Base="SectionBase">
+	  <Property Name="Filename" Type="string" />
+	  <Property Name="VideoEndMode" Type="VideoEndMode" />
+	</Class>
+  </Namespace>
+
+  <Namespace Name="Eval">
+	<Class Name="And" Base="CollectionBase">
+	</Class>
+
+	<Class Name="Base">
+	</Class>
+
+	<Class Name="CollectionBase" Base="Base">
+	  <ListProperty Name="Conditions" XmlName="Condition" ElementType="Base" Inline="true" />
+	</Class>
+
+	<Class Name="Constant" Base="Base">
+	  <Property Name="Value" Type="string" />
+	</Class>
+
+	<Class Name="ContainerBase" Base="Base">
+	  <CompositeProperty Name="Evaluation" Type="Base" />
+	</Class>
+
+	<Class Name="CodeConversion" Base="Base">
+	  <Property Name="FileName" Type="string" />
+	  <Property Name="UseImage" Type="bool" />
+	</Class>
+
+	<Class Name="CsvMapping" Base="Base">
+	  <Property Name="FileName" Type="string" />
+	  <Property Name="OutputFormat" Type="string" />
+	  <CompositeProperty Name="DefaultValue" Type="DynamicProperty" />
+	  <ListProperty Name="Matches" XmlName="Match" ElementType="MatchDynamicProperty" Inline="true" />
+	</Class>
+
+	<Class Name="MatchDynamicProperty" Base="DynamicProperty">
+	  <Property Name="Column" Type="int" />
+	</Class>
+
+	<Class Name="Date" Base="DateTimeBase">
+	  <Property Name="Begin" Type="DateTime" Format="yyyy-MM-dd" />
+	  <Property Name="End" Type="DateTime" Format="yyyy-MM-dd" />
+	</Class>
+
+	<Class Name="DateTimeBase" Base="Base">
+	</Class>
+
+	<Class Name="DayOfWeek" Base="DateTimeBase">
+	  <Property Name="Monday" XmlName="Mon" Type="bool" />
+	  <Property Name="Tuesday" XmlName="Tue" Type="bool" />
+	  <Property Name="Wednesday" XmlName="Wed" Type="bool" />
+	  <Property Name="Thursday" XmlName="Thu" Type="bool" />
+	  <Property Name="Friday" XmlName="Fri" Type="bool" />
+	  <Property Name="Saturday" XmlName="Sat" Type="bool" />
+	  <Property Name="Sunday" XmlName="Sun" Type="bool" />
+	</Class>
+
+	<Class Name="Evaluation" Base="Base">
+	  <ReferenceProperty Name="Reference" XmlName="Ref" Type="string" Reference="Presentation.Evaluation.Name" />
+	</Class>
+
+	<Class Name="Format" Base="Base">
+	  <Property Name="Format" Type="string" />
+	  <ListProperty Name="Arguments" XmlName="Argument" ElementType="Base" Inline="true" />
+	</Class>
+
+	<Class Name="Generic" Base="Base">
+	  <Property Name="Language" XmlName="Lang" Type="int" />
+	  <Property Name="Table" Type="int" />
+	  <Property Name="Column" Type="int" />
+	  <Property Name="Row" Type="int" />
+	</Class>
+
+	<Class Name="If" Base="Base">
+	  <CompositeProperty Name="Condition" Type="DynamicProperty" />
+	  <CompositeProperty Name="Then" Type="DynamicProperty" />
+	  <CompositeProperty Name="Else" Type="DynamicProperty" />
+	</Class>
+
+	<Class Name="IntegerCompare" Base="ContainerBase">
+	  <Property Name="Begin" Type="int" />
+	  <Property Name="End" Type="int" />
+	</Class>
+
+	<Class Name="Not" Base="ContainerBase">
+	</Class>
+
+	<Class Name="Or" Base="CollectionBase">
+	</Class>
+
+	<Class Name="RegexReplace" Base="ContainerBase">
+	  <Property Name="Pattern" Type="string" />
+	  <Property Name="Replacement" Type="string" />
+	</Class>
+
+	<Class Name="StringCompare" Base="ContainerBase">
+	  <Property Name="Value" Type="string" />
+	  <Property Name="IgnoreCase" Type="bool" DefaultValue="false" />
+	</Class>
+
+	<Class Name="Switch" Base="Base">
+	  <CompositeProperty Name="Value" Type="DynamicProperty" />
+	  <ListProperty Name="Cases" XmlName="Case" ElementType="CaseDynamicProperty" Inline="true" />
+	  <CompositeProperty Name="Default" Type="DynamicProperty" />
+	</Class>
+
+	<Class Name="CaseDynamicProperty" Base="DynamicProperty">
+	  <Property Name="Value" Type="string" />
+	</Class>
+
+	<Class Name="TextToImage" Base="ContainerBase">
+	  <Property Name="FilePatterns" Type="string" />
+	</Class>
+
+	<Class Name="Time" Base="DateTimeBase">
+	  <Property Name="Begin" Type="Time" Format="HH:mm:ss" />
+	  <Property Name="End" Type="Time" Format="HH:mm:ss" />
+	</Class>
+
+	<!-- Binary Operators -->
+	
+	<Class Name="BinaryOperatorBase" Base="Base">
+	  <CompositeProperty Name="Left" Type="DynamicProperty" />
+	  <CompositeProperty Name="Right" Type="DynamicProperty" />
+	</Class>
+
+	<Class Name="Equals" Base="BinaryOperatorBase" />
+
+	<Class Name="NotEquals" Base="BinaryOperatorBase" />
+
+	<Class Name="GreaterThan" Base="BinaryOperatorBase" />
+
+	<Class Name="GreaterThanOrEqual" Base="BinaryOperatorBase" />
+
+	<Class Name="LessThan" Base="BinaryOperatorBase" />
+
+	<Class Name="LessThanOrEqual" Base="BinaryOperatorBase" />
+  </Namespace>
+</Entities>

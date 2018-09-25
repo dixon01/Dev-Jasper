@@ -1,0 +1,66 @@
+﻿<Activity mc:Ignorable="sap" x:Class="Services.DependentService" sap:VirtualizedContainerService.HintSize="526,1262" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://tempuri.org/" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:ssa="clr-namespace:System.ServiceModel.Activities;assembly=System.ServiceModel.Activities" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sad:XamlDebuggerXmlReader.FileName="D:\Dev\Tfs\Main\Center\BackgroundSystem\Spikes\WorkflowCorrelationInitialization\Services\DependentService.xaml" sap:VirtualizedContainerService.HintSize="486,1222">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:Guid" Name="Id" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence sap:VirtualizedContainerService.HintSize="464,344">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="p1:CorrelationHandle" Name="__handle1" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg3:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <p1:Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap:VirtualizedContainerService.HintSize="255,90" OperationName="Create" ServiceContractName="p:IService">
+        <p1:Receive.CorrelationInitializers>
+          <p1:RequestReplyCorrelationInitializer CorrelationHandle="[__handle1]" />
+        </p1:Receive.CorrelationInitializers>
+        <p1:ReceiveParametersContent>
+          <OutArgument x:TypeArguments="s:Guid" x:Key="Id">[Id]</OutArgument>
+        </p1:ReceiveParametersContent>
+      </p1:Receive>
+      <p1:SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap:VirtualizedContainerService.HintSize="255,90" />
+    </Sequence>
+    <WriteLine sap:VirtualizedContainerService.HintSize="464,61" Text="[String.Format(&quot;Dependent {0} created&quot;, Id)]" />
+    <Delay Duration="[TimeSpan.FromSeconds(1)]" sap:VirtualizedContainerService.HintSize="464,22" />
+    <If Condition="True" sap:VirtualizedContainerService.HintSize="464,450">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="308,344">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="p1:CorrelationHandle" Name="__handle1" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <p1:Send x:Name="__ReferenceID1" EndpointAddress="[New Uri(&quot;http://localhost:9999/WorkflowCorrelationInitializationMain&quot;)]" sap:VirtualizedContainerService.HintSize="255,90" OperationName="Reply" ServiceContractName="p:IService">
+            <p1:Send.CorrelationInitializers>
+              <p1:RequestReplyCorrelationInitializer CorrelationHandle="[__handle1]" />
+            </p1:Send.CorrelationInitializers>
+            <p1:Send.Endpoint>
+              <p1:Endpoint>
+                <p1:Endpoint.Binding>
+                  <p1:BasicHttpBinding Name="basicHttpBinding" />
+                </p1:Endpoint.Binding>
+              </p1:Endpoint>
+            </p1:Send.Endpoint>
+            <p1:SendParametersContent>
+              <InArgument x:TypeArguments="s:Guid" x:Key="Id">[Id]</InArgument>
+            </p1:SendParametersContent>
+          </p1:Send>
+          <p1:ReceiveReply Request="{x:Reference __ReferenceID1}" DisplayName="ReceiveReplyForSend" sap:VirtualizedContainerService.HintSize="255,90">
+            <p1:ReceiveParametersContent />
+          </p1:ReceiveReply>
+        </Sequence>
+      </If.Then>
+    </If>
+    <WriteLine sap:VirtualizedContainerService.HintSize="464,61" Text="[String.Format(&quot;Dependent {0} completed&quot;, Id)]" />
+  </Sequence>
+</Activity>

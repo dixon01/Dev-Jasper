@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60B1A687-3802-499E-B03F-B4BC1829B932}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Protocols.Vdv301</RootNamespace>
+    <AssemblyName>Gorba.Common.Protocols.Vdv301</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Messages\DataAcceptedResponseDataStructure.cs" />
+    <Compile Include="Messages\IBISIPboolean.cs" />
+    <Compile Include="Messages\IBISIPdateTime.cs" />
+    <Compile Include="Messages\IBISIPdouble.cs" />
+    <Compile Include="Messages\IBISIPint.cs" />
+    <Compile Include="Messages\IBISIPNMTOKEN.cs" />
+    <Compile Include="Messages\IBISIPstring.cs" />
+    <Compile Include="Messages\IBIS_IP_V1_0.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ITimeService.cs" />
+    <Compile Include="Services\Services.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Messages\Readme.txt" />
+    <Content Include="Services.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IBIS-IP_common_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_CustomerInformationService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_DeviceManagementService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_Enumerations_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_JourneyInformationService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_LocationService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_NetworkLocationService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_PassengerCountingService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_SystemDocumentationService_v1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_SystemManagementService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS-IP_TicketInformationService_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IBIS_IP_V1.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Services.ttinclude" />
+    <None Include="Services\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Services.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

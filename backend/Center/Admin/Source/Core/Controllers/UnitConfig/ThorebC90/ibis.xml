@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<IbisConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Devices Description="If the IBIS_Address is -1, then the device is disabled">
+    <TicketingConfig Description="The IBIS addresses of Ticketing units. Model is 'None', 'Krauth' or 'Atron'. Maximum 2 ticketing units are allowed for Krauth and 3 for Atron. Have a look to DS070. Addresses are sequential : adress #2 means device #2">
+      <Model>Atron</Model>
+      <IBIS_Address>-1</IBIS_Address>
+      <IBIS_Address>2</IBIS_Address>
+    </TicketingConfig>
+    <GorbaTFT Description="The IBIS addresses of the Gorba TFT units. Have a look to: DS020 and DSHPW021b_1.">
+      <IBIS_Address>8</IBIS_Address>
+      <IBIS_Address>-1</IBIS_Address>
+    </GorbaTFT>
+    <PassengerCountingConfig Description="The IBIS addresses of Passenger count units. Model is 'None' or 'Iris'. Addresses are sequential: adress #2 means door #2. Use ; to separate cell numbers for a single door">
+      <Model>None</Model>
+      <IBIS_Address></IBIS_Address>
+      <IBIS_Address></IBIS_Address>
+    </PassengerCountingConfig>
+  </Devices>
+  <IBIS_Telegrams>
+    <MinRepeatIntervalConfig Description="The minimum repeat interval time for IBIS messages which contains a RepeatInterval xml tag. If the RepeatInterval is smaller than this value, the cycle duration will be set to this value. Value is in seconds.">
+      <Value>10</Value>
+    </MinRepeatIntervalConfig>
+    <DS001 Description="Transmits the line number. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS001>
+    <DS002 Description="Transmits the trip number. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS002>
+    <DS003 Description="Transmits the destination number with the given number of characters (DestinationSize). (Send condition: Cyclic and Event)">
+      <DestinationSize>3</DestinationSize>
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS003>
+    <DS003c Description="Transmits a text to an interior display. max 60 char. The value MaxTextLength defines the fixed length. Value should be a multiple of 4! maximum is 60 characters. (Send condition: Cyclic and Event)">
+      <Enabled>false</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+      <MaxTextLength>20</MaxTextLength>
+    </DS003c>
+    <DS004 Description="Transmits the characteristics for the ticket canceler. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS004>
+    <DS004a Description="Transmits Razzia Start/Stop messages to the ticketing system. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS004a>
+    <DS004b Description="Transmits didok to the Atron ticketing system. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS004b>
+    <DS004c Description="Transmits druckName to the Atron ticketing system. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS004c>
+    <DS005 Description="Transmits the time. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS005>
+    <DS006 Description="Transmits the calendar date. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS006>
+    <DS009 Description="Transmits a text to an interior display. Preview next stop. (Send condition: Cyclic and Event)">
+      <Enabled>false</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS009>
+    <DSHPW010b_1 Description="Transmits the current stop index. Attention: Because structure of this telegram is the same like telegram DS010, it's not allowed to use DSHPW010_1 and DS010 in the same vehicle. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DSHPW010b_1>
+    <DS020 Description="Asks for the status of configured displays. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>10</RepeatInterval>
+    </DS020>
+    <DSHPW021b_1 Description="Transmits the route path information to route course indicator. (Send condition: Event)">
+      <Enabled>true</Enabled>
+    </DSHPW021b_1>
+    <DS036 Description="Transmits an announcement number. (Send condition: Event)">
+      <Enabled>true</Enabled>
+    </DS036>
+    <DS037_1 Description="Transmits the speaker volume to the TTS System. Volume 0..100%. (Send condition: Event)">
+      <Enabled>false</Enabled>
+    </DS037_1>
+    <DS038_1 Description="Transmits a text to announce via TTS. (Send condition: Event)">
+      <Enabled>false</Enabled>
+    </DS038_1>
+    <DS070 Description="Asks for the status of configured ticket canceler. (Send condition: Cyclic and Event)">
+      <Enabled>true</Enabled>
+      <RepeatInterval>120</RepeatInterval>
+      <Threshold>10</Threshold>
+    </DS070>
+    <DS080 Description="Indicates that the door is opened. (Send condition: Event)">
+      <Enabled>true</Enabled>
+    </DS080>
+    <DS081 Description="Indicates that the door is closed. (Send condition: Event)">
+      <Enabled>true</Enabled>
+    </DS081>
+    <DS084 Description="Request Iris cell status. (Send condition: Cyclic and Event)">
+      <Enabled>false</Enabled>
+      <RepeatInterval>600</RepeatInterval>
+    </DS084>
+  </IBIS_Telegrams>
+  <Functionality>
+    <DestinationAnnouncement Description="Destination message will be activated when the door opens. Transmits a DS036 message with the destination code">
+      <Value>false</Value>
+    </DestinationAnnouncement>
+    <PreventSendingDateTimeBeforeSynch>true</PreventSendingDateTimeBeforeSynch>
+    <DefaultTextStop>Ende des Dienstes/Fin de Service</DefaultTextStop>
+    <DefaultTextDestination>Depot</DefaultTextDestination>
+    <DefaultLineNumber>999</DefaultLineNumber>
+    <DefaultZoneNumber>300</DefaultZoneNumber>
+  </Functionality>
+  <Interface>
+    <EventHandlerConfig Version="1">
+      <IPAddress>127.0.0.1</IPAddress>
+      <Port>1598</Port>
+    </EventHandlerConfig>
+    <SerialPortConfig Version="1" Description="Possible COM-Ports: Com1, Com2, ..., RSB1">
+      <ComPort>COM20</ComPort>
+      <BaudRate>1200</BaudRate>
+      <DataBits>7</DataBits>
+      <FParity>true</FParity>
+      <Parity Description="Possible values: None, Odd, Even, Mark, Space">
+        <Value>Even</Value>
+      </Parity>
+      <StopBits Description="Possible values: None, One, Two, OnePointFive">
+        <Value>Two</Value>
+      </StopBits>
+      <DtrControl>false</DtrControl>
+      <RtsControl>false</RtsControl>
+      <ReadIntervalTimeout>100</ReadIntervalTimeout>
+      <ReadTotalTimeout>10</ReadTotalTimeout>
+      <ReadTotalMultiplierTimeout>100</ReadTotalMultiplierTimeout>
+      <WriteTotalTimeout>0</WriteTotalTimeout>
+      <WriteMultiplierTimeout>0</WriteMultiplierTimeout>
+    </SerialPortConfig>
+  </Interface>
+</IbisConfig>

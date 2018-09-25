@@ -1,0 +1,3 @@
+[From NuGet installation directory]
+
+Refer to eula.rtf and thirdparynotices.rtf

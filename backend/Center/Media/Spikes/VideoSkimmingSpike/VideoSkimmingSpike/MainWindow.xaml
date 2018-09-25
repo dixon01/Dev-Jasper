@@ -1,0 +1,18 @@
+﻿<Window x:Class="VideoSkimmingSpike.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:videoSkimmingSpike="clr-namespace:VideoSkimmingSpike"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Open video:" VerticalAlignment="Center" />
+            <TextBox Name="VideoFileName" Width="200" Margin="5,0"/>
+            <Button Content="Browse..." Click="ButtonBaseOnClick"></Button>
+        </StackPanel>
+        <videoSkimmingSpike:SkimmingElement Grid.Row="1" x:Name="SkimmingElement"/>
+    </Grid>
+</Window>

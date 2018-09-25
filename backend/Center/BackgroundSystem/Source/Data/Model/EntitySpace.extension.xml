@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntitySpace xmlns="http://schemas.gorba.com/Center/EntitySpace" xmlns:data="http://schemas.gorba.com/Center/Data/ExtendedEntitySpace">
+  <Partitions>
+    <Partition name="AccessControl">
+      <Entities>
+        <Entity name="Authorization">
+          <Properties>
+              <data:DataProperty name="DataScope" type="DataScope" propertyType="Enumeration" sqlType="tinyint" />
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+  </Partitions>
+</EntitySpace>

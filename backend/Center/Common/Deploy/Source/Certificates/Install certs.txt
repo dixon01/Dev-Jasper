@@ -1,0 +1,10 @@
+- From Start | Run: mmc.exe
+- File | Add/Remove Snapins and select Certificates then Add.
+- When prompted for the type of account select Computer Account
+- Select local computer
+- Finish the wizard and OK to close the add/remove dialog.
+- On the category "Personal" right click and select "All Tasks\Import...".
+- Choose the certificate to import
+- Check "Mark this key as exportable..." and "Include all extended properties"
+- Ensure that "Place all cert..." is checked and the certificate store is Personal
+- Finish the wizard

@@ -1,0 +1,293 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Editors.EntityEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:configurations="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Configurations"
+             xmlns:converters="clr-namespace:Gorba.Center.Admin.Core.Converters"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Admin.Core.DataViewModels"
+             xmlns:editor="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Editor"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.Views.Editors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:meta="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Meta"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:software="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Software"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:widgets="clr-namespace:Gorba.Center.Admin.Core.Views.Widgets"
+             Validation.ErrorTemplate="{x:Null}"
+             d:DataContext="{d:DesignInstance editor:EntityEditorViewModel}"
+             d:DesignHeight="400"
+             d:DesignWidth="350"
+             x:Name="EntityEditorRoot"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+        <converters1:IsNullOrWhiteSpaceConverter x:Key="IsNullOrWhiteSpaceConverter" />
+    </UserControl.Resources>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelEditCommand}" />
+    </UserControl.InputBindings>
+
+    <telerik:RadBusyIndicator IsBusy="{Binding IsSaving}">
+        <telerik:RadBusyIndicator.BusyContent>
+            <TextBlock Text="{x:Static resources:AdminStrings.Editor_Saving}" />
+        </telerik:RadBusyIndicator.BusyContent>
+
+        <telerik:RadBusyIndicator IsBusy="{Binding EditingEntity.IsLoading}">
+            <Grid MinWidth="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <converters1:StringFormatConverter x:Key="StringFormatConverter" />
+                </Grid.Resources>
+
+                <Button Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5 5 15 5"
+                        Command="{Binding NavigateToEntityCommand}"
+                        CommandParameter="{Binding EditingEntity.ReadOnlyDataViewModel}"
+                        Style="{StaticResource FlatIconButton}">
+                    <Image Width="48"
+                           Height="48"
+                           Source="{Binding EntityTypeName,
+                                            Converter={StaticResource StringFormatConverter},
+                                            ConverterParameter=../../Resources/Icons/EntityTypes/EntityTypes_{0}_48x48.png}" />
+                </Button>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0 5 0 0"
+                           FontSize="32"
+                           Text="{Binding EntityTypeDisplayName}" />
+
+                <Button Grid.Row="0"
+                        Grid.Column="2"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding SaveEntityCommand}"
+                        ToolTip="{x:Static resources:AdminStrings.Editor_SaveTooltip}"
+                        ToolTipService.ShowOnDisabled="True"
+                        Visibility="{Binding IsNewEntity,
+                                             Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="../../Resources/Icons/edit_commit_24x24.png" />
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <Image Source="../../Resources/Icons/edit_commit_dark_24x24.png" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Grid.Row="0"
+                        Grid.Column="3"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding CreateEntityCommand}"
+                        ToolTip="{x:Static resources:AdminStrings.Editor_SaveNewEntityTooltip}"
+                        ToolTipService.ShowOnDisabled="True"
+                        Visibility="{Binding IsNewEntity,
+                                             Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="../../Resources/Icons/edit_create_24x24.png" />
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <Image Source="../../Resources/Icons/edit_create_dark_24x24.png" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Grid.Row="0"
+                        Grid.Column="4"
+                        VerticalAlignment="Bottom"
+                        Click="OnCancelClick"
+                        ToolTip="{x:Static resources:AdminStrings.Editor_DiscardTooltip}"
+                        ToolTipService.ShowOnDisabled="True"
+                        Command="{Binding CancelEditCommand}">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="../../Resources/Icons/edit_cancel_24x24.png" />
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <Image Source="../../Resources/Icons/edit_cancel_dark_24x24.png" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <ContentPresenter Name="MainContentPresenter"
+                                  Grid.Row="1"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="5"
+                                  Focusable="True"
+                                  Content="{Binding EditingEntity}"
+                                  Validation.ErrorTemplate="{x:Null}">
+                    <ContentPresenter.Resources>
+
+                        <Style TargetType="telerik:DataFormComboBoxField">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+
+                        <DataTemplate DataType="{x:Type configurations:UnitConfigurationDataViewModel}">
+                            <editors:UnitConfigurationEditor DataContext="{Binding}" Validation.ErrorTemplate="{x:Null}" />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type software:PackageVersionDataViewModel}">
+                            <editors:PackageVersionEditor DataContext="{Binding}" Validation.ErrorTemplate="{x:Null}" />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type meta:FtpServerDataViewModel}">
+                            <editors:FtpServerEditor DataContext="{Binding}" Validation.ErrorTemplate="{x:Null}" />
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="EntityXmlEditor" DataType="{x:Type configurations:UnitConfigurationDataViewModel}">
+                            <widgets:EntityXmlEditor PopupOpened="OnXmlEditorPopupOpened" telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="XmlData" />
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="ItemSelectionEditor" DataType="dataViewModels:ItemSelectionViewModelBase">
+                            <widgets:ItemSelectionEditor telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="ItemSelection" />
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="PasswordEditor" DataType="system:String">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Name="passwordtext"
+                                         Grid.Column="0"
+                                         Margin="2"
+                                         HorizontalAlignment="Stretch"
+                                         IsReadOnly="True">
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                            <Setter Property="Text" Value="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding .HashedPassword, Converter={StaticResource IsNullOrWhiteSpaceConverter}}" Value="true">
+                                                    <Setter Property="Text" Value="" />
+                                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+
+                                <Button Grid.Column="1"
+                                        Click="PasswordChangeOnClick"
+                                        ToolTip="{x:Static resources:AdminStrings.Editor_SetNewPasswordTooltip}"
+                                        ToolTipService.ShowOnDisabled="True"
+                                        Style="{StaticResource FlatIconButton}">
+                                    <Image Width="16"
+                                           Height="16"
+                                           Source="../../Resources/Icons/edit_password_16x16.png" />
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type dataViewModels:DataViewModelBase}">
+                            <telerik:RadPropertyGrid Name="PropertyGrid"
+                                                     Margin="0 0 5 0"
+                                                     Loaded="OnLoaded"
+                                                     HorizontalAlignment="Stretch"
+                                                     SelectedPropertyDefinition="{Binding ElementName=EntityEditorRoot, Path=SelectedErrorProperty}"
+                                                     SelectionChanged="RadPropertyGrid_OnSelectionChanged"
+                                                     RenderMode="Flat"
+                                                     AutoGeneratingPropertyDefinition="PropertyGridOnAutoGeneratingPropertyDefinition"
+                                                     Item="{Binding}"
+                                                     Validation.ErrorTemplate="{x:Null}">
+                                <telerik:RadPropertyGrid.Resources>
+                                    <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="CheckBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="widgets:ItemSelectionEditor">
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style BasedOn="{StaticResource {x:Type telerik:RadComboBox}}" TargetType="telerik:RadComboBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style BasedOn="{StaticResource {x:Type telerik:RadDateTimePicker}}" TargetType="telerik:RadDateTimePicker">
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter Property="DateTimeWatermarkContent" Value="" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                                        <Setter Property="Padding" Value="1" />
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </telerik:RadPropertyGrid.Resources>
+                            </telerik:RadPropertyGrid>
+                        </DataTemplate>
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
+            </Grid>
+        </telerik:RadBusyIndicator>
+    </telerik:RadBusyIndicator>
+</UserControl>

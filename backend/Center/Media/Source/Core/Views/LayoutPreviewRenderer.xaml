@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.LayoutPreviewRenderer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels"
+             xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:layoutElements="clr-namespace:Gorba.Center.Media.Core.Views.LayoutElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="{StaticResource LayoutBackgroundColorBrush}"
+             d:DataContext="{d:DesignInstance viewModels:PreviewLayoutRenderer}">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:AlignmentConverter x:Key="AlignmentConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Parent.Elements, Mode=TwoWay}" Focusable="False">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Visibility" Value="{Binding Visible.Value, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Setter Property="Canvas.Left" Value="{Binding X.Value}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Y.Value}" />
+                    <Setter Property="Canvas.ZIndex" Value="{Binding ZIndex.Value}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.Resources>
+                <converters:IsInListConverter x:Key="IsInListConverter" />
+                <Style x:Key="LayoutElementWithAdorners">
+                    <Setter Property="layoutElements:EditableLayoutElementBase.ShowAdorner">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource IsInListConverter}">
+                                <Binding Path="Parent.SelectedElements" Mode="TwoWay" />
+                                <Binding />
+                                <Binding Path="Parent.SelectedElements.Count" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <DataTemplate DataType="{x:Type layout:StaticTextElementDataViewModel}">
+                    <layoutElements:StaticTextLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        HorizontalTextAlignment="{Binding Align.Value, Converter={StaticResource AlignmentConverter}}"
+                        VerticalTextAlignment="{Binding VAlign.Value, Converter={StaticResource AlignmentConverter}}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:DynamicTextElementDataViewModel}">
+                    <layoutElements:DynamicTextLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        HorizontalTextAlignment="{Binding Align.Value, Converter={StaticResource AlignmentConverter}}"
+                        VerticalTextAlignment="{Binding VAlign.Value, Converter={StaticResource AlignmentConverter}}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:ImageElementDataViewModel}">
+                    <layoutElements:PictureLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:VideoElementDataViewModel}">
+                    <layoutElements:VideoLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:LiveStreamElementDataViewModel}">
+                    <layoutElements:LiveStreamLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:FrameElementDataViewModel}">
+                    <layoutElements:FrameLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}">
+                    </layoutElements:FrameLayoutElement>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:AnalogClockElementDataViewModel}">
+                    <layoutElements:AnalogClockLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}">
+                    </layoutElements:AnalogClockLayoutElement>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:ImageListElementDataViewModel}">
+                    <layoutElements:ImageListLayoutElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        Style="{StaticResource LayoutElementWithAdorners}">
+                    </layoutElements:ImageListLayoutElement>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type layout:RssTickerElementDataViewModel}">
+                    <layoutElements:RssTickerElement
+                        Width="{Binding Width.Value, Mode=TwoWay}"
+                        Height="{Binding Height.Value, Mode=TwoWay}"
+                        HorizontalTextAlignment="{Binding Align.Value, Converter={StaticResource AlignmentConverter}}"
+                        VerticalTextAlignment="{Binding VAlign.Value, Converter={StaticResource AlignmentConverter}}"
+                        Style="{StaticResource LayoutElementWithAdorners}" />
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
+    </Grid>
+</UserControl>

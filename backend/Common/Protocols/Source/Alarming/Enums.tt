@@ -1,0 +1,80 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="Alarms.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+<#
+    var categories = LoadAlarmCategories(this.Host.ResolvePath("Alarms.xml"));
+    
+    #>
+namespace Gorba.Common.Protocols.Alarming
+{
+    public enum AlarmCategory
+    {
+<#
+    foreach (var category in categories)
+    {
+        #>
+        <#= category.Name #>,
+<#
+    }
+    #>
+    }
+    
+    public enum AlarmType
+    {
+<#
+    foreach (var category in categories)
+    {
+        foreach (var evnt in category.Events)
+        {
+            #>
+        <#= category.Name #><#= evnt.Name #>,
+<#
+        }
+    }
+    #>
+    }
+<#
+    foreach (var category in categories)
+    {
+        foreach (var evnt in category.Events)
+        {
+            #>
+
+    public enum <#= category.Name #><#= evnt.Name #>Attribute
+    {
+<#
+            foreach (var attribute in evnt.Attributes)
+            {
+                var value = string.Empty;
+                if (attribute.Value.HasValue)
+                {
+                    value = " = " + attribute.Value.Value;
+                }
+                #>
+        <#= attribute.Name #><#= value #>,
+<#
+            }
+#>
+    }
+<#
+        }
+    }
+    #>
+}

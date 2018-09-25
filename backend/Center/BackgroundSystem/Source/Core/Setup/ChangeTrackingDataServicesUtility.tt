@@ -1,0 +1,122 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\TemplatingExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Core" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.BackgroundSystem.Core.Setup
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.ExceptionServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+
+    using NLog;
+
+    using Version = Gorba.Center.Common.ServiceModel.ChangeTracking.Version;
+<#
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = entitySpace.Partitions
+        .SelectMany(partition => partition.Entities)
+        .Where(entity => entity.HasChangeTracking)
+        .OrderBy(entity => entity.Name);
+
+    foreach (var partition in partitions)
+    {
+        this.WriteUsing(partition);
+    }
+#>
+
+    public static class ChangeTrackingDataServicesUtility
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public static async Task<IEnumerable<DisposableServiceHost>> SetupChangeTrackingDataServicesAsync(
+            BackgroundSystemConfiguration configuration)
+        {
+            var hosts = new List<DisposableServiceHost>();
+            var tasks = new List<Task>();
+            ServiceHost host;
+            Task task;
+<#
+    foreach (var entity in entities)
+    {#>
+
+            var <#= entity.Name.GetVariableName() #> = new <#= entity.Name #>ChangeTrackingDataService(
+                DataServicesUtility.Create<#= entity.Name #>DataService(),
+                configuration,
+                Create<#= entity.Name #>Configuration(configuration));
+            task = <#= entity.Name.GetVariableName() #>.StartAsync();
+            tasks.Add(task);
+            DependencyResolver.Current.Register<I<#= entity.Name #>DataService>(<#= entity.Name.GetVariableName() #>);
+            host = DataServicesUtility.CreateServiceHost<I<#= entity.Name #>DataService>(<#= entity.Name.GetVariableName() #>, "<#= entity.Name #>");
+            hosts.Add(new DisposableServiceHost("<#= entity.Name #>", <#= entity.Name.GetVariableName() #>, host));
+<#
+    }
+#>
+            await Task.WhenAll(tasks);
+            return hosts;
+        }
+<#
+
+    foreach (var entity in entities)
+    {
+        this.WriteCreateConfiguration(entity);
+    }
+#>
+    }
+}
+<#+
+
+    private void WriteCreateConfiguration(EntitySpace.Entity entity)
+    {#>
+
+        private static NotificationSubscriptionConfiguration Create<#= entity.Name #>Configuration(
+            BackgroundSystemConfiguration backgroundSystemConfiguration)
+        {
+            var configuration = new NotificationManagerConfiguration
+                                    {
+                                        ConnectionString =
+                                            backgroundSystemConfiguration
+                                            .NotificationsConnectionString,
+                                        Path = "<#= entity.Name.Pluralize() #>"
+                                    };
+            return new NotificationSubscriptionConfiguration(
+                                                        configuration,
+                                                        "BackgroundSystem",
+                                                        "Service")
+                                                    {
+                                                        Filter = new SqlNotificationManagerFilter("[sys].ReplyToSessionId IS NOT NULL"),
+                                                        Timeout = TimeSpan.FromDays(31)
+                                                    };
+        }
+<#+
+    }
+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.BackgroundSystem.Core.<#= partition.Name #>;
+<#+
+    }
+#>

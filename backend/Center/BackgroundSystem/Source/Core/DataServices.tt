@@ -1,0 +1,192 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).ToList();
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+    foreach (var entity in entities)
+    {
+        this.keyTypes.Add(entity.Name, entity.IdPropertyType);
+    }
+#>
+namespace Gorba.Center.BackgroundSystem.Core
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+    using System.Xml;
+    
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.BackgroundSystem.Data.Access;
+    using Gorba.Center.BackgroundSystem.Data.Model;
+<#
+    foreach (var partition in partitions)
+    {
+#>
+    using Gorba.Center.BackgroundSystem.Data.Model.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    }
+#>
+    using Gorba.Common.Utility.Core;
+
+    using NLog;
+
+<#
+    foreach (var entity in entities)
+    {
+        var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+        this.WriteDataService(entity, userDefinedPropertiesEnabled);
+    }
+    #>
+}
+<#+
+    private readonly Dictionary<string, string> keyTypes = new Dictionary<string, string>();
+
+    private void WriteDataService(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var keyType = this.keyTypes[entity.Name];
+#>
+
+    public class <#= entity.Name #>DataService : I<#= entity.Name #>DataService
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> AddAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var databaseEntity = entity.ToDatabase();
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+                databaseEntity.CreatedOn = TimeProvider.Current.UtcNow;
+<#+
+        } #>
+                var result = await repository.AddAsync(databaseEntity);
+                Logger.Trace("Entity '<#= entity.Name #>' added");
+                return result.ToDto();
+            }
+        }
+<#+
+        if (!entity.HasChangeTracking)
+        {
+            #>
+
+        public async Task AddRangeAsync(IEnumerable<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> entities)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var databaseEntities = entities.Select(entity => entity.ToDatabase());
+                await repository.AddRangeAsync(databaseEntities);
+            }
+        }
+
+        public async Task<int> DeleteAsync(<#= entity.Name #>Filter filter)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                return await repository.DeleteAsync(filter);
+            }
+        }
+<#+
+        } #>
+
+        public async Task DeleteAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var databaseEntity = await repository.FindAsync(entity.Id);
+                if (databaseEntity == null)
+                {
+                    throw new DataException("Entity was not found in the database");
+                }
+
+                await repository.RemoveAsync(databaseEntity);
+                Logger.Trace("Entity '<#= entity.Name #>' deleted");
+            }
+        }
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> GetAsync(<#= entity.IdPropertyType #> id)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var entity = await repository.FindAsync(id);
+                if (entity == null)
+                {
+                    throw new DataException(string.Format("<#= entity.Name #> with Id '{0}' not found", id));
+                }
+
+                Logger.Trace("Returning entity '<#= entity.Name #>' with Id '{0}'", id);
+                return entity.ToDto();
+            }
+        }
+
+        public async Task<IEnumerable<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>>> QueryAsync(<#= entity.Name #>Query query = null)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var repoQuery = repository.Query().Apply(query);
+
+                var entities = await repoQuery.ToListAsync();
+                var list = entities.Select(entity => entity.ToDto(query)).ToList();
+                Logger.Trace("Returning {0} result(s) for entity '<#= entity.Name #>'", list.Count);
+                return list;
+            }
+        }
+
+        public async Task<int> CountAsync(<#= entity.Name #>Query query = null)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var repoQuery = repository.Query().Apply(query);
+
+                var count = await repoQuery.CountAsync();
+                Logger.Trace("Returning count {0} for entity '<#= entity.Name #>'", count);
+                return count;
+            }
+        }
+
+        public async Task<Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #>> UpdateAsync(Gorba.Center.Common.ServiceModel.<#= entity.Partition.Name #>.<#= entity.Name #> entity)
+        {
+            using (var repository = <#= entity.Name #>RepositoryFactory.Current.Create())
+            {
+                var databaseEntity = entity.ToDatabase();
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+                databaseEntity.LastModifiedOn = TimeProvider.Current.UtcNow;
+<#+
+        } #>
+                var result = await repository.UpdateAsync(databaseEntity);
+                Logger.Trace("Entity '<#= entity.Name #>' with Id '{0}' updated", entity.Id);
+                return result.ToDto();
+            }
+        }
+    }
+<#+
+    }
+#>

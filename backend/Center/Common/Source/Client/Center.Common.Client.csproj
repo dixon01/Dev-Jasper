@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FC54EA9-187A-471E-889D-3D983E65B217}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Common.Client</RootNamespace>
+    <AssemblyName>Gorba.Center.Common.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618,4014</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618,4014</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagementBootstrapper.generated.cs">
+      <DependentUpon>ChangeTrackingManagementBootstrapper.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagementBootstrapper.partial.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingManagementBootstrapperResult.partial.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingManagementBootstrapperResult.generated.cs">
+      <DependentUpon>ChangeTrackingManagementBootstrapperResult.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagersExtensions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingManagersExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagersSet.generated.cs">
+      <DependentUpon>ChangeTrackingManagersSet.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ChangeTracking\CommitVerificationBase{T}.cs" />
+    <Compile Include="ChangeTracking\Consts.cs" />
+    <Compile Include="ChangeTracking\IReadyGate.cs" />
+    <Compile Include="ChangeTracking\ReadyGate.cs" />
+    <Compile Include="ChangeTracking\ReadyGateFactory.cs" />
+    <Compile Include="ChangeTracking\RemoteChangeTrackingManagementBootstrapper.cs" />
+    <Compile Include="DataServicesConfigurationChannelScopeFactory{T}.cs" />
+    <Compile Include="FunctionalServicesConfigurationChannelScopeFactory{T}.cs" />
+    <Compile Include="NotificationManagerFactoryUtility.cs" />
+    <Compile Include="RemoteServicesConfigurationChannelScopeFactory{T}.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingManagers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingManagers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingManagerBase.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingManagersNotificationHandling.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingManagersNotificationHandling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\TemplateExtensions.cs" />
+    <Compile Include="ChangeTracking\WaitHandleExtensions.cs" />
+    <Compile Include="ChannelScopeFactoryUtility.cs" />
+    <Compile Include="ChannelScope{T}.cs" />
+    <Compile Include="ChannelScopeFactory{T}.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ChangeTracking\ChangeTrackingManagementBootstrapper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagementBootstrapper.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagementBootstrapperResult.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagementBootstrapperResult.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagers.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagersExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagersExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagersNotificationHandling.Entity.ttinclude">
+      <DependentUpon>ChangeTrackingManagersNotificationHandling.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagersNotificationHandling.Partition.ttinclude">
+      <DependentUpon>ChangeTrackingManagersNotificationHandling.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagersNotificationHandling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagersNotificationHandling.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingManagersSet.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingManagersSet.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediNotifications\Center.Common.MediNotifications.csproj">
+      <Project>{e7673f96-f778-4dfc-bc83-fc29d73c0b9c}</Project>
+      <Name>Center.Common.MediNotifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

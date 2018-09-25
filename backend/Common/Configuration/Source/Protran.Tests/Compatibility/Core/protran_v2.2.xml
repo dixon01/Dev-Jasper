@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Protran Version="2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--
+  IMPORTANT: this is not an original Protran 2.2 protran.xml,
+  all "description" and "desc" attributes that were previously allowed were removed -->
+  <Protocols>
+    <Protocol Name="IbisProtocol" Enabled="true"/>
+    <Protocol Name="IOProtocol" Enabled="false"/>
+    <Protocol Name="VDV301" Enabled="false"/>
+  </Protocols>
+  <Persistence>
+    <IsEnabled>false</IsEnabled>
+    <PersistenceFile>persistence.xml</PersistenceFile>
+    <DefaultValidity>PT10M</DefaultValidity>
+  </Persistence>
+</Protran>

@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9411DF24-9043-480A-A8F4-F051F3253E2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Configuration.Infomedia</RootNamespace>
+    <AssemblyName>Gorba.Common.Configuration.Infomedia</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AhdlcRenderer\AhdlcRendererConfig.cs" />
+    <Compile Include="AhdlcRenderer\ChannelConfig.cs" />
+    <Compile Include="AhdlcRenderer\RtsMode.cs" />
+    <Compile Include="AhdlcRenderer\SerialPortConfig.cs" />
+    <Compile Include="AhdlcRenderer\SerialPortReopen.cs" />
+    <Compile Include="AhdlcRenderer\SignBrightness.cs" />
+    <Compile Include="AhdlcRenderer\SignConfig.cs" />
+    <Compile Include="AhdlcRenderer\SignMode.cs" />
+    <Compile Include="AhdlcRenderer\TextConfig.cs" />
+    <Compile Include="HtmlRenderer\HtmlRendererConfig.cs" />
+    <Compile Include="Layout\ElementId.cs" />
+    <Compile Include="MatrixRenderer\ChannelConfig.cs" />
+    <Compile Include="MatrixRenderer\ChannelType.cs" />
+    <Compile Include="MatrixRenderer\MatrixRendererConfigBase.cs" />
+    <Compile Include="MatrixRenderer\MatrixRendererConfig.cs" />
+    <Compile Include="MatrixRenderer\RtsMode.cs" />
+    <Compile Include="MatrixRenderer\SerialPortConfig.cs" />
+    <Compile Include="MatrixRenderer\SerialPortReopen.cs" />
+    <Compile Include="MatrixRenderer\SignBrightness.cs" />
+    <Compile Include="MatrixRenderer\SignConfig.cs" />
+    <Compile Include="MatrixRenderer\SignMode.cs" />
+    <Compile Include="MatrixRenderer\TextConfig.cs" />
+    <Compile Include="AudioRenderer\AudioChannelConfig.cs" />
+    <Compile Include="AudioRenderer\AudioRendererConfig.cs" />
+    <Compile Include="AudioRenderer\IOConfig.cs" />
+    <Compile Include="AudioRenderer\IOPortConfig.cs" />
+    <Compile Include="AudioRenderer\TextToSpeechApi.cs" />
+    <Compile Include="AudioRenderer\TextToSpeechConfig.cs" />
+    <Compile Include="Composer\ComposerConfig.cs" />
+    <Compile Include="Composer\XimpleInactivityConfig.cs" />
+    <Compile Include="DirectXRenderer\DeviceConfig.cs" />
+    <Compile Include="DirectXRenderer\FontQualities.cs" />
+    <Compile Include="DirectXRenderer\ImageConfig.cs" />
+    <Compile Include="DirectXRenderer\MultiSampleTypes.cs" />
+    <Compile Include="DirectXRenderer\PresentFlags.cs" />
+    <Compile Include="DirectXRenderer\PresentIntervals.cs" />
+    <Compile Include="DirectXRenderer\RendererConfig.cs" />
+    <Compile Include="DirectXRenderer\ScreenConfig.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="DirectXRenderer\SwapEffects.cs" />
+    <Compile Include="DirectXRenderer\TextConfig.cs" />
+    <Compile Include="DirectXRenderer\TextMode.cs" />
+    <Compile Include="DirectXRenderer\VideoConfig.cs" />
+    <Compile Include="DirectXRenderer\VideoMode.cs" />
+    <Compile Include="DirectXRenderer\VisibleRegionConfig.cs" />
+    <Compile Include="DirectXRenderer\WindowMode.cs" />
+    <Compile Include="Eval\ConstantEval.cs" />
+    <Compile Include="Eval\Evals.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Evals.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Layout\AnalogClockHandMode.cs" />
+    <Compile Include="Layout\Elements.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Elements.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Layout\GroupElement.cs" />
+    <Compile Include="Layout\ICompositeElement.cs" />
+    <Compile Include="Layout\ElementScaling.cs" />
+    <Compile Include="Layout\Font.cs" />
+    <Compile Include="Layout\HorizontalAlignment.cs" />
+    <Compile Include="Common\PropertyChangeAnimation.cs" />
+    <Compile Include="Common\PropertyChangeAnimationType.cs" />
+    <Compile Include="Layout\SupportedScreenTypesAttribute.cs" />
+    <Compile Include="Layout\TextDirection.cs" />
+    <Compile Include="Layout\TextOverflow.cs" />
+    <Compile Include="Layout\VerticalAlignment.cs" />
+    <Compile Include="Eval\EvalSerializer.cs" />
+    <Compile Include="Eval\GenericEval.cs" />
+    <Compile Include="Common\AnimatedDynamicProperty.cs" />
+    <Compile Include="Common\DynamicProperty.cs" />
+    <Compile Include="Layout\ElementSerializer.cs" />
+    <Compile Include="Common\GenericCoordinate.cs" />
+    <Compile Include="Layout\ImageElement.cs" />
+    <Compile Include="Presentation\Cycle\EventCycleConfigBase.cs" />
+    <Compile Include="Presentation\Cycle\GenericTriggerConfig.cs" />
+    <Compile Include="Presentation\Section\SectionConfigSerializer.cs" />
+    <Compile Include="Presentation\EvaluationConfig.cs" />
+    <Compile Include="Presentation\Presentation.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Presentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\InfomediaConfig.cs" />
+    <Compile Include="Presentation\PhysicalScreenType.cs" />
+    <Compile Include="Presentation\Section\PageMode.cs" />
+    <Compile Include="Presentation\Section\SectionConfigBase.cs" />
+    <Compile Include="Layout\TextElement.cs" />
+    <Compile Include="Layout\VideoElement.cs" />
+    <Compile Include="Presentation\Section\VideoEndMode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Webmedia\ImageWebmediaElement.cs" />
+    <Compile Include="Webmedia\LayoutWebmediaElement.cs" />
+    <Compile Include="Webmedia\VideoWebmediaElement.cs" />
+    <Compile Include="Webmedia\WebmediaConfig.cs" />
+    <Compile Include="Webmedia\WebmediaCycleConfig.cs" />
+    <Compile Include="Webmedia\WebmediaElementBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AhdlcRenderer\AhdlcRenderer.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Composer\Composer.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioRenderer\AudioRenderer.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectXRenderer\DirectXRenderer.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Eval\Evals.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Evals.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Layout\Elements.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Elements.generated.cs</LastGenOutput>
+      <FormatOutput>True</FormatOutput>
+    </None>
+    <None Include="Entities.ttinclude" />
+    <None Include="Eval\All Eval Classes.cd" />
+    <None Include="Layout\All Layout Classes.cd" />
+    <None Include="Local.ttinclude" />
+    <None Include="packages.config" />
+    <None Include="Presentation\All Presentation Classes.cd" />
+    <None Include="Presentation\Presentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Presentation.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

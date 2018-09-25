@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <!-- Control Styles -->
+    <Style x:Key="ButtonReset" TargetType="Button">
+        <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                            Background="{TemplateBinding Background}"
+                            x:Name="Border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+
+                        <Grid>
+                            <ContentPresenter x:Name="ButtonContent"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                                              Content="{TemplateBinding Content}"
+                                              RecognizesAccessKey="True" />
+
+                            <TextBlock x:Name="ButtonTextBlock"  Margin="2"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Text="{TemplateBinding Content}"
+                                              Visibility="Collapsed"/>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefault" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{x:Null}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FlatHighlightButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonHiglightBackgroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HighlightButtonHoverBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource HighlightButtonHoverForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource HoverButtonBackgroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource PressedButtonBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FlatToolbarButton" TargetType="Button" BasedOn="{StaticResource FlatButton}">
+        <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Light.ttf#Frutiger LT Com"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Width" Value="80" />
+    </Style>
+
+    <Style x:Key="FlatTileButton" TargetType="Button" BasedOn="{StaticResource ButtonReset}">
+        <Setter Property="Foreground" Value="{StaticResource UnitTileForeground}" />
+        <Setter Property="Background" Value="{StaticResource UnitTileBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource UnitTileBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HoverButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource HoverButtonBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PressedButtonForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource OpaquePressedButtonBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+</ResourceDictionary>

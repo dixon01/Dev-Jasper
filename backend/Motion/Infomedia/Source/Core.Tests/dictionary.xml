@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <Language Index="0" Name="English">
+    <Table Index="0" Name="System">
+      <Description>Table containing all system information.</Description>
+      <Column Index="0" Name="Date" />
+      <Column Index="1" Name="Time" />
+    </Table>
+    <Table Index="10" Name="Stops">
+      <Description>Table containing all stop information.</Description>
+      <Column Index="0" Name="StopCity" />
+      <Column Index="1" Name="StopTime" />
+    </Table>
+  </Language>
+  <Language Index="1" Name="German">
+    <Table Index="0" Name="System">
+      <Description>Table containing all system information.</Description>
+      <Column Index="0" Name="Datum" />
+      <Column Index="1" Name="Zeit" />
+    </Table>
+    <Table Index="10" Name="Haltestellen">
+      <Description>Table containing all stop information.</Description>
+      <Column Index="0" Name="HaltStadt" />
+      <Column Index="1" Name="Ankunft" />
+    </Table>
+  </Language>
+</Dictionary>

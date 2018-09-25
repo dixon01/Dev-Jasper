@@ -1,0 +1,34 @@
+﻿<interaction1:InteractionDialogBase x:Class="Gorba.Center.Diag.Core.Views.AddUnitDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             xmlns:interaction1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:interaction="clr-namespace:Gorba.Center.Diag.Core.Interaction"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance interaction:AddUnitPromptNotification}"
+             d:DesignHeight="110" d:DesignWidth="300">
+    <Border Padding="10 18 10 10" Background="{StaticResource WindowBackgroundColorBrush}" BorderBrush="{StaticResource OuterWindowBorderColorBrush}"
+            BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static resources:DiagStrings.AddUnitDialog_UnitAddress}"
+                   VerticalAlignment="Center" Margin="10 0 0 0" />
+            <TextBox Name="UnitAddressInput" Grid.Row="0" Grid.Column="1" Text="{Binding UnitAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0 2 10 0" />
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Content="{x:Static resources:DiagStrings.Dialog_OK}" Width="80" Margin="10" Click="OnOkClick"/>
+                <Button Content="{x:Static resources:DiagStrings.Dialog_Cancel}" Width="80" Margin="10" Click="OnCancelClick"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</interaction1:InteractionDialogBase>

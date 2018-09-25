@@ -1,0 +1,239 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{5984C032-1A13-4782-965E-6806EE72AAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceModel", "..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj", "{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Update.ServiceModel", "..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj", "{989648EE-7505-44B4-AF06-432554242964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Update", "..\..\Common\Configuration\Source\Update\Configuration.Update.csproj", "{E976240D-8A45-486D-B485-6D26AEF71A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Client", "..\Common\Source\Client\Center.Common.Client.csproj", "{5FC54EA9-187A-471E-889D-3D983E65B217}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Portal.AzureCloudService", "Source\AzureCloudService\Portal.AzureCloudService.ccproj", "{2F9EBFAA-77CB-469B-9997-CB9C877D8460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Azure", "..\Common\Source\Azure\Center.Common.Azure.csproj", "{4A674DB7-2131-4399-B4A0-795CA4AFCB39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.HostConsole", "Source\HostConsole\Portal.HostConsole.csproj", "{B7E077DE-8027-4325-8567-977C123827A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.MediNotifications", "..\Common\Source\MediNotifications\Center.Common.MediNotifications.csproj", "{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medi.Core", "..\..\Common\Medi\Source\Core\Medi.Core.csproj", "{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Host", "Source\Host\Portal.Host.csproj", "{48B68B82-940E-45CC-B61F-0D8B4633628A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.WorkerRole", "Source\WorkerRole\Portal.WorkerRole.csproj", "{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Files", "..\..\Common\Utility\Source\Files\Utility.Files.csproj", "{93AAE312-ADC9-4F65-BEAF-4266D171D348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Host.Tests", "Source\Host.Tests\Portal.Host.Tests.csproj", "{8950D65F-A52C-414A-A272-30FCAE1285F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Azure", "Source\Azure\Portal.Azure.csproj", "{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|x86.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|x86.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|x86.ActiveCfg = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9EBFAA-77CB-469B-9997-CB9C877D8460}.Release|x86.ActiveCfg = Release|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39}.Release|x86.ActiveCfg = Release|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7E077DE-8027-4325-8567-977C123827A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C}.Release|x86.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.ActiveCfg = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.Build.0 = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.ActiveCfg = Release|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.Build.0 = Release|x86
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B68B82-940E-45CC-B61F-0D8B4633628A}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB1BC36A-179A-4729-BA8A-D79BD0B705F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348}.Release|x86.ActiveCfg = Release|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8950D65F-A52C-414A-A272-30FCAE1285F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7207EFCC-B767-4D1D-AB7E-24BF5D2F4BB9}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{989648EE-7505-44B4-AF06-432554242964} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{E976240D-8A45-486D-B485-6D26AEF71A0C} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{4A674DB7-2131-4399-B4A0-795CA4AFCB39} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{E7673F96-F778-4DFC-BC83-FC29D73C0B9C} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{93AAE312-ADC9-4F65-BEAF-4266D171D348} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {5984C032-1A13-4782-965E-6806EE72AAFA}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 18
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Common\\Source\\ServiceModel\\Center.Common.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName1 = Gorba.Center.Portal.sln
+		SccProjectName1 = ../Common/Source/ServiceModel
+		SccLocalPath1 = ..\\Common\\Source\\ServiceModel
+		SccProjectUniqueName2 = ..\\..\\Common\\Update\\Source\\ServiceModel\\Common.Update.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName2 = Gorba.Center.Portal.sln
+		SccProjectName2 = ../../Common/Update/Source/ServiceModel
+		SccLocalPath2 = ..\\..\\Common\\Update\\Source\\ServiceModel
+		SccProjectUniqueName3 = ..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = Gorba.Center.Portal.sln
+		SccProjectName3 = ../../Common/Configuration/Source/Core
+		SccLocalPath3 = ..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName4 = ..\\..\\Common\\Configuration\\Source\\Update\\Configuration.Update.csproj
+		SccProjectTopLevelParentUniqueName4 = Gorba.Center.Portal.sln
+		SccProjectName4 = ../../Common/Configuration/Source/Update
+		SccLocalPath4 = ..\\..\\Common\\Configuration\\Source\\Update
+		SccProjectUniqueName5 = ..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName5 = Gorba.Center.Portal.sln
+		SccProjectName5 = ../../Common/Utility/Source/Core
+		SccLocalPath5 = ..\\..\\Common\\Utility\\Source\\Core
+		SccProjectUniqueName6 = ..\\Common\\Source\\Client\\Center.Common.Client.csproj
+		SccProjectTopLevelParentUniqueName6 = Gorba.Center.Portal.sln
+		SccProjectName6 = ../Common/Source/Client
+		SccLocalPath6 = ..\\Common\\Source\\Client
+		SccProjectUniqueName7 = ..\\Common\\Source\\Azure\\Center.Common.Azure.csproj
+		SccProjectTopLevelParentUniqueName7 = Gorba.Center.Portal.sln
+		SccProjectName7 = ../Common/Source/Azure
+		SccLocalPath7 = ..\\Common\\Source\\Azure
+		SccProjectUniqueName8 = Source\\HostConsole\\Portal.HostConsole.csproj
+		SccProjectName8 = Source/HostConsole
+		SccLocalPath8 = Source\\HostConsole
+		SccProjectUniqueName9 = ..\\Common\\Source\\MediNotifications\\Center.Common.MediNotifications.csproj
+		SccProjectTopLevelParentUniqueName9 = Gorba.Center.Portal.sln
+		SccProjectName9 = ../Common/Source/MediNotifications
+		SccLocalPath9 = ..\\Common\\Source\\MediNotifications
+		SccProjectUniqueName10 = ..\\..\\Common\\Medi\\Source\\Core\\Medi.Core.csproj
+		SccProjectTopLevelParentUniqueName10 = Gorba.Center.Portal.sln
+		SccProjectName10 = ../../Common/Medi/Source/Core
+		SccLocalPath10 = ..\\..\\Common\\Medi\\Source\\Core
+		SccProjectUniqueName11 = Source\\Host\\Portal.Host.csproj
+		SccProjectName11 = Source/Host
+		SccLocalPath11 = Source\\Host
+		SccProjectUniqueName12 = ..\\..\\Common\\Utility\\Source\\Files\\Utility.Files.csproj
+		SccProjectTopLevelParentUniqueName12 = Gorba.Center.Portal.sln
+		SccProjectName12 = ../../Common/Utility/Source/Files
+		SccLocalPath12 = ..\\..\\Common\\Utility\\Source\\Files
+		SccProjectUniqueName13 = Source\\WorkerRole\\Portal.WorkerRole.csproj
+		SccProjectName13 = Source/WorkerRole
+		SccLocalPath13 = Source\\WorkerRole
+		SccProjectUniqueName14 = Source\\Host.Tests\\Portal.Host.Tests.csproj
+		SccProjectName14 = Source/Host.Tests
+		SccLocalPath14 = Source\\Host.Tests
+		SccProjectUniqueName15 = ..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName15 = Gorba.Center.Portal.sln
+		SccProjectName15 = ../../Common/Utility/Source/Compatibility
+		SccLocalPath15 = ..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName16 = Source\\AzureCloudService\\Portal.AzureCloudService.ccproj
+		SccProjectName16 = Source/AzureCloudService
+		SccLocalPath16 = Source\\AzureCloudService
+		SccProjectUniqueName17 = Source\\Azure\\Portal.Azure.csproj
+		SccProjectName17 = Source/Azure
+		SccLocalPath17 = Source\\Azure
+	EndGlobalSection
+EndGlobal

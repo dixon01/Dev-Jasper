@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns="http://schemas.gorba.com/imotion/systemManager/configuration">
+  <connectionManager checkDelay="PT1H"/>
+   <eventHandler
+    ipAddress="127.0.0.1"
+    port="2539"
+    useIpV6="false"/>
+  <resourceManager
+    deliveryAttemptDelay="PT3M"
+    deliveryMaxAttempts="5"
+    sourceRelativePath="Out\Resources"
+    usbResourcesPath="Resources"/>
+  <schedulerController>
+    <Activity Repeat="OnContact">
+      <CLD xmlns="http://schemas.gorba.com/workflows/activities/v1" Filter="*.icl" Path="D:\Infomedia" UploadPath="In\MediaLogs"/>
+    </Activity>
+    <!--<Activity Repeat="OnContact">
+      <CLD xmlns="http://schemas.gorba.com/workflows/activities/v1" Filter="*.log" Path="D:\imotion\Logs" UploadPath="In\Logs"/>
+    </Activity>-->
+  </schedulerController>
+  <syncManager>
+    <synchronizationContext contextId="3" remotePath="Pool"/>
+  </syncManager>
+  <unitConfiguration
+    unitId="1"
+     dataPath="D:\imotion\Data"
+      ftpAddress="172.17.0.1"
+      ftpPassword="infobase"
+     ftpPort="21"
+      ftpRoot=""
+       ftpUser="infoflex"
+      name="{SystemName}"
+       updateMode="Driven"
+     usbRoot="UsbUpdates"
+     />
+  <notificationManager feedbackNotificationsPath="In\Feedback" notificationsCheckDelay="PT30S" systemNotificationsPath="Out\Notifications\{SystemName}" usbRoot="UsbUpdates"/>
+  <workflowManager>
+    <activationContext id="1" path="D:\Infomedia\Layout" restartComponents="true" restartSystem="false"/>
+    <activationContext id="2" path="D:\Infomedia\Data\Managed" restartComponents="true" restartSystem="false"/>
+    <activationContext id="3" path="D:\Infomedia\Data\Pool" restartComponents="true" restartSystem="false"/>
+    <activationContext id="4" path="D:\Infomedia\Data\Sound" restartComponents="true" restartSystem="false"/>
+    <activationContext id="5" path="D:\Infomedia\Data\Web" restartComponents="true" restartSystem="false"/>
+    <activationContext id="6" path="D:\Progs\Infomedia" restartComponents="true" restartSystem="false"/>
+    <activationContext id="7" path="D:\Infomedia\Symbols" restartComponents="true" restartSystem="false"/>
+    <activationContext id="8" path="D:\Progs\Protran" restartComponents="true" restartSystem="false"/>
+    <activationContext id="9" path="D:\Progs\SystemManager" restartComponents="true" restartSystem="false"/>
+    <activationContext id="10" path="D:\Progs\Startup" restartComponents="true" restartSystem="false"/>
+    <activationContext id="11" path="D:\Progs\EventHandler" restartComponents="true" restartSystem="false"/>
+    <activationContext id="12" path="D:\Progs\SystemUpdate" restartComponents="false" restartSystem="false"/>
+  </workflowManager>
+  <systemManager
+    usbUpdateMode="Force"
+    autoStartComponents="true"
+    componentsRestartDelay="PT30S"
+    startupScript="D:\Progs\Startup\TFTStartup.bat"
+    systemUpdateExecutablePath="D:\Progs\SystemUpdate\SystemUpdate.exe">
+    <embedded controllerType="Gorba.imotion.Update.SystemManager.BusController, Gorba.imotion.Update.SystemManager.Core" autoStart="false" isControllerEmbedded="true" isEnabled="true" name="Bus"/>
+    <embedded controllerType="Gorba.imotion.Update.SystemManager.ActivationController, Gorba.imotion.Update.SystemManager.Core" autoStart="false" isControllerEmbedded="true" isEnabled="true" name="Activation"/>
+    <embedded controllerType="Gorba.imotion.Update.WorkflowManager.WorkflowController, Gorba.imotion.Update.WorkflowManager.Core" autoStart="true" isControllerEmbedded="true" isEnabled="true" name="Workflow"/>
+    <embedded controllerType="Gorba.imotion.Update.ResourceManager.ResourceController, Gorba.imotion.Update.ResourceManager.Core" autoStart="true" isControllerEmbedded="true" isEnabled="true" name="Resources"/>
+    <embedded controllerType="Gorba.imotion.Update.NotificationManager.NotificationController, Gorba.imotion.Update.NotificationManager.Core" autoStart="true" isControllerEmbedded="true" isEnabled="true" name="Notification"/>
+    <embedded controllerType="Gorba.imotion.Update.SystemManager.SchedulerController, Gorba.imotion.Update.SystemManager.Core" autoStart="true" isControllerEmbedded="true" isEnabled="true" name="Scheduler"/>
+    <external applicationPath="D:\Progs\EventHandler\MediServer.exe" autoStart="true" isEnabled="true" name="MediServer" startMinimized="true"/>
+    <external applicationPath="D:\Progs\Protran\Protran.exe" autoStart="true" isEnabled="true" name="Protran" startMinimized="true"/>
+    <external applicationPath="D:\Progs\Infomedia\Infomedia.exe" autoStart="true" isEnabled="true" name="Infomedia"/>
+	<external applicationPath="D:\Progs\Protran\FileZillaServer\FileZillaServer.bat" autoStart="true" isEnabled="true" name="FileZillaServer" startMinimized="true"/>
+  </systemManager>
+
+</configuration>

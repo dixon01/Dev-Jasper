@@ -1,0 +1,127 @@
+﻿<?xml version="1.0"?>
+<SystemManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="file:///. ../ServiceModel/Config/SystemManager.xsd">
+  <Defaults>
+    <Process>
+      <LaunchDelay>PT0S</LaunchDelay>
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <WindowMode>Minimized</WindowMode>
+      <Priority>Normal</Priority>
+      <KillIfRunning>true</KillIfRunning>
+    </Process>
+  </Defaults>
+
+  <SplashScreens>
+    <SplashScreen Name="Boot" Enabled="false" Foreground="Black" Background="#E6ECF0">
+      <ShowOn>
+        <SystemBoot />
+      </ShowOn>
+      <HideOn>
+        <SystemShutdown />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Announcement" Enabled="false" Foreground="Black" Background="#FF0000">
+      <ShowOn>
+        <Input Unit="*" Name="UDCPAnnounce" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Input Unit="*" Name="UDCPAnnounce" Value="0" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="false" Serial="true" />
+        <Network Name="false" Ip="true" Gateway="false" Mac="false" Status="false" StatusFilter="Up" />
+      </Items>
+    </SplashScreen>
+  </SplashScreens>
+
+  <System>
+    <KickWatchdog>false</KickWatchdog>
+    <RamLimit Enabled="false">
+      <FreeRamMB>800</FreeRamMB>
+      <Actions>
+        <Reboot/>
+      </Actions>
+    </RamLimit>
+    <CpuLimit Enabled="false">
+      <MaxCpuPercentage>98</MaxCpuPercentage>
+      <Actions>
+        <Reboot/>
+      </Actions>
+    </CpuLimit>
+    <DiskLimits Enabled="false">
+      <Disk Path="C:\" Enabled="true">
+        <FreeSpaceMB>5</FreeSpaceMB>
+        <Actions>
+          <Reboot/>
+        </Actions>
+      </Disk>
+      <Disk Path="D:\" Enabled="false">
+        <FreeSpaceMB>10</FreeSpaceMB>
+        <FreeSpacePercentage>5</FreeSpacePercentage>
+        <Actions>
+          <Purge Path="D:\temp\"/>
+          <Purge Path="D:\log\archives\"/>
+        </Actions>
+      </Disk>
+    </DiskLimits>
+    <PreventPopups Enabled="true" CheckInterval="PT10S">
+    </PreventPopups>
+  </System>
+  <Applications>
+    <Process Name="Portal" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT0S</LaunchDelay>
+      <ExecutablePath>..\Portal\CenterPortal.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="false">
+        <MaxRamMB>50</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="BackgroundSystem" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT10S</LaunchDelay>
+      <ExecutablePath>..\BackgroundSystem\BackgroundSystemConsoleHost.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>800</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="Presentation Play Logging" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT10S</LaunchDelay>
+      <ExecutablePath>..\PresentationPlayLogging\PresentationPlayLoggingImport.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>800</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="Presentation Play Logging" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT10S</LaunchDelay>
+      <ExecutablePath>..\PresentationPlayLogging\PresentationPlayLoggingImport.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>800</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+  </Applications>
+</SystemManager>

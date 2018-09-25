@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<UnitManagerConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="UnitManagerConsoleApp.Config">
+  <UnitAddress>
+	<NetworkAddress>A:2.1.1</NetworkAddress>
+	<NetworkAddress>A:2.2.1</NetworkAddress>
+  </UnitAddress>
+</UnitManagerConfig>

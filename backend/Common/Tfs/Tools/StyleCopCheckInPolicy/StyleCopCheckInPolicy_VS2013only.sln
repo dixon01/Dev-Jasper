@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyleCopCheckInPolicy_VS2013only", "StyleCopCheckInPolicy_VS2013only.csproj", "{C76315AE-87A1-44E0-8313-5B604A32F5F1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = StyleCopCheckInPolicy_VS2013only.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		VS2013_Debug|Any CPU = VS2013_Debug|Any CPU
+		VS2013_Release|Any CPU = VS2013_Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C76315AE-87A1-44E0-8313-5B604A32F5F1}.VS2013_Debug|Any CPU.ActiveCfg = VS2013_Debug|Any CPU
+		{C76315AE-87A1-44E0-8313-5B604A32F5F1}.VS2013_Debug|Any CPU.Build.0 = VS2013_Debug|Any CPU
+		{C76315AE-87A1-44E0-8313-5B604A32F5F1}.VS2013_Release|Any CPU.ActiveCfg = VS2013_Release|Any CPU
+		{C76315AE-87A1-44E0-8313-5B604A32F5F1}.VS2013_Release|Any CPU.Build.0 = VS2013_Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

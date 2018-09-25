@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Gorba.Center.Diag.Core.Views.Controls.ApplicationListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             xmlns:serviceModel="clr-namespace:Gorba.Common.SystemManagement.ServiceModel;assembly=Gorba.Common.SystemManagement.ServiceModel"
+             xmlns:unit="clr-namespace:Gorba.Center.Diag.Core.ViewModels.Unit"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:converters="clr-namespace:Gorba.Center.Diag.Core.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="50" d:DesignWidth="300" d:DataContext="{d:DesignInstance unit:ApplicationInfoSectionViewModel}">
+    <UserControl.Resources>
+        <converters:ApplicationIconConverter x:Key="ApplicationIconConverter" />
+        <converters1:StringFormatConverter x:Key="ImageSourcePathConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+
+            <Style x:Key="TitleBlock" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+                <Setter Property="FontFamily" Value="/Gorba.Center.Diag.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"/>
+            </Style>
+            
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="75"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ToolTip>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{x:Static resources:DiagStrings.UnitTabSection_Tooltip_Format}">
+                        <Binding Path="Application.State.Path"/>
+                        <Binding Path="Application.State.CpuUsage"/>
+                        <Binding Path="Application.State.RamUsageBytes"/>
+                        <Binding Source="{x:Static s:Environment.NewLine}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </Grid.ToolTip>
+
+        <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"  Width="32" Height="32"
+               Source="{Binding Path=Application.ApplicationType, Converter={StaticResource ApplicationIconConverter}}" />
+
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Text="{Binding Application.Name}" 
+                   TextTrimming="CharacterEllipsis" Style="{StaticResource TitleBlock}" VerticalAlignment="Center" />
+
+        <TextBlock Grid.Column="4" Grid.Row="0" Text="{Binding Application.State.Version}" VerticalAlignment="Center"
+                                                                   Margin="0 0 2 0"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Application.State.CpuUsage, StringFormat='{}CPU {0}'}" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Application.State.RamUsage, StringFormat='{}RAM {0}'}" VerticalAlignment="Center" />
+
+        <Image Grid.Column="3" Grid.Row="1" Width="16" Height="16"
+               Source="{Binding Path=Application.State.State, Converter={StaticResource ImageSourcePathConverter}, ConverterParameter=../../Resources/Icons/State_{0}_16x16.png}">
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Application.State.State}" Value="{x:Static serviceModel:ApplicationState.Exited}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+
+        <Image Grid.Column="4" Grid.Row="1" Source="../../Resources/Icons/warning_16x16.png" Width="16" Height="16" Visibility="Hidden" />
+    </Grid>
+</UserControl>

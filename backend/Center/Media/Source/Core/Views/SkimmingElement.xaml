@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.SkimmingElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Project"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance dataViewModels:ResourceInfoDataViewModel}">
+    <UserControl.Resources>
+        <converters:FilenameToResourceFullFilenameConverter x:Key="FilenameToResourceFullFilenameConverter" />
+    </UserControl.Resources>
+    <Grid>
+
+        <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/placeholder_video.png"
+               Name="LoadPlaceholder"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+        <MediaElement VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      LoadedBehavior="Pause"
+                      UnloadedBehavior="Stop"
+                      Name="VideoElement"
+                      PreviewMouseMove="VideoElementOnPreviewMouseMove"
+                      MouseEnter="VideoElementOnMouseEnter"
+                      ScrubbingEnabled="True"
+                      Source="{Binding Converter={StaticResource ResourceKey=FilenameToResourceFullFilenameConverter}, Path=Filename}"/>
+        <Grid ZIndex="1" VerticalAlignment="Bottom" Margin="5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="DimensionTextBlock" Grid.Column="0" HorizontalAlignment="Left" />
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <TextBlock x:Name="TimeTextBlock" />
+                <TextBlock Text="/" Margin="3,0" />
+                <TextBlock x:Name="DurationTextBlock" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

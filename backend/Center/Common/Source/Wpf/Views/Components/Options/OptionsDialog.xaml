@@ -1,0 +1,150 @@
+﻿<interaction:InteractionDialogBase x:Class="Gorba.Center.Common.Wpf.Views.Components.Options.OptionsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:framework="clr-namespace:Gorba.Center.Common.Wpf.Framework;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction:OptionsPrompt}"
+                                   Background="{StaticResource DialogBackgroundColorBrush}"
+                                     BorderThickness="1" BorderBrush="{StaticResource DialogBorderBrush}"
+                                     Padding="3"
+                                   Name="Root">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Title bar -->
+        <Border Grid.Row="0" BorderBrush="{StaticResource DialogBorderBrush}" BorderThickness="0 0 0 2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                               Width="48"
+                               Height="48"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Source="../../Icons/gear_48x48.png"
+                               Margin="12,0,0,0"/>
+
+                <TextBlock Grid.Column="1"
+                                   Margin="5 0 0 0"
+                                   VerticalAlignment="Center"
+                                   FontSize="24"
+                                    HorizontalAlignment="Left"
+                                   Text="{x:Static framework:FrameworkStrings.OptionsDialog_Title}" />
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- Left tab -->
+            <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                     BorderBrush="{StaticResource DialogBorderBrush}" BorderThickness="0 0 1 0" Margin="0 0 5 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image ToolTip="{Binding TitleTooltip}" Source="{Binding CategoryIconSource}"
+                                   Width="32" Height="32" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Margin="0,2,0,0"/>
+                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" Margin="3 3"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource ToolbarBackgroundBrush}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}" Padding="4 0 0 0" 
+                                BorderThickness="0 0 4 0" BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect" Value="{x:Null}" />
+
+                                <Setter Property="Background" Value="{StaticResource HoverToolbarButtonBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource HoverToolbarButtonBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Effect" Value="{x:Null}" />
+
+                                <Setter Property="Background" Value="{StaticResource CheckedToolbarButtonBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource CheckedToolbarButtonBorderBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            
+            <!-- Content -->
+            <Border Grid.Column="1" Grid.Row="0" BorderThickness="0 0 0 2" BorderBrush="{StaticResource DialogBorderBrush}" DataContext="{Binding SelectedCategory}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="{StaticResource DialogBorderBrush}" BorderThickness="0 0 0 2">
+                        <TextBlock Text="{Binding Title}" ToolTip="{Binding TitleTooltip}" FontSize="18" VerticalAlignment="Center" Margin="5 0"/>
+                    </Border>
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Groups}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Border  Background="{StaticResource OptionDialogGroupBackgroundBrush}" Grid.Row="0" Margin="0 5">
+                                        <TextBlock Text="{Binding Label}" FontWeight="Bold" Padding="2" Foreground="{StaticResource OptionDialogGroupForegroundBrush}"/>
+                                    </Border>
+                                    <ContentControl Content="{Binding}" Grid.Row="1" Margin="5 0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
+                <Button Style="{StaticResource FlatHighlightButton}"
+                        Command="{Binding SaveCommand}"
+                        CommandParameter="{Binding}"
+                        Click="ButtonOnClick"
+                    Content="{x:Static framework:FrameworkStrings.Dialog_Ok}"
+                    MinWidth="70"
+                    Margin="0 0 10 0" Height="18" VerticalAlignment="Top"/>
+
+                <Button Style="{StaticResource FlatDarkButton}" 
+                    Content="{x:Static framework:FrameworkStrings.Dialog_Cancel}"
+                        Click="ButtonOnClick"
+                    MinWidth="70" 
+                    />
+            </StackPanel>
+        </Grid>
+        
+        
+        
+        
+        
+        
+    </Grid>
+</interaction:InteractionDialogBase>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{989648EE-7505-44B4-AF06-432554242964}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Update.ServiceModel</RootNamespace>
+    <AssemblyName>Gorba.Common.Update.ServiceModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Clients\IUpdateClient.cs" />
+    <Compile Include="Clients\UpdateClientBase.cs" />
+    <Compile Include="Clients\UpdateClientFactory.cs" />
+    <Compile Include="Clients\UpdateSourceBase.cs" />
+    <Compile Include="Common\FileDefinitions.cs" />
+    <Compile Include="Common\IUpdateContext.cs" />
+    <Compile Include="Common\IUpdateComponent.cs" />
+    <Compile Include="Common\IUpdateSource.cs" />
+    <Compile Include="Common\ResourceCollector.cs" />
+    <Compile Include="Common\UpdateCommandsEventArgs.cs" />
+    <Compile Include="Common\UpdateComponentBase.cs" />
+    <Compile Include="Common\UpdateFolderStructure.cs" />
+    <Compile Include="Common\UpdateStage.cs" />
+    <Compile Include="Repository\RepositoryConfig.cs" />
+    <Compile Include="Repository\RepositoryVersionConfig.cs" />
+    <Compile Include="Resources\IExtendedResourceProvider.cs" />
+    <Compile Include="UpdateException.FX20.cs" />
+    <Compile Include="Messages\ExecutableFile.cs" />
+    <Compile Include="Messages\FileSystemUpdate.cs" />
+    <Compile Include="Messages\FileSystemUpdateInfo.cs" />
+    <Compile Include="Messages\FileUpdate.cs" />
+    <Compile Include="Messages\FileUpdateInfo.cs" />
+    <Compile Include="Messages\FolderUpdate.cs" />
+    <Compile Include="Messages\FolderUpdateInfo.cs" />
+    <Compile Include="Messages\ItemUpdateState.cs" />
+    <Compile Include="Messages\RunApplication.cs" />
+    <Compile Include="Messages\RunCommands.cs" />
+    <Compile Include="Messages\UnitId.cs" />
+    <Compile Include="Messages\UpdateId.cs" />
+    <Compile Include="Messages\UpdateStateInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Messages\UpdateCommand.cs" />
+    <Compile Include="Messages\UpdateState.cs" />
+    <Compile Include="Common\FeedbackEventArgs.cs" />
+    <Compile Include="Common\FileReceivedLogFile.cs" />
+    <Compile Include="Common\IReceivedLogFile.cs" />
+    <Compile Include="Common\IUpdateSink.cs" />
+    <Compile Include="Providers\IManualUpdateProvider.cs" />
+    <Compile Include="Providers\UpdateProviderFactory.cs" />
+    <Compile Include="Common\UpdateSinkBase.cs" />
+    <Compile Include="Resources\IResource.cs" />
+    <Compile Include="Resources\IResourceProvider.cs" />
+    <Compile Include="Providers\IUpdateProvider.cs" />
+    <Compile Include="Providers\UpdateProviderBase.cs" />
+    <Compile Include="Resources\ResourceHash.cs" />
+    <Compile Include="UpdateException.cs" />
+    <Compile Include="Utility\IPartProgressMonitor.cs" />
+    <Compile Include="Utility\IProgressMonitor.cs" />
+    <Compile Include="Utility\NullProgressMonitor.cs" />
+    <Compile Include="Utility\PartProgressMonitor.cs" />
+    <Compile Include="Utility\TemporaryFileStream.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Repository\repository.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Created="2013-10-04 10:44:17">
+  <PhysicalScreens>
+    <PhysicalScreen Name="TftScreen" Type="TFT" Id="0" Width="1920" Height="630"/>
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="TftLeftDisplay" CyclePackage="TftLeftPackage" Width="940" Height="630" />
+    <VirtualDisplay Name="TftRightDisplay" CyclePackage="TftRightPackage" Width="940" Height="630" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MasterCycle">
+        <MasterSection Duration="86400" Layout="StandardMasterLayout" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="StandardMasterLayout">
+        <PhysicalScreen Ref="TftScreen">
+          <VirtualDisplay X="0" Y="0" Ref="TftLeftDisplay" />
+          <VirtualDisplay X="980" Y="0" Ref="TftRightDisplay" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations />
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="Main Left Cycle">
+        <Enabled>
+          <DayOfWeek Mon="true" Tue="true" Wed="true" Thu="true" Fri="true" Sat="true" Sun="true" />
+        </Enabled>
+        <StandardSection Duration="8" Layout="Main Left Layout" />
+        <StandardSection Duration="8" Layout="Fallback Layout" />
+      </StandardCycle>
+      <StandardCycle Name="Main Right Cycle">
+        <Enabled>
+          <DayOfWeek Mon="true" Tue="true" Wed="true" Thu="true" Fri="true" Sat="true" Sun="true" />
+        </Enabled>
+        <PoolSection Duration="10" Layout="Main Right Layout" Pool="ImagePool" Frame="0" VideoEndMode="Adapt" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles />
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="TftLeftPackage">
+      <StandardCycles>
+        <StandardCycle Ref="Main Left Cycle" />
+      </StandardCycles>
+      <EventCycles />
+    </CyclePackage>
+    <CyclePackage Name="TftRightPackage">
+      <StandardCycles>
+        <StandardCycle Ref="Main Right Cycle" />
+      </StandardCycles>
+      <EventCycles />
+    </CyclePackage>
+  </CyclePackages>
+  <Pools>
+    <Pool Name="ImagePool" BaseDirectory="images\Pool"/>
+  </Pools>
+  <Fonts>
+    <Font Path="fonts\FTC___.TTF" />
+    <Font Path="fonts\FTBLC_.TTF" />
+  </Fonts>
+  <Layouts>
+    <Layout Name="Main Left Layout">
+      <Resolution Width="940" Height="630">
+        <AnalogClock X="0" Y="0" ZIndex="1">
+          <Hour X="888" Y="533" Width="7" Height="56" Filename="Images\HourZ.png" Scaling="Fixed" Mode="Smooth" CenterX="4" CenterY="41" />
+          <Minute X="889" Y="523" Width="5" Height="68" Filename="Images\MinZ.png" Scaling="Fixed" Mode="Smooth" CenterX="3" CenterY="53" />
+          <Seconds X="886" Y="524" Width="12" Height="66" Filename="Images\SecZ.png" ZIndex="1" Scaling="Fixed" Mode="Smooth" CenterX="6" CenterY="51" />
+        </AnalogClock>
+        <Text X="200" Y="10" Width="800" Height="100" ZIndex="2" Align="Left" Overflow="Scale" Value="Stop1">
+          <Visible>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="12" Column="5" Row="0" />
+            </StringCompare>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="1000" Italic="false" Color="#FFFFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+        </Text>
+        <Text X="200" Y="-9" Width="800" Height="100" ZIndex="3" Align="Left" Overflow="Scale" Value="Stop1">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="12" Column="5" Row="0" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="1000" Italic="false" Color="#FFFFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+        </Text>
+        <ImageList X="289" Y="110" Width="800" Height="50" ZIndex="4" Overflow="Wrap" Align="Left" Direction="LTR" HorizontalImageGap="5" VerticalImageGap="0" ImageWidth="0" ImageHeight="0" FilePatterns="Symbols\{0}.jpg;Symbols\{0}.jpeg;Symbols\{0}.png">
+          <Values>
+            <Generic Lang="0" Table="12" Column="5" Row="0" />
+          </Values>
+        </ImageList>
+        <Text X="200" Y="151" Width="800" Height="200" ZIndex="5" Align="Left" Overflow="Scale" Value="Stop2">
+          <Visible>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="12" Column="5" Row="1" />
+            </StringCompare>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="100" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+        </Text>
+        <Text X="200" Y="128" Width="800" Height="200" ZIndex="6" Align="Left" Overflow="Scale" Value="Stop2">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="12" Column="5" Row="1" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="100" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+        </Text>
+        <ImageList X="289" Y="266" Width="800" Height="50" ZIndex="7" Overflow="Wrap" Align="Left" Direction="LTR" HorizontalImageGap="5" VerticalImageGap="0" ImageWidth="0" ImageHeight="0" FilePatterns="Symbols\{0}.jpg;Symbols\{0}.jpeg;Symbols\{0}.png">
+          <Values>
+            <Generic Lang="0" Table="12" Column="5" Row="1" />
+          </Values>
+        </ImageList>
+        <Text X="200" Y="273" Width="800" Height="200" ZIndex="8" Align="Left" Overflow="Scale" Value="Stop3">
+          <Visible>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="12" Column="5" Row="2" />
+            </StringCompare>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="500" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+        </Text>
+        <Text X="200" Y="264" Width="800" Height="200" ZIndex="9" Align="Left" Overflow="Scale" Value="Stop3">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="12" Column="5" Row="2" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="500" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+        </Text>
+        <ImageList X="289" Y="422" Width="800" Height="50" ZIndex="10" Overflow="Wrap" Align="Left" Direction="LTR" HorizontalImageGap="5" VerticalImageGap="0" ImageWidth="0" ImageHeight="0" FilePatterns="Symbols\{0}.jpg;Symbols\{0}.jpeg;Symbols\{0}.png">
+          <Values>
+            <Generic Lang="0" Table="12" Column="5" Row="2" />
+          </Values>
+        </ImageList>
+        <Text X="200" Y="380" Width="800" Height="200" ZIndex="11" Align="Left" Overflow="Scale" Value="Stop4">
+          <Visible>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="12" Column="5" Row="3" />
+            </StringCompare>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="500" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="3" />
+          </Value>
+        </Text>
+        <Text X="285" Y="380" Width="800" Height="200" ZIndex="12" Align="Left" Overflow="Scale" Value="Stop4">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="12" Column="5" Row="3" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="500" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="3" />
+          </Value>
+        </Text>
+        <ImageList X="289" Y="578" Width="800" Height="45" ZIndex="13" Overflow="Wrap" Align="Left" Direction="LTR" HorizontalImageGap="5" VerticalImageGap="0" ImageWidth="0" ImageHeight="0" FilePatterns="Symbols\{0}.jpg;Symbols\{0}.jpeg;Symbols\{0}.png">
+          <Values>
+            <Generic Lang="0" Table="12" Column="5" Row="3" />
+          </Values>
+        </ImageList>
+        <Text X="200" Y="530" Width="800" Height="300" ZIndex="14" Align="Left" Overflow="Scale" Value="DestinationName">
+          <Visible>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="11" Column="5" Row="0" />
+            </StringCompare>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="650" Italic="false" Color="#FFFFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="11" Column="0" Row="0" />
+          </Value>
+        </Text>
+        <Text X="200" Y="530" Width="800" Height="300" ZIndex="15" Align="Left" Overflow="Scale" Value="DestinationName">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="11" Column="5" Row="0" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="80" Weight="650" Italic="false" Color="#FFFFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="11" Column="0" Row="0" />
+          </Value>
+        </Text>
+        <Image X="200" Y="854" Width="0" Height="0" ZIndex="16">
+          <Filename>
+            <Generic Lang="0" Table="11" Column="5" Row="0" />
+          </Filename>
+        </Image>
+        <Text X="10" Y="2" Width="120" Height="170" ZIndex="17" Align="Center" Overflow="Scale" Value="LineNr">
+          <Font Face="Frutiger 57Cn" Height="143" Weight="650" Italic="false" Color="#FFFFFFFF" />
+          <Value>
+            <CsvMapping FileName="codeconversion.csv" OutputFormat="{3}">
+              <DefaultValue>
+                <Generic Lang="0" Table="10" Column="0" Row="0" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="10" Column="1" Row="0" />
+              </Match>
+              <Match Column="1">
+                <Generic Lang="0" Table="10" Column="0" Row="0" />
+              </Match>
+            </CsvMapping>
+          </Value>
+        </Text>
+        <Image X="0" Y="0" Width="120" Height="170" ZIndex="18">
+          <Filename>
+            <CsvMapping FileName="codeconversion.csv" OutputFormat="{2}">
+              <DefaultValue>
+                <Generic Lang="0" Table="10" Column="1" Row="0" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="10" Column="1" Row="0" />
+              </Match>
+              <Match Column="1">
+                <Generic Lang="0" Table="10" Column="0" Row="0" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+    <Text X="30" Y="215" Width="1305" Height="240" ZIndex="110" Align="Left" Overflow="Scale" Value="PopUp">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="20" Column="2" Row="0" />
+              </StringCompare>
+            </Not>
+          </Visible>
+          <Font Face="Frutiger 57Cn" Height="120" Weight="600" Italic="false" Color="#FF000000" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="0" />
+          </Value>
+        </Text>
+        <Image X="0" Y="155" Width="900" Height="483" ZIndex="100" Filename="Images\Popup.png">
+          <Visible>
+            <Not>
+              <StringCompare Value="">
+                <Generic Lang="0" Table="20" Column="2" Row="0" />
+              </StringCompare>
+            </Not>
+          </Visible>
+        </Image>
+        <Image X="0" Y="0" Width="940" Height="630" ZIndex="-10" Filename="Images\Background.png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Fallback Layout">
+      <Resolution Width="940" Height="630">
+        <Image X="0" Y="0" Width="940" Height="630" ZIndex="-10" Filename="Images\bvb-testbild.png" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Main Right Layout">
+      <Resolution Width="940" Height="630">
+      </Resolution>
+    </Layout>        
+  </Layouts>
+</Infomedia>

@@ -1,0 +1,179 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name).OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).OrderBy(entity => entity.Name);
+    foreach (var entity in entities)
+    {
+        this.entityKeyTypes.Add(entity.Name, entity.IdPropertyType);
+        this.entityKeyTypes.Add(entity.Partition.Name + "." + entity.Name, entity.IdPropertyType);
+    }
+#>
+namespace Gorba.Center.Common.ServiceModel.Filters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Runtime.Serialization;
+
+    using Filters;
+    
+    using Gorba.Center.Common.ServiceModel;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}<#+
+    private readonly Dictionary<string, string> entityKeyTypes = new Dictionary<string, string>();
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.OrderBy(entity => entity.Name).ToList();
+#>
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+
+        <#+
+        foreach (var entity in entities)
+        {
+            this.WriteEntity(entity);
+        }
+#>
+    }
+<#+
+    }
+    
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+#>
+        public static class <#= entity.Name #>QueryExtensions
+        {
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+
+            public static <#= entity.Name #>Query OrderByCreatedOn(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.CreatedOn, SortDirection.Ascending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= entity.Name #>Query OrderByCreatedOnDescending(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.CreatedOn, SortDirection.Descending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= entity.Name #>Query OrderByLastModifiedOn(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.LastModifiedOn, SortDirection.Ascending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= entity.Name #>Query OrderByLastModifiedOnDescending(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.LastModifiedOn, SortDirection.Descending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= entity.Name #>Query OrderByVersion(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.Version, SortDirection.Ascending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= entity.Name #>Query OrderByVersionDescending(this <#= entity.Name #>Query query)
+            {
+                var clause = new <#= entity.Name #>Query.OrderClause(<#= entity.Name #>Query.SortingProperties.Version, SortDirection.Descending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+<#+
+        }
+
+        var valueProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+            .OrderBy(property => property.Name).ToList();
+            
+        var enumProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Enumeration)
+            .OrderBy(property => property.Name).ToList();
+
+        foreach (var property in enumProperties)
+        {
+            this.WriteEnumProperty(property);
+        }
+
+        foreach (var property in valueProperties)
+        {
+            this.WriteProperty(property);
+        }
+#>
+        }
+
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {
+#>
+
+            public static <#= property.Entity.Name #>Query OrderBy<#= property.Name #>(this <#= property.Entity.Name #>Query query)
+            {
+                var clause = new <#= property.Entity.Name #>Query.OrderClause(<#= property.Entity.Name #>Query.SortingProperties.<#= property.Name #>, SortDirection.Ascending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= property.Entity.Name #>Query OrderBy<#= property.Name #>Descending(this <#= property.Entity.Name #>Query query)
+            {
+                var clause = new <#= property.Entity.Name #>Query.OrderClause(<#= property.Entity.Name #>Query.SortingProperties.<#= property.Name #>, SortDirection.Descending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+<#+
+    }
+
+    private void WriteEnumProperty(EntitySpace.Property property)
+    {
+#>
+
+            public static <#= property.Entity.Name #>Query OrderBy<#= property.Name #>(this <#= property.Entity.Name #>Query query)
+            {
+                var clause = new <#= property.Entity.Name #>Query.OrderClause(<#= property.Entity.Name #>Query.SortingProperties.<#= property.Name #>, SortDirection.Ascending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+
+            public static <#= property.Entity.Name #>Query OrderBy<#= property.Name #>Descending(this <#= property.Entity.Name #>Query query)
+            {
+                var clause = new <#= property.Entity.Name #>Query.OrderClause(<#= property.Entity.Name #>Query.SortingProperties.<#= property.Name #>, SortDirection.Descending);
+                query.Sorting.Add(clause);
+                return query;
+            }
+<#+
+    }
+#>

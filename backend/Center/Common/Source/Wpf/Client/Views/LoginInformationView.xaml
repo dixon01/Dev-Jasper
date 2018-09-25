@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Gorba.Center.Common.Wpf.Client.Views.LoginInformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:client="clr-namespace:Gorba.Center.Common.Wpf.Client"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Common.Wpf.Client.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="28" d:DataContext="{d:DesignInstance viewModels:LoginInformationViewModel}">
+    <UserControl.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBoolToVisibility" />
+        <converters:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding ApplicationState.IsOfflineMode, Converter={StaticResource InvertedBoolToVisibility}}">
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0"
+                   FontFamily="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome"
+                   FontSize="18"
+                   Foreground="OrangeRed"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="3"
+                   Text="&#xf071;"
+                   Visibility="{Binding ApplicationState.MaintenanceMode.IsEnabled, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock.ToolTip>
+                <TextBlock>
+                    <!-- weird formatting below is to prevent spaces between runs, but still keep it readable -->
+                    <Run FontFamily="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome" Text="&#xf0ad; "
+                         /><Run Text="{x:Static client:Strings.MaintenanceModeActivated_Title}"
+                         /><Run Text=": " xml:space="preserve"
+                         /><Run Text="{Binding ApplicationState.MaintenanceMode.Reason}" />
+                </TextBlock>
+            </TextBlock.ToolTip>
+        </TextBlock>
+
+        <telerik:RadDropDownButton Grid.Column="1"
+                                   x:Name="UserDropDown"
+                                   HorizontalAlignment="Right"
+                                   HorizontalContentAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="{Binding ApplicationState.CurrentUser.Username}"
+                                   BorderThickness="0">
+            <telerik:RadDropDownButton.DropDownContent>
+                <telerik:RadListBox x:Name="UserDropDownList"
+                                    Width="Auto" Height="Auto"
+                                    BorderThickness="0"
+                                    MouseLeftButtonUp="OnOptionChange">
+                    <telerik:RadListBoxItem Content="{Binding ApplicationState.LastServer, Converter={StaticResource StringFormatConverter}, ConverterParameter={x:Static client:Strings.UserMenu_ServerFormat}}"
+                                            IsEnabled="False" FontStyle="Italic"
+                                            Margin="3 1" />
+                    <telerik:RadListBoxItem Content="{x:Static client:Strings.UserMenu_ChangePassword}"
+                                            MouseLeftButtonUp="OnChangePasswordClicked"
+                                            Margin="3 1"
+                                            IsEnabled="{Binding ApplicationState.UsedDomainLogin, Converter={StaticResource InvertedBooleanConverter}}"/>
+                    <telerik:RadListBoxItem Content="{x:Static client:Strings.UserMenu_Logout}"
+                                            MouseLeftButtonUp="OnLogOutClicked"
+                                            Margin="3 1" /> 
+                </telerik:RadListBox>
+            </telerik:RadDropDownButton.DropDownContent>
+        </telerik:RadDropDownButton>
+
+        <telerik:RadButton Grid.Column="2" 
+                           Margin="3"
+                           Style="{StaticResource RadButtonStyle}"
+                           Height="22" Width="22"
+                           FontSize="18"
+                           FontFamily="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome"
+                           Content="&#xf08b;"
+                           Command="{Binding LogoutCommand}"
+                           ToolTip="{Binding ApplicationState.LastServer, Converter={StaticResource StringFormatConverter}, ConverterParameter={x:Static client:Strings.Logout_ToolTipFormat}}"/>
+
+        <Rectangle Grid.Column="3" VerticalAlignment="Stretch" Width="1" Margin="3" Stroke="Black" />
+
+        <telerik:RadDropDownButton Grid.Column="4"
+                                   x:Name="TenantDropDown"
+                                   HorizontalAlignment="Left"
+                                   HorizontalContentAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="{Binding ApplicationState.CurrentTenant.Name}"
+                                   BorderThickness="0">
+            <telerik:RadDropDownButton.DropDownContent>
+                <telerik:RadListBox Width="Auto"
+                                    Height="Auto"
+                                    BorderThickness="0"
+                                    SelectedItem="{Binding ApplicationState.CurrentTenant, Mode=TwoWay}"
+                                    ItemsSource="{Binding ApplicationState.AuthorizedTenants}"
+                                    MouseLeftButtonUp="OnOptionChange">
+                    <telerik:RadListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Margin="3 1" />
+                        </DataTemplate>
+                    </telerik:RadListBox.ItemTemplate>
+                </telerik:RadListBox>
+            </telerik:RadDropDownButton.DropDownContent>
+        </telerik:RadDropDownButton>
+    </Grid>
+</UserControl>

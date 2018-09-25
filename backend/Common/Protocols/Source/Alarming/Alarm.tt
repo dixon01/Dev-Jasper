@@ -1,0 +1,48 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="Alarms.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+
+using Gorba.Common.Utility.Compatibility;
+
+<#
+    var categories = LoadAlarmCategories(this.Host.ResolvePath("Alarms.xml"));
+    
+    #>
+namespace Gorba.Common.Protocols.Alarming
+{
+    public partial class Alarm
+    {
+        public string GetAttributeText()
+        {
+<#
+    foreach (var category in categories)
+    {
+        foreach (var evnt in category.Events)
+        {
+            #>
+            if (this.Type == AlarmType.<#= category.Name #><#= evnt.Name #>)
+            {
+                return ((<#= category.Name #><#= evnt.Name #>Attribute)this.Attribute).ToString();
+            }
+
+<#
+        }
+    }
+    #>
+            return this.Attribute.ToString();
+        }
+    }
+}

@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2858D55E-8A3A-4DE0-94F5-2AF03672AE8C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.Tools.ComposerVisualizer</RootNamespace>
+    <AssemblyName>ComposerVisualizer</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\composer.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\..\..\3rdParty\packages\Extended.Wpf.Toolkit.1.7.0\lib\net35\WPFToolkit.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controllers\LoggingController.cs" />
+    <Compile Include="Controllers\PresentationController.cs" />
+    <Compile Include="Converters\TreeViewFolderConverter.cs" />
+    <Compile Include="DataViewModels\Evaluator\ReadOnlyCollectionEditor.cs" />
+    <Compile Include="DataViewModels\Items\RectangleItemDataViewModel.cs" />
+    <Compile Include="DataViewModels\LayoutDataViewModel.cs" />
+    <Compile Include="DataViewModels\MasterCycleDataViewModel.cs" />
+    <Compile Include="DataViewModels\MasterEventCycleDataViewModel.cs" />
+    <Compile Include="DataViewModels\MasterLayoutDataViewModel.cs" />
+    <Compile Include="DataViewModels\MasterSectionDataViewModel.cs" />
+    <Compile Include="DataViewModels\PresentationsDataViewModel.cs" />
+    <Compile Include="ViewModels\LayoutTabViewModel.cs" />
+    <Compile Include="ViewModels\LoggingViewModel.cs" />
+    <Compile Include="ViewModels\LogLevel.cs" />
+    <Compile Include="DataViewModels\TreeViewFolderItem.cs" />
+    <Compile Include="Views\AllLayoutsView.xaml.cs">
+      <DependentUpon>AllLayoutsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutView.xaml.cs">
+      <DependentUpon>LayoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoggingView.xaml.cs">
+      <DependentUpon>LoggingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScreensView.xaml.cs">
+      <DependentUpon>ScreensView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfCore\CommandRegistry.cs" />
+    <Compile Include="Controllers\ComposerApplicationController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="WpfCore\ICommandRegistry.cs" />
+    <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\ShellController.cs" />
+    <Compile Include="DataViewModels\ConfigBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\CycleDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\AndEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\BinaryOperatorEvaluatorBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\CollectionEvaluatorBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\ConstantEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\ContainerEvaluatorBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\CsvMappingEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\DateEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\DateTimeEvaluatorBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\DayOfWeekEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\EqualsEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\EvaluatorBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\FormatEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\GenericEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\GreaterThanEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\GreaterThanOrEqualEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\IfEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\IntegerCompareEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\LessThanEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\LessThanOrEqualEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\NotEqualsEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\NotEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\OrEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\RegexReplaceEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\StringCompareEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\SwitchEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\TextToImageEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Evaluator\TimeEvaluatorDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\AndEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\BinaryOperatorEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\CaseEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\CollectionEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\ConstantEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\ContainerEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\CsvMappingEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\DateEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\DateTimeEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\DayOfWeekEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\DynamicPropertyDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\EqualsEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\EvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\EvaluationEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\FormatEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\GenericEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\GreaterThanEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\GreaterThanOrEqualEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\IfEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\IntegerCompareEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\LessThanEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\LessThanOrEqualEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\MatchEvalBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\NotEqualsEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\NotEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\OrEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\RegexReplaceEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\StringCompareEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\SwitchEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\TextToImageEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\TimeEvalDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\EventCycleDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\AnalogClockHandItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\AnalogClockItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\AudioFileItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\AudioItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\AudioPauseItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\DrawableItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\GraphicalItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\ImageItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\ImageListItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\ItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\PlaybackItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\ScreenItemBaseDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\TextItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\TextToSpeechItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\Items\VideoItemDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\PhysicalScreenDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\SectionDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataViewModels\VirtualDisplayDataViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\SolutionAssemblyProductInfo.cs" />
+    <Compile Include="ViewModels\LayoutViewModel.cs" />
+    <Compile Include="ViewModels\ComposerVisualizerShell.cs" />
+    <Compile Include="ViewModels\PresentationTreeViewModel.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WpfCore\Extensions.cs" />
+    <Compile Include="WpfCore\IViewModel.cs" />
+    <Compile Include="WpfCore\RelayCommand.cs" />
+    <Compile Include="WpfCore\RelayCommand{T}.cs" />
+    <Compile Include="WpfCore\ViewModelBase.cs" />
+    <Page Include="Views\AllLayoutsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoggingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScreensView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="dictionary.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="main.im2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Medi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\texttospeech_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cyclereference_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\audiodata_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\event_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\frame_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\composer.ico" />
+    <Content Include="Images\hour.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\imagelist_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Images\minute.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\rectangle_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Images\seconds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="dictionary.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\Messages\SystemManagement.Messages.csproj">
+      <Project>{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}</Project>
+      <Name>SystemManagement.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ed8c6acb-e53b-4278-b9ac-485709e6294d}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\BbCode\BbCode.csproj">
+      <Project>{D9E310CB-7DB7-46D2-8F0D-8A799660A106}</Project>
+      <Name>BbCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Core\Infomedia.Core.csproj">
+      <Project>{4D9A8CEA-2CF9-4361-B011-8C137289BE36}</Project>
+      <Name>Infomedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clock_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\image_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionstandard_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionimage_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionmulti_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionpool_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionvideo_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sectionwebmedia_dark_16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\statictext_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\video_44x44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

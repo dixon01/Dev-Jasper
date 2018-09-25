@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A279B0CB-74CC-4296-8734-BA8AA45B17BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Common.Wpf.Framework</RootNamespace>
+    <AssemblyName>Gorba.Center.Common.Wpf.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\3rdParty\System.Windows.Interactivity\v2.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\CommandRegistry.cs" />
+    <Compile Include="Controllers\DialogControllerBase.cs" />
+    <Compile Include="Controllers\EmptyDialogResult.cs" />
+    <Compile Include="Controllers\IApplicationController.cs" />
+    <Compile Include="Controllers\ICommandRegistry.cs" />
+    <Compile Include="Controllers\IDialogController.cs" />
+    <Compile Include="Controllers\IShellController.cs" />
+    <Compile Include="Controllers\IStageController.cs" />
+    <Compile Include="Controllers\IWindowController.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="Controllers\ShellControllerExtensions.cs" />
+    <Compile Include="Controllers\StageControllerBase{TState,TStage}.cs" />
+    <Compile Include="Controllers\SynchronizableControllerBase.cs" />
+    <Compile Include="Controllers\WindowControllerBase.cs" />
+    <Compile Include="Converters\ActivityMessageTypeBrushConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityExtendedConverter.cs" />
+    <Compile Include="Converters\EqualsConverter.cs" />
+    <Compile Include="Converters\HalfValueConverter.cs" />
+    <Compile Include="Converters\IcoConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\IsNullOrWhiteSpaceConverter.cs" />
+    <Compile Include="Converters\CultureInfoConverter.cs" />
+    <Compile Include="Converters\DisplayStringConverter.cs" />
+    <Compile Include="Converters\IFormulaConverter.cs" />
+    <Compile Include="Converters\InvertedBooleanConverter.cs" />
+    <Compile Include="Converters\ItemCountConverter.cs" />
+    <Compile Include="Converters\NullOrWhiteSpaceTextConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsEqualConverter.cs" />
+    <Compile Include="Converters\ToTypeConverter.cs" />
+    <Compile Include="Converters\UtcToUiTimeConverter.cs" />
+    <Compile Include="DataViewModels\AnimationDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\DataViewModelBase.cs" />
+    <Compile Include="DataViewModels\DataViewModelManager{TDataViewModel,TEntity}.cs" />
+    <Compile Include="DataViewModels\FormulaDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\IAnimatedDataValue.cs" />
+    <Compile Include="DataViewModels\IDataValue.cs" />
+    <Compile Include="DataViewModels\IDataViewModel.cs" />
+    <Compile Include="DataViewModels\IDynamicDataValue.cs" />
+    <Compile Include="DataViewModels\ReferenceTrackedDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\TrackedResourceReference.cs" />
+    <Compile Include="DataViewModels\DataViewModelReferenceKey.cs" />
+    <Compile Include="DialogResultBase.cs" />
+    <Compile Include="DataViewModels\ErrorDialogContent.cs" />
+    <Compile Include="Extensions\ColumnDefinitionExtended.cs" />
+    <Compile Include="Extensions\CompositionExtensions.cs" />
+    <Compile Include="Extensions\IconMarkupExtension.cs" />
+    <Compile Include="FrameworkCommandCompositionKeys.cs" />
+    <Compile Include="FrameworkStrings.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkStrings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="FrameworkStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="FrameworkStrings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkStrings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ChildControlFinder.cs" />
+    <Compile Include="Helpers\MultipleSelectionAction.cs" />
+    <Compile Include="Helpers\PasswordBoxAssistant.cs" />
+    <Compile Include="Helpers\CenterUriBuilder.cs" />
+    <Compile Include="History\ChangeHistory.cs" />
+    <Compile Include="History\ChangeHistoryFactory.cs" />
+    <Compile Include="History\HistoryEntryBase.cs" />
+    <Compile Include="History\IChangeHistory.cs" />
+    <Compile Include="History\IHistoryEntry.cs" />
+    <Compile Include="IBusy.cs" />
+    <Compile Include="IDirty.cs" />
+    <Compile Include="Interaction\AboutScreenPrompt.cs" />
+    <Compile Include="Interaction\CallMethodAction.cs" />
+    <Compile Include="Interaction\FileDialog\DialogDirectoryType.cs" />
+    <Compile Include="Interaction\FileDialog\FileDialogInteractionBase.cs" />
+    <Compile Include="Interaction\FileDialog\FileDialogInteractionManagerBase.cs" />
+    <Compile Include="Interaction\FileDialog\OpenFileDialogInteraction.cs" />
+    <Compile Include="Interaction\FileDialog\OpenFileDialogInteractionManager.cs" />
+    <Compile Include="Interaction\FileDialog\SaveFileDialogInteraction.cs" />
+    <Compile Include="Interaction\FileDialog\SaveFileDialogInteractionManager.cs" />
+    <Compile Include="Interaction\InteractionDialogBase.cs" />
+    <Compile Include="Interaction\InteractionAction.cs" />
+    <Compile Include="Interaction\ConfirmationInteractionDialogBase.cs" />
+    <Compile Include="Interaction\InteractionEventArgs.cs" />
+    <Compile Include="Interaction\InteractionRequest.cs" />
+    <Compile Include="Interaction\InteractionRequestEventArgs.cs" />
+    <Compile Include="Interaction\IInteractionRequest.cs" />
+    <Compile Include="Interaction\InteractionManager{T}.cs" />
+    <Compile Include="Interaction\InteractionRequestTrigger.cs" />
+    <Compile Include="Interaction\InteractionType.cs" />
+    <Compile Include="Interaction\OptionsPrompt.cs" />
+    <Compile Include="Interaction\ProgressPromptBase.cs" />
+    <Compile Include="IStageAuthorizationContext.cs" />
+    <Compile Include="Model\ApplicationOptions.cs" />
+    <Compile Include="Model\ApplicationState.cs" />
+    <Compile Include="Model\Options\LanguageOptionGroup.cs" />
+    <Compile Include="Model\Options\GeneralOptionCategory.cs" />
+    <Compile Include="Model\Options\OptionCategoryBase.cs" />
+    <Compile Include="Model\Options\OptionGroupBase.cs" />
+    <Compile Include="Notifications\MessageNotification.cs" />
+    <Compile Include="Notifications\MessageNotificationType.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationExtensions.cs" />
+    <Compile Include="Notifications\ProgressNotification.cs" />
+    <Compile Include="Notifications\PromptNotification.cs" />
+    <Compile Include="Notifications\StatusNotification.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApplicationStateManager.cs" />
+    <Compile Include="Startup\BootstrapperBase.cs" />
+    <Compile Include="Startup\BootstrapperResult{TController,TState}.cs" />
+    <Compile Include="Startup\CompositionBootstrapper.cs" />
+    <Compile Include="Startup\DisplayContext.cs" />
+    <Compile Include="Startup\ExportMenuItemAttribute.cs" />
+    <Compile Include="Startup\ExportStageAttribute.cs" />
+    <Compile Include="Startup\IApplicationState.cs" />
+    <Compile Include="Startup\IMenuItemMetadata.cs" />
+    <Compile Include="Startup\IResourceDictionary.cs" />
+    <Compile Include="Startup\IStageMetadata.cs" />
+    <Compile Include="Startup\Screen.cs" />
+    <Compile Include="Startup\ScreenIdentifier.cs" />
+    <Compile Include="ViewModels\ActivityMessage.cs" />
+    <Compile Include="ViewModels\DialogFactory{T}.cs" />
+    <Compile Include="ViewModels\Dialogs\SuccessDialogResult.cs" />
+    <Compile Include="ViewModels\DialogViewModelBase.cs" />
+    <Compile Include="ViewModels\DisplayOptions.cs" />
+    <Compile Include="ViewModels\Extensions.cs" />
+    <Compile Include="ViewModels\HeaderBarBase.cs" />
+    <Compile Include="ViewModels\IDialogFactory.cs" />
+    <Compile Include="ViewModels\IDialogViewModel.cs" />
+    <Compile Include="ViewModels\IDisplayViewModel.cs" />
+    <Compile Include="ViewModels\IShellViewModel.cs" />
+    <Compile Include="ViewModels\IStage.cs" />
+    <Compile Include="ViewModels\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\IWindowFactory.cs" />
+    <Compile Include="ViewModels\IWindowViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetails\ColumnDescriptor.cs" />
+    <Compile Include="ViewModels\MasterDetails\IMasterDetailsStage.cs" />
+    <Compile Include="ViewModels\MasterDetails\IMasterDetailsStage{T}.cs" />
+    <Compile Include="ViewModels\MasterDetails\ItemsListBase.cs" />
+    <Compile Include="ViewModels\MasterDetails\ItemsListBase{TItem}.cs" />
+    <Compile Include="ViewModels\MenuItemBase.cs" />
+    <Compile Include="ViewModels\DialogParentViewModelBase.cs" />
+    <Compile Include="ViewModels\Options\GeneralOptionCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Options\LanguageOptionGroupViewModel.cs" />
+    <Compile Include="ViewModels\Options\OptionCategoryViewModelBase.cs" />
+    <Compile Include="ViewModels\Options\OptionGroupViewModelBase.cs" />
+    <Compile Include="ViewModels\ShellBase.cs" />
+    <Compile Include="ViewModels\StageBase.cs" />
+    <Compile Include="ViewModels\StagedShellBase.cs" />
+    <Compile Include="ViewModels\StatusBarItemBase.cs" />
+    <Compile Include="ViewModels\SynchronizableViewModelBase.cs" />
+    <Compile Include="ViewModels\WindowFactory{T}.cs" />
+    <Compile Include="ViewModels\Windows\LoginWindowBase.cs" />
+    <Compile Include="ViewModels\WindowViewModelBase.cs" />
+    <Compile Include="ViewModels\WindowViewModelCloseStrategyBase.cs" />
+    <Compile Include="Views\IDialogView.cs" />
+    <Compile Include="Views\IWindowView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Wpf.Core.csproj">
+      <Project>{ADE176C8-B499-4597-B13F-F638EC70D090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Wizards\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrameworkStrings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FrameworkStrings.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrameworkStrings.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FrameworkStrings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrameworkStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FrameworkStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,54 @@
+﻿<#+
+	private void WriteGetCmdlet(EntitySpace.Entity entity)
+	{
+		var keyType = this.keyTypes[entity.Name];
+#>
+
+	[Cmdlet(VerbsCommon.Get, CmdletNouns.<#= entity.Name #>, DefaultParameterSetName = "Filter")]
+	public partial class Get<#= entity.Name #> : <#= entity.Name #>CmdletBase
+	{
+        [Parameter(ParameterSetName = "Id", Position = <#= this.startingParameterIndex #>, ValueFromPipeline = true)]
+		public <#= keyType #> Id { get; set; }
+
+        [Parameter(ParameterSetName = "Filter", Position = <#= this.startingParameterIndex #>)]
+		public <#= entity.Name #>Query Filter { get; set; }
+
+        protected override void ProcessRecord()
+        {
+			switch (this.ParameterSetName)
+			{
+				case "Id":
+					this.GetById();
+					return;
+				case "Filter":
+					this.GetByFilter();
+					return;
+				default:
+					throw new NotSupportedException();
+			}
+        }
+
+		private void GetByFilter()
+		{
+			using (var channelScope = this.CreateDataChannelScope<I<#= entity.Name #>DataService>())
+			{
+				var result = channelScope.Channel.QueryAsync(this.Filter).Result;
+				this.WriteObject(result, true);
+				return;
+			}
+		}
+
+		private void GetById()
+		{
+			using (var channelScope = this.CreateDataChannelScope<I<#= entity.Name #>DataService>())
+			{
+				this.WriteVerbose(string.Format("Getting '<#= entity.Name #>' with Id '{0}'", this.Id));
+				var result = channelScope.Channel.GetAsync(this.Id).Result;
+				this.WriteObject(result);
+				return;
+			}
+		}
+	}
+<#+
+	}
+#>

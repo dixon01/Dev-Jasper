@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BackgroundSystemConfiguration>
+  <NotificationsConnectionString>medi://localhost</NotificationsConnectionString>
+<DataServices>
+<Protocol>Tcp</Protocol>
+<Host>localhost</Host>
+</DataServices>
+  <FunctionalServices>
+    <Protocol>Tcp</Protocol>
+    <Host>localhost2s</Host>
+  </FunctionalServices>
+</BackgroundSystemConfiguration>

@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHyperTerminal", "MyHyperTerminal.csproj", "{C76E3352-E7DF-468A-AB31-9E391F7DB50E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{FEA9AB92-5EA6-4E1F-9108-D355E427D93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protran.Controls", "..\..\Source\Controls\Protran.Controls.csproj", "{043E6147-0C0A-4027-868A-B53E0505F831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Ximple", "..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj", "{016A923F-272C-403E-AFFE-F811A0C26045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MyHyperTerminal.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\..\\Source\\Controls\\Protran.Controls.csproj
+		SccProjectTopLevelParentUniqueName2 = MyHyperTerminal.sln
+		SccProjectName2 = ../../Source/Controls
+		SccLocalPath2 = ..\\..\\Source\\Controls
+		SccProjectUniqueName3 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ximple\\Protocols.Ximple.csproj
+		SccProjectTopLevelParentUniqueName3 = MyHyperTerminal.sln
+		SccProjectName3 = ../../../../Common/Protocols/Source/Ximple
+		SccLocalPath3 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ximple
+		SccProjectUniqueName4 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName4 = MyHyperTerminal.sln
+		SccProjectName4 = ../../../../Common/Utility/Source/Compatibility
+		SccLocalPath4 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Debug|x86.ActiveCfg = Debug|x86
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Debug|x86.Build.0 = Debug|x86
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Release|x86.ActiveCfg = Release|x86
+		{C76E3352-E7DF-468A-AB31-9E391F7DB50E}.Release|x86.Build.0 = Release|x86
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{043E6147-0C0A-4027-868A-B53E0505F831}.Release|x86.ActiveCfg = Release|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016A923F-272C-403E-AFFE-F811A0C26045}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{043E6147-0C0A-4027-868A-B53E0505F831} = {FEA9AB92-5EA6-4E1F-9108-D355E427D93C}
+		{016A923F-272C-403E-AFFE-F811A0C26045} = {FEA9AB92-5EA6-4E1F-9108-D355E427D93C}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {FEA9AB92-5EA6-4E1F-9108-D355E427D93C}
+	EndGlobalSection
+EndGlobal

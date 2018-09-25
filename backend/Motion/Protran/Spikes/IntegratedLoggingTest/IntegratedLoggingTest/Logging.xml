@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Logging>
+  <LogLevel desc="Values admitted: {Low, Mid, High} Default: low">Mid</LogLevel>
+</Logging>

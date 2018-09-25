@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HardwareManager>
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="true">
+    <PollingInterval>PT0.1S</PollingInterval>
+    <GPIO>
+      <Pin Index="0">Pin0</Pin>
+      <Pin Index="1">Pin1</Pin>
+      <Pin Index="2">Pin2</Pin>
+      <Pin Index="3">Pin3</Pin>
+      <Pin Index="4">Pin4</Pin>
+      <Pin Index="5">Pin5</Pin>
+      <Pin Index="6">Pin6</Pin>
+      <Pin Index="7">Pin7</Pin>
+    </GPIO>
+    <Button>Button</Button>
+    <UpdateLed>UpdateLed</UpdateLed>
+    <RS485Interface>At91</RS485Interface>
+    <DviLevelShifters>
+      <DviLevelShifter Index="1">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+      <DviLevelShifter Index="2">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+    </DviLevelShifters>
+    <Transceivers>
+      <Transceiver Index="1">
+        <Type>RS485</Type>
+        <Termination>false</Termination>
+        <Mode>HalfDuplex</Mode>
+      </Transceiver>
+      <Transceiver Index="2">
+        <Type>RS485</Type>
+        <Termination>false</Termination>
+        <Mode>HalfDuplex</Mode>
+      </Transceiver>
+    </Transceivers>
+  </Mgi>
+  <SNTP Enabled="false" Host="2.europe.pool.ntp.org" Port="123" Version="4" />
+  <VDV301 Enabled="true" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="true" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions/>
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>UTC</TimeZone>
+      <IPAddress>192.168.1.210</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+      <Gateway>192.168.1.254</Gateway>
+      <Display Mode="Clone">
+        <Screens>
+          <Screen Adapter="0" Width="1920" Height="1080" Orientation="Landscape" IsMainDisplay="true"/>
+          <Screen Adapter="1" Width="1920" Height="1080" Orientation="Landscape" IsMainDisplay="false"/>
+        </Screens>
+      </Display>
+    </Setting>
+  </Settings>
+</HardwareManager>

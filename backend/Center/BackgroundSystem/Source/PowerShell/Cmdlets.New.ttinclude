@@ -1,0 +1,15 @@
+﻿<#+
+	private void WriteNewCmdlet(EntitySpace.Entity entity)
+	{#>
+
+	[Cmdlet(VerbsCommon.New, CmdletNouns.<#= entity.Name #>)]
+	public partial class New<#= entity.Name #> : PSCmdlet
+	{
+        protected override void ProcessRecord()
+        {
+            this.WriteObject(new <#= entity.Name #>());
+        }
+	}
+<#+
+	}
+#>

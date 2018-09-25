@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ShortKeyConfig Version="1" Description="Possible action values: None,ChangeBrightness,ChangeLanguage,ChangeTtsVolume,Detour,DriverChange,InformationMessages,LogOffAll,LogOffDrive,PassengerCount,Quit,Razzia,ShowAlarms,ShowAnnouncement,SpeechGsm,SpeechIra,SystemCode">
+  <F1LongAction>SpeechIra</F1LongAction>
+  <F1ShortAction>SpeechGsm</F1ShortAction>
+  <F2LongAction>PassengerCount</F2LongAction>
+  <F2ShortAction>Razzia</F2ShortAction>
+  <F3LongAction>LogOffAll</F3LongAction>
+  <F3ShortAction>DriverChange</F3ShortAction>
+  <F4LongAction>InformationMessages</F4LongAction>
+  <F4ShortAction>ShowAnnouncement</F4ShortAction>
+  <F5LongAction>ShowAlarms</F5LongAction>
+  <F5ShortAction>ShowAlarms</F5ShortAction>
+  <F6ShortAction>Detour</F6ShortAction>
+</ShortKeyConfig>

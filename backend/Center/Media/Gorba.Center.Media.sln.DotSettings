@@ -1,0 +1,130 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=Gorba_002ECenter_002EMedia_002ECore_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Description/@EntryValue">WPF ValueConverter</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Field/=Name/InitialRange/@EntryValue">-1</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Text/@EntryValue">// --------------------------------------------------------------------------------------------------------------------&#xD;
+// &lt;copyright file="$Name$.cs" company="Gorba AG"&gt;&#xD;
+//   Copyright © 2011-2014 Gorba AG. All rights reserved.&#xD;
+// &lt;/copyright&gt;&#xD;
+// &lt;summary&gt;&#xD;
+//   Defines the $Name$ type.&#xD;
+// &lt;/summary&gt;&#xD;
+// --------------------------------------------------------------------------------------------------------------------&#xD;
+&#xD;
+namespace Gorba.Center.Media.Core.Converters&#xD;
+{&#xD;
+    using System;&#xD;
+    using System.Globalization;&#xD;
+    using System.Windows.Data;&#xD;
+&#xD;
+    /// &lt;summary&gt;&#xD;
+    /// The $Name$&#xD;
+    /// &lt;/summary&gt;&#xD;
+    public class $Name$ : IValueConverter&#xD;
+    {&#xD;
+        /// &lt;summary&gt;&#xD;
+        /// not implemented&#xD;
+        /// &lt;/summary&gt;&#xD;
+        /// &lt;param name="value"&gt;the value&lt;/param&gt;&#xD;
+        /// &lt;param name="targetType"&gt;the target type&lt;/param&gt;&#xD;
+        /// &lt;param name="parameter"&gt;the parameter&lt;/param&gt;&#xD;
+        /// &lt;param name="culture"&gt;the culture&lt;/param&gt;&#xD;
+        /// &lt;returns&gt;the result&lt;/returns&gt;&#xD;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)&#xD;
+        {&#xD;
+            throw new NotImplementedException();&#xD;
+        }&#xD;
+&#xD;
+        /// &lt;summary&gt;&#xD;
+        /// not implemented&#xD;
+        /// &lt;/summary&gt;&#xD;
+        /// &lt;param name="value"&gt;the value&lt;/param&gt;&#xD;
+        /// &lt;param name="targetType"&gt;the target type&lt;/param&gt;&#xD;
+        /// &lt;param name="parameter"&gt;the parameter&lt;/param&gt;&#xD;
+        /// &lt;param name="culture"&gt;the culture&lt;/param&gt;&#xD;
+        /// &lt;returns&gt;the result&lt;/returns&gt;&#xD;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)&#xD;
+        {&#xD;
+            throw new NotImplementedException();&#xD;
+        }&#xD;
+    }&#xD;
+}&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Categories/=Imported_002005_002E02_002E2014/@EntryIndexedValue">Imported 05.02.2014</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/CustomProperties/=FileName/@EntryIndexedValue">NewValueConverter</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Field/=Name/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Field/=Name/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2EBD76A0A2DE25459E3C1A017AB83719/Field/=Name/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/CustomProperties/=FileName/@EntryIndexedValue">NewMultiValueConverter</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Description/@EntryValue">WPF MultiValueConverter</s:String>
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Field/=NAME/InitialRange/@EntryValue">-1</s:Int64>
+	
+	
+	
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Field/=NAME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E730A5521962BF4EA3CD859100E9AE46/Text/@EntryValue">// --------------------------------------------------------------------------------------------------------------------&#xD;
+// &lt;copyright file="$NAME$.cs" company="Gorba AG"&gt;&#xD;
+//   Copyright © 2011-2014 Gorba AG. All rights reserved.&#xD;
+// &lt;/copyright&gt;&#xD;
+// &lt;summary&gt;&#xD;
+//   Defines the $NAME$ type.&#xD;
+// &lt;/summary&gt;&#xD;
+// --------------------------------------------------------------------------------------------------------------------&#xD;
+&#xD;
+namespace Gorba.Center.Media.Core.Converters&#xD;
+{&#xD;
+    using System;&#xD;
+    using System.Globalization;&#xD;
+    using System.Windows.Data;&#xD;
+&#xD;
+    /// &lt;summary&gt;&#xD;
+    /// The $NAME$&#xD;
+    /// &lt;/summary&gt;&#xD;
+    public class $NAME$ : IMultiValueConverter&#xD;
+    {&#xD;
+        /// &lt;summary&gt;&#xD;
+        /// not implemented&#xD;
+        /// &lt;/summary&gt;&#xD;
+        /// &lt;param name="values"&gt;the values&lt;/param&gt;&#xD;
+        /// &lt;param name="targetType"&gt;the target type&lt;/param&gt;&#xD;
+        /// &lt;param name="parameter"&gt;the parameter&lt;/param&gt;&#xD;
+        /// &lt;param name="culture"&gt;the culture&lt;/param&gt;&#xD;
+        /// &lt;returns&gt;the result&lt;/returns&gt;&#xD;
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)&#xD;
+        {&#xD;
+            throw new NotImplementedException();&#xD;
+        }&#xD;
+&#xD;
+        /// &lt;summary&gt;&#xD;
+        /// not implemented&#xD;
+        /// &lt;/summary&gt;&#xD;
+        /// &lt;param name="value"&gt;the value&lt;/param&gt;&#xD;
+        /// &lt;param name="targetTypes"&gt;the target types&lt;/param&gt;&#xD;
+        /// &lt;param name="parameter"&gt;the parameter&lt;/param&gt;&#xD;
+        /// &lt;param name="culture"&gt;the culture&lt;/param&gt;&#xD;
+        /// &lt;returns&gt;the result&lt;/returns&gt;&#xD;
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)&#xD;
+        {&#xD;
+            throw new NotImplementedException();&#xD;
+        }&#xD;
+    }&#xD;
+}&#xD;
+</s:String></wpf:ResourceDictionary>

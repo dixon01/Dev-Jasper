@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{15EB1F9E-61C3-4C6D-95FB-C0B8985B5842}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.Visualizer</RootNamespace>
+    <AssemblyName>ProtranVisualizer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\Icons\protran.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.Windows.Forms.4.2.1\lib\net35\NLog.Windows.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ScintillaNET">
+      <HintPath>..\..\..\..\3rdParty\ScintillaNET\v2.6\ScintillaNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiGenericDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiGenericDataControl.Designer.cs">
+      <DependentUpon>AbuDhabiGenericDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiLogsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiLogsControl.Designer.cs">
+      <DependentUpon>AbuDhabiLogsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiMainForm.Designer.cs">
+      <DependentUpon>AbuDhabiMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiTabControl.Designer.cs">
+      <DependentUpon>AbuDhabiTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiTransformationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\AbuDhabiTransformationsControl.Designer.cs">
+      <DependentUpon>AbuDhabiTransformationsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\DataItemsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\DataItemsControl.Designer.cs">
+      <DependentUpon>DataItemsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\IsiResponseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AbuDhabi\IsiResponseControl.Designer.cs">
+      <DependentUpon>IsiResponseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GenericDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GenericDataControl.Designer.cs">
+      <DependentUpon>GenericDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\ButtonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\ButtonControl.Designer.cs">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\IoGenericDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\IoGenericDataControl.Designer.cs">
+      <DependentUpon>IoGenericDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\IoLogsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\IoLogsControl.Designer.cs">
+      <DependentUpon>IoLogsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\IOMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\IOMainForm.Designer.cs">
+      <DependentUpon>IOMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\IOTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\IOTabControl.Designer.cs">
+      <DependentUpon>IOTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IO\IoTransformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IO\IoTransformationControl.Designer.cs">
+      <DependentUpon>IoTransformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IVisualizationControl.cs" />
+    <Compile Include="Controls\Ibis\HandlerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\HandlerControl.Designer.cs">
+      <DependentUpon>HandlerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisGenericDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisGenericDataControl.Designer.cs">
+      <DependentUpon>IbisGenericDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisLogsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisLogsControl.Designer.cs">
+      <DependentUpon>IbisLogsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisMainForm.Designer.cs">
+      <DependentUpon>IbisMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisTabControl.Designer.cs">
+      <DependentUpon>IbisTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisTransformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\IbisTransformationControl.Designer.cs">
+      <DependentUpon>IbisTransformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\IIbisVisualizationControl.cs" />
+    <Compile Include="Controls\Ibis\ParserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\ParserControl.Designer.cs">
+      <DependentUpon>ParserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ibis\TelegramControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ibis\TelegramControl.Designer.cs">
+      <DependentUpon>TelegramControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LogsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LogsControl.Designer.cs">
+      <DependentUpon>LogsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\ApplicationLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\ApplicationLogForm.Designer.cs">
+      <DependentUpon>ApplicationLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\VisualizerMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\VisualizerMainForm.Designer.cs">
+      <DependentUpon>VisualizerMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MdiChildBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MdiChildBase.Designer.cs">
+      <DependentUpon>MdiChildBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransformationControl.Designer.cs">
+      <DependentUpon>TransformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TypePropertyGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TypePropertyGrid.Designer.cs">
+      <DependentUpon>TypePropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\CustomerInformationServiceInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\CustomerInformationServiceInputControl.Designer.cs">
+      <DependentUpon>CustomerInformationServiceInputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\IVdv301VisualizationControl.cs" />
+    <Compile Include="Controls\Vdv301\Vdv301LogsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301LogsControl.Designer.cs">
+      <DependentUpon>Vdv301LogsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301GenericDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301GenericDataControl.Designer.cs">
+      <DependentUpon>Vdv301GenericDataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301InputControl.Designer.cs">
+      <DependentUpon>Vdv301InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301MainForm.Designer.cs">
+      <DependentUpon>Vdv301MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301TabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301TabControl.Designer.cs">
+      <DependentUpon>Vdv301TabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301AllTransformationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301AllTransformationsControl.Designer.cs">
+      <DependentUpon>Vdv301AllTransformationsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301TransformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\Vdv301TransformationControl.Designer.cs">
+      <DependentUpon>Vdv301TransformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vdv301\XmlEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Vdv301\XmlEditorControl.Designer.cs">
+      <DependentUpon>XmlEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AbuDhabi\AbuDhabiVisualizationService.cs" />
+    <Compile Include="Data\AbuDhabi\DataItemTransformationEventArgs.cs" />
+    <Compile Include="Data\AbuDhabi\IAbuDhabiVisualizationService.cs" />
+    <Compile Include="Data\AbuDhabi\VisualizerCtuClient.cs" />
+    <Compile Include="Data\AbuDhabi\VisualizerTransformationChain.cs" />
+    <Compile Include="Data\Ibis\IIbisVisualizationService.cs" />
+    <Compile Include="Data\Ibis\TelegramFormatter.cs" />
+    <Compile Include="Data\Ibis\TelegramHandlerEventArgs.cs" />
+    <Compile Include="Data\Ibis\TelegramHandlerWrapper.cs" />
+    <Compile Include="Data\Ibis\TelegramHandlerXimpleEventArgs.cs" />
+    <Compile Include="Data\Ibis\TelegramParsedEventArgs.cs" />
+    <Compile Include="Data\Ibis\VisualizerIbisSerialChannel.cs" />
+    <Compile Include="Data\Ibis\VisualizerRemoteComputer.cs" />
+    <Compile Include="Data\IO\IIOVisualizationService.cs" />
+    <Compile Include="Data\IO\IOVisualizationService.cs" />
+    <Compile Include="Data\IO\VisualizerInputHandler.cs" />
+    <Compile Include="Data\ITransformationLogger.cs" />
+    <Compile Include="Data\TransformationChainEventArgs.cs" />
+    <Compile Include="Data\TransformationEventArgs.cs" />
+    <Compile Include="Data\TransformationInfo.cs" />
+    <Compile Include="Data\TransformationLogger.cs" />
+    <Compile Include="Data\Vdv301\CustomerInformationServiceMock.cs" />
+    <Compile Include="Data\Vdv301\IVdv301VisualizationService.cs" />
+    <Compile Include="Data\Vdv301\Vdv301VisualizationService.cs" />
+    <Compile Include="Data\Vdv301\VisualizerElementHandlerFactory.cs" />
+    <Compile Include="Data\Vdv301\VisualizerIbisServiceLocator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\SideTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SideTab.Designer.cs">
+      <DependentUpon>SideTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Ibis\IbisVisualizationService.cs" />
+    <Compile Include="Data\Ibis\VisualizerChannel.cs" />
+    <Compile Include="ProtranVisualizerApplication.cs" />
+    <Content Include="..\..\..\..\3rdParty\ScintillaNET\v2.6\SciLexer.dll">
+      <Link>SciLexer.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\3rdParty\ScintillaNET\v2.6\SciLexer64.dll">
+      <Link>SciLexer64.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\player_pause.png" />
+    <None Include="Resources\player_play.png" />
+    <None Include="Resources\inspect.png" />
+    <None Include="Resources\xml.gif" />
+    <None Include="Resources\convert.png" />
+    <None Include="Resources\icn_gear_arrow.gif" />
+    <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\arrow_left.png" />
+    <EmbeddedResource Include="Controls\AbuDhabi\AbuDhabiMainForm.resx">
+      <DependentUpon>AbuDhabiMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AbuDhabi\AbuDhabiTabControl.resx">
+      <DependentUpon>AbuDhabiTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AbuDhabi\AbuDhabiTransformationsControl.resx">
+      <DependentUpon>AbuDhabiTransformationsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AbuDhabi\DataItemsControl.resx">
+      <DependentUpon>DataItemsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AbuDhabi\IsiResponseControl.resx">
+      <DependentUpon>IsiResponseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GenericDataControl.resx">
+      <DependentUpon>GenericDataControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ibis\HandlerControl.resx">
+      <DependentUpon>HandlerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ibis\IbisMainForm.resx">
+      <DependentUpon>IbisMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ibis\IbisTabControl.resx">
+      <DependentUpon>IbisTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ibis\ParserControl.resx">
+      <DependentUpon>ParserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ibis\TelegramControl.resx">
+      <DependentUpon>TelegramControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\ButtonControl.resx">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\IoGenericDataControl.resx">
+      <DependentUpon>IoGenericDataControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\IoLogsControl.resx">
+      <DependentUpon>IoLogsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\IOMainForm.resx">
+      <DependentUpon>IOMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\IOTabControl.resx">
+      <DependentUpon>IOTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IO\IoTransformationControl.resx">
+      <DependentUpon>IoTransformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LogsControl.resx">
+      <DependentUpon>LogsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\ApplicationLogForm.resx">
+      <DependentUpon>ApplicationLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\VisualizerMainForm.resx">
+      <DependentUpon>VisualizerMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TransformationControl.resx">
+      <DependentUpon>TransformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TypePropertyGrid.resx">
+      <DependentUpon>TypePropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\CustomerInformationServiceInputControl.resx">
+      <DependentUpon>CustomerInformationServiceInputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\Vdv301AllTransformationsControl.resx">
+      <DependentUpon>Vdv301AllTransformationsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\Vdv301InputControl.resx">
+      <DependentUpon>Vdv301InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\Vdv301MainForm.resx">
+      <DependentUpon>Vdv301MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\Vdv301TabControl.resx">
+      <DependentUpon>Vdv301TabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Vdv301\XmlEditorControl.resx">
+      <DependentUpon>XmlEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Controls\SideTab.resx">
+      <DependentUpon>SideTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Protran\Configuration.Protran.csproj">
+      <Project>{159CE797-E084-488F-87B3-23857049BE50}</Project>
+      <Name>Configuration.Protran</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ctu\Protocols.Ctu.csproj">
+      <Project>{31CDBD33-6A2C-4850-BE80-2ADA677D1564}</Project>
+      <Name>Protocols.Ctu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Isi\Protocols.Isi.csproj">
+      <Project>{9F6F6B85-9B4D-4FA5-932B-48F95C6419AF}</Project>
+      <Name>Protocols.Isi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Vdv300\Protocols.Vdv300.csproj">
+      <Project>{D45A1354-2A0F-489A-A9B5-D45E13078A39}</Project>
+      <Name>Protocols.Vdv300</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Vdv301\Protocols.Vdv301.csproj">
+      <Project>{60B1A687-3802-499E-B03F-B4BC1829B932}</Project>
+      <Name>Protocols.Vdv301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\IbisIP\Common.IbisIP.csproj">
+      <Project>{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}</Project>
+      <Name>Common.IbisIP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbuDhabi\Protran.AbuDhabi.csproj">
+      <Project>{A5E85D05-3D3D-4E32-BA1A-F30799CA42C9}</Project>
+      <Name>Protran.AbuDhabi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Protran.Controls.csproj">
+      <Project>{043E6147-0C0A-4027-868A-B53E0505F831}</Project>
+      <Name>Protran.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Protran.Core.csproj">
+      <Project>{C3036BE3-1D3C-4B40-87BB-DDBE33F53568}</Project>
+      <Name>Protran.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GorbaProtocol\Protran.GorbaProtocol.csproj">
+      <Project>{7cf516a7-8998-4f8b-ab07-6f0e3b44b741}</Project>
+      <Name>Protran.GorbaProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ibis\Protran.Ibis.csproj">
+      <Project>{38767532-4E74-4EB6-9911-1B58BCFB967D}</Project>
+      <Name>Protran.Ibis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IO\Protran.IO.csproj">
+      <Project>{10046E67-00E6-4A80-8E23-069741191B21}</Project>
+      <Name>Protran.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoapIbisPlus\Protran.SoapIbisPlus.csproj">
+      <Project>{C4EA174B-F696-4169-93E3-7C81DDE1EB46}</Project>
+      <Name>Protran.SoapIbisPlus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vdv301\Protran.Vdv301.csproj">
+      <Project>{794D19AD-FC86-498D-BF2E-7767EDE7A5EB}</Project>
+      <Name>Protran.Vdv301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XimpleProtocol\Luminator.Protran.XimpleProtocol.csproj">
+      <Project>{e2eaf924-e3bc-414b-96e6-ee9fdfe8b80a}</Project>
+      <Name>Luminator.Protran.XimpleProtocol</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

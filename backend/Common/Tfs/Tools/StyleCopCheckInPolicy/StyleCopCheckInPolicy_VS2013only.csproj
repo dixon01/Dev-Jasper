@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <!-- If no configuration is specified, default to Debug, for the current version of VS -->
+  <PropertyGroup Condition="'$(Configuration)' == ''">
+    <Configuration Condition="'$(VisualStudioVersion)' == '12.0'">VS2013_Debug</Configuration>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C76315AE-87A1-44E0-8313-5B604A32F5F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Tfs.Tools.StyleCopCheckInPolicy</RootNamespace>
+    <AssemblyName>Gorba.Common.Tfs.Tools.StyleCopCheckInPolicy</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <CreateVsixContainer>true</CreateVsixContainer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS2013_Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\VS2013_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS2013_Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\VS2013_Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="StyleCop">
+      <HintPath>3rdParty\StyleCop_4.7.49.0\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <!-- When targeting VS 2013, add references to the VS 2013 client object model -->
+  <ItemGroup Condition="'$(Configuration)' == 'VS2013_Debug' or '$(Configuration)' == 'VS2013_Release'">
+    <Reference Include="Microsoft.VisualStudio.Services.Common, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.Client, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Common, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Client, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.VersionControl.Common, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.VersionControl.Client, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.Client, Version=12.0.0.0">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Policy\EvaluateOnType.cs" />
+    <Compile Include="Policy\EvaluationContext.cs" />
+    <Compile Include="Policy\EvaluationProcess.cs" />
+    <Compile Include="Policy\Exclusions\ExclusionAttribute.cs" />
+    <Compile Include="Policy\Exclusions\FileSystem\FilePolicyExclusion.cs" />
+    <Compile Include="Policy\Exclusions\FileSystem\PathExclusionType.cs" />
+    <Compile Include="Policy\Exclusions\PolicyExclusion.cs" />
+    <Compile Include="Policy\Exclusions\FileSystem\DirectoryPolicyExclusion.cs" />
+    <Compile Include="Policy\Exclusions\PolicyExclusionConfigInfo.cs" />
+    <Compile Include="Policy\Exclusions\PolicyExclusionFactory.cs" />
+    <Compile Include="Policy\Exclusions\PolicyExclusionType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Policy\Exclusions\WorkItem\WorkItemExclusion.cs" />
+    <Compile Include="Policy\Exclusions\WorkItem\WorkItemFieldExclusion.cs" />
+    <Compile Include="Policy\Exclusions\WorkItem\WorkItemIdExclusion.cs" />
+    <Compile Include="Policy\Extensions.cs" />
+    <Compile Include="Policy\PolicySettings.cs" />
+    <Compile Include="Policy\PolicyTaskCategory.cs" />
+    <Compile Include="Policy\StyleCopConsole.cs" />
+    <Compile Include="Policy\TfsCheckInPolicyEnvironment.cs" />
+    <Compile Include="StyleCopCheckInPolicy.cs" />
+    <Compile Include="UI\Controls\BrowseFileControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\BrowseFileControl.Designer.cs">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Design\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Design\BaseUserControl.Designer.cs">
+      <DependentUpon>BaseUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\AddExclusionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\AddExclusionDialog.Designer.cs">
+      <DependentUpon>AddExclusionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ComboBoxItem.cs" />
+    <Compile Include="UI\Controls\ItemEventArgs.cs" />
+    <Compile Include="UI\Controls\ExclusionManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ExclusionManagerControl.Designer.cs">
+      <DependentUpon>ExclusionManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\EnableButtonsEventArgs.cs" />
+    <Compile Include="UI\Forms\Editors\Design\BaseEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\Design\BaseEditorDialog.Designer.cs">
+      <DependentUpon>BaseEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\Design\BasePathEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\Design\BasePathEditorDialog.Designer.cs">
+      <DependentUpon>BasePathEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\DirectoryEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\DirectoryEditorDialog.Designer.cs">
+      <DependentUpon>DirectoryEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\EditorMode.cs" />
+    <Compile Include="UI\Forms\Editors\FileEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\FileEditorDialog.Designer.cs">
+      <DependentUpon>FileEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\WorkItemFieldEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\WorkItemFieldEditorDialog.Designer.cs">
+      <DependentUpon>WorkItemFieldEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\WorkItemIdEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Editors\WorkItemIdEditorDialog.Designer.cs">
+      <DependentUpon>WorkItemIdEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Policy\SourceAnalysisPolicyFailure.cs" />
+    <Compile Include="UI\Forms\Design\BaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Design\BaseDialog.Designer.cs">
+      <DependentUpon>BaseDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Design\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Design\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\EditPolicyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\EditPolicyDialog.Designer.cs">
+      <DependentUpon>EditPolicyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Policy\Exclusions\FileSystem\PathPolicyExclusion.cs" />
+    <Compile Include="UI\Forms\DisplayViolationsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\DisplayViolationsDialog.Designer.cs">
+      <DependentUpon>DisplayViolationsDialog.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\BrowseFileControl.resx">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\AddExclusionDialog.resx">
+      <DependentUpon>AddExclusionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ExclusionManagerControl.resx">
+      <DependentUpon>ExclusionManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Design\BaseDialog.resx">
+      <DependentUpon>BaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\Design\BaseEditorDialog.resx">
+      <DependentUpon>BaseEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Design\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\Design\BasePathEditorDialog.resx">
+      <DependentUpon>BasePathEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\DirectoryEditorDialog.resx">
+      <DependentUpon>DirectoryEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\FileEditorDialog.resx">
+      <DependentUpon>FileEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\WorkItemFieldEditorDialog.resx">
+      <DependentUpon>WorkItemFieldEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Editors\WorkItemIdEditorDialog.resx">
+      <DependentUpon>WorkItemIdEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\EditPolicyDialog.resx">
+      <DependentUpon>EditPolicyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\DisplayViolationsDialog.resx">
+      <DependentUpon>DisplayViolationsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Warning.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Load the VS SDK targets to create a VSIX, if the VS SDK is installed and the
+       version of VS that is currently running matches the current configuration -->
+  <PropertyGroup>
+    <_VsSdkTargetsPath>$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets</_VsSdkTargetsPath>
+    <_ShouldImportVsSdkTargets>false</_ShouldImportVsSdkTargets>
+    <_ShouldImportVsSdkTargets Condition="'$(VisualStudioVersion)' == '12.0' and ('$(Configuration)' == 'VS2013_Debug' or '$(Configuration)' == 'VS2013_Release')">true</_ShouldImportVsSdkTargets>
+  </PropertyGroup>
+  <Target Name="_VsSDKGenerateWarnings" BeforeTargets="BeforeBuild">
+    <Warning Condition="!Exists('$(_VsSdkTargetsPath)')" Text="The Visual Studio SDK is not installed, so no VSIX installer package can be generated." />
+    <Warning Condition="!$(_ShouldImportVsSdkTargets)" Text="The version of Visual Studio you are running ($(VisualStudioVersion)) does not match your currently selected configuration ($(Configuration)), so no VSIX installer package can be generated." />
+  </Target>
+  <Import Condition="$(_ShouldImportVsSdkTargets) and Exists('$(_VsSdkTargetsPath)')" Project="$(_VsSdkTargetsPath)" />
+  <!-- Redefine the FindSourceVsixManifest target -->
+  <Target Name="FindSourceVsixManifest">
+    <ItemGroup>
+      <SourceVsixManifest Condition="'$(VisualStudioVersion)' == '12.0'" Include="vs2013.extension.vsixmanifest" />
+    </ItemGroup>
+  </Target>
+</Project>

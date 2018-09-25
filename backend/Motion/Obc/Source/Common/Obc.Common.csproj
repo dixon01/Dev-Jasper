@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7A557595-773B-4909-8D87-1DE06B015B9C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Obc.Common</RootNamespace>
+    <AssemblyName>Gorba.Motion.Obc.Common</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="GpsTimeProvider.cs" />
+    <Compile Include="Messages\AlarmAck.cs" />
+    <Compile Include="Messages\AlarmState.cs" />
+    <Compile Include="Messages\BusStop.cs" />
+    <Compile Include="Messages\BusStopList.cs" />
+    <Compile Include="Messages\ehConfig.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Messages\evAdvDelay.cs" />
+    <Compile Include="Messages\evAnnouncement.cs" />
+    <Compile Include="Messages\evBusDriving.cs" />
+    <Compile Include="Messages\evBUSStop.cs" />
+    <Compile Include="Messages\evBUSStopLeft.cs" />
+    <Compile Include="Messages\evBUSStopReached.cs" />
+    <Compile Include="Messages\evBusyIncomingCallDetected.cs" />
+    <Compile Include="Messages\evComptageRequest.cs" />
+    <Compile Include="Messages\evDeviationDetected.cs" />
+    <Compile Include="Messages\evDeviationEnded.cs" />
+    <Compile Include="Messages\evDeviationStarted.cs" />
+    <Compile Include="Messages\evDistressAlarm.cs" />
+    <Compile Include="Messages\evDriver.cs" />
+    <Compile Include="Messages\evDriverAlarm.cs" />
+    <Compile Include="Messages\evDriverAlarmAck.cs" />
+    <Compile Include="Messages\evDuty.cs" />
+    <Compile Include="Messages\evDutyAck.cs" />
+    <Compile Include="Messages\evERGError.cs" />
+    <Compile Include="Messages\evGsmAcceptCall.cs" />
+    <Compile Include="Messages\evGsmEndedCall.cs" />
+    <Compile Include="Messages\evGsmStartCall.cs" />
+    <Compile Include="Messages\evGsmStopCall.cs" />
+    <Compile Include="Messages\evIncomingCallDetected.cs" />
+    <Compile Include="Messages\evIraLogin.cs" />
+    <Compile Include="Messages\evIraLoginAck.cs" />
+    <Compile Include="Messages\evIraLogout.cs" />
+    <Compile Include="Messages\evIraMessage.cs" />
+    <Compile Include="Messages\evIraMessageReceived.cs" />
+    <Compile Include="Messages\evLog.cs" />
+    <Compile Include="Messages\evMaintenance.cs" />
+    <Compile Include="Messages\evMessage.cs" />
+    <Compile Include="Messages\evMessageAck.cs" />
+    <Compile Include="Messages\evPassengerCount.cs" />
+    <Compile Include="Messages\evRazziaEnded.cs" />
+    <Compile Include="Messages\evRazziaStart.cs" />
+    <Compile Include="Messages\evRebooting.cs" />
+    <Compile Include="Messages\evRebootModemRequest.cs" />
+    <Compile Include="Messages\evServiceEnded.cs" />
+    <Compile Include="Messages\evServiceStarted.cs" />
+    <Compile Include="Messages\evSetService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Messages\evSetServiceAck.cs" />
+    <Compile Include="Messages\evSpeechConnected.cs" />
+    <Compile Include="Messages\evSpeechDisconnected.cs" />
+    <Compile Include="Messages\evSpeechMediaType.cs" />
+    <Compile Include="Messages\evSpeechRequested.cs" />
+    <Compile Include="Messages\evTrafficLight.cs" />
+    <Compile Include="Messages\evTrafficLightCore.cs" />
+    <Compile Include="Messages\evTripEnded.cs" />
+    <Compile Include="Messages\evTripLoaded.cs" />
+    <Compile Include="Messages\evTripStarted.cs" />
+    <Compile Include="Messages\evTTSFrame.cs" />
+    <Compile Include="Messages\evTTSVolume.cs" />
+    <Compile Include="Messages\evUpdateRequested.cs" />
+    <Compile Include="Messages\evZoneChanged.cs" />
+    <Compile Include="Messages\ExtraService.cs" />
+    <Compile Include="Messages\Service.cs" />
+    <Compile Include="Messages\TrafficLightPosition.cs" />
+    <Compile Include="Messages\TrafficLightState.cs" />
+    <Compile Include="Messages\Trip.cs" />
+    <Compile Include="Messages\TTSFrame.cs" />
+    <Compile Include="Messages\TTSoverIBIS.cs" />
+    <Compile Include="Messages\TTSVolume.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\RemoteEventHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Obc\Configuration.Obc.csproj">
+      <Project>{939f1e2a-b8ea-43be-878c-dd9e4fcba28f}</Project>
+      <Name>Configuration.Obc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Entities\Motion.Common.Entities.csproj">
+      <Project>{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}</Project>
+      <Name>Motion.Common.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

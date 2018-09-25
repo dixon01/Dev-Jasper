@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Presentation Version="2.0">
+  <Display>
+    <Width>360</Width>
+    <Height>200</Height>
+  </Display>
+
+  <StandardCycles>
+    <StandardCycle Name="MainCycle">
+      <StandardSection Duration="10" Layout="PoolLayout" />
+    </StandardCycle>
+  </StandardCycles>
+
+  <Layouts>
+    <Layout Name="PoolLayout">
+      <Pool X="0" Y="0" Width="360" Height="200" FilePatterns="images\*.jpg;images\*.avi" />
+    </Layout>
+
+  </Layouts>
+
+</Presentation>

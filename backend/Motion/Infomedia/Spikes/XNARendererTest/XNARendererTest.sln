@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNARendererTest", "XNARendererTest\XNARendererTest\XNARendererTest.csproj", "{4C721A43-9813-47F2-8358-0C0608E35D28}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "XNARendererTestContent", "XNARendererTest\XNARendererTestContent\XNARendererTestContent.contentproj", "{43BB0F11-5C40-49E4-BE06-20ACE1F4DD41}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = XNARendererTest\\XNARendererTest\\XNARendererTest.csproj
+		SccProjectName1 = XNARendererTest/XNARendererTest
+		SccLocalPath1 = XNARendererTest\\XNARendererTest
+		SccProjectUniqueName2 = XNARendererTest\\XNARendererTestContent\\XNARendererTestContent.contentproj
+		SccProjectName2 = XNARendererTest/XNARendererTestContent
+		SccLocalPath2 = XNARendererTest\\XNARendererTestContent
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C721A43-9813-47F2-8358-0C0608E35D28}.Debug|x86.ActiveCfg = Debug|x86
+		{4C721A43-9813-47F2-8358-0C0608E35D28}.Debug|x86.Build.0 = Debug|x86
+		{4C721A43-9813-47F2-8358-0C0608E35D28}.Release|x86.ActiveCfg = Release|x86
+		{4C721A43-9813-47F2-8358-0C0608E35D28}.Release|x86.Build.0 = Release|x86
+		{43BB0F11-5C40-49E4-BE06-20ACE1F4DD41}.Debug|x86.ActiveCfg = Debug|x86
+		{43BB0F11-5C40-49E4-BE06-20ACE1F4DD41}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,102 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Admin.Core.Controllers.Entities
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading.Tasks;
+    using System.Xml.Serialization;
+    
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+
+    using Gorba.Center.Common.Wpf.Client.Controllers;
+    using Gorba.Center.Common.Wpf.Framework.Controllers;
+    
+    using Gorba.Center.Admin.Core.DataViewModels;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}<#+
+    private readonly PluralizationService pluralizer =
+        PluralizationService.CreateService(System.Globalization.CultureInfo.GetCultureInfo("en-us"));
+
+    private void WritePartition(EntitySpace.Partition partition)
+    { #>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Admin.Core.DataViewModels.<#= partition.Name #>;
+        using Gorba.Center.Admin.Core.ViewModels.Stages.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+
+        <#+
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteEntity(entity, partition);
+        }
+        #>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, EntitySpace.Partition partition)
+    {
+        var pluralName = this.pluralizer.Pluralize(entity.Name);
+        #>
+
+        public partial class <#= entity.Name #>StageController : EntityStageControllerBase
+        {
+            private readonly <#= entity.Name #>DataController dataController;
+            private readonly <#= entity.Name #>StageViewModel stage;
+
+            public <#= entity.Name #>StageController(<#= entity.Name #>DataController dataController)
+                : base(dataController)
+            {
+                this.dataController = dataController;
+                this.Name = "<#= entity.Name #>";
+                this.PartitionName = "<#= partition.Name #>";
+                this.StageViewModel = this.stage = new <#= entity.Name #>StageViewModel(dataController.Factory.CommandRegistry);
+            }
+
+            public override bool SupportsEntity(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                return dataViewModel is <#= entity.Name #>ReadOnlyDataViewModel;
+            }
+
+            public override bool SupportsEntity(DataViewModelBase dataViewModel)
+            {
+                return dataViewModel is <#= entity.Name #>DataViewModel;
+            }
+            
+            public override void LoadData()
+            {
+                if (this.stage.<#= pluralName #> == null)
+                {
+                    this.stage.<#= pluralName #> = this.dataController.All;
+                }
+            }
+        }
+
+        <#+
+    }
+#>

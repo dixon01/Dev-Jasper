@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Common.ServiceModel</RootNamespace>
+    <AssemblyName>Gorba.Center.Common.ServiceModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AsyncLock.cs" />
+    <Compile Include="AsyncReaderWriterLock.cs" />
+    <Compile Include="AsyncSemaphore.cs" />
+    <Compile Include="AzureUpdateProviderConfig.cs" />
+    <Compile Include="BackgroundSystemConfiguration.cs" />
+    <Compile Include="BackgroundSystemConfigurationProvider.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingEntitiesChildrenHandling.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeTrackingEntitiesChildrenHandling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\ChangeTrackingModelCreatedEventArgs{TDelta}.cs" />
+    <Compile Include="ChangeTracking\Delta.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\DeltaBase.cs" />
+    <Compile Include="ChangeTracking\DeltaMessageBase.cs" />
+    <Compile Include="ChangeTracking\DeltaMessages.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeltaMessages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\DeltaNotification.cs" />
+    <Compile Include="ChangeTracking\DeltaNotificationType.cs" />
+    <Compile Include="ChangeTracking\DeltaOperation.cs" />
+    <Compile Include="ChangeTracking\Notification.cs" />
+    <Compile Include="ChangeTracking\ReadableModelBase.cs" />
+    <Compile Include="ChangeTracking\ReadableModelEventArgs.cs" />
+    <Compile Include="ChangeTracking\Extensions.generated.cs">
+      <DependentUpon>Extensions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ChangeTracking\IChangeTrackingManager.cs" />
+    <Compile Include="ChangeTracking\IChangeTrackingModel.cs" />
+    <Compile Include="ChangeTracking\ModelUpdatedEventArgs{TDelta}.cs" />
+    <Compile Include="ChangeTracking\NotificationSubscriptionConfiguration.cs" />
+    <Compile Include="ChangeTracking\NotificationManagerFilter.cs" />
+    <Compile Include="ChangeTracking\Notifications.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Notifications.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTracking\PropertyChange{T}.cs" />
+    <Compile Include="ChangeTracking\ReadableModelBase{TDelta}.cs" />
+    <Compile Include="ChangeTracking\ReferenceChange{T}.cs" />
+    <Compile Include="ChangeTracking\NotificationManagerConfiguration.cs" />
+    <Compile Include="ChangeTracking\SqlNotificationManagerFilter.cs" />
+    <Compile Include="ChangeTracking\UserDefinedPropertiesDictionary.cs" />
+    <Compile Include="ChangeTracking\Version.cs" />
+    <Compile Include="ChangeTracking\WritableModelBase{TDelta}.cs" />
+    <Compile Include="Collections\IObservableReadOnlyCollection.cs" />
+    <Compile Include="Collections\IObservableReadOnlyDictionary{TKey,TValue}.cs" />
+    <Compile Include="Collections\ObservableReadOnlyCollection.cs" />
+    <Compile Include="Collections\ObservableReadOnlyDictionary{TKey,TValue}.cs" />
+    <Compile Include="CommonNames.cs" />
+    <Compile Include="ContentResourceDownloadRequest.cs" />
+    <Compile Include="ContentResourceDownloadResult.cs" />
+    <Compile Include="ContentResourceUploadRequest.cs" />
+    <Compile Include="ContentResourceUploadResult.cs" />
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Dynamic\DynamicContentInfo.cs" />
+    <Compile Include="Dynamic\DynamicContentPartBase.cs" />
+    <Compile Include="Dynamic\EPaperDynamicContentPart.cs" />
+    <Compile Include="Dynamic\ScreenGateDynamicContentPart.cs" />
+    <Compile Include="Dynamic\RssFeedDynamicContentPart.cs" />
+    <Compile Include="Exceptions\AzureConfigurationException.cs" />
+    <Compile Include="Exceptions\ChangeTrackingException.cs" />
+    <Compile Include="Exceptions\NotAuthenticatedException.cs" />
+    <Compile Include="Faults\FaultCodes.cs" />
+    <Compile Include="Faults\NotAuthenticatedFaultDetails.cs" />
+    <Compile Include="Filters\Queries.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Queries.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\QueryExtensions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueryExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\QueryExtensions.cs" />
+    <Compile Include="HttpMessageHandlerFactory.cs" />
+    <Compile Include="IContentResourceService.cs" />
+    <Compile Include="IMembershipService.cs" />
+    <Compile Include="IResourceService.cs" />
+    <Compile Include="IUpdateService.cs" />
+    <Compile Include="LogFileUploadRequest.cs" />
+    <Compile Include="Notifications\INotificationManager.cs" />
+    <Compile Include="Notifications\INotificationObserver.cs" />
+    <Compile Include="Notifications\INotificationManager{TObserver}.cs" />
+    <Compile Include="Notifications\INotificationSubscriber.cs" />
+    <Compile Include="Notifications\NotificationManagerFactory.cs" />
+    <Compile Include="Notifications\NotificationManagerUtility.cs" />
+    <Compile Include="Notifications\PingNotification.cs" />
+    <Compile Include="Notifications\PongNotification.cs" />
+    <Compile Include="RemoteServicesConfiguration.cs" />
+    <Compile Include="ServiceConfigurationDefaults.cs" />
+    <Compile Include="RemoveServiceProtocol.cs" />
+    <Compile Include="ChangeTracking\ChangeTrackingEntities.generated.cs">
+      <DependentUpon>ChangeTrackingEntities.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EntitySpace.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntitySpace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Filters\Comparisons.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comparisons.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\FilterComparison.cs" />
+    <Compile Include="Filters\PropertyFilterBase.cs" />
+    <Compile Include="Filters\PropertyReferenceFilterBase.cs" />
+    <Compile Include="Filters\PropertyReferenceFilters.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyReferenceFilters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\PropertyReferenceSetFilter{T}.cs" />
+    <Compile Include="Filters\PropertyValueFilterDefinition.ttcode.cs" />
+    <Compile Include="Filters\PropertyValueFilterBase.cs" />
+    <Compile Include="Filters\IQuery.cs" />
+    <Compile Include="Filters\Filters.generated.cs">
+      <DependentUpon>Filters.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Filters\FiltersExtensions.generated.cs">
+      <DependentUpon>FiltersExtensions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Filters\SortDirection.cs" />
+    <Compile Include="Filters\PropertyValueFilters.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyValueFilters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Namespaces.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceDownloadRequest.cs" />
+    <Compile Include="ResourceUploadRequest.cs" />
+    <Compile Include="ResourceUploadResult.cs" />
+    <Compile Include="Security\CurrentContextUserInfoProvider.cs" />
+    <Compile Include="Security\BackgroundSystemX509CertificateValidator.cs" />
+    <Compile Include="Security\UserCredentials.cs" />
+    <Compile Include="Security\UserInfo.cs" />
+    <Compile Include="ServiceContracts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceContracts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceModelExtensions.cs" />
+    <Compile Include="Settings\HostingSettings.cs" />
+    <Compile Include="Settings\HostingSettingsProvider.cs" />
+    <Compile Include="Settings\BackgroundSystemSettings.cs" />
+    <Compile Include="ResourceDownloadResult.cs" />
+    <Compile Include="Settings\MaintenanceModeSettings.cs" />
+    <Compile Include="Update\InstallationInstructions.cs" />
+    <Compile Include="XmlData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntitySpace.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BackgroundSystemConfiguration.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="ChangeTracking\ChangeTrackingEntities.Entity.ttinclude">
+      <DependentUpon>ChangeTrackingEntities.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingEntities.Partition.ttinclude">
+      <DependentUpon>ChangeTrackingEntities.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingEntities.Property.ttinclude">
+      <DependentUpon>ChangeTrackingEntities.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingEntities.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\ChangeTrackingEntitiesChildrenHandling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangeTrackingEntitiesChildrenHandling.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\Delta.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Delta.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\DeltaMessages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeltaMessages.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\Extensions.Entity.ttinclude">
+      <DependentUpon>Extensions.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\Extensions.Partition.ttinclude">
+      <DependentUpon>Extensions.tt</DependentUpon>
+    </None>
+    <None Include="ChangeTracking\Extensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Extensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ChangeTracking\Notifications.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Notifications.generated.cs</LastGenOutput>
+    </None>
+    <None Include="EntitySpace.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntitySpace.generated.cs</LastGenOutput>
+    </None>
+    <None Include="EntitySpace.XmlSerializedProperty.ttinclude">
+      <DependentUpon>EntitySpace.tt</DependentUpon>
+    </None>
+    <None Include="Filters\Comparisons.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comparisons.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\FilterDefinitions.ttinclude">
+      <LastGenOutput>FilterDefintions1.txt</LastGenOutput>
+    </None>
+    <None Include="Filters\PropertyReferenceFilters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyReferenceFilters.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\PropertyReferenceFilters.Partition.ttinclude">
+      <DependentUpon>PropertyReferenceFilters.tt</DependentUpon>
+    </None>
+    <None Include="Filters\PropertyReferenceFilters.Entity.ttinclude">
+      <DependentUpon>PropertyReferenceFilters.tt</DependentUpon>
+    </None>
+    <None Include="Filters\PropertyReferenceFilters.Using.ttinclude">
+      <DependentUpon>PropertyReferenceFilters.tt</DependentUpon>
+    </None>
+    <None Include="Filters\Filters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Filters.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\FiltersExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FiltersExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\PropertyValueFilters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyValueFilters.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\Queries.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Queries.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Filters\QueryExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryExtensions.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="ServiceContracts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceContracts.generated.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Settings\BackgroundSystemSettings.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{e53548fe-1d9d-4a99-8fc0-f02b661d964f}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648ee-7505-44b4-af06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

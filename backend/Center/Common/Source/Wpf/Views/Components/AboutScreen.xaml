@@ -1,0 +1,101 @@
+﻿<interaction:InteractionDialogBase x:Class="Gorba.Center.Common.Wpf.Views.Components.AboutScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:framework="clr-namespace:Gorba.Center.Common.Wpf.Framework;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:views="clr-namespace:Gorba.Center.Common.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="196" d:DesignWidth="600" d:DataContext="{d:DesignInstance interaction:AboutScreenPrompt}"
+             x:Name="Root">
+    <Grid>
+        <Grid.Resources>
+            <Brush x:Key="GorbaDarkGreyBrush">#33343d</Brush>
+            <Brush x:Key="GorbaLightGreyBrush">#949a9d</Brush>
+            <Brush x:Key="GorbaYellowBrush">#f9ae10</Brush>
+            <views:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="196"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="{StaticResource GorbaDarkGreyBrush}" VerticalAlignment="Stretch">
+            <Canvas ClipToBounds="True" VerticalAlignment="Center" Height="196">
+                <Image Canvas.Top="8"
+                       VerticalAlignment="Center"
+                       Source="{Binding Path=ApplicationIconSource}"
+                       HorizontalAlignment="Left"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       Stretch="None"/>
+                <Rectangle Canvas.Top="-2" Fill="{StaticResource GorbaDarkGreyBrush}" Width="196" Height="12" />
+                <Rectangle Canvas.Top="186" Fill="{StaticResource GorbaDarkGreyBrush}" Width="196" Height="12" />
+            </Canvas>
+        </Grid>
+
+        <Rectangle Grid.Column="1" Fill="{StaticResource GorbaYellowBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
+        <Grid Grid.Column="2" Background="{StaticResource GorbaLightGreyBrush}" Visibility="{Binding ShowLuminatorAbout, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+                <TextBlock FontSize="32" Text="{Binding ProductName}" Margin="0"
+                           FontWeight="Bold" Foreground="{StaticResource GorbaDarkGreyBrush}" VerticalAlignment="Center" />
+                <TextBlock Margin="0 8 0 0" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="12">
+                    <Run Text="Version" />
+                    <Run Text="{Binding AssemblyVersion}" />
+                </TextBlock>
+
+                <TextBlock Margin="0 8" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="12">
+                    <Run Text="{Binding Copyright}" />
+                    <Run Text="- All rights reserved." />
+                </TextBlock>
+
+                <TextBlock Text="Luminator Technology Group" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="900 Klein Road" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="Plano, Texas 75074" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="USA" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="972.424.6511" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+
+                <Frame>
+                    <Frame.Content>
+                        <TextBlock Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11">
+                            <Hyperlink NavigateUri="mailto:infotransit@luminatorusa.com">infotransit@luminatorusa.com</Hyperlink>
+                        </TextBlock>
+                    </Frame.Content>
+                </Frame>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="2" Background="{StaticResource GorbaLightGreyBrush}" Visibility="{Binding ShowGorbaAbout, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+                <TextBlock FontSize="32" Text="{Binding ProductName}" Margin="0"
+                           FontWeight="Bold" Foreground="{StaticResource GorbaDarkGreyBrush}" VerticalAlignment="Center" />
+                <TextBlock Margin="0 8 0 0" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="12">
+                    <Run Text="Version" />
+                    <Run Text="{Binding AssemblyVersion}" />
+                </TextBlock>
+
+                <TextBlock Margin="0 8" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="12">
+                    <Run Text="{Binding Copyright}" />
+                    <Run Text="- All rights reserved." />
+                </TextBlock>
+
+                <TextBlock Text="Gorba AG" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="Sandackerstrasse 26" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="CH-9245 Oberbüren" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="{x:Static framework:FrameworkStrings.AboutScreen_Switzerland}" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+                <TextBlock Text="+41 71 955 74 74" Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11" />
+
+                <Frame>
+                    <Frame.Content>
+                        <TextBlock Foreground="{StaticResource GorbaDarkGreyBrush}" FontSize="11">
+                            <Hyperlink NavigateUri="mailto:info@gorba.com">info@gorba.com</Hyperlink>
+                        </TextBlock>
+                    </Frame.Content>
+                </Frame>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</interaction:InteractionDialogBase>

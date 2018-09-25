@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.FormattedText&lt;TPart&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\FormattedText.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.SimpleImagePart" Collapsed="true">
+    <Position X="0.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Text\SimpleImagePart.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.SimplePartBase" Collapsed="true">
+    <Position X="3" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\SimplePartBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.SimpleTextFactory" Collapsed="true">
+    <Position X="3" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACAAAAAAAAAAAAAACAAIAAAE=</HashCode>
+      <FileName>Text\SimpleTextFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.SimpleTextPart" Collapsed="true">
+    <Position X="3" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAACAAA=</HashCode>
+      <FileName>Text\SimpleTextPart.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.SimpleVideoPart" Collapsed="true">
+    <Position X="5.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\SimpleVideoPart.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Text.TextFactoryBase&lt;TPart&gt;" Collapsed="true">
+    <Position X="11" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAQAACAAAAAAAAAAAAAACQAIABAE=</HashCode>
+      <FileName>Text\TextFactoryBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.AlphaAnimator&lt;T&gt;" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Gorba.Motion.Infomedia.RendererBase.Manager.AlphaAnimator&lt;T&gt;.Task" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Manager\AlphaAnimator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAAAAAAAACAEAwAAAAAAAAAAAAAAJAACAA=</HashCode>
+      <FileName>Manager\AlphaAnimator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="strategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.AnalogClockRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAAAAAAAIAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\AnalogClockRenderManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.DrawableRenderManagerBase&lt;TItem, TContext, TEngine&gt;" Collapsed="true">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAABCAAAAQAYAAAAMAAARAAAAABABBgAARAYAI=</HashCode>
+      <FileName>Manager\DrawableRenderManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.DrawableRenderManagerList&lt;TContext&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAgIBAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\DrawableRenderManagerList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.DualValueAnimatorStrategy" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAABgAAEAAEIAAAAAgAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Manager\DualValueAnimatorStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.ImageListRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="1" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Images" Type="Gorba.Motion.Infomedia.RendererBase.Manager.AlphaAnimator&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.75" Y="5.191" />
+        <Point X="1.75" Y="5.566" />
+        <Point X="16.188" Y="5.566" />
+        <Point X="16.188" Y="5.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAIAABAAAhAEABAAACAAAAA=</HashCode>
+      <FileName>Manager\ImageListRenderManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Images" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.ImageRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAQAAAAAAAAAAAABAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\ImageRenderManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Filename" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.IncludeRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAIAAAABAAAABAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\IncludeRenderManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.RenderManagerBase&lt;TItem, TContext&gt;" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAIRAAEABAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\RenderManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.RootRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="14.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABCAAAAQAAAAIBEAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\RootRenderManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="children" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.SingleValueAnimatorStrategy" Collapsed="true">
+    <Position X="17" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAACAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAA=</HashCode>
+      <FileName>Manager\SingleValueAnimatorStrategy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="strategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.TextRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Text" Type="Gorba.Motion.Infomedia.RendererBase.Manager.AlphaAnimator&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="5.191" />
+        <Point X="4" Y="5.566" />
+        <Point X="15.875" Y="5.566" />
+        <Point X="15.875" Y="5.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAgBAAAAAEIBAACAACAAA=</HashCode>
+      <FileName>Manager\TextRenderManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Text" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.ValueAnimator" Collapsed="true">
+    <Position X="14.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Manager\ValueAnimator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="strategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.Manager.VideoRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="12.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Manager\VideoRenderManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="VideoUri" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.RendererBase.RenderManagerFactoryBase&lt;TContext&gt;" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Gorba.Motion.Infomedia.RendererBase.RenderManagerFactoryBase&lt;TContext&gt;.CreateEngineMethod&lt;TItem, TManager, TEngine&gt;" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RenderManagerFactoryBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAQ=</HashCode>
+      <FileName>RenderManagerFactoryBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IAnalogClockHandRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="1" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IAnalogClockHandRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IAnalogClockRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="5.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IAnalogClockRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IImageListRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="10" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IImageListRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IImageRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="12.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IImageRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IIncludeRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="14.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IIncludeRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engine\IRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.ITextRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="3.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\ITextRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Engine.IVideoRenderEngine&lt;TContext&gt;" Collapsed="true">
+    <Position X="7.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IVideoRenderEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Text.IImagePart" Collapsed="true">
+    <Position X="11" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Text\IImagePart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Text.IPart" Collapsed="true">
+    <Position X="11" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\IPart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Text.ITextPart" Collapsed="true">
+    <Position X="13.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAACAAA=</HashCode>
+      <FileName>Text\ITextPart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Text.IVideoPart" Collapsed="true">
+    <Position X="8.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\IVideoPart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.Manager.IDrawableRenderManager&lt;TContext&gt;" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAIBAAAAAAAAAABABAAAAAAAAA=</HashCode>
+      <FileName>Manager\IDrawableRenderManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Gorba.Motion.Infomedia.RendererBase.IRenderContext" Collapsed="true">
+    <Position X="10.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>IRenderContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+This file is maintained manually since VDV doesn't (currently) provide
+a machine-readable list of services and operations.
+The method data types are referring to the XSD structure names, not the generated class names.
+-->
+<Services>
+  <Service Name="CustomerInformationService">
+    <Operation Name="GetAllData">
+      <Response>CustomerInformationService.GetAllDataResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentAnnouncement">
+      <Response>CustomerInformationService.GetCurrentAnnouncementResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentConnectionInformation">
+      <Response>CustomerInformationService.GetCurrentConnectionInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentDisplayContent">
+      <Response>CustomerInformationService.GetCurrentDisplayContentResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentStopPoint">
+      <Response>CustomerInformationService.GetCurrentStopPointResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentStopIndex">
+      <Response>CustomerInformationService.GetCurrentStopIndexResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetTripData">
+      <Response>CustomerInformationService.GetTripDataResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetVehicleData">
+      <Response>CustomerInformationService.GetVehicleDataResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrievePartialStopSequence">
+      <Request>CustomerInformationService.RetrievePartialStopSequenceRequestStructure</Request>
+      <Response>CustomerInformationService.RetrievePartialStopSequenceResponseStructure</Response>
+    </Operation>
+  </Service>
+  <Service Name="DeviceManagementService">
+    <Operation Name="GetDeviceInformation">
+      <Response>DeviceManagementService.GetDeviceInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetDeviceConfiguration">
+      <Response>DeviceManagementService.GetDeviceConfigurationResponseStructure</Response>
+    </Operation>
+    <Operation Name="SetDeviceConfiguration">
+      <Request>DeviceManagementService.SetDeviceConfigurationRequestStructure</Request>
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="GetDeviceStatus">
+      <Response>DeviceManagementService.GetDeviceStatusResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetDeviceErrorMessages">
+      <Response>DeviceManagementService.GetDeviceErrorMessagesResponseStructure</Response>
+    </Operation>
+    <Operation Name="RestartDevice">
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="DeactivateDevice">
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="ActivateDevice">
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="GetServiceInformation">
+      <Response>DeviceManagementService.GetServiceInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetServiceStatus">
+      <Response>DeviceManagementService.GetServiceStatusResponseStructure</Response>
+    </Operation>
+    <Operation Name="StartService">
+      <Request>DeviceManagementService.StartServiceRequestStructure</Request>
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="RestartService">
+      <Request>DeviceManagementService.RestartServiceRequestStructure</Request>
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+    <Operation Name="StopService">
+      <Request>DeviceManagementService.StopServiceRequestStructure</Request>
+      <!-- Response: DataAcceptedResponseStructure -->
+    </Operation>
+  </Service>
+  <Service Name="NetworkLocationService">
+    <Multicast>NetworkLocationService.DataStructure</Multicast>
+  </Service>
+  <Service Name="DistanceLocationService">
+    <Multicast>DistanceLocationService.DataStructure</Multicast>
+  </Service>
+  <Service Name="GNSSLocationService">
+    <Multicast>GNSSLocationService.DataStructure</Multicast>
+  </Service>
+  <!--
+  Remark: TimeService is using SNTP, therefore we don't generate any code for it.
+  <Service Name="TimeService" />
+  -->
+  <!-- TODO: verify other services below before uncommenting -->
+  <!-- <Service Name="JourneyInformationService">
+    <Operation Name="GetAllData">
+      <Response>JourneyInformationService.GetAllDataResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetCurrentBlockRef">
+      <Response>JourneyInformationService.GetCurrentBlockRefResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrievePartialTripSequence">
+      <Request>JourneyInformationService.RetrievePartialTripSequenceRequestStructure</Request>
+      <Response>JourneyInformationService.RetrievePartialTripSequenceResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificBlockInformation">
+      <Request>JourneyInformationService.RetrieveSpecificBlockInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificBlockInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificStopInformation">
+      <Request>JourneyInformationService.RetrieveSpecificStopInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificStopInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificTSPPointInformation">
+      <Request>JourneyInformationService.RetrieveSpecificTSPPointInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificTSPPointInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificTimingPointInformation">
+      <Request>JourneyInformationService.RetrieveSpecificTimingPointInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificTimingPointInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificGNSSPointInformation">
+      <Request>JourneyInformationService.RetrieveSpecificGNSSPointInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificGNSSPointInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveSpecificBeaconPointInformation">
+      <Request>JourneyInformationService.RetrieveSpecificBeaconPointInformationRequestStructure</Request>
+      <Response>JourneyInformationService.RetrieveSpecificBeaconPointInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllDisplayContents">
+      <Response>JourneyInformationService.ListAllDisplayContentsResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllLineInformation">
+      <Response>JourneyInformationService.ListAllLineInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllDestinationInformation">
+      <Response>JourneyInformationService.ListAllDestinationInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllViaPoint">
+      <Response>JourneyInformationService.ListAllViaPointResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllAdditionalDisplayInformation">
+      <Response>JourneyInformationService.ListAllAdditionalDisplayInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="ListAllRoutes">
+      <Response>JourneyInformationService.ListAllRoutesResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveAllRoutesPerLine">
+      <Request>JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure</Request>
+      <Response>JourneyInformationService.ListAllRoutesResponseStructure</Response>
+    </Operation>
+    <Operation Name="SetBlockNumber">
+      <Request>JourneyInformationService.SetBlockNumberRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetTripRef">
+      <Request>JourneyInformationService.SetTripRefRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetDisplayContent">
+      <Request>JourneyInformationService.SetDisplayContentRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetCurrentTripIndex">
+      <Request>JourneyInformationService.SetCurrentTripIndexRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetCurrentStopIndex">
+      <Request>JourneyInformationService.SetCurrentStopIndexRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetAdditionalAnnouncement">
+      <Request>JourneyInformationService.SetAdditionalAnnouncementRequestStructure</Request>
+    </Operation>
+    <Operation Name="SetAdditionalTextMessage">
+      <Request>JourneyInformationService.SetAdditionalTextMessageRequestStructure</Request>
+    </Operation>
+  </Service>
+  <Service Name="BeaconLocationService">
+    <Operation Name="GetData">
+      <Response>BeaconLocationService.GetDataResponseStructure</Response>
+    </Operation>
+  </Service>
+  <Service Name="DistanceLocationService" />
+  <Service Name="GNSSLocationService" />
+  <Service Name="SystemDocumentationService">
+    <Operation Name="GetSystemConfiguration">
+      <Response>SystemDocumentationService.GetSystemConfigurationResponseStructure</Response>
+    </Operation>
+    <Operation Name="StoreSystemConfiguration">
+      <Request>SystemDocumentationService.StoreSystemConfigurationRequestStructure</Request>
+    </Operation>
+    <Operation Name="RetrieveLogMessages">
+      <Request>SystemDocumentationService.RetrieveLogMessagesRequestStructure</Request>
+      <Response>SystemDocumentationService.RetrieveLogMessagesResponseStructure</Response>
+    </Operation>
+    <Operation Name="StoreLogMessages">
+      <Request>SystemDocumentationService.StoreLogMessagesRequestStructure</Request>
+    </Operation>
+  </Service>
+  <Service Name="SystemManagementService">
+    <Operation Name="GetDeviceStatus">
+      <Response>SystemManagementService.GetDeviceStatusResponseStructure</Response>
+    </Operation>
+    <Operation Name="GetServiceStatus">
+      <Response>SystemManagementService.GetServiceStatusResponseStructure</Response>
+    </Operation>
+  </Service>
+  <Service Name="TicketingService">
+    <Operation Name="SetRazzia">
+      <Request>TicketingService.SetRazziaRequestStructure</Request>
+    </Operation>
+    <Operation Name="GetTariffInformation">
+      <Response>TicketingService.GetTariffInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="RetrieveTariffInformation">
+      <Request>TicketingService.RetrieveTariffInformationRequestStructure</Request>
+      <Response>TicketingService.GetTariffInformationResponseStructure</Response>
+    </Operation>
+    <Operation Name="ValidateTicket">
+      <Request>TicketingService.ValidateTicketRequestStructure</Request>
+      <Response>TicketingService.ValidateTicketResponseStructure</Response>
+    </Operation>
+  </Service>
+  <Service Name="TestService" /> -->
+</Services>

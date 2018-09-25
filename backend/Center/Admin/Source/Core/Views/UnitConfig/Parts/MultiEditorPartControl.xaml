@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Parts.MultiEditorPartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:parts="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Parts"
+             xmlns:unitConfig="clr-namespace:Gorba.Center.Admin.Core.Views.UnitConfig"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             xmlns:editorViews="clr-namespace:Gorba.Center.Admin.Core.Views.UnitConfig.Editors"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance parts:MultiEditorPartViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Auto"
+        Grid.IsSharedSizeScope="True"
+        Background="Transparent">
+        <ItemsControl ItemsSource="{Binding Editors}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding}">
+                        <ContentPresenter.Resources>
+                            <DataTemplate DataType="{x:Type editors:TitleEditorViewModel}">
+                                <Label Content="{Binding Label}" FontWeight="Bold" FontSize="16"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type editors:EditorViewModelBase}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition SharedSizeGroup="ColumnOne" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <Label Grid.Column="0"
+                                           Content="{Binding Label}"
+                                           IsEnabled="{Binding IsEnabled}"/>
+
+                                    <ContentPresenter Grid.Column="1"
+                                                      Content="{Binding}"
+                                                      IsEnabled="{Binding IsEnabled}">
+                                        <ContentPresenter.Resources>
+                                            <DataTemplate DataType="{x:Type editors:NumberEditorViewModel}">
+                                                <editorViews:NumberEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:SelectionEditorViewModel}">
+                                                <editorViews:SelectionEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:EditableSelectionEditorViewModel}">
+                                                <editorViews:EditableSelectionEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:TextEditorViewModel}">
+                                                <editorViews:TextEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:DateTimeEditorViewModel}">
+                                                <editorViews:DateTimeEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:CheckableEditorViewModel}">
+                                                <editorViews:CheckableEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:TimeSpanEditorViewModel}">
+                                                <editorViews:TimeSpanEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:MultiSelectEditorViewModel}">
+                                                <editorViews:MultiSelectEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:MulitLineTextEditorViewModel}">
+                                                <editorViews:MultiLineTextEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:ResourceUploadEditorViewModel}">
+                                                <editorViews:ResourceUploadEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:ColorEditorViewModel}">
+                                                <editorViews:ColorEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:CheckableTreeEditorViewModel}">
+                                                <editorViews:CheckableTreeEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:GenericUsageEditorViewModel}">
+                                                <editorViews:GenericUsageEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                            <DataTemplate DataType="{x:Type editors:GenericUsageDS021BaseEditorViewModel}">
+                                                <editorViews:GenericUsageDS021BaseEditorControl DataContext="{Binding}"/>
+                                            </DataTemplate>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+                                </Grid>
+                            </DataTemplate>
+                        </ContentPresenter.Resources>
+                    </ContentPresenter>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>

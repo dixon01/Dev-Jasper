@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.StagesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:stages="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Stages"
+             xmlns:stageViews="clr-namespace:Gorba.Center.Admin.Core.Views.Stages"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:meta="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Stages.Meta"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance stages:StageViewModelBase}" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Border>
+        <Border BorderBrush="{StaticResource StageLeftHandBorderColor}">
+            <Border.Resources>
+                <converters:ToTypeConverter x:Key="ToTypeConverter"/>
+            </Border.Resources>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="BorderThickness" Value="3 0 0 0"/>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" Value="{x:Type stages:HomeStageViewModel}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <ContentPresenter Content="{Binding}">
+                <ContentPresenter.Resources>
+                    <DataTemplate DataType="{x:Type stages:HomeStageViewModel}">
+                        <stageViews:HomeStageControl DataContext="{Binding}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type stages:EntityStageViewModelBase}">
+                        <stageViews:EntityStageControl DataContext="{Binding .}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type stages:RemovableMediaStageViewModel}">
+                        <stageViews:RemovableMediaStageControl DataContext="{Binding .}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type meta:BackgroundSystemSettingsViewModel}">
+                        <stageViews:BackgroundSystemSettingsStageControl DataContext="{Binding .}" />
+                    </DataTemplate>
+                    </ContentPresenter.Resources>
+            </ContentPresenter>
+        </Border>
+    </Border>
+</UserControl>

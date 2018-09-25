@@ -1,0 +1,10 @@
+2.3	Functionality 3: Integrated logging
+•	Logging to console as well to file
+•	Concept to avoid lost log entries
+•	Compression of data
+o	Only if also disrupted files can be restored as well
+•	Flash lifetime is not taken into consideration during this test (we want to prove the performance)
+•	Test log: Date and time stamp every 1 sec (low level), 1/10 sec (med level), 1/100 sec (high level) + ongoing counter since start + current CPU consumption of system
+o	One log entry per line
+•	Logging with three mentioned levels (to file AND console) should not cause any trouble for performance (video playback,2 tickers (see chapter 1.2, cycle1), IBIS reaction time)
+•	Hardware: PM800

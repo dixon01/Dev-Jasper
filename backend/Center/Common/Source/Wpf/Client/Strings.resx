@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Login_Authenticating" xml:space="preserve">
+    <value>Authenticating...</value>
+  </data>
+  <data name="Login_Cancel" xml:space="preserve">
+    <value>Operation canceled</value>
+  </data>
+  <data name="Login_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Login_Description" xml:space="preserve">
+    <value>Select the server you would like to log in to and provide your credentials.</value>
+  </data>
+  <data name="Login_Error" xml:space="preserve">
+    <value>Error during validation</value>
+  </data>
+  <data name="Login_LoginButton" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Login_Server" xml:space="preserve">
+    <value>Server:</value>
+  </data>
+  <data name="Login_Username" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="Login_UserNotAuthenticated" xml:space="preserve">
+    <value>User not authenticated</value>
+  </data>
+  <data name="TenantSelection_LabelTenant" xml:space="preserve">
+    <value>Tenant:</value>
+  </data>
+  <data name="TenantSelection_SelectButton" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="TenantSelection_TenantDescription" xml:space="preserve">
+    <value>Please select your tenant.</value>
+  </data>
+  <data name="Login_NoTenants" xml:space="preserve">
+    <value>No tenants found</value>
+  </data>
+  <data name="ConnectionException_DefaultTitle" xml:space="preserve">
+    <value>Connection problem</value>
+  </data>
+  <data name="Login_CanNotGetConfiguration" xml:space="preserve">
+    <value>Error configuring connection to the server. Please contact the support team.</value>
+  </data>
+  <data name="Login_CanNotGetConfigurationTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Logout_ToolTipFormat" xml:space="preserve">
+    <value>Log out from {0}</value>
+  </data>
+  <data name="ChangePassword_CurrentPassword" xml:space="preserve">
+    <value>Current password:</value>
+  </data>
+  <data name="ChangePassword_Error_CurrentNoMatch" xml:space="preserve">
+    <value>The current password does not match.</value>
+  </data>
+  <data name="ChangePassword_Error_InvalidPassword" xml:space="preserve">
+    <value>The new password must consist of at least 8 characters.</value>
+  </data>
+  <data name="ChangePassword_Error_NotChanged" xml:space="preserve">
+    <value>Couldn't change the password. If neccessary, try logging out and then back in with the old credentials.</value>
+  </data>
+  <data name="ChangePassword_Error_NotChanged_Title" xml:space="preserve">
+    <value>Password Change Failed</value>
+  </data>
+  <data name="ChangePassword_Error_RepeatNoMatch" xml:space="preserve">
+    <value>The new passwords don't match.</value>
+  </data>
+  <data name="ChangePassword_NewPassword" xml:space="preserve">
+    <value>New password:</value>
+  </data>
+  <data name="ChangePassword_RepeatPassword" xml:space="preserve">
+    <value>Repeat password:</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="UserMenu_ChangePassword" xml:space="preserve">
+    <value>Change password...</value>
+  </data>
+  <data name="UserMenu_Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="UserMenu_ServerFormat" xml:space="preserve">
+    <value>Server: {0}</value>
+  </data>
+  <data name="Login_FetchingTenants" xml:space="preserve">
+    <value>Fetching tenants...</value>
+  </data>
+  <data name="Login_NoTenantsFound" xml:space="preserve">
+    <value>No tenant found. Please choose another user.</value>
+  </data>
+  <data name="Login_NoTenantsFoundTitle" xml:space="preserve">
+    <value>No tenant found</value>
+  </data>
+  <data name="Permission_NotGranted" xml:space="preserve">
+    <value>The operation is not possible with the current user permissions.</value>
+  </data>
+  <data name="Permission_NotGrantedTitle" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Login_NoConnection" xml:space="preserve">
+    <value>Couldn't connect to server.</value>
+  </data>
+  <data name="Login_NoServices" xml:space="preserve">
+    <value>Error connecting to services</value>
+  </data>
+  <data name="Login_ServerNotFound" xml:space="preserve">
+    <value>Couldn't find server. Check the server name.</value>
+  </data>
+  <data name="Login_SystemInMaintenance" xml:space="preserve">
+    <value>Couldn't log in. The system is in maintenance mode:
+{0}</value>
+  </data>
+  <data name="Login_SystemNotAvailable" xml:space="preserve">
+    <value>System is not available. Please try again later.</value>
+  </data>
+  <data name="MaintenanceModeActivated_MessageFormat" xml:space="preserve">
+    <value>The maintenance mode for the background system has been activated. Please close your applications.
+Reason: {0}</value>
+  </data>
+  <data name="MaintenanceModeActivated_Title" xml:space="preserve">
+    <value>Maintenance mode</value>
+  </data>
+  <data name="UpdateProgress_Description" xml:space="preserve">
+    <value>Installing an update from</value>
+  </data>
+  <data name="UpdateProgress_Message" xml:space="preserve">
+    <value>Downloading: {0:0.0}MB of {1:0.0}MB - {2}% complete</value>
+  </data>
+  <data name="Login_CheckingUpdates" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="Login_UpdateError" xml:space="preserve">
+    <value>Couldn't check for updates</value>
+  </data>
+  <data name="Login_OfflineButton" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="CheckInDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CheckInDialog_Checkin" xml:space="preserve">
+    <value>Check In</value>
+  </data>
+  <data name="CheckInDialog_MajorVersion" xml:space="preserve">
+    <value> Major version</value>
+  </data>
+  <data name="CheckInDialog_MinorVersion" xml:space="preserve">
+    <value> Minor version</value>
+  </data>
+  <data name="CheckInDialog_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="CheckInDialog_VersionComments" xml:space="preserve">
+    <value>Version Comments</value>
+  </data>
+  <data name="CheckInDialog_VersionTypeMessage" xml:space="preserve">
+    <value>What kind of version would you like to check in?</value>
+  </data>
+  <data name="LoadingWindow_BusyContent" xml:space="preserve">
+    <value>Loading the main window and resources</value>
+  </data>
+  <data name="CheckInDialog_ErrorDescription_Empty" xml:space="preserve">
+    <value>The version comments must not be empty.</value>
+  </data>
+</root>

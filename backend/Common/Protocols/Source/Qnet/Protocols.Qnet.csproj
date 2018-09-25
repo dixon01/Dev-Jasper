@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1ADAC8C9-5FA3-4B65-8C57-F2A8F4EE20C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Protocols.Qnet</RootNamespace>
+    <AssemblyName>Gorba.Common.Protocols.Qnet</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsContainerAnalysis>False</CodeContractsContainerAnalysis>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsContainerAnalysis>False</CodeContractsContainerAnalysis>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\3rdParty\NLog\2.0.0.2000\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AlarmClass.cs" />
+    <Compile Include="AttributeCode.cs" />
+    <Compile Include="BusMessageAttribute.cs" />
+    <Compile Include="BusMessageStruct.cs" />
+    <Compile Include="ActivityIdsMessage.cs" />
+    <Compile Include="QnaErrors.cs" />
+    <Compile Include="QnetDisplayTypeInfolineRow.cs" />
+    <Compile Include="QnetDisplayTypeLRow.cs" />
+    <Compile Include="QnetDisplayTypeMRow.cs" />
+    <Compile Include="QnetDisplayTypeSRow.cs" />
+    <Compile Include="DaySecTime.cs" />
+    <Compile Include="DisplayMode.cs" />
+    <Compile Include="QnetDisplayTypeCRow.cs" />
+    <Compile Include="QnetFixedPort.cs" />
+    <Compile Include="QnetRealtimeDataMessage.cs" />
+    <Compile Include="QnetRealtimeDataValue.cs" />
+    <Compile Include="QnetRealtimeMessage.cs" />
+    <Compile Include="DOSTimeStruct.cs" />
+    <Compile Include="EventCode.cs" />
+    <Compile Include="ExecutionScheduleContext.cs" />
+    <Compile Include="IQmailIdentifierProvider.cs" />
+    <Compile Include="QmailIdentifierProvider.cs" />
+    <Compile Include="QnetEventMessage.cs" />
+    <Compile Include="QnetEventStruct.cs" />
+    <Compile Include="QnetMessageStruct.cs" />
+    <Compile Include="QnetProtocolStackException.cs" />
+    <Compile Include="ReservedCharacters.cs" />
+    <Compile Include="RxState.cs" />
+    <Compile Include="Structures\ActivityDataStruct.cs" />
+    <Compile Include="Structures\ActivityIdsStruct.cs" />
+    <Compile Include="Structures\DeleteTripStruct.cs" />
+    <Compile Include="Structures\DisplayStruct.cs" />
+    <Compile Include="Structures\RealtimeLaneDataStruct.cs" />
+    <Compile Include="Structures\RealtimeDataTypeLStruct.cs" />
+    <Compile Include="Structures\RealtimeDepartureTimeDataStruct.cs" />
+    <Compile Include="RealtimeSpecialCharacters.cs" />
+    <Compile Include="ReceivedQnetMessageArgs.cs" />
+    <Compile Include="Structures\RealtimeMonitorCommand.cs" />
+    <Compile Include="Structures\RealtimeDestinationDataStruct.cs" />
+    <Compile Include="Structures\RealtimeLineDataStruct.cs" />
+    <Compile Include="Structures\RealtimeDataTypeMStruct.cs" />
+    <Compile Include="Structures\RealtimeDataTypeCStruct.cs" />
+    <Compile Include="Structures\RealtimeDataStruct.cs" />
+    <Compile Include="Structures\RealtimeDataTypeSStruct.cs" />
+    <Compile Include="RealtimeDisplayType.cs" />
+    <Compile Include="Structures\RealtimeInfoLineStruct.cs" />
+    <Compile Include="Structures\RealtimeMonitoringStruct.cs" />
+    <Compile Include="RealtimeStartMode.cs" />
+    <Compile Include="Structures\RealtimeStartStruct.cs" />
+    <Compile Include="Structures\StructuresHelper.cs" />
+    <Compile Include="Structures\ActivityStruct.cs" />
+    <Compile Include="Structures\VoiceTextStruct.cs" />
+    <Compile Include="TftpAckStruct.cs" />
+    <Compile Include="QnetTFTPMessage.cs" />
+    <Compile Include="ExecutionCondition.cs" />
+    <Compile Include="InfoLineDataType.cs" />
+    <Compile Include="IqubeCommandCode.cs" />
+    <Compile Include="IqubeTaskCode.cs" />
+    <Compile Include="Structures\QmailStruct.cs" />
+    <Compile Include="QnetIqubeCmdMessageContext.cs" />
+    <Compile Include="QnetIqubeActivityMessage.cs" />
+    <Compile Include="DateTimeStruct.cs" />
+    <Compile Include="IqubeCmdMsgStruct.cs" />
+    <Compile Include="QnetScheduledTimetableRequestMessage.cs" />
+    <Compile Include="QnetVdvMessageContext.cs" />
+    <Compile Include="QnetVdvMessage.cs" />
+    <Compile Include="QnetMessage.cs" />
+    <Compile Include="QnetRefDataRequestMessage.cs" />
+    <Compile Include="QnetSNMPMessage.cs" />
+    <Compile Include="QnetTimeSyncRequestMessage.cs" />
+    <Compile Include="QnetRequestMessage.cs" />
+    <Compile Include="QnetBusMessageContext.cs" />
+    <Compile Include="QnetMessageDecoder.cs" />
+    <Compile Include="QnetMessageBase.cs" />
+    <Compile Include="QnetBusMessage.cs" />
+    <Compile Include="MessageEnum.cs" />
+    <Compile Include="ByteAccess.cs" />
+    <Compile Include="DosDateTime.cs" />
+    <Compile Include="QNPLayer.cs" />
+    <Compile Include="QNETLayer.cs" />
+    <Compile Include="QDPLayer.cs" />
+    <Compile Include="Qna.cs" />
+    <Compile Include="QnetAddress.cs" />
+    <Compile Include="QnetEnums.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QnetProtocolStack.cs" />
+    <Compile Include="QntpMsgStruct.cs" />
+    <Compile Include="RemoteBusStruct.cs" />
+    <Compile Include="TftpMailStruct.cs" />
+    <Compile Include="TftpOperationCode.cs" />
+    <Compile Include="TftpStruct.cs" />
+    <Compile Include="Structures\VdvStructures.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vdv\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Protocols.Core.csproj">
+      <Project>{890FE479-4DA8-46EB-9AFF-796A27636504}</Project>
+      <Name>Protocols.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

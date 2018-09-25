@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<SystemManager>
+	<Launches>
+		<LaunchProcess>
+			<ExecutablePath>D:\Progs\FileZillaServer\FileZilla server.exe</ExecutablePath>
+			<Arguments>/compat /start</Arguments>
+			<Minimize>true</Minimize>
+			<UseWatchdog>false</UseWatchdog>
+		</LaunchProcess>
+		<LaunchProcess>
+			<ExecutablePath>D:\Progs\MediServer\MediServer.exe</ExecutablePath>
+			<Minimize>true</Minimize>
+			<UseWatchdog>false</UseWatchdog>
+		</LaunchProcess>
+		<LaunchProcess>
+			<ExecutablePath>D:\Progs\Protran\Protran.exe</ExecutablePath>
+			<Minimize>true</Minimize>
+			<UseWatchdog>false</UseWatchdog>
+		</LaunchProcess>
+		<LaunchProcess>
+			<ExecutablePath>D:\Progs\InfoMedia\Infomedia.exe</ExecutablePath>
+			<Minimize>false</Minimize>
+			<UseWatchdog>false</UseWatchdog>
+		</LaunchProcess>
+	</Launches>
+
+	<SplashFile>
+		<Destination>D:\SplashFile.txt</Destination>
+		<FileName>D:\Progs\Protran\Protran.exe</FileName>
+		<FileName>D:\Progs\MediServer\MediServer.exe</FileName>
+		<FileName>D:\Progs\SystemManager\SystemManager.exe</FileName>
+		<FileName>D:\Progs\InfoMedia\Infomedia.exe</FileName>
+		<FileName>D:\Update\Update.exe</FileName>
+	</SplashFile>
+	
+</SystemManager>

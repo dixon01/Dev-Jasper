@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0A59FBC7-D685-4F22-87DE-0403E255A90C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.AhdlcRenderer</RootNamespace>
+    <AssemblyName>Gorba.Motion.Infomedia.AhdlcRenderer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="AhdlcRendererApplication.cs" />
+    <Compile Include="Handlers\ChannelHandler.cs" />
+    <Compile Include="Engines\ImageComponent.cs" />
+    <Compile Include="Engines\RectangleComponent.cs" />
+    <Compile Include="Engines\RectangleRenderEngine.cs" />
+    <Compile Include="Engines\BitmapFactory.cs" />
+    <Compile Include="Handlers\FontInfo.cs" />
+    <Compile Include="Handlers\FrameHandlerFactory.cs" />
+    <Compile Include="Renderer\BidiUtility.cs" />
+    <Compile Include="Renderer\ColoredFont.cs" />
+    <Compile Include="FramesEventArgs.cs" />
+    <Compile Include="IAhdlcRenderContext.cs" />
+    <Compile Include="Engines\ComponentBase.cs" />
+    <Compile Include="Engines\ImageRenderEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\GraphicsRenderer.cs" />
+    <Compile Include="Signs\BitmapSignRendererBase.cs" />
+    <Compile Include="Renderer\IGraphicsContext.cs" />
+    <Compile Include="Parts\ImagePart.cs" />
+    <Compile Include="Renderer\OutlinedColoredFont.cs" />
+    <Compile Include="Parts\PartBase.cs" />
+    <Compile Include="Engines\RenderEngineBase.cs" />
+    <Compile Include="Signs\ColorSignRenderer.cs" />
+    <Compile Include="Signs\MonochromeSignRenderer.cs" />
+    <Compile Include="Handlers\SerialPortFrameHandler.FX20.cs" />
+    <Compile Include="Signs\SignRendererBase.cs" />
+    <Compile Include="Renderer\SimpleColorPixelSource.cs" />
+    <Compile Include="Renderer\SimpleMonochromePixelSource.cs" />
+    <Compile Include="Engines\TextComponent.cs" />
+    <Compile Include="Parts\TextPart.cs" />
+    <Compile Include="Parts\TextPartFactory.cs" />
+    <Compile Include="Signs\TextSignRenderer.cs" />
+    <Compile Include="RenderManagerFactory.cs" />
+    <Compile Include="Handlers\SignHandler.cs" />
+    <Compile Include="Engines\TextRenderEngine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Formats\Source\AlphaNT\Formats.AlphaNT.csproj">
+      <Project>{189BDF41-0454-4172-BE5B-F88481F78393}</Project>
+      <Name>Formats.AlphaNT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ahdlc\Protocols.Ahdlc.csproj">
+      <Project>{43F7581A-4A54-4F18-B584-76996B2EB2EC}</Project>
+      <Name>Protocols.Ahdlc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BbCode\BbCode.csproj">
+      <Project>{D9E310CB-7DB7-46D2-8F0D-8A799660A106}</Project>
+      <Name>BbCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RendererBase\RendererBase.csproj">
+      <Project>{646028B8-57A6-4017-BEE2-0064B2F78B0A}</Project>
+      <Name>RendererBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AhdlcRenderer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="Renderer\arabCode.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Handlers\G07X03_1.FON" />
+    <EmbeddedResource Include="Handlers\G08X05U1.FON" />
+    <EmbeddedResource Include="Handlers\G12X07U2.FON" />
+    <EmbeddedResource Include="Handlers\G15X07_2.FON" />
+    <EmbeddedResource Include="Handlers\G07X04_1.FON" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

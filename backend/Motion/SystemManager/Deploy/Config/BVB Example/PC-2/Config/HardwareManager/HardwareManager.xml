@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HardwareManager>
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="true">
+    <PollingInterval>PT0.1S</PollingInterval>
+    <GPIO>
+      <Pin Index="0">StopRequest</Pin>
+      <Pin Index="1">Pin1</Pin>
+      <Pin Index="2">Pin2</Pin>
+      <Pin Index="3">Pin3</Pin>
+      <Pin Index="4">Pin4</Pin>
+      <Pin Index="5">Pin5</Pin>
+      <Pin Index="6">Pin6</Pin>
+      <Pin Index="7">Pin7</Pin>
+    </GPIO>
+    <Button>Button</Button>
+    <UpdateLed>UpdateLed</UpdateLed>
+    <RS485Interface>At91</RS485Interface>
+    <DviLevelShifters>
+      <DviLevelShifter Index="1">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+      <DviLevelShifter Index="2">
+        <Trim>StandardCurrent</Trim>
+        <OutputLevel>0</OutputLevel>
+      </DviLevelShifter>
+    </DviLevelShifters>
+    <Transceivers>
+      <Transceiver Index="1">
+        <Type>RS485</Type>
+        <Termination>false</Termination>
+        <Mode>HalfDuplex</Mode>
+      </Transceiver>
+      <Transceiver Index="2">
+        <Type>RS485</Type>
+        <Termination>false</Termination>
+        <Mode>HalfDuplex</Mode>
+      </Transceiver>
+    </Transceivers>
+  </Mgi>
+  <SNTP Enabled="false" Host="2.europe.pool.ntp.org" Port="123" Version="4" />
+  <VDV301 Enabled="false" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="false" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions/>
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>UTC</TimeZone>
+      <IPAddress>192.168.10.40</IPAddress>
+      <SubnetMask>255.255.255.0</SubnetMask>
+      <Gateway>192.168.10.254</Gateway>
+    </Setting>
+  </Settings>
+</HardwareManager>

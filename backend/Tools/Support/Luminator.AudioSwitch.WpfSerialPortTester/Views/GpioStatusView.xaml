@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Luminator.AudioSwitch.WpfSerialPortTester.Views.GpioStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Luminator.AudioSwitch.WpfSerialPortTester.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewModels="clr-namespace:Luminator.AudioSwitch.WpfSerialPortTester.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="1024">
+    <!--<UserControl.DataContext>
+        <viewModels:GpioStatusViewModel/>
+    </UserControl.DataContext>-->
+    <Grid d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="23*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" IsChecked="{Binding Door1Active}" IsHitTestVisible="False" Focusable="False" Content="Door 1" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" IsChecked="{Binding Door2Active}" IsHitTestVisible="False" Focusable="False" d:LayoutOverrides="Width" Content="Door 2" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" IsChecked="{Binding InteriorSpeakersActive}" IsHitTestVisible="False" Focusable="False" d:LayoutOverrides="Width" Content="Int. Spks" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" IsChecked="{Binding ExteriorSpeakersActive}" IsHitTestVisible="False" Focusable="False" d:LayoutOverrides="Width" Content="Ext. Spks" HorizontalAlignment="Center"/>
+
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="0" Visibility="Collapsed" IsChecked="{Binding Reverse}" IsHitTestVisible="False" Focusable="False" Content="Direction" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="4" IsChecked="{Binding RadioSpeakerMuted}" IsHitTestVisible="False" Focusable="False" Content="Rad. Spk.(M)" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="5" IsChecked="{Binding InteriorSpeakerMuted}" IsHitTestVisible="False" Focusable="False" Content="Int. Spk.(M)" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="0" Grid.Column="6" IsChecked="{Binding InterorSpeakerNonMuting}" IsHitTestVisible="False" Focusable="False" Content="Int. Spk.(NM)" HorizontalAlignment="Center"/>
+
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="0" IsChecked="{Binding StopRequest}" IsHitTestVisible="False" Focusable="False" Content="Stop" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="1" IsChecked="{Binding PushToTalk}" IsHitTestVisible="False" Focusable="False" Content="PTT" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="2" IsChecked="{Binding AdaStopRequest}" IsHitTestVisible="False" Focusable="False" Content="ADA" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="3" IsChecked="{Binding Odometer}" IsHitTestVisible="False" Focusable="False" Content="Speed" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="4" IsChecked="{Binding RadioSpeakerNonMuting}" IsHitTestVisible="False" Focusable="False" Content="Rad. Spk.(NM)" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="5" IsChecked="{Binding ExteriorSpeakerMuted}" IsHitTestVisible="False" Focusable="False" Content="Ext. Spk.(M)" HorizontalAlignment="Center"/>
+        <controls:ToggleSwitch Grid.Row="1" Grid.Column="6" IsChecked="{Binding ExteriorSpeakerNonMuting}" IsHitTestVisible="False" Focusable="False" Content="Ext. Spk.(NM)" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

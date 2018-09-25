@@ -1,0 +1,31 @@
+﻿@using Gorba.Center.BackgroundSystem.Spikes.InTeWebApplication.Models
+@model TestResult
+
+@{
+    ViewBag.Title = "TestResult";
+}
+
+<h2>TestResult '@this.Model.Name'</h2>
+<p><a class="btn btn-default" href="@this.Url.Action("Index")">&laquo; Back to test lists</a></p>
+<div>Result: @this.Model.ResultType</div>
+<div>Time elapsed: @(this.Model.ElapsedTime)</div>
+<blockquote>
+    @switch (this.Model.ResultType)
+    {
+        case TestResultType.Inconclusive:
+            <div>Result unknown</div>
+            break;
+        case TestResultType.Warning:
+        <div class="text-warning">@this.Model.Description</div>
+            break;
+        case TestResultType.Success:
+        <div class="text-success">@this.Model.Description</div>
+            break;
+        case TestResultType.Error:
+            var message = this.Model.Exception == null ? "No details. The exception object is null." : this.Model.Exception.Message;
+            <div class="text-danger">@message</div>
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+</blockquote>

@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D7BF44D-13E6-4EA1-A647-0029729D353B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Update.UsbUpdateManager</RootNamespace>
+    <AssemblyName>USBUpdateManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\..\Update\Icons\update.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\FileExplorerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FileExplorerListView.Designer.cs">
+      <DependentUpon>FileExplorerListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileIconManager.cs" />
+    <Compile Include="Controls\FoldersTreeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FoldersTreeControl.Designer.cs">
+      <DependentUpon>FoldersTreeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FoldersTreeModel.cs" />
+    <Compile Include="Controls\FtpServersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\FtpServersDialog.Designer.cs">
+      <DependentUpon>FtpServersDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstallationActionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InstallationActionsControl.Designer.cs">
+      <DependentUpon>InstallationActionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IProgressTask.cs" />
+    <Compile Include="Controls\ProgressTaskBase.cs" />
+    <Compile Include="Controls\SelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\SelectionDialog.Designer.cs">
+      <DependentUpon>SelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\TextInputDialog.Designer.cs">
+      <DependentUpon>TextInputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitConfigControl.Designer.cs">
+      <DependentUpon>UnitConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitDetailsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitDetailsControl.Designer.cs">
+      <DependentUpon>UnitDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitGroupDetailsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitGroupDetailsControl.Designer.cs">
+      <DependentUpon>UnitGroupDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitTree.Designer.cs">
+      <DependentUpon>UnitTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitUpdateDetailsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitUpdateDetailsControl.Designer.cs">
+      <DependentUpon>UnitUpdateDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitUpdateDetailsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitUpdateDetailsDialog.Designer.cs">
+      <DependentUpon>UnitUpdateDetailsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UpdateCreationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UpdateCreationControl.Designer.cs">
+      <DependentUpon>UpdateCreationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UpdateExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\UpdateExportDialog.Designer.cs">
+      <DependentUpon>UpdateExportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UpdateFolderStructureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UpdateFolderStructureControl.Designer.cs">
+      <DependentUpon>UpdateFolderStructureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DirectoryNode.cs" />
+    <Compile Include="Data\FileNode.cs" />
+    <Compile Include="Controls\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Unit.cs" />
+    <Compile Include="Data\UnitGroup.cs" />
+    <Compile Include="Data\UpdateProject.cs" />
+    <Compile Include="Data\UpdateInfo.cs" />
+    <Compile Include="GuiUpdateContext.cs" />
+    <Compile Include="IProjectManager.cs" />
+    <Compile Include="Controls\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectHandler.cs" />
+    <Compile Include="ProjectManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\UpdateExport.cs" />
+    <Compile Include="UnitGroupExportPreview.cs" />
+    <Compile Include="UpdateExportPreview.cs" />
+    <Compile Include="Utility\FileUtility.cs" />
+    <EmbeddedResource Include="Controls\FileExplorerListView.resx">
+      <DependentUpon>FileExplorerListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FoldersTreeControl.resx">
+      <DependentUpon>FoldersTreeControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FtpServersDialog.resx">
+      <DependentUpon>FtpServersDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InstallationActionsControl.resx">
+      <DependentUpon>InstallationActionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SelectionDialog.resx">
+      <DependentUpon>SelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextInputDialog.resx">
+      <DependentUpon>TextInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitConfigControl.resx">
+      <DependentUpon>UnitConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitDetailsControl.resx">
+      <DependentUpon>UnitDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitGroupDetailsControl.resx">
+      <DependentUpon>UnitGroupDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitTree.resx">
+      <DependentUpon>UnitTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitUpdateDetailsControl.resx">
+      <DependentUpon>UnitUpdateDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitUpdateDetailsDialog.resx">
+      <DependentUpon>UnitUpdateDetailsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UpdateCreationControl.resx">
+      <DependentUpon>UpdateCreationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UpdateExportDialog.resx">
+      <DependentUpon>UpdateExportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UpdateFolderStructureControl.resx">
+      <DependentUpon>UpdateFolderStructureControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj">
+      <Project>{E976240D-8A45-486D-B485-6D26AEF71A0C}</Project>
+      <Name>Configuration.Update</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Resources\Medi.Resources.csproj">
+      <Project>{31D9EAD4-9A25-48A1-8491-940C2A711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Ftp\Common.Update.Ftp.csproj">
+      <Project>{F9F814B5-3FF3-440E-A110-4353C6E65D89}</Project>
+      <Name>Common.Update.Ftp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Medi\Common.Update.Medi.csproj">
+      <Project>{81A45ACB-5C2A-44C9-A8ED-46691B9B5C49}</Project>
+      <Name>Common.Update.Medi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Usb\Common.Update.Usb.csproj">
+      <Project>{C2D59B4D-2366-496D-AC39-DD795DEB64DB}</Project>
+      <Name>Common.Update.Usb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Computer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\servers.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Computer1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\servers1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\112_Plus_Green.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\112_Minus_Orange.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newfldr.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\077_AddFile.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repfld.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\move.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditDocument.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\autoplay.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cmd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Generic_Document.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\112_UpArrowShort_Blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\112_DownArrowShort_Blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Places-network-server-database-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Places-network-server-database.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

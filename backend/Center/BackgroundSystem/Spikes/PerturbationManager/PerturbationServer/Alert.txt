@@ -1,0 +1,36 @@
+﻿{
+header {
+  gtfs_realtime_version: "1.0"
+  incrementality: FULL_DATASET
+  timestamp: 1381318027
+}
+entity {
+  id: "8310870"
+  alert:[ {
+    active_period {
+      start: 1381315680
+      end: 1383220080
+    }
+    informed_entity {
+      stop_id: "3"
+    }
+    informed_entity {
+      stop_id: "2"
+    }
+    cause: UNKNOWN_CAUSE
+    effect: UNKNOWN_EFFECT
+    header_text {
+      translation {
+        text: "Auf den Linien 300, 301 und 302 ist aktuell mit Versp\303\244tungen oder Ausf\303\244llen zu rechnen."
+        language: "de"
+      }
+    }
+    description_text {
+      translation {
+        text: ""
+        language: "de"
+      }
+    }
+  }
+}
+}

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{159CE797-E084-488F-87B3-23857049BE50}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Configuration.Protran</RootNamespace>
+    <AssemblyName>Gorba.Common.Configuration.Protran</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Arriva\ArrivaConfig.cs" />
+    <Compile Include="Arriva\BehaviourConfig.cs" />
+    <Compile Include="Arriva\ConnectionSource.cs" />
+    <Compile Include="Arriva\FtpConfig.cs" />
+    <Compile Include="Arriva\ObuConfig.cs" />
+    <Compile Include="Common\AuthenticationConfig.cs" />
+    <Compile Include="Core\ConfigLoader.cs" />
+    <Compile Include="Common\GenericUsage.cs" />
+    <Compile Include="Core\PersistenceConfig.cs" />
+    <Compile Include="Core\ProtocolConfig.cs" />
+    <Compile Include="Core\ProtranConfig.cs" />
+    <Compile Include="GorbaProtocol\GorbaConfig.cs" />
+    <Compile Include="Ibis\Behaviour.cs" />
+    <Compile Include="Ibis\ByteType.cs" />
+    <Compile Include="Ibis\IbisConfig.cs" />
+    <Compile Include="Ibis\IbisSourcesConfig.cs" />
+    <Compile Include="Ibis\IbisSourceType.cs" />
+    <Compile Include="Ibis\JsonConfig.cs" />
+    <Compile Include="Ibis\RecordingConfig.cs" />
+    <Compile Include="Ibis\RecordingFormat.cs" />
+    <Compile Include="Ibis\SerialPortConfig.cs" />
+    <Compile Include="Ibis\SerialPortReopen.cs" />
+    <Compile Include="Ibis\SimulationConfig.cs" />
+    <Compile Include="Ibis\TelegramFormat.cs" />
+    <Compile Include="Ibis\Telegrams\Answer.cs" />
+    <Compile Include="Ibis\Telegrams\ConnectionConfig.cs" />
+    <Compile Include="Ibis\Telegrams\ControlChar.cs" />
+    <Compile Include="Ibis\Telegrams\DS003AConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS006AConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS006Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS021AConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS021CConfig.cs" />
+    <Compile Include="Ibis\Telegrams\DS021ConfigBase.cs" />
+    <Compile Include="Ibis\Telegrams\DS036Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS080Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS081Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS120Config.cs" />
+    <Compile Include="Ibis\Telegrams\DS130Config.cs" />
+    <Compile Include="Ibis\Telegrams\GenericUsageDS021Base.cs" />
+    <Compile Include="Ibis\Telegrams\GO002Config.cs" />
+    <Compile Include="Ibis\Telegrams\GO004Config.cs" />
+    <Compile Include="Ibis\Telegrams\GO005Config.cs" />
+    <Compile Include="Ibis\Telegrams\GO007Config.cs" />
+    <Compile Include="Ibis\Telegrams\HPW074Config.cs" />
+    <Compile Include="Ibis\Telegrams\Response.cs" />
+    <Compile Include="Ibis\Telegrams\ScheduleDeviation.cs" />
+    <Compile Include="Ibis\Telegrams\SimpleTelegramConfig.cs" />
+    <Compile Include="Ibis\Telegrams\Status.cs" />
+    <Compile Include="Ibis\Telegrams\TelegramConfig.cs" />
+    <Compile Include="Ibis\Telegrams\TelegramConfigList.cs" />
+    <Compile Include="Ibis\Telegrams\TelegramConfigXmlSerializer.cs" />
+    <Compile Include="Ibis\TimeSyncConfig.cs" />
+    <Compile Include="Ibis\UdpServerConfig.cs" />
+    <Compile Include="IO\InputHandlingConfig.cs" />
+    <Compile Include="IO\IOProtocolConfig.cs" />
+    <Compile Include="IO\SerialPortConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformations\Capitalize.cs" />
+    <Compile Include="Transformations\CapitalizeMode.cs" />
+    <Compile Include="Transformations\Chain.cs" />
+    <Compile Include="Transformations\ChainRef.cs" />
+    <Compile Include="Transformations\Integer.cs" />
+    <Compile Include="Transformations\Join.cs" />
+    <Compile Include="Transformations\LawoString.cs" />
+    <Compile Include="Transformations\Mapping.cs" />
+    <Compile Include="Transformations\RegexDivider.cs" />
+    <Compile Include="Transformations\RegexMapping.cs" />
+    <Compile Include="Transformations\Replace.cs" />
+    <Compile Include="Transformations\Reverse.cs" />
+    <Compile Include="Transformations\StringMapping.cs" />
+    <Compile Include="Transformations\SymbolDivider.cs" />
+    <Compile Include="Transformations\TransformationConfig.cs" />
+    <Compile Include="Transformations\Utf8.cs" />
+    <Compile Include="VDV301\DataItemConfig.cs" />
+    <Compile Include="VDV301\DateTimeDataItemConfig.cs" />
+    <Compile Include="VDV301\InternationalTextDataItemConfig.cs" />
+    <Compile Include="VDV301\LanguageMappingConfig.cs" />
+    <Compile Include="VDV301\OperationConfigBase.cs" />
+    <Compile Include="VDV301\ServiceConfigBase.cs" />
+    <Compile Include="VDV301\ServiceConfigs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceConfigs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VDV301\Vdv301ProtocolConfig.cs" />
+    <Compile Include="XimpleProtocol\AudioZonePresentationValues.cs" />
+    <Compile Include="XimpleProtocol\IXimpleConfig.cs" />
+    <Compile Include="XimpleProtocol\NetworkFtpSettings.cs" />
+    <Compile Include="XimpleProtocol\XimpleConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\protran.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Arriva\Arriva.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ibis\ibis.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IO\io.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GorbaProtocol\gorba.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="VDV301\ServiceConfigs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceConfigs.generated.cs</LastGenOutput>
+    </None>
+    <None Include="VDV301\vdv301.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>vdv301.xsd</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="VDV301\vdv301.xsd">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vdv301.tt</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="VDV301\Vdv301Protocol.ttinclude" />
+    <EmbeddedResource Include="XimpleProtocol\ximpleProtocol.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VDV301\SupportedServices.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

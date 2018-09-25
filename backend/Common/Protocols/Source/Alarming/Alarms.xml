@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Alarms>
+  <Category Name="System">
+    <Event Name="Restart">
+      <Attribute Name="SoftwareUpdate" Value="1" Severity="Info">
+        <Description Language="de" Value="Neustart (Software updated)"/>
+      </Attribute>
+      <Attribute Name="User" Value="2" Severity="Info">
+        <Description Language="de" Value="Neustart (Benutzer)"/>
+      </Attribute>
+      <Attribute Name="PowerLoss" Value="3" Severity="Warning">
+        <Description Language="de" Value="Neustart (Stromunterbruch)"/>
+      </Attribute>
+      <Attribute Name="BatteryLow" Value="4" Severity="Warning">
+        <Description Language="de" Value="Neustart (Batteriespannung prüfen)"/>
+      </Attribute>
+      <Attribute Name="Unknown" Value="5" Severity="Warning">
+        <Description Language="de" Value="Neustart (Unbekannt)"/>
+      </Attribute>
+      <Attribute Name="Timer" Value="6" Severity="Info">
+        <Description Language="de" Value="Neustart (Timer)"/>
+      </Attribute>
+      <Attribute Name="MemoryLow" Value="7" Severity="Warning">
+        <Description Language="de" Value="Neustart (System Neustart [wenig Speicher])"/>
+      </Attribute>
+      <Attribute Name="TimeModified" Value="8" Severity="Info">
+        <Description Language="de" Value="Neustart (Einstellen der Uhrzeit)"/>
+      </Attribute>
+    </Event>
+    <Event Name="FileSystem">
+      <Attribute Name="EepromError" Value="0" Severity="Error">
+        <Description Language="de" Value="Fehler in Dateisystem (EEPROM Speicher)"/>
+      </Attribute>
+      <Attribute Name="FlashError" Value="1" Severity="Error">
+        <Description Language="de" Value="Fehler in Dateisystem (FLASH Speicher)"/>
+      </Attribute>
+    </Event>
+    <Event Name="Test">
+      <Attribute Name="Test" Severity="Info">
+        <Description Language="de" Value="Test alarm (Befehl test 300)"/>
+      </Attribute>
+    </Event>
+    <Event Name="LedPanel">
+      <Attribute Name="Error" Severity="Severe">
+        <Description Language="de" Value="Error LED-Panel (LED-Panel error detected)"/>
+      </Attribute>
+    </Event>
+    <Event Name="Config">
+      <!--
+      this is an intentional mismatch between iqube and Alarming:
+      those two were different events with no attribute
+      -->
+      <Attribute Name="ConfigChanged" Severity="Info">
+        <Description Language="de" Value="Konfiguration geändert (Config Parameter)"/>
+      </Attribute>
+      <Attribute Name="SetupChanged" Severity="Info">
+        <Description Language="de" Value="Konfiguration geändert (Setup Parameter)"/>
+      </Attribute>
+    </Event>
+    <Event Name="DcmIO">
+      <Attribute Name="Error" Value="1" Severity="Error">
+        <Description Language="de" Value="DCM-I/O (Fehler)"/>
+      </Attribute>
+      <Attribute Name="OK" Value="2" Severity="Info">
+        <Description Language="de" Value="DCM-I/O (Ok)"/>
+      </Attribute>
+    </Event>
+  </Category>
+  <Category Name="Application">
+    <!-- new category for imotion -->
+    <Event Name="Relaunch">
+      <Attribute Name="Unknown" Severity="Warning">
+        <Description Language="de" Value="Applikation Neustart (Unbekannt)"/>
+      </Attribute>
+      <Attribute Name="SystemBoot" Severity="Info">
+        <Description Language="de" Value="Applikation Neustart (Systemstart)"/>
+      </Attribute>
+      <Attribute Name="SoftwareUpdate" Severity="Info">
+        <Description Language="de" Value="Applikation Neustart (Software updated)"/>
+      </Attribute>
+      <Attribute Name="User" everity="Info">
+        <Description Language="de" Value="Applikation Neustart (Benutzer)"/>
+      </Attribute>
+      <Attribute Name="MemoryLow" Severity="Error">
+        <Description Language="de" Value="Applikation Neustart (wenig Speicher)"/>
+      </Attribute>
+      <Attribute Name="CpuExcess" Severity="Error">
+        <Description Language="de" Value="Applikation Neustart (zu hohe CPU-Auslastung)"/>
+      </Attribute>
+      <Attribute Name="DiskFull" Severity="Error">
+        <Description Language="de" Value="Applikation Neustart (Disk voll)"/>
+      </Attribute>
+      <Attribute Name="Watchdog" Severity="Error">
+        <Description Language="de" Value="Applikation Neustart (keine Reaktion)"/>
+      </Attribute>
+    </Event>
+  </Category>
+  <Category Name="Func">
+    <!-- Shorter name for "Functionality" -->
+    <Event Name="BatteryTemperature">
+      <Attribute Name="Level1" Value="1" Severity="Warning">
+        <Description Language="de" Value="Batterie Temperatur ()"/>
+      </Attribute>
+      <Attribute Name="Level2" Value="2" Severity="Warning">
+        <Description Language="de" Value="Batterie Temperatur ()"/>
+      </Attribute>
+      <Attribute Name="Level3" Value="3" Severity="Warning">
+        <Description Language="de" Value="Batterie Temperatur ()"/>
+      </Attribute>
+    </Event>
+    <Event Name="BatteryEndOfLife">
+      <Attribute Name="EndOfLife" Severity="Error">
+        <Description Language="de" Value="Batterie End Of Life ()"/>
+      </Attribute>
+    </Event>
+    <Event Name="MainsPowerFaillure">
+      <Attribute Name="Error" Value="1" Severity="Error">
+        <Description Language="de" Value="Netzstrom (Fehler)"/>
+      </Attribute>
+      <Attribute Name="OK" Value="2" Severity="Info">
+        <Description Language="de" Value="Netzstrom (Ok)"/>
+      </Attribute>
+    </Event>
+    <Event Name="DoorStatus">
+      <Attribute Name="Open" Value="1" Severity="Error">
+        <Description language="de" value="Anzeiger Deckel (offen)"/>
+      </Attribute>
+      <Attribute Name="Closed" Value="2" Severity="Info">
+        <Description language="de" value="Anzeiger Deckel (geschlossen)"/>
+      </Attribute>
+    </Event>
+    <Event Name="PowerMode">
+      <Attribute Name="Initializing" Value="-1" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Initialisierung)"/>
+      </Attribute>
+      <Attribute Name="Full" Value="0" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Volle Leistung)"/>
+      </Attribute>
+      <Attribute Name="Reduced" Value="1" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Reduzierte Leistung)"/>
+      </Attribute>
+      <Attribute Name="Minimal" Value="2" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Minimale Leistung - CPU, GPRS-Modem, DCM-IO eingeschaltet)"/>
+      </Attribute>
+      <Attribute Name="NoPower" Value="3" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Kein Strom)"/>
+      </Attribute>
+      <Attribute Name="Off" Value="4" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (ausgeschaltet)"/>
+      </Attribute>
+      <Attribute Name="Manual" Value="5" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Manueller Modus - alles eingeschaltet)"/>
+      </Attribute>
+      <Attribute Name="Shutdown" Value="6" Severity="Info">
+        <Description language="de" value="Leistungsmodus geändert (Abschaltung - alles abschalten)"/>
+      </Attribute>
+    </Event>
+    <Event Name="TractionFailure">
+      <Attribute Name="Error" Value="1" Severity="Error">
+        <Description language="de" value="Traction Failure alarm (Traction Failure)"/>
+      </Attribute>
+      <Attribute Name="OK" Value="2" Severity="Info">
+        <Description language="de" value="Traction Failure alarm (Traction Ok [after failure])"/>
+      </Attribute>
+    </Event>
+    <Event Name="InverterFailure">
+      <Attribute Name="Error" Value="1" Severity="Error">
+        <Description language="de" value="Inverter (Fehler)"/>
+      </Attribute>
+      <Attribute Name="OK" Value="2" Severity="Info">
+        <Description language="de" value="Inverter (behoben)"/>
+      </Attribute>
+    </Event>
+    <Event Name="LowBattery">
+      <Attribute Name="Error" Value="1" Severity="Error">
+        <Description language="de" value="Batterie Spannung (Spannung niedrig)"/>
+      </Attribute>
+      <Attribute Name="OK" Value="2" Severity="Info">
+        <Description language="de" value="Batterie Spannung (Ok)"/>
+      </Attribute>
+    </Event>
+    <Event Name="Vandalism">
+      <Attribute Name="Vandalism" Severity="Severe">
+        <Description language="de" value="Vandalismus detektiert"/>
+      </Attribute>
+    </Event>
+    <Event Name="Buttons">
+      <!--
+      different naming scheme because we will have other buttons in the future too
+      was: EventFncTTSKeyPressed
+      -->
+      <Attribute Name="TtsKeyPressed" Severity="Info">
+        <Description language="de" value="Anforderungstaster gedrückt"/>
+      </Attribute>
+    </Event>
+    <Event Name="SurgeProtection">
+      <!-- different name: proper English naming; was: EventFncOverVoltageProtection -->
+      <Attribute Name="Active" Value="1" Severity="Error">
+        <Description language="de" value="Überspannungsschutz (aktiv)"/>
+      </Attribute>
+      <Attribute Name="Inactive" Value="2" Severity="Info">
+        <Description language="de" value="Überspannungsschutz (inaktiv)"/>
+      </Attribute>
+    </Event>
+    <Event Name="TimeSync">
+      <!-- different name: allowing different attributes later -->
+      <Attribute Name="LowThreshold" Severity="Info">
+        <Description language="de" value="Zeitsynchronisation > 5 Sek."/>
+      </Attribute>
+    </Event>
+  </Category>
+  <Category Name="Operation">
+    <Event Name="MasterData">
+      <Attribute Name="Route" Value="1" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Routen Datei - xxx_rou.csv)"/>
+      </Attribute>
+      <Attribute Name="Trip" Value="2" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Fahrten Datei - xxx_frt.csv)"/>
+      </Attribute>
+      <Attribute Name="Calendar" Value="3" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Kalender Datei - calendar.ini)"/>
+      </Attribute>
+      <Attribute Name="Points" Value="4" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Ort Datei - ort.csv)"/>
+      </Attribute>
+      <Attribute Name="Led" Value="5" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (LED Text Konfigurationsdatei - led.ini)"/>
+      </Attribute>
+      <Attribute Name="Tts" Value="6" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Text-to-Speech Konfigurationsdatei - tts.ini)"/>
+      </Attribute>
+      <Attribute Name="Line" Value="7" Severity="Error">
+        <Description language="de" value="Stammdaten Fehler (Linien Konfigurationsdatei - line.ini)"/>
+      </Attribute>
+    </Event>
+    <Event Name="TripStateUnknown">
+      <Attribute Name="StateUnknown" Severity="Warning">
+        <Description language="de" value="Fahrtstatus unbekannt"/>
+      </Attribute>
+    </Event>
+    <Event Name="TripStateLeft">
+      <Attribute Name="Early" Value="1" Severity="Warning">
+        <Description language="de" value="Fehler in Fahrt (Verfrühte Abfahrt)"/>
+      </Attribute>
+      <Attribute Name="Late" Value="2" Severity="Warning">
+        <Description language="de" value="Fehler in Fahrt (Verspätete Abfahrt)"/>
+      </Attribute>
+      <Attribute Name="Skipped" Value="3" Severity="Warning">
+        <Description language="de" value="Fehler in Fahrt (Fahrt durch nachfolgende Station abgebucht)"/>
+      </Attribute>
+      <Attribute Name="Aborted" Value="4" Severity="Warning">
+        <Description language="de" value="Fehler in Fahrt (Fahrt abgebrochen)"/>
+      </Attribute>
+    </Event>
+    <Event Name="VdvDataMissing">
+      <!--
+      this is an intentional mismatch between iqube and Alarming:
+      those two were different events with no attribute
+      -->
+      <Attribute Name="Ref" Severity="Warning">
+        <Description Language="de" Value="Fehlende VDV Daten (Referenzfahrpläne)"/>
+      </Attribute>
+      <Attribute Name="Prc" Severity="Warning">
+        <Description Language="de" Value="Fehlende VDV Daten (Prozessdaten)"/>
+      </Attribute>
+    </Event>
+    <!--
+    The following events are not mentioned here since they are internal to the
+    disp handling and not meant to be forwarded to a UI:
+    EventDispoSuccess
+    EventDispoFailure
+    EventDispoStatus
+    -->
+  </Category>
+</Alarms>

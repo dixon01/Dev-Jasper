@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BC0EEE34-AECC-4284-9226-60F117E4A640}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Protocols.Vdv453</RootNamespace>
+    <AssemblyName>Gorba.Common.Protocols.Vdv453</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\3rdParty\NLog\2.0.0.2000\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Communication\Extensions.cs" />
+    <Compile Include="Communication\HttpChannel.cs" />
+    <Compile Include="Communication\HttpChannelConfig.cs" />
+    <Compile Include="Communication\HttpChannelException.cs" />
+    <Compile Include="Communication\HttpChannelFactory.cs" />
+    <Compile Include="Communication\HttpChannelResponse.cs" />
+    <Compile Include="Communication\HttpMessageQueue.cs" />
+    <Compile Include="Communication\IHttpChannel.cs" />
+    <Compile Include="Communication\ServiceUnavailableEventArgs.cs" />
+    <Compile Include="Messages\DeleteSubscription.cs" />
+    <Compile Include="Messages\DeleteSubscriptionsAll.cs" />
+    <Compile Include="Messages\Vdv453MessageSerializer{T}.cs" />
+    <Compile Include="Messages\Result.cs" />
+    <Compile Include="Messages\StatusRequest.cs" />
+    <Compile Include="Messages\StatusReply.cs" />
+    <Compile Include="Messages\DataReadyAnswer.cs" />
+    <Compile Include="Messages\DataReadyRequest.cs" />
+    <Compile Include="Messages\DataSupplyRequest.cs" />
+    <Compile Include="Messages\TripId.cs" />
+    <Compile Include="Messages\DisMessage.cs" />
+    <Compile Include="Messages\DisDeviation.cs" />
+    <Compile Include="Messages\DisTripDelete.cs" />
+    <Compile Include="Messages\Acknowledge.cs" />
+    <Compile Include="Messages\DataSupplyAnswer.cs" />
+    <Compile Include="Messages\Status.cs" />
+    <Compile Include="Messages\DisLineSpecialText.cs" />
+    <Compile Include="Messages\DisLineSpecialTextDelete.cs" />
+    <Compile Include="Messages\DisSubscription.cs" />
+    <Compile Include="Messages\DisSchedule.cs" />
+    <Compile Include="Messages\DisRefSubscription.cs" />
+    <Compile Include="Messages\SubscriptionRequest.cs" />
+    <Compile Include="Messages\SubscriptionReply.cs" />
+    <Compile Include="Messages\Trainset.cs" />
+    <Compile Include="Messages\TripStatus.cs" />
+    <Compile Include="Messages\Vdv453Constants.cs" />
+    <Compile Include="Messages\Vdv453Message.cs" />
+    <Compile Include="Messages\TripInfo.cs" />
+    <Compile Include="Messages\Vdv453MessageSerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

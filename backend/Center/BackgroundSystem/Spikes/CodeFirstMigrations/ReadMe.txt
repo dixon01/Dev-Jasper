@@ -1,0 +1,3 @@
+- Works with Visual Studio 2013
+- Be sure that in the setting 'Automatically check for Missing packages during build in Visual Studio' in 'NuGet Package Manager -> General -> Package Restore' is enabled; it will locally restore the package which are needed to get the PowerShell commands. Anywa, be sure you don't checkin packages into Tfs
+- Follow instructions in Program.cs <Summary> to step through the migration process

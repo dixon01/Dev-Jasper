@@ -1,0 +1,47 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplateExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var entities =
+        entitySpace.Partitions
+        .SelectMany(partition => partition.Entities.Where(entity => entity.HasChangeTracking))
+        .ToList();
+#>
+namespace Gorba.Center.Common.Client.ChangeTracking
+{
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.AccessControl;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Configurations;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Documents;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Membership;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Meta;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Resources;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Software;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Units;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Update;
+
+    public partial class ChangeTrackingManagementBootstrapperResult
+    {<#
+    foreach (var entity in entities)
+    {
+        #>
+
+        //public Task<I<#= entity.Name #>ChangeTrackingManager> <#= entity.Name #>ChangeTrackingManager { get; set; }
+		public I<#= entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager { get; set; }
+<#
+    }
+#>
+    }
+}

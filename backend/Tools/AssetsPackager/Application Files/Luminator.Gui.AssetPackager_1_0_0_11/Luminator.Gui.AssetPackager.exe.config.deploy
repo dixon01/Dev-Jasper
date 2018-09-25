@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<configuration>
+    <configSections>
+        <section name="nlog" type="NLog.Config.ConfigSectionHandler, NLog"/>
+        <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+        <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <section name="Luminator.Gui.AssetPackager.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+        </sectionGroup>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="Luminator.Gui.AssetPackager.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" autoload="true" throwExceptions="false" internalLogFile="VMBProviderLogs.nlog.txt" internalLogLevel="Error" internalLogToConsole="false">
+        <targets async="true">
+            <target name="colouredConsole" xsi:type="ColoredConsole" useDefaultRowHighlightingRules="false" layout="${longdate}|${pad:padding=5:inner=${level:uppercase=true}}|${message}">
+                <highlight-row condition="level == LogLevel.Debug" foregroundColor="DarkGray"/>
+                <highlight-row condition="level == LogLevel.Info" foregroundColor="White"/>
+                <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow"/>
+                <highlight-row condition="level == LogLevel.Error" foregroundColor="White" backgroundColor="Red"/>
+                <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Red" backgroundColor="White"/>
+            </target>
+
+            <target name="mail" xsi:type="BufferingWrapper" bufferSize="100" flushTimeout="5000">
+                <!--<target xsi:type="Mail"  html="True" 
+               header="&lt;big&gt;Visual Message Board Provider Console&lt;/big&gt;&lt;hr&gt;" 
+               body="${longdate} | &lt;b&gt;${logger}&lt;/b&gt; | ${callsite:methodName=true:includeSourcePath=false}() | ${pad:padding=5:inner=${level:uppercase=true}} | ${message}.&lt;br&gt;"
+               addnewLines="True"
+               smtpServer="127.0.0.1" 
+               smtpPort="25"
+               smtpAuthentication="Basic"
+               smtpUserName="dartvmb"
+               smtpPassword="vmb2012"
+               enableSsl="false"
+               from="vmbsupport@luminatorUSA.com" to="vmbsupport@luminatorUSA.com"
+               subject="Luminator-Assets Provider Console ${longdate} on ${machineName}"/>-->
+
+                <!--Gmail Example, Smtp settings modified-->
+
+                <target xsi:type="Mail" html="True" header="&lt;big&gt;Visual Message Board Provider Console&lt;/big&gt;&lt;hr&gt;" body="${longdate} | &lt;b&gt;${logger}&lt;/b&gt; | ${callsite:methodName=true:includeSourcePath=false}() | ${pad:padding=5:inner=${level:uppercase=true}} | ${message}.&lt;br&gt;" addnewLines="True" smtpServer="smtp.gmail.com" smtpPort="587" smtpAuthentication="Basic" smtpUserName="LuminatorVmb@gmail.com" smtpPassword="LuminatorVmb2012" enableSsl="true" from="LuminatorVmb@gmail.com" to="LuminatorVmb@gmail.com" subject="Luminator-Assets Provider Console ${longdate} on ${machineName}"/>
+            </target>
+
+            <target name="infoFile" type="File" fileName="${basedir}/Logs/${shortdate}-AssetPackager.txt" layout="${longdate}|Thread:${threadid}|${pad:padding=5:inner=${level:uppercase=true}}|${message}"/>
+
+            <target name="eventlog" type="EventLog" source="Luminator Asset Packager" log="Assets Packager" layout="${date}: ${message} ${stacktrace}"/>
+
+            <target name="errorFile" xsi:type="AsyncWrapper" queueLimit="10000" overflowAction="Discard">
+                <target xsi:type="File" fileName="${basedir}/Logs/${shortdate}AssetPackagerError.txt" layout="${longdate}|Thread:${threadid}|${callsite}|${pad:padding=5:inner=${level:uppercase=true}}|${message} ${exception}"/>
+            </target>
+        </targets>
+
+        <rules>
+            <logger name="*" minlevel="Debug" writeTo="colouredConsole"/>
+            <logger name="*" minlevel="Debug" maxlevel="Info" writeTo="infoFile"/>
+            <logger name="*" minlevel="Warn" maxlevel="Fatal" writeTo="errorFile"/>
+            <logger name="*" minlevel="Warn" writeTo="eventlog"/>
+            <!--<logger name="Luminator.Gui.AssetPackager" minlevel="Info"  writeTo="mail" final="true" />-->
+            <logger name="*.FaultProviderService" minlevel="Info" writeTo="mail" final="true"/>
+            <logger name="*" minlevel="Warn" writeTo="mail"/>
+        </rules>
+    </nlog>
+    <applicationSettings>
+        <Luminator.Gui.AssetPackager.Properties.Settings>
+            <setting name="EnableMultiFileSelect" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="DefaultFileAssetsSelectionXmlFile" serializeAs="String">
+                <value>FileAssetsSelection.xml</value>
+            </setting>
+        </Luminator.Gui.AssetPackager.Properties.Settings>
+    </applicationSettings>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/></startup><userSettings>
+        <Luminator.Gui.AssetPackager.Properties.Settings>
+            <setting name="FileAssetsFilter" serializeAs="String">
+                <value>All Files (*.*)|*.*|All zip files (*.zip)|*.zip|Media Files (*.media)|*.media|INFOtransit Database Files (*.itna)|*.itna|General Transit Feed Specification files (*.gtfs)|*.gtfs</value>
+            </setting>
+            <setting name="EnableActivateDateSelection" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="EnableEquipmentTypeSelection" serializeAs="String">
+                <value>False</value>
+            </setting>
+        </Luminator.Gui.AssetPackager.Properties.Settings>
+    </userSettings>
+</configuration>

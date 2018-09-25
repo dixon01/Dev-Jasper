@@ -1,0 +1,413 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\EntitySpace.xml");
+    this.entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.ServiceModel.ChangeTracking
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
+
+    using Gorba.Center.Common.ServiceModel.Collections;
+<#
+    foreach (var partition in this.entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private EntitySpace entitySpace;
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+        var userDefinedPropertiesEnabledEntityNames =
+            partition.EntitySpace.Partitions.Single(p => p.Name == "Meta")
+                .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using System.IO;
+        using System.Threading.Tasks;
+        using System.Xml.Serialization;
+        
+        using Gorba.Center.Common.ServiceModel.Collections;
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities)
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, userDefinedPropertiesEnabled);
+        }
+        #>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => !property.IsXmlSerialized
+                && (property.PropertyType == EntitySpace.PropertyType.Primitive
+                    || property.PropertyType == EntitySpace.PropertyType.Enumeration));
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>().Where(property => property.IsXmlSerialized);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+#>
+
+        public partial class <#= entity.Name #>Delta : DeltaBase
+        {<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+            private UserDefinedPropertiesDictionary userDefinedPropertiesDelta;
+<#+
+        }
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceField(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteField(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlField(property);
+        }
+#>
+ 
+            public <#= entity.Name #>Delta()
+                : base(DeltaOperation.Created)
+            {
+                this.Version = new Version(1);
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                this.UserDefinedProperties =
+                    this.userDefinedPropertiesDelta = new UserDefinedPropertiesDictionary();
+<#+
+        }
+#>
+            }
+ 
+            public <#= entity.Name #>Delta(<#= entity.Name #>ReadableModel model)
+                : base(DeltaOperation.Updated)
+            {
+                this.Id = model.Id;
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceFieldInitialization(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteFieldInitialization(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlFieldInitialization(property);
+        }
+#>
+                this.Version = new Version(model.Version.Value);
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                this.UserDefinedProperties =
+                    this.userDefinedPropertiesDelta = new UserDefinedPropertiesDictionary();
+<#+
+        }
+#>
+            }
+ 
+            public <#= entity.Name #>Delta(<#= entity.Name #> model)
+                : base(DeltaOperation.Updated)
+            {
+                this.Id = model.Id;
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceFieldInitialization(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteFieldInitialization(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlFieldInitialization(property);
+        }
+#>
+                this.Version = new Version(model.Version);
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                this.UserDefinedProperties =
+                    this.userDefinedPropertiesDelta = new UserDefinedPropertiesDictionary();
+<#+
+        }
+#>
+            }
+ 
+            public <#= entity.Name #>Delta(<#= entity.IdPropertyType #> id, DeltaOperation operation)
+                : base(operation)
+            {
+                this.Id = id;
+                this.Version = new Version(1);
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                this.UserDefinedProperties =
+                    this.userDefinedPropertiesDelta = new UserDefinedPropertiesDictionary();
+<#+
+        }
+#>
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            public IDictionary<string, string> UserDefinedPropertiesDelta
+            {
+                get
+                {
+                    return this.userDefinedPropertiesDelta;
+                }
+            }
+
+            public IReadOnlyDictionary<string, string> UserDefinedProperties { get; private set; }
+<#+
+        }
+#>
+
+            public <#= entity.IdPropertyType #> Id { get; private set; }
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceProperty(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WriteProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferencePropertyChange(property);
+        }
+
+        foreach (var property in properties)
+        {
+            this.WritePropertyChange(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlPropertyChange(property);
+        }
+#>
+
+            public <#= entity.Name #>Delta GetChangedDelta()
+            {
+                var clone = this.Clone();
+                if (this.DeltaOperation == DeltaOperation.Deleted || this.DeltaOperation == DeltaOperation.Created)
+                {
+                    return clone;
+                }
+
+                var hasChanges = <#= userDefinedPropertiesEnabled.ToString().ToLower() #>;
+<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteCloneReference(property);
+        }
+
+        foreach (var property in properties.Union(xmlProperties))
+        {
+            this.WriteClone(property);
+        }
+#>
+
+                return hasChanges ? clone : null;
+            }
+
+            public <#= entity.Name #>Delta Clone()
+            {
+                return (<#= entity.Name #>Delta)(this as ICloneable).Clone();
+            }
+        }
+<#+
+    }
+
+    private void WriteField(EntitySpace.Property property)
+    {
+#>
+
+            private readonly <#= property.Type #> original<#= property.Name #>;
+<#+
+    }
+
+    private void WriteXmlField(EntitySpace.Property property)
+    {
+#>
+
+            private readonly XmlData original<#= property.Name #>;
+<#+
+    }
+
+    private void WriteFieldInitialization(EntitySpace.Property property)
+    {
+#>
+                this.original<#= property.Name #> = model.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteXmlFieldInitialization(EntitySpace.Property property)
+    {
+#>
+                this.original<#= property.Name #> = model.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteReferenceField(EntitySpace.Property property)
+    {
+        var type = property.IsXmlSerialized ? "string" : property.Type;
+#>
+
+            private readonly <#= this.entitySpace.GetIdPropertyType(type.GetPropertyPartition(property.Entity.Partition.Name), type.GetLastPart()) #>? original<#= property.Name #>Id;
+<#+
+    }
+
+    private void WriteReferenceFieldInitialization(EntitySpace.Property property)
+    {#>
+                this.original<#= property.Name #>Id = model.<#= property.Name #> == null ? null : (int?)model.<#= property.Name #>.Id;
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {
+#>
+    
+            public PropertyChange<<#= property.Type #>> <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WriteXmlProperty(EntitySpace.Property property)
+    {
+#>
+    
+            public PropertyChange<XmlData> <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WriteReferenceProperty(EntitySpace.Property property)
+    {
+#>
+    
+            public ReferenceChange<<#= this.entitySpace.GetIdPropertyType(property.Type.GetPropertyPartition(property.Entity.Partition.Name), property.Type.GetLastPart()) #>> <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WritePropertyChange(EntitySpace.Property property)
+    {
+#>
+
+            public void Change<#= property.Name #>(<#= property.Type #> value)
+            {
+                this.<#= property.Name #> = new PropertyChange<<#= property.Type #>>(this.original<#= property.Name #>).ChangeValue(value);
+            }
+<#+
+    }
+
+    private void WriteXmlPropertyChange(EntitySpace.Property property)
+    {
+#>
+
+            public void Change<#= property.Name #>(XmlData value)
+            {
+                this.<#= property.Name #> = new PropertyChange<XmlData>(this.original<#= property.Name #>).ChangeValue(value);
+            }
+<#+
+    }
+
+    private void WriteReferencePropertyChange(EntitySpace.Property property)
+    {
+        var type = property.Type;
+#>
+
+            public void Change<#= property.Name #>(int? id)
+            {
+                this.<#= property.Name #> = new ReferenceChange<<#= this.entitySpace.GetIdPropertyType(type.GetPropertyPartition(property.Entity.Partition.Name), type.GetLastPart()) #>>(this.original<#= property.Name #>Id).ChangeReference(id);
+            }
+
+            public void Change<#= property.Name #>(<#= type #>ReadableModel value)
+            {
+                var id = value == null ? (int?)null : value.Id;
+                this.<#= property.Name #> = new ReferenceChange<<#= this.entitySpace.GetIdPropertyType(type.GetPropertyPartition(property.Entity.Partition.Name), type.GetLastPart()) #>>(this.original<#= property.Name #>Id).ChangeReference(id);
+            }
+<#+
+    }
+
+    private void WriteCloneReference(EntitySpace.Property property)
+    {#>
+    
+                if (this.<#= property.Name #> != null && this.<#= property.Name #>.OriginalReferenceId != this.<#= property.Name #>.ReferenceId)
+                {
+                    hasChanges = true;
+                }
+                else
+                {
+                    clone.<#= property.Name #> = null;
+                }
+<#+
+    }
+
+    private void WriteClone(EntitySpace.Property property)
+    {#>
+    
+                if (this.<#= property.Name #> != null && this.<#= property.Name #>.OriginalValue != this.<#= property.Name #>.Value)
+                {
+                    hasChanges = true;
+                }
+                else
+                {
+                    clone.<#= property.Name #> = null;
+                }
+<#+
+    }
+#>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScreenItems>
+  <!--
+  This file only contains the difference from Elements (defined in Entities.xml);
+  if there are no differences, the items are not mentioned
+  -->
+
+  <!-- ==== Graphical ==== -->
+
+  <ScreenItem Name="Base" Action="Modify" Presentable="false" />
+
+  <ScreenItem Name="GraphicalBase" Action="Modify" Presentable="false" />
+
+  <ScreenItem Name="Frame" Action="Remove" />
+
+  <ScreenItem Name="Group" Action="Modify" Presentable="false" />
+
+  <ScreenItem Name="Image" Action="Modify">
+    <Property Name="Blink" Action="Add" Type="bool" />
+  </ScreenItem>
+
+  <ScreenItem Name="ImageList" Action="Modify">
+    <Property Name="FilePatterns" Action="Remove" />
+    <Property Name="Delimiter" Action="Remove" />
+    <Property Name="Values" Action="Remove" />
+    <Property Name="Images" Action="Add" Type="string[]" Dynamic="true" Animated="true" />
+  </ScreenItem>
+
+  <ScreenItem Name="Text" Action="Modify">
+    <Property Name="Value" Action="Remove" />
+    <Property Name="Text" Action="Add" Type="string" Dynamic="true" Animated="true" />
+  </ScreenItem>
+
+  <!-- ==== Audio ==== -->
+
+  <ScreenItem Name="AudioBase" Action="Modify" Presentable="false" />
+
+  <ScreenItem Name="AudioOutput" Action="Modify" Presentable="false" />
+
+  <ScreenItem Name="PlaybackBase" Action="Modify">
+    <Property Name="Volume" Action="Add" Type="int" />
+    <Property Name="Priority" Action="Add" Type="int" />
+  </ScreenItem>
+</ScreenItems>

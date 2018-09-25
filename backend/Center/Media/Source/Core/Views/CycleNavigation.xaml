@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.CycleNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:components="clr-namespace:Gorba.Center.Common.Wpf.Views.Components;assembly=Gorba.Center.Common.Wpf.Views"
+             mc:Ignorable="d" Width="Auto" Height="Auto" Background="{StaticResource CycleNavigationBackgroundColorBrush}"
+             d:DataContext="{d:DesignInstance viewModels:MediaShell}" d:DesignHeight="60" Name="Root">
+    <Grid>
+        <Grid.Resources>
+            <converters:DataViewModelTypeToNameConverter x:Key="DataViewModelTypeToNameConverter" />
+            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+
+        <ToggleButton Grid.Column="0" Name="CyclePackageToggleButton" Style="{StaticResource CycleNavigationButton}"
+                      MouseEnter="CyclePackageMouseEnter" MouseLeave="CyclePackageMouseLeave" Click="OnShowCyclePackageNavigationClick"
+                      IsChecked="{Binding CycleNavigator.SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.CyclePackage}}">
+            <components:TextBlockWithChangeIndicator Text="{Binding ElementName=Root, Path=CyclePackage.Name.Value}" 
+                                                IsDirty="{Binding CycleNavigator.CurrentCyclePackage.IsDirty}"
+                                                Foreground="{Binding ElementName=CyclePackageToggleButton, Path=Foreground}"
+                                                     TextTrimming="CharacterEllipsis"
+                                                     ToolTip="{Binding ElementName=Root, Path=CyclePackage.Name.Value}"/>
+        </ToggleButton>
+
+        <ToggleButton Grid.Column="1" Name="CycleToggleButton" Style="{StaticResource CycleNavigationButton}" 
+                      MouseEnter="CycleMouseEnter" MouseLeave="CycleMouseLeave" Click="OnShowCycleNavigationClick"
+                      IsChecked="{Binding CycleNavigator.SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.Cycle}}">
+            <components:TextBlockWithChangeIndicator Text="{Binding ElementName=Root, Path=Cycle.Name.Value}"
+                                                IsDirty="{Binding CycleNavigator.CurrentCycle.IsDirty}"
+                                                Foreground="{Binding ElementName=CycleToggleButton, Path=Foreground}"
+                                                     TextTrimming="CharacterEllipsis"
+                                                     ToolTip="{Binding ElementName=Root, Path=Cycle.Name.Value}"/>
+        </ToggleButton>
+
+        <ToggleButton Grid.Column="2" Name="SectionToggleButton" Style="{StaticResource CycleNavigationButton}" 
+                      MouseEnter="CycleItemMouseEnter" MouseLeave="CycleItemMouseLeave" Click="OnShowCycleItemNavigationClick"
+                      IsChecked="{Binding CycleNavigator.SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.Section}}">
+            <components:TextBlockWithChangeIndicator Text="{Binding ElementName=Root, Path=Section.Name}"
+                                                IsDirty="{Binding CycleNavigator.CurrentSection.IsDirty}"
+                                                Foreground="{Binding ElementName=SectionToggleButton, Path=Foreground}"
+                                                     TextTrimming="CharacterEllipsis"
+                                                     ToolTip="{Binding ElementName=Root, Path=Section.Name}"/>
+        </ToggleButton>
+    </Grid>
+</UserControl>

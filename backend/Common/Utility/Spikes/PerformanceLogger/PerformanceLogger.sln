@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceLogger", "PerformanceLogger\PerformanceLogger.csproj", "{07148CF9-0C65-438D-AA3D-9A98FEC3082C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{5E011FDD-47A0-4996-98B2-9D3ACDF83AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PerformanceLogger\\PerformanceLogger.csproj
+		SccProjectName1 = PerformanceLogger
+		SccLocalPath1 = PerformanceLogger
+		SccProjectUniqueName2 = ..\\..\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName2 = PerformanceLogger.sln
+		SccProjectName2 = ../../Source/Core
+		SccLocalPath2 = ..\\..\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07148CF9-0C65-438D-AA3D-9A98FEC3082C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07148CF9-0C65-438D-AA3D-9A98FEC3082C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07148CF9-0C65-438D-AA3D-9A98FEC3082C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07148CF9-0C65-438D-AA3D-9A98FEC3082C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {5E011FDD-47A0-4996-98B2-9D3ACDF83AC1}
+	EndGlobalSection
+EndGlobal

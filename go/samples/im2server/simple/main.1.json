@@ -1,0 +1,11 @@
+{
+    "Version": "2.0",
+    "Created": "2016-08-12 14:13:38",
+    "PhysicalScreens": {
+       "PhysicalScreen": {
+          "Name": "1366x768",
+          "Width": "1366",
+          "Height": "768"
+       }
+    }
+}

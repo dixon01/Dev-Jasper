@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PeripheralConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1">
+  <Enabled>true</Enabled>
+  <PeripheralHeaderInNetworkByteOrder>true</PeripheralHeaderInNetworkByteOrder>
+  <SerialPortSettings>
+    <ComPort>Com4</ComPort>
+    <BaudRate>115200</BaudRate>
+    <DataBits>8</DataBits>
+    <Parity>None</Parity>
+    <StopBits>One</StopBits>
+    <DtrControl>false</DtrControl>
+    <RtsControl>false</RtsControl>
+    <ReceivedBytesThreshold>7</ReceivedBytesThreshold>
+  </SerialPortSettings>
+  <IgnoreFirstGpioEvent>true</IgnoreFirstGpioEvent>
+  <DefaultMaxPeripheralFramingBytes>2</DefaultMaxPeripheralFramingBytes>
+  <MaxWritesWhenWaitForAck>1</MaxWritesWhenWaitForAck>
+  <WaitForAckTimeout>500</WaitForAckTimeout>
+</PeripheralConfig>

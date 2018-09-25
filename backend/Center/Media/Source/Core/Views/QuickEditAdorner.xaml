@@ -1,0 +1,68 @@
+﻿<Button x:Class="Gorba.Center.Media.Core.Views.QuickEditAdorner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+             xmlns:extensions="clr-namespace:Gorba.Center.Media.Core.Extensions"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d"
+             Height="16" Width="16">
+    <Button.Resources>
+        <converters1:ToTypeConverter x:Key="ToTypeConverter"/>
+    </Button.Resources>
+    <Button.Style>
+        <Style TargetType="Button">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Background" Value="{StaticResource LayoutElementAdornerQuickEditBackgroundColorBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Background="{TemplateBinding Background}" Cursor="{extensions:Cursor cursor_hand__point_32x32, X=12, Y=5}">
+                            <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/triangle_right_light_8x8.png" Width="8" Height="8" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:DynamicTextElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:ImageElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:VideoElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:ImageListElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:AudioFileElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>                
+                <DataTrigger Binding="{Binding Converter={StaticResource ToTypeConverter}}" 
+                             Value="{x:Type layout:DynamicTtsElementDataViewModel}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource LayoutElementAdornerQuickEditHoverBackgroundColorBrush}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource LayoutElementAdornerQuickEditPressedBackgroundColorBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Button.Style>
+</Button>

@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Editors.GenericUsageEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             xmlns:generic="clr-namespace:Gorba.Common.Protocols.Ximple.Generic;assembly=Gorba.Common.Protocols.Ximple"
+             xmlns:extensions="clr-namespace:Gorba.Center.Common.Wpf.Framework.Extensions;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance editors:GenericUsageEditorViewModel}"
+             d:DesignHeight="24" d:DesignWidth="500">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+        <HierarchicalDataTemplate DataType="{x:Type generic:Table}" ItemsSource="{Binding Columns}">
+            <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" />
+        </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type generic:Column}">
+            <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid IsEnabled="{Binding IsEnabled}">
+        <Grid.ColumnDefinitions>
+            <extensions:ColumnDefinitionExtended Width="Auto" />
+            <extensions:ColumnDefinitionExtended Width="5*" />
+            <extensions:ColumnDefinitionExtended Width="2*" Visible="{Binding ShouldShowLanguage}" />
+            <extensions:ColumnDefinitionExtended Width="1*" Visible="{Binding ShouldShowRow}" />
+        </Grid.ColumnDefinitions>
+        
+        <CheckBox Grid.Column="0"
+                  Visibility="{Binding IsNullable, Converter={StaticResource BoolToVisibility}}"
+                  IsChecked="{Binding HasValue}"
+                  HorizontalAlignment="Left"/>
+
+        <telerik:RadDropDownButton Grid.Column="1"
+                                   HorizontalAlignment="Stretch"
+                                   HorizontalContentAlignment="Stretch"
+                                   IsEnabled="{Binding IsEditorEnabled}"
+                                   Name="DropDownButton">
+            <telerik:RadDropDownButton.Content>
+                <TextBlock Text="{Binding TableColumnName, Mode=OneWay}" TextAlignment="Left">
+
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="true">
+                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </telerik:RadDropDownButton.Content>
+            <telerik:RadDropDownButton.DropDownContent>
+                <telerik:RadTreeView HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     MaxHeight="300"
+                                     ItemsSource="{Binding Dictionary.Tables}"
+                                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                     AutoScrollToSelectedItem="True"
+                                     ItemClick="RadTreeViewOnItemClick">
+                </telerik:RadTreeView>
+            </telerik:RadDropDownButton.DropDownContent>
+        </telerik:RadDropDownButton>
+        
+        <telerik:RadComboBox Grid.Column="2"
+                             SelectedItem="{Binding SelectedLanguage}"
+                             ItemsSource="{Binding Dictionary.Languages}"
+                             Visibility="{Binding IsLanguageVisible, Converter={StaticResource BoolToVisibility}}"
+                             IsEnabled="{Binding IsEditorEnabled}">
+            <telerik:RadComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Description}" ToolTip="{Binding Name}"/>
+                </DataTemplate>
+            </telerik:RadComboBox.ItemTemplate>
+        </telerik:RadComboBox>
+
+        <telerik:RadNumericUpDown Grid.Column="3"
+                                  Minimum="0"
+                                  Maximum="10000"
+                                  Value="{Binding RowIndex, Mode=TwoWay}"
+                                  IsInteger="True"
+                                  Visibility="{Binding IsRowVisible, Converter={StaticResource BoolToVisibility}}"
+                                  IsEnabled="{Binding IsEditorEnabled}"/>
+    </Grid>
+</UserControl>

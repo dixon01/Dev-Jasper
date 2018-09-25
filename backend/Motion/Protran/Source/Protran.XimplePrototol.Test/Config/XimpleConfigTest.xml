@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<XimpleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Enabled>true</Enabled>  
+  <InfoTainmentAudioStatusTableIndex>104</InfoTainmentAudioStatusTableIndex>
+  <InfoTainmentCannedMsgPlayTableIndex>101</InfoTainmentCannedMsgPlayTableIndex>
+  <InfoTainmentVolumeSettingsTableIndex>100</InfoTainmentVolumeSettingsTableIndex>
+  <NetworkChangedMessageTableIndex>102</NetworkChangedMessageTableIndex>
+  <NetworkFileAccessSettingsTableIndex>103</NetworkFileAccessSettingsTableIndex>
+  <Port>1600</Port>
+  <NetworkFtpSettings>
+    <Enabled>true</Enabled>
+    <Password>Asdf1234</Password>
+    <Uri>ftp://192.1.2.3/Root</Uri>
+    <UserName>gorba</UserName>
+  </NetworkFtpSettings>
+</XimpleConfig>

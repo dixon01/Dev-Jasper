@@ -1,0 +1,107 @@
+﻿<Window x:Class="WpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:wpfApplication="clr-namespace:WpfApplication"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="MainWindow" Height="868" Width="1024" WindowState="Maximized">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="MinWidth" Value="100"/>
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+            <Style
+    x:Key="LinkButton"
+    TargetType="Button">
+                <Setter
+        Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate
+                TargetType="Button">
+                            <TextBlock
+                    TextDecorations="Underline">
+                <ContentPresenter /></TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter
+        Property="Foreground"
+        Value="Blue" />
+                <Style.Triggers>
+                    <Trigger
+            Property="IsMouseOver"
+            Value="true">
+                        <Setter
+                Property="Foreground"
+                Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <wpfApplication:InvertBoolConverter x:Key="InvertBoolConverter"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Command="{Binding Path=StartCommand}" Content="Start" />
+                <Button Command="{Binding Path=StopCommand}" Content="Stop" />
+                <CheckBox Content="Simulation mode" IsChecked="{Binding Path=SimulationMode}" IsEnabled="{Binding Path=IsSimulationModeSelectorEnabled}" />
+            </StackPanel>
+            <GroupBox Grid.Row="1" Header="Info &amp; Tools">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Content="Send wrong content" HorizontalAlignment="Left" IsChecked="{Binding Path=SendWrongContent}" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="1" Content="IsValid" HorizontalAlignment="Left" IsChecked="{Binding Path=IsValid}" IsEnabled="False" VerticalAlignment="Center" />
+                    <Button Grid.Row="2" Command="{Binding Path=ReformatTextCommand}" Content="Reformat" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" />
+                    <Button Grid.Row="2" Command="{Binding Path=CreateSampleMessageCommand}" Content="Create sample message" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" />
+                    <TextBlock Grid.Row="4" Text="Epoch converter: " VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="4" MinWidth="150" Text="{Binding Path=FromEpochInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Grid.Row="4" MinWidth="150" Text="{Binding Path=FromEpochOutput}" VerticalAlignment="Center"/>
+                    <Button Grid.Column="3" Grid.Row="4" Command="{Binding Path=CopyDateTimeCommand}" Content="Copy"/>
+                    <TextBlock Grid.Row="5" Text="DateTime converter: " VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="5" MinWidth="150" Text="{Binding Path=FromDateTimeInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Grid.Row="5" MinWidth="150" Text="{Binding Path=FromDateTimeOutput}" VerticalAlignment="Center"/>
+                    <Button Grid.Column="3" Grid.Row="5" Command="{Binding Path=CopyEpochCommand}" Content="Copy"/>
+                    <StackPanel Grid.Column="2" Grid.Row="3">
+                    <Button Command="{Binding Path=SelectNowCommand}" Content="Apocalipse now" VerticalAlignment="Center" />
+                        <Button Command="{Binding Path=CopyDateAsEpochCommand}" Content="Copy as epoch" VerticalAlignment="Center" />
+                    </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="3">
+                        <Button Command="{Binding Path=AddMinuteCommand}" Content="+1m" />
+                        <Button Command="{Binding Path=SubstractMinuteCommand}" Content="-1m" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Center">
+                    <xctk:DateTimePicker HorizontalAlignment="Stretch" Value="{Binding Path=Date}"/>
+                    <CheckBox IsChecked="{Binding Path=TruncateSeconds}" Content="Truncate seconds"></CheckBox>
+                    </StackPanel>
+                    <TextBlock Text="Select date: " VerticalAlignment="Center" Grid.Row="3" />
+                    <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=Units}" SelectedValue="{Binding Path=SelectedUnitId}" SelectedValuePath="Id" DisplayMemberPath="Name" Name="comboBox1" VerticalAlignment="Center" />
+                </Grid>
+            </GroupBox>
+
+        </StackPanel>
+        <TextBox Grid.Column="1" Grid.Row="0" AcceptsReturn="True" HorizontalAlignment="Stretch" IsEnabled="{Binding Converter={StaticResource ResourceKey=InvertBoolConverter}, Path=SimulationMode}"  Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="2">
+            <StatusBarItem><TextBlock Text="{Binding Path=StatusBar}"/></StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BackgroundSystemConfiguration" nillable="true" type="BackgroundSystemConfiguration" />
+  <xs:complexType name="BackgroundSystemConfiguration">
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="1" name="NotificationsConnectionString" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            String used for connection. It is an address of type medi://{server-uri}[:port] to use Medi.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="ApiHostPort" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            Port used for the api host services.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DataServices" type="RemoteServicesConfiguration">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of data services.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="FunctionalServices" type="RemoteServicesConfiguration">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of functional services.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="RemoteServicesConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Path" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The {path} segment in the {protocol}://{hostname}[:{port}][/{path}]/{serviceName}[{nameSuffix}] pattern.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Protocol" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The {protocol} segment in the {protocol}://{hostname}[:{port}][/{path}]/{serviceName}[{nameSuffix}] pattern.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="-1" name="Port" type="portValue">
+        <xs:annotation>
+          <xs:documentation>
+            The (external) port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="-1" name="InternalPort" type="portValue">
+        <xs:annotation>
+          <xs:documentation>
+            The internal port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Host" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The {hostname} segment in the {protocol}://{hostname}[:{port}][/{path}]/{serviceName}[{nameSuffix}] pattern.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="protocolValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Http">
+        <xs:annotation>
+          <xs:documentation>
+            The Http protocol.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Tcp">
+        <xs:annotation>
+          <xs:documentation>
+            The Tcp protocol.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="portValue">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="-1"/>
+      <xs:maxInclusive value="65535"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

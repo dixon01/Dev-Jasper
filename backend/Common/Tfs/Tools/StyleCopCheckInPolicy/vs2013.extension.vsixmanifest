@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="2151dd9c-54ca-4c60-a32b-b7159b5f5578" Version="1.0" Language="en-US" Publisher="Gorba AG" />
+    <DisplayName>Gorba StyleCop Check-in Policy (VS 2013)</DisplayName>
+    <Description>Installs the VS 2013 version of the Gorba StyleCop Check-in Policy.</Description>
+  </Metadata>
+  <Installation InstalledByMsi="false">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Premium" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Ultimate" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.VWDExpress" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.VPDExpress" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.VSWinExpress" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.VSWinDesktopExpress" Version="[12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.IntegratedShell" Version="[12.0]" />
+  </Installation>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="StyleCopCheckInPolicy.pkgdef" />
+  </Assets>
+</PackageManifest>

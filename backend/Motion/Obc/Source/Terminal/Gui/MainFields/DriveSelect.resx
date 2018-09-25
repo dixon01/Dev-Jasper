@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 11pt, style=Bold</value>
+  </data>
+  <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 0</value>
+  </data>
+  <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 20</value>
+  </data>
+  <data name="lblCaption.Text" xml:space="preserve">
+    <value>Überschrift - lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
+    <value>lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="btnLoginExtensionCourse.ClickedBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAH1JREFUSEtj
+        WEwvwAC0SHuGJq0R0Ba622S3ypp2qPZlFcJPtLMGaDK6TZ5bXGmBCu7kDqhN4UdCqYtSLiRi9xN1rQGa
+        NmoTJUE6GnqjoYea94dLikg6kQCP2uHiJ+S0Ouon6udcYJjSAqHXhEA+7RCiHQFk0RpBW2H0aS8DAI6Q
+        lHkA7wFXAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnLoginExtensionCourse.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 13pt, style=Bold</value>
+  </data>
+  <data name="btnLoginExtensionCourse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 156</value>
+  </data>
+  <data name="btnLoginExtensionCourse.NormalBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        /wAACv8BNGKaggAAAI9JREFUSEtjWEwvwAC0qKK8nNYIaAvdbcrOyqIdUlNTQ/iJdtYATUa3KT4ujhbI
+        0sJiQG0Kwg2Cg4PhkkA2HODRApRycXLC7if82siQHbWJjECDaxkNvdHQQw2B0RQxfFMEclkeAgbE+BVn
+        igBKUB1hrzWobg12PwEtpxFCr91pZA1K6AHtpDWAtsLo014GAHu6Ke4HNDszAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnLoginExtensionCourse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 28</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnLoginExtensionCourse.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="btnLoginExtensionCourse.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;btnLoginExtensionCourse.Name" xml:space="preserve">
+    <value>btnLoginExtensionCourse</value>
+  </data>
+  <data name="&gt;&gt;btnLoginExtensionCourse.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;btnLoginExtensionCourse.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnLoginExtensionCourse.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnLoginSchool.ClickedBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAHFJREFUSEtj
+        mEkvwAC0SNRmPq0R0Ba62yThup12KL3vI8JPtLMGaDK6TdK+52iBQhveD6hN8hGvqIuci99i9xN1rQGa
+        NmoTJUE6GnqjoYea90dTxGiKGKkpApj2aYHQa0Ign3YI0Y4AsmiNoK0w+rSXAV/gakVRKhjvAAAAAElF
+        TkSuQmCC
+</value>
+  </data>
+  <data name="btnLoginSchool.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 13pt, style=Bold</value>
+  </data>
+  <data name="btnLoginSchool.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 156</value>
+  </data>
+  <data name="btnLoginSchool.NormalBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        /wAACv8BNGKaggAAAI9JREFUSEtjWEwvwAC0qKK8nNYIaAvdbcrOyqIdUlNTQ/iJdtYATUa3KT4ujhbI
+        0sJiQG0Kwg2Cg4PhkkA2HODRApRycXLC7if82siQHbWJjECDaxkNvdHQQw2B0RQxfFMEclkeAgbE+BVn
+        igBKUB1hrzWobg12PwEtpxFCr91pZA1K6AHtpDWAtsLo014GAHu6Ke4HNDszAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnLoginSchool.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 28</value>
+  </data>
+  <data name="btnLoginSchool.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="btnLoginSchool.Text" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="&gt;&gt;btnLoginSchool.Name" xml:space="preserve">
+    <value>btnLoginSchool</value>
+  </data>
+  <data name="&gt;&gt;btnLoginSchool.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;btnLoginSchool.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnLoginSchool.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnEnter.ClickedBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        +AAACvgBZiY8/QAAAKdJREFUSEtjWEwvwAC0SI32AGgL3W2ytLCgHaooL0f4iXbWAE1Gt8nFyYkWKDsr
+        i1ibXJ2d3Vxc3Fxd3d3dPT08vDw8QKSnpyeQ7+oKFAfK4nEidpuCiAbBYABUDmdg1RofF0epTUQ6adQm
+        IgNqNJ4oCajR0BsNPSJCYNCXRiEhIXBvQApyoEhoaCiEPcJTOTD2aIHQa0Ign3YI0Y4AsmiNoK0w+rSX
+        Adx2/BDmGTrRAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnEnter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 13pt, style=Bold</value>
+  </data>
+  <data name="btnEnter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 156</value>
+  </data>
+  <data name="btnEnter.NormalBgImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAIAAABkl5F2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        +AAACvgBZiY8/QAAAI9JREFUSEtjWEwvwAC0qKK8nNYIaAvdbcrOyqIdUlNTQ/iJdtYATUa3KT4ujhbI
+        0sJiQG0Kwg2Cg4PhkkA2HODRApRycXLC7if82siQHbWJjECDaxkNvdHQQw2B0RQxfFMEclkeAgbE+BVn
+        igBKUB1hrzWobg12PwEtpxFCr91pZA1K6AHtpDWAtsLo014GAHu6Ke4HNDszAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnEnter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 28</value>
+  </data>
+  <data name="btnEnter.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="btnEnter.Text" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="&gt;&gt;btnEnter.Name" xml:space="preserve">
+    <value>btnEnter</value>
+  </data>
+  <data name="&gt;&gt;btnEnter.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;btnEnter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnEnter.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="menuItem3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 11pt</value>
+  </data>
+  <data name="menuItem3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 81</value>
+  </data>
+  <data name="menuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 27</value>
+  </data>
+  <data name="menuItem3.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="menuItem3.Text" xml:space="preserve">
+    <value>menuItem3</value>
+  </data>
+  <data name="menuItem3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;menuItem3.Name" xml:space="preserve">
+    <value>menuItem3</value>
+  </data>
+  <data name="&gt;&gt;menuItem3.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;menuItem3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuItem3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="menuItem4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 11pt</value>
+  </data>
+  <data name="menuItem4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 107</value>
+  </data>
+  <data name="menuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 27</value>
+  </data>
+  <data name="menuItem4.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="menuItem4.Text" xml:space="preserve">
+    <value>menuItem4</value>
+  </data>
+  <data name="menuItem4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;menuItem4.Name" xml:space="preserve">
+    <value>menuItem4</value>
+  </data>
+  <data name="&gt;&gt;menuItem4.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;menuItem4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuItem4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="menuItem2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 11pt</value>
+  </data>
+  <data name="menuItem2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 54</value>
+  </data>
+  <data name="menuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 28</value>
+  </data>
+  <data name="menuItem2.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="menuItem2.Text" xml:space="preserve">
+    <value>menuItem2</value>
+  </data>
+  <data name="menuItem2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;menuItem2.Name" xml:space="preserve">
+    <value>menuItem2</value>
+  </data>
+  <data name="&gt;&gt;menuItem2.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;menuItem2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuItem2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="menuItem1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 11pt</value>
+  </data>
+  <data name="menuItem1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 27</value>
+  </data>
+  <data name="menuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 28</value>
+  </data>
+  <data name="menuItem1.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="menuItem1.Text" xml:space="preserve">
+    <value>MenuItem1</value>
+  </data>
+  <data name="menuItem1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;menuItem1.Name" xml:space="preserve">
+    <value>menuItem1</value>
+  </data>
+  <data name="&gt;&gt;menuItem1.Type" xml:space="preserve">
+    <value>Microsoft.CompactFramework.Design.UnsafeControl, Microsoft.CompactFramework.Design, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;menuItem1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuItem1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
+    <value>WEBPAD</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 192</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>VMxDriveSelect</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

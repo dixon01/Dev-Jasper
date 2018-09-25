@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FC86963-44E7-4882-9388-9D43EFAE108E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Luminator.Motion.Protran.AdHocMessagingProtocol</RootNamespace>
+    <AssemblyName>Luminator.Motion.Protran.AdHocMessagingProtocol</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdhocMessageService.cs" />
+    <Compile Include="Interfaces\IAdHocRegisterRequest.cs" />
+    <Compile Include="Interfaces\IAdHocUnit.cs" />
+    <Compile Include="Interfaces\IMessagingProtocolImpl.cs" />
+    <Compile Include="Interfaces\IAdHocRegistrationResponse.cs" />
+    <Compile Include="Interfaces\IAdHocMessagingProtocolConfig.cs" />
+    <Compile Include="Interfaces\ITimerSettings.cs" />
+    <Compile Include="Interfaces\IAdHocGetMessagesRequest.cs" />
+    <Compile Include="Logging.cs" />
+    <Compile Include="Models\AdHocGetMessagesRequest.cs" />
+    <Compile Include="Models\AdHocRegisterRequest.cs" />
+    <Compile Include="Models\TimerSettings.cs" />
+    <Compile Include="AdHocMessageServiceConfig.cs" />
+    <Compile Include="Models\AdHocMessages.cs" />
+    <Compile Include="Interfaces\IAdHocMessageServiceConfig.cs" />
+    <Compile Include="Interfaces\IAdHocRequest.cs" />
+    <Compile Include="Interfaces\IAdHocMessages.cs" />
+    <Compile Include="Interfaces\IAdhocMessageService.cs" />
+    <Compile Include="Interfaces\IAdHocResponse.cs" />
+    <Compile Include="Interfaces\IXimpleAdHocMessage.cs" />
+    <Compile Include="Models\AdHocUnit.cs" />
+    <Compile Include="Models\UriSettings.cs" />
+    <Compile Include="Models\VehiclePositonInfo.cs" />
+    <Compile Include="Models\AdHocMessagingProtocolConfig.cs" />
+    <Compile Include="AdHocMessagingProtocolImpl.cs" />
+    <Compile Include="Models\AdHocRegistrationResponse.cs" />
+    <Compile Include="Models\AdHocResponse.cs" />
+    <Compile Include="Models\AdHocRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceRunState.cs" />
+    <Compile Include="XimpleAdHocMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\AdhocMessaging\Luminator.AdhocMessaging\Luminator.AdhocMessaging.csproj">
+      <Project>{f5c399a6-17f9-46bd-9a27-48332bb2e129}</Project>
+      <Name>Luminator.AdhocMessaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2b005d69-e10b-4ce6-b9e8-3f3fd1f2c874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016a923f-272c-403e-affe-f811a0c26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{e11fbc4e-2eb6-461c-9310-094b6ade9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ed8c6acb-e53b-4278-b9ac-485709e6294d}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8a10e3d6-2c5d-4a72-97ef-5a412663920c}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Protran.Core.csproj">
+      <Project>{c3036be3-1d3c-4b40-87bb-ddbe33f53568}</Project>
+      <Name>Protran.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdHocMessagingProtocolConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

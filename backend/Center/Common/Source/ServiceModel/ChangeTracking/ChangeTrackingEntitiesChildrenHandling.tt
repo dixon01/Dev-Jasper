@@ -1,0 +1,146 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\EntitySpace.xml");
+    this.entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.ServiceModel.ChangeTracking
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Runtime.Serialization;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private EntitySpace entitySpace;
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.OrderBy(entity => entity.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using System.Threading.Tasks;
+
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteEntity(entity);
+        }
+        #>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var properties = entity.Properties.OfType<EntitySpace.CollectionProperty>();
+#>
+
+        public partial class <#= entity.Name #>ReadableModel
+        {<#+
+            if (properties.Any())
+            {
+                foreach (var property in properties)
+                {
+                    this.WriteProperty(property);
+                }
+            }
+            else
+            {
+                this.WriteLine(String.Empty);
+            }
+            #>
+        }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.CollectionProperty property)
+    {
+        var name = property.Name;
+        var type = property.ItemType;
+        var inverseName = property.InverseProperty;
+        var interfaceName = property.ItemType.GetContainingPartition() + "I" + property.ItemType.GetLastPart()
+                            + "ChangeTrackingManager";
+        if (string.IsNullOrEmpty(inverseName))
+        {
+            this.Warning("'" + property.Entity.Name + '.' + name + "' doesn't contain inverse property");
+            return;
+        }
+#>
+
+            public virtual async Task ApplyAsync(<#= type #>Delta delta)
+            {
+                switch (delta.DeltaOperation)
+                {
+                    case DeltaOperation.Updated:
+                        if (delta.<#= inverseName #> == null)
+                        {
+                            this.Remove<#= name #>(delta.Id);
+                            return;
+                        }
+
+                        if (delta.<#= inverseName #>.ReferenceId == this.Id)
+                        {
+                            await this.Add<#= name #>Async(delta.Id);
+                            return;
+                        }
+
+                        this.Remove<#= name #>(delta.Id);
+                        break;
+                    case DeltaOperation.Created:
+                        await this.Add<#= name #>Async(delta.Id);
+                        break;
+                    case DeltaOperation.Deleted:
+                        this.Remove<#= name #>(delta.Id);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            private async Task Add<#= name #>Async(int id)
+            {
+                if (this.<#= name #>.Any(m => m.Id == id))
+                {
+                    return;
+                }
+
+                var manager = DependencyResolver.Current.Get<<#= interfaceName #>>();
+                var model = await manager.GetAsync(id);
+                this.<#= name.GetFieldName() #>.Add(model);
+            }
+
+            private void Remove<#= name #>(int id)
+            {
+                if (this.<#= name #>.All(model => model.Id != id))
+                {
+                    return;
+                }
+
+                var item = this.<#= name #>.Single(u => u.Id == id);
+                this.<#= name.GetFieldName() #>.Remove(item);
+            }
+<#+
+    }
+#>

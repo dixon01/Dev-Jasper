@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.MainMenu.ImportScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction:MainMenuPrompt}"
+             x:Name="Root">
+    <UserControl.Resources>
+        <converters:ResourceProgressConverter x:Key="ResourceProgressConverter" />
+    </UserControl.Resources>
+    <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}" IsIndeterminate="True">
+        <telerik:RadBusyIndicator.BusyContent>
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="{Binding BusyContentText}" />
+                    <TextBlock Text="{Binding CurrentBusyProgressText}" />
+                </StackPanel>
+            </Grid>
+        </telerik:RadBusyIndicator.BusyContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        
+            <Grid Grid.Row="0" Margin="0 30 0 0">
+                <Grid.Resources>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MediaTextBoxStyle}">
+                        <Setter Property="Margin" Value="8 0 5 5" />
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="8 0 5 5" />
+                    </Style>
+                    <Style TargetType="TextBox" x:Key="TextBoxWithValidation" BasedOn="{StaticResource MediaTextBoxStyle}">
+                        <Setter Property="Margin" Value="8 0 5 5" />
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static resources:MediaStrings.ImportMenu_Path}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ImportFilePath}" />
+                <Button Grid.Row="0" Content="{x:Static resources:MediaStrings.ImportMenu_Browse}"
+                        Click="BrowseButtonOnClick" Grid.Column="2"
+                        Style="{StaticResource FlatButton}" VerticalAlignment="Top"
+                        Margin="0 0 8 0"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static resources:MediaStrings.ImportMenu_Name}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewProjectName, UpdateSourceTrigger=PropertyChanged , ValidatesOnDataErrors=True}"
+                         Style="{StaticResource TextBoxWithValidation}" />
+                <TextBlock Text="{x:Static resources:MediaStrings.ImportMenu_Description}" Grid.Row="2" Grid.Column="0" Margin="8 0 0 0" KeyUp="OnKeyUpHandleEnter"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding Description}"
+                         Style="{StaticResource TextBoxWithValidation}"
+                         AcceptsReturn="True"
+                         MinLines="2" KeyUp="OnKeyUpHandleEnter" TextWrapping="Wrap"/>
+                <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="8 20" x:Name="OpenProjectCheckBox"
+                          IsChecked="{Binding IsOpenAfterImport}"
+                          Style="{StaticResource FlatStyleCheckbox}"
+                          Content="{x:Static resources:MediaStrings.ImportMenu_OpenAfterImport}" />
+            </Grid>
+            <Border Grid.Row="1" BorderThickness="0 1 0 0" Margin="8 0 8 0" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+                <Button Style="{StaticResource FlatHighlightButton}" MinWidth="70" HorizontalAlignment="Right"
+                    Margin="0 5 0 8" Content="{x:Static resources:MediaStrings.ImportMenu_Import}" Command="{Binding ImportCommand}" />
+            </Border>
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

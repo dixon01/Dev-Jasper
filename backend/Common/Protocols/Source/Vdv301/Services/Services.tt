@@ -1,0 +1,234 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\Services.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Protocols.Vdv301.Messages;
+
+<#
+    var services = LoadServices(this.Host.ResolvePath(@"..\Services.xml"));
+    
+    #>
+namespace Gorba.Common.Protocols.Vdv301.Services
+{
+    public class DataUpdateEventArgs<T> : EventArgs
+    {
+        public DataUpdateEventArgs(T value)
+        {
+            this.Value = value;
+        }
+
+        public T Value { get; private set; }
+    }
+    
+    public interface IVdv301Service
+    {
+    }
+    
+    public interface IVdv301HttpService : IVdv301Service
+    {
+    }
+    
+    public interface IVdv301UdpService : IVdv301Service
+    {
+    }<#
+
+    foreach (var service in services)
+    {
+         this.GenerateServiceInterface(service);
+    }
+
+    foreach (var service in services)
+    {
+         this.GenerateServiceBaseClass(service);
+    }
+    #>
+
+}
+
+<#+
+
+private void GenerateServiceInterface(Service service)
+{
+    #>
+    
+
+    public interface I<#= service.Name #> : IVdv301<#= service.IsMulticast ? "Udp" : "Http" #>Service
+    {<#+
+    if (service.IsMulticast)
+    {
+        var multicastType = GetClassName(service.MulticastType.Name);
+        var eventName = service.Name.Replace("Service", string.Empty);
+        #>
+
+        event EventHandler<DataUpdateEventArgs<<#= multicastType #>>> <#= eventName #>Changed;<#+
+    }
+    else
+    {
+        // generate events for Get operations
+        foreach (Operation operation in service.Operations)
+        {
+            if (!operation.Name.StartsWith("Get") || operation.Return == null)
+            {
+                continue;
+            }
+
+            var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            #>
+
+        event EventHandler<DataUpdateEventArgs<<#= returnType #>>> <#= operation.Name.Substring(3) #>Changed;<#+
+        }
+    
+        // generate methods
+        foreach (Operation operation in service.Operations)
+        {
+            var returnType = "DataAcceptedResponseDataStructure";
+            var arguments = new StringBuilder();
+            foreach (var arg in operation.Arguments)
+            {
+                if (arguments.Length > 0)
+                {
+                    arguments.Append(", ");
+                }
+
+                arguments.Append(GetClassName(arg.ElementSchemaType.Name));
+                arguments.Append(" ");
+                arguments.Append(char.ToLower(arg.Name[0]));
+                arguments.Append(arg.Name.Substring(1));
+            }
+        
+            if (operation.Return != null)
+            {
+                returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            }
+            #>
+
+        <#= returnType #> <#= operation.Name #>(<#= arguments #>);<#+
+        }
+    }
+        #>
+
+    }<#+
+}
+
+private void GenerateServiceBaseClass(Service service)
+{
+    #>
+    
+
+    public abstract partial class <#= service.Name #>Base : I<#= service.Name #>
+    {<#+
+    if (service.IsMulticast)
+    {
+        var multicastType = GetClassName(service.MulticastType.Name);
+        var eventName = service.Name.Replace("Service", string.Empty);
+        #>
+
+        public event EventHandler<DataUpdateEventArgs<<#= multicastType #>>> <#= eventName #>Changed;
+
+        protected virtual void Raise<#= eventName #>Changed(DataUpdateEventArgs<<#= multicastType #>> e)
+        {
+            var handler = this.<#= eventName #>Changed;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }<#+
+    }
+    else
+    {
+        // generate events for Get operations
+        foreach (Operation operation in service.Operations)
+        {
+            if (!operation.Name.StartsWith("Get") || operation.Return == null)
+            {
+                continue;
+            }
+
+            var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            #>
+
+        public event EventHandler<DataUpdateEventArgs<<#= returnType #>>> <#= operation.Name.Substring(3) #>Changed;
+
+        <#+
+        }
+    
+        // generate methods
+        foreach (Operation operation in service.Operations)
+        {
+            var returnType = "DataAcceptedResponseDataStructure";
+            var arguments = new StringBuilder();
+            foreach (var arg in operation.Arguments)
+            {
+                if (arguments.Length > 0)
+                {
+                    arguments.Append(", ");
+                }
+
+                arguments.Append(GetClassName(arg.ElementSchemaType.Name));
+                arguments.Append(" ");
+                arguments.Append(char.ToLower(arg.Name[0]));
+                arguments.Append(arg.Name.Substring(1));
+            }
+        
+            if (operation.Return != null)
+            {
+                returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            }
+            #>
+
+        public abstract <#= returnType #> <#= operation.Name #>(<#= arguments #>);
+        <#+
+        }
+    
+        // generate event invocation for Get operations
+        foreach (Operation operation in service.Operations)
+        {
+            if (!operation.Name.StartsWith("Get") || operation.Return == null)
+            {
+                continue;
+            }
+
+            var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            #>
+
+        protected virtual void Raise<#= operation.Name.Substring(3) #>Changed(DataUpdateEventArgs<<#= returnType #>> e)
+        {
+            var handler = this.<#= operation.Name.Substring(3) #>Changed;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void Raise<#= operation.Name.Substring(3) #>Changed()
+        {
+            var handler = this.<#= operation.Name.Substring(3) #>Changed;
+            if (handler != null)
+            {
+                handler(this, new DataUpdateEventArgs<<#= returnType #>>(this.<#= operation.Name #>()));
+            }
+        }
+        <#+
+        }
+    }
+    #>
+
+    }<#+
+}
+#>

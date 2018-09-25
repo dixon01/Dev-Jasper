@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducerConsumerQueueTester", "ProducerConsumerQueueTester\ProducerConsumerQueueTester.csproj", "{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{48849E00-332C-4BE7-821B-BC06A305C8C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Core", "..\..\..\Common\Source\Core\Center.Common.Core.csproj", "{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccProjectUniqueName0 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName0 = ProducerConsumerQueueTester.sln
+		SccProjectName0 = ../../../../Common/Utility/Source/Core
+		SccAuxPath0 = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = ..\\..\\..\\Common\\Source\\Core\\Center.Common.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = ProducerConsumerQueueTester.sln
+		SccProjectName1 = ../../../Common/Source/Core
+		SccAuxPath1 = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath1 = ..\\..\\..\\Common\\Source\\Core
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Debug|x86.ActiveCfg = Debug|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Debug|x86.Build.0 = Debug|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Release|Any CPU.ActiveCfg = Release|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Release|x86.ActiveCfg = Release|x86
+		{D4BE8FD0-7D1F-4D92-BD5B-564D3084B44F}.Release|x86.Build.0 = Release|x86
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {48849E00-332C-4BE7-821B-BC06A305C8C5}
+		{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE} = {48849E00-332C-4BE7-821B-BC06A305C8C5}
+	EndGlobalSection
+EndGlobal

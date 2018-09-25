@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Gorba.Center.BackgroundSystem.Spikes.ResourceManager.ViewModels">
+    <DataTemplate DataType="{x:Type viewModels:ConfigurationSectionViewModel}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="UserName: " />
+            <TextBox Text="{Binding UserName}" MinWidth="100" />
+            <TextBlock Text="        Password: " />
+            <TextBox Text="{Binding Password}" MinWidth="100" />
+            <Button Content="CreateCredentials" Command="{Binding CreateCredentialsCommand}" Margin="10 0 10 0"/>
+            <TextBlock Text="Credentials created">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CredentialsCreated}" Value="true">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModels:UploadSectionViewModel}">
+        <Button Command="{Binding Path=UploadCommand}" Content="Upload" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </DataTemplate>
+    <DataTemplate x:Key="ResourceBrowser" DataType="{x:Type viewModels:ResourceSectionViewModel}">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <DataTemplate x:Key="Resource" DataType="viewModels:ResourceViewModel">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+                        <Run Text="Filename: " />
+                        <Run Text="{Binding Path=Filename}" />
+                        <Run Text=", Hash: " />
+                        <Run Text="{Binding Path=Hash}" />
+                        <Run Text="(" />
+                        <Run Text="{Binding Path=MimeType}" />
+                        <Run Text=")" />
+                    </TextBlock>
+                    <Button Command="{Binding Path=DownloadCommand}" Content="Download" Visibility="{Binding Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}, Path=CanDownload}" />
+                </StackPanel>
+            </DataTemplate>
+        </DataTemplate.Resources>
+        <ListView ItemsSource="{Binding Path=Resources}" ItemTemplate="{StaticResource ResourceKey=Resource}" />
+    </DataTemplate>
+    <DataTemplate x:Key="LocalResources" DataType="{x:Type viewModels:ResourceSectionViewModel}">
+        <StackPanel>
+            <TextBlock Text="Local resources"></TextBlock>
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ResourceKey=ResourceBrowser}"></ContentControl>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="RemoteResources" DataType="{x:Type viewModels:ResourceSectionViewModel}">
+        <StackPanel>
+            <TextBlock Text="Remote resources"></TextBlock>
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ResourceKey=ResourceBrowser}"></ContentControl>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

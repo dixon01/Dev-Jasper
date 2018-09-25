@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.Controls.FontPreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             x:Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        </Grid.Resources>
+        <TextBlock Text="{Binding Path=Text, ElementName=Root}"
+                   FontSize="20"
+                   Margin="5"
+                   TextWrapping="Wrap"
+                   FontFamily="{Binding ElementName=Root, Path=WindowsFont, Mode=TwoWay}"
+                   MaxWidth="300">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=Root, Path=BitmapFont}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <Image Source="{Binding ElementName=Root, Path=Image}"
+               Visibility="{Binding ElementName=Root, Path=BitmapFont, Converter={StaticResource NullToVisibilityConverter}}"
+               Width="{Binding ElementName=Root, Path=Width}"/>
+        
+    </Grid>
+</UserControl>

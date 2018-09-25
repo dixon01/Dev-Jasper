@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AudioRenderer" nillable="true" type="AudioRendererConfig" />
+  <xs:complexType name="AudioRendererConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Audio Renderer configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IO" type="IOConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration how digital I/O are being used by the Renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="AudioChannels" type="ArrayOfAudioChannels" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all audio channels used by the renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="TextToSpeech" type="TextToSpeechConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the text-to-speech component of Audio Renderer.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration how digital I/O are being used by the Renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="VolumePort" type="IOPortConfig">
+        <xs:annotation>
+          <xs:documentation>
+            If this element is present, it defines which GIOoM port to use to set the
+            volume before playing any sounds. The volume to be set is configured in the
+            .im2 file. The configured I/O needs to be writable, of type integer and have (at least)
+            a range of 0..100.
+            Usually the local "Volume" port from Hardware Manager is configured in this I/O.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SpeakerPort" type="IOPortConfig">
+        <xs:annotation>
+          <xs:documentation>
+            If this element is present, it defines which GIOoM port to use to enable and disable the
+            audio output. The port is enabled before playing any sounds and disabled once all playback has completed.
+            The configured I/O needs to be writable and of type boolean.
+            Usually this is a GPIO connected to an amplifier which is handled by
+            Hardware Manager through one of the pins.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOPortConfig">
+    <xs:annotation>
+      <xs:documentation></xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Unit" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The unit name where to find the output (e.g. &quot;TFT-01-23-45&quot;).
+          If this attribute is not set, the output will be searched on the local system only.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Application" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The application name where to find the output (e.g. &quot;HardwareManager&quot;).
+          If this attribute is not set, the output will be searched in all applications.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The exact name of the GIOoM output (e.g. &quot;Volume&quot;).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Value" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Systemwide volume for speakers.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0"/>
+          <xs:maxInclusive value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+ <xs:complexType name="ArrayOfAudioChannels">
+    <xs:annotation>
+      <xs:documentation>
+        The list of the audio channels which can be used by the renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AudioChannel" nillable="true" type="AudioChannelConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of an audio channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AudioChannelConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of an audio channel. A channel must have unique id.
+        It can have multiple speaker ports configured on it.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+    <xs:element minOccurs="0" maxOccurs="unbounded" name="SpeakerPort" nillable="true" type="IOPortConfig" >
+      <xs:annotation>
+        <xs:documentation>
+          List of all speaker ports available on this audio channel.
+          If this element is present, it defines which GIOoM port to use to enable and disable the
+          audio output. The port is enabled before playing any sounds and disabled once all playback has completed.
+          The configured I/O needs to be writable and of type boolean.
+          Usually this is a GPIO connected to an amplifier which is handled by
+          Hardware Manager through one of the pins.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The identifier for the audio channel towards Composer. This can be used to address the correct speaker port
+          on the hardware.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TextToSpeechConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the text-to-speech component of Audio Renderer.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="API" type="TextToSpeechApi">
+        <xs:annotation>
+          <xs:documentation>
+            Defines which API (vendor) to use for text-to-speech.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="HintPath" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The hint path where text-to-speech engine related files are located.
+            By default each engine searches in the most usual places for its file;
+            this setting allows you to search first in the given path.
+            For Acapela, this path is used to find the AcaTTS.dll.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TextToSpeechApi">
+    <xs:annotation>
+      <xs:documentation>
+        Defines the possible APIs (vendors) usable for text-to-speech.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Microsoft">
+        <xs:annotation>
+          <xs:documentation>
+            The standard Microsoft TTS API from System.Speech.Synthesis.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Acapela">
+        <xs:annotation>
+          <xs:documentation>
+            The Acapela API from Acapela Group.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

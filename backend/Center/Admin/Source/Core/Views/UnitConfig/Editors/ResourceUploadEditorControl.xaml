@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Editors.ResourceUploadEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Editors"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance editors:ResourceUploadEditorViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <telerik:RadBusyIndicator IsBusy="{Binding IsLoading}">
+        <Grid IsEnabled="{Binding IsEnabled}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"
+                   Source="{Binding PreviewImage}"
+                   Stretch="Uniform"
+                   MinWidth="32" Height="32"
+                   Margin="3 0"/>
+
+            <TextBox Grid.Column="1" 
+                     IsReadOnly="True" 
+                     Text="{Binding Filename, Mode=OneWay}" 
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     Margin="3" />
+
+            <Button Grid.Column="2"
+                Width="90"
+                Margin="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                Command="{Binding UploadFileCommand}"
+                Content="{x:Static resources:AdminStrings.ResourceUploadEditor_SelectFile}" />
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

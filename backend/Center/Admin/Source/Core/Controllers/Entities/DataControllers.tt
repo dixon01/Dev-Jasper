@@ -1,0 +1,658 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.Admin.Core.Controllers.Entities
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading.Tasks;
+    using System.Xml.Serialization;
+    
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+
+    using Gorba.Center.Common.Wpf.Client.Controllers;
+    using Gorba.Center.Common.Wpf.Framework.Controllers;
+    
+    using Gorba.Center.Admin.Core.DataViewModels;
+
+    public partial class DataController
+    {
+        private void CreateControllers()
+        {<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            #>
+
+            this.<#= entity.Name #> = new <#= partition.Name #>.<#= entity.Name #>DataController(this);<#
+        }
+    }
+#>
+
+        }
+        
+        private void InitializeControllers()
+        {<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            #>
+
+            this.<#= entity.Name #>.Initialize(this.ConnectionController);<#
+        }
+    }
+#>
+
+        }<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            #>
+
+
+        public <#= partition.Name #>.<#= entity.Name #>DataController <#= entity.Name #>  { get; private set; }<#
+        }
+    }
+#>
+
+    }
+
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition, userDefinedPropertiesEnabledEntityNames);
+    }
+#>
+}<#+
+    private readonly PluralizationService pluralizer =
+        PluralizationService.CreateService(System.Globalization.CultureInfo.GetCultureInfo("en-us"));
+
+    private void WritePartition(EntitySpace.Partition partition, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    { #>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Admin.Core.DataViewModels.<#= partition.Name #>;
+        using Gorba.Center.Admin.Core.ViewModels.Stages.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+
+        <#+
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, partition, userDefinedPropertiesEnabled);
+        }
+        #>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, EntitySpace.Partition partition, bool userDefinedPropertiesEnabled)
+    {
+        var pluralName = this.pluralizer.Pluralize(entity.Name);
+        #>
+
+        public partial class <#= entity.Name #>DataController : DataControllerBase
+        {
+            private readonly AsyncLock asyncLocker = new AsyncLock();
+
+            private readonly ObservableCollection<<#= entity.Name #>ReadOnlyDataViewModel> all<#= pluralName #> =
+                new ObservableCollection<<#= entity.Name #>ReadOnlyDataViewModel>();
+            private volatile ReadOnlyEntityCollection<<#= entity.Name #>ReadOnlyDataViewModel> readOnly<#= pluralName #>;
+            
+            private TaskCompletionSource<bool> loadAllCompletion;<#+
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+
+            private TaskCompletionSource<I<#= entity.Name #>UdpContext> udpContextCompletion;<#+
+        }
+        #>
+
+
+            public <#= entity.Name #>DataController(DataController dataController)
+                : base(dataController)
+            {
+            }
+
+            public IReadOnlyEntityCollection<<#= entity.Name #>ReadOnlyDataViewModel> All
+            {
+                get
+                {
+                    if (this.readOnly<#= pluralName #> != null)
+                    {
+                        return this.readOnly<#= pluralName #>;
+                    }
+
+                    lock (this)
+                    {
+                        if (this.readOnly<#= pluralName #> != null)
+                        {
+                            return this.readOnly<#= pluralName #>;
+                        }
+                        
+                        this.StartReloadAllData(true);
+                    }
+                    
+
+                    return this.readOnly<#= pluralName #>;
+                }
+            }
+
+            public override void Initialize(IConnectionController controller)
+            {
+                I<#= entity.Name #>ChangeTrackingManager changeTrackingManager;
+                if (this.ConnectionController != null)
+                {
+                    changeTrackingManager = this.ConnectionController.<#= entity.Name #>ChangeTrackingManager;
+                    changeTrackingManager.Added -= this.ChangeTrackingManagerOnAdded;
+                    changeTrackingManager.Removed -= this.ChangeTrackingManagerOnRemoved;
+                }
+
+                base.Initialize(controller);
+                
+                changeTrackingManager = this.ConnectionController.<#= entity.Name #>ChangeTrackingManager;
+                changeTrackingManager.Added += this.ChangeTrackingManagerOnAdded;
+                changeTrackingManager.Removed += this.ChangeTrackingManagerOnRemoved;
+
+                this.Initialize();
+            }
+
+            public override Task AwaitAllDataAsync()
+            {
+                // the following line is needed to kick off the loading (if not already done)
+                var all = this.All;
+                return this.loadAllCompletion.Task;
+            }
+
+            public override bool SupportsEntity(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                return dataViewModel is <#= entity.Name #>ReadOnlyDataViewModel;
+            }
+            
+            public async override Task<ReadOnlyDataViewModelBase> GetEntityAsync(string idString)
+            {
+                var id = <#= entity.IdPropertyType #>.Parse(idString);
+                var model = await this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.GetAsync(id);
+                if (model == null)
+                {
+                    return null;
+                }
+
+                if (!(await PartialAsync.RunAsync(this.RunFilter, model, true)))
+                {
+                    return null;
+                }
+
+                return await this.CreateReadOnlyAsync(model);
+            }
+            
+#pragma warning disable 1998
+            public async override Task<DataViewModelBase> CreateEntityAsync()
+            {
+                var model = this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.Create();<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                var udpContext = await this.GetUdpContextAsync();
+                var dvm = this.Factory.Create(model, udpContext);<#+
+        }
+        else
+        {
+            #>
+
+                var dvm = this.Factory.Create(model);<#+
+        }
+        #>
+
+                await this.SetupDataViewModelAsync(dvm);
+                this.PostCreateEntity(dvm);
+                return dvm;
+            }
+#pragma warning restore 1998
+
+            public override async Task<DataViewModelBase> EditEntityAsync(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                var readOnly = dataViewModel as <#= entity.Name #>ReadOnlyDataViewModel;
+                if (readOnly == null)
+                {
+                    throw new ArgumentException("EditEntity() requires a <#= entity.Name #>ReadOnlyDataViewModel");
+                }
+
+                await readOnly.ReadableModel.LoadXmlPropertiesAsync();
+                var dvm = this.Factory.Create(readOnly);
+                await this.SetupDataViewModelAsync(dvm);
+                this.PostStartEditEntity(dvm);
+                return dvm;
+            }
+
+            public override async Task<DataViewModelBase> CopyEntityAsync(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                var readOnly = dataViewModel as <#= entity.Name #>ReadOnlyDataViewModel;
+                if (readOnly == null)
+                {
+                    throw new ArgumentException("CopyEntity() requires a <#= entity.Name #>ReadOnlyDataViewModel");
+                }
+                
+                await readOnly.ReadableModel.LoadXmlPropertiesAsync();
+                var model = this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.CreateCopy(
+                    readOnly.ReadableModel);
+                var dvm = this.Factory.Create(model);
+                await this.SetupDataViewModelAsync(dvm);
+                this.PostCopyEntity(dvm);
+                return dvm;
+            }
+
+            public override async Task<ReadOnlyDataViewModelBase> SaveEntityAsync(DataViewModelBase dvm)
+            {
+                var dataViewModel = dvm as <#= entity.Name #>DataViewModel;
+                if (dataViewModel == null)
+                {
+                    throw new ArgumentException("SaveEntity() requires a <#= entity.Name #>DataViewModel");
+                }
+
+                await PartialAsync.RunAsync(this.RunPreSaveEntity, dataViewModel);
+
+                var readable = await this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.CommitAndVerifyAsync(
+                    dataViewModel.Model);
+                readable = await PartialAsync.RunAsync(this.RunPostSaveEntity, dataViewModel, readable, readable);
+                await readable.LoadReferencePropertiesAsync();
+                return await this.CreateReadOnlyAsync(readable);
+            }
+
+            public async override Task DeleteEntityAsync(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                var readOnly = dataViewModel as <#= entity.Name #>ReadOnlyDataViewModel;
+                if (readOnly == null)
+                {
+                    throw new ArgumentException("DeleteEntity() requires a <#= entity.Name #>ReadOnlyDataViewModel");
+                }
+                
+                await PartialAsync.RunAsync(this.RunPreDeleteEntity, readOnly);
+                await this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.DeleteAsync(readOnly.ReadableModel);
+                await PartialAsync.RunAsync(this.RunPostDeleteEntity, readOnly);
+            }
+
+            protected async override Task DoLoadEntityDetailsAsync(ReadOnlyDataViewModelBase dataViewModel)
+            {
+                var readOnly = dataViewModel as <#= entity.Name #>ReadOnlyDataViewModel;
+                if (readOnly == null)
+                {
+                    throw new ArgumentException("DoLoadEntityDetailsAsync() requires a <#= entity.Name #>ReadOnlyDataViewModel");
+                }
+                <#+
+        var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>().ToList();
+        foreach (var property in collectionProperties)
+        {
+            #>
+
+                readOnly.<#= property.Name #>.IsLoading = true;<#+
+        }
+            #>
+                
+
+                await readOnly.ReadableModel.LoadNavigationPropertiesAsync();
+                await PartialAsync.RunAsync(this.RunPrePopulateEntityDetails, readOnly);<#+
+        foreach (var property in collectionProperties)
+        {
+            var fullItemType = property.ItemType.IndexOf('.') > 0
+                ? "Gorba.Center.Common.ServiceModel.ChangeTracking." + property.ItemType
+                : property.ItemType;
+            #>
+
+            
+                try
+                {
+                    foreach (var reference in readOnly.ReadableModel.<#= property.Name #>)
+                    {
+                        readOnly.<#= property.Name #>.Items.Add(this.Factory.CreateReadOnly(reference));
+                    }
+                }
+                finally
+                {
+                    readOnly.ReadableModel.<#= property.Name #>.CollectionChanged += (s, e) =>
+                        {
+                            this.StartNew(
+                                () =>
+                                    {
+                                        switch (e.Action)
+                                        {
+                                            case NotifyCollectionChangedAction.Add:
+                                                readOnly.<#= property.Name #>.Items.Add(
+                                                    this.Factory.CreateReadOnly(
+                                                        (<#= fullItemType #>ReadableModel)e.NewItems[0]));
+                                                break;
+                                            case NotifyCollectionChangedAction.Remove:
+                                                var remove =
+                                                    readOnly.<#= property.Name #>.Items.FirstOrDefault(
+                                                        i => i.ReadableModel.Equals(e.OldItems[0]));
+                                                readOnly.<#= property.Name #>.Items.Remove(remove);
+                                                break;
+                                            case NotifyCollectionChangedAction.Reset:
+                                                readOnly.<#= property.Name #>.Items.Clear();
+                                                break;
+                                        }
+                                    });
+                        };
+                    readOnly.<#= property.Name #>.IsLoading = false;
+                }<#+
+        }
+            #>
+
+            }
+            
+            partial void Initialize();
+            
+            partial void Filter(ref Func<<#= entity.Name #>ReadableModel, Task<bool>> asyncMethod);
+            
+            partial void FilterResults(
+                ref Func<IEnumerable<<#= entity.Name #>ReadableModel>, Task<IEnumerable<<#= entity.Name #>ReadableModel>>> asyncMethod);
+
+            partial void PostCreateEntity(<#= entity.Name #>DataViewModel dataViewModel);
+
+            partial void PostCopyEntity(<#= entity.Name #>DataViewModel dataViewModel);
+
+            partial void PostSetupReferenceProperties(ref Func<<#= entity.Name #>DataViewModel, Task> asyncMethod);
+
+            partial void PostStartEditEntity(<#= entity.Name #>DataViewModel dataViewModel);
+            
+            partial void PreSaveEntity(ref Func<<#= entity.Name #>DataViewModel, Task> asyncMethod);
+            
+            partial void PostSaveEntity(
+                ref Func<<#= entity.Name #>DataViewModel, <#= entity.Name #>ReadableModel, Task<<#= entity.Name #>ReadableModel>> asyncMethod);
+            
+            partial void PreDeleteEntity(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod);
+            
+            partial void PostDeleteEntity(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod);
+
+            partial void PrePopulateEntityDetails(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod);
+
+            partial void CreateFilter(ref <#= entity.Name #>Query query);
+            
+            private void RunFilter(ref Func<<#= entity.Name #>ReadableModel, Task<bool>> asyncMethod)
+            {
+                this.Filter(ref asyncMethod);
+            }
+            
+            private void RunFilterResults(
+                ref Func<IEnumerable<<#= entity.Name #>ReadableModel>, Task<IEnumerable<<#= entity.Name #>ReadableModel>>> asyncMethod)
+            {
+                this.FilterResults(ref asyncMethod);
+            }
+            
+            private void RunPostSetupReferenceProperties(ref Func<<#= entity.Name #>DataViewModel, Task> asyncMethod)
+            {
+                this.PostSetupReferenceProperties(ref asyncMethod);
+            }
+            
+            private void RunPreSaveEntity(ref Func<<#= entity.Name #>DataViewModel, Task> asyncMethod)
+            {
+                this.PreSaveEntity(ref asyncMethod);
+            }
+            
+            private void RunPostSaveEntity(
+                ref Func<<#= entity.Name #>DataViewModel, <#= entity.Name #>ReadableModel, Task<<#= entity.Name #>ReadableModel>> asyncMethod)
+            {
+                this.PostSaveEntity(ref asyncMethod);
+            }
+            
+            private void RunPreDeleteEntity(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod)
+            {
+                this.PreDeleteEntity(ref asyncMethod);
+            }
+            
+            private void RunPostDeleteEntity(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod)
+            {
+                this.PostDeleteEntity(ref asyncMethod);
+            }
+
+            private void RunPrePopulateEntityDetails(ref Func<<#= entity.Name #>ReadOnlyDataViewModel, Task> asyncMethod)
+            {
+                this.PrePopulateEntityDetails(ref asyncMethod);
+            }
+
+            protected async override void StartReloadAllData(bool force)
+            {<#+
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                this.udpContextCompletion = null;<#+
+        }
+        #>
+
+                if (this.readOnly<#= pluralName #> == null)
+                {
+                    if (!force)
+                    {
+                        return;
+                    }
+
+                    this.readOnly<#= pluralName #> =
+                        new ReadOnlyEntityCollection<<#= entity.Name #>ReadOnlyDataViewModel>(this.all<#= pluralName #>);
+                }
+                else
+                {
+                    this.all<#= pluralName #>.Clear();
+                }
+
+                this.readOnly<#= pluralName #>.IsLoading = true;
+                var completion = this.loadAllCompletion = new TaskCompletionSource<bool>();
+                try
+                {
+                    using (await this.asyncLocker.LockAsync())
+                    {
+                        try
+                        {
+                            <#= entity.Name #>Query query = null;
+                            this.CreateFilter(ref query);
+                            var models = await this.ConnectionController.<#= entity.Name #>ChangeTrackingManager.QueryAsync(query);
+                            var filteredModels = await PartialAsync.RunAsync(this.RunFilterResults, models, models);
+                            foreach (var model in filteredModels)
+                            {
+                                this.all<#= pluralName #>.Add(await this.CreateReadOnlyAsync(model));
+                            }
+                        }
+                        finally
+                        {
+                            this.readOnly<#= pluralName #>.IsLoading = false;
+                        }
+                    }
+                    
+                    completion.TrySetResult(true);
+                }
+                catch (Exception ex)
+                {
+                    this.Logger.ErrorException("Couldn't load all entities", ex);
+                    completion.TrySetException(ex);
+                }
+            }
+
+            private async Task SetupDataViewModelAsync(<#= entity.Name #>DataViewModel dataViewModel)
+            {
+                await this.SetupReferencePropertiesAsync(dataViewModel);
+
+                var validator = new <#= entity.Name #>Validator(dataViewModel, this.DataController);
+                validator.Start();
+
+                dataViewModel.Disposing += (s, e) => validator.Stop();
+                dataViewModel.IsLoading = false;
+            }
+
+            private async Task SetupReferencePropertiesAsync(<#= entity.Name #>DataViewModel dataViewModel)
+            {<#+
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference).ToList();
+        if (referenceProperties.Count > 0)
+        { #>
+        
+                dataViewModel.IsLoading = true;<#+
+            foreach (var property in referenceProperties)
+            {
+                var shortPropertyType = property.Type.Substring(property.Type.LastIndexOf('.') + 1);
+                #>
+                
+                
+                dataViewModel.<#= property.Name #>.Entities = this.DataController.<#= shortPropertyType #>.All;
+                dataViewModel.<#= property.Name #>.IsRequired = <#= property.IsRequired.ToString().ToLower() #>;
+                dataViewModel.Disposing += (s, e) => dataViewModel.<#= property.Name #>.Entities = null;
+                await this.DataController.<#= shortPropertyType #>.AwaitAllDataAsync();<#+
+            }
+        }
+            #>
+
+                await PartialAsync.RunAsync(this.RunPostSetupReferenceProperties, dataViewModel);
+            }
+            
+#pragma warning disable 1998
+            private async Task<<#= entity.Name #>ReadOnlyDataViewModel> CreateReadOnlyAsync(<#= entity.Name #>ReadableModel model)
+            {<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                var udpContext = await this.GetUdpContextAsync();
+                return this.Factory.CreateReadOnly(model, udpContext);<#+
+        }
+        else
+        {
+            #>
+            
+                return this.Factory.CreateReadOnly(model);<#+
+        }
+        #>
+
+            }
+#pragma warning restore 1998
+
+            private async void ChangeTrackingManagerOnAdded(
+                object sender, ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+            {
+                try
+                {
+                    using (await this.asyncLocker.LockAsync())
+                    {
+                        if (this.readOnly<#= pluralName #> == null || this.readOnly<#= pluralName #>.IsLoading)
+                        {
+                            return;
+                        }
+                    }
+
+                    await e.Model.LoadReferencePropertiesAsync();
+                    if (await PartialAsync.RunAsync(this.RunFilter, e.Model, true))
+                    {
+                        this.StartNew(async () => this.all<#= pluralName #>.Add(await this.CreateReadOnlyAsync(e.Model)));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.ErrorException("Couldn't load added <#= entity.Name #>", ex);
+                }
+            }
+
+            private async void ChangeTrackingManagerOnRemoved(
+                object sender, ReadableModelEventArgs<<#= entity.Name #>ReadableModel> e)
+            {
+                try
+                {
+                    using (await this.asyncLocker.LockAsync())
+                    {
+                        if (this.readOnly<#= pluralName #> == null || this.readOnly<#= pluralName #>.IsLoading)
+                        {
+                            return;
+                        }
+                    }
+
+                    this.StartNew(() =>
+                        {
+                            var dvm = this.all<#= pluralName #>.FirstOrDefault(m => m.Id.Equals(e.Model.Id));
+                            if (dvm != null)
+                            {
+                                this.all<#= pluralName #>.Remove(dvm);
+                            }
+                        });
+                }
+                catch (Exception ex)
+                {
+                    Logger.ErrorException("Couldn't remove <#= entity.Name #>", ex);
+                }
+            }<#+
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+            
+
+            private async Task<I<#= entity.Name #>UdpContext> GetUdpContextAsync()
+            {
+                if (this.udpContextCompletion != null)
+                {
+                    return await this.udpContextCompletion.Task;
+                }
+
+                var completion = this.udpContextCompletion = new TaskCompletionSource<I<#= entity.Name #>UdpContext>();
+
+                await this.DataController.UserDefinedProperty.AwaitAllDataAsync();
+                var context =
+                    new <#= entity.Name #>UdpContext(
+                        this.DataController.UserDefinedProperty.All.Where(
+                            u =>
+                            u.OwnerEntity == Gorba.Center.Common.ServiceModel.Meta.UserDefinedPropertyEnabledEntity.<#= entity.Name #>
+                            && (u.Tenant == null || u.Tenant.Id == this.ApplicationState.CurrentTenant.Id))
+                            .Select(u => u.ReadableModel.Name));
+
+                completion.TrySetResult(context);
+                return context;
+            }
+
+            private class <#= entity.Name #>UdpContext : I<#= entity.Name #>UdpContext
+            {
+                private List<string> udpNames;
+
+                public <#= entity.Name #>UdpContext(IEnumerable<string> udpNames)
+                {
+                    this.udpNames = udpNames.ToList();
+                }
+
+                public IEnumerable<string> GetAdditional<#= entity.Name #>Properties()
+                {
+                    return this.udpNames;
+                }
+            }<#+
+        }
+        #>
+
+        }
+
+        <#+
+    }
+#>

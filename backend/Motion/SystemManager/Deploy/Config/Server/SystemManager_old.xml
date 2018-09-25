@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SystemManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Defaults>
+    <Process>
+      <LaunchDelay>PT0S</LaunchDelay>
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <WindowMode>Normal</WindowMode>
+      <Priority>Normal</Priority>
+      <ExitTimeout>PT30S</ExitTimeout>
+    </Process>
+  </Defaults>
+  <SplashScreens X="0" Y="0" Width="1366" Height="768">
+    <SplashScreen Name="Boot" Enabled="true" Foreground="#FF000000" Background="#FFE6ECF0">
+      <ShowOn>
+        <SystemBoot />
+        <SystemShutdown />
+      </ShowOn>
+      <HideOn>
+        <ApplicationStateChange Application="DirectX Renderer" State="Running" />
+      </HideOn>
+      <Items>
+        <!--<Logo Filename="Boot.jpeg" />-->
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="Update Index" Name="UpdateIndex" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Announcement" Enabled="false" Foreground="Black" Background="Red">
+      <ShowOn>
+        <Input Name="UDCPAnnounce" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Input Name="UDCPAnnounce" Value="0" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="false" Serial="true" />
+        <Network Name="false" Ip="true" Gateway="false" Mac="false" Status="false" StatusFilter="Up" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="HotKey" Enabled="true" Foreground="#FF000000" Background="#FFE6ECF0">
+      <ShowOn>
+        <HotKey Key="S" />
+      </ShowOn>
+      <HideOn>
+        <HotKey Key="S" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="Update Index" Name="UpdateIndex" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Button" Enabled="true" Foreground="#FF000000" Background="#FFE6ECF0">
+      <ShowOn>
+        <Input Unit="*" Name="Button" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Timeout Delay="PT30S" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <IO ValueFormat="{0}°C" Name="Temperature" />
+        <IO Label="Update Index" Name="UpdateIndex" />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false" />
+      </Items>
+    </SplashScreen>
+  </SplashScreens>
+  <System>
+    <ShutDownSplashScreenVisibleTime>PT20S</ShutDownSplashScreenVisibleTime>
+    <IgnitionHoldTime>PT10S</IgnitionHoldTime>
+    <RamLimit Enabled="false">
+      <FreeRamMB>800</FreeRamMB>
+      <Actions>
+        <Reboot />
+      </Actions>
+    </RamLimit>
+    <CpuLimit Enabled="false">
+      <MaxCpuPercentage>98</MaxCpuPercentage>
+      <Actions>
+        <Reboot />
+      </Actions>
+    </CpuLimit>
+    <DiskLimits Enabled="false">
+      <Disk Path="C:\" Enabled="true">
+        <FreeSpaceMB>5</FreeSpaceMB>
+        <Actions>
+          <Reboot/>
+        </Actions>
+      </Disk>
+      <Disk Path="D:\" Enabled="false">
+        <FreeSpaceMB>10</FreeSpaceMB>
+        <FreeSpacePercentage>5</FreeSpacePercentage>
+        <Actions>
+          <Purge Path="D:\temp\"/>
+          <Purge Path="D:\log\archives\"/>
+        </Actions>
+      </Disk>
+    </DiskLimits>
+    <PreventPopups Enabled="true" CheckInterval="PT10S">
+    </PreventPopups>
+  </System>
+
+  <Applications>
+    <Process Name="Portal" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT0S</LaunchDelay>
+      <ExecutablePath>..\Portal\CenterPortal.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="false">
+        <MaxRamMB>50</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="BackgroundSystem" Enabled="true" UseWatchdog="false">
+      <LaunchDelay>PT10S</LaunchDelay>
+      <ExecutablePath>..\BackgroundSystem\BackgroundSystemConsoleHost.exe</ExecutablePath>
+      <Arguments></Arguments>
+      <WindowMode>Normal</WindowMode>
+      <RamLimit Enabled="true">
+        <MaxRamMB>800</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+    </Process>
+  </Applications>
+</SystemManager>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScreenRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Items>
+    <ScreenItem xsi:type="TextItem">
+      <X>50</X>
+      <Y>100</Y>
+      <Font Face="Arial" Height="50" Weight="900" Italic="false" Color="#FFFFFF" />
+      <Text>Welcome to Infomedia 2.0</Text>
+    </ScreenItem>
+  </Items>
+</ScreenRoot>

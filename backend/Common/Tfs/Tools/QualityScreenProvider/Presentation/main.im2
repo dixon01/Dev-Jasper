@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Presentation Version="2.0">
+  <Display>
+    <Width>1920</Width>
+    <Height>1080</Height>
+  </Display>
+
+  <StandardCycles>
+    <StandardCycle Name="MainCycle">
+      <StandardSection Duration="2" Layout="MainLayout">
+        <Enabled>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="1000" Column="0" Row="0" />
+          </StringCompare>
+        </Enabled>
+      </StandardSection>
+      <MultiSection Duration="15" Layout="FailedBuild" Language="0" Table="1001" RowsPerPage="1" Mode="AllPages">
+        <Enabled>
+          <Not>
+            <StringCompare Value="">
+              <Generic Lang="0" Table="1001" Column="0" Row="0" />
+            </StringCompare>
+          </Not>
+        </Enabled>
+      </MultiSection>
+      <MultiSection Duration="10" Layout="LastBuilds" Language="0" Table="1000" RowsPerPage="15" Mode="AllPages" />
+    </StandardCycle>
+  </StandardCycles>
+
+  <EventCycles>
+  </EventCycles>
+
+  <Layouts>
+    <Layout Name="MainLayout">
+    </Layout>
+
+    <Layout Name="FailedBuild">
+      <Image X="0" Y="0" Width="1920" Height="1080" ZIndex="-100">
+        <Filename>
+          <Format Format="BuildColor_{0}.png">
+            <Generic Lang="0" Table="1001" Column="1" Row="0" /> <!-- Error State -->
+          </Format>
+        </Filename>
+      </Image>
+
+      <Text X="20" Y="20" Width="1880" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+        <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+        <Value>
+          <Generic Lang="0" Table="1001" Column="0" Row="0" /> <!-- Build Definition Name -->
+        </Value>
+      </Text>
+    </Layout>
+
+    <Layout Name="LastBuilds">
+      <Text X="20" Y="20" Width="1880" Height="80" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline" Value="Last Builds">
+        <Font Face="Arial" Height="72" Weight="900" Italic="false" Color="#FFFFFF" />
+      </Text>
+      <Text X="20" Y="20" Width="1880" Height="80" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+        <Font Face="Arial" Height="72" Weight="900" Italic="false" Color="#FFFFFF" />
+        <Value>
+          <Format Format="({0} / {1})">
+            <Generic Lang="0" Table="1" Column="1" Row="0" />
+            <Generic Lang="0" Table="1" Column="0" Row="0" />
+          </Format>
+        </Value>
+      </Text>
+      
+      <Group X="0" Y="120">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="0" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="0" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="0" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="0" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="180">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="1" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="1" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="1" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="1" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="240">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="2" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="2" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="2" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="2" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="300">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="3" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="3" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="3" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="3" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="360">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="4" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="4" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="4" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="4" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="420">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="5" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="5" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="5" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="5" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="480">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="6" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="6" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="6" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="6" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="540">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="7" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="7" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="7" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="7" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="600">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="8" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="8" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="8" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="8" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="660">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="9" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="9" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="9" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="9" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="720">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="10" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="10" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="10" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="10" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="780">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="11" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="11" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="11" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="11" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="840">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="12" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="12" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="12" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="12" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="900">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="13" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="13" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="13" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="13" />
+          </Value>
+        </Text>
+      </Group>
+
+      <Group X="0" Y="960">
+        <Text X="20" Y="0" Width="1000" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="900" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Format Format="[color={0}]{1}[/color]">
+              <Switch>
+                <Value>
+                  <Generic Lang="0" Table="1000" Column="1" Row="14" />
+                </Value>
+                <Case Value="0">#00FF00</Case>
+                <Case Value="1">orange</Case>
+                <Case Value="2">red</Case>
+                <Default>white</Default>
+              </Switch>
+              <Generic Lang="0" Table="1000" Column="0" Row="14" />
+            </Format>
+          </Value>
+        </Text>
+
+        <Text X="1040" Y="0" Width="380" Height="60" ZIndex="0" Align="Right" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="3" Row="14" />
+          </Value>
+        </Text>
+
+        <Text X="1460" Y="0" Width="400" Height="60" ZIndex="0" Align="Left" Overflow="Scale" VAlign="Baseline">
+          <Font Face="Arial" Height="48" Weight="100" Italic="false" Color="#FFFFFF" />
+          <Value>
+            <Generic Lang="0" Table="1000" Column="2" Row="14" />
+          </Value>
+        </Text>
+      </Group>
+    </Layout>
+  </Layouts>
+</Presentation>

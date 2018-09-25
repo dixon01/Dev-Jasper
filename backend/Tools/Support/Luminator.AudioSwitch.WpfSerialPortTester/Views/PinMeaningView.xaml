@@ -1,0 +1,99 @@
+﻿<Window x:Class="Luminator.AudioSwitch.WpfSerialPortTester.Views.PinMeaningView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Luminator.AudioSwitch.WpfSerialPortTester.Views"
+        mc:Ignorable="d"
+        Name="SaveWindow"
+        xmlns:vm="clr-namespace:Luminator.AudioSwitch.WpfSerialPortTester.ViewModels"
+        Title="PinMeaningView" Height="836.664" Width="761.626" ResizeMode="CanMinimize" >
+    <Window.DataContext>
+        <vm:PinMeaningViewModel/>
+    </Window.DataContext>
+    <Grid Margin="124,10,88,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="128*"/>
+            <ColumnDefinition Width="93*"/>
+
+
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Value" HorizontalAlignment="Center" Margin="10,19,21,11" VerticalAlignment="Center" Visibility="Visible" Height="20" Width="58" FontSize="14" TextDecorations="Underline" />
+        <TextBlock HorizontalAlignment="Center" Margin="43,18,62,10" VerticalAlignment="Center" Visibility="Visible" Height="22" Width="159" FontSize="14" Grid.Column="1" ><Run Text="&#x9;"/><Run Text="Pin Meaning" TextDecorations="Underline"/></TextBlock>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="54,18,53,14" VerticalAlignment="Center" Visibility="Visible" Height="18" Width="84" RenderTransformOrigin="0.672,0.386" FontSize="14" TextDecorations="Underline" ><Run Text="Pin "/><Run Text="Sense"/></TextBlock>
+        <TextBlock Text="01" HorizontalAlignment="Left" Margin="32,16,0,10" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="1"/>
+        <TextBlock Text="02" HorizontalAlignment="Left" Margin="32,16,0,10" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="2" RenderTransformOrigin="0.676,-0.051"/>
+        <TextBlock Text="03" HorizontalAlignment="Left" Margin="32,19,0,15" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="3"/>
+        <TextBlock Text="04" HorizontalAlignment="Left" Margin="32,23,0,11" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="4"/>
+        <TextBlock Text="05" HorizontalAlignment="Left" Margin="32,22,0,12" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="5"/>
+        <TextBlock Text="06" HorizontalAlignment="Left" Margin="32,18,0,16" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="6"/>
+        <TextBlock Text="07" HorizontalAlignment="Left" Margin="32,22,0,12" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="7"/>
+        <TextBlock Text="08" HorizontalAlignment="Left" Margin="32,19,0,15" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="8"/>
+        <TextBlock Text="09" HorizontalAlignment="Left" Margin="32,20,0,14" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="9"/>
+        <TextBlock Text="0A" HorizontalAlignment="Left" Margin="32,22,0,12" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="10"/>
+        <TextBlock Text="0B" HorizontalAlignment="Left" Margin="32,18,0,16" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="16" Grid.Row="11"/>
+        <TextBlock Text="0C" HorizontalAlignment="Left" Margin="32,14,0,20" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="12" Grid.Row="12"/>
+
+        <TextBlock Text="Door 1" HorizontalAlignment="Left" Margin="33,15,0,10" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Text="Door 2" HorizontalAlignment="Left" Margin="33,10,0,16" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Stop Request" HorizontalAlignment="Left" Margin="33,6,0,10" VerticalAlignment="Center" Visibility="Visible" Height="25" Width="112" Grid.Row="3" Grid.Column="1"/>
+        <TextBlock Text="ADA Stop Request" HorizontalAlignment="Left" Margin="33,19,0,15" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="4" Grid.Column="1"/>
+        <TextBlock Text="Push-To-Talk" HorizontalAlignment="Left" Margin="33,22,0,12" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock Text="Interior Select" HorizontalAlignment="Left" Margin="33,18,0,15" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="6" Grid.Column="1"/>
+        <TextBlock Text="Exterior Select" HorizontalAlignment="Left" Margin="33,22,0,11" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="7" Grid.Column="1"/>
+        <TextBlock Text="Odometer" HorizontalAlignment="Left" Margin="33,21,0,13" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="8" Grid.Column="1"/>
+        <TextBlock Text="Reverse" HorizontalAlignment="Left" Margin="33,17,0,17" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="112" Grid.Row="9" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="33,14,0,20" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="131" FontSize="10" Grid.Row="10" Grid.Column="1"><Run FontSize="12" Text="Interior Speaker Priority"/><LineBreak/><Run Text=" – Mute"/></TextBlock>
+        <TextBlock Text="Exterior Speaker Priority - Mute" HorizontalAlignment="Left" Margin="33,14,0,20" VerticalAlignment="Center" Visibility="Visible" Height="16" Width="169" Grid.Row="11" Grid.Column="1"/>
+        <TextBlock Text="Radio Speaker Priority – Mute" HorizontalAlignment="Left" Margin="33,14,0,15" VerticalAlignment="Center" Visibility="Visible" Height="21" Width="169" Grid.Row="12" Grid.Column="1"/>
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.InteriorSelect, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,11,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.StopRequest, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,14,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.ADAStopRequest, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,14,0,0" Grid.Row="5" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.PushToTalk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="33,14,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.Door1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="33,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.Door2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,13,0,0" Grid.Row="7" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.ExteriorSelect, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Grid.Row="9" VerticalAlignment="Top" Width="120" Margin="35,13,0,0" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.Reverse, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Top" Width="120" Margin="35,14,0,0" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.InteriorSpeakerPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Top" Width="120" Margin="35,14,0,0" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.ExteriorSpeakerPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Top" Width="120" Margin="35,14,0,0" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValue="{Binding PinMeaningValues.RadioSpeakerPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Button Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="62,7,0,0" Grid.Row="14" VerticalAlignment="Top" Width="114" Height="33" Command="{Binding SaveButton, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=SaveWindow}" FontSize="11"/>
+        <ComboBox Grid.Column="2" HorizontalAlignment="Left" Margin="35,14,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120" Height="26" ItemsSource="{Binding PinMeaningValues.Options, UpdateSourceTrigger=PropertyChanged}" 
+            SelectedValue="{Binding PinMeaningValues.Odometer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+    </Grid>
+</Window>
