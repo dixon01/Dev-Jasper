@@ -1,0 +1,288 @@
+{
+    "Version": "2.0",
+    "Created": "2016-08-12 14:13:38",
+    "PhysicalScreens": {
+       "PhysicalScreen": {
+          "Name": "1366x768",
+          "Width": "1366",
+          "Height": "768"
+       }
+    },
+    "VirtualDisplays": {
+       "VirtualDisplay": {
+          "Name": "TFT Display_1",
+          "CyclePackage": "CyclePackage TFT 1366x768",
+          "Width": "1366",
+          "Height": "768"
+       }
+    },
+    "MasterPresentation": {
+       "MasterCycles": {
+          "MasterCycle": {
+             "Name": "Master cycle",
+             "MasterSection": {
+                "Duration": "P1D",
+                "Layout": "Standard Master Layout"
+             }
+          }
+       },
+       "MasterEventCycles": [],
+       "MasterLayouts": {
+          "MasterLayout": {
+             "Name": "Standard Master Layout",
+             "PhysicalScreen": {
+                "Ref": "1366x768",
+                "VirtualDisplay": {
+                   "X": "0",
+                   "Y": "0",
+                   "ZIndex": "0",
+                   "Ref": "TFT Display_1"
+                }
+             }
+          }
+       }
+    },
+    "Evaluations": [
+       {
+          "Name": "DoorClose",
+          "StringCompare": {
+             "Value": "0",
+             "Generic": {
+                "Lang": "0",
+                "Table": "0",
+                "Column": "4",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "DoorOpen",
+          "StringCompare": {
+             "Value": "1",
+             "Generic": {
+                "Lang": "0",
+                "Table": "0",
+                "Column": "4",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "Line0",
+          "IntegerCompare": {
+             "Begin": "0",
+             "End": "0",
+             "Generic": {
+                "Lang": "0",
+                "Table": "10",
+                "Column": "0",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "LineBlank",
+          "StringCompare": {
+             "Value": "",
+             "Generic": {
+                "Lang": "0",
+                "Table": "10",
+                "Column": "0",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "MissingIBIS",
+          "StringCompare": {
+             "Value": "0",
+             "Generic": {
+                "Lang": "0",
+                "Table": "0",
+                "Column": "2",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "SpecialLinePicture",
+          "CodeConversion": {
+             "FileName": "codeconversion.csv",
+             "UseImage": "true"
+          }
+       },
+       {
+          "Name": "SpecialLineText",
+          "CodeConversion": {
+             "FileName": "codeconversion.csv",
+             "UseImage": "false"
+          }
+       },
+       {
+          "Name": "StopIndex1to89",
+          "IntegerCompare": {
+             "Begin": "1",
+             "End": "89",
+             "Generic": {
+                "Lang": "0",
+                "Table": "10",
+                "Column": "4",
+                "Row": "0"
+             }
+          }
+       },
+       {
+          "Name": "StopRequest",
+          "StringCompare": {
+             "Value": "1",
+             "Generic": {
+                "Lang": "0",
+                "Table": "0",
+                "Column": "3",
+                "Row": "0"
+             }
+          }
+       }
+    ],
+    "Cycles": {
+       "StandardCycles": {
+          "StandardCycle": {
+             "Name": "New Cycle 1",
+             "StandardSection": [
+                {
+                   "Duration": "PT10S",
+                   "Layout": "Layout 0 (1366x768)"
+                },
+                {
+                   "Duration": "PT10S",
+                   "Layout": "Layout 1 (1366x768)"
+                }
+             ]
+          }
+       },
+       "EventCycles": []
+    },
+    "CyclePackages": {
+       "CyclePackage": {
+          "Name": "CyclePackage TFT 1366x768",
+          "StandardCycles": {
+             "StandardCycle": {
+                "Ref": "New Cycle 1"
+             }
+          },
+          "EventCycles": []
+       }
+    },
+    "Pools": [],
+    "Layouts": [
+       {
+          "Name": "Layout 0 (1366x768)",
+          "Resolution": {
+             "Width": "1366",
+             "Height": "768",
+             "Text": [
+                {
+                   "X": "45",
+                   "Y": "46",
+                   "Width": "443",
+                   "Height": "46",
+                   "ZIndex": "3",
+                   "Align": "Center",
+                   "Overflow": "Scale",
+                   "ScrollSpeed": "100",
+                   "Value": "Image and Video OnlyStaticText2",
+                   "Font": {
+                      "Face": "Arial",
+                      "Height": "50",
+                      "Weight": "20",
+                      "Italic": "false",
+                      "Color": "#FFFF0000",
+                      "OutlineColor": ""
+                   },
+                   "LastPosition": {
+                      "Location": {
+                         "X": "0",
+                         "Y": "0"
+                      },
+                      "Size": {
+                         "Width": "0",
+                         "Height": "0"
+                      },
+                      "X": "0",
+                      "Y": "0",
+                      "Width": "0",
+                      "Height": "0"
+                   }
+                },
+                {
+                   "X": "169",
+                   "Y": "124",
+                   "Width": "825",
+                   "Height": "129",
+                   "ZIndex": "0",
+                   "Align": "Center",
+                   "Overflow": "Scale",
+                   "ScrollSpeed": "100",
+                   "Value": "",
+                   "Font": {
+                      "Face": "Arial",
+                      "Height": "50",
+                      "Weight": "20",
+                      "Italic": "false",
+                      "Color": "#FFFF0000",
+                      "OutlineColor": ""
+                   },
+                   "LastPosition": {
+                      "Location": {
+                         "X": "0",
+                         "Y": "0"
+                      },
+                      "Size": {
+                         "Width": "0",
+                         "Height": "0"
+                      },
+                      "X": "0",
+                      "Y": "0",
+                      "Width": "0",
+                      "Height": "0"
+                   }
+                }
+             ],
+             "Video": {
+                "X": "29",
+                "Y": "327",
+                "Width": "505",
+                "Height": "430",
+                "ZIndex": "2",
+                "VideoUri": "Videos\\cookie.avi",
+                "FallbackImage": ""
+             },
+             "Image": {
+                "X": "548",
+                "Y": "358",
+                "Width": "674",
+                "Height": "404",
+                "ZIndex": "1",
+                "Filename": "Images\\Koala.jpg"
+             }
+          }
+       },
+       {
+          "Name": "Layout 1 (1366x768)",
+          "Resolution": {
+             "Width": "1366",
+             "Height": "768",
+             "Video": {
+                "X": "231",
+                "Y": "121",
+                "Width": "927",
+                "Height": "483",
+                "ZIndex": "0",
+                "VideoUri": "Videos\\SampleVideo_1280x720_1mb.mp4",
+                "FallbackImage": ""
+             }
+          }
+       }
+    ],
+    "Fonts": []
+ }
