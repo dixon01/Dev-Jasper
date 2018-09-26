@@ -3,9 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 
-	"github.com/sanity-io/litter"
+	"github.com/gorilla/mux"
 )
 
 type Infomedia struct {
@@ -170,6 +172,7 @@ type Infomedia struct {
 }
 
 func LoadIm2(filename string) (Infomedia, error) {
+	fmt.Println("loading media file ...")
 	var im2 Infomedia
 	im2File, err := os.Open(filename)
 	defer im2File.Close()
@@ -178,13 +181,66 @@ func LoadIm2(filename string) (Infomedia, error) {
 	}
 	jsonParser := json.NewDecoder(im2File)
 	err = jsonParser.Decode(&im2)
+	fmt.Println("loading media file ...success ")
 	return im2, err
 
 }
 
+var projects []Infomedia
+
+func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	//params := mux.Vars(req)
+	fmt.Println("calling GetProjectEndPoint ...")
+	for i, item := range projects {
+		if i == 0 {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+	json.NewEncoder(w).Encode(&Infomedia{})
+}
+
+func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling GetProjectsDataEndPoint ...")
+	json.NewEncoder(w).Encode(projects)
+}
+
+func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling CreateProjectEndPoint ...")
+	// params := mux.Vars(req)
+	var project Infomedia
+	// _ = json.NewDecoder(req.Body).Decode(&project)
+	// //	project.ProjectID = params["projectid"]
+	// projects = append(projects, project)
+	json.NewEncoder(w).Encode(project)
+}
+func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling DeleteProjectEndPoint ...")
+	// params := mux.Vars(req)
+	// for index, item := range projects {
+	// 	if index == 0 {
+	// 		projects = append(projects[:index], projects[index+1:]...)
+	// 		break
+	// 	}
+	// }
+	json.NewEncoder(w).Encode(projects)
+}
+func TestEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(w, "testing server - server is running !!!")
+}
 func main() {
 	fmt.Println("Strating application")
-	im2, _ := LoadIm2(".\\simple\\main.1.json")
+	log.Print("Starting Go Server at http://localhost:8011")
+	router := mux.NewRouter()
+	im2, _ := LoadIm2(".\\simple\\main.json")
+	projects = append(projects, im2)
 	//fmt.Printf("Screens %s, version %s \n", im2.PhysicalScreens.PhysicalScreen.Height, im2.Version)
-	litter.Dump(im2)
+	//litter.Dump(im2)
+
+	router.HandleFunc("/test", TestEndPoint).Methods("GET")
+	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
+	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
+	router.HandleFunc("/project/{projectid}", CreateProjectEndPoint).Methods("POST")
+	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
+	log.Fatal(http.ListenAndServe(":8011", router))
 }
