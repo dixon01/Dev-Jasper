@@ -187,6 +187,7 @@ func LoadIm2(filename string) (Infomedia, error) {
 }
 
 var projects []Infomedia
+var projectsXML []InfomediaXML
 
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	//params := mux.Vars(req)
@@ -234,8 +235,10 @@ func main() {
 	router := mux.NewRouter()
 	im2, _ := LoadIm2(".\\simple\\main.json")
 	projects = append(projects, im2)
-	//fmt.Printf("Screens %s, version %s \n", im2.PhysicalScreens.PhysicalScreen.Height, im2.Version)
-	//litter.Dump(im2)
+	im2xml, _ := LoadXML(".\\simple\\main.im2")
+	projectsXML = append(projectsXML, im2xml)
+	fmt.Printf("Screens %s, version %s \n", im2xml.PhysicalScreens.PhysicalScreen.Height, im2xml.Version)
+	//litter.Dump(im2xml)
 
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
