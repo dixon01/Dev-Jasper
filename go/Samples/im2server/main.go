@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"log"
 	"net/http"
@@ -187,7 +188,6 @@ func LoadIm2(filename string) (Infomedia, error) {
 }
 
 var projects []Infomedia
-var projectsXML []InfomediaXML
 
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	//params := mux.Vars(req)
@@ -235,9 +235,20 @@ func main() {
 	router := mux.NewRouter()
 	im2, _ := LoadIm2(".\\simple\\main.json")
 	projects = append(projects, im2)
-	im2xml, _ := LoadXML(".\\simple\\main.im2")
-	projectsXML = append(projectsXML, im2xml)
-	fmt.Printf("Screens %s, version %s \n", im2xml.PhysicalScreens.PhysicalScreen.Height, im2xml.Version)
+	//im2xml, _ := LoadXMLTest(".\\simple\\test.im2")
+	//	projectsXML = append(projectsXML, im2xml)
+	v := new(HostProperties)
+	err := xml.Unmarshal([]byte(data), v)
+	if err != nil {
+		fmt.Printf("error: %v", err)
+		return
+	}
+	// fmt.Printf("v = %#v\n", v)
+	tags := make(map[string]string)
+	for _, tag := range v.Tags {
+		tags[tag.Key] = tag.Value
+	}
+	fmt.Printf("map = %#v\n", tags)
 	//litter.Dump(im2xml)
 
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
