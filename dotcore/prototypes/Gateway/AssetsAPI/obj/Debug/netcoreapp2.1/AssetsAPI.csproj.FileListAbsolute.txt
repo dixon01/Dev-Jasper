@@ -12,3 +12,17 @@ c:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netc
 c:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.RazorTargetAssemblyInfo.cache
 c:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.dll
 c:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.pdb
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\bin\Debug\netcoreapp2.1\AssetsAPI.deps.json
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\bin\Debug\netcoreapp2.1\AssetsAPI.runtimeconfig.json
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\bin\Debug\netcoreapp2.1\AssetsAPI.runtimeconfig.dev.json
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\bin\Debug\netcoreapp2.1\AssetsAPI.dll
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\bin\Debug\netcoreapp2.1\AssetsAPI.pdb
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.csproj.CoreCompileInputs.cache
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.RazorAssemblyInfo.cache
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.RazorAssemblyInfo.cs
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.AssemblyInfoInputs.cache
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.AssemblyInfo.cs
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.RazorTargetAssemblyInfo.cache
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.dll
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.pdb
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\AssetsAPI\obj\Debug\netcoreapp2.1\AssetsAPI.csprojAssemblyReference.cache

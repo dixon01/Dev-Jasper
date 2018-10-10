@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ocelot.Middleware;
 using Ocelot.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace LtgGateway
 {
@@ -29,6 +30,12 @@ namespace LtgGateway
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddOcelot(Configuration);
+
+             // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "ltg Gateway", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,8 +51,12 @@ namespace LtgGateway
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
-              await app.UseOcelot();
+            app.UseMvc().UseSwaggerUI(c =>
+                    {
+                        c.SwaggerEndpoint("/assets/swagger.json", "Assets Service");
+                        c.SwaggerEndpoint("/resources/swagger.json", "Resources Service");
+                    });;
+            await app.UseOcelot();
         }
     }
 }

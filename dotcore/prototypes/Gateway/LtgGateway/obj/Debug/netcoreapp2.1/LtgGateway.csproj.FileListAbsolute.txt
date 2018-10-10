@@ -12,3 +12,17 @@ C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\net
 C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.RazorTargetAssemblyInfo.cache
 C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.dll
 C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.pdb
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\bin\Debug\netcoreapp2.1\LtgGateway.deps.json
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\bin\Debug\netcoreapp2.1\LtgGateway.runtimeconfig.json
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\bin\Debug\netcoreapp2.1\LtgGateway.runtimeconfig.dev.json
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\bin\Debug\netcoreapp2.1\LtgGateway.dll
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\bin\Debug\netcoreapp2.1\LtgGateway.pdb
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.csproj.CoreCompileInputs.cache
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.RazorAssemblyInfo.cache
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.RazorAssemblyInfo.cs
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.AssemblyInfoInputs.cache
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.AssemblyInfo.cs
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.RazorTargetAssemblyInfo.cache
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.dll
+c:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.pdb
+C:\Dev\test-jasper\granite-jasper\dotcore\prototypes\Gateway\LtgGateway\obj\Debug\netcoreapp2.1\LtgGateway.csprojAssemblyReference.cache
