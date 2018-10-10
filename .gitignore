@@ -7,3 +7,19 @@ dotcore/prototypes/Gateway/LtgGateway/bin/
 dotcore/prototypes/Gateway/ResourcesAPI/obj/
 dotcore/prototypes/Gateway/ResourcesAPI/bin/
 
+dotcore/prototypes/Gateway/AssetsAPI/bin/Debug/netcoreapp2.1/AssetsAPI.dll
+dotcore/prototypes/Gateway/ResourcesAPI/obj/Debug/netcoreapp2.1/ResourcesAPI.assets.cache
+dotcore/prototypes/Gateway/AssetsAPI/bin/Debug/netcoreapp2.1/AssetsAPI.dll
+dotcore/prototypes/Gateway/AssetsAPI/bin/Debug/netcoreapp2.1/AssetsAPI.pdb
+dotcore/prototypes/Gateway/AssetsAPI/obj/Debug/netcoreapp2.1/AssetsAPI.dll
+dotcore/prototypes/Gateway/AssetsAPI/obj/Debug/netcoreapp2.1/AssetsAPI.pdb
+dotcore/prototypes/Gateway/AssetsAPI/obj/Debug/netcoreapp2.1/AssetsAPI.assets.cache
+dotcore/prototypes/Gateway/LtgGateway/bin/Debug/netcoreapp2.1/LtgGateway.dll
+dotcore/prototypes/Gateway/LtgGateway/bin/Debug/netcoreapp2.1/LtgGateway.pdb
+dotcore/prototypes/Gateway/LtgGateway/obj/Debug/netcoreapp2.1/LtgGateway.dll
+dotcore/prototypes/Gateway/LtgGateway/obj/Debug/netcoreapp2.1/LtgGateway.pdb
+dotcore/prototypes/Gateway/LtgGateway/obj/Debug/netcoreapp2.1/LtgGateway.assets.cache
+dotcore/prototypes/Gateway/ResourcesAPI/bin/Debug/netcoreapp2.1/ResourcesAPI.dll
+dotcore/prototypes/Gateway/ResourcesAPI/bin/Debug/netcoreapp2.1/ResourcesAPI.pdb
+dotcore/prototypes/Gateway/ResourcesAPI/obj/Debug/netcoreapp2.1/ResourcesAPI.dll
+dotcore/prototypes/Gateway/ResourcesAPI/obj/Debug/netcoreapp2.1/ResourcesAPI.pdb
