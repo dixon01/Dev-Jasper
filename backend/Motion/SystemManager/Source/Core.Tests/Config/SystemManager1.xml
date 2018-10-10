@@ -1,0 +1,179 @@
+﻿<?xml version="1.0"?>
+<SystemManager>
+  <Defaults>
+    <Process>
+      <WindowMode>Normal</WindowMode>
+      <LaunchDelay>PT0S</LaunchDelay>
+      <RelaunchDelay>PT10S</RelaunchDelay>
+      <Priority>Normal</Priority>
+      <KillIfRunning>true</KillIfRunning>
+
+      <CpuLimit>
+        <MaxCpuPercentage>10</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </CpuLimit>
+    </Process>
+  </Defaults>
+
+  <SplashScreens>
+    <SplashScreen Name="Boot" Enabled="true" Foreground="White" Background="#000066">
+      <ShowOn>
+        <SystemBoot />
+      </ShowOn>
+      <HideOn>
+        <ApplicationStateChange Application="Infomedia" State="Running" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="false" Serial="true" />
+        <Applications Version="true" State="true" Ram="false" Cpu="false" Uptime="false" LaunchReason="false" ExitReason="false">
+          <Hide Application="FileZilla" />
+        </Applications>
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Shutdown" Enabled="false" Foreground="Red" Background="#000066">
+      <ShowOn>
+        <SystemShutdown />
+      </ShowOn>
+      <Items>
+        <Logo Filename="custom.jpg" />
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Infomedia" Enabled="true" Foreground="White" Background="Black">
+      <ShowOn>
+        <ApplicationStateChange Application="Infomedia" State="Exiting" />
+        <ApplicationStateChange Application="Infomedia" State="AwaitingLaunch" />
+        <ApplicationStateChange Application="Infomedia" State="Launching" />
+        <ApplicationStateChange Application="Infomedia" State="Starting" />
+      </ShowOn>
+      <HideOn>
+        <ApplicationStateChange Application="Infomedia" State="Running" />
+      </HideOn>
+      <Items>
+        <System MachineName="true" Ram="true" Cpu="true" Uptime="false" Serial="false" />
+        <Applications Version="false" State="true" Ram="true" Cpu="true" Uptime="false" LaunchReason="false" ExitReason="true">
+          <Show Application="Infomedia" />
+        </Applications>
+      </Items>
+    </SplashScreen>
+    <SplashScreen Name="Button" Enabled="true" Foreground="Black" Background="#E6ECF0">
+      <ShowOn>
+        <Input Unit="*" Name="Button" Value="1" />
+      </ShowOn>
+      <HideOn>
+        <Timeout Delay="PT60S" />
+      </HideOn>
+      <Items>
+        <Logo />
+        <System MachineName="true" Ram="false" Cpu="false" Uptime="true" Serial="true" />
+        <Network Name="true" Ip="true" Gateway="false" Mac="true" Status="false" StatusFilter="Up" />
+      </Items>
+    </SplashScreen>
+  </SplashScreens>
+
+  <System>
+    <RebootAt>02:00:00</RebootAt>
+    <RebootAfter>PT23H59M</RebootAfter>
+    <KickWatchdog>true</KickWatchdog>
+    <CpuLimit Enabled="true">
+      <MaxCpuPercentage>98</MaxCpuPercentage>
+      <Actions>
+        <Reboot/>
+      </Actions>
+    </CpuLimit>
+    <RamLimit Enabled="true">
+      <FreeRamMB>150</FreeRamMB>
+      <FreeRamPercentage>5</FreeRamPercentage>
+      <Actions>
+        <Relaunch Application="Infomedia"/>
+        <Reboot/>
+      </Actions>
+    </RamLimit>
+    <DiskLimits Enabled="true">
+      <Disk Path="C:\" Enabled="true">
+        <FreeSpaceMB>5</FreeSpaceMB>
+        <Actions>
+          <Reboot/>
+        </Actions>
+      </Disk>
+      <Disk Path="D:\" Enabled="true">
+        <FreeSpaceMB>10</FreeSpaceMB>
+        <FreeSpacePercentage>5</FreeSpacePercentage>
+        <Actions>
+          <Purge Path="D:\temp\"/>
+          <Purge Path="D:\logs\archive\"/>
+          <Purge Path="D:\logs\*.icl"/>
+        </Actions>
+      </Disk>
+    </DiskLimits>
+    <PreventPopups Enabled="true">
+      <UsbDeviceFound Enabled="true" />
+      <LowDiskSpace Enabled="true" />
+      <!-- more to be added -->
+    </PreventPopups>
+  </System>
+
+  <Applications>
+    <Process Name="FileZilla" Enabled="true" UseWatchdog="false">
+      <ExecutablePath>D:\Progs\FileZillaServer\FileZilla server.exe</ExecutablePath>
+      <WorkingDirectory>D:\Progs\FileZillaServer\</WorkingDirectory>
+      <Arguments>/compat /start</Arguments>
+      <WindowMode>Minimized</WindowMode>
+      <LaunchDelay>PT5S</LaunchDelay>
+    </Process>
+    <Process Name="MediServer" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>D:\Progs\MediServer\MediServer.exe</ExecutablePath>
+      <WorkingDirectory>D:\Progs\MediServer\</WorkingDirectory>
+      <WindowMode>Hidden</WindowMode>
+      <RelaunchDelay>P100Y</RelaunchDelay> <!-- example, relaunch is "disabled" -->
+      <KillIfRunning>false</KillIfRunning>
+      <RamLimit>
+        <MaxRamMB>5</MaxRamMB>
+        <Actions>
+          <Relaunch /> <!-- optional attribute: Application="", to relaunch another application -->
+        </Actions>
+      </RamLimit>
+    </Process>
+    <Process Name="Protran" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>D:\Progs\Protran\Protran.exe</ExecutablePath>
+      <WorkingDirectory>D:\Progs\Protran\</WorkingDirectory>
+      <WindowMode>Hidden</WindowMode>
+      <LaunchWaitFor Application="MediServer" State="Running" />
+      <Priority>AboveNormal</Priority>
+      <RamLimit>
+        <MaxRamMB>100</MaxRamMB>
+        <Actions>
+          <Reboot />
+        </Actions>
+      </RamLimit>
+      <CpuLimit>
+        <MaxCpuPercentage>60</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+          <Relaunch />
+          <Reboot />
+        </Actions>
+      </CpuLimit>
+    </Process>
+    <Process Name="Infomedia" Enabled="true" UseWatchdog="true">
+      <ExecutablePath>D:\Progs\InfoMedia\Infomedia.exe</ExecutablePath>
+      <WindowMode>Maximized</WindowMode> <!-- possible option, but probably usually not used -->
+      <LaunchWaitFor Application="Protran" State="Running" />
+      <RelaunchDelay>PT2S</RelaunchDelay>
+      <RamLimit>
+        <MaxRamMB>150</MaxRamMB>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </RamLimit>
+      <CpuLimit>
+        <MaxCpuPercentage>65</MaxCpuPercentage>
+        <Actions>
+          <Relaunch />
+        </Actions>
+      </CpuLimit>
+    </Process>
+  </Applications>
+</SystemManager>

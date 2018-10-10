@@ -1,0 +1,1974 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="$(SolutionDir)Source\T4Templating\bin\Debug\Gorba.Center.Media.T4Templating.dll" #>
+
+<#@ import namespace="ICSharpCode.NRefactory.CSharp" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\NRefactory\5.3.0\Net40\ICSharpCode.NRefactory.CSharp.dll" #>
+<#@ assembly name="$(SolutionDir)..\..\3rdParty\Mono.Cecil\0.9.5.2\net40\Mono.Cecil.dll" #>
+
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#
+	var entitiesFileName = "../../../../../Common/Configuration/Source/Infomedia/Entities.xml";
+
+	var fileName = "DataViewModels.xml";
+	var templates = DataViewModelTemplatedEntities.Load(Host.ResolvePath(entitiesFileName), Host.ResolvePath(fileName));
+	var namespaces = templates.NamespaceEntityDescriptors;
+	foreach (var ns in namespaces)
+	{
+		this.currentNamespace = ns;
+		#>
+
+namespace Gorba.Center.Media.Core.DataViewModels.<#= ns.Name #>
+{
+	using Gorba.Center.Common.Wpf.Views.Components.PropertyGrid;
+	using Gorba.Center.Common.Wpf.Framework.DataViewModels;
+	using Gorba.Center.Media.Core.DataViewModels.Compatibility;
+	using Gorba.Center.Media.Core.DataViewModels.Eval;
+	using Gorba.Center.Media.Core.DataViewModels.Layout;
+	using Gorba.Center.Media.Core.DataViewModels.Presentation;
+	using Gorba.Center.Media.Core.DataViewModels.Presentation.Section;
+	using Gorba.Center.Media.Core.Models;
+	using Gorba.Center.Media.Core.Models.Eval;
+	using Gorba.Center.Media.Core.Models.Layout;
+	using Gorba.Center.Media.Core.Models.Presentation;
+	using Gorba.Center.Media.Core.Models.Presentation.Section;
+	using Gorba.Center.Media.Core.Models.Presentation.Cycle;
+	using Gorba.Center.Media.Core.Extensions;
+	using Gorba.Center.Media.Core.ViewModels;
+	using Gorba.Common.Configuration.Infomedia.Common;
+	using Gorba.Common.Configuration.Infomedia.Eval;
+	using Gorba.Common.Configuration.Infomedia.Layout;
+	using Gorba.Common.Configuration.Infomedia.Presentation;
+	using Gorba.Center.Media.Core.DataViewModels.Presentation.Cycle;
+	using Gorba.Common.Configuration.Infomedia.Presentation.Cycle;
+	using Gorba.Common.Configuration.Infomedia.Presentation.Section;
+	using Gorba.Center.Common.Wpf.Framework;
+	using Gorba.Center.Media.Core.Controllers;
+	using Microsoft.Practices.ServiceLocation;
+	using System;
+	using System.ComponentModel;
+	using System.Linq;
+
+<#
+	foreach (var dataViewModelEntity in ns.FilteredDataViewModelEntityDescriptors)
+	{
+		this.GenerateEntity(dataViewModelEntity);
+	}
+
+	if (ns.Name == "Eval")
+	{
+		#>
+		public enum EvaluationType
+		{
+			None,
+		<#
+			foreach (var dataViewModelEntity in ns.FilteredDataViewModelEntityDescriptors)
+			{
+				if (!dataViewModelEntity.Name.Contains("Base") && dataViewModelEntity.Base != "DynamicProperty")
+				{
+					#><#= dataViewModelEntity.Name #>,<#
+				}
+			}
+		#>
+		}
+		<#
+	}
+	#>
+}
+<#
+	}
+	
+	PrettyPrinter.CleanUp(this.GenerationEnvironment);
+#>
+<#+
+	private bool isEval;
+	private CSharpCodeProvider codeProvider = new CSharpCodeProvider();
+	NamespaceEntityDescriptor currentNamespace;
+
+	/// <summary>
+	/// Creates a data view model class. It is abstract if the descriptor is set to abstract
+	/// </summary>
+	/// <param name="dataViewModelDescriptor">
+	/// The descriptor of which the class should be generated.
+	/// </param> 
+	private void GenerateEntity(DataViewModelEntityDescriptor dataViewModelDescriptor)
+	{
+		var properties = dataViewModelDescriptor.PropertyDescriptors.OfType<Property>().ToList();
+		var collections = dataViewModelDescriptor.PropertyDescriptors.OfType<ListProperty>().ToList();
+		var compositeProperties = dataViewModelDescriptor.PropertyDescriptors.OfType<CompositeProperty>().ToList();
+		var abstractPartial = dataViewModelDescriptor.IsAbstract ? "abstract partial" : "partial";
+		this.isEval = false;
+		var baseClass = dataViewModelDescriptor.BaseDataViewModel.ViewModelName;
+		if (dataViewModelDescriptor.ParentObject.Name == "Eval" && dataViewModelDescriptor.Base == "Base")
+		{
+			baseClass = "EvalDataViewModelBase";
+		}
+
+		if (dataViewModelDescriptor.ParentObject.Name == "Layout" && dataViewModelDescriptor.Base == "Base")
+		{
+			baseClass = "LayoutElementDataViewModelBase";
+		}
+
+		if (dataViewModelDescriptor.ViewModelName == "SectionConfigDataViewModelBase")
+		{
+			baseClass = "ReferenceTrackedDataViewModelBase";
+		}
+
+		var cloneableInterface = string.Empty;
+		if (dataViewModelDescriptor.IsRoot && baseClass != "EvalDataViewModelBase")
+		{
+			cloneableInterface = ", ICloneable";
+		}
+#>
+
+	public <#= abstractPartial #> class <#= dataViewModelDescriptor.ViewModelName #> : <#= baseClass #><#= cloneableInterface #>
+	{
+		private readonly IMediaShell mediaShell;
+<#+
+		foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+		{
+			this.GeneratePropertyField(property);
+		}
+
+
+		if (dataViewModelDescriptor.Base == "DynamicProperty")
+		{
+			this.isEval = true;
+#>
+			private EvalDataViewModelBase evaluation;
+<#+ 
+		}
+#>
+
+		public <#= dataViewModelDescriptor.ViewModelName #>(IMediaShell mediaShell, <#= dataViewModelDescriptor.DataModelName #> dataModel = null)
+<#+
+		if (dataViewModelDescriptor.RequiresLayoutEditorConstructorParameter || baseClass == "LayoutElementDataViewModelBase")
+		{
+#>
+			: base(mediaShell, dataModel)
+<#+
+		}
+#>
+		{
+			this.mediaShell = mediaShell;
+
+<#+
+			foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+			{
+				this.GeneratePropertyInitialization(property);
+			}
+#>
+
+			if (dataModel != null)
+			{
+<#+
+				foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+				{
+					this.AssignModelValue(property, dataViewModelDescriptor);
+				}
+#>
+
+				this.DisplayText = dataModel.DisplayText;
+
+<#+ 
+				if (dataViewModelDescriptor.Base == "DynamicProperty")
+				{
+#>
+					if (dataModel.Evaluation != null)
+					{
+						this.Evaluation = this.CreateEvalDataViewModel(dataModel.Evaluation.Evaluation);
+					}
+<#+
+				}
+#>
+			}
+
+			this.Initialize(dataModel);
+		}
+
+		protected <#= dataViewModelDescriptor.ViewModelName #>(IMediaShell mediaShell, <#= dataViewModelDescriptor.ViewModelName #> dataViewModel)
+<#+
+		if (dataViewModelDescriptor.RequiresLayoutEditorConstructorParameter || baseClass == "LayoutElementDataViewModelBase")
+		{
+#>
+			: base(mediaShell, dataViewModel)
+<#+
+		}
+#>
+		{
+			this.mediaShell = mediaShell;
+<#+ 
+			foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+			{
+				//this.GeneratePropertyInitialization(property);
+				this.GenerateClone(property);
+			}
+
+			if (dataViewModelDescriptor.Base == "DynamicProperty")
+			{
+ #>
+				if (dataViewModel.Evaluation != null)
+				{
+					this.Evaluation = (EvalDataViewModelBase)dataViewModel.Evaluation.Clone();
+				}
+<#+ 
+			}
+#>
+			this.Initialize(dataViewModel);
+		}
+
+		public override bool IsDirty
+		{
+			get
+			{
+				bool isDirtyNotGenerated = false;
+				this.IsDirtyNotGenerated(ref isDirtyNotGenerated);
+				return base.IsDirty || isDirtyNotGenerated 
+<#+
+		foreach (var property in properties)
+		{
+			#>
+							|| this.<#= property.Name #>.IsDirty
+<#+
+		}
+
+		foreach (var collection in collections)
+		{
+			#>
+							|| this.<#= collection.Name #>.IsDirty
+<#+
+		}
+
+		foreach (var composite in compositeProperties)
+		{
+			#>
+			|| (this.<#= composite.Name #> != null && this.<#= composite.Name #>.IsDirty)
+			<#+ 
+		} 
+#>
+						;
+			}
+		}
+				
+		<#+
+		foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+		{
+			this.GenerateProperty(property);
+			var compositeProperty = property as CompositeProperty;
+			if (compositeProperty != null && compositeProperty.Type == "DynamicProperty")
+			{
+				this.isEval = true;
+			}
+		}
+
+		if (dataViewModelDescriptor.Base == "DynamicProperty")
+		{
+#>
+			public EvalDataViewModelBase Evaluation
+			{
+				get
+				{
+					return this.evaluation;
+				}
+
+				set
+				{
+					this.UnregisterIsDirtyPropertyChanged(this.evaluation);
+					this.SetProperty(ref this.evaluation, value, () => this.Evaluation);
+					this.RegisterIsDirtyPropertyChanged(value);
+				}
+			}
+<#+
+		}
+				
+		var variableName = dataViewModelDescriptor.Name.ToLower();
+		if (!this.codeProvider.IsValidIdentifier(variableName))
+		{
+			variableName = "@" + variableName;
+		}
+
+		string addNew = "";
+		if ((dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.Base == "Base" && dataViewModelDescriptor.ParentObject.Name == "Eval")
+			|| (!dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.Base != "DynamicProperty"))
+		{
+			addNew = "new";
+		}
+		else if (dataViewModelDescriptor.EntityName == "GraphicalElementBase" || dataViewModelDescriptor.EntityName == "AudioElementBase")
+		{
+			addNew = "override";
+		}
+
+		
+		string elementBase = dataViewModelDescriptor.EntityName;
+		string dataModelName = dataViewModelDescriptor.DataModelName;
+		if (dataViewModelDescriptor.ParentObject.Name == "Layout" && dataViewModelDescriptor.EntityName != "Font")
+		{
+			elementBase = "ElementBase";
+			dataModelName = "LayoutElementDataModelBase";
+		}
+		#>
+
+		public <#= addNew #> <#= elementBase #> Export(object parameters = null)
+		{
+			var <#= variableName #> = (<#= dataViewModelDescriptor.EntityName #>)this.CreateExportObject();
+			this.DoExport(<#= variableName #>, parameters);
+			return <#= variableName #>;
+		}
+	   
+		public <#= addNew #> <#= dataModelName #> ToDataModel()
+		{
+			var <#= variableName #> = (<#= dataViewModelDescriptor.DataModelName #>)this.CreateDataModelObject();
+			this.ConvertToDataModel(<#= variableName #>);
+			return <#= variableName #>;
+		}
+
+		public override void ClearDirty()
+		{<#+ 
+		foreach (var dataViewModelPropertyDescriptor in dataViewModelDescriptor.PropertyDescriptors)
+		{#>
+
+			if (this.<#= dataViewModelPropertyDescriptor.Name #> != null)
+			{
+				this.<#= dataViewModelPropertyDescriptor.Name #>.ClearDirty();
+			}
+<#+
+		}
+#>
+
+			base.ClearDirty();
+		}
+
+<#+ 
+		if (dataViewModelDescriptor.IsAbstract && dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.ParentObject.Name != "Eval")
+		{
+			#>
+			protected abstract object CreateExportObject();
+
+			protected abstract object CreateDataModelObject();
+<#+ 
+		}
+		else if ((!dataViewModelDescriptor.IsAbstract && dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.ParentObject.Name != "Eval") || dataViewModelDescriptor.Base == "DynamicProperty")
+		{
+		#>
+		protected object CreateExportObject()
+		{
+			return new <#= dataViewModelDescriptor.EntityName #>();
+		}
+
+		protected object CreateDataModelObject()
+		{
+			return new <#= dataViewModelDescriptor.DataModelName #>();
+		}
+<#+    
+		}
+		else if (!dataViewModelDescriptor.IsAbstract)
+		{
+		#>
+		protected override object CreateExportObject()
+		{
+			return new <#= dataViewModelDescriptor.EntityName #>();
+		}
+
+		protected override object CreateDataModelObject()
+		{
+			return new <#= dataViewModelDescriptor.DataModelName #>();
+		}
+<#+
+		}
+		#>
+		protected override void DoExport(object exportModel, object exportParameters)
+		{
+			var model = (<#= dataViewModelDescriptor.EntityName #>)exportModel;
+<#+ if (!dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.Base != "DynamicProperty")
+		{ #>
+			base.DoExport(exportModel, exportParameters);
+				
+<#+ 
+		}
+		foreach (var dataViewModelPropertyDescriptor in dataViewModelDescriptor.PropertyDescriptors)
+		{
+			this.GeneratePropertyConversion(dataViewModelPropertyDescriptor, ConversionDirection.DataViewModelToEntity, dataViewModelDescriptor);
+		}
+
+		if (dataViewModelDescriptor.Base == "DynamicProperty")
+		{
+#>
+			model.Evaluation = this.Evaluation.Export(exportParameters);
+<#+ 
+		}
+#>
+			this.ExportNotGeneratedValues(model, exportParameters);
+		}
+
+		protected override void ConvertToDataModel(object dataModel)
+		{
+			var model = (<#= dataViewModelDescriptor.DataModelName #>)dataModel;
+<#+ if (!dataViewModelDescriptor.IsRoot && dataViewModelDescriptor.Base != "DynamicProperty")
+			{ 
+		 #>
+			base.ConvertToDataModel(model);
+<#+ 
+		}
+		else if (dataViewModelDescriptor.IsRoot)
+		{
+#>
+		   model.DisplayText = this.DisplayText;
+<#+ 
+		}
+
+		foreach (var dataViewModelPropertyDescriptor in dataViewModelDescriptor.PropertyDescriptors)
+		{
+			this.GeneratePropertyConversion(dataViewModelPropertyDescriptor, ConversionDirection.DataViewModelToDataModel, dataViewModelDescriptor);
+		}
+		 
+		if (dataViewModelDescriptor.Base == "DynamicProperty")
+		{
+#>
+			model.Evaluation = new DynamicPropertyDataModel(this.Evaluation.ToDataModel());
+<#+ 
+		}
+#>
+			this.ConvertNotGeneratedToDataModel(ref model);
+		}
+
+<#+ 
+		if (dataViewModelDescriptor.IsAbstract && dataViewModelDescriptor.IsRoot
+			&& dataViewModelDescriptor.ParentObject.Name != "Eval"
+			&& dataViewModelDescriptor.ViewModelName != "GraphicalElementDataViewModelBase"
+			&& dataViewModelDescriptor.ViewModelName != "AudioElementDataViewModelBase")
+		{
+#>
+			public abstract object Clone();
+<#+
+		}
+		else if (!dataViewModelDescriptor.IsAbstract)
+		{
+			var overrideString = string.Empty;
+			if (dataViewModelDescriptor.Base != "DynamicProperty"
+				&& (!dataViewModelDescriptor.IsRoot || dataViewModelDescriptor.ParentObject.Name == "Eval"))
+			{
+				overrideString = "override";
+			}
+#>
+			public <#= overrideString #> object Clone()
+			{
+				var clone = new <#= dataViewModelDescriptor.ViewModelName #>(this.mediaShell, this);
+				clone.ClonedFrom = this.GetHashCode();
+				return clone;
+			}
+<#+ 
+		}
+#>
+			
+		public override bool EqualsViewModel(object obj)
+		{
+			bool result = base.EqualsViewModel(obj);
+
+			if (obj is <#= dataViewModelDescriptor.ViewModelName #>)
+			{
+				var that = (<#= dataViewModelDescriptor.ViewModelName #>)obj;
+
+				if (this != that)
+				{
+					if (this == null || that == null)
+					{
+						result = false;
+					}
+					else
+					{
+<#+
+						foreach (var property in dataViewModelDescriptor.PropertyDescriptors)
+						{
+							this.GeneratePropertyComparison(property);
+						}
+#>
+					}
+				}
+			}
+			else
+			{
+				result = false;
+			}
+
+			return result;
+		}
+
+		partial void Initialize(<#= dataViewModelDescriptor.DataModelName #> dataModel = null);
+		partial void Initialize(<#= dataViewModelDescriptor.ViewModelName #> dataViewModel);
+		partial void ExportNotGeneratedValues(<#= dataViewModelDescriptor.EntityName #> model, object exportParameters);
+		partial void ConvertNotGeneratedToDataModel(ref <#= dataViewModelDescriptor.DataModelName #> dataModel);
+		partial void IsDirtyNotGenerated(ref bool isDirtyNotGenerated);
+
+			private EvalDataViewModelBase CreateEvalDataViewModel(EvalDataModelBase dataModel)
+			{
+					if (dataModel == null)
+					{
+						return null;
+					}
+
+					var typeName = dataModel.GetType().Name.Replace("DataModel", "DataViewModel");
+					var assembly = this.GetType().Assembly;
+					var type = assembly.GetTypes().SingleOrDefault(t => t.Name == typeName);
+					if (type == null)
+					{
+						throw new Exception(
+							string.Format("Type '{0}' for data model '{1} not found", typeName, dataModel));
+					}
+
+					return (EvalDataViewModelBase)Activator.CreateInstance(type, mediaShell, dataModel);
+			}
+		
+<#+ 
+			this.isEval = false;
+		#>
+	}
+	
+<#+
+
+	}
+
+
+
+	/// <summary>
+	/// Generates the code to generate a property comparison
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property for which a comparison must be generated.
+	/// </param>
+	private void GeneratePropertyComparison(PropertyBase propertyDescriptor)
+	{
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+	   #>
+			result = result && this.<#=listProperty.Name #>.Count == that.<#=listProperty.Name #>.Count;
+			if (result)
+			{
+				foreach (var item in this.<#=listProperty.Name #>)
+				{
+					var found = false;
+					
+					foreach (var otherItem in that.<#=listProperty.Name #>)
+					{
+						if (item != null && item.EqualsViewModel(otherItem))
+						{
+							found = true;
+							break;
+						}
+					}
+
+					result = result && found;
+				}
+			}
+<#+ 
+			return;
+		}
+
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			if (referenceProperty.Name == "Reference")
+			{
+#>
+if (this.<#=referenceProperty.Name #> != null)
+			{
+			result = result && this.<#=referenceProperty.Name #>.EqualsViewModel(that.<#=referenceProperty.Name #>);
+			}
+<#+ 
+			}
+			else
+			{
+			#>
+			result = result && this.<#=referenceProperty.Name #>.EqualsViewModel(that.<#=referenceProperty.Name #>);
+			<#+
+			}
+			return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+#>
+			if (this.<#=propertyDescriptor.Name #> != null)
+			{
+				result = result && this.<#=propertyDescriptor.Name #>.EqualsViewModel(that.<#=propertyDescriptor.Name #>);
+			}
+<#+ 
+			return;
+		}
+
+		var typedProperty = propertyDescriptor as Property;
+		if (typedProperty != null)
+		{
+			
+#>
+			
+				result = result && this.<#=propertyDescriptor.Name #>.EqualsValue(that.<#=propertyDescriptor.Name #>);
+			
+<#+ 
+			
+			return;
+		}
+	}
+
+	/// <summary>
+	/// Generates the code to declare a property field.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property for which a field must be declared.
+	/// </param>
+	private void GeneratePropertyField(PropertyBase propertyDescriptor)
+	{
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.GenerateCompositePropertyField(compositeProperty);
+			return;
+		}
+
+		var property = propertyDescriptor as Property;
+		if (property == null)
+		{
+			return;
+		}
+		
+		var prefix = string.Empty;
+		if (property.Animated)
+		{
+			prefix = "AnimatedDynamic";
+		}
+		else if (property.Dynamic)
+		{
+			prefix = "Dynamic";
+		}
+
+		var propertyType = property.Type;
+		if (propertyType == "Time")
+		{
+			propertyType = "TimeSpan";
+		}
+		#>
+		
+		
+		private <#= prefix #>DataValue<<#= propertyType #>> <#= propertyDescriptor.FieldName #>;
+<#+
+	}
+
+
+	/// <summary>
+	/// Generates the code to declare a composite property field.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property for which a field must be declared.
+	/// </param>
+	private void GenerateCompositePropertyField(CompositeProperty propertyDescriptor)
+	{
+
+		if (propertyDescriptor.Type == "DynamicProperty")
+		{
+			var fieldName = propertyDescriptor.FieldName;
+			if (!this.codeProvider.IsValidIdentifier(fieldName))
+			{
+				fieldName = "@" + fieldName;
+			}
+	#>
+		private EvalDataViewModelBase <#= fieldName #>;
+<#+
+		}
+		else
+		{
+	#>
+		private <#= propertyDescriptor.TypeDataViewModel.ViewModelName #> <#= propertyDescriptor.FieldName #>;
+
+<#+
+		}
+	}
+
+	/// <summary>
+	/// Entry point to generate a property.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to generate.
+	/// </param>
+	private void GenerateProperty(PropertyBase propertyDescriptor)
+	{
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			this.GenerateReferenceProperty(referenceProperty);
+			return;
+		}
+
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+			this.GenerateListProperty(listProperty);
+			return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.GenerateCompositeProperty(compositeProperty);
+			return;
+		}
+
+		var typedProperty = propertyDescriptor as Property;
+		if (typedProperty != null)
+		{
+			this.GenerateDefaultProperty(typedProperty);
+			return;
+		}
+
+		throw new ArgumentOutOfRangeException("propertyDescriptor", "Can't handle property type");
+	}
+
+	/// <summary>
+	/// Entry point to generate the initialization of a property.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to initialize.
+	/// </param>
+	private void GeneratePropertyInitialization(PropertyBase propertyDescriptor)
+	{
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			this.GenerateReferencePropertyInitialization(referenceProperty);
+			return;
+		}
+
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+			this.GenerateListPropertyInitialization(listProperty);
+			return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.GenerateCompositePropertyInitialization(compositeProperty);
+			return;
+		}
+
+		var typedProperty = propertyDescriptor as Property;
+		if (typedProperty != null)
+		{
+			this.GenerateDefaultPropertyInitialization(typedProperty);
+			return;
+		}
+
+		throw new ArgumentOutOfRangeException("propertyDescriptor", "Can't handle property type");
+	}
+
+	/// <summary>
+	/// Generates the code to initialize a default property in the constructor.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to initialize.
+	/// </param>
+	private void GenerateDefaultPropertyInitialization(Property propertyDescriptor)
+	{
+		var defaultValue = "string.Empty";
+		if (string.IsNullOrEmpty(propertyDescriptor.DefaultValue))
+		{
+			var valueTypes = new[] { "int", "bool" };
+			if (valueTypes.Contains(propertyDescriptor.Type))
+			{
+				defaultValue = "default(" + propertyDescriptor.Type + ")";
+			}
+			else if (propertyDescriptor.Type == "Time")
+			{
+				defaultValue = "TimeSpan.Zero";
+			}
+			else if (propertyDescriptor.Type != "string")
+			{
+				defaultValue = "new " + propertyDescriptor.Type + "()";
+			}
+		}
+		else
+		{
+			defaultValue = propertyDescriptor.GetEscapedDefaultValue();
+		}
+
+		var prefix = string.Empty;
+		if (propertyDescriptor.Animated)
+		{
+			prefix = "AnimatedDynamic";
+		}
+		else if (propertyDescriptor.Dynamic)
+		{
+			prefix = "Dynamic";
+		}
+
+		 var propertyType = propertyDescriptor.Type;
+		if (propertyType == "Time")
+		{
+			propertyType = "TimeSpan";
+		}
+	 
+		#>
+			this.<#= propertyDescriptor.Name #> = new <#= prefix #>DataValue<<#= propertyType #>>(<#= defaultValue #>);
+			this.<#= propertyDescriptor.Name #>.PropertyChanged += this.<#= propertyDescriptor.Name #>Changed;
+<#+
+	}
+
+	private void GenerateReferencePropertyInitialization(ReferenceProperty propertyDescriptor)
+	{
+		#>
+		// <#= propertyDescriptor.Name #>
+<#+
+	}
+
+	/// <summary>
+	/// Generates the code to initialize a composite property in the constructor.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to initialize.
+	/// </param>
+	private void GenerateCompositePropertyInitialization(CompositeProperty propertyDescriptor)
+	{
+		if (propertyDescriptor.TypeDataViewModel.ViewModelName == "EvalDataViewModelBase")
+		{
+			return;
+		}
+
+		if (propertyDescriptor.Type == "DynamicProperty")
+		{
+		#>
+			
+<#+
+		}
+		else
+		{
+	#>
+			this.<#= propertyDescriptor.FieldName #> = new <#= propertyDescriptor.TypeDataViewModel.ViewModelName #>(this.mediaShell);
+<#+
+		}
+	}
+
+	/// <summary>
+	/// Generates the code to initialize a list property in the constructor.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to initialize.
+	/// </param>
+	private void GenerateListPropertyInitialization(ListProperty propertyDescriptor)
+	{
+	#>
+		this.<#= propertyDescriptor.Name #> = new ExtendedObservableCollection<<#= propertyDescriptor.ElementTypeDataViewModel.ViewModelName #>>();
+<#+
+	}
+
+	/// <summary>
+	/// Generates the code for a normal property.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to generate.
+	/// </param>
+	private void GenerateDefaultProperty(Property propertyDescriptor)
+	{
+		var prefix = string.Empty;
+		if (propertyDescriptor.Animated)
+		{
+			prefix = "AnimatedDynamic";
+		}
+		else if (propertyDescriptor.Dynamic)
+		{
+			prefix = "Dynamic";
+		}
+
+		if (!propertyDescriptor.IsHidden)
+		{ #>
+
+		[UserVisibleProperty("<#= propertyDescriptor.UserVisibleGroupName #>"<#=
+	string.IsNullOrEmpty(propertyDescriptor.UserVisibleFieldName)
+		? string.Empty
+		: ", FieldName = \"" + propertyDescriptor.UserVisibleFieldName + "\"" #>
+		<#= (string.IsNullOrEmpty(propertyDescriptor.SupportedScreenTypes)
+			 || propertyDescriptor.SupportedScreenTypes == "TFT,LED")
+			 ? string.Empty
+			 : ", Filter = \"" + propertyDescriptor.SupportedScreenTypes + "\"" #>
+		, OrderIndex = <#= propertyDescriptor.UserVisibleOrderIndex	#>, GroupOrderIndex = <#= propertyDescriptor.UserVisibleGroupOrderIndex #>)]
+<#+
+		}
+		else
+		{
+			this.WriteLine("");
+		}
+
+		  var propertyType = propertyDescriptor.Type;
+		if (propertyType == "Time")
+		{
+			propertyType = "TimeSpan";
+		}
+#>
+		public <#= prefix #>DataValue<<#= propertyType #>> <#= propertyDescriptor.Name #>
+		{
+			get
+			{
+				return this.<#= propertyDescriptor.FieldName #>;
+			}
+
+			set
+			{
+				this.UnregisterIsDirtyPropertyChanged(this.<#= propertyDescriptor.FieldName #>);
+				if (this.<#= propertyDescriptor.FieldName #> != null)
+				{
+					 this.<#= propertyDescriptor.FieldName #>.PropertyChanged -= this.<#= propertyDescriptor.Name #>Changed;
+				}
+
+				this.SetProperty(ref this.<#= propertyDescriptor.FieldName #>, value, () => this.<#= propertyDescriptor.Name #>);
+				if (value != null)
+				{
+					 this.<#= propertyDescriptor.FieldName #>.PropertyChanged += this.<#= propertyDescriptor.Name #>Changed;
+				}
+
+				this.RegisterIsDirtyPropertyChanged(value);
+			}
+		}
+
+		private void <#= propertyDescriptor.Name #>Changed(object sender, PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == "IsDirty")
+			{
+				return;
+			}
+
+			this.RaisePropertyChanged(() => this.<#= propertyDescriptor.Name #>);
+		}
+<#+
+	}
+	/// <summary>
+	/// Generates the code for a reference property.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to generate.
+	/// </param>
+	private void GenerateReferenceProperty(ReferenceProperty propertyDescriptor)
+	{
+	#>
+		private string  <#= propertyDescriptor.FieldName #>ReferenceName;
+
+<#+
+		if (!propertyDescriptor.IsHidden)
+		{
+ #>
+			 
+
+		private <#= propertyDescriptor.ReferencedType.ViewModelName #> <#= propertyDescriptor.FieldName #>Reference;
+
+					
+		[UserVisibleProperty("<#= propertyDescriptor.UserVisibleGroupName #>"<#=
+	string.IsNullOrEmpty(propertyDescriptor.UserVisibleFieldName)
+		? string.Empty
+		: ", FieldName = \"" + propertyDescriptor.UserVisibleFieldName + "\"" #>
+		, OrderIndex = <#= propertyDescriptor.UserVisibleOrderIndex#>, GroupOrderIndex = <#= propertyDescriptor.UserVisibleGroupOrderIndex #>)]
+		public <#= propertyDescriptor.ReferencedType.ViewModelName #> <#= propertyDescriptor.Name #>
+		{
+			get
+			{
+
+				if (this.<#= propertyDescriptor.FieldName #>Reference == null)
+				{
+					 this.<#= propertyDescriptor.FieldName #>Reference = this.FindReference();
+					 if (this.<#= propertyDescriptor.FieldName #>Reference != null)
+					 {
+						 this.<#= propertyDescriptor.FieldName #>Reference.PropertyChanged += this.<#= propertyDescriptor.Name #>Changed;
+					 }
+				}
+
+				return this.<#= propertyDescriptor.FieldName #>Reference;
+			}
+			
+			<#+
+			if (propertyDescriptor.ReferencedType.ViewModelName == "LayoutConfigDataViewModelBase")
+			{
+			#>
+			set
+			{
+				var parentCycle = this.SearchParentCycle();
+				
+				if (this.Layout != null)
+				{
+					this.Layout.PropertyChanged -= this.LayoutChanged;
+					
+					var oldLayout = this.Layout as LayoutConfigDataViewModel;
+					if (oldLayout != null && parentCycle != null)
+					{
+						var reference = oldLayout.GetCycleSectionReference(this, parentCycle);
+						if (reference != null)
+						{
+							oldLayout.CycleSectionReferences.Remove(reference);
+						}
+					}
+				}
+
+				this.SetProperty(ref this.layoutReference, value, () => this.Layout);
+				if (value != null)
+				{
+					this.LayoutName = value.Name.Value;
+					this.Layout.PropertyChanged += this.LayoutChanged;
+
+					var newLayout = this.Layout as LayoutConfigDataViewModel;
+					if (newLayout != null && parentCycle != null)
+					{
+						var reference = new LayoutCycleSectionRefDataViewModel(parentCycle, this);
+						newLayout.CycleSectionReferences.Add(reference);
+					}
+				}
+			}
+			<#+
+			}
+			else
+			{
+			#>
+			set
+			{
+			  if (this.<#= propertyDescriptor.Name #> != null)
+				{
+					this.<#= propertyDescriptor.Name #>.PropertyChanged -= this.<#= propertyDescriptor.Name #>Changed;
+				}
+
+				this.SetProperty(ref this.<#= propertyDescriptor.FieldName #>Reference, value, () => this.<#= propertyDescriptor.Name #>);
+				if (value != null)
+				{
+					this.<#= propertyDescriptor.Name #>Name = value.Name.Value;
+					this.<#= propertyDescriptor.Name #>.PropertyChanged += this.<#= propertyDescriptor.Name #>Changed;
+				}
+			}
+			<#+
+			}
+			#>
+			
+		}
+
+<#+
+		}
+		else
+		{
+			this.WriteLine("");
+		}
+#>
+		public string <#= propertyDescriptor.Name #>Name
+		{
+			get
+			{
+				return this.<#= propertyDescriptor.FieldName #>ReferenceName;
+			}
+
+			private set
+			{
+				this.SetProperty(ref this.<#= propertyDescriptor.FieldName #>ReferenceName, value, () => this.<#= propertyDescriptor.Name #>);
+			}
+		}
+
+		private void <#= propertyDescriptor.Name #>Changed(object sender, PropertyChangedEventArgs e)
+		{
+			if (this.<#= propertyDescriptor.Name #> != null)
+			{
+				this.<#= propertyDescriptor.Name #>Name = this.<#= propertyDescriptor.Name #>.Name.Value;
+			}
+
+			this.RaisePropertyChanged(() => this.<#= propertyDescriptor.Name #>);
+		}
+<#+
+	}
+
+	/// <summary>
+	/// Generates the code for a composite property.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to generate.
+	/// </param>
+	private void GenerateCompositeProperty(CompositeProperty propertyDescriptor)
+	{
+	#>
+
+<#+
+		if (!propertyDescriptor.IsHidden)
+		{ #>
+
+		[UserVisibleProperty("<#= propertyDescriptor.UserVisibleGroupName #>"<#=
+	string.IsNullOrEmpty(propertyDescriptor.UserVisibleFieldName)
+		? string.Empty
+		: ", FieldName = \"" + propertyDescriptor.UserVisibleFieldName + "\"" #>
+		, OrderIndex = <#= propertyDescriptor.UserVisibleOrderIndex #>, GroupOrderIndex = <#= propertyDescriptor.UserVisibleGroupOrderIndex #>)]
+<#+
+		}
+		else
+		{
+			this.WriteLine("");
+		}
+
+		// Composite properties of Eval namespace.
+		if (propertyDescriptor.Type == "DynamicProperty")
+		{
+			
+			var fieldName = propertyDescriptor.FieldName;
+			
+			if (!this.codeProvider.IsValidIdentifier(fieldName))
+			{
+				fieldName = "@" + fieldName;
+			}
+#>
+
+        public EvalDataViewModelBase <#= propertyDescriptor.Name #>
+        {
+            get
+            {
+                return this.<#= fieldName #>;
+            }
+
+            set
+            {
+                this.UnregisterIsDirtyPropertyChanged(this.<#= fieldName #>);
+                this.SetProperty(ref this.<#= fieldName #>, value, () => this.<#= propertyDescriptor.Name #>);
+                this.RegisterIsDirtyPropertyChanged(value);
+            }
+        }
+
+        private void <#= propertyDescriptor.Name #>Changed(object sender, PropertyChangedEventArgs e)
+        {
+            this.RaisePropertyChanged(() => this.<#= propertyDescriptor.Name #>);
+        }
+
+        <#+
+        }
+        else
+        {
+            #>
+        public <#= propertyDescriptor.TypeDataViewModel.ViewModelName #> <#= propertyDescriptor.Name #>
+        {
+            get
+            {
+                return this.<#= propertyDescriptor.FieldName #>;
+            }
+
+            set
+            {
+
+				if (this.<#= propertyDescriptor.FieldName #> != null)
+		                {
+		                    this.<#= propertyDescriptor.FieldName #>.PropertyChanged -= this.<#= propertyDescriptor.Name #>Changed;
+		                }
+
+		                this.SetProperty(ref this.<#= propertyDescriptor.FieldName #>, value, () => this.<#= propertyDescriptor.Name #>);
+		                if (value != null)
+		                {
+		                    this.<#= propertyDescriptor.FieldName #>.PropertyChanged += this.<#= propertyDescriptor.Name #>Changed;
+		                }
+            }
+        }
+
+		private void <#= propertyDescriptor.Name #>Changed(object sender, PropertyChangedEventArgs e)
+		{
+			this.<#= propertyDescriptor.Name #>ChangedPartial(sender, e);
+		}
+
+		partial void <#= propertyDescriptor.Name #>ChangedPartial(object sender, PropertyChangedEventArgs e);
+
+<#+
+        this.GenerateFlattenCompositeProperties(propertyDescriptor);
+        }
+
+    }
+
+    /// <summary>
+    /// Generates the code for a list property.
+    /// </summary>
+    /// <param name="propertyDescriptor">
+    /// The property to generate.
+    /// </param>
+    private void GenerateListProperty(ListProperty propertyDescriptor)
+    {
+    #>
+
+    private ExtendedObservableCollection<<#= propertyDescriptor.ElementTypeDataViewModel.ViewModelName #>> <#= propertyDescriptor.FieldName #>;
+
+<#+
+		if (!propertyDescriptor.IsHidden)
+		{ #>
+
+		[UserVisibleProperty("<#= propertyDescriptor.UserVisibleGroupName #>"<#=
+	string.IsNullOrEmpty(propertyDescriptor.UserVisibleFieldName)
+		? string.Empty
+		: ", FieldName = \"" + propertyDescriptor.UserVisibleFieldName + "\"" #>
+		, OrderIndex = <#= propertyDescriptor.UserVisibleOrderIndex#>, GroupOrderIndex = <#= propertyDescriptor.UserVisibleGroupOrderIndex #>)]
+<#+
+		}
+		else
+		{
+			this.WriteLine("");
+		}
+#>
+		public ExtendedObservableCollection<<#= propertyDescriptor.ElementTypeDataViewModel.ViewModelName #>> <#= propertyDescriptor.Name #>
+		{
+			get
+			{
+				return this.<#= propertyDescriptor.FieldName #>;
+			}
+		 
+			set
+			{
+				this.UnregisterIsDirtyPropertyChanged(this.<#= propertyDescriptor.FieldName #>);
+				this.SetProperty(ref this.<#= propertyDescriptor.FieldName #>, value, () => this.<#= propertyDescriptor.Name #>);
+				this.RegisterIsDirtyPropertyChanged(value);
+			}
+		}
+<#+
+	}
+
+	/// <summary>
+	/// Generates the conversion code for a default property to a data model object or a model object depending
+	/// on the direction.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The property to convert.
+	/// </param>
+	/// <param name="direction">
+	/// The direction (DataViewModelToDataModel / DataViewModelToEntity)
+	/// </param>
+	private void GeneratePropertyConversion(PropertyBase propertyDescriptor, ConversionDirection direction,  DataViewModelEntityDescriptor dataViewModelDescriptor)
+	{
+		var referenceProperty = propertyDescriptor as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+		   this.GeneratePropertyConversion(referenceProperty, direction);
+		   return;
+		}
+
+		var compositeProperty = propertyDescriptor as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			this.GeneratePropertyConversion(compositeProperty, direction, dataViewModelDescriptor);
+			return;
+		}
+
+		var listProperty = propertyDescriptor as ListProperty;
+		if (listProperty != null)
+		{
+			this.GeneratePropertyConversion(listProperty, direction);
+			return;
+		}
+
+		var defaultProperty = propertyDescriptor as Property;
+		if (defaultProperty != null)
+		{
+			this.GenerateDynamicPropertyConversion(defaultProperty, direction);
+			return;
+		}
+#>
+		model.<#= propertyDescriptor.Name #> = this.<#= propertyDescriptor.Name #>.Value;
+<#+ 
+	}
+
+	private void GenerateDynamicPropertyConversion(Property dynamicProperty, ConversionDirection direction)
+	{
+		switch(direction)
+		{
+			case ConversionDirection.DataViewModelToEntity:
+				if (dynamicProperty.Animated)
+				{
+#>
+					if (this.<#= dynamicProperty.Name #>.Formula != null)
+					{
+						var formulaController =
+						ServiceLocator.Current.GetInstance<IMediaApplicationController>().ShellController.FormulaController;
+						try
+						{
+							
+
+						var formulaString = ((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).HumanReadable();
+						if (!formulaString.StartsWith("="))
+						{
+							formulaString = formulaString.Insert(0, "=");
+						}   
+
+						formulaController.ParseFormula(formulaString);
+						var <#= dynamicProperty.FieldName #>Eval = <#= dynamicProperty.Name #>.Formula as CodeConversionEvalDataViewModel;
+							if (<#= dynamicProperty.FieldName #>Eval != null)
+							{
+								if (this.CsvMappingCompatibilityRequired(exportParameters))
+								{
+									var csvMapping = new CsvMappingEval
+										{
+												FileName = "codeconversion.csv",
+												DefaultValue =
+													new DynamicProperty
+														{
+															Evaluation =
+																new GenericEval
+																	{
+																		Column = 0,
+																		Language = 0,
+																		Table = 10,
+																		Row = 0
+																	}
+														}
+											};
+									var match0 = new MatchDynamicProperty
+									{
+										Column = 0,
+										Evaluation = new GenericEval
+										{
+											Column = 1,
+											Language = 0,
+											Table = 10,
+											Row = 0
+										}
+									};
+									var match1 = new MatchDynamicProperty
+									{
+										Column = 1,
+										Evaluation =
+											new GenericEval
+											{
+												Column = 0,
+												Language = 0,
+												Table = 10,
+												Row = 0
+											}
+									};
+
+									csvMapping.Matches.Add(match0);
+									csvMapping.Matches.Add(match1);
+									csvMapping.OutputFormat = <#= dynamicProperty.FieldName #>Eval.UseImage.Value ? "{2}" : "{3}";
+									model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicProperty(csvMapping);
+									
+								}
+								else
+								{
+									model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicProperty(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).Export(exportParameters));
+								}
+
+							}
+							else
+							{
+								model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicProperty(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).Export(exportParameters));
+							}
+						}
+						catch()
+						{
+							model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+						}
+					}
+					else
+					{
+						model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+					}
+
+					if (this.<#= dynamicProperty.Name #>.Animation != null && this.<#= dynamicProperty.Name #>.Formula != null)
+					{
+						if (model.<#= dynamicProperty.Name #>Property == null)
+						{
+							model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicProperty();
+						}
+						
+						model.<#= dynamicProperty.Name #>Property.Animation = new PropertyChangeAnimation
+								{ 
+									Duration = ((AnimationDataViewModel)this.<#= dynamicProperty.Name #>.Animation).Duration.Value,
+									Type = ((AnimationDataViewModel)this.<#= dynamicProperty.Name #>.Animation).Type.Value
+								};
+					}
+<#+
+				}
+				else if (dynamicProperty.Dynamic)
+				{
+#>
+					if (this.<#= dynamicProperty.Name #>.Formula != null)
+					{
+					   var formulaController =
+					ServiceLocator.Current.GetInstance<IMediaApplicationController>().ShellController.FormulaController;
+					try
+					{
+					var formulaString = ((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).HumanReadable();
+					if (!formulaString.StartsWith("="))
+					{
+						formulaString = formulaString.Insert(0, "=");
+					}
+
+					formulaController.ParseFormula(formulaString);
+
+					var <#= dynamicProperty.FieldName #>Eval = <#= dynamicProperty.Name #>.Formula as CodeConversionEvalDataViewModel;
+							if (<#= dynamicProperty.FieldName #>Eval != null)
+							{
+								if (this.CsvMappingCompatibilityRequired(exportParameters))
+								{
+									var csvMapping = new CsvMappingEval
+										{
+												FileName = "codeconversion.csv",
+												DefaultValue =
+													new DynamicProperty
+														{
+															Evaluation =
+																new GenericEval
+																	{
+																		Column = 0,
+																		Language = 0,
+																		Table = 10,
+																		Row = 0
+																	}
+														}
+											};
+									var match0 = new MatchDynamicProperty
+									{
+										Column = 0,
+										Evaluation = new GenericEval
+										{
+											Column = 1,
+											Language = 0,
+											Table = 10,
+											Row = 0
+										}
+									};
+									var match1 = new MatchDynamicProperty
+									{
+										Column = 1,
+										Evaluation =
+											new GenericEval
+											{
+												Column = 0,
+												Language = 0,
+												Table = 10,
+												Row = 0
+											}
+									};
+
+									csvMapping.Matches.Add(match0);
+									csvMapping.Matches.Add(match1);
+									csvMapping.OutputFormat = <#= dynamicProperty.FieldName #>Eval.UseImage.Value ? "{2}" : "{3}";
+									model.<#= dynamicProperty.Name #>Property = new DynamicProperty(csvMapping);
+									
+								}
+								else
+								{
+									model.<#= dynamicProperty.Name #>Property = new DynamicProperty(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).Export(exportParameters));
+								}
+
+							}
+							else
+							{
+								model.<#= dynamicProperty.Name #>Property = new DynamicProperty(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).Export(exportParameters));
+							}
+						  }
+					catch()
+					{
+						model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+					}
+					}
+					else
+					{
+						model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+					}
+<#+
+				}
+				else
+				{
+#>
+					model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+<#+	
+				}
+
+				break;
+			case ConversionDirection.DataViewModelToDataModel:
+				if (dynamicProperty.Animated)
+				{
+#>
+					model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+					
+					if (this.<#= dynamicProperty.Name #>.Formula != null)
+					{
+						model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicPropertyDataModel(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).ToDataModel());
+					}
+
+					if (this.<#= dynamicProperty.Name #>.Animation != null)
+					{
+						if (model.<#= dynamicProperty.Name #>Property == null)
+						{
+							model.<#= dynamicProperty.Name #>Property = new AnimatedDynamicPropertyDataModel();
+						}
+						
+						model.<#= dynamicProperty.Name #>Property.Animation = new PropertyChangeAnimationDataModel
+								{ 
+									Duration = ((AnimationDataViewModel)this.<#= dynamicProperty.Name #>.Animation).Duration.Value,
+									Type = ((AnimationDataViewModel)this.<#= dynamicProperty.Name #>.Animation).Type.Value
+								};
+					}
+<#+
+				}
+				else if (dynamicProperty.Dynamic)
+				{
+#>
+					model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+
+					if (this.<#= dynamicProperty.Name #>.Formula != null)
+					{
+						model.<#= dynamicProperty.Name #>Property = new DynamicPropertyDataModel(((EvalDataViewModelBase)this.<#= dynamicProperty.Name #>.Formula).ToDataModel());
+					}
+<#+
+				}
+				else
+				{   
+#>
+					model.<#= dynamicProperty.Name #> = this.<#= dynamicProperty.Name #>.Value;
+<#+	
+				}
+
+				break;
+			default:
+				throw new ArgumentOutOfRangeException("direction");
+		}
+	}
+
+	/// <summary>
+	/// Generates the conversion code for a reference property to a data model object or a model object depending
+	/// on the direction.
+	/// </summary>
+	/// <param name="referenceProperty">
+	/// The property to convert.
+	/// </param>
+	/// <param name="direction">
+	/// The direction (DataViewModelToDataModel / DataViewModelToEntity)
+	/// </param>
+	private void GeneratePropertyConversion(ReferenceProperty referenceProperty, ConversionDirection direction)
+	{
+		#>
+			model.<#= referenceProperty.Name #> = this.<#= referenceProperty.Name #>Name;
+<#+ 
+	}
+
+	/// <summary>
+	/// Generates the conversion code for a composite property to a data model object or a model object depending
+	/// on the direction.
+	/// </summary>
+	/// <param name="compositeProperty">
+	/// The property to convert.
+	/// </param>
+	/// <param name="direction">
+	/// The direction (DataViewModelToDataModel / DataViewModelToEntity)
+	/// </param>
+	private void GeneratePropertyConversion(CompositeProperty compositeProperty, ConversionDirection direction, DataViewModelEntityDescriptor dataViewModelDescriptor)
+	{#>
+
+			if (this.<#= compositeProperty.Name #> != null)
+			{
+<#+
+			switch(direction)
+			{
+				case ConversionDirection.DataViewModelToEntity:
+					if (compositeProperty.Type == "DynamicProperty")
+					{
+					#>
+						var dynamicProperty = new DynamicProperty(this.<#= compositeProperty.Name #>.Export(exportParameters));
+						model.<#= compositeProperty.Name #> = dynamicProperty;                 
+					<#+ 
+					}
+					else if (compositeProperty.Type == "AnalogClockHand")
+					{
+					#>
+						model.<#= compositeProperty.Name #> = (AnalogClockHandElement)this.<#= compositeProperty.Name #>.Export(exportParameters);
+					<#+
+					}
+					else
+					{
+					#>
+						model.<#= compositeProperty.Name #> = this.<#= compositeProperty.Name #>.Export(exportParameters);
+<#+ 
+					}
+					break;
+				case ConversionDirection.DataViewModelToDataModel:
+					if (compositeProperty.Type == "DynamicProperty")
+					{
+		#>
+						model.<#= compositeProperty.Name #> = new DynamicPropertyDataModel(this.<#= compositeProperty.Name #>.ToDataModel());
+<#+
+					}
+					 else if (compositeProperty.Type == "AnalogClockHand")
+					{
+					#>
+						model.<#= compositeProperty.Name #> = (AnalogClockHandElementDataModel)this.<#= compositeProperty.Name #>.ToDataModel();
+					<#+
+					}
+					else
+					{
+						if (dataViewModelDescriptor.Base == "DynamicProperty")
+						{
+							
+#>
+					model.<#= compositeProperty.Name #> = this.<#= compositeProperty.Name #>.Evaluation.ToDataModel();
+<#+ 
+						}
+						else
+						{
+#>
+					model.<#= compositeProperty.Name #> = this.<#= compositeProperty.Name #>.ToDataModel();
+<#+ 
+						}
+					}
+			break;
+			default:
+				throw new ArgumentOutOfRangeException("direction");
+			}
+			#>
+			}
+		<#+
+	}
+
+	/// <summary>
+	/// Generates the conversion code for all objects of a list property to a data model object or a model object
+	/// depending on the direction.
+	/// </summary>
+	/// <param name="propertyDescriptor">
+	/// The list property to convert.
+	/// </param>
+	/// <param name="direction">
+	/// The direction (DataViewModelToDataModel / DataViewModelToEntity)
+	/// </param>
+	private void GeneratePropertyConversion(ListProperty propertyDescriptor, ConversionDirection direction)
+	{
+		switch (direction)
+		{
+			case ConversionDirection.DataViewModelToDataModel:
+			#>
+
+			foreach (var item in this.<#= propertyDescriptor.Name #>)
+			{
+				if (item != null) 
+				{
+					var convertedItem = item.ToDataModel();
+					model.<#= propertyDescriptor.Name #>.Add(convertedItem);
+				}
+			}
+			<#+
+				break;
+			case ConversionDirection.DataViewModelToEntity:
+				#>
+
+			foreach (var item in this.<#= propertyDescriptor.Name #>)
+			{
+				if (item != null) 
+				{
+					var convertedItem = item.Export(exportParameters);
+					model.<#= propertyDescriptor.Name #>.Add(convertedItem);
+				}
+			}
+			<#+ 
+				break;
+			default:
+				throw new ArgumentOutOfRangeException("direction");
+		}
+	}
+
+	/// <summary>
+	/// Assigns a data model property value to the view model property.
+	/// </summary>
+	/// <param name="propertyBase">
+	/// The property to assign.
+	/// </param>
+	private void AssignModelValue(PropertyBase propertyBase, DataViewModelEntityDescriptor dataViewModelDescriptor)
+	{
+		var listProperty = propertyBase as ListProperty;
+		if (listProperty != null)
+		{
+		#>
+
+				foreach (var item in dataModel.<#= propertyBase.Name #>)
+				{
+<#+
+				if (listProperty.ElementType.EndsWith("Base"))
+				{ 
+				#>
+					var typeName = item.GetType().Name.Replace("DataModel", "DataViewModel");
+					var assembly = this.GetType().Assembly;
+					var type = assembly.GetTypes().SingleOrDefault(t => t.Name == typeName);
+					if (type == null)
+					{
+						throw new Exception(
+							string.Format("Type '{0}' for data model '{1} not found", typeName, item.GetType().Name));
+					}
+
+					var convertedItem = (<#= listProperty.ElementTypeDataViewModel.ViewModelName #>)Activator.CreateInstance(type, mediaShell, item);
+<#+ 
+				}
+			else
+			{ #>
+					var convertedItem = new <#= listProperty.ElementTypeDataViewModel.ViewModelName #>(mediaShell, item);
+<#+ 
+			} #>
+					this.<#= propertyBase.Name #>.Add(convertedItem);
+				}
+<#+    
+			return;
+			
+		}
+
+		var compositeProperty = propertyBase as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			if (compositeProperty.Type == "DynamicProperty")
+			{
+				if (dataViewModelDescriptor.Base == "DynamicProperty")
+				{
+#>
+					if (dataModel.<#= compositeProperty.Name #> != null && dataModel.<#= compositeProperty.Name #>.Evaluation != null && dataModel.<#= compositeProperty.Name #>.Evaluation.Evaluation != null)
+					{
+						this.<#= compositeProperty.Name #> = this.CreateEvalDataViewModel(dataModel.<#= compositeProperty.Name #>.Evaluation.Evaluation);
+					}
+<#+ 
+				}
+				else
+				{
+#>
+					if (dataModel.<#= compositeProperty.Name #> != null && dataModel.<#= compositeProperty.Name #>.Evaluation != null)
+					{
+						this.<#= compositeProperty.Name #> = this.CreateEvalDataViewModel(dataModel.<#= compositeProperty.Name #>.Evaluation);
+					}
+				
+				<#+
+				}
+			}
+			else
+			{
+				if (compositeProperty.ParentObject.Name =="ContainerBase")
+				{
+ #>
+				this.<#= compositeProperty.FieldName #> = this.CreateEvalDataViewModel(dataModel.<#= compositeProperty.Name #>);
+<#+
+				}
+				else
+				{
+				#>
+				this.<#= compositeProperty.FieldName #> = new <#= compositeProperty.TypeDataViewModel.ViewModelName #>(this.mediaShell, dataModel.<#= compositeProperty.Name #>);
+<#+}
+			}
+
+			return;
+		}
+
+		var referenceProperty = propertyBase as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+			#>
+				this.<#= referenceProperty.FieldName #>ReferenceName = dataModel.<#= referenceProperty.Name #>;
+<#+ 
+			return;
+		}
+
+		var property = propertyBase as Property;
+		if (property != null)
+		{
+			if (property.Dynamic)
+			{
+#>
+				if (dataModel.<#= property.Name #> != null)
+				{            
+					this.<#= property.Name #>.Value = dataModel.<#= property.Name #>;
+				}
+
+				if (dataModel.<#= property.Name #>Property != null)
+				{
+					this.<#= property.Name #>.Formula = this.CreateEvalDataViewModel(dataModel.<#= property.Name #>Property.Evaluation);
+<#+ 
+					if (property.Animated)
+					{
+#>
+						if (dataModel.<#= property.Name #>Property.Animation != null)
+						{
+							this.<#= property.Name #>.Animation = new AnimationDataViewModel(this.mediaShell, dataModel.<#= property.Name #>Property.Animation);
+						}
+<#+ 
+					}
+#>
+				}
+<#+ 
+			}
+			else
+			{
+			#>
+		
+				this.<#= property.Name #>.Value = dataModel.<#= property.Name #>;
+<#+ 
+			}
+		}
+		else
+		{
+		#>
+		
+				this.<#= propertyBase.Name #>.Value = dataModel.<#= propertyBase.Name #>;
+<#+ 
+		}
+	}
+
+	private void GenerateClone(PropertyBase propertyBase)
+	{
+		var listProperty = propertyBase as ListProperty;
+		if (listProperty != null)
+		{
+	   #>
+			this.<#= listProperty.Name #> = new ExtendedObservableCollection<<#= listProperty.ElementTypeDataViewModel.ViewModelName #>>();
+			foreach (var item in dataViewModel.<#= listProperty.Name #>)
+			{
+				<#= listProperty.ElementTypeDataViewModel.ViewModelName #> clonedItem = null;
+				if (item != null) {
+					clonedItem = (<#= listProperty.ElementTypeDataViewModel.ViewModelName #>)item.Clone();
+				}
+				this.<#= listProperty.Name #>.Add(clonedItem);
+			}
+<#+ 
+			return;
+		}
+
+		var compositeProperty = propertyBase as CompositeProperty;
+		if (compositeProperty != null)
+		{
+			if (compositeProperty.Type == "DynamicProperty")
+			{
+#>
+				if (dataViewModel.<#= compositeProperty.Name #> != null)
+				{
+					this.<#= compositeProperty.Name #> = (EvalDataViewModelBase)dataViewModel.<#= compositeProperty.Name #>.Clone();
+				}
+<#+ 
+			}
+			else
+			{
+
+#>
+			var cloned<#= compositeProperty.Name #> = dataViewModel.<#= compositeProperty.Name #>;
+			if (cloned<#= compositeProperty.Name #> != null)
+			{
+				this.<#= compositeProperty.Name #> = (<#= compositeProperty.TypeDataViewModel.ViewModelName #>)cloned<#= compositeProperty.Name #>.Clone();
+			}
+<#+
+			}
+
+			return;
+		}
+
+		var referenceProperty = propertyBase as ReferenceProperty;
+		if (referenceProperty != null)
+		{
+#>
+			this.<#= referenceProperty.Name #>Name = dataViewModel.<#= referenceProperty.Name #>Name;
+<#+
+			return;
+		}
+
+		var property = propertyBase as Property;
+		var prefix = string.Empty;
+		if (property != null)
+		{
+			if (property.Animated)
+			{
+				prefix = "AnimatedDynamic";
+			}
+			else if (property.Dynamic)
+			{
+				prefix = "Dynamic";
+			}
+
+			var propertyType = property.Type;
+			if (propertyType == "Time")
+			{
+				propertyType = "TimeSpan";
+			}
+#>
+			this.<#= property.Name #> = (<#= prefix #>DataValue<<#= propertyType #>>)dataViewModel.<#= property.Name #>.Clone();
+			 this.<#= property.Name #>.PropertyChanged += this.<#= property.Name #>Changed;
+<#+
+		}
+	}
+
+	private void GenerateFlattenCompositeProperties(CompositeProperty compositeProperty)
+	{
+		var uservisiblePropertyName = compositeProperty.Name;
+		this.GenerateFlattenDefaultProperties(compositeProperty.TypeDataViewModel, uservisiblePropertyName, compositeProperty);
+	}
+
+	private void GenerateFlattenDefaultProperties(DataViewModelEntityDescriptor entity, string uservisiblePropertyName, CompositeProperty compositeProperty)
+	{
+		foreach (var propertyBase in entity.PropertyDescriptors)
+		{
+			var property = propertyBase as Property;
+			if (property == null)
+			{
+				return;
+			}
+
+			var prefix = string.Empty;
+			if (property.Animated)
+			{
+				prefix = "AnimatedDynamic";
+			}
+			else if (property.Dynamic)
+			{
+				prefix = "Dynamic";
+			}
+
+			if (!property.IsHidden)
+			{
+				/*if (!string.IsNullOrEmpty(property.SupportedScreenTypes))
+				{
+					if (!property.SupportedScreenTypes.Contains("TFT"))
+					{
+						return;
+					}
+				}*/
+	#>
+				
+				[UserVisibleProperty("<#= uservisiblePropertyName #>", FieldName = "<#= property.Name #>" <#= (string.IsNullOrEmpty(property.SupportedScreenTypes)
+			 || property.SupportedScreenTypes == "TFT,LED")
+			 ? string.Empty
+			 : ", Filter = \"" + property.SupportedScreenTypes + "\"" #>
+			 , OrderIndex = <#= property.UserVisibleOrderIndex #>, GroupOrderIndex = <#= compositeProperty.UserVisibleGroupOrderIndex #>)]
+	<#+
+			}
+			else
+			{
+				this.WriteLine("");
+			}   
+
+			var propertyType = property.Type;
+			if (propertyType == "Time")
+			{
+				propertyType = "TimeSpan";
+			}
+	#>
+			public <#= prefix #>DataValue<<#= propertyType #>> <#= uservisiblePropertyName #><#= property.Name #>
+			{
+				get
+				{
+					return <#= compositeProperty.Name #>.<#= property.Name #>;
+				}
+
+				set
+				{
+					return;
+				}
+			}
+<#+ 
+		}
+
+		if (entity.BaseDataViewModel.Name != "DataViewModelBase"
+			&& entity.BaseDataViewModel.Name != "DynamicDataValue<EvalDataViewModelBase>")
+		{
+			this.GenerateFlattenDefaultProperties(entity.BaseDataViewModel, uservisiblePropertyName, compositeProperty);
+		}
+	}
+	
+
+	private enum ConversionDirection
+	{
+		DataModelToDataViewModel = 0,
+		DataViewModelToDataModel = 1,
+		DataViewModelToEntity = 2
+	}
+#>

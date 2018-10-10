@@ -1,0 +1,211 @@
+﻿<Ibis desc="Container of all the settings required by Protran to translate the IBIS protocol."
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="file:///. ibis.xsd">
+
+  <Behaviour desc="Container of the settings about all the software's behaviours.">
+    <IbisAddress desc="Values admitted: {1 ... 32} Def. 8">8</IbisAddress>
+    <ConnectionTimeOut desc="Connection timeout">PT60S</ConnectionTimeOut>
+    <ConnectionStatusUsedFor Table="SystemStatus" Column="RemotePC" Row="0"/>
+    <CheckCrc desc="values admitted: {true, false} (case insensitive) Def. true">true</CheckCrc>
+    <ByteType desc="values admitted: {Ascii7, UnicodeBigEndian, Hengartner8}">Ascii7</ByteType>
+    <ProcessPriority desc="Gets or sets the priority of the Protran process in case IBIS is used.
+      Values admitted: {AboveNormal, BelowNormal, High, Idle, Normal, RealTime }.
+      Default value is AboveNormal">AboveNormal</ProcessPriority>
+  </Behaviour>
+
+  <Sources Active="SerialPort">
+    <Simulation desc="Container of all the information about the IBIS simulation.">
+      <SimulationFile desc="Free text (case insensitive) Def. ibis.log">./ibis.log</SimulationFile>
+      <InitialDelay desc="Initial simulation delay">PT5S</InitialDelay>
+      <TimesToRepeat desc="Values admitted: {0, max int} 0 means infite times. Def. 1">2</TimesToRepeat>
+    </Simulation>
+
+    <SerialPort desc="Container of the settings about the channel with the IBIS master.">
+      <ComPort desc="Serial port's name. Free text (case insensitive) Def. COM1">COM1</ComPort>
+      <BaudRate desc="Values admitted: {1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200} Def. 1200">1200</BaudRate>
+      <DataBits desc="Values admitted: {5, 6, 7, 8} Def. 7">7</DataBits>
+      <StopBits desc="Values admitted: {None, One, Two, OnePointFive} Def. Two">Two</StopBits>
+      <Parity desc="Values admitted: {Odd, Even, Mark, Space, None} (case insensitive) Def. Even">Even</Parity>
+
+      <RetryCount desc="Tells how many attempts Protran has to do to open the serial port, if it is currently busy.
+        Values admitted: an interger between 0 and 255. 0 means that Protran will not retry.
+        Default value: 0">10</RetryCount>
+      <SerialPortReopen desc="Attempt to reopen serial port due to errors{FrameOnly, All, None}. Default value: FrameOnly">FrameOnly</SerialPortReopen>
+    </SerialPort>
+  </Sources>
+
+  <Recording desc="Container of all the information about a registration on file of a channel.">
+    <Active desc="Values admitted: {true, false} (case insensitive) Def. false">false</Active>
+    <Format desc="The file format for the recording. Values admitted: {Protran,Gismo}">Protran</Format>
+    <FileAbsPath desc="Free text (case insensitive) Def. ./ibis.log">./ibis.log</FileAbsPath>
+  </Recording>
+  
+  <TimeSync desc="Container of the settings about the date-time synchronization process.">
+    <InitialDelay desc="Time to wait before the time sync is started.">PT10S</InitialDelay>
+    <WaitTelegrams desc="Number of telegrams to check before the time is considered valid.">3</WaitTelegrams>
+    <Tolerance desc="Tolerance above which the difference has to be for the time to be synchronized">PT0S</Tolerance>
+    <UpdateInterval desc="Interval for sending time updates.">PT60S</UpdateInterval>
+    <TimeUsedFor Table="SystemStatus" Column="Time" Row="0" />
+  </TimeSync>
+
+  <Telegrams>
+    <DS001 TransfRef="Line" Enabled="true">
+      <UsedFor Table="Route" Column="Line" Row="0" />
+    </DS001>
+    
+    <DS001a TransfRef="Default" Enabled="true">
+      <UsedFor Table="Route" Column="SpecialLine" Row="0" />
+    </DS001a>
+
+    <DS005 TransfRef="Time" Enabled="true">
+      <!-- We handle the time now with the IbisTimeSync above, so ignore this
+      <UsedFor Table="SystemStatus" Column="Time" Row="0" />
+      -->
+    </DS005>
+
+    <DS006 TransfRef="Date" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="Date" Row="0" />
+    </DS006>
+
+    <DS010b TransfRef="Number" Enabled="true">
+      <!-- no configuration is required for this telegram since it is handled by the DS021a handler -->
+    </DS010b>
+
+    <DS020 Enabled="true">
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="NoData">3</Response>
+          <Response Status="MissingData">4</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+    </DS020>
+    
+    <DS021a TransfRef="Stops021a" Enabled="true">
+      <UsedFor Table="Stops" Column="StopName" Row="{0}" FromBlock="0" />
+      <!-- <UsedForTransfers Table="Stops" Column="StopInfo" Row="{0}" FromBlock="1"  /> -->
+      <UsedForTransferSymbols Table="Stops" Column="StopTransferSymbols" Row="{0}" FromBlock="1" />
+      <UsedForRelativeTime Table="Stops" Column="StopTime" Row="{0}" FromBlock="2" />
+      <UsedForAbsoluteTime Table="Stops" Column="StopInfo" Row="{0}" FromBlock="2" />
+
+      <UsedForDestination Table="Destination" Column="DestinationName" Row="0" />
+      <!-- <UsedForDestinationTransfers Table="Destination" Column="DestinationInfo" Row="0" /> -->
+      <UsedForDestinationTransferSymbols Table="Destination" Column="DestinationTransferSymbols" Row="0" />
+      <UsedForDestinationRelativeTime Table="Destination" Column="DestinationTime" Row="0" />
+      <UsedForDestinationAbsoluteTime Table="Destination" Column="DestinationInfo" Row="0" />
+      
+      <Answer>
+        <DS120 Enabled="true">
+          <!-- possible Status values: Ok, NoData, MissingData, IncorrectRecord -->
+          <Response Status="IncorrectRecord">6</Response>
+          <DefaultResponse>0</DefaultResponse>
+        </DS120>
+      </Answer>
+      
+      <FlushNumberOfStations
+        desc="Number of stations to collect before sending all of them to the media player.
+        Values admitted: a positive integer value {1; 65535}.
+        Default value: 5">4</FlushNumberOfStations>
+      <FlushTimeout
+        desc="Amount of time to wait before forcing a send of all the current
+        stations collected. Default value: 30">PT30S</FlushTimeout>
+      <FirstStopIndexValue
+        desc="The value of the index of the first stop.
+        Values admitted {0, 1}. Default value: 0">1</FirstStopIndexValue>
+      <EndingStopValue
+        desc="The value of the stop that has to be considered as the end of a sequence of stops
+        (and not really a proper stop as the others).
+        Values admitted {99 or 999}. Default value: 99">99</EndingStopValue>
+
+      <HideLastStop
+        desc="Tells if the last stop should be shown or not.
+        You might want to hide the last stop if you prefer not to show the destination
+        name twice when aproaching the destination.
+        Values admitted: {true, false}.
+        Default is false.">true</HideLastStop>
+      <HideDestinationBelow
+        desc="the threshold below which the destination has to be hidden.
+        Set this value to one more than the number of stops visible in your 
+        Perlschnur to hide the destination information (see UsedForDestination, ...)
+        if the last stop is visible in the Perlschnur.">0</HideDestinationBelow>
+      <DeleteRouteIndexValue
+        desc="The value of the index to delete a route.
+        Values admitted {-1, 0}. Default value: -1">-1</DeleteRouteIndexValue>
+
+      <AbsoluteTimeFormat
+        desc="Format of the UsedForAbsoluteTime and UsedForDestinationAbsoluteTime.
+        Meaningful formats: 'HH:mm' (24-hour format), 'H:mm' (1-digit hour), 'hh:mm' (12-hour format)
+        See http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx for more formats.
+        Default value: 'HH:mm'">HH:mm</AbsoluteTimeFormat>
+    </DS021a>
+
+    <DS080 Enabled="true">
+      <OpenValue>1</OpenValue>
+      <CloseValue>0</CloseValue>
+      <ResetWithDS010b>true</ResetWithDS010b>
+      <UsedFor Table="SystemStatus" Column="DoorStatus" Row="0"/>
+    </DS080>
+  </Telegrams>
+  
+  <Transformations desc="Container of all the transformation that Protran has to do on the IBIS telegrams.">
+    <Chain id="Default" />
+    
+    <Chain id="Time">
+      <RegexMapping desc="Format HHmm to HH:mm">
+        <Mapping from="^(\d\d)(\d\d)$" to="$1:$2"/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="Date">
+      <RegexMapping desc="Format ddMMYY to dd.MM.YYYY">
+        <Mapping from="^(\d\d)(\d\d)(\d\d)$" to="$1.$2.20$3"/>
+      </RegexMapping>
+    </Chain>
+
+    <Chain id="Stops021a">
+      <RegexMapping desc="Replace $ after \5 with ÿ">
+        <Mapping from="(?&lt;=\u0005.*)\$" to="ÿ"/>
+      </RegexMapping>
+      <RegexDivider desc="Devide at \3, \4, \5 and ÿ characters (ÿ used to be the $ at the end)">
+        <Regex>[\u0003-\u0005ÿ]</Regex>
+      </RegexDivider>
+      <StringMapping desc="IBIS conversion">
+        <!-- standard German umlauts (added uppercase as well, if needed) -->
+        <Mapping from="{" to="ä"/>
+        <Mapping from="[" to="Ä"/>
+        <Mapping from="|" to="ö"/>
+        <Mapping from="\" to="Ö"/>
+        <Mapping from="}" to="ü"/>
+        <Mapping from="]" to="Ü"/>
+
+        <!-- French accents -->
+        <Mapping from="~" to="é"/>
+        <Mapping from="$" to="è"/>
+        <Mapping from="?" to="ê"/>
+        <Mapping from="=" to="ë"/>
+        <Mapping from="&amp;" to="à"/>
+        <Mapping from="_" to="â"/>
+        <Mapping from="+" to="ï"/>
+        <Mapping from="^" to="ç"/>
+        <Mapping from="&gt;" to="ô"/>
+        <Mapping from="%" to="ù"/>
+        <Mapping from="&lt;" to="û"/>
+        
+        <!-- remove unused # signs in transfer symbols -->
+        <Mapping from="#" to=""/>
+      </StringMapping>
+    </Chain>
+
+    <Chain id="Line">
+      <RegexMapping desc="Remove all the leading zeros from a string.">
+        <Mapping from="^0+" to=""/>
+      </RegexMapping>
+    </Chain>
+    
+    <Chain id="Number">
+      <Integer/>
+    </Chain>
+
+  </Transformations>
+</Ibis>

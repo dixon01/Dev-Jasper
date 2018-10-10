@@ -1,0 +1,165 @@
+﻿<layoutElements:EditableLayoutElementBase x:Class="Gorba.Center.Media.Core.Views.LayoutElements.AudioOutputFrame"
+                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                 xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+                                 xmlns:dragDropExtension="clr-namespace:Gorba.Center.Media.Core.Extensions.DragDropExtension"
+                                 xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+                                 xmlns:converters1="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                 xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                 xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+                                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                                 xmlns:layoutElements="clr-namespace:Gorba.Center.Media.Core.Views.LayoutElements"
+                                 mc:Ignorable="d" 
+                                 x:Name="Root"
+                                 d:DataContext="{d:DesignInstance layout:AudioOutputElementDataViewModel}" MouseLeftButtonUp="AudioOutputFrame_OnMouseLeftButtonUp">
+    <UserControl.Resources>
+        <dragDropExtension:AudioOutputFrameDropHandler x:Key="AudioOutputFrameDropHandler" />
+        <converters:ToTypeConverter x:Key="ToTypeConverter" />
+        <converters1:IsTypeOfConverter x:Key="IsTypeOfConverter" />
+    </UserControl.Resources>
+
+
+    <Border BorderThickness="0" Width="{Binding ElementName=Root, Path=ActualWidth}" MinHeight="200" Margin="0 0 0 40">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource LayoutElementBorder}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=AudioElementList, Path=SelectedItem}" Value="{x:Null}">
+                        <Setter Property="Background" Value="{StaticResource AudioOutputFrameSelectedFrameBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource AudioOutputFrameSelectedFrameBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Name="AudioElementList" Grid.Row="0"
+                      BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ItemsSource="{Binding Elements}"
+                  Margin="8"
+                  SelectionChanged="Selector_OnSelectionChanged" 
+                  dragDropExtension:DragDropHelper.IsDragSource="True"
+                  dragDropExtension:DragDropHelper.IsDropTarget="True"
+                  dragDropExtension:DragDropHelper.DropHandler="{StaticResource AudioOutputFrameDropHandler}">
+
+                <ListView.Resources>
+                    <DataTemplate DataType="{x:Type layout:AudioFileElementDataViewModel}">
+                        <layoutElements:AudioFileLayoutElement/>
+                    </DataTemplate>
+                    
+                    <DataTemplate DataType="{x:Type layout:AudioPauseElementDataViewModel}">
+                        <layoutElements:AudioPauseLayoutElement/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type layout:TextToSpeechElementDataViewModel}">
+                        <layoutElements:AudioStaticTtsLayoutElement/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type layout:DynamicTtsElementDataViewModel}">
+                        <layoutElements:AudioDynamicTtsLayoutElement/>
+                    </DataTemplate>
+
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="Foreground" Value="{StaticResource AudioElementForegroundColorBrush}" />
+                        <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredBackgroundBrush}" />
+                        <Setter Property="IsSelected" Value="{Binding IsItemSelected, Mode=TwoWay}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid Background="Transparent">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="20" />
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter/>
+                                            <Button Grid.Column="1" Margin="5 0 0 0"
+                                                Command="{Binding ElementName=Root, Path=DeleteEntityCommand}"
+                                                CommandParameter="{Binding}" Name="RemoveButton">
+                                                <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/remove_dark10x10.png" 
+                                                   Width="10" Height="10"/>
+
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                        <Setter Property="Background" Value="Transparent" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsMouseOver}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{StaticResource AudioElementButtonHoverBackgroundColorBrush}" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </Grid>
+                                        
+                                        
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AudioElementHoverBackgroundBrush}" />
+                            </Trigger>
+
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AudioOutputFrameSelectedFrameBrush}" />
+                            </Trigger>              
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+                
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+            <TextBox Grid.Row="0" Text="{x:Static resources:MediaStrings.AudioEditor_NoAudioAddedMessage}" 
+                     IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Center"
+                     Margin="20 40 20 0" BorderThickness="0"
+                     TextWrapping="Wrap"  TextAlignment="Center"
+                     FontFamily="FontAwesome" FontSize="14">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Elements.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+
+                            </DataTrigger>
+
+                        </Style.Triggers>
+
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            
+            <!--<Canvas>
+                <i:Interaction.Triggers>
+                    <interaction:InteractionRequestTrigger SourceObject="{Binding SelectAudioFileInteractionRequest}">
+                        <interaction:InteractionAction Modal="True" IsToggle="True" ToggleSourceName="QuickEdit" Tag="{Binding ElementName=EditorCanvas, Path=.}">
+                            <interaction:InteractionAction.Dialog>
+                                <views:SelectMediaPopup/>
+                            </interaction:InteractionAction.Dialog>
+                        </interaction:InteractionAction>
+                    </interaction:InteractionRequestTrigger>
+                </i:Interaction.Triggers>
+            </Canvas>-->
+        </Grid>
+    </Border>
+</layoutElements:EditableLayoutElementBase>

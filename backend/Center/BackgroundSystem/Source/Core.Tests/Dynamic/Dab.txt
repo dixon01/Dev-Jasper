@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="fahrgastinfo_1_0.xsd">
+<category id="br-online">
+<newsfeed rubrik="nachrichten">
+<news id="1" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Bundestag stimmt über neue Griechenland-Hilfen ab</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="2" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Neue Mehrwertsteuer in Griechenland soll ab Montag greifen</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="3" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>"Batman"-Amokläufer Holmes wegen Mordes schuldig gesprochen</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="4" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Vier Marines bei Attentat in US-Bundesstaat Tennessee getötet  </titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="5" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Niederlande erinnern an Abschuss von Flug MH 17</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="6" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Steinmeier spricht mit Castro über Menschenrechte</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="7" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>EU-Gericht verurteilt Italien wegen Müllkrise von Neapel zu Bußgeld</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="8" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Brite soll in Computersysteme von Nasa und US-Armee eingedrungen sein</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="9" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Polizei in Bayern ermittelt nach Brandanschlag auf Flüchtlingsheim</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="nachrichten">
+<news id="10" rubrik="News" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Fastenmonat Ramadan ist beendet</titel>
+</news>
+</newsfeed>
+<newsfeed rubrik="wetter">
+<news id="11" rubrik="Oberbayern" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Das Wetter in Bayern: Überwiegend sonnig, Höchstwerte 32 bis 36 Grad</titel>
+<body>
+<paragraph>
+Das Wetter in Bayern:
+Heute meist sonnig bei Werten bis 35 Grad, am Untermain bis 36 Grad. Am Abend vereinzelt Wärmegewitter. In der Nacht klar bei Tiefstwerten um 16 Grad. Auch morgen sehr warm bei Temperaturen bis 34 Grad.
+Die weiteren Aussichten:
+Am Sonntag unbeständig mit längeren sonnigen Abschnitten, aber weiterhin warm. Auch am Montag viel Sonnenschein bei Werten um 33 Grad.
+</paragraph>
+</body>
+</news>
+</newsfeed>
+<newsfeed rubrik="copyright">
+<news id="12" rubrik="copyright" dateTime="2015-07-17T07:28:12+02:00">
+<titel>Die Nachrichten des Bayerischen Rundfunks   </titel>
+</news>
+</newsfeed>
+</category>
+</data>

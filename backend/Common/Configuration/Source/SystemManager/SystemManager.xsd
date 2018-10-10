@@ -1,0 +1,1514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SystemManager" type="SystemManagerConfig" />
+  <xs:complexType name="SystemManagerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The System Manager configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Defaults" type="SystemManagerDefaults">
+        <xs:annotation>
+          <xs:documentation>
+            The default values for Process and Component elements in the Applications element.
+            These value are used if a value is not defined under Applications for a given process or component.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SplashScreens" type="SplashScreenConfigList">
+        <xs:annotation>
+          <xs:documentation>
+            All splash screens that can be shown by System Manager.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="System" type="SystemConfig">
+        <xs:annotation>
+          <xs:documentation>
+            All configuration parameters that are valid for the entire system (OS) and not a specific application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Applications" type="ArrayOfApplicationConfigBase">
+        <xs:annotation>
+          <xs:documentation>
+            List of all applications that are managed by System Manager.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SystemManagerDefaults">
+    <xs:annotation>
+      <xs:documentation>
+        The default values for Process and Component elements in the Applications element.
+        These value are used if a value is not defined under Applications for a given process or component.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Process" type="ProcessDefaultsConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The default configuration for Process elements.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Component" type="ComponentDefaultsConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The default configuration for Component elements.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProcessConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single process (.exe) managed by System Manager.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="ExecutablePath" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>
+                The full or relative (to this file) path to the executable file (location where to find the .exe).
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="WorkingDirectory" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>
+                The working directory of the process.
+                If this is not set, the directory of the executable is used as its working directory.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="Arguments" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>
+                The command line arguments used when starting the process.
+                This is written the same way as in a command window, i.e. if necessary write quotes (&amp;quot;)
+                around parameters and separate parameters with space.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="WindowMode" type="ProcessWindowStyle">
+            <xs:annotation>
+              <xs:documentation>
+                The window mode in which to start the process.
+                If this parameter is not set, the process is started in the default mode of Windows.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="Priority" type="ProcessPriorityClass">
+            <xs:annotation>
+              <xs:documentation>
+                The priority with which to start the process.
+                If this parameter is not set, the process is started with the default priority of Windows.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="true" name="KillIfRunning" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>
+                Indicates whether to kill any existing process with the same ExecutablePath
+                before starting this process.
+                If this property is set to false, this might lead to the same application being started
+                multiple times.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="ExitTimeout" type="xs:duration" default="PT30S">
+            <xs:annotation>
+              <xs:documentation>
+                Time to wait before a process is killed when it is not
+                responding to the exit command (or closing the main window).
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="RamLimit" type="ApplicationRamLimitConfig">
+            <xs:annotation>
+              <xs:documentation>
+                Configuration of the amount of RAM that can be used by the process
+                before given actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="CpuLimit" type="CpuLimitConfig">
+            <xs:annotation>
+              <xs:documentation>
+                Configuration of the amount of CPU time that can be used by the process
+                before given actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ProcessDefaultsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The default configuration for Process elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationDefaultsConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="WindowMode" type="ProcessWindowStyle">
+            <xs:annotation>
+              <xs:documentation>
+                The window mode in which to start the process.
+                If this parameter is not set, the process is started in the default mode of Windows.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="Priority" type="ProcessPriorityClass">
+            <xs:annotation>
+              <xs:documentation>
+                The priority with which to start the process.
+                If this parameter is not set, the process is started with the default priority of Windows.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" default="true" name="KillIfRunning" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>
+                Indicates whether to kill any existing process with the same ExecutablePath
+                before starting this process.
+                If this property is set to false, this might lead to the same application being started
+                multiple times.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="ExitTimeout" type="xs:duration">
+            <xs:annotation>
+              <xs:documentation>
+                Time to wait before a process is killed when it is not
+                responding to the exit command (or closing the main window).
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="RamLimit" type="ApplicationRamLimitConfig">
+            <xs:annotation>
+              <xs:documentation>
+                Configuration of the amount of RAM that can be used by the process
+                before given actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="CpuLimit" type="CpuLimitConfig">
+            <xs:annotation>
+              <xs:documentation>
+                Configuration of the amount of CPU time that can be used by the process
+                before given actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApplicationConfigBase" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="LaunchWaitFor" type="LaunchWaitForConfig">
+        <xs:annotation>
+          <xs:documentation>
+            With this parameter it is possible to delay the launch of an application (Process or Component)
+            until another application has reached the given state.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="LaunchDelay" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Time to wait until the application is launched.
+            If this parameter is not set, the application is launched immediately.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RelaunchDelay" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Time to wait until the application is relaunched after being stopped or having crashed.
+            If this value is not set, the LaunchDelay is used instead.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The name of the application. This has to be unique within this System Manager configuration.
+          The name can be used to refer to the process and is used for logging.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if this application is enabled.
+          If set to false, System Manager behaves as if the application wasn't configured at all.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UseWatchdog" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the Gorba Software Watchdog is to be enabled for this application.
+          Set this to true for all normal Gorba applications and to false for third party applications.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ApplicationDefaultsConfigBase" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="LaunchDelay" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Time to wait until the application is launched.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RelaunchDelay" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Time to wait until the application is relaunched after being stopped or having crashed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="UseWatchdog" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the Gorba Software Watchdog is to be enabled for this application.
+          Set this to true for all normal Gorba applications and to false for third party applications.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="LaunchWaitForConfig">
+    <xs:annotation>
+      <xs:documentation>
+        With this configuration it is possible to delay the launch of an application (Process or Component)
+        until another application has reached the given state.
+        Use this if an application has a dependency on another application and requires that application
+        to be started before System Manager starts this application.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Application" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The name of the application to observe. This must exactly match the Name= attribute of the application.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="State" type="ApplicationState" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The state the given application has to reach, so this application is started by System Manager.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="ApplicationState">
+    <xs:annotation>
+      <xs:documentation>
+        The possible states of an application
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AwaitingLaunch">
+        <xs:annotation>
+          <xs:documentation>
+            The application will soon start, e.g. waiting for the launch delay or another app.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Launching">
+        <xs:annotation>
+          <xs:documentation>
+            The application process is started, but no feedback was received from the application yet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Starting">
+        <xs:annotation>
+          <xs:documentation>
+            The application is registered with System Manager and it is starting up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Running">
+        <xs:annotation>
+          <xs:documentation>
+            The application is running. This is the normal state of an application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Exiting">
+        <xs:annotation>
+          <xs:documentation>
+            The application was told to exit, but the process is still running.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Exited">
+        <xs:annotation>
+          <xs:documentation>
+            The application has exited. This state is only reached if an application
+            should not be relaunched by System Manager (e.g. during shutdown or when someone
+            requests the application to exit).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ComponentConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single component (.dll) managed by System Manager.
+        Components are usually not used in the normal operation of System Manager.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="LibraryPath" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>
+                The full or relative (to this file) path to the DLL in which the component is found.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="ClassName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>
+                The full name of the class (including namespace) of the component.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="UseAppDomain" type="xs:boolean" default="false">
+            <xs:annotation>
+              <xs:documentation>
+                Flag to configure whether to use a separate Application Domain for this component.
+                If this flag is set to false, the component is started in the same Application Domain as
+                System Manager.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComponentDefaultsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The default configuration for Component elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationDefaultsConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="UseAppDomain" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>
+                Flag to configure whether to use a separate Application Domain for this component.
+                If this flag is set to false, the component is started in the same Application Domain as
+                System Manager.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ProcessWindowStyle">
+    <xs:annotation>
+      <xs:documentation>
+        The style of the main window of a process.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:documentation>
+            The process is started in a normal window which is visible and usually takes the focus.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Hidden">
+        <xs:annotation>
+          <xs:documentation>
+            The process is completely hidden from the task bar and no window is visible.
+            Never use this value for UI applications as their behavior is usually not defined when they can't
+            show a window.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Minimized">
+        <xs:annotation>
+          <xs:documentation>
+            The window of the process is minimized to the Windows task bar.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Maximized">
+        <xs:annotation>
+          <xs:documentation>
+            The window of the process is maximized to use the entire desktop.
+            The window still contains the normal border and title bar.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProcessPriorityClass">
+    <xs:annotation>
+      <xs:documentation>
+        Possible process priorities.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RealTime">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the process has the highest possible priority.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="High">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the process performs time-critical tasks that must be executed immediately,
+            such as the Task List dialog, which must respond quickly when called by the user,
+            regardless of the load on the operating system.
+            The threads of the process preempt the threads of normal or idle priority class processes.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AboveNormal">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the process has priority above Normal but below High.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the process has no special scheduling needs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BelowNormal">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the process has priority above Idle but below Normal.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Idle">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the threads of this process run only when the system is idle, such as a screen saver.
+            The threads of the process are preempted by the threads of any process running in a higher priority class.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ApplicationRamLimitConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the amount of RAM that can be used by the process before given actions are performed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="MaxRamMB" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                The maximum number of megabytes to be used by the process.
+                If this amount is exceeded for a certain period, System Manager exceutes the actions defined below.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Actions" type="ArrayOfLimitActionConfigBase">
+            <xs:annotation>
+              <xs:documentation>
+                The actions to perform when the amount of RAM is exceeded.
+                Every time the limit is exceeded, one action is performed, when the end of the list is reached,
+                the first action is performed again.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LimitConfigBase" abstract="true">
+    <xs:attribute name="Enabled" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if this limit is being observed by System Manager.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLimitActionConfigBase">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Reboot" nillable="true" type="RebootLimitActionConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Relaunch" nillable="true" type="RelaunchLimitActionConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Purge" nillable="true" type="PurgeLimitActionConfig" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="RebootLimitActionConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The entire system is rebooted when this action is performed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitActionConfigBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LimitActionConfigBase" abstract="true" />
+  <xs:complexType name="PurgeLimitActionConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The given directory is purged (files deleted, but directories not) when this action is performed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitActionConfigBase">
+        <xs:attribute name="Path" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The full or relative (to this file) path to the directory to be purged.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RelaunchLimitActionConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The given application is relaunched when this action is performed.
+        If no application name is configured, the application that triggers the action is relaunched.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitActionConfigBase">
+        <xs:attribute name="Application" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The name of the application to relaunch. This must exactly match the Name= attribute of the application.
+              This attribute can be omitted if the action is for a limit of an application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DiskLimitConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the amount of free disk space available before given actions are performed.
+        Either FreeSpaceMB or FreeSpacePercentage have to be configured,
+        if both are configured, the first one reached will trigger the given actions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="FreeSpaceMB" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                If less than the given amount megabytes is available on the given drive (Path),
+                the configured actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="FreeSpacePercentage" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                If less than the given percentage is available on the given drive (Path),
+                the configured actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Actions" type="ArrayOfLimitActionConfigBase">
+            <xs:annotation>
+              <xs:documentation>
+                The actions to perform when the given disk limit is reached.
+                Every time the limit is reached, one action is performed, when the end of the list is reached,
+                the first action is performed again.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Path" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The drive path (usually &quot;D:\&quot; or similar).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SystemRamLimitConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the amount of free RAM available before given actions are performed.
+        Either FreeRamMB or FreeRamPercentage have to be configured,
+        if both are configured, the first one reached will trigger the given actions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="FreeRamMB" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                If less than the given amount megabytes of RAM is available in the system,
+                the configured actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="1" name="FreeRamPercentage" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                If less than the given percentage of RAM is available in the system,
+                the configured actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Actions" type="ArrayOfLimitActionConfigBase">
+            <xs:annotation>
+              <xs:documentation>
+                The actions to perform when the given system RAM limit is reached.
+                Every time the limit is reached, one action is performed, when the end of the list is reached,
+                the first action is performed again.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CpuLimitConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the maximum CPU usage before given actions are performed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="LimitConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="MaxCpuPercentage" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>
+                If the maximum CPU usage is reached and kept for a certain time,
+                the configured actions are performed.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" maxOccurs="1" name="Actions" type="ArrayOfLimitActionConfigBase">
+            <xs:annotation>
+              <xs:documentation>
+                The actions to perform when the maximum CPU usage is exceeded.
+                Every time the limit is reached, one action is performed, when the end of the list is reached,
+                the first action is performed again.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SplashScreenConfigList">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the splash screens that can be shown by System Manager.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SplashScreen" type="SplashScreenConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The splash screens.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="X" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The horizontal location in pixels of the splash screen on the screen.
+          If this attribute is not defined, the splash screen is shown at the very right of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Y" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The vertical location in pixels of the splash screen on the screen.
+          If this attribute is not defined, the splash screen is shown at the very top of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The width of the splash screen in pixels.
+          If this attribute is not defined, the splash screen is shown across the entire width of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The height of the splash screen in pixels.
+          If this attribute is not defined, the splash screen is shown across the entire height of the screen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SplashScreenConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single splash screen. A splash screen is shown as soon as any of the
+        ShowOn triggers is reached and is hidden again either when another splash screen becomes visible or
+        any of the HideOn triggers is reached.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowOn" type="ArrayOfShowOnSplashScreenTriggers">
+        <xs:annotation>
+          <xs:documentation>
+            List of triggers on which to show this splash screen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="HideOn" type="ArrayOfHideOnSplashScreenTriggers">
+        <xs:annotation>
+          <xs:documentation>
+            List of triggers on which to hide this splash screen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Items" type="ArrayOfSplashScreenItemBase">
+        <xs:annotation>
+          <xs:documentation>
+            List of all items to show on this splash screen.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The unique name of this splash screen. This name is used for identification and logging.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          A flag indicating if the splash screen is to be shown at all or not.
+          If this flag is set to false, System Manager will behave as if the splash screen wasn't configured at all.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Foreground" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The foreground (text) color of the splash screen.
+          Possible values are english color names (e.g. Red, Green, Yellow) or &quot;#RRGGBB&quot; where
+          RR, GG and BB are the hex red, green and blue color components (e.g. #FF0000 for Red).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Background" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The background color of the splash screen.
+          Possible values see above.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfShowOnSplashScreenTriggers">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="SystemBoot" nillable="true" type="SystemBootTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ApplicationStateChange" nillable="true" type="ApplicationStateChangeTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SystemShutdown" nillable="true" type="SystemShutdownTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Input" nillable="true" type="InputTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HotKey" nillable="true" type="HotKeyTriggerConfig" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="SystemShutdownTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is triggered (hidden or shown) when the system shuts down.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SplashScreenTriggerConfigBase" abstract="true" />
+  <xs:complexType name="TimeoutTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is hidden after the given timeout. The timer is started when the splash screen is shown.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase">
+        <xs:attribute name="Delay" type="xs:duration" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              Duration after which the splash screen is hidden.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SystemBootTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is shown immediately when the system starts up.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="InputTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is triggered (hidden or shown) when the given GIOoM input changes its value.
+        If the Value= attribute is provided, the trigger occurs only when the input changes to the given value,
+        otherwise the trigger occurs every time the input changes its value.
+        If the configured input doesn't exist, the splash screen is never triggered.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase">
+        <xs:attribute name="Unit" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The unit name where to find the input (e.g. &quot;TFT-01-23-45&quot;).
+              If this attribute is not set, the input will be searched on the local system only.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Application" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The application name where to find the input (e.g. &quot;HardwareManager&quot;).
+              If this attribute is not set, the input will be searched in all applications.
+              The name of the application is the one used by the application, not the one defined in
+              this config file.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Name" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The exact name of the GIOoM input (e.g. &quot;Button&quot;).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Value" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The value for which to trigger the change of splash screen. See below.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HotKeyTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is triggered (hidden or shown) when the given HotKey is pressed.
+        The trigger occurs every time the hotkey is pressed.
+        If the configured input doesn't exist, the splash screen is never triggered.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase">
+        <xs:attribute name="Key">
+          <xs:annotation>
+            <xs:documentation>
+              The hotkey that must be pressed by user to toggle the splash screen.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApplicationStateChangeTriggerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The splash screen is triggered (hidden or shown) when the given application reaches the given state.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenTriggerConfigBase">
+        <xs:attribute name="Application" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The name of the application. This must exactly match the Name= attribute of the application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="State" type="ApplicationState" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The state that triggers the splash screen.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfHideOnSplashScreenTriggers">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="SystemShutdown" nillable="true" type="SystemShutdownTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ApplicationStateChange" nillable="true" type="ApplicationStateChangeTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Timeout" nillable="true" type="TimeoutTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Input" nillable="true" type="InputTriggerConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HotKey" nillable="true" type="HotKeyTriggerConfig" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSplashScreenItemBase">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Network" nillable="true" type="NetworkSplashScreenItem" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Applications" nillable="true" type="ApplicationsSplashScreenItem" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IO" nillable="true" type="GioomSplashScreenItem" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Management" nillable="true" type="ManagementSplashScreenItem" />
+      <xs:element minOccurs="1" maxOccurs="1" name="System" nillable="true" type="SystemSplashScreenItem" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Logo" nillable="true" type="LogoSplashScreenItem" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="NetworkSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        Network interface information is shown on the splash screen.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:attribute name="Name" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the name of the network interface (max. 30 characters).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Ip" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the IP address and network mask (in CIDR notation) of the network interface.
+              Example: &quot;192.168.10.50/24&quot;
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Gateway" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the gateway IP address of the network interface.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Mac" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the MAC address of the network interface in hex notation.
+              Example: 01-23-45-67-89-AB
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Status" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the status of the network interface (e.g. Up, Down, ...).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="StatusFilter" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              Allows to filter network interfaces that are in one of the given states.
+              This is a comma separated list of the following possible values:
+              Unknown, NotPresent, Down, LowerLayerDown, Dormant, Testing, Up
+              Example: &quot;Dormant,Up&quot;
+              If this attribute is not set, all network interfaces are shown.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SplashScreenItemBase" abstract="true" />
+  <xs:complexType name="ApplicationsSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        Information about all applications managed by System Manager is shown on the splash screen.
+        Specific applications can be hidden from the splash screen by defining
+        &lt;Hide Application=&quot;...&quot; /&gt; items.
+        If &lt;Show Application=&quot;...&quot; /&gt; items are defined, only those applications are shown.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Hide" type="ApplicationsSplashScreenHide">
+            <xs:annotation>
+              <xs:documentation>
+                Hide all given applications from the splash screen.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Show" type="ApplicationsSplashScreenShow">
+            <xs:annotation>
+              <xs:documentation>
+                Show only the given applications on the splash screen.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Version" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the full version number of the application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="State" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the state of the application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Ram" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the RAM usage in MB of the application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Cpu" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the CPU usage of the application in percents.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Uptime" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the time for which the application has already been running.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="LaunchReason" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows a short summary why the application was launched.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ExitReason" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows a short summary why the application last exited.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApplicationsSplashScreenVisibilityBase" abstract="true">
+    <xs:attribute name="Application" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The name of the application. This must exactly match the Name= attribute of the application.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ApplicationsSplashScreenHide">
+    <xs:annotation>
+      <xs:documentation>
+        Hide all given applications from the splash screen.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationsSplashScreenVisibilityBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApplicationsSplashScreenShow">
+    <xs:annotation>
+      <xs:documentation>
+        Show only the given applications on the splash screen.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ApplicationsSplashScreenVisibilityBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SystemSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        Information about the operating system is shown on the splash screen.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:attribute name="MachineName" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the name of the system.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Ram" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the total RAM usage (available and used).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Cpu" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the overall CPU usage in percent.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Uptime" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the time for which the system has already been running.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Serial" type="xs:boolean" default="false">
+          <xs:annotation>
+            <xs:documentation>
+              If true, shows the internal serial number if available, otherwise &quot;n/a&quot;.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GioomSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        Information about a single GIOoM input or output is shown on the splash screen.
+        To show the state of multiple I/Os, just use multiple &lt;IO /&gt; elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:attribute name="Label" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The label to be shown on the left of the value.
+              If this attribute is not specified, the Name= below is used.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute default="{0}" name="ValueFormat" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The value format string to be used when displaying the value.
+              The '{0}' placeholder will be replaced with the value coming from the I/O.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Unit" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The unit name where to find the input (e.g. &quot;TFT-01-23-45&quot;).
+              If this attribute is not set, the input will be searched on the local system only.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Application" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The application name where to find the input (e.g. &quot;HardwareManager&quot;).
+              If this attribute is not set, the input will be searched in all applications.
+              The name of the application is the one used by the application, not the one defined in
+              this config file.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Name" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The exact name of the GIOoM input (e.g. &quot;Temperature&quot;).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ManagementSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        Information about a management property is shown on the splash screen.
+        To show the value of multiple management properties, just use multiple &lt;Management /&gt; elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:attribute name="Label" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The label to be shown on the left of the value.
+              If this attribute is not specified, the last part of the Path= below is used.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute default="{0}" name="ValueFormat" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The value format string to be used when displaying the value.
+              The '{0}' placeholder will be replaced with the value coming from management property.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Unit" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The unit name where to find the management property (e.g. &quot;TFT-01-23-45&quot;).
+              If this attribute is not set, the management property will be taken from the local system.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Application" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The application name where to find the management property (e.g. &quot;HardwareManager&quot;).
+              If this attribute is not set, the management property is taken from the local system.
+              The name of the application is the one used by the application, not the one defined in
+              this config file.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Path" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The path to the management property delimited by backslash "\"
+              (e.g. &quot;\HardwareManager\MgiHardwareHandler\At91Rev&quot;).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LogoSplashScreenItem">
+    <xs:annotation>
+      <xs:documentation>
+        An image is shown on the splash screen.
+        The logo is by default the Gorba logo, but it can be replaced by a user defined
+        logo by specifying the Filename= attribute.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SplashScreenItemBase">
+        <xs:attribute name="Filename" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The full or relative (to this file) path to the image file (JPEG, PNG or BMP).
+              If this path is not specified, the Gorba logo is used instead.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SystemConfig">
+    <xs:annotation>
+      <xs:documentation>
+        All configuration parameters that are valid for the entire system (OS) and not a specific application.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" default="true" name="EnableReboot" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Development parameter that should only be changed when running System Manager on a regular employee PC.
+            If this is set to false, every action that would reboot the system, would actually just exit System Manager.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RebootAt" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Time of day at which the system should perform an automatic reboot. Format: HH:mm:ss
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RebootAfter" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            Time after which the system should perform an automatic reboot.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="ShutDownSplashScreenVisibleTime" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            The time for which the splash screen is visible during shutdown.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="true" name="KickWatchdog" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Development parameter that should only be changed for testing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IgnitionHoldTime" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>
+            The time to wait until the system is shut down when ignition is removed.
+            If ignition is turned on again during the given timeout, the system will not shut down.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RamLimit" type="SystemRamLimitConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the amount of free RAM available before given actions are performed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="CpuLimit" type="CpuLimitConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of the amount of CPU time that can be used by the system
+            before given actions are performed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DiskLimits" type="DiskLimitConfigList">
+        <xs:annotation>
+          <xs:documentation>
+            List of configurations of the amount of free disk space available before given actions are performed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="PreventPopups" type="PreventPopupsConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Popup window blocking configuration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DiskLimitConfigList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Disk" type="DiskLimitConfig">
+        <xs:annotation>
+          <xs:documentation>
+            List of configurations of the amount of free disk space available before given actions are performed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if disk limit observation is enabled. All items in this config will be disabled
+          if this attribute is set to false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PreventPopupsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Popup window blocking configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Popup" type="PopupConfig">
+        <xs:annotation>
+          <xs:documentation>
+            List of popups to block.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if popup blocking is enabled.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CheckInterval" type="xs:duration">
+      <xs:annotation>
+        <xs:documentation>
+          Interval at which to check if any of the given popups are visible.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PopupConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration for a single popup window that should be prevented.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="ClassName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The class name of the window to close.
+          If the window should be searched by WindowName only, don't specify this attribute.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="WindowName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The window name (caption) of the window to close.
+          If the window should be searched by searched by ClassName only, don't specify this attribute.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfApplicationConfigBase">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Process" nillable="true" type="ProcessConfig" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Component" nillable="true" type="ComponentConfig" />
+    </xs:choice>
+  </xs:complexType>
+</xs:schema>

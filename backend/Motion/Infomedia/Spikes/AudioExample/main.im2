@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Infomedia Version="2.0">
+  <PhysicalScreens>
+    <PhysicalScreen Name="AudioScreen" Type="Audio" Width="0" Height="0" />
+  </PhysicalScreens>
+
+  <VirtualDisplays>
+    <VirtualDisplay Name="AudioDisplay" CyclePackage="AudioPackage" Width="0" Height="0"/>
+  </VirtualDisplays>
+
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MasterCycle">
+        <MasterSection Duration="70000" Layout="MasterLayout" />
+      </MasterCycle>
+    </MasterCycles>
+
+    <MasterEventCycles />
+
+    <MasterLayouts>
+      <MasterLayout Name="MasterLayout">
+        <PhysicalScreen Ref="AudioScreen">
+          <VirtualDisplay Ref="AudioDisplay" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+
+  <CyclePackages>
+    <CyclePackage Name="AudioPackage">
+      <StandardCycles>
+        <StandardCycle Ref="MainCycle" />
+      </StandardCycles>
+
+      <EventCycles>
+        <EventCycle Ref="NextStopCycle" />
+        <EventCycle Ref="WelcomeCycle" />
+        <EventCycle Ref="TextToSpeechCycle" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="MainCycle">
+        <StandardSection Duration="100000" Layout="MainLayout" />
+      </StandardCycle>
+    </StandardCycles>
+
+    <EventCycles>
+      <EventCycle Name="WelcomeCycle">
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </Trigger>
+        <Enabled>
+          <IntegerCompare Begin="100" End="199">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="0.1" Layout="WelcomeLayout" />
+      </EventCycle>
+      
+      <EventCycle Name="NextStopCycle">
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="10" Row="0" />
+        </Trigger>
+        <Enabled>
+          <IntegerCompare Begin="1" End="9999">
+            <Generic Lang="0" Table="10" Column="10" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="0.1" Layout="NextStopLayout" />
+      </EventCycle>
+      
+      <EventCycle Name="TextToSpeechCycle">
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="8" Row="0" />
+        </Trigger>
+        <Enabled>
+          <IntegerCompare Begin="200" End="299">
+            <Generic Lang="0" Table="10" Column="8" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+
+        <StandardSection Duration="0.1" Layout="TextToSpeechLayout" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+
+  <Layouts>
+    <Layout Name="MainLayout">
+      <Resolution Width="0" Height="0">
+      </Resolution>
+    </Layout>
+    <Layout Name="WelcomeLayout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Priority="10" Volume="80">
+          <AudioFile Filename="Audio\0101.mp3" />
+          <AudioFile Filename="Audio\6045.mp3" />
+          <AudioFile Filename="Audio\6046.mp3" />
+          <AudioPause Duration="PT1.5S" />
+          <AudioFile Filename="Audio\6044.mp3" />
+          <AudioFile Filename="Audio\6031.mp3" />
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+    <Layout Name="NextStopLayout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Priority="20" Volume="80">
+          <AudioFile Filename="Audio\0101.mp3" />
+          <AudioFile Filename="Audio\6044.mp3" />
+          <AudioFile>
+            <Filename>
+              <Format Format="Audio\{0:0000}.mp3">
+                <Generic Lang="0" Table="10" Column="10" Row="0" />
+              </Format>
+            </Filename>
+          </AudioFile>
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+    <Layout Name="TextToSpeechLayout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Priority="10" Volume="80">
+          <AudioFile Filename="Audio\0101.mp3" />
+          <TextToSpeech Voice="Julia22k_HQ" Value="Nächste Haltestelle: Hauptbahnhof" />
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+  </Layouts>
+
+  <Pools>
+  </Pools>
+
+  <Fonts>
+  </Fonts>
+</Infomedia>

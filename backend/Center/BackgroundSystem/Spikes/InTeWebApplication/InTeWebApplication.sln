@@ -1,0 +1,141 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InTeWebApplication", "InTeWebApplication\InTeWebApplication.csproj", "{564EB2CB-1F8A-4277-B94F-E9AC772BA405}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{8E844F72-D602-4522-9C99-9C1B71D5FE6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel", "..\..\..\Common\Source\ServiceModel\ServiceModel.csproj", "{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Client", "..\..\..\Common\Source\Client\Center.Common.Client.csproj", "{5FC54EA9-187A-471E-889D-3D983E65B217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus", "..\..\..\Common\Source\ServiceBus\ServiceBus.csproj", "{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InTeController", "InTeController\InTeController.csproj", "{B8EC0EC1-3B3A-41AF-AF06-6A8EF74D5533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InTeWebApplication.ServiceModel", "ServiceModel\InTeWebApplication.ServiceModel.csproj", "{02680B11-47E1-4933-B8CC-14BD9F8B3373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Update.ServiceModel", "..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj", "{989648EE-7505-44B4-AF06-432554242964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Update", "..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj", "{E976240D-8A45-486D-B485-6D26AEF71A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = InTeWebApplication\\InTeWebApplication.csproj
+		SccProjectName1 = InTeWebApplication
+		SccLocalPath1 = InTeWebApplication
+		SccProjectUniqueName2 = ..\\..\\..\\Common\\Source\\ServiceModel\\ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName2 = InTeWebApplication.sln
+		SccProjectName2 = ../../../Common/Source/ServiceModel
+		SccLocalPath2 = ..\\..\\..\\Common\\Source\\ServiceModel
+		SccProjectUniqueName3 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = InTeWebApplication.sln
+		SccProjectName3 = ../../../../Common/Configuration/Source/Core
+		SccLocalPath3 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName4 = ..\\..\\..\\Common\\Source\\Client\\Center.Common.Client.csproj
+		SccProjectTopLevelParentUniqueName4 = InTeWebApplication.sln
+		SccProjectName4 = ../../../Common/Source/Client
+		SccLocalPath4 = ..\\..\\..\\Common\\Source\\Client
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName5 = InTeWebApplication.sln
+		SccProjectName5 = ../../../../Common/Utility/Source/Compatibility
+		SccLocalPath5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName6 = ..\\..\\..\\Common\\Source\\ServiceBus\\ServiceBus.csproj
+		SccProjectTopLevelParentUniqueName6 = InTeWebApplication.sln
+		SccProjectName6 = ../../../Common/Source/ServiceBus
+		SccLocalPath6 = ..\\..\\..\\Common\\Source\\ServiceBus
+		SccProjectUniqueName7 = InTeController\\InTeController.csproj
+		SccProjectName7 = InTeController
+		SccLocalPath7 = InTeController
+		SccProjectUniqueName8 = ServiceModel\\InTeWebApplication.ServiceModel.csproj
+		SccProjectName8 = ServiceModel
+		SccLocalPath8 = ServiceModel
+		SccProjectUniqueName9 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel\\Common.Update.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName9 = InTeWebApplication.sln
+		SccProjectName9 = ../../../../Common/Update/Source/ServiceModel
+		SccLocalPath9 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel
+		SccProjectUniqueName10 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Update\\Configuration.Update.csproj
+		SccProjectTopLevelParentUniqueName10 = InTeWebApplication.sln
+		SccProjectName10 = ../../../../Common/Configuration/Source/Update
+		SccLocalPath10 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Update
+		SccProjectUniqueName11 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName11 = InTeWebApplication.sln
+		SccProjectName11 = ../../../../Common/Utility/Source/Core
+		SccLocalPath11 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{564EB2CB-1F8A-4277-B94F-E9AC772BA405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564EB2CB-1F8A-4277-B94F-E9AC772BA405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564EB2CB-1F8A-4277-B94F-E9AC772BA405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564EB2CB-1F8A-4277-B94F-E9AC772BA405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8EC0EC1-3B3A-41AF-AF06-6A8EF74D5533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8EC0EC1-3B3A-41AF-AF06-6A8EF74D5533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8EC0EC1-3B3A-41AF-AF06-6A8EF74D5533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8EC0EC1-3B3A-41AF-AF06-6A8EF74D5533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02680B11-47E1-4933-B8CC-14BD9F8B3373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02680B11-47E1-4933-B8CC-14BD9F8B3373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02680B11-47E1-4933-B8CC-14BD9F8B3373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02680B11-47E1-4933-B8CC-14BD9F8B3373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{989648EE-7505-44B4-AF06-432554242964} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{E976240D-8A45-486D-B485-6D26AEF71A0C} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {8E844F72-D602-4522-9C99-9C1B71D5FE6F}
+	EndGlobalSection
+EndGlobal

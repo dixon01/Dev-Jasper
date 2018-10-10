@@ -1,0 +1,29 @@
+<propertyGrid:PropertyGridEditor x:Class="Gorba.Center.Common.Wpf.Views.Components.PropertyGrid.PropertyGridTextEditor"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                             xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid"
+                             mc:Ignorable="d"
+                                 x:Name="Root"
+                             d:DataContext="{d:DesignInstance propertyGrid:PropertyGridItemDataSource}">
+    <propertyGrid:PropertyGridEditor.Resources>
+        <Style TargetType="TextBox" x:Key="TextBoxWithValidation" BasedOn="{StaticResource MediaTextBoxStyle}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </propertyGrid:PropertyGridEditor.Resources>
+
+    <TextBox Text="{Binding Path=Value, Mode=TwoWay, ValidatesOnDataErrors=True}"
+             x:Name="PropertyGridTextBox"
+             Padding="2"
+             Style="{StaticResource TextBoxWithValidation}"
+             TextChanged="PropertyGridTextBox_OnTextChanged"
+             GotKeyboardFocus="PropertyGridTextBox_OnGotKeyboardFocus"
+             PreviewLostKeyboardFocus="PropertyGridTextBox_OnLostFocus"
+             KeyUp="PropertyGridTextBox_OnKeyUp"/>
+</propertyGrid:PropertyGridEditor>

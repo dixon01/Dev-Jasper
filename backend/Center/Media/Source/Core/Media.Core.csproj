@@ -1,0 +1,1626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4FA22905-460B-4016-8F84-F0AA961785E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Media.Core</RootNamespace>
+    <AssemblyName>Gorba.Center.Media.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\..\..\3rdParty\ClosedXml\v0.69.1\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005">
+      <HintPath>..\..\..\..\3rdParty\DirectShowLib\2.1\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>../../../../3rdParty/Microsoft.DirectX/1.0.2902/Microsoft.DirectX.Direct3D.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\System.Windows.Interactivity\v2.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="CommandCompositionKeys.cs" />
+    <Compile Include="Configuration\MasterLayout.cs" />
+    <Compile Include="Configuration\MediaConfiguration.cs">
+      <DependentUpon>MediaConfiguration.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\PhysicalScreenSettings.cs" />
+    <Compile Include="Configuration\PhysicalScreenTypeConfig.cs" />
+    <Compile Include="Configuration\ResolutionConfiguration.cs" />
+    <Compile Include="Controllers\ChangeHistoryController.cs" />
+    <Compile Include="Controllers\EditorControllers\AudioEditorController.cs" />
+    <Compile Include="Controllers\EditorControllers\GeneralEditorController.cs" />
+    <Compile Include="Controllers\EditorControllers\TftEditorController.cs" />
+    <Compile Include="Controllers\EditorControllers\LedEditorController.cs" />
+    <Compile Include="Controllers\EditorControllers\GraphicalEditorControllerBase.cs" />
+    <Compile Include="Controllers\EditorControllers\EditorControllerBase.cs" />
+    <Compile Include="Controllers\IChangeHistoryController.cs" />
+    <Compile Include="Controllers\ILayoutController.cs" />
+    <Compile Include="Controllers\INavigationController.cs" />
+    <Compile Include="Controllers\IResourceController.cs" />
+    <Compile Include="Controllers\ICsvMappingController.cs" />
+    <Compile Include="Controllers\ITextReplacementController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\ProjectStates\CheckedInState.cs" />
+    <Compile Include="Controllers\ProjectStates\IProjectControllerContext.cs" />
+    <Compile Include="Controllers\ProjectStates\IState.cs" />
+    <Compile Include="Controllers\ProjectStates\ModifiedState.cs" />
+    <Compile Include="Controllers\ProjectStates\SavedState.cs" />
+    <Compile Include="Controllers\ProjectStates\NoProjectState.cs" />
+    <Compile Include="Controllers\ProjectStates\StateBase.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\CsvMappingController.cs" />
+    <Compile Include="Controllers\TextReplacementController.cs" />
+    <Compile Include="Controllers\UnitConfigurationReader.cs" />
+    <Compile Include="Converters\BooleanToFontStyleConverter.cs" />
+    <Compile Include="Converters\CanExecuteToBoolConverter.cs" />
+    <Compile Include="Converters\IsCsvMappingEvalFileNameConverter.cs" />
+    <Compile Include="Converters\TimeSpanToDateTimeConverter.cs" />
+    <Compile Include="Converters\IsTimeEvalConverter.cs" />
+    <Compile Include="Converters\IsDateEvalConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\VersionToStringConverter.cs" />
+    <Compile Include="DataViewModels\Compatibility\ExportCompatibilityParameters.cs" />
+    <Compile Include="DataViewModels\Compatibility\ICompatibilityChecker.cs" />
+    <Compile Include="DataViewModels\Compatibility\SoftwareComponentVersion.cs" />
+    <Compile Include="DataViewModels\Compatibility\CompatibilityCheckParameters.cs" />
+    <Compile Include="DataViewModels\Compatibility\CompatibilityChecker.cs" />
+    <Compile Include="DataViewModels\Compatibility\FeatureComponentRequirements.cs" />
+    <Compile Include="DataViewModels\Eval\CodeConversionEvalDataViewModel.cs" />
+    <Compile Include="DataViewModels\Extensions.cs" />
+    <Compile Include="DataViewModels\Layout\ElementDataViewModel.tt.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElementDataViewModel.tt.disabled</DependentUpon>
+    </Compile>
+    <Compile Include="DataViewModels\Layout\FontDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\LiveStreamElementDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\RssTickerElementDataViewModel.cs" />
+    <Compile Include="DataViewModels\CsvMappingDataViewModel.cs" />
+    <Compile Include="Exceptions\ReasonException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="History\CloneLayoutHistoryEntry.cs" />
+    <Compile Include="History\CreateCsvMappingHistoryEntry.cs" />
+    <Compile Include="History\DeleteCsvMappingHistoryEntry.cs" />
+    <Compile Include="History\HistoryHelper.cs" />
+    <Compile Include="Interaction\ProjectListPrompt.cs" />
+    <Compile Include="Models\Layout\LiveStreamElementDataModel.cs" />
+    <Compile Include="Models\Layout\RssTickerElementDataModel.cs" />
+    <Compile Include="Models\Options\LocalResourceOptionCategory.cs" />
+    <Compile Include="Models\Options\LocalResourceOptionGroup.cs" />
+    <Compile Include="Models\Options\RendererOptionCategory.cs" />
+    <Compile Include="Models\Options\RendererOptionGroup.cs" />
+    <Compile Include="ProjectManagement\ElementReferenceManagerBase.cs" />
+    <Compile Include="ProjectManagement\ImageSectionReferenceManager.cs" />
+    <Compile Include="ProjectManagement\VideoSectionReferenceManager.cs" />
+    <Compile Include="ProjectManagement\PoolReferenceManager.cs" />
+    <Compile Include="ProjectManagement\TextualReplacementElementReferenceManager.cs" />
+    <Compile Include="ProjectManagement\AnalogClockElementReferenceManager.cs" />
+    <Compile Include="ProjectManagement\AudioElementReferenceManager.cs" />
+    <Compile Include="ProjectManagement\TextElementReferenceManager.cs" />
+    <Compile Include="ProjectManagement\ImageElementReferenceManager.cs" />
+    <Compile Include="ProjectManagement\VideoElementReferenceManager.cs" />
+    <Compile Include="Models\CsvMappingDataModel.cs" />
+    <Compile Include="Resources\MediaStrings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaStrings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Simulation\Composers\RssTickerComposer.cs" />
+    <Compile Include="ViewModels\PasteConfiguration.cs" />
+    <Compile Include="ViewModels\CsvEditorViewModel.cs" />
+    <Compile Include="ViewModels\GraphicalEditorViewModelBase.cs" />
+    <Compile Include="ViewModels\Options\LocalResourceOptionCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Options\LocalResourceOptionGroupViewModel.cs" />
+    <Compile Include="ViewModels\Options\RendererOptionCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Options\RendererOptionGroupViewModel.cs" />
+    <Compile Include="ViewModels\UpdateGroupItemViewModel.cs" />
+    <Compile Include="ViewModels\SnapConfiguration.cs" />
+    <Compile Include="ViewModels\TftEditorToolbarViewModel.cs" />
+    <Compile Include="ViewModels\SelectableItemViewModel.cs" />
+    <Compile Include="Views\Editors\CsvEditor.xaml.cs">
+      <DependentUpon>CsvEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\EditorViewBase.cs" />
+    <Compile Include="Views\Editors\GraphicalEditorViewBase.cs" />
+    <Compile Include="Controllers\IImportController.cs" />
+    <Compile Include="Controllers\ILayerEditorController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\IPhysicalScreenController.cs" />
+    <Compile Include="Controllers\LayerEditorController.cs" />
+    <Compile Include="Controllers\PhysicalScreenController.cs" />
+    <Compile Include="Converters\ConsistencyToSeverityConverter.cs" />
+    <Compile Include="Converters\AudioPauseLabelConverter.cs" />
+    <Compile Include="Converters\DeleteButtonVisibilityConverter.cs" />
+    <Compile Include="Converters\LedDotLengthConverter.cs" />
+    <Compile Include="Converters\FontFaceToFontFamilyConverter.cs" />
+    <Compile Include="Converters\LedDotPositionConverter.cs" />
+    <Compile Include="Converters\NotNullConverter.cs" />
+    <Compile Include="Converters\RemovePathConverter.cs" />
+    <Compile Include="Converters\CycleRefTooltipConverter.cs" />
+    <Compile Include="Converters\HasAnimationConverter.cs" />
+    <Compile Include="Converters\ResourceProgressConverter.cs" />
+    <Compile Include="Converters\ShowCycleRefIconConverter.cs" />
+    <Compile Include="Converters\TimeSpanToIntegerConverter.cs" />
+    <Compile Include="Converters\NotOfTypeConverter.cs" />
+    <Compile Include="DataViewModels\AnimationDataViewModel.cs" />
+    <Compile Include="DataViewModels\Consistency\ConsistencyChecker.cs" />
+    <Compile Include="DataViewModels\Consistency\ConsistencyMessageDataViewModel.cs" />
+    <Compile Include="DataViewModels\Consistency\Severity.cs" />
+    <Compile Include="DataViewModels\CustomPlacementTarget.cs" />
+    <Compile Include="Controllers\ICodeConversionController.cs" />
+    <Compile Include="Controllers\IFormulaManagerController.cs" />
+    <Compile Include="Controllers\FormulaManagerController.cs" />
+    <Compile Include="Controllers\CycleController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Controllers\FormulaController.cs" />
+    <Compile Include="Controllers\ICycleController.cs" />
+    <Compile Include="Controllers\IExportController.cs" />
+    <Compile Include="Controllers\IFormulaController.cs" />
+    <Compile Include="Controllers\IMediaApplicationController.cs" />
+    <Compile Include="Controllers\IMediaShellController.cs" />
+    <Compile Include="Controllers\IProjectController.cs" />
+    <Compile Include="Controllers\EditorControllers\PostUndoController.cs" />
+    <Compile Include="Controllers\MediaApplicationController.cs" />
+    <Compile Include="Controllers\MediaShellController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ResizeController.cs" />
+    <Compile Include="Controllers\VideoDetector.cs" />
+    <Compile Include="Controllers\ZoomCalculator.cs" />
+    <Compile Include="Converters\AlignmentConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\CenterConverter.cs" />
+    <Compile Include="Converters\ColumnNameTranslationConverter.cs" />
+    <Compile Include="Converters\FindReferenceConverter.cs" />
+    <Compile Include="Converters\FontWeightConverter.cs" />
+    <Compile Include="Converters\HelpLinkConverter.cs" />
+    <Compile Include="Converters\IsTypeOfConverter.cs" />
+    <Compile Include="Converters\DataValueToValueConverter.cs" />
+    <Compile Include="Converters\DataViewModelTypeToNameConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\EvaluationPropertyListConverter.cs" />
+    <Compile Include="Converters\EvaluationToStringConverter.cs" />
+    <Compile Include="Converters\FilenameConverter.cs" />
+    <Compile Include="Converters\FilenameToResourceFullFilenameConverter.cs" />
+    <Compile Include="Converters\FilepathToImageConverter.cs" />
+    <Compile Include="Converters\HasFormulaConverter.cs" />
+    <Compile Include="Converters\HelpTextConverter.cs" />
+    <Compile Include="Converters\ImageCacheConverter.cs" />
+    <Compile Include="Converters\IsListConverter.cs" />
+    <Compile Include="Converters\LanguageNameTranslationConverter.cs" />
+    <Compile Include="Converters\DivideValueConverter.cs" />
+    <Compile Include="Converters\EditorToolbarSelectionConverter.cs" />
+    <Compile Include="Converters\EditorToolConverter.cs" />
+    <Compile Include="Converters\EqualsConverter.cs" />
+    <Compile Include="Converters\GraphicalElementType2ImageConverter.cs" />
+    <Compile Include="Converters\IsInListConverter.cs" />
+    <Compile Include="Converters\ListAndItemAggregationConverter.cs" />
+    <Compile Include="Converters\NotZeroConverter.cs" />
+    <Compile Include="Converters\PercentageConverter.cs" />
+    <Compile Include="Converters\TreeViewFolderConverter.cs" />
+    <Compile Include="DataViewModels\EdgeSnapData.cs" />
+    <Compile Include="DataViewModels\Eval\AndEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\BinaryOperatorEvalDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Eval\CaseDynamicPropertyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\CollectionEvalDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Eval\ConstantEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\ContainerEvalDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\Eval\CsvMappingEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\DayOfWeekEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\IntegerCompareEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\MatchDynamicPropertyDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\RegexReplaceEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\StringCompareEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\SwitchEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\TextToImageEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\TimeEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\DateEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\GenericEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\FormatEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\IfEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\NotEqualsEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\EqualsEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\NotEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\LessThanEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\LessThanOrEqualEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\GreaterThanOrEqualEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\GreaterThanEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\OrEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\ReflectionWrapper.cs" />
+    <Compile Include="Converters\ResourceInfoToMediaElementConverter.cs" />
+    <Compile Include="Converters\TableNameTranslationConverter.cs" />
+    <Compile Include="Converters\ThumbnailHashToImageConverter.cs" />
+    <Compile Include="Converters\ToggleSourceConverter.cs" />
+    <Compile Include="Converters\ViewModeConverter.cs" />
+    <Compile Include="Converters\ZoomConverter.cs" />
+    <Compile Include="DataViewModels\AnimatedDynamicDataValue{T}.cs" />
+    <Compile Include="DataViewModels\Converters\ResourceFilenameToImageConverter.cs" />
+    <Compile Include="DataViewModels\Converters\MarginConverter.cs" />
+    <Compile Include="DataViewModels\Converters\EditPopupMarginConverter.cs" />
+    <Compile Include="DataViewModels\Converters\DataViewModelConverterBase.cs" />
+    <Compile Include="DataViewModels\DataValue{T}.cs" />
+    <Compile Include="DataViewModels\DataViewModelConverterAttribute.cs" />
+    <Compile Include="DataViewModels\DataViewModels.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\EvalDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\Eval\EvaluationEvalDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Eval\EvaluationPropertyDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\AnalogClockElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\AudioElementDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Layout\AudioFileElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\AudioOutputElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\DynamicTtsElementDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\ImageListElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\LayoutElementDataViewModelBase.cs" />
+    <Compile Include="DataViewModels\Layout\RectangleElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\VideoElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Layout\DictionaryValueDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\ImageElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\MediaConfigurationDataViewModel.cs" />
+    <Compile Include="DataViewModels\Presentation\CycleNavigationTreeViewDataViewModel.cs" />
+    <Compile Include="DataViewModels\Presentation\CyclePackageConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Cycle\CycleConfigDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Cycle\CycleRefConfigDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Cycle\CycleType.cs" />
+    <Compile Include="DataViewModels\Presentation\Cycle\EventCycleConfigDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Cycle\GenericTriggerConfigDataViewModel.cs" />
+    <Compile Include="DataViewModels\Presentation\InfomediaConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\LayoutConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\DynamicDataValue{T}.cs" />
+    <Compile Include="DataViewModels\IDataViewModelConverter.cs" />
+    <Compile Include="DataViewModels\Layout\DynamicTextElementDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\GraphicalElementDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Layout\GraphicalElementGroupDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\StaticTextElementDataViewModel.cs" />
+    <Compile Include="DataViewModels\Layout\TextElementDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\LayoutResolutionCollection.cs" />
+    <Compile Include="DataViewModels\Presentation\LayoutCycleSectionRefDataViewModel.cs" />
+    <Compile Include="DataViewModels\Presentation\PhysicalScreenConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\PhysicalScreenRefConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\PoolConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Section\ImageSectionConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Section\PoolSectionConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Section\SectionConfigDataViewModelBase.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\Section\SectionType.cs" />
+    <Compile Include="DataViewModels\Presentation\Section\VideoSectionConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\VirtualDisplayConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Presentation\VirtualDisplayRefConfigDataViewModel.partial.cs" />
+    <Compile Include="DataViewModels\Project\DocumentDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\DocumentReadOnlyDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\DocumentVersionReadOnlyDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\IUsageTrackedObject.cs" />
+    <Compile Include="DataViewModels\Project\MediaProjectDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\RecentProjectDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\ResourceInfoDataViewModel.cs" />
+    <Compile Include="DataViewModels\Project\ResourceReferenceDataViewModel.cs" />
+    <Compile Include="DataViewModels\TextualReplacementDataViewModel.cs" />
+    <Compile Include="DataViewModels\TreeViewFolderItem.cs" />
+    <Compile Include="Extensions\AnimateGridLengthAnimation.cs" />
+    <Compile Include="Extensions\CursorExtension.cs" />
+    <Compile Include="Extensions\DragDropExtension\AudioDragHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\AudioOutputFrameDropHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\DefaultDragHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\DefaultDropHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\DragAdorner.cs" />
+    <Compile Include="Extensions\DragDropExtension\DragDropHelper.cs" />
+    <Compile Include="Extensions\DragDropExtension\DragInfo.cs" />
+    <Compile Include="Extensions\DragDropExtension\DropInfo.cs" />
+    <Compile Include="Extensions\DragDropExtension\DropTargetAdorner.cs" />
+    <Compile Include="Extensions\DragDropExtension\DropTargetAdorners.cs" />
+    <Compile Include="Extensions\DragDropExtension\DropTargetHighlightAdorner.cs" />
+    <Compile Include="Extensions\DragDropExtension\DropTargetInsertionAdorner.cs" />
+    <Compile Include="Extensions\DragDropExtension\HitTestUtilities.cs" />
+    <Compile Include="Extensions\DragDropExtension\IconFactory.cs" />
+    <Compile Include="Extensions\DragDropExtension\IDragInfo.cs" />
+    <Compile Include="Extensions\DragDropExtension\IDragSource.cs" />
+    <Compile Include="Extensions\DragDropExtension\IDropInfo.cs" />
+    <Compile Include="Extensions\DragDropExtension\IDropTarget.cs" />
+    <Compile Include="Extensions\DragDropExtension\ItemsControlExtensions.cs" />
+    <Compile Include="Extensions\DragDropExtension\LayerEditorDropHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\RelativeInsertPosition.cs" />
+    <Compile Include="Extensions\DragDropExtension\ReusableListDropHandler.cs" />
+    <Compile Include="Extensions\DragDropExtension\TypeUtilities.cs" />
+    <Compile Include="Extensions\DragDropExtension\VisualTreeExtensions.cs" />
+    <Compile Include="Extensions\EnumerationExtension.cs" />
+    <Compile Include="Extensions\FileInfoExtensions.cs" />
+    <Compile Include="Extensions\FocusExtension.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
+    <Compile Include="Extensions\GridLengthAnimation.cs" />
+    <Compile Include="Extensions\Linq2XmlExtensions.cs" />
+    <Compile Include="Extensions\MouseHandlingExtensions.cs" />
+    <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="Extensions\ExtendedObservableCollection{T}.cs" />
+    <Compile Include="Extensions\ReferenceExtensions.cs" />
+    <Compile Include="Extensions\TextChangedBehavior.cs" />
+    <Compile Include="Extensions\TranslateExtension.cs" />
+    <Compile Include="Extensions\TreeViewHelper.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Formulas\BinaryExpressionNode.cs" />
+    <Compile Include="Formulas\BinaryExpressionNode{TLeft,TRight}.cs" />
+    <Compile Include="Formulas\BinaryOperation.cs" />
+    <Compile Include="Formulas\CsvMappingCallNode.cs" />
+    <Compile Include="Formulas\SwitchCallNode.cs" />
+    <Compile Include="Formulas\GenericNode.cs" />
+    <Compile Include="Formulas\StarExpressionNode.cs" />
+    <Compile Include="Formulas\FormulaGrammar.cs" />
+    <Compile Include="Formulas\FormulaModelGenerator.cs" />
+    <Compile Include="Formulas\FormulaVisitor.cs" />
+    <Compile Include="Formulas\MethodCallNode.cs" />
+    <Compile Include="Formulas\ParseException.cs" />
+    <Compile Include="Formulas\ParseTreeExtensions.cs" />
+    <Compile Include="History\CloneCycleHistoryEntry.cs" />
+    <Compile Include="History\ClonePhysicalScreenHistoryEntry.cs" />
+    <Compile Include="History\CloneSectionHistoryEntry.cs" />
+    <Compile Include="History\ClonePredefinedFormulaHistoryEntry.cs" />
+    <Compile Include="History\AddListElementHistoryEntry{T}.cs" />
+    <Compile Include="History\CreateCycleReferenceHistoryEntry.cs" />
+    <Compile Include="History\CreatePhysicalScreenHistoryEntry.cs" />
+    <Compile Include="History\DeleteListElementEntry{T}.cs" />
+    <Compile Include="History\DeleteLayoutHistoryEntry.cs" />
+    <Compile Include="History\CreateLayoutHistoryEntry.cs" />
+    <Compile Include="History\DeletePhysicalScreenHistoryEntry.cs" />
+    <Compile Include="History\ListElementHistoryEntryBase.cs" />
+    <Compile Include="History\OrderAudioElementsHistoryEntry.cs" />
+    <Compile Include="History\PasteElementsHistoryEntry.cs" />
+    <Compile Include="History\RenameCyclePackageHistoryEntry.cs" />
+    <Compile Include="History\RenamePhysicalScreenHistoryEntry.cs" />
+    <Compile Include="History\RenamePredefinedFormulaHistoryEntry.cs" />
+    <Compile Include="History\DeletePredefinedFormulaHistoryEntry.cs" />
+    <Compile Include="History\CreatePredefinedFormulaHistoryEntry.cs" />
+    <Compile Include="History\DeleteReplacementHistoryEntry.cs" />
+    <Compile Include="History\CreateReplacementHistoryEntry.cs" />
+    <Compile Include="History\DeleteSectionsHistoryEntry.cs" />
+    <Compile Include="History\DeleteCyclesHistoryEntry.cs" />
+    <Compile Include="History\CreateSectionHistoryEntry.cs" />
+    <Compile Include="History\CreateCycleHistoryEntry.cs" />
+    <Compile Include="History\CreateLayoutElementHistoryEntry.cs" />
+    <Compile Include="History\DeleteLayoutElementsHistoryEntry.cs" />
+    <Compile Include="History\MoveLayoutElementsHistoryEntry.cs" />
+    <Compile Include="History\OrderLayerHistoryEntry.cs" />
+    <Compile Include="History\RenameCycleHistoryEntry.cs" />
+    <Compile Include="History\RenameLayoutHistoryEntry.cs" />
+    <Compile Include="History\RenameSectionHistoryEntry.cs" />
+    <Compile Include="History\ResizeLayoutElementsHistoryEntry.cs" />
+    <Compile Include="History\RestoreSelectionElementHistoryBase.cs" />
+    <Compile Include="History\UpdateViewModelHistoryEntry.cs" />
+    <Compile Include="Interaction\AudioDictionarySelectorPrompt.cs" />
+    <Compile Include="Interaction\AudioFileSelectionPrompt.cs" />
+    <Compile Include="Interaction\ConsistencyCheckPrompt.cs" />
+    <Compile Include="Interaction\AnimationEditorPrompt.cs" />
+    <Compile Include="Interaction\AnimationNavigationEditorPrompt.cs" />
+    <Compile Include="Interaction\CreatePhysicalScreenPrompt.cs" />
+    <Compile Include="Interaction\DictionaryTriggerEditorSelectorPrompt.cs" />
+    <Compile Include="Interaction\FormulaNavigationEditorPrompt.cs" />
+    <Compile Include="Interaction\FormulaManagerPrompt.cs" />
+    <Compile Include="Interaction\FormulaResolutionEditorPrompt.cs" />
+    <Compile Include="Interaction\IPlacementTarget.cs" />
+    <Compile Include="Interaction\MenuSelectMediaPrompt.cs" />
+    <Compile Include="Interaction\ShowCycleNavigationPrompt.cs" />
+    <Compile Include="Interaction\ShowSectionNavigationPrompt.cs" />
+    <Compile Include="Interaction\TextReplacementPrompt.cs" />
+    <Compile Include="Interaction\ImageListDictionaryPrompt.cs" />
+    <Compile Include="Interaction\UpdateCycleDetailsPrompt.cs" />
+    <Compile Include="Interaction\TriggerNavigationEditorPrompt.cs" />
+    <Compile Include="Interaction\SelectCycleTypePrompt.cs" />
+    <Compile Include="Interaction\SelectSectionTypePrompt.cs" />
+    <Compile Include="Interaction\UpdateLedDisplayPrompt.cs" />
+    <Compile Include="Interaction\UpdateResolutionDetailsPrompt.cs" />
+    <Compile Include="Interaction\UpdateSectionDetailsPrompt.cs" />
+    <Compile Include="Interaction\ViewMenuPrompt.cs" />
+    <Compile Include="Interaction\DictionarySelectorPrompt.cs" />
+    <Compile Include="Interaction\FormulaEditorPrompt.cs" />
+    <Compile Include="Interaction\DialogDirectoryTypes.cs" />
+    <Compile Include="Interaction\ResourceManagementPrompt.cs" />
+    <Compile Include="Interaction\EditDynamicTextPrompt.cs" />
+    <Compile Include="Interaction\EditMenuPrompt.cs" />
+    <Compile Include="Interaction\LayoutNavigationPrompt.cs" />
+    <Compile Include="Interaction\ResolutionNavigationPrompt.cs" />
+    <Compile Include="Interaction\SelectMediaPrompt.cs" />
+    <Compile Include="Interaction\UpdateLayoutDetailsPrompt.cs" />
+    <Compile Include="Interaction\VirtualDisplayNavigationPrompt.cs" />
+    <Compile Include="MediaBootstrapper.cs" />
+    <Compile Include="Models\AnimatedDynamicPropertyDataModel.cs" />
+    <Compile Include="Models\DataModelBase.cs" />
+    <Compile Include="Models\DataModels.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicPropertyDataModel.cs" />
+    <Compile Include="Models\Eval\EvalDataModelBase.cs" />
+    <Compile Include="Models\IMediaApplicationState.cs" />
+    <Compile Include="Models\Layout\AudioElementDataModelBase.partial.cs" />
+    <Compile Include="Models\Layout\AudioOutputElementDataModel.partial.cs" />
+    <Compile Include="Models\Layout\ClipboardListDataModel.cs" />
+    <Compile Include="Models\Layout\DictionaryValueElementDataModel.cs" />
+    <Compile Include="Models\Layout\Dictionary\ColumnDataModel.cs" />
+    <Compile Include="Models\Layout\Dictionary\LanguageDataModel.cs" />
+    <Compile Include="Models\Layout\Dictionary\TableDataModel.cs" />
+    <Compile Include="Models\Layout\DynamicTextElementDataModel.cs" />
+    <Compile Include="Models\Layout\DynamicTtsElementDataModel.cs" />
+    <Compile Include="Models\Layout\GraphicalElementGroupDataModel.cs" />
+    <Compile Include="Models\Layout\ImageListElementDataModel.partial.cs" />
+    <Compile Include="Models\Layout\LayoutElementDataModelBase.cs" />
+    <Compile Include="Models\Layout\StaticTextElementDataModel.cs" />
+    <Compile Include="Models\Layout\VideoElementDataModel.partial.cs" />
+    <Compile Include="Models\MediaApplicationState.cs" />
+    <Compile Include="Models\MediaPool.cs" />
+    <Compile Include="Models\MediaProjectDataModel.cs" />
+    <Compile Include="Models\Presentation\EvaluationConfigDataModel.partial.cs" />
+    <Compile Include="Models\Presentation\Cycle\EventCycleConfigDataModelBase.partial.cs" />
+    <Compile Include="Models\Presentation\Cycle\GenericTriggerConfigDataModel.partial.cs" />
+    <Compile Include="Models\Presentation\VirtualDisplayConfigDataModel.partial.cs" />
+    <Compile Include="Models\Presentation\PhysicalScreenConfigDataModel.partial.cs" />
+    <Compile Include="Models\Presentation\PoolConfigDataModel.partial.cs" />
+    <Compile Include="Models\Presentation\Section\SectionConfigDataModelBase.partial.cs" />
+    <Compile Include="Models\PropertyChangeAnimationDataModel.cs" />
+    <Compile Include="Models\ResourceInfo.cs" />
+    <Compile Include="Models\ResourceReference.cs" />
+    <Compile Include="Models\DataModelSerializer.cs" />
+    <Compile Include="Models\ResourceType.cs" />
+    <Compile Include="Models\TextualReplacementDataModel.cs" />
+    <Compile Include="ProjectManagement\AppDataResourceProvider.cs" />
+    <Compile Include="ProjectManagement\IProjectManager.cs" />
+    <Compile Include="ProjectManagement\IResourceManager.cs" />
+    <Compile Include="ProjectManagement\ProjectManager.cs" />
+    <Compile Include="ProjectManagement\ProjectFile.cs" />
+    <Compile Include="ProjectManagement\ProjectFileMetadata.cs" />
+    <Compile Include="ProjectManagement\ResourceManager.cs" />
+    <Compile Include="ProjectManagement\ResourceMetadata.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ResourceSettings.cs" />
+    <Compile Include="Resources\MediaStrings.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaStrings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MediaStrings.de2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaStrings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MediaStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataViewModels\Dictionary\ColumnDataViewModel.cs" />
+    <Compile Include="DataViewModels\Dictionary\LanguageDataViewModel.cs" />
+    <Compile Include="DataViewModels\Dictionary\DictionaryDataViewModel.cs" />
+    <Compile Include="Simulation\Composers\AnalogClockComposer.partial.cs" />
+    <Compile Include="Simulation\Composers\AnalogClockHandComposer.cs" />
+    <Compile Include="Simulation\Composers\ComposerBase.cs" />
+    <Compile Include="Simulation\Composers\Composers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Composers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Simulation\Composers\DrawableComposerBase.partial.cs" />
+    <Compile Include="Simulation\Composers\FrameComposer.cs" />
+    <Compile Include="Simulation\Composers\IComposer.cs" />
+    <Compile Include="Simulation\Composers\IComposerContext.cs" />
+    <Compile Include="Simulation\Composers\ImageComposer.partial.cs" />
+    <Compile Include="Simulation\Composers\ImageListComposer.partial.cs" />
+    <Compile Include="Simulation\Composers\IPresentableComposer.cs" />
+    <Compile Include="Simulation\Composers\LayoutComposer.cs" />
+    <Compile Include="Simulation\Composers\TextComposer.partial.cs" />
+    <Compile Include="Simulation\Composers\VideoComposer.partial.cs" />
+    <Compile Include="Simulation\DirectXSimulator.cs" />
+    <Compile Include="Simulation\ISimulator.cs" />
+    <Compile Include="Simulation\SimulationManager.cs" />
+    <Compile Include="ViewModels\AnimationTypeDefinition.cs" />
+    <Compile Include="ViewModels\AudioEditorViewModel.cs" />
+    <Compile Include="ViewModels\CommandParameters\AddResourceParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\AddResourceReferenceParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\CreateDocumentVersionParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\CreatePhysicalScreenParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\ExportFileSelectionFilter.cs" />
+    <Compile Include="ViewModels\CommandParameters\ExportParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\PublishDocumentWritableModelParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\RenameProjectParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\CreateProjectParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\CreateSectionParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\MenuNavigationParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\RemoveMediaReferenceParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\RenameReusableEntityParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\SaveAsParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\SelectResourceParameters.cs" />
+    <Compile Include="ViewModels\CycleNavigationViewModel.cs" />
+    <Compile Include="ViewModels\EditorViewModelBase.cs" />
+    <Compile Include="ViewModels\ExportScreenViewModel.cs" />
+    <Compile Include="ViewModels\LedEditorViewModel.cs" />
+    <Compile Include="ViewModels\LedPreviewRenderer.cs" />
+    <Compile Include="ViewModels\SaveAsScreenViewModel.cs" />
+    <Compile Include="ViewModels\ScreenshotEventArgs.cs" />
+    <Compile Include="ViewModels\CommandParameters\MoveElementsCommandParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\ModifiersState.cs" />
+    <Compile Include="ViewModels\CommandParameters\MovementDirection.cs" />
+    <Compile Include="ViewModels\CommandParameters\ResizeElementParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\SelectElementParameters.cs" />
+    <Compile Include="ViewModels\CommandParameters\UpdateEntityParameters.cs" />
+    <Compile Include="DataViewModels\Dictionary\TableDataViewModel.cs" />
+    <Compile Include="ViewModels\ViewModeType.cs" />
+    <Compile Include="ViewModels\EditorToolType.cs" />
+    <Compile Include="ViewModels\IEditorViewModel.cs" />
+    <Compile Include="ViewModels\ILayoutRenderer.cs" />
+    <Compile Include="ViewModels\IMediaShell.cs" />
+    <Compile Include="Interaction\MainMenuPrompt.cs" />
+    <Compile Include="ViewModels\TftEditorViewModel.cs" />
+    <Compile Include="ViewModels\MediaShell.cs" />
+    <Compile Include="ViewModels\MediaShellFactory.cs" />
+    <Compile Include="ViewModels\PreviewLayoutRenderer.cs" />
+    <Compile Include="Views\AdornerThumb.xaml.cs">
+      <DependentUpon>AdornerThumb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\HeightConverter.cs" />
+    <Compile Include="Converters\DecimationConverter.cs" />
+    <Compile Include="Views\Controls\AnimationEditor.xaml.cs">
+      <DependentUpon>AnimationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\LedGridDisplay.xaml.cs">
+      <DependentUpon>LedGridDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\DictionarySelector.xaml.cs">
+      <DependentUpon>DictionarySelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\EditableTextblock.xaml.cs">
+      <DependentUpon>EditableTextblock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataViewModels\Eval\EvaluationTypeDefinition.cs" />
+    <Compile Include="Views\Controls\FontPreview.xaml.cs">
+      <DependentUpon>FontPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\FormulaEditor.xaml.cs">
+      <DependentUpon>FormulaEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\PlaybackControl.xaml.cs">
+      <DependentUpon>PlaybackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TextReplaceControl.xaml.cs">
+      <DependentUpon>TextReplaceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\VirtualDisplaySelector.xaml.cs">
+      <DependentUpon>VirtualDisplaySelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\NewEntityButton.xaml.cs">
+      <DependentUpon>NewEntityButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CommandParameters\CreateElementParameters.cs" />
+    <Compile Include="ViewModels\IReusableEntity.cs" />
+    <Compile Include="Converters\ShowGridConverter.cs" />
+    <Compile Include="Converters\ShowConverter.cs" />
+    <Compile Include="Views\Controls\ReusableList.xaml.cs">
+      <DependentUpon>ReusableList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CycleNavigationSelection.cs" />
+    <Compile Include="Views\AudioSkimmingElement.xaml.cs">
+      <DependentUpon>AudioSkimmingElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ZoomIndicator.xaml.cs">
+      <DependentUpon>ZoomIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\LedDynamicTextLayoutElement.xaml.cs">
+      <DependentUpon>LedDynamicTextLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\LedStaticTextLayoutElement.xaml.cs">
+      <DependentUpon>LedStaticTextLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\LiveStreamLayoutElement.xaml.cs">
+      <DependentUpon>LiveStreamLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\RssTickerElement.xaml.cs">
+      <DependentUpon>RssTickerElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LedPreviewRenderer.xaml.cs">
+      <DependentUpon>LedPreviewRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\AudioEditor.xaml.cs">
+      <DependentUpon>AudioEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\LayerEditor.xaml.cs">
+      <DependentUpon>LayerEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\LayoutEditor.xaml.cs">
+      <DependentUpon>LayoutEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editors\LedEditor.xaml.cs">
+      <DependentUpon>LedEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\AnimationEditorDialog.xaml.cs">
+      <DependentUpon>AnimationEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ConsistencyCheckDialog.xaml.cs">
+      <DependentUpon>ConsistencyCheckDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\CreatePhysicalScreenPopup.xaml.cs">
+      <DependentUpon>CreatePhysicalScreenPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\DictionarySelectorDialog.xaml.cs">
+      <DependentUpon>DictionarySelectorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\EditDynamicTextPopup.xaml.cs">
+      <DependentUpon>EditDynamicTextPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\EditMenuDialog.xaml.cs">
+      <DependentUpon>EditMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\FormulaEditorDialog.xaml.cs">
+      <DependentUpon>FormulaEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\LayoutNavigationDialog.xaml.cs">
+      <DependentUpon>LayoutNavigationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\MainMenuDialog.xaml.cs">
+      <DependentUpon>MainMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ResolutionNavigationDialog.xaml.cs">
+      <DependentUpon>ResolutionNavigationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\SelectCycleTypePopup.xaml.cs">
+      <DependentUpon>SelectCycleTypePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\SelectMediaPopup.xaml.cs">
+      <DependentUpon>SelectMediaPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\SelectSectionTypePopup.xaml.cs">
+      <DependentUpon>SelectSectionTypePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\TriggerEditorDialog.xaml.cs">
+      <DependentUpon>TriggerEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ViewMenuDialog.xaml.cs">
+      <DependentUpon>ViewMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AnalogClockLayoutElement.xaml.cs">
+      <DependentUpon>AnalogClockLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AudioDynamicTtsLayoutElement.xaml.cs">
+      <DependentUpon>AudioDynamicTtsLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AudioFileLayoutElement.xaml.cs">
+      <DependentUpon>AudioFileLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AudioOutputFrame.xaml.cs">
+      <DependentUpon>AudioOutputFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AudioPauseLayoutElement.xaml.cs">
+      <DependentUpon>AudioPauseLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\AudioStaticTtsLayoutElement.xaml.cs">
+      <DependentUpon>AudioStaticTtsLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\DynamicTextLayoutElement.xaml.cs">
+      <DependentUpon>DynamicTextLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\EditableLayoutElementBase.cs" />
+    <Compile Include="Views\LayoutElements\FrameLayoutElement.xaml.cs">
+      <DependentUpon>FrameLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\ImageListLayoutElement.xaml.cs">
+      <DependentUpon>ImageListLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\LedImageLayoutElement.xaml.cs">
+      <DependentUpon>LedImageLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\LedRectangleLayoutElement.xaml.cs">
+      <DependentUpon>LedRectangleLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\PictureLayoutElement.xaml.cs">
+      <DependentUpon>PictureLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\StaticTextLayoutElement.xaml.cs">
+      <DependentUpon>StaticTextLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElements\VideoLayoutElement.xaml.cs">
+      <DependentUpon>VideoLayoutElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\ExportScreen.xaml.cs">
+      <DependentUpon>ExportScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\ImportScreen.xaml.cs">
+      <DependentUpon>ImportScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\NewProjectScreen.xaml.cs">
+      <DependentUpon>NewProjectScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\ResourceManagerView.xaml.cs">
+      <DependentUpon>ResourceManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\ProjectListScreen.xaml.cs">
+      <DependentUpon>ProjectListScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu\SaveAsScreen.xaml.cs">
+      <DependentUpon>SaveAsScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbars\AudioEditorToolbar.xaml.cs">
+      <DependentUpon>AudioEditorToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbars\TftEditorToolbar.xaml.cs">
+      <DependentUpon>TftEditorToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormulaManager.xaml.cs">
+      <DependentUpon>FormulaManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SelectableImage.xaml.cs">
+      <DependentUpon>SelectableImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropertyGridContextMenuFactory.cs" />
+    <Compile Include="ViewModels\CommandParameters\TriggerEditorParameters.cs" />
+    <Compile Include="Views\SkimmingElement.xaml.cs">
+      <DependentUpon>SkimmingElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuickEditAdorner.xaml.cs">
+      <DependentUpon>QuickEditAdorner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReusableEntitySelector.xaml.cs">
+      <DependentUpon>ReusableEntitySelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CycleDetailsNavigator.xaml.cs">
+      <DependentUpon>CycleDetailsNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CycleNavigation.xaml.cs">
+      <DependentUpon>CycleNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LayoutElementType.cs" />
+    <Compile Include="Views\LayoutNavigation.xaml.cs">
+      <DependentUpon>LayoutNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutPreviewRenderer.xaml.cs">
+      <DependentUpon>LayoutPreviewRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MediaShellWindow.xaml.cs">
+      <DependentUpon>MediaShellWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResolutionNavigator.xaml.cs">
+      <DependentUpon>ResolutionNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayoutElementDetails.xaml.cs">
+      <DependentUpon>LayoutElementDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Toolbars\LedEditorToolbar.xaml.cs">
+      <DependentUpon>LedEditorToolbar.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AdornerThumb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\AnimationEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\LedGridDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\DictionarySelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\EditableTextblock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FontPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FormulaEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PlaybackControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\TextReplaceControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\VirtualDisplaySelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\NewEntityButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ReusableList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AudioSkimmingElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\ZoomIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editors\CsvEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutElements\LedDynamicTextLayoutElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutElements\LedStaticTextLayoutElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutElements\LiveStreamLayoutElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutElements\RssTickerElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LedPreviewRenderer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editors\AudioEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editors\LayerEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editors\LayoutEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editors\LedEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\AnimationEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\ConsistencyCheckDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\CreatePhysicalScreenPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\DictionarySelectorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\EditDynamicTextPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\EditMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\FormulaEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\LayoutNavigationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\MainMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\ResolutionNavigationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\SelectCycleTypePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\SelectMediaPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\SelectSectionTypePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\TriggerEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\ViewMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AnalogClockLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AudioDynamicTtsLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AudioFileLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AudioOutputFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AudioPauseLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\AudioStaticTtsLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\DynamicTextLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\FrameLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\ImageListLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\LedImageLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\LedRectangleLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\PictureLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\StaticTextLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LayoutElements\VideoLayoutElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\ExportScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\ImportScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\NewProjectScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\ResourceManagerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\ProjectListScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenu\SaveAsScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbars\AudioEditorToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Toolbars\TftEditorToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FormulaManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SelectableImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SkimmingElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuickEditAdorner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReusableEntitySelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CycleDetailsNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CycleNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutPreviewRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MediaShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResolutionNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayoutElementDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Toolbars\LedEditorToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Irony\Irony.Interpreter\015.Irony.Interpreter.2010.csproj">
+      <Project>{321A7F5D-00C2-4095-9970-075CDEE8C139}</Project>
+      <Name>015.Irony.Interpreter.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Irony\Irony\010.Irony.2010.csproj">
+      <Project>{D81F5C91-D7DB-46E5-BC99-49488FB6814C}</Project>
+      <Name>010.Irony.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Microsoft.Windows.Shell\Microsoft.Windows.Shell.csproj">
+      <Project>{55D5297C-F1DF-4B76-A3C1-D82CC294EEBB}</Project>
+      <Name>Microsoft.Windows.Shell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Formats\Source\AlphaNT\Formats.AlphaNT.csproj">
+      <Project>{189BDF41-0454-4172-BE5B-F88481F78393}</Project>
+      <Name>Formats.AlphaNT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj">
+      <Project>{989648EE-7505-44B4-AF06-432554242964}</Project>
+      <Name>Common.Update.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\AhdlcRenderer\AhdlcRenderer.csproj">
+      <Project>{0A59FBC7-D685-4F22-87DE-0403E255A90C}</Project>
+      <Name>AhdlcRenderer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\BbCode\BbCode.csproj">
+      <Project>{D9E310CB-7DB7-46D2-8F0D-8A799660A106}</Project>
+      <Name>BbCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\DirectXRenderer\DirectXRenderer.csproj">
+      <Project>{7FE018F4-F60A-4817-A273-F6AA726E0931}</Project>
+      <Name>DirectXRenderer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Motion\Infomedia\Source\RendererBase\RendererBase.csproj">
+      <Project>{646028B8-57A6-4017-BEE2-0064B2F78B0A}</Project>
+      <Name>RendererBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Client\Center.Common.Client.csproj">
+      <Project>{5fc54ea9-187a-471e-889d-3d983e65b217}</Project>
+      <Name>Center.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0c98ca35-4d00-46fc-8c37-63b5c36e4c60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Client\Wpf.Client.csproj">
+      <Project>{fbdea493-698e-4f44-9d46-1b3ea374d7e0}</Project>
+      <Name>Wpf.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Core\Wpf.Core.csproj">
+      <Project>{ADE176C8-B499-4597-B13F-F638EC70D090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Framework\Wpf.Framework.csproj">
+      <Project>{A279B0CB-74CC-4296-8734-BA8AA45B17BF}</Project>
+      <Name>Wpf.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Views\Wpf.Views.csproj">
+      <Project>{AA87EDAF-179F-4784-B39C-1F2E8C2055C9}</Project>
+      <Name>Wpf.Views</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\MediaConfiguration.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\..\Common\Configuration\Source\Infomedia\DirectXRenderer\DirectXRenderer.xsd">
+      <Link>Configuration\DirectXRenderer.xsd</Link>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataViewModels\DataViewModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataViewModels.generated.cs</LastGenOutput>
+    </None>
+    <None Include="DataViewModels\DataViewModels.ttinclude">
+      <LastGenOutput>DataViewModels1.cs</LastGenOutput>
+    </None>
+    <None Include="DataViewModels\Descriptors.ttinclude" />
+    <Compile Include="DataViewModels\Presentation\EvaluationConfigDataViewModel.partial.cs" />
+    <None Include="DataViewModels\Layout\ElementDataViewModel.tt.disabled">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ElementDataViewModel.tt.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Models\DataModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataModels.generated.cs</LastGenOutput>
+    </None>
+    <Compile Include="Models\Layout\GraphicalElementDataModelBase.partial.cs" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Resources\G07X07_2_GORBA_V1.FON" />
+    <EmbeddedResource Include="Resources\G16X07_2_GORBA_V2.FON" />
+    <None Include="Simulation\Composers\Composers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Composers.generated.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resources\FrutigerLTCom-Light.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-BoldItalic.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-Bold.ttf" />
+    <Resource Include="Resources\FrutigerLTCom-LightItalic.ttf" />
+    <Resource Include="Resources\fontawesome.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\ImageNotAvailable.png" />
+    <EmbeddedResource Include="Resources\MediaStrings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MediaStrings.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MediaStrings.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MediaStrings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MediaStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MediaStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icentertext.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ReplaceStub\flugzeug.png" />
+    <Resource Include="Resources\ReplaceStub\pandr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fontawesome license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Cursors\pan.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Cursors\zoom.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ClearSearch_Default.png" />
+    <Resource Include="Resources\Images\ClearSearch_Highlight.png" />
+    <Resource Include="Resources\Images\ClearSearch_Pressed.png" />
+    <Resource Include="Resources\Images\Search_Default.png" />
+    <Resource Include="Resources\Images\Search_Highlight.png" />
+    <Resource Include="Resources\Images\Search_Pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\Common\Protocols\Source\Ximple\Generic\dictionary.xml">
+      <Link>dictionary.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\Icons\archive_32x32.png" />
+    <Resource Include="Resources\Images\Icons\edit_commit_24x24.png" />
+    <Resource Include="Resources\Images\Icons\edit_commit_dark_24x24.png" />
+    <Resource Include="Resources\Images\Icons\csvplaceholder_48x48.png" />
+    <Resource Include="Resources\Images\Icons\live_tool_44x44.png" />
+    <Resource Include="Resources\Images\Icons\rss_tool_44x44.png" />
+    <Resource Include="Resources\Images\Icons\nested_tool_overlay_44x44.png" />
+    <Resource Include="Resources\Images\Icons\Database-Save.png" />
+    <Resource Include="Resources\Images\Icons\Database.png" />
+    <Resource Include="Resources\media_35x35.ico" />
+    <Resource Include="Resources\Images\Icons\collapseAll_16x16.png" />
+    <Resource Include="Resources\Images\Icons\expandAll_16x16.png" />
+    <Resource Include="..\..\Icons\media_16x16.png">
+      <Link>Resources\media_16x16.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\media_196x196.png">
+      <Link>Resources\media_196x196.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\media_32x32.png">
+      <Link>Resources\media_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\media_48x48.png">
+      <Link>Resources\media_48x48.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\media_64x64.png">
+      <Link>Resources\media_64x64.png</Link>
+    </Resource>
+    <Resource Include="..\..\Icons\media.ico">
+      <Link>Resources\media.ico</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Infomedia\Icons\directxrenderer_32x32.png">
+      <Link>Resources\Images\Icons\directxrenderer_32x32.png</Link>
+    </Resource>
+    <Content Include="DataViewModels\DataViewModels.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Resources\Images\Icons\rectangle_44x44.png" />
+    <Resource Include="Resources\Images\Icons\audiobreak_dark_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiobreak_grey_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiobreak_light_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiodata_dark_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiodata_grey_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiodata_light_48x48.png" />
+    <Resource Include="Resources\Images\Icons\dynamictexttospeech_dark_48x48.png" />
+    <Resource Include="Resources\Images\Icons\dynamictexttospeech_grey_48x48.png" />
+    <Resource Include="Resources\Images\Icons\dynamictexttospeech_light_48x48.png" />
+    <Resource Include="Resources\Images\Icons\texttospeech_dark_48x48.png" />
+    <Resource Include="Resources\Images\Icons\texttospeech_grey_48x48.png" />
+    <Resource Include="Resources\Images\Icons\texttospeech_light_48x48.png" />
+    <Resource Include="Resources\Images\Icons\audiobreak_44x44.png" />
+    <Resource Include="Resources\Images\Icons\audiodata_44x44.png" />
+    <Resource Include="Resources\Images\Icons\dynamictexttospeech_44x44.png" />
+    <Resource Include="Resources\Images\Icons\texttospeech_44x44.png" />
+    <Resource Include="Resources\Images\Icons\fontplaceholder_48x48.png" />
+    <Resource Include="Resources\Images\Icons\imagefit_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imagefit_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imagefit_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imagenotselected_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imagenotselected_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imagenotselected_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\cyclereference_16x16.png" />
+    <Resource Include="Resources\Images\Icons\animationeditor_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\animation_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\animation_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\animation_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\check_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\check_grey_10x10.png" />
+    <Resource Include="Resources\Images\Icons\check_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\delete_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\delete_grey_10x10.png" />
+    <Resource Include="Resources\Images\Icons\delete_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\dublicate_grey_16x16 Kopie.png" />
+    <Resource Include="Resources\Images\Icons\error_48x48.png" />
+    <Resource Include="Resources\Images\Icons\event_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\event_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\event_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\formeleditor_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\frame_48x48.png" />
+    <Resource Include="Resources\Images\Icons\fxanimation_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\fxanimation_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\fxanimation_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\fx_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\help_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\help_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\imageframe_48x48.png" />
+    <Resource Include="Resources\Images\Icons\info_16x16.png" />
+    <Resource Include="Resources\Images\Icons\info_48x48.png" />
+    <Resource Include="Resources\Images\Icons\new_grey_16x16-Kopie.png" />
+    <Resource Include="Resources\Images\Icons\ok_16x16.png" />
+    <Resource Include="Resources\Images\Icons\ok_48x48.png" />
+    <Resource Include="Resources\Images\Icons\placeholder_video.png" />
+    <Resource Include="Resources\Images\Icons\rename_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\textframe_48x48.png" />
+    <Resource Include="Resources\Images\Icons\videoframe_48x48.png" />
+    <Resource Include="Resources\Images\Icons\warning_48x48.png" />
+    <Resource Include="Resources\Images\Icons\fx_none_16x16.png" />
+    <Resource Include="Resources\Images\Icons\error_16x16.png" />
+    <Resource Include="Resources\Images\Icons\warning_16x16.png" />
+    <EmbeddedResource Include="Resources\Images\MinuteHand.png" />
+    <EmbeddedResource Include="Resources\Images\SecondsHand.png" />
+    <Resource Include="Resources\Images\Icons\sectionimage_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionimage_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionimage_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionmulti_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionmulti_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionmulti_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionpool_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionpool_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionpool_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionstandard_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionstandard_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionstandard_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionvideo_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionvideo_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionvideo_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionwebmedia_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionwebmedia_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\sectionwebmedia_light_16x16.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand__closed_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand__point_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_text_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_zoom_in_32x32.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_zoom_out_32x32.png" />
+    <Resource Include="Resources\Images\Icons\delete_light_16x16.png" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand__closed_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_hand__point_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_text_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_zoom_in_32x32.ico" />
+    <EmbeddedResource Include="Resources\Cursors\cursor_zoom_out_32x32.ico" />
+    <Resource Include="Resources\Images\EffectCopy.png" />
+    <Resource Include="Resources\Images\EffectLink.png" />
+    <Resource Include="Resources\Images\EffectMove.png" />
+    <Resource Include="Resources\Images\EffectNone.png" />
+    <Resource Include="Resources\Images\Icons\analogclock_44x44.png" />
+    <Resource Include="Resources\Images\Icons\imagelist_44x44.png" />
+    <EmbeddedResource Include="Resources\Images\HourHand.png" />
+    <Resource Include="Resources\Images\AnalogClockTemplate.png" />
+    <Resource Include="Resources\Images\Icons\analogclock_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\imagelist_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\image_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\video_dark_16x16.png" />
+    <Content Include="Configuration\MediaConfiguration.xml" />
+    <Resource Include="Resources\progicon_placeholder_16x16.png" />
+    <Resource Include="Resources\Images\Icons\frame_44x44.png" />
+    <Resource Include="Resources\Images\Icons\dynamictext_44x44.png" />
+    <Resource Include="Resources\Images\Icons\hand_44x44.png" />
+    <Resource Include="Resources\Images\Icons\image_44x44.png" />
+    <Resource Include="Resources\Images\Icons\move_44x44.png" />
+    <Resource Include="Resources\Images\Icons\statictext_44x44.png" />
+    <Resource Include="Resources\Images\Icons\template_44x44.png" />
+    <Resource Include="Resources\Images\Icons\video_44x44.png" />
+    <Resource Include="Resources\Images\Icons\zoom_44x44.png" />
+    <Resource Include="Resources\Images\Icons\add_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\add_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\airplane_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\arrow_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\browse_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\closed_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\closed_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\copy_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\cut_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\delete_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\dynamictext_dark_12x12.png" />
+    <Resource Include="Resources\Images\Icons\edit_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\edit_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\folder_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\frame_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\fx_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\fx_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\group_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\group_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\image_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\locked_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\open_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\open_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\parkandride_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\paste_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\pause_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\pause_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\play_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\play_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\progicon_placeholder_16x16.png" />
+    <Resource Include="Resources\Images\Icons\project_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\redo_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\remove_dark10x10.png" />
+    <Resource Include="Resources\Images\Icons\remove_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\remove_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\remove_light_16x16.png" />
+    <Resource Include="Resources\Images\Icons\search_dark_16x16.png" />
+    <Resource Include="Resources\Images\Icons\selectall_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\stop_dark_10x10.png" />
+    <Resource Include="Resources\Images\Icons\stop_light_10x10.png" />
+    <Resource Include="Resources\Images\Icons\text_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\triangle_down_dark_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_down_light_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_left_dark_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_left_light_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_right_dark_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_right_light_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_up_dark_8x8.png" />
+    <Resource Include="Resources\Images\Icons\triangle_up_light_8x8.png" />
+    <Resource Include="Resources\Images\Icons\undo_grey_16x16.png" />
+    <Resource Include="Resources\Images\Icons\video_grey_12x12.png" />
+    <Resource Include="Resources\Images\Icons\visible_dark_12x12.png" />
+    <Resource Include="Resources\Images\Icons\visible_disabled_12x12.png" />
+    <Resource Include="Resources\Images\Icons\zoommax_grey_10x10.png" />
+    <Resource Include="Resources\Images\Icons\zoommin_grey_10x10.png" />
+    <Resource Include="Resources\Images\arrow-down.png" />
+    <Resource Include="Resources\Images\arrow-up.png" />
+    <Resource Include="Resources\Images\radiobutton_off.png" />
+    <Resource Include="Resources\Images\radiobutton_off_selected.png" />
+    <Resource Include="Resources\Images\radiobutton_on.png" />
+    <Resource Include="Resources\Images\radiobutton_on_selected.png" />
+    <Resource Include="Resources\Images\Folder.png" />
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Delete.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Redo.png" />
+    <Resource Include="Resources\Images\Select_All.png" />
+    <Resource Include="Resources\Images\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataViewModels\Templating\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

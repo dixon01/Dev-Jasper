@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOControlMGI", "IOControlMGI\IOControlMGI.csproj", "{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{08C189F6-2474-4FBD-8322-E51F95B78ADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kontron.Jida32", "..\..\..\..\Common\3rdParty\Kontron.Jida32\Kontron.Jida32.csproj", "{D1EE4794-32C2-4047-ACCA-457812A7FCC6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IOControlMGI\\IOControlMGI.csproj
+		SccProjectName1 = IOControlMGI
+		SccLocalPath1 = IOControlMGI
+		SccProjectUniqueName2 = ..\\..\\..\\..\\Common\\3rdParty\\Kontron.Jida32\\Kontron.Jida32.csproj
+		SccProjectTopLevelParentUniqueName2 = IOControlMGI.sln
+		SccProjectName2 = ../../../../Common/3rdParty/Kontron.Jida32
+		SccLocalPath2 = ..\\..\\..\\..\\Common\\3rdParty\\Kontron.Jida32
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Debug|x86.ActiveCfg = Debug|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Debug|x86.Build.0 = Debug|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Release|Any CPU.ActiveCfg = Release|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Release|Mixed Platforms.Build.0 = Release|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Release|x86.ActiveCfg = Release|x86
+		{5BEF0ABC-5DD6-448F-82B1-520BD8F39137}.Release|x86.Build.0 = Release|x86
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6} = {08C189F6-2474-4FBD-8322-E51F95B78ADF}
+	EndGlobalSection
+EndGlobal

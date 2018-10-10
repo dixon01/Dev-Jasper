@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="Protran" type="ProtranConfig"/>
+    <xs:complexType name="ProtranConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The Protran configuration.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="Protocols" type="ArrayOfProtocolConfig">
+          <xs:annotation>
+            <xs:documentation>
+              List of all the different protocols that can be started by Protran.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="Persistence" type="PersistenceConfig">
+          <xs:annotation>
+            <xs:documentation>
+              All configuration parameters to configure the persistence of data in Protran.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Version" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The version of the Protran configuration file.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="ArrayOfProtocolConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The general configuration settings of the protocol to be started by Protran.
+          More than one protocol can be started at once by Protran.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" name="Protocol" type="ProtocolConfig">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProtocolConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration settings of the protocol to be started by Protran.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="Name" type="xs:string" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            The name of the protocol to be started by Protran.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+        <xs:annotation>
+          <xs:documentation>
+            Flad indictating if the protocol should be started or not by Protran.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="PersistenceConfig">
+      <xs:annotation>
+        <xs:documentation>
+          The configuration settings for the persistence of data on Protran.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="IsEnabled" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>
+              Flag indicating if the persistence should be enabled or not.
+              Set it to true if persistence should be enabled.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="PersistenceFile" type="xs:string" default="Persistence.xml">
+          <xs:annotation>
+            <xs:documentation>
+              The absolute file name for the file that will be used to store the persisted data
+              by Protran.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element  minOccurs="0" maxOccurs="1" name="DefaultValidity" type="xs:duration" default="PT10M">
+          <xs:annotation>
+            <xs:documentation>
+              The default time for the validity of the information persisted by Protran.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+</xs:schema>

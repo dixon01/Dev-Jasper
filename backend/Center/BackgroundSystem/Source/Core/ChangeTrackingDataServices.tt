@@ -1,0 +1,195 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplatingExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Core" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+#>
+namespace Gorba.Center.BackgroundSystem.Core
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.ExceptionServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.BackgroundSystem.Core.Utility;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+
+    using NLog;
+
+    using Version = Gorba.Center.Common.ServiceModel.ChangeTracking.Version;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.Where(entity => entity.HasChangeTracking).OrderBy(entity => entity.Name);
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities)
+        {
+            this.WriteEntity(entity);
+        }
+#>
+    }
+<#+
+    }
+    
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+#>
+
+        [ErrorHandler]
+        [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)]
+        public partial class <#= entity.Name #>ChangeTrackingDataService : ChangeTrackingServiceBase, I<#= entity.Name #>DataService
+        {
+            private readonly I<#= entity.Name #>DataService dataService;
+
+            public <#= entity.Name #>ChangeTrackingDataService(
+                I<#= entity.Name #>DataService dataService,
+                BackgroundSystemConfiguration backgroundSystemConfiguration,
+                NotificationSubscriptionConfiguration configuration)
+                : base(backgroundSystemConfiguration, configuration)
+            {
+                this.dataService = dataService;
+            }
+
+            public async Task<<#= entity.Name #>> AddAsync(<#= entity.Name #> entity)
+            {
+                ExceptionDispatchInfo exceptionDispatchInfo = null;
+                try
+                {
+                    var addedEntity = await this.dataService.AddAsync(entity);
+                    await this.OnEntityAddedAsync(addedEntity);
+                    return addedEntity;
+                }
+                catch (Exception exception)
+                {
+                    exceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception);
+                }
+
+                await this.OnErrorAsync(entity.Id, DeltaNotificationType.EntityAdded);
+                exceptionDispatchInfo.Throw();
+                return null;
+            }
+
+            public async Task DeleteAsync(<#= entity.Name #> entity)
+            {
+                ExceptionDispatchInfo exceptionDispatchInfo = null;
+                try
+                {
+                    await this.dataService.DeleteAsync(entity);
+                    await this.OnEntityDeletedAsync(entity);
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    exceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception);
+                }
+
+                await this.OnErrorAsync(entity.Id, DeltaNotificationType.EntityRemoved);
+                exceptionDispatchInfo.Throw();
+            }
+
+            public async Task<<#= entity.Name #>> GetAsync(<#= entity.IdPropertyType #> id)
+            {
+                return await this.dataService.GetAsync(id);
+            }
+
+            public async Task<IEnumerable<<#= entity.Name #>>> QueryAsync(<#= entity.Name #>Query query = null)
+            {
+                return await this.dataService.QueryAsync(query);
+            }
+
+            public async Task<int> CountAsync(<#= entity.Name #>Query query = null)
+            {
+                return await this.dataService.CountAsync(query);
+            }
+
+            public async Task<<#= entity.Name #>> UpdateAsync(<#= entity.Name #> entity)
+            {
+                ExceptionDispatchInfo exceptionDispatchInfo = null;
+                try
+                {
+                    var original = await this.GetAsync(entity.Id);
+                    var updated = await this.dataService.UpdateAsync(entity);
+                    await this.OnEntityUpdatedAsync(original, updated);
+                    return updated;
+                }
+                catch (Exception exception)
+                {
+                    exceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception);
+                }
+                
+                await this.OnErrorAsync(entity.Id, DeltaNotificationType.PropertiesChanged);
+                exceptionDispatchInfo.Throw();
+                return null;
+            }
+        }
+<#+
+    }
+
+    private void WriteCreateDelta(EntitySpace.Property property)
+    {#>
+                delta.Change<#= property.Name #>(entity.<#= property.Name #>);
+<#+
+    }
+
+    private void WriteOnDelta(EntitySpace.Property property)
+    {#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    model.<#= property.Name #> = delta.<#= property.Name #>.Value;
+                }
+<#+
+    }
+
+    private void WriteOnDeltaReference(EntitySpace.Property property)
+    {
+#>
+
+                if (delta.<#= property.Name #> != null)
+                {
+                    dynamic id = delta.<#= property.Name #>.ReferenceId;
+                    model.<#= property.Name #> = new <#= property.Type.GetNameWithServiceModelNamespace() #> { Id = id };
+                }
+<#+
+    }
+#>

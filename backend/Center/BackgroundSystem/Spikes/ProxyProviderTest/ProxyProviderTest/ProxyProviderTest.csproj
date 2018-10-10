@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4659BA0-ED15-40DF-B6C8-ACF87C606CE8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProxyProviderTest</RootNamespace>
+    <AssemblyName>ProxyProviderTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\..\3rdParty\NLog\2.0.0.2000\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\..\..\..\3rdParty\Rx\1.0.10621\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommsMessagingServiceProxy.cs" />
+    <Compile Include="CommsServiceProxy.cs" />
+    <Compile Include="CommsTester.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\ConcurrentPriorityQueue\Utility.ConcurrentPriorityQueue.csproj">
+      <Project>{3B25263B-F663-4D64-97EF-51C6DEBDF9A6}</Project>
+      <Name>Utility.ConcurrentPriorityQueue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Source\Core\Center.Common.Core.csproj">
+      <Project>{CF3487A1-EACF-4016-AAA0-A5B30B2CBDCE}</Project>
+      <Name>Center.Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{768079A3-523C-492B-8822-1655594BA3F7}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\CommS\Source\Core\ComponentModel\CommS.Core.ComponentModel.csproj">
+      <Project>{E69F11C7-502F-460B-876C-3DC343C9BD78}</Project>
+      <Name>CommS.Core.ComponentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\CommS\Source\Wcf\ServiceModel\CommS.Wcf.ServiceModel.csproj">
+      <Project>{D54684F4-5F16-4901-A798-C0D7B7480CA0}</Project>
+      <Name>CommS.Wcf.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Client\BackgroundSystem.Client.csproj">
+      <Project>{6D454F7B-CA50-4DC2-AAB3-1020DDE6F40D}</Project>
+      <Name>BackgroundSystem.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Core\BackgroundSystem.Core.csproj">
+      <Project>{313E0DC9-A8BA-410E-93D8-B752B4DBAB38}</Project>
+      <Name>BackgroundSystem.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

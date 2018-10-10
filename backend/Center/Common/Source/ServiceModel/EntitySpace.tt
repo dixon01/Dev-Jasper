@@ -1,0 +1,238 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ include file="EntitySpace.XmlSerializedProperty.ttinclude" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath("EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.Common.ServiceModel
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Xml.Serialization;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition, userDefinedPropertiesEnabledEntityNames);
+    }
+#>
+}<#+
+    private void WritePartition(EntitySpace.Partition partition, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    {#>
+
+    namespace <#= partition.Name #>
+    {<#+
+        foreach (var @enum in partition.Enums)
+        {
+            this.WriteEnum(@enum);
+        }
+
+        foreach (var entity in partition.Entities)
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, userDefinedPropertiesEnabled);
+        }
+#>
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        #>
+
+        [DataContract(IsReference = true, Namespace = "<#= Namespaces.EntitiesDto #>")]
+        public partial class <#= entity.Name #> : ICloneable
+        {
+            public static readonly <#= entity.Name #> Null = new <#= entity.Name #>();
+            <#+
+        if (userDefinedPropertiesEnabled)
+        {
+            this.WriteConstructor(entity);
+        }
+        #>
+
+            [DataMember]
+            public <#= entity.IdPropertyType #> Id { get; set; }
+<#+
+        if (entity.HasChangeTracking)
+        {
+        #>
+
+            [DataMember]
+            public DateTime CreatedOn { get; set; }
+
+            [DataMember]
+            public DateTime? LastModifiedOn { get; set; }
+
+            [DataMember]
+            public int Version { get; set; }
+<#+
+        }
+
+
+        foreach (var property in entity.Properties)
+        {
+            this.WriteProperty(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            this.WriteUserDefinedProperties(entity);
+        }
+#>
+
+            public object Clone()
+            {
+                var clone = (<#= entity.Name #>)this.MemberwiseClone();
+<#+
+        foreach (var collectionProperty in entity.Properties.OfType<EntitySpace.CollectionProperty>())
+        {#>
+                clone.<#= collectionProperty.Name #> =
+                    this.<#= collectionProperty.Name #> == null ?
+                        null : new List<<#= collectionProperty.ItemType #>>(this.<#= collectionProperty.Name #>);
+<#+
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+                clone.UserDefinedProperties = new Dictionary<string, string>(this.UserDefinedProperties);
+<#+
+        }
+#>
+                return clone;
+            }
+        }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.PropertyBase propertyBase)
+    {
+        var collectionProperty = propertyBase as EntitySpace.CollectionProperty;
+        if (collectionProperty != null)
+        {
+            this.WriteCollectionProperty(collectionProperty);
+            return;
+        }
+
+        var streamProperty = propertyBase as EntitySpace.StreamProperty;
+        if (streamProperty != null)
+        {
+            this.WriteStreamProperty(streamProperty);
+            return;
+        }
+
+        var property = propertyBase as EntitySpace.Property;
+        if (property == null)
+        {
+            throw new NotSupportedException("Property of type " + propertyBase.GetType().FullName + " not supported");
+        }
+        
+        if (property.IsXmlSerialized)
+        {
+            this.WriteXmlSerializedProperty(property);
+            return;
+        }
+
+        this.WriteProperty(property);
+    }
+
+    private void WriteCollectionProperty(EntitySpace.CollectionProperty property)
+    {#>
+
+            [DataMember]
+            public ICollection<<#= property.ItemType #>> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {#>
+
+            [DataMember]
+            public <#= property.Type #> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WriteStreamProperty(EntitySpace.StreamProperty property)
+    {#>
+
+            [DataMember]
+            public System.Lazy<System.IO.Stream> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WriteEnum(EntitySpace.Enum @enum)
+    {#>
+
+        [DataContract(Namespace = "<#= Namespaces.EntitiesDto #>")]
+        public enum <#= @enum.Name #>
+        {<#+
+        if (@enum.Members.Count > 0)
+        {
+            var take = @enum.Members.Count - 1;
+            foreach (var member in @enum.Members.Take(take))
+            {
+                this.WriteEnumMember(member);
+            }
+
+            var last = @enum.Members.Skip(take).Single();
+            this.WriteEnumMember(last, true);
+        }
+#>
+        }
+<#+
+    }
+
+    private void WriteEnumMember(EntitySpace.EnumMember enumMember, bool isLast = false)
+    {
+        var comma = isLast ? string.Empty : ",";
+    #>
+
+            [EnumMember]
+<#+
+        if (!string.IsNullOrEmpty(enumMember.Description))
+        {
+    #>
+            [Description("<#= enumMember.Description #>")]
+<#+
+        }
+    #>
+            <#= enumMember.Name #>  = <#= enumMember.Value #><#= comma #>
+<#+
+    }
+
+    private void WriteConstructor(EntitySpace.Entity entity)
+    {
+        #>
+            
+            public <#= entity.Name #>()
+            {
+                this.UserDefinedProperties = new Dictionary<string, string>();
+            }
+<#+
+    }
+
+    private void WriteUserDefinedProperties(EntitySpace.Entity entity)
+    {
+        #>
+        
+            [DataMember]
+            public IDictionary<string, string> UserDefinedProperties { get; set; }		
+<#+
+    }
+#>

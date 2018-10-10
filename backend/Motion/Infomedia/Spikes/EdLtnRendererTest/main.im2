@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Created="2013-05-01 15:05:26">
+  <PhysicalScreens>
+    <PhysicalScreen Name="PS1" Type="TFT" Width="240" Height="72" />
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="VD1" CyclePackage="CP1" Width="240" Height="72" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MC1">
+        <MasterSection Duration="86400" Layout="ML1" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="ML1">
+        <PhysicalScreen Ref="PS1">
+          <VirtualDisplay X="0" Y="0" Ref="VD1" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations />
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="MainCycle">
+        <StandardSection Duration="100" Layout="MainLayout" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles />
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="CP1">
+      <StandardCycles>
+        <StandardCycle Ref="MainCycle" />
+      </StandardCycles>
+      <EventCycles />
+    </CyclePackage>
+  </CyclePackages>
+  <Pools />
+  <Layouts>
+    <Layout Name="MainLayout">
+      <Resolution Width="240" Height="72">
+        <Group X="0" Y="0" Width="0" Height="0">
+          <Text X="0" Y="0" Width="30" Height="18" Align="Left" Overflow="Clip" Value="11">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="30" Y="0" Width="160" Height="18" ZIndex="1" Align="Left" Overflow="Scroll" Value="Infomedia 2 rocks!">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="190" Y="0" Width="50" Height="18" ZIndex="2" Align="Left" Overflow="Clip" Value="[bl]&lt;--[/bl]">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+        </Group>
+        <Group X="0" Y="18" Width="0" Height="0">
+          <Text X="0" Y="0" Width="30" Height="18" Align="Left" Overflow="Clip" Value="15">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="30" Y="0" Width="160" Height="18" ZIndex="1" Align="Left" Overflow="Scroll" Value="Cuba">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="190" Y="0" Width="50" Height="18" ZIndex="2" Align="Left" Overflow="Clip" Value="15'">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+        </Group>
+        <Group X="0" Y="36" Width="0" Height="0">
+          <Text X="0" Y="0" Width="30" Height="18" Align="Left" Overflow="Clip" Value="17">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="30" Y="0" Width="160" Height="18" ZIndex="1" Align="Left" Overflow="ScrollAlways" ScrollSpeed="-10" Value="Trinidad and Tobago">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="190" Y="0" Width="50" Height="18" ZIndex="2" Align="Left" Overflow="Clip" Value="17:55">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+        </Group>
+        <Group X="0" Y="54" Width="0" Height="0">
+          <Text X="0" Y="0" Width="30" Height="18" Align="Left" Overflow="Clip" Value="12">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="30" Y="0" Width="160" Height="18" ZIndex="1" Align="Left" Overflow="Scroll" Value="Jamaica">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+          <Text X="190" Y="0" Width="50" Height="18" ZIndex="2" Align="Left" Overflow="Clip" Value="19:20">
+            <Font Face="0" Height="120" Weight="900" Italic="false" Color="#FFFFFF" />
+          </Text>
+        </Group>
+      </Resolution>
+    </Layout>
+  </Layouts>
+</Infomedia>

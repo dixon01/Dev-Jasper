@@ -1,0 +1,456 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.CycleDetailsNavigator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:propertyGrid="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.PropertyGrid;assembly=Gorba.Center.Common.Wpf.Views"
+             xmlns:presentation="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:cycle="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation.Cycle"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:dragDropExtension="clr-namespace:Gorba.Center.Media.Core.Extensions.DragDropExtension"
+             xmlns:section="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation.Section"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels"
+             xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:interaction1="clr-namespace:Gorba.Center.Media.Core.Views.Interaction"
+             mc:Ignorable="d" 
+             x:Name="NavigatorRoot"
+             d:DesignHeight="300" d:DesignWidth="800" d:DataContext="{d:DesignInstance viewModels:CycleNavigationViewModel}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <converters:EvaluationToStringConverter x:Key="EvaluationToStringConverter"/>
+            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:FindReferenceConverter x:Key="FindReferenceConverter"/>
+            <converters:DataValueToValueConverter x:Key="DataValueToValueConverter" />
+            <converters:TreeViewFolderConverter x:Key="TreeViewFolderConverter" />
+            <converters:IsTypeOfConverter x:Key="IsTypeOfConverter" />
+            
+            <Style x:Key="CloneButtonStyle" BasedOn="{StaticResource FlatButton}" TargetType="Button">
+                <Setter Property="Visibility" Value="Hidden" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Height" Value="23" />
+                <Setter Property="Margin" Value="0 0 2 0" />
+               <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsMouseOver}" Value="True" />
+                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Value="True" />
+                        </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ReferenceButtonStyle" BasedOn="{StaticResource FlatButton}" TargetType="Button">
+                <Setter Property="Visibility" Value="Hidden" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Height" Value="23" />
+                <Setter Property="Margin" Value="0 0 2 0" />
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsMouseOver}" Value="True" />
+                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Value="True" />
+                            <!--<Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="False" />-->
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemStyle}" x:Key="NavigationItemContainerStyle">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{Binding IsItemSelected, Mode=TwoWay}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChildItemSelected, Mode=TwoWay}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource TreeViewExpandedGroupBackgroundColorBrush}"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemStyle}" x:Key="NavigationItemStyle">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{Binding IsItemSelected, Mode=TwoWay}" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="TreeViewParentNodeTextStyle">
+                <Setter Property="FontWeight" Value="Normal" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChildItemSelected}" Value="True">
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="CycleDataTemplate" DataType="cycle:CycleRefConfigDataViewModelBase">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                
+                    <TextBlock Text="{Binding Reference.Name, Converter={StaticResource DataValueToValueConverter}}"
+                                                VerticalAlignment="Center" IsHitTestVisible="False" >
+                    </TextBlock>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource CloneButtonStyle}"
+                            ToolTip="{x:Static resources:MediaStrings.CycleDetailsNavigator_CycleReferenceButtonTooltip}"
+                            Command="{Binding DataContext.CreateCycleReference, ElementName=NavigatorRoot}" CommandParameter="{Binding}">
+                        <Path 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="1,1,1,1"
+                            Data="M 0 3 L 4 3 L 4 0 L 9 5 L 4 10 L 4 7 L 0 7 Z">
+                            <Path.Fill>
+                                <SolidColorBrush Color="{DynamicResource ColorDark}" />
+                            </Path.Fill>
+                        </Path>
+                    </Button>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="SectionDataTemplate" DataType="section:SectionConfigDataViewModelBase">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Name}" 
+                               VerticalAlignment="Center" IsHitTestVisible="False" />
+                    <Button
+                        Style="{StaticResource CloneButtonStyle}"
+                        Grid.Column="1"
+                        Command="{Binding DataContext.CloneSection, ElementName=NavigatorRoot}" CommandParameter="{Binding}"
+                        ToolTip="{x:Static resources:MediaStrings.CycleDetailsNavigator_DuplicateSectionButtonTooltip}">
+                        <Path 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="1,1,1,1"
+                            Data="M 0 3 L 4 3 L 4 0 L 9 5 L 4 10 L 4 7 L 0 7 Z">
+                            <Path.Fill>
+                                <SolidColorBrush Color="{DynamicResource ColorDark}" />
+                            </Path.Fill>
+                        </Path>
+                    </Button>
+                </Grid>
+            </DataTemplate>
+
+            <ContextMenu x:Key="CycleContextMenu">
+                <MenuItem Header="{x:Static resources:MediaStrings.CycleDetailsNavigator_CreateCycleReference}"
+                                              Command="{Binding Path=DataContext.CreateCycleReference, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                              CommandParameter="{Binding}"
+                                              Style="{StaticResource FlatContextMenuItem}"/>
+                <MenuItem Header="{x:Static resources:MediaStrings.CycleDetailsNavigator_CloneCycle}"
+                                              Command="{Binding Path=DataContext.CloneCycle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                              CommandParameter="{Binding}"
+                                              Style="{StaticResource FlatContextMenuItem}"/>
+            </ContextMenu>
+            <ContextMenu x:Key="SectionContextMenu">
+                <MenuItem Header="{x:Static resources:MediaStrings.CycleDetailsNavigator_CloneSection}"
+                                              Command="{Binding Path=DataContext.CloneSection, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                              CommandParameter="{Binding}"
+                                              Style="{StaticResource FlatContextMenuItem}"/>
+            </ContextMenu>
+            <HierarchicalDataTemplate x:Key="CycleTreeViewFolderItemsTemplate"
+                                      DataType="{x:Type dataViewModels:TreeViewFolderItem}"
+                                      ItemsSource="{Binding Path=Items}"
+                                      ItemTemplate="{StaticResource CycleDataTemplate}">
+                <HierarchicalDataTemplate.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemContainerStyle}">
+                        <Setter Property="ContextMenu" Value="{StaticResource CycleContextMenu}" />
+                    </Style>
+                </HierarchicalDataTemplate.ItemContainerStyle>
+                <Border Height="23" IsHitTestVisible="False">
+                    <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" />
+                </Border>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="SectionTreeViewFolderItemsTemplate"
+                                      DataType="{x:Type dataViewModels:TreeViewFolderItem}"
+                                      ItemsSource="{Binding Path=Items}">
+                <HierarchicalDataTemplate.ItemTemplate>
+                    <HierarchicalDataTemplate 
+                                    ItemsSource="{Binding Reference.Sections}"
+                                    ItemTemplate="{StaticResource SectionDataTemplate}"
+                                    DataType="cycle:CycleRefConfigDataViewModelBase">
+                        <HierarchicalDataTemplate.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemStyle}">
+                                <Setter Property="ContextMenu" Value="{StaticResource SectionContextMenu}" />
+                            </Style>
+                        </HierarchicalDataTemplate.ItemContainerStyle>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Reference.Name, Converter={StaticResource DataValueToValueConverter}}"
+                                                VerticalAlignment="Center" IsHitTestVisible="True" 
+                                       Style="{StaticResource TreeViewParentNodeTextStyle}">
+                            </TextBlock>
+                            <Button Grid.Column="1"
+                            Style="{StaticResource ReferenceButtonStyle}"
+                            ToolTip="{x:Static resources:MediaStrings.CycleDetailsNavigator_CycleReferenceButtonTooltip}"
+                            Command="{Binding DataContext.CreateCycleReference, ElementName=NavigatorRoot}" CommandParameter="{Binding}">
+                                <Path 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="1,1,1,1"
+                            Data="M 0 3 L 4 3 L 4 0 L 9 5 L 4 10 L 4 7 L 0 7 Z">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{DynamicResource ColorDark}" />
+                                    </Path.Fill>
+                                </Path>
+                            </Button>
+                        </Grid>
+                     </HierarchicalDataTemplate>
+                </HierarchicalDataTemplate.ItemTemplate>
+                <HierarchicalDataTemplate.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemContainerStyle}">
+                        <Setter Property="ContextMenu" Value="{StaticResource CycleContextMenu}" />
+                    </Style>
+                </HierarchicalDataTemplate.ItemContainerStyle>
+                <Border Height="23" IsHitTestVisible="True">
+                    <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"
+                               Style="{StaticResource TreeViewParentNodeTextStyle}"/>
+                </Border>
+            </HierarchicalDataTemplate>
+
+            <Style TargetType="propertyGrid:PropertyGridActionEditor">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=Value, Converter={StaticResource IsTypeOfConverter}, ConverterParameter={x:Type cycle:GenericTriggerConfigDataViewModel}}" 
+                                 Value="True">
+                        <Setter Property="ButtonStyle">
+                            <Setter.Value>
+                                <Style TargetType="Button" BasedOn="{StaticResource FlatImageButton}">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/add_light_10x10.png"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+
+        <Border Grid.Column="0" Margin="3 0 3 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <x:Array Type="viewModels:CycleNavigationSelection" x:Key="CycleTreeViewEnableValues">
+                        <viewModels:CycleNavigationSelection>Cycle</viewModels:CycleNavigationSelection>
+                        <viewModels:CycleNavigationSelection>CyclePackage</viewModels:CycleNavigationSelection>
+                    </x:Array>
+                </Grid.Resources>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource FlatIconButton}" Click="OnCollapseAllClicked" Margin="5"
+                            ToolTip="{x:Static resources:MediaStrings.CycleDetailsNavigator_CollapseAllTooltip}">
+                        <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/collapseAll_16x16.png" Stretch="Fill" />
+                    </Button>
+                    <Button Style="{StaticResource FlatIconButton}" Click="OnExpandAllClicked" Margin="0 5 5 5"
+                            ToolTip="{x:Static resources:MediaStrings.CycleDetailsNavigator_ExpandAllTooltip}">
+                        <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/expandAll_16x16.png" Stretch="Fill" />
+                    </Button>
+                </StackPanel>
+                
+                <TreeView Background="Transparent" BorderThickness="0" Style="{StaticResource ReusableEntitiesTreeViewStyle}"
+                          ItemsSource="{Binding TreeViewFirstLevelElements}"
+                          Name="SectionTreeView" Grid.Row="1"
+                          dragDropExtension:DragDropHelper.IsDragSource="True"
+                          MouseUp="OnTreeViewMouseUp"
+                          FocusManager.IsFocusScope="True"
+                          >
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="presentation:CycleNavigationTreeViewDataViewModel"
+                                                  ItemsSource="{Binding CyclePackages}">
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate DataType="presentation:CyclePackageConfigDataViewModel"
+                                                  ItemTemplate="{StaticResource SectionTreeViewFolderItemsTemplate}" >
+                                    <HierarchicalDataTemplate.ItemsSource>
+                                        <MultiBinding Converter="{StaticResource TreeViewFolderConverter}" ConverterParameter="{x:Static resources:MediaStrings.CycleDetailsNavigator_TreeViewCycleTypes}">
+                                            <Binding Path="EventCycles" />
+                                            <Binding Path="StandardCycles" />
+                                        </MultiBinding>
+                                    </HierarchicalDataTemplate.ItemsSource>
+                                    <HierarchicalDataTemplate.ItemContainerStyle>
+                                        <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemContainerStyle}" />
+                                    </HierarchicalDataTemplate.ItemContainerStyle>
+                                    <Border Height="23" IsHitTestVisible="True">
+                                        <TextBlock Text="{Binding Name.Value}" VerticalAlignment="Center" IsHitTestVisible="True" 
+                                                   Style="{StaticResource TreeViewParentNodeTextStyle}"/>
+                                    </Border>
+                                </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                            <HierarchicalDataTemplate.ItemContainerStyle>
+                                <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemContainerStyle}" />
+                            </HierarchicalDataTemplate.ItemContainerStyle>
+                            <Border Height="23" IsHitTestVisible="True" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding PhysicalScreenType}" IsHitTestVisible="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                           Style="{StaticResource TreeViewParentNodeTextStyle}" />
+                            </Border>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem" BasedOn="{StaticResource NavigationItemContainerStyle}">
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                </TreeView>
+            </Grid>
+        </Border>
+
+        <GridSplitter Grid.Column="0" Width="3"/>
+
+
+        <Border Grid.Column="1" BorderThickness="1 0 1 0" BorderBrush="{StaticResource CycleNavigationBorderBrush}">
+            <Grid>
+                <controls:ReusableList Entities="{Binding CurrentCyclePackage.StandardCycles}"
+                                       NewButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CreateNewCycle}"
+                                       RenameButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_RenameCycle}"
+                                       RemoveButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_DeleteCycle}"
+                                       CloneButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CloneCycle}"
+                                       CreateNewEntity="{Binding ShowCycleTypeSelection}"
+                                       DeleteEntity="{Binding DeleteCycle}"
+                                       CloneEntity="{Binding CloneCycle}"
+                                       RenameEntity="{Binding RenameCycle}"
+                                       ChooseEntity="{Binding ChooseCycle}"
+                                       SelectedChanged="OnSelectedItemChanged"
+                                       HighlightChanged="OnStandardCycleHighlightChanged"
+                                       HighlightedEntity="{Binding HighlightedCycle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       ShowIsUsed="False"
+                                       x:Name="StandardCycleList"
+                                       IsEnabled="{Binding SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.Cycle}}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       ShowReferenceFlag="True"
+                                       ReferenceFlagIcon="/Gorba.Center.Media.Core;component/Resources/Images/Icons/cyclereference_16x16.png">
+                    <controls:ReusableList.SelectedEntity>
+                        <MultiBinding Converter="{StaticResource FindReferenceConverter}">
+                            <Binding Path="CurrentCycle"/>
+                            <Binding Path="CurrentCyclePackage.StandardCycles"/>
+                        </MultiBinding>
+                    </controls:ReusableList.SelectedEntity>
+                    <controls:ReusableList.PrefixContent>
+                        <controls:ReusableList Entities="{Binding CurrentCyclePackage.EventCycles}"
+                                            NewButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CreateNewCycle}"
+                                            RenameButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_RenameCycle}"
+                                            RemoveButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_DeleteCycle}"
+                                            CloneButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CloneCycle}"
+                                            CreateNewEntity="{Binding ShowCycleTypeSelection}"
+                                            DeleteEntity="{Binding DeleteCycle}"
+                                            CloneEntity="{Binding CloneCycle}"
+                                            RenameEntity="{Binding RenameCycle}"
+                                            ChooseEntity="{Binding ChooseCycle}"
+                                            SelectedChanged="OnSelectedItemChanged"
+                                            HighlightChanged="OnEventCycleHighlightChanged"
+                                            HighlightedEntity="{Binding HighlightedCycle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            ShowIsUsed="False"
+                                            ShowCreateButton="False"
+                                            IsEnabled="{Binding SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.Cycle}}"
+                                            ShowReferenceFlag="True"
+                                            ReferenceFlagIcon="/Gorba.Center.Media.Core;component/Resources/Images/Icons/cyclereference_16x16.png">
+                            <controls:ReusableList.SelectedEntity>
+                                <MultiBinding Converter="{StaticResource FindReferenceConverter}" Mode="TwoWay">
+                                    <Binding Path="CurrentCycle"/>
+                                    <Binding Path="CurrentCyclePackage.EventCycles"/>
+                                </MultiBinding>
+                            </controls:ReusableList.SelectedEntity>
+                        </controls:ReusableList>
+                    </controls:ReusableList.PrefixContent>
+                </controls:ReusableList>
+
+                <controls:ReusableList Entities="{Binding CurrentCycle.Sections}"
+                                       NewButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CreateNewSection}"
+                                       RenameButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_RenameSection}"
+                                       RemoveButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_DeleteSection}"
+                                       CloneButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_CloneSection}"
+                                       CreateNewEntity="{Binding ShowSectionTypeSelection}"
+                                       DeleteEntity="{Binding DeleteSection}"
+                                       CloneEntity="{Binding CloneSection}"
+                                       RenameEntity="{Binding RenameSection}"
+                                       SelectedEntity="{Binding CurrentSection}"
+                                       HighlightedEntity="{Binding HighlightedSection, Mode=TwoWay}"
+                                       ChooseEntity="{Binding ChooseSection}"
+                                       SelectedChanged="OnSelectedItemChanged"
+                                       HighlightChanged="OnSectionHighlightChanged"
+                                       ShowIsUsed="False"
+                                       IsEnabled="{Binding SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.Section}}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       x:Name="SectionList">
+                </controls:ReusableList>
+
+                <controls:ReusableList Entities="{Binding SelectedCycleNavigationTreeViewDataViewModel.CyclePackages}"
+                                       RenameButtonText="{x:Static resources:MediaStrings.CycleDetailsNavigator_RenameSection}"
+                                       RenameEntity="{Binding RenameCyclePackage}"
+                                       SelectedEntity="{Binding CurrentCyclePackage}"
+                                       HighlightedEntity="{Binding HighlightedCyclePackage, Mode=TwoWay}"
+                                       ChooseEntity="{Binding ChooseCyclePackage}"
+                                       SelectedChanged="OnSelectedItemChanged"
+                                       HighlightChanged="OnCyclePackageHighlightChanged"
+                                       ShowIsUsed="False"
+                                       ShowCreateButton="False"
+                                       ShowRemoveButton="False"
+                                       IsEnabled="{Binding SelectedNavigation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewModels:CycleNavigationSelection.CyclePackage}}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       x:Name="CyclePackageList">
+                </controls:ReusableList>
+            </Grid>
+        </Border>
+
+        <GridSplitter Grid.Column="1" Width="3"/>
+
+        <Border Grid.Column="2" BorderThickness="0 0 1 0" Margin="3 0 0 0" Padding="0 0 3 0" BorderBrush="{StaticResource CycleNavigationBorderBrush}">
+            <Border.Resources>
+                <converters:EvaluationToStringConverter x:Key="EvaluationToStringConverter"/>
+
+                <Style TargetType="propertyGrid:PropertyGridItem" BasedOn="{StaticResource DefaultContextButtonPropertyGridItemStyle}"></Style>
+            </Border.Resources>
+
+            <propertyGrid:PropertyGrid x:Name="PropertyGrid" DynamicDataConverter="{StaticResource EvaluationToStringConverter}"
+                                       EditorCallbacks="{Binding ElementName=NavigatorRoot, Path=EditorCallbacks}"  />
+        </Border>
+
+        <GridSplitter Grid.Column="2" Width="3"/>
+
+        <Canvas Grid.Column="1">
+            <i:Interaction.Triggers>
+                <interaction:InteractionRequestTrigger SourceObject="{Binding CreateCycleInteractionRequest}">
+                    <interaction:InteractionAction Width="200" Height="100" CanvasBottom="50" CanvasLeft="60" Modal="True" >
+                        <interaction:InteractionAction.Dialog>
+                            <interaction1:SelectCycleTypePopup />
+                        </interaction:InteractionAction.Dialog>
+                    </interaction:InteractionAction>
+                </interaction:InteractionRequestTrigger>
+                <interaction:InteractionRequestTrigger SourceObject="{Binding SelectSectionTypeInteractionRequest}">
+                    <interaction:InteractionAction Width="250" Height="150" CanvasBottom="50" CanvasLeft="40" Modal="True" >
+                        <interaction:InteractionAction.Dialog>
+                            <interaction1:SelectSectionTypePopup />
+                        </interaction:InteractionAction.Dialog>
+                    </interaction:InteractionAction>
+                </interaction:InteractionRequestTrigger>
+
+
+                <interaction:InteractionRequestTrigger SourceObject="{Binding ElementName=NavigatorRoot, Path=RefreshCyclePropertyGridRequest}">
+                    <i:InvokeCommandAction Command="{Binding ElementName=NavigatorRoot, Path=UpdateCyclePropertiesCommand}"/>
+                </interaction:InteractionRequestTrigger>
+            </i:Interaction.Triggers>
+        </Canvas>
+    </Grid>
+</UserControl>

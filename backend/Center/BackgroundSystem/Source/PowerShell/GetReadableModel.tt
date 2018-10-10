@@ -1,0 +1,132 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.Where(p => p.Entities.Any(e => e.HasChangeTracking));
+    var entities =
+        entitySpace.Partitions
+        .SelectMany(partition => partition.Entities.Where(entity => entity.HasChangeTracking))
+        .ToList();
+#>
+namespace Gorba.Center.BackgroundSystem.PowerShell
+{
+    using System;
+	using System.Linq;
+    using System.Management.Automation;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.Client.ChangeTracking;
+
+<#
+    foreach (var partition in partitions)
+    {#>
+    using Gorba.Center.Common.Client.ChangeTracking.<#= partition.Name #>;
+<# 
+    }
+	#>
+
+<#
+    foreach (var partition in partitions)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<# 
+    }
+	#>
+
+    using NLog;
+
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteCmdlet(entity);
+    }
+#>
+	
+}
+<#+
+
+    private void WriteCmdlet(EntitySpace.Entity entity)
+    {
+        #>
+	[Cmdlet(VerbsCommon.Get, "<#= entity.Name #>ReadableModel", DefaultParameterSetName = GetReadableModel.QueryParameterSet)]
+	public class Get<#= entity.Name #>ReadableModel : AsyncCmdlet
+	{
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        [Parameter(Mandatory = true)]
+        public <#= entity.Name #>ChangeTrackingManager ChangeTrackingManager { get; set; }
+
+		[Parameter(ParameterSetName = GetReadableModel.IdParameterSet)]
+		public int Id { get; set; }
+
+		[Parameter(ParameterSetName = GetReadableModel.QueryParameterSet)]
+		public <#= entity.Name #>Query Query { get; set; }
+
+		[Parameter]
+		public SwitchParameter LoadReferenceProperties { get; set; }
+
+        protected override async Task ProcessRecordAsync()
+        {
+            try
+            {
+                switch (this.ParameterSetName)
+                {
+                    case GetReadableModel.IdParameterSet:
+                        await this.GetByIdAsync();
+                        break;
+                    case GetReadableModel.QueryParameterSet:
+                        await this.QueryAsync();
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error while bootstrapping change tracking");
+                this.WriteError(
+                    new ErrorRecord(
+                        exception,
+                        "GetUserReadableModel",
+                        ErrorCategory.ReadError,
+                        this.ChangeTrackingManager));
+                throw new Exception(exception.StackTrace);
+            }
+        }
+
+	    private async Task QueryAsync()
+	    {
+	        var result = (await this.ChangeTrackingManager.QueryAsync()).ToList();
+	        if (this.LoadReferenceProperties.ToBool())
+	        {
+	            result.ToList().ForEach(async item => await item.LoadNavigationPropertiesAsync());
+	        }
+
+	        this.WriteObject(result, true);
+	    }
+
+	    private async Task GetByIdAsync()
+	    {
+	        var model = await this.ChangeTrackingManager.GetAsync(this.Id);
+	        if (this.LoadReferenceProperties.ToBool())
+	        {
+	            await model.LoadReferencePropertiesAsync();
+	        }
+
+			this.WriteObject(model);
+	    }
+	}
+<#+
+    }
+#>

@@ -1,0 +1,320 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Stages.EntityStageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:configurations="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Configurations"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Admin.Core.DataViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:stages="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Stages"
+             xmlns:stagesViews="clr-namespace:Gorba.Center.Admin.Core.Views.Stages"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:update="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Update"
+             d:DataContext="{d:DesignInstance stages:EntityStageViewModelBase}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="GridViewGroupPanelTemplate" TargetType="telerik:GridViewGroupPanel">
+
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="Grouping">
+                        <VisualState x:Name="NoGroups" />
+                        <VisualState x:Name="HasGroups">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="panelText" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Collapsed</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="panelTextGrouped" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Visible</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel x:Name="expandColapse"
+                                Orientation="Horizontal"
+                                Visibility="Collapsed">
+                        <telerik:RadButton VerticalAlignment="Center"
+                                           Background="Transparent"
+                                           BorderThickness="0"
+                                           Click="ExpandAllOnClick"
+                                           ToolTip="{x:Static resources:AdminStrings.EntityList_ExpandAll}">
+                            <Image Source="../../Resources/Icons/expand_all_16x16.png" />
+                        </telerik:RadButton>
+                        <telerik:RadButton VerticalAlignment="Center"
+                                           Background="Transparent"
+                                           BorderThickness="0"
+                                           Click="CollapseAllOnClick"
+                                           ToolTip="{x:Static resources:AdminStrings.EntityList_CollapseAll}">
+                            <Image Source="../../Resources/Icons/collapse_all_16x16.png" />
+                        </telerik:RadButton>
+                    </StackPanel>
+                    <TextBlock x:Name="panelText"
+                               Margin="{TemplateBinding Padding}"
+                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                               IsHitTestVisible="False"
+                               telerik:LocalizationManager.ResourceKey="GridViewGroupPanelText" />
+                    <TextBlock x:Name="panelTextGrouped"
+                               Margin="{TemplateBinding Padding}"
+                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"
+                               telerik:LocalizationManager.ResourceKey="GridViewGroupPanelTopTextGrouped" />
+                    <ItemsPresenter VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasItems" Value="True">
+                    <Setter TargetName="panelText" Property="Visibility" Value="Collapsed" />
+                    <Setter TargetName="panelTextGrouped" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="expandColapse" Property="Visibility" Value="Visible" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="GridViewGroupPanelStyle1" TargetType="telerik:GridViewGroupPanel">
+            <Setter Property="Template" Value="{StaticResource GridViewGroupPanelTemplate}" />
+        </Style>
+    </UserControl.Resources>
+
+    <telerik:RadBusyIndicator IsBusy="{Binding IsLoading}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <converters:StringFormatConverter x:Key="StringFormatConverter" />
+                <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            </Grid.Resources>
+
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                   Width="48"
+                   Height="48"
+                   Margin="5 5 15 5"
+                   Source="{Binding EntityName,
+                                    Converter={StaticResource StringFormatConverter},
+                                    ConverterParameter=../../Resources/Icons/EntityTypes/EntityTypes_{0}_48x48.png}" />
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Margin="0 5 0 0">
+                <!--  weird formatting below is to prevent spaces between runs, but still keep it readable  -->
+                <Run FontSize="32" Text="{Binding PluralDisplayName}" /><Run FontSize="32" Text=" " /><Run FontSize="12" Text="(" /><Run FontSize="12" Text="{Binding Items.Count, Mode=OneWay, ElementName=GridView}" /><Run FontSize="12" Text=" / " /><Run FontSize="12" Text="{Binding Instances.Count, Mode=OneWay}" /><Run FontSize="12" Text=" " /><Run FontSize="12" Text="{x:Static resources:AdminStrings.EntityList_CountPostfix}" /><Run FontSize="12" Text=")" />
+            </TextBlock>
+
+            <Button Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding AddEntityCommand}"
+                    ToolTip="{x:Static resources:AdminStrings.Stage_AddNewEntityTooltip}"
+                    ToolTipService.ShowOnDisabled="True"
+                    Visibility="{Binding CanCreate,
+                                         Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Image Source="../../Resources/Icons/add_24x24.png" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Image Source="../../Resources/Icons/add_dark_24x24.png" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Row="0"
+                    Grid.Column="3"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding EditEntityCommand}"
+                    CommandParameter="{Binding SelectedInstance}"
+                    ToolTip="{x:Static resources:AdminStrings.Stage_EditCurrentEntryTooltip}"
+                    ToolTipService.ShowOnDisabled="True"
+                    Visibility="{Binding CanWrite,
+                                         Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Image Source="../../Resources/Icons/edit_24x24.png" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Image Source="../../Resources/Icons/edit_dark_24x24.png" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Row="0"
+                    Grid.Column="4"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding CopyEntityCommand}"
+                    CommandParameter="{Binding SelectedInstance}"
+                    ToolTip="{x:Static resources:AdminStrings.Stage_CopyCurrentEntryTooltip}"
+                    ToolTipService.ShowOnDisabled="True"
+                    Visibility="{Binding CanCreate,
+                                         Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Image Source="../../Resources/Icons/copy_24x24.png" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Image Source="../../Resources/Icons/copy_dark_24x24.png" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Row="0"
+                    Grid.Column="5"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding DeleteEntityCommand}"
+                    CommandParameter="{Binding SelectedInstance}"
+                    ToolTip="{x:Static resources:AdminStrings.Stage_DeleteCurrentEntryTooltip}"
+                    ToolTipService.ShowOnDisabled="True"
+                    Visibility="{Binding CanDelete,
+                                         Converter={StaticResource BoolToVisibilityConverter}}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource FlatIconButton}" TargetType="Button">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Image Source="../../Resources/Icons/delete_24x24.png" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Image Source="../../Resources/Icons/delete_dark_24x24.png" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <telerik:RadGridView x:Name="GridView"
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="6"
+                                 AutoGenerateColumns="True"
+                                 AutoGeneratingColumn="GridViewOnAutoGeneratingColumn"
+                                 BorderThickness="0"
+                                 DataLoaded="GridViewOnDataLoaded"
+                                 EnableLostFocusSelectedState="True"
+                                 GroupPanelStyle="{StaticResource GridViewGroupPanelStyle1}"
+                                 GroupRenderMode="Flat"
+                                 IsReadOnly="True"
+                                 ItemsSource="{Binding Instances}"
+                                 LoadingRowDetails="GridViewOnLoadingRowDetails"
+                                 MouseDoubleClick="GridViewOnMouseDoubleClick"
+                                 RowIndicatorVisibility="Collapsed"
+                                 SelectedItem="{Binding SelectedInstance,
+                                                        Mode=TwoWay}"
+                                 ShowColumnSortIndexes="True">
+                <telerik:RadGridView.ControlPanelItems>
+                    <telerik:ControlPanelItem ButtonTooltip="{x:Static resources:AdminStrings.EntityList_ChooseColumn}">
+                        <telerik:ControlPanelItem.ButtonContent>
+                            <Grid Width="16"
+                                  Height="16"
+                                  HorizontalAlignment="Center">
+                                <Image Source="../../Resources/Icons/select_columns_16x16.png"/>
+                            </Grid>
+                        </telerik:ControlPanelItem.ButtonContent>
+                        <telerik:ControlPanelItem.Content>
+                            <ListBox BorderThickness="0" ItemsSource="{Binding Columns}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding Header, Mode=OneWay}" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </telerik:ControlPanelItem.Content>
+                    </telerik:ControlPanelItem>
+                </telerik:RadGridView.ControlPanelItems>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewToggleRowDetailsColumn IsVisible="{Binding DataContext.HasDetails, RelativeSource={RelativeSource AncestorType=telerik:RadGridView}}" />
+                </telerik:RadGridView.Columns>
+                <telerik:RadGridView.RowDetailsTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}">
+                            <ContentControl.Resources>
+
+                                <DataTemplate DataType="{x:Type dataViewModels:ReadOnlyDataViewModelBase}">
+                                    <stagesViews:EntityDetailsControl DataContext="{Binding}" />
+                                </DataTemplate>
+
+                                <DataTemplate DataType="{x:Type configurations:UnitConfigurationReadOnlyDataViewModel}">
+                                    <stagesViews:UnitConfigurationDetailsControl DataContext="{Binding}" />
+                                </DataTemplate>
+
+                                <DataTemplate DataType="{x:Type update:UpdateGroupReadOnlyDataViewModel}">
+                                    <stagesViews:UpdateGroupDetailsControl DataContext="{Binding}" />
+                                </DataTemplate>
+
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </DataTemplate>
+                </telerik:RadGridView.RowDetailsTemplate>
+            </telerik:RadGridView>
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

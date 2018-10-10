@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbStickDetectionTest", "UsbStickDetectionTest\UsbStickDetectionTest.csproj", "{0F34B6A2-9932-4FA6-854B-C2ABCC46FB96}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = UsbStickDetectionTest\\UsbStickDetectionTest.csproj
+		SccProjectName1 = UsbStickDetectionTest
+		SccLocalPath1 = UsbStickDetectionTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F34B6A2-9932-4FA6-854B-C2ABCC46FB96}.Debug|x86.ActiveCfg = Debug|x86
+		{0F34B6A2-9932-4FA6-854B-C2ABCC46FB96}.Debug|x86.Build.0 = Debug|x86
+		{0F34B6A2-9932-4FA6-854B-C2ABCC46FB96}.Release|x86.ActiveCfg = Release|x86
+		{0F34B6A2-9932-4FA6-854B-C2ABCC46FB96}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

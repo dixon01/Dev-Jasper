@@ -1,0 +1,24 @@
+﻿[$RootKey$\TextTemplating]
+[$RootKey$\TextTemplating\DirectiveProcessors]
+[$RootKey$\TextTemplating\DirectiveProcessors\ImportProjectDirectiveProcessor]
+@="Custom Directive Processor description"
+"Class"="Gorba.Common.VisualStudio.T4Directives.ImportProject.ImportProjectDirectiveProcessor"
+"CodeBase"="$PackageFolder$\Gorba.Common.VisualStudio.T4Directives.dll"
+[$RootKey$\TextTemplating]
+[$RootKey$\TextTemplating\DirectiveProcessors]
+[$RootKey$\TextTemplating\DirectiveProcessors\CompileDirectiveProcessor]
+@="Custom Directive Processor description"
+"Class"="Gorba.Common.VisualStudio.T4Directives.Compiler.CompileDirectiveProcessor"
+"CodeBase"="$PackageFolder$\Gorba.Common.VisualStudio.T4Directives.dll"
+[$RootKey$\TextTemplating]
+[$RootKey$\TextTemplating\DirectiveProcessors]
+[$RootKey$\TextTemplating\DirectiveProcessors\SuggestNamespaceDirectiveProcessor]
+@="Custom Directive Processor description"
+"Class"="Gorba.Common.VisualStudio.T4Directives.SuggestNamespaceDirectiveProcessor"
+"CodeBase"="$PackageFolder$\Gorba.Common.VisualStudio.T4Directives.dll"
+[$RootKey$\TextTemplating]
+[$RootKey$\TextTemplating\DirectiveProcessors]
+[$RootKey$\TextTemplating\DirectiveProcessors\PluralizationServiceDirectiveProcessor]
+@="PluralizationService Directive Processor description"
+"Class"="Gorba.Common.VisualStudio.T4Directives.PluralizationServiceDirectiveProcessor"
+"CodeBase"="$PackageFolder$\Gorba.Common.VisualStudio.T4Directives.dll"

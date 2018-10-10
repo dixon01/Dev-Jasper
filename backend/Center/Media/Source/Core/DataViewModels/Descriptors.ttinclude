@@ -1,0 +1,357 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#+
+
+    private readonly string baseNamespace = "Gorba.Common.Configuration.Infomedia";
+
+	private Entities modelEntities;
+
+	private DataViewModelEntities viewModelEntities;
+
+    private static string GetFieldName(PropertyDescriptor propertyDescriptor)
+    {
+        return propertyDescriptor.ModelName.Substring(0, 1).ToLower() + propertyDescriptor.ModelName.Substring(1);
+    }
+
+    private string GetClassName(string ns, string modelName, out bool isAbstract)
+    {
+        var name = this.GetClassName(ns, modelName);
+        isAbstract = name.EndsWith("Base");
+        return name;
+    }
+
+    private string GetClassName(string ns, string modelName)
+    {
+        if (modelName == "DataViewModelBase")
+        {
+            return "DataViewModelBase";
+        }
+
+	    const string Suffix = "DataViewModel";
+
+        var fullQualifiedName = this.GetModelClassName(ns, modelName);
+        var name = GetClassNameWithoutNamespace(fullQualifiedName);
+		if (name.EndsWith("Base"))
+		{
+			return name.Substring(0, name.Length - 4) + Suffix + "Base";
+		}
+
+		return name + Suffix;
+    }
+
+	/// <summary>
+	/// Creates the real class name for an element.
+	/// <summary>
+	private string GetModelClassName(string ns, string className)
+	{
+		if (string.IsNullOrEmpty(className) || className == "Base")
+		{
+		    return "DataViewModelBase";
+		}
+
+		if (ns == "Layout")
+		{
+			var name = GetClassNameWithoutNamespace(className);
+		    if (name == "Font")
+		    {
+				return this.baseNamespace + ".Font";
+		    }
+
+			// special case since we name the elements differently
+			return this.baseNamespace + "." + GetClassNameWithSuffix(className, "Element");
+		}
+
+		if (ns == "Eval")
+		{
+			// special case since we name the elements differently
+			return this.baseNamespace + "." + className + "Eval";
+		}
+
+	    return GetClassNameWithSuffix(className, "Config");
+	}
+
+	private static string GetClassNameWithoutNamespace(string name)
+	{
+		var parts = name.Split('.');
+		return parts.Last();
+	}
+
+	private static string GetClassNameWithSuffix(string className, string suffix)
+	{
+		if (className.EndsWith("Base"))
+		{
+			return className.Substring(0, className.Length - 4) + suffix + "Base";
+		}
+
+		return className + suffix;
+	}
+
+    private static PropertyDescriptor GetPropertyDescriptor(
+        PropertyBase propertyBase, DataViewModelDescriptor dataViewModelDescriptor)
+    {
+        var propertyElement =
+            dataViewModelDescriptor.DataViewModelEntity.Properties.SingleOrDefault(p => p.ModelName == propertyBase.Name);
+
+        var property = propertyBase as Property;
+        if (property != null)
+        {
+            PropertyType viewModelType;
+            if (property.Animated)
+            {
+                viewModelType = PropertyType.Animated;
+            }
+            else if (property.Dynamic)
+            {
+                viewModelType = PropertyType.Dynamic;
+            }
+            else
+            {
+                viewModelType = PropertyType.Default;
+            }
+
+            return new PropertyDescriptor(
+                dataViewModelDescriptor,
+                propertyBase.Name,
+                property.Type,
+				property.GetEscapedDefaultValue(),
+                viewModelType,
+                propertyElement != null && propertyElement.IsHidden);
+        }
+
+        var compositeProperty = propertyBase as CompositeProperty;
+        if (compositeProperty != null)
+        {
+            return new PropertyDescriptor(
+                dataViewModelDescriptor,
+                propertyBase.Name,
+                compositeProperty.Type,
+				null,
+                PropertyType.Composite,
+                propertyElement != null && propertyElement.IsHidden);
+        }
+
+        var referenceProperty = propertyBase as ReferenceProperty;
+        if (referenceProperty != null)
+        {
+            return new PropertyDescriptor(
+                dataViewModelDescriptor,
+                propertyBase.Name,
+                referenceProperty.Type,
+				null,
+                PropertyType.Reference,
+                propertyElement != null && propertyElement.IsHidden);
+        }
+
+	    var listProperty = propertyBase as ListProperty;
+	    if (listProperty != null)
+	    {
+	        return new PropertyDescriptor(
+	            dataViewModelDescriptor,
+	            propertyBase.Name,
+	            listProperty.ElementType,
+				null,
+	            PropertyType.List,
+	            propertyElement != null && propertyElement.IsHidden);
+	    }
+
+        throw new NotSupportedException(
+            string.Format("property of type '{0}' is not supported yet", propertyBase.GetType()));
+    }
+
+    private string GetPropertyTypeModel(PropertyDescriptor propertyDescriptor)
+    {
+        if (propertyDescriptor.Type == "Layout.Base")
+        {
+            return "DataViewModelBase";
+        }
+
+        return propertyDescriptor.Type;/*
+        var propertyTypeModel = this.viewModelEntities.FindViewByModel(propertyDescriptor.Type);
+        if (propertyTypeModel == null)
+        {
+            throw new InvalidDataException(
+                string.Format(
+                    "Couldn't find '{0}' type for List '{1}'", propertyDescriptor.Type, propertyDescriptor.ModelName));
+        }
+
+        return propertyTypeModel.ModelName;*/
+    }
+
+	private DataViewModelDescriptor GetDataViewModelDescriptor(DataViewModelNamespace ns, DataViewModelEntity entity)
+	{
+	    if (entity == null)
+	    {
+	        throw new ArgumentNullException("entity", "The view model entity can't be null");
+	    }
+
+	    var modelNamespace = this.viewModelEntities.ModelEntities.Namespaces.SingleOrDefault(n => n.Name == ns.Name);
+	    if (modelNamespace == null)
+	    {
+	        throw new InvalidDataException(
+	            string.Format("Can't find model entity for name '{0}' with namespace '{1}'", entity.ModelName, ns.Name));
+	    }
+
+	    var modelEntity = modelNamespace.Classes.SingleOrDefault(c => c.Name == entity.ModelName);
+	    if (modelEntity == null)
+	    {
+	        throw new InvalidDataException(
+	            string.Format("Can't find model entity for name '{0}' with namespace '{1}'", entity.ModelName, ns.Name));
+	    }
+
+	    bool isAbstract;
+	    var name = GetClassName(ns.Name, ns.Name + "." + modelEntity.Name, out isAbstract);
+
+	    DataViewModelDescriptor baseDataViewModelDescriptor;
+	    if (string.IsNullOrEmpty(modelEntity.Base))
+	    {
+	        baseDataViewModelDescriptor = null;
+	    }
+	    else
+	    {
+	        var inheritanceViewModel = this.viewModelEntities.FindViewByModel(modelEntity.Base);
+	        baseDataViewModelDescriptor = inheritanceViewModel == null
+	                                          ? null
+	                                          : this.GetDataViewModelDescriptor(ns, inheritanceViewModel);
+	    }
+
+	    return new DataViewModelDescriptor(ns, name, entity, modelEntity, isAbstract, baseDataViewModelDescriptor);
+	}
+
+    private IEnumerable<NamespaceDescriptor> GetNamespaceDescriptors()
+    {
+        var namespaceDescriptors = new List<NamespaceDescriptor>();
+        foreach (var ns in this.viewModelEntities.Namespaces)
+        {
+            var namespaceDescriptor = new NamespaceDescriptor(ns.Name);
+			var descriptors = ns.Entities.Select(e => this.GetDataViewModelDescriptor(ns, e)).ToList();
+			foreach (var dataViewModelDescriptor in descriptors)
+			{
+				var properties =
+					dataViewModelDescriptor.DataModelEntity.Properties.Select(
+						p => GetPropertyDescriptor(p, dataViewModelDescriptor)).ToList();
+				properties.ForEach(dataViewModelDescriptor.PropertyDescriptors.Add);
+			}
+
+            descriptors.ForEach(namespaceDescriptor.DataViewModelDescriptors.Add);
+			namespaceDescriptors.Add(namespaceDescriptor);
+        }
+
+        return namespaceDescriptors;
+    }
+
+    private IEnumerable<DataViewModelDescriptor> GetDataViewModelDescriptors()
+    {
+        foreach (var ns in this.viewModelEntities.Namespaces)
+        {
+			var descriptors = ns.Entities.Select(e => this.GetDataViewModelDescriptor(ns, e)).ToList();
+			foreach (var dataViewModelDescriptor in descriptors)
+			{
+				var properties =
+					dataViewModelDescriptor.DataModelEntity.Properties.Select(
+						p => GetPropertyDescriptor(p, dataViewModelDescriptor)).ToList();
+				properties.ForEach(dataViewModelDescriptor.PropertyDescriptors.Add);
+			}
+
+			return descriptors;
+        }
+
+        return Enumerable.Empty<DataViewModelDescriptor>();
+    }
+
+    private class NamespaceDescriptor
+    {
+		public NamespaceDescriptor(string name)
+		{
+		    this.Name = name;
+			this.DataViewModelDescriptors = new List<DataViewModelDescriptor>();
+		}
+
+		public string Name { get; private set; }
+
+		public ICollection<DataViewModelDescriptor> DataViewModelDescriptors { get; private set; } 
+    }
+
+    private class DataViewModelDescriptor
+    {
+        public DataViewModelDescriptor(
+            DataViewModelNamespace ns,
+            string viewModelName,
+            DataViewModelEntity dataViewModelEntity,
+            Class dataModelEntity,
+            bool isAbstract,
+            DataViewModelDescriptor inheritance)
+        {
+            this.Namespace = ns;
+            this.DataModelEntity = dataModelEntity;
+            this.DataViewModelEntity = dataViewModelEntity;
+            this.ViewModelName = viewModelName;
+            this.IsAbstract = isAbstract;
+            this.Inheritance = inheritance;
+            this.PropertyDescriptors = new List<PropertyDescriptor>();
+        }
+
+        public bool IsAbstract { get; private set; }
+
+        public Class DataModelEntity { get; private set; }
+
+        public DataViewModelEntity DataViewModelEntity { get; private set; }
+
+        public DataViewModelNamespace Namespace { get; set; }
+
+        public string ViewModelName { get; private set; }
+
+        public DataViewModelDescriptor Inheritance { get; private set; }
+
+        public ICollection<PropertyDescriptor> PropertyDescriptors { get; private set; }
+    }
+
+    private class PropertyDescriptor
+    {
+        public PropertyDescriptor(
+            DataViewModelDescriptor dataViewModelDescriptor,
+            string modelName,
+            string type,
+            string defaultValue,
+            PropertyType viewModelType,
+            bool isHidden)
+        {
+            DataViewModelDescriptor = dataViewModelDescriptor;
+            this.DefaultValue = defaultValue;
+            this.ModelName = modelName;
+            this.Type = type;
+            this.ViewModelType = viewModelType;
+            this.IsHidden = isHidden;
+        }
+
+        public DataViewModelDescriptor DataViewModelDescriptor { get; private set; }
+
+        public string DefaultValue { get; set; }
+
+        public string ModelName { get; private set; }
+
+        public string Type { get; private set; }
+
+        public PropertyType ViewModelType { get; private set; }
+
+        public bool IsHidden { get; set; }
+
+        [XmlAttribute]
+        public string UserVisibleFieldName { get; set; }
+
+        [XmlAttribute]
+        public string UserVisibleGroupName { get; set; }
+    }
+
+    private enum PropertyType
+	{
+	    Default = 0,
+		Dynamic = 1,
+		Animated = 2,
+		Composite = 3,
+		List = 4,
+		Reference = 5
+	}
+#>

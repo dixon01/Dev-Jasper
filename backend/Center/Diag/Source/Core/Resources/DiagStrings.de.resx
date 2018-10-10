@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Dialog_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+	<data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+	<data name="AddUnitDialog_UnitAddress" xml:space="preserve">
+    <value>Unit-Adresse</value>
+  </data>
+	<data name="AllUnits_AddUnit" xml:space="preserve">
+    <value>Unit hinzufügen</value>
+  </data>
+	<data name="AllUnits_Connected" xml:space="preserve">
+    <value>Verbunden</value>
+  </data>
+	<data name="AllUnits_Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+	<data name="AllUnits_Unconnected" xml:space="preserve">
+    <value>Getrennt</value>
+  </data>
+	<data name="AllUnits_UnitProperties" xml:space="preserve">
+    <value>Eigenschaften der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_CommonGroup" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+	<data name="AllUnits_UnitProperties_ConnectionState" xml:space="preserve">
+    <value>Verbindungsstatus</value>
+  </data>
+	<data name="AllUnits_UnitProperties_ConnectionState_Help" xml:space="preserve">
+    <value>Der Verbindungsstatus der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Gateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Gateway_Help" xml:space="preserve">
+    <value>Das IP-Gateway der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_IPAddress" xml:space="preserve">
+    <value>IP-Adressse</value>
+  </data>
+	<data name="AllUnits_UnitProperties_IPAddress_Help" xml:space="preserve">
+    <value>IP-Adresse der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Name_Help" xml:space="preserve">
+    <value>Name der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_NetworkMask" xml:space="preserve">
+    <value>Netzwerk-Maske</value>
+  </data>
+	<data name="AllUnits_UnitProperties_NetworkMask_Help" xml:space="preserve">
+    <value>IP-Netzwerk-Maske der Unit</value>
+  </data>
+	<data name="AllUnits_UnitProperties_SoftwareVersion" xml:space="preserve">
+    <value>UDCP Version</value>
+  </data>
+	<data name="AllUnits_UnitProperties_SoftwareVersion_Help" xml:space="preserve">
+    <value>UDCP Software-Version der Unit</value>
+  </data>
+	<data name="AppInfoPart_ApplicationIO" xml:space="preserve">
+    <value>Anwendungs I/O</value>
+  </data>
+	<data name="AppInfoPart_MediManagementTree" xml:space="preserve">
+    <value>Medi Verwaltungsbaum</value>
+  </data>
+	<data name="AppInfoPart_RemoteLog" xml:space="preserve">
+    <value>Remote-Log</value>
+  </data>
+	<data name="ApplicationMenu_End" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+	<data name="ApplicationMenu_Launch" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+	<data name="MainMenu_Exit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+	<data name="MainMenu_ExitGestureText" xml:space="preserve">
+    <value>ALT + F4</value>
+  </data>
+	<data name="Shell_AllUnitsTabHeader" xml:space="preserve">
+    <value>Alle Units</value>
+  </data>
+	<data name="UnitMenu_Add" xml:space="preserve">
+    <value>Hinzufügen...</value>
+  </data>
+	<data name="UnitMenu_AddGestureText" xml:space="preserve">
+    <value>CTRL + SHIFT + A</value>
+  </data>
+	<data name="UnitMenu_Announce" xml:space="preserve">
+    <value>Ankündigen</value>
+  </data>
+	<data name="UnitMenu_Connect" xml:space="preserve">
+    <value>Verbinden</value>
+  </data>
+	<data name="UnitMenu_Disconnect" xml:space="preserve">
+    <value>Verbindung trennen</value>
+  </data>
+	<data name="UnitMenu_EditIPSettings" xml:space="preserve">
+    <value>IP-Einstellungen ändern</value>
+  </data>
+	<data name="UnitMenu_Reboot" xml:space="preserve">
+    <value>Neustarten</value>
+  </data>
+	<data name="UnitMenu_Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+	<data name="UnitTabSection_FileSystemInfo" xml:space="preserve">
+    <value>Dateisystem</value>
+  </data>
+	<data name="UnitTabSection_SystemInfo" xml:space="preserve">
+    <value>Systeminformationen</value>
+  </data>
+	<data name="UnitTabSection_Tooltip_Format" xml:space="preserve">
+    <value>Pfad: {0}{3}CPU Auslastung: {1}{3}RAM Auslastung: {2} Bytes</value>
+  </data>
+	<data name="UnitTabSection_UnitIoInfo" xml:space="preserve">
+    <value>Unit I/O</value>
+  </data>
+	<data name="UnitTab_BusyConnecting" xml:space="preserve">
+    <value>Verbindung...</value>
+  </data>
+	<data name="ViewMenu_Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+	<data name="Window_Application" xml:space="preserve">
+    <value>Anwendung</value>
+  </data>
+	<data name="Window_File" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+	<data name="Window_Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+	<data name="Window_View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+	<data name="EditIpSettingsDialog_GatewayAddress_Placeholder" xml:space="preserve">
+    <value>Gateway-Adresse eingeben</value>
+  </data>
+	<data name="EditIpSettingsDialog_IpAddress_Placeholder" xml:space="preserve">
+    <value>IP-Adresse eingeben</value>
+  </data>
+	<data name="EditIpSettingsDialog_NetworkMask_Placeholder" xml:space="preserve">
+    <value>Netzwerk-Maske eingeben</value>
+  </data>
+	<data name="IPValidation_InvalidValues" xml:space="preserve">
+    <value>Jedes Oktett einer IP-Adresse muss zwischen 0 und 255 sein.</value>
+  </data>
+	<data name="IPValidation_NoIP" xml:space="preserve">
+    <value>Bitte geben Sie die IP-Adresse ein.</value>
+  </data>
+	<data name="FileSystemTab_Refresh" xml:space="preserve">
+    <value>Neu Laden</value>
+  </data>
+	<data name="IoColumnValue" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+	<data name="ApplicationIoCountLabel" xml:space="preserve">
+    <value>{0} I/O Anschlüsse</value>
+  </data>
+	<data name="FileSystemViewDownloadFile" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+	<data name="FileSystemViewOpenFile" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+	<data name="FileSystemView_DownloadFile_DialogTitle" xml:space="preserve">
+    <value>Datei herunterladen...</value>
+  </data>
+	<data name="BusyIndicator_Downloading" xml:space="preserve">
+    <value>Herunterladen...</value>
+  </data>
+	<data name="BusyIndicator_Loading" xml:space="preserve">
+    <value>Wird geladen...</value>
+  </data>
+	<data name="FileSystemView_DownloadFile_Error" xml:space="preserve">
+    <value>Herunterladen der Datei '{0}' fehlgeschlagen.{1}{2}</value>
+  </data>
+	<data name="FileSystemView_DownloadFile_Success" xml:space="preserve">
+    <value>Herunterladen der Datei '{0}' erfolgreich.</value>
+  </data>
+	<data name="RemoteLog_AutoScroll" xml:space="preserve">
+    <value>Automatisch scrollen</value>
+  </data>
+	<data name="RemoteLog_Enabled" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
+	<data name="RemoteLog_MinLevel" xml:space="preserve">
+    <value>Mindestlevel:</value>
+  </data>
+	<data name="OverviewTitle_ApplicationIo" xml:space="preserve">
+    <value>Eingänge/Ausgänge</value>
+  </data>
+	<data name="ApplicationLogCountLabel" xml:space="preserve">
+    <value>{0} Log Nachrichten</value>
+  </data>
+	<data name="OverviewTitle_MediTree" xml:space="preserve">
+    <value>Management</value>
+  </data>
+	<data name="OverviewTitle_RemoteLog" xml:space="preserve">
+    <value>Anwendungslog</value>
+  </data>
+	<data name="ApplicationMenu_Relaunch" xml:space="preserve">
+    <value>Neustarten</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+	<data name="AllUnits_UnitProperties_Description_Help" xml:space="preserve">
+    <value>Beschreibung der Unit, Sie können hier ihre eigenen Notizen einfügen.</value>
+  </data>
+	<data name="ViewMenu_ShowTileView" xml:space="preserve">
+    <value>Kachel-Übersicht anzeigen</value>
+  </data>
+	<data name="Unit_GatewayAddress_Header" xml:space="preserve">
+    <value>Gateway-Adresse</value>
+  </data>
+	<data name="Unit_IpAddress_Header" xml:space="preserve">
+    <value>IP-Adresse</value>
+  </data>
+	<data name="Unit_SoftwareVersion_Header" xml:space="preserve">
+    <value>UDCP-Version</value>
+  </data>
+	<data name="Dialog_No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+	<data name="Dialog_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+	<data name="UnitAction_ReallyRebootMessage" xml:space="preserve">
+    <value>Wollen Sie wirklich {0} neustarten?</value>
+  </data>
+	<data name="UnitAction_ReallyEndApplicationMessage" xml:space="preserve">
+    <value>Wollen Sie wirklich {0} auf {1} beenden?</value>
+  </data>
+	<data name="UnitAction_ReallyRelaunchApplicationMessage" xml:space="preserve">
+    <value>Wollen Sie die Anwendung {0} auf {1} wirklich neustarten?</value>
+  </data>
+	<data name="EditIpSettingsDialog_GatewayAddress" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+	<data name="EditIpSettingsDialog_IpAddress" xml:space="preserve">
+    <value>IP-Adresse</value>
+  </data>
+	<data name="EditIpSettingsDialog_NetworkMask" xml:space="preserve">
+    <value>Netzwerk-Maske</value>
+  </data>
+	<data name="IoColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="IPValidation_NotCorrectLength" xml:space="preserve">
+    <value>Die IP-Adresse muss aus vier Oktetten bestehen, getrennt durch Punkte.</value>
+  </data>
+	<data name="IPValidation_OnlyNumbers" xml:space="preserve">
+    <value>Jedes Oktett einer IP-Adresse muss eine Nummer sein.</value>
+  </data>
+	<data name="Unit_ConnectionState_Header" xml:space="preserve">
+    <value>Verbindungsstatus</value>
+  </data>
+	<data name="Unit_Description_Header" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+	<data name="Unit_Name_Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="Unit_NetworkMask_Header" xml:space="preserve">
+    <value>Netzwerk-Maske</value>
+  </data>
+	<data name="UnitTab_AnnounceUnit" xml:space="preserve">
+    <value>Ankündigen</value>
+  </data>
+	<data name="UnitTab_DisconnectUnit" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+	<data name="UnitTab_RestartUnit" xml:space="preserve">
+    <value>Neustarten</value>
+  </data>
+	<data name="ViewMenu_Refresh" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+	<data name="ConnectionMode_BackgroundSystem" xml:space="preserve">
+    <value>Background System</value>
+  </data>
+	<data name="ConnectionMode_Local" xml:space="preserve">
+    <value>Lokal</value>
+  </data>
+	<data name="ConnectionMode_NotAvailable" xml:space="preserve">
+    <value>Nicht verfügbar</value>
+  </data>
+	<data name="ConnectionState_Connected" xml:space="preserve">
+    <value>Verbunden</value>
+  </data>
+	<data name="ConnectionState_Connecting" xml:space="preserve">
+    <value>Verbinde</value>
+  </data>
+	<data name="ConnectionState_Disconnected" xml:space="preserve">
+    <value>Getrennt</value>
+  </data>
+	<data name="AllUnits_UnitProperties_DhcpEnabled" xml:space="preserve">
+		<value>DHCP Aktivieret</value>
+	</data>
+	<data name="AllUnits_UnitProperties_DhcpEnabled_Help" xml:space="preserve">
+		<value>Gibt an, ob die Unit so eingestellt ist, dass sie DHCP verwendet, um ihre IP-Adresse zu erhalten.</value>
+	</data>
+	<data name="EditIpSettingsDialog_DhcpEnabled" xml:space="preserve">
+		<value>DHCP verwenden</value>
+	</data>
+	<data name="Unit_Dhcp_Header" xml:space="preserve">
+		<value>DHCP</value>
+	</data>
+	<data name="UnitTabSection_RemoteViewer" xml:space="preserve">
+		<value>Fernansicht</value>
+	</data>
+	<data name="AllUnits_UnitProperties_ConnectionMode" xml:space="preserve">
+		<value>Verbindungsmodus</value>
+	</data>
+	<data name="AllUnits_UnitProperties_ConnectionMode_Help" xml:space="preserve">
+		<value>Die Art, in der icenter.diag mit dieser Unit verbunden wird</value>
+	</data>
+	<data name="RemoteViewer_InteractiveQuery" xml:space="preserve">
+		<value>Möchten Sie wirklich zum interaktiven Modus überwechseln? Andere könnten Ihre Handlungen auf dem ferngesteuerten Gerät sehen.</value>
+	</data>
+	<data name="RemoteViewer_InteractiveQueryTitle" xml:space="preserve">
+		<value>Interaktiver Modus</value>
+	</data>
+	<data name="RemoteViewer_Alt" xml:space="preserve">
+		<value>Alt</value>
+	</data>
+	<data name="RemoteViewer_Ctrl" xml:space="preserve">
+		<value>Strg</value>
+	</data>
+	<data name="RemoteViewer_Shift" xml:space="preserve">
+		<value>Umschalt</value>
+	</data>
+	<data name="RemoteViewer_Win" xml:space="preserve">
+		<value>Win</value>
+	</data>
+	<data name="RemoteLog_ClearAll" xml:space="preserve">
+		<value>Alles löschen</value>
+	</data>
+	<data name="RemoteViewer_FitToScreen" xml:space="preserve">
+		<value>An das Fenster anpassen</value>
+	</data>
+</root>

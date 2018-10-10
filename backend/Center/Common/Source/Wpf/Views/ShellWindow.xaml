@@ -1,0 +1,180 @@
+<Window x:Class="Gorba.Center.Common.Wpf.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:Gorba.Center.Common.Wpf.Framework.ViewModels;assembly=Gorba.Center.Common.Wpf.Framework"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        mc:Ignorable="d" 
+        d:DesignHeight="300" d:DesignWidth="300"
+        Title="{Binding Path=Title}">
+    <Window.Resources>
+        <Style x:Key="ListBoxContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#2A2A30" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ActiveBorderBrushKey}" Color="#2A2A30" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#2A2A30" />
+            </Style.Resources>
+            <Setter Property="Background" Value="#35353D"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2A2A30"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Border.Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="BorderBrush" Value="#1D1E21" />
+            <Setter Property="Height" Value="44" />
+            <Style.Triggers>
+                <Trigger Property="Border.IsMouseOver" Value="True">
+                    <Setter Property="Border.Background" Value="#2A2A30" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="0,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="0" Color="#014268" />
+                <GradientStop Offset="1" Color="#002C4A" />
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <HierarchicalDataTemplate DataType="{x:Type viewModels:MenuItemBase}"
+                                  ItemsSource="{Binding Path=Children}">
+             <HierarchicalDataTemplate.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Command" Value="{Binding Path=Command}" />
+                </Style>
+            </HierarchicalDataTemplate.ItemContainerStyle>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Path=ImageSource}" />
+                <TextBlock Text="{Binding Path=DisplayName}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <CollectionViewSource x:Key="SortedMenuItems" Source="{Binding Path=MenuItems}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Index"></scm:SortDescription>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" ItemsSource="{Binding Source={StaticResource SortedMenuItems}}" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="46" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Path=StagesMenuView}" 
+                     ItemContainerStyle="{StaticResource ListBoxContainerStyle}" 
+                SelectedItem="{Binding Path=ActiveStage}"
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                     Background="#35353D" 
+                Grid.Column="0" 
+                     Name="ListBoxHeader"
+                BorderThickness="1,0,1,0" 
+                BorderBrush="#292930"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:IStage}">
+                        <Border BorderThickness="0,1,0,0" BorderBrush="#4A4A54" Height="45" Width="42" >
+                            <Border 
+                                BorderThickness="0,0,0,1" 
+                                BorderBrush="#1D1E21" 
+                                Height="44" 
+                                Width="42"
+                                Style="{StaticResource BorderStyle}" >
+                                <Image Source="{Binding Path=NavBarImage}" Width="32" Height="32" />
+                            </Border>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Foreground="White" 
+                     Panel.ZIndex="2" 
+                     Background="#35353D" 
+                     Name="ListBoxBody" 
+                     ItemContainerStyle="{StaticResource ListBoxContainerStyle}" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Width="120" 
+                     HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding Path=StagesMenuView}" 
+                     SelectedItem="{Binding Path=ActiveStage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                     VerticalAlignment="Stretch" 
+                     VerticalContentAlignment="Center" 
+                     BorderThickness="1,0,1,0" 
+                     BorderBrush="#292930"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:IStage}">
+                        <Border BorderThickness="0,1,0,0" BorderBrush="#4A4A54" Height="45" >
+                            <Border 
+                                BorderThickness="0,0,0,1" 
+                                BorderBrush="#1D1E21" 
+                                Height="44" 
+                                Style="{StaticResource BorderStyle}" >
+                                <TextBlock 
+                                    Text="{Binding Path=DisplayName}" 
+                                    Foreground="LightGray" 
+                                    VerticalAlignment="Center" 
+                                    Margin="5,0,0,0" />
+                            </Border>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.Style>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger 
+                                Binding="{Binding ElementName=ListBoxHeader, Path=IsMouseOver}" 
+                                Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Style>
+            </ListBox>
+            <ContentControl Grid.Column="1" Content="{Binding Path=ActiveStage}" />
+        </Grid>
+        <StatusBar Grid.Row="3"
+                   Foreground="White" 
+                   Background="{StaticResource BlueGradient}" 
+                   ItemsSource="{Binding Path=StatusBarItems}">
+          <StatusBar.ItemsPanel>
+              <ItemsPanelTemplate>
+                  <Grid></Grid>
+              </ItemsPanelTemplate>
+                 
+          </StatusBar.ItemsPanel>
+          <StatusBar.ItemContainerStyle>
+               <Style>
+                   <Setter Property="StatusBarItem.HorizontalAlignment" 
+                           Value="{Binding Path=HorizontalAlignment}" />
+                   <Setter Property="StatusBarItem.HorizontalContentAlignment" 
+                           Value="{Binding Path=HorizontalAlignment}" />
+               </Style>
+           </StatusBar.ItemContainerStyle>
+           
+        </StatusBar>
+        
+        <!-- Header bar -->
+        <ContentControl Grid.Row="1" Content="{Binding Path=HeaderBar}" />
+    </Grid>
+</Window>

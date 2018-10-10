@@ -1,0 +1,27 @@
+﻿<#+
+	private void WriteBaseCmdlet(EntitySpace.Entity entity)
+	{#>
+
+	public partial class <#= entity.Name #>CmdletBase : DataServiceCmdletBase
+	{
+		public override string EntityName { get { return "<#= entity.Name #>"; } }
+	}
+
+	public partial class <#= entity.Name #>CmdletBaseWithInputObject : <#= entity.Name #>CmdletBase
+	{
+        [Parameter(Mandatory = true, ParameterSetName = "Single", Position = <#= this.startingParameterIndex #>, ValueFromPipeline = true)]
+		public <#= entity.Name #> InputObject { get; set; }
+<#+
+	    if (!entity.HasChangeTracking)
+	    {
+	        #>
+
+        [Parameter(Mandatory = true, ParameterSetName = "Multiple", Position = <#= this.startingParameterIndex #>, ValueFromPipeline = true)]
+		public IEnumerable<<#= entity.Name #>> InputObjects { get; set; }
+<#+
+	    }
+#>
+	}
+<#+
+	}
+#>

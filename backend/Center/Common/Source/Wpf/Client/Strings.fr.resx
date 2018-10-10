@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Login_Authenticating" xml:space="preserve">
+    <value>Authentification...</value>
+  </data>
+  <data name="Login_Cancel" xml:space="preserve">
+    <value>Opération annulée</value>
+  </data>
+  <data name="Login_Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Login_Description" xml:space="preserve">
+    <value>Sélectionnez le serveur sur lequel vous voulez vous connecter et indiquez vos références.</value>
+  </data>
+  <data name="Login_Error" xml:space="preserve">
+    <value>Erreur durant la validation</value>
+  </data>
+  <data name="Login_LoginButton" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>Mot de passe:</value>
+  </data>
+  <data name="Login_Server" xml:space="preserve">
+    <value>Serveur:</value>
+  </data>
+  <data name="Login_Username" xml:space="preserve">
+    <value>Nom d'utilisateur:</value>
+  </data>
+  <data name="Login_UserNotAuthenticated" xml:space="preserve">
+    <value>Utilisateur non authentifié</value>
+  </data>
+  <data name="TenantSelection_LabelTenant" xml:space="preserve">
+    <value>Client:</value>
+  </data>
+  <data name="TenantSelection_SelectButton" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="TenantSelection_TenantDescription" xml:space="preserve">
+    <value>Veuillez sélectionner votre client.</value>
+  </data>
+  <data name="Login_NoTenants" xml:space="preserve">
+    <value>Aucun client trouvé</value>
+  </data>
+  <data name="ConnectionException_DefaultTitle" xml:space="preserve">
+    <value>Problème de connexion</value>
+  </data>
+  <data name="Login_CanNotGetConfiguration" xml:space="preserve">
+    <value>Erreur durant la configuration de la connexion au portail. Veuillez contacter l'assistance technique.</value>
+  </data>
+  <data name="Login_CanNotGetConfigurationTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="Logout_ToolTipFormat" xml:space="preserve">
+    <value>Déconnexion depuis {0}</value>
+  </data>
+  <data name="ChangePassword_CurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel:</value>
+  </data>
+  <data name="ChangePassword_Error_CurrentNoMatch" xml:space="preserve">
+    <value>Le mot de passe actuel ne correspond pas.</value>
+  </data>
+  <data name="ChangePassword_Error_InvalidPassword" xml:space="preserve">
+    <value>Le nouveau mot de passe doit contenir au moins 8 caractères.</value>
+  </data>
+  <data name="ChangePassword_Error_NotChanged" xml:space="preserve">
+    <value>Impossible de changer le mot de passe. Veuillez si nécessaire tenter de vous déconnecter puis de revenir avec vos anciennes références.</value>
+  </data>
+  <data name="ChangePassword_Error_NotChanged_Title" xml:space="preserve">
+    <value>Échec Modification Mot de passe</value>
+  </data>
+  <data name="ChangePassword_Error_RepeatNoMatch" xml:space="preserve">
+    <value>Les nouveaux mots de passe ne correspondent pas.</value>
+  </data>
+  <data name="ChangePassword_NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe:</value>
+  </data>
+  <data name="ChangePassword_RepeatPassword" xml:space="preserve">
+    <value>Répéter le mot de passe:</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Modifier mot de passe</value>
+  </data>
+  <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="UserMenu_ChangePassword" xml:space="preserve">
+    <value>Modifier le mot de passe...</value>
+  </data>
+  <data name="UserMenu_Logout" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="UserMenu_ServerFormat" xml:space="preserve">
+    <value>Serveur: {0}</value>
+  </data>
+  <data name="Login_FetchingTenants" xml:space="preserve">
+    <value>Recherche de clients...</value>
+  </data>
+  <data name="Login_NoTenantsFound" xml:space="preserve">
+    <value>Aucun client trouvé. Veuillez choisir un autre utilisateur.</value>
+  </data>
+  <data name="Login_NoTenantsFoundTitle" xml:space="preserve">
+    <value>Aucun client trouvé</value>
+  </data>
+  <data name="Permission_NotGranted" xml:space="preserve">
+    <value>L'opération ne peut avoir lieu avec les permissions actuelles de l'utilisateur.</value>
+  </data>
+  <data name="Permission_NotGrantedTitle" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="CheckInDialog_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CheckInDialog_Checkin" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="CheckInDialog_MajorVersion" xml:space="preserve">
+    <value> Version majeure</value>
+  </data>
+  <data name="CheckInDialog_MinorVersion" xml:space="preserve">
+    <value> Version mineure</value>
+  </data>
+  <data name="CheckInDialog_Skip" xml:space="preserve">
+    <value>Saut</value>
+  </data>
+  <data name="CheckInDialog_VersionComments" xml:space="preserve">
+    <value>Commentaires Version</value>
+  </data>
+  <data name="CheckInDialog_VersionTypeMessage" xml:space="preserve">
+    <value>Quel type de version voulez-vous enregistrer?</value>
+  </data>
+  <data name="Login_NoConnection" xml:space="preserve">
+		<value>Impossible de se connecter au serveur.</value>
+	</data>
+  <data name="Login_NoServices" xml:space="preserve">
+		<value>Erreur de connexion aux services</value>
+	</data>
+  <data name="Login_ServerNotFound" xml:space="preserve">
+		<value>Impossible de trouver le serveur. Vérifier le nom du serveur.</value>
+	</data>
+  <data name="Login_SystemNotAvailable" xml:space="preserve">
+		<value>Le système n'est pas disponible. Veuillez réessayer ultérieurement.</value>
+	</data>
+  <data name="MaintenanceModeActivated_Title" xml:space="preserve">
+		<value>Mode maintenance</value>
+	</data>
+  <data name="UpdateProgress_Description" xml:space="preserve">
+		<value>Installation d'une mise à jour du</value>
+	</data>
+  <data name="UpdateProgress_Message" xml:space="preserve">
+		<value>Téléchargement: {0:0.0}Mo sur {1:0.0}Mo - {2}% terminé</value>
+	</data>
+  <data name="Login_CheckingUpdates" xml:space="preserve">
+		<value>Vérification des mises à jour en cours…</value>
+	</data>
+  <data name="Login_UpdateError" xml:space="preserve">
+		<value>Impossible de vérifier les mises à jour</value>
+	</data>
+  <data name="Login_OfflineButton" xml:space="preserve">
+		<value>Hors ligne</value>
+	</data>
+  <data name="LoadingWindow_BusyContent" xml:space="preserve">
+		<value>Chargement de la fenêtre principale et des ressources en cours</value>
+	</data>
+  <data name="Login_SystemInMaintenance" xml:space="preserve">
+		<value>Impossible de se connecter. Le système est en mode maintenance: {0}</value>
+	</data>
+  <data name="MaintenanceModeActivated_MessageFormat" xml:space="preserve">
+		<value>Le mode de maintenance pour le système d'arrière-plan a été activé. Veuillez fermer vos applications. Raison: {0}</value>
+	</data>
+  <data name="CheckInDialog_ErrorDescription_Empty" xml:space="preserve">
+    <value>Les commentaires version ne doit pas être vide</value>
+  </data>
+</root>

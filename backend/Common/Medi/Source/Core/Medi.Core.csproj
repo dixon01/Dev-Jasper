@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Medi.Core</RootNamespace>
+    <AssemblyName>Gorba.Common.Medi.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Config\AutoConfigurator.cs" />
+    <Compile Include="Config\ClientPeerConfig.cs" />
+    <Compile Include="Config\EventHandlerClientPeerConfig.cs" />
+    <Compile Include="Config\EventHandlerPeerConfig.cs" />
+    <Compile Include="Config\EventHandlerPeerConfigBase.cs" />
+    <Compile Include="Config\EventHandlerServerPeerConfig.cs" />
+    <Compile Include="Config\ObjectConfigurator.cs" />
+    <Compile Include="Config\PeerStackConfig.cs" />
+    <Compile Include="Config\PortForwardingServiceConfig.cs" />
+    <Compile Include="IRootMessageDispatcher.cs" />
+    <Compile Include="Management\Remote\IRemoteManagementObjectProvider.cs" />
+    <Compile Include="Management\Remote\IRemoteManagementTableProvider.cs" />
+    <Compile Include="Messages\AudioStatusRequest.cs" />
+    <Compile Include="Messages\AudioStatusMessage.cs" />
+    <Compile Include="Network\IRoutingTable.cs" />
+    <Compile Include="Network\SessionIds.cs" />
+    <Compile Include="Peers\ClientPeerStack.cs" />
+    <Compile Include="Peers\Edi\EventHandlerClientPeer.cs" />
+    <Compile Include="Peers\Edi\EventHandlerPeerBase.cs" />
+    <Compile Include="Peers\IPeer.cs" />
+    <Compile Include="Peers\ServerPeerStack.cs" />
+    <Compile Include="Peers\Session\GatewayMode.cs" />
+    <Compile Include="Messages\BroadcastSubscriptionRequest.cs" />
+    <Compile Include="Resources\BackgroundSystemResourceDataStoreConfig.cs" />
+    <Compile Include="Resources\BackgroundSystemResourceStoreConfig.cs" />
+    <Compile Include="Resources\FileResourceDataStoreConfig.cs" />
+    <Compile Include="Resources\FileResourceStoreConfig.cs" />
+    <Compile Include="Resources\IVolumeSettings.cs" />
+    <Compile Include="Resources\ResourceDataStoreConfigBase.cs" />
+    <Compile Include="Resources\ResourceStoreConfigBase.cs" />
+    <Compile Include="Subscription\BroadcastSubscriptionService.cs" />
+    <Compile Include="Subscription\IBroadcastSubscriptionService.cs" />
+    <Compile Include="Subscription\SubscribedTypesEventArgs.cs" />
+    <Compile Include="Subscription\SubscriptionEventArgs.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\DateTimeSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GuidSchemaSerializer.FX20.cs" />
+    <Compile Include="TypeFactory.FX20.cs" />
+    <Compile Include="Logging\ILogObserver.cs" />
+    <Compile Include="Management\FileSystem\FileSystemManagementProvider.FX20.cs" />
+    <Compile Include="Peers\Transport\IReadBufferProvider.cs" />
+    <Compile Include="Resources\LocalResourceServiceConfig.cs" />
+    <Compile Include="Resources\RemoteResourceServiceConfig.cs" />
+    <Compile Include="Resources\ResourceServiceConfigBase.cs" />
+    <Compile Include="Config\ServiceConfigBase.cs" />
+    <Compile Include="Config\StringConfigurator.cs" />
+    <Compile Include="Config\TransportClientConfig.cs" />
+    <Compile Include="Config\IConfigurator.cs" />
+    <Compile Include="Config\TransportServerConfig.cs" />
+    <Compile Include="Config\CodecConfig.cs" />
+    <Compile Include="Config\FileConfigurator.cs" />
+    <Compile Include="Config\ServerPeerConfig.cs" />
+    <Compile Include="Config\TransportConfig.cs" />
+    <Compile Include="IMessageDispatcher.cs" />
+    <Compile Include="IMessageDispatcherImpl.cs" />
+    <Compile Include="Logging\ILogObserverFactory.cs" />
+    <Compile Include="Logging\LocalLogObserver.cs" />
+    <Compile Include="Logging\LogObserverFactory.cs" />
+    <Compile Include="Logging\LogRequest.cs" />
+    <Compile Include="Logging\LogEventArgs.cs" />
+    <Compile Include="Logging\RemoteLogObserver.cs" />
+    <Compile Include="Management\IManageableObject.cs" />
+    <Compile Include="Management\IManageableTable.cs" />
+    <Compile Include="Management\IManagementObjectProvider.cs" />
+    <Compile Include="Management\IManagementProviderFactory.cs" />
+    <Compile Include="Management\IManagementTableProvider.cs" />
+    <Compile Include="Management\Provider\ManageableManagementProvider.cs" />
+    <Compile Include="Management\Provider\ManageableTableManagementProvider.cs" />
+    <Compile Include="Management\Provider\ManagementProviderBase.cs" />
+    <Compile Include="Management\Provider\ManagementTableProviderBase.cs" />
+    <Compile Include="Management\Provider\ModifiableManagementObjectProvider.cs" />
+    <Compile Include="Management\Provider\ModifiableManagementTableProvider.cs" />
+    <Compile Include="Management\Remote\IRemoteManagementProviderImpl.cs" />
+    <Compile Include="Management\Remote\RemoteManagementHandler.cs" />
+    <Compile Include="Management\Remote\RemoteManagementObjectProvider.cs" />
+    <Compile Include="Management\Remote\RemoteManagementTableProvider.cs" />
+    <Compile Include="Management\Wmi\WmiManagementProvider.FX20.cs" />
+    <Compile Include="Management\Wmi\WmiNamespaceProvider.FX20.cs" />
+    <Compile Include="Management\Wmi\WmiClassProvider.FX20.cs" />
+    <Compile Include="Peers\Codec\SendMessageBuffer.cs" />
+    <Compile Include="Peers\IMessage.cs" />
+    <Compile Include="Peers\Session\FrameCheck.cs" />
+    <Compile Include="Peers\Session\FrameController.cs" />
+    <Compile Include="Peers\Session\FrameInfo.cs" />
+    <Compile Include="Peers\Session\IFrameController.cs" />
+    <Compile Include="Peers\Streams\SimpleStreamMessage.cs" />
+    <Compile Include="Peers\Streams\StreamHeader.cs" />
+    <Compile Include="Peers\StreamMessage.cs" />
+    <Compile Include="Peers\Streams\StreamReadResult.cs" />
+    <Compile Include="Resources\ResourceStatus.cs" />
+    <Compile Include="Resources\FileReceivedEventArgs.cs" />
+    <Compile Include="Resources\IDownloadHandler.cs" />
+    <Compile Include="Resources\IResourceService.cs" />
+    <Compile Include="Resources\IResourceServiceImpl.cs" />
+    <Compile Include="Resources\IResourceMessage.cs" />
+    <Compile Include="Resources\IUploadHandler.cs" />
+    <Compile Include="Resources\ResourceAnnouncement.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IServiceImpl.cs" />
+    <Compile Include="Subscription\ISubscription.cs" />
+    <Compile Include="IUnknown.cs" />
+    <Compile Include="Management\Clr\AssembliesManagementProvider.FX20.cs" />
+    <Compile Include="Management\Clr\ClrManagementProvider.cs" />
+    <Compile Include="Management\FileSystem\FileSystemManagementProvider.cs" />
+    <Compile Include="Management\IManageable.cs" />
+    <Compile Include="Management\Remote\IRemoteManagementProvider.cs" />
+    <Compile Include="Management\Provider\ManageableObjectManagementProvider.cs" />
+    <Compile Include="Management\Provider\ManagementObjectProviderBase.cs" />
+    <Compile Include="Management\IManagementProvider.cs" />
+    <Compile Include="Management\IModifiableManagementProvider.cs" />
+    <Compile Include="Management\Provider\ModifiableManagementProvider.cs" />
+    <Compile Include="Management\ManagementProperty.cs" />
+    <Compile Include="Management\ManagementProperty{T}.cs" />
+    <Compile Include="Management\ManagementProviderFactory.cs" />
+    <Compile Include="Management\Provider\ObjectManagementProvider.cs" />
+    <Compile Include="Management\Remote\RemoteManagementProvider.cs" />
+    <Compile Include="MediAddress.cs" />
+    <Compile Include="MessageEventArgs.cs" />
+    <Compile Include="Messages\AddSubscriptions.cs" />
+    <Compile Include="Messages\INetworkMessage.cs" />
+    <Compile Include="Messages\ISubscriptionMessage.cs" />
+    <Compile Include="Messages\ManagementRequest.cs" />
+    <Compile Include="Messages\ManagementResponse.cs" />
+    <Compile Include="Messages\Ping.cs" />
+    <Compile Include="Messages\Pong.cs" />
+    <Compile Include="Messages\RemoveSubscriptions.cs" />
+    <Compile Include="Config\MediConfig.cs" />
+    <Compile Include="Config\PeerConfig.cs" />
+    <Compile Include="Messages\RoutingUpdates.cs" />
+    <Compile Include="NamedDispatcher.cs" />
+    <Compile Include="Network\Pinger.cs" />
+    <Compile Include="Network\RouteUpdate.cs" />
+    <Compile Include="Network\RouteUpdatesEventArgs.cs" />
+    <Compile Include="Network\RoutingEntry.cs" />
+    <Compile Include="Network\RoutingTable.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SchemaSerializerFactory.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GeneratedUnknownListSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\UnknownBecList.cs" />
+    <Compile Include="Transcoder\Bec\Engine\UnknownListSchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Schema\EnumTypeSchema.cs" />
+    <Compile Include="Transport\Bluetooth\BluetoothTransportClientConfig.cs" />
+    <Compile Include="Transport\Bluetooth\BluetoothTransportServerConfig.cs" />
+    <Compile Include="Transport\File\FileTransferSessionProvider.FX20.cs" />
+    <Compile Include="Transport\Stream\IStreamClient.cs" />
+    <Compile Include="Transport\Stream\IStreamConnection.cs" />
+    <Compile Include="Transport\Stream\IStreamFactory.cs" />
+    <Compile Include="Transport\Stream\IStreamServer.cs" />
+    <Compile Include="Transport\Stream\ChannelType.cs" />
+    <Compile Include="Transport\Stream\HandshakeError.cs" />
+    <Compile Include="Transport\Stream\HandshakeErrorEventArgs.cs" />
+    <Compile Include="Transport\Stream\HandshakeSuccessEventArgs.cs" />
+    <Compile Include="Transport\Stream\Messages\IInternalMessage.cs" />
+    <Compile Include="Transport\Stream\Messages\KeepAlive.cs" />
+    <Compile Include="Transport\Stream\Messages\ResourceDownloaded.cs" />
+    <Compile Include="Transport\Stream\Messages\ResourceStateAck.cs" />
+    <Compile Include="Transport\Stream\Messages\ResourceStateRequest.cs" />
+    <Compile Include="Transport\Stream\Messages\ResourceStateResponse.cs" />
+    <Compile Include="Transport\Stream\SendMessageQueue.cs" />
+    <Compile Include="Transport\Stream\StreamFeature.cs" />
+    <Compile Include="Transport\Stream\StreamTransportClient.cs" />
+    <Compile Include="Transport\Stream\StreamTransportClientConfig.cs" />
+    <Compile Include="Transport\Stream\StreamTransportServer.cs" />
+    <Compile Include="Transport\Stream\StreamTransportServerConfig.cs" />
+    <Compile Include="Transport\Tcp\TcpStreamClient.cs" />
+    <Compile Include="Transport\Tcp\TcpStreamConnection.cs" />
+    <Compile Include="Transport\Tcp\TcpStreamFactory.cs" />
+    <Compile Include="Transport\Tcp\TcpStreamServer.cs" />
+    <Compile Include="Peers\MediPeerBase.cs" />
+    <Compile Include="Peers\MediPeerBase.SessionSubscriptionsHandler.cs">
+      <DependentUpon>MediPeerBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Peers\MediPeerBase.SessionRoutingUpdateHandler.cs">
+      <DependentUpon>MediPeerBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Peers\Transport\MessageReadResult.cs" />
+    <Compile Include="Peers\Session\SessionEventArgs.cs" />
+    <Compile Include="Peers\Edi\EventHandlerServerPeer.cs" />
+    <Compile Include="Network\ISessionId.cs" />
+    <Compile Include="Peers\Session\ITransportSession.cs" />
+    <Compile Include="Utility\ReadWriteLock.FX20.cs" />
+    <Compile Include="Utility\ReadWriteLock.cs" />
+    <Compile Include="Peers\Session\TransportSession.cs" />
+    <Compile Include="Resources\ResourceId.cs" />
+    <Compile Include="Resources\ResourceInfo.cs" />
+    <Compile Include="Transcoder\Bec\Engine\DefaultTypeSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\ArraySchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\DefaultSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GeneratedSchemaSerializerBase{T}.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GeneratedSerializationContext.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\IBuiltInSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\ExplicitSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GeneratedSchemaSerializerBase.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GenerateSchemaSerializerFactory.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\GenerateSchemaSerializerFactory.BecSchema.FX20.cs">
+      <DependentUpon>GenerateSchemaSerializerFactory.FX20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transcoder\Bec\Engine\Generate\ListSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\Playground.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Generate\TypeSchemaSerializer.FX20.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\ExplicitSchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\ReflectionSchemaSerializerFactory.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\ListTypeSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\SchemaMemberSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SchemaSerializerFactory.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SchemaSerializerFactory{TSerializerBase}.cs" />
+    <Compile Include="Transcoder\Bec\Engine\UnknownSchemaMemberSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\UnknownSchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\UnknownBecObject.cs" />
+    <Compile Include="Transcoder\Dynamic\DynamicCodecInfo.cs" />
+    <Compile Include="Transcoder\Xml\UnknownXmlObject.cs" />
+    <Compile Include="Transport\File\FileMessageTransport.cs" />
+    <Compile Include="Transport\File\FileSessionId.cs" />
+    <Compile Include="Transport\File\FileTransportServer.cs" />
+    <Compile Include="Transport\File\FileTransportServerConfig.cs" />
+    <Compile Include="Transport\File\Ftp\FtpDownloadStream.FX20.cs" />
+    <Compile Include="Transport\File\Ftp\FtpFileTransferSession.FX20.cs" />
+    <Compile Include="Transport\File\Ftp\FtpFileTransferSessionProvider.FX20.cs" />
+    <Compile Include="Transport\File\Ftp\FtpUploadStream.FX20.cs" />
+    <Compile Include="Transport\File\IFileTransferSession.cs" />
+    <Compile Include="Transport\File\FileTransferSessionProvider.cs" />
+    <Compile Include="Transport\File\Local\LocalFileTransferSession.cs" />
+    <Compile Include="Transport\File\Local\LocalFileTransferSessionProvider.cs" />
+    <Compile Include="Transport\Stream\StreamSessionId.cs" />
+    <Compile Include="TypeFactory.cs" />
+    <Compile Include="Peers\MediMessage.cs" />
+    <Compile Include="Peers\MediMessageEventArgs.cs" />
+    <Compile Include="Peers\Codec\IMessageBufferProvider.cs" />
+    <Compile Include="Peers\Codec\IMessageCodec.cs" />
+    <Compile Include="Peers\Transport\IMessageTransport.cs" />
+    <Compile Include="Peers\Transport\ITransportClient.cs" />
+    <Compile Include="Peers\Transport\ITransportImplementation.cs" />
+    <Compile Include="Peers\Transport\ITransportServer.cs" />
+    <Compile Include="Utility\MessageBuffer.cs" />
+    <Compile Include="Peers\Codec\MessageCodec.cs" />
+    <Compile Include="Peers\Codec\MessageTranscoder.cs" />
+    <Compile Include="Peers\Transport\MessageTransport.cs" />
+    <Compile Include="Peers\PeerStackBase.cs" />
+    <Compile Include="Peers\Transport\ReadMessageRequest.cs" />
+    <Compile Include="Peers\Session\SessionMessageEventArgs.cs" />
+    <Compile Include="Peers\IPeerImpl.cs" />
+    <Compile Include="MessageEventArgs{T}.cs" />
+    <Compile Include="MessageDispatcher.cs" />
+    <Compile Include="Peers\Codec\SimpleMessageBufferProvider.cs" />
+    <Compile Include="Peers\Codec\CodecIdentification.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscription\Subscription.cs" />
+    <Compile Include="Subscription\Subscription{T}.cs" />
+    <Compile Include="Transcoder\Bec\BecCodecConfig.cs" />
+    <Compile Include="Transcoder\Bec\BecMessageCodec.cs" />
+    <Compile Include="Transcoder\Bec\BecReader.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\BuiltInSchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SchemaMemberInfo.cs" />
+    <Compile Include="Transcoder\Bec\SchemaMapper.cs" />
+    <Compile Include="Transcoder\Bec\Schema\AttributeUtil.cs" />
+    <Compile Include="Transcoder\Bec\Schema\BecSchema.cs" />
+    <Compile Include="Transcoder\Bec\BecSerializer.cs" />
+    <Compile Include="Transcoder\Bec\BecWriter.cs" />
+    <Compile Include="Transcoder\Bec\IBecSerializable.cs" />
+    <Compile Include="Transcoder\Bec\Engine\ISchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\IMapper.cs" />
+    <Compile Include="Transcoder\Bec\Schema\ListTypeSchema.cs" />
+    <Compile Include="Transcoder\Bec\Schema\DefaultTypeSchema.cs" />
+    <Compile Include="Transcoder\Bec\Schema\BuiltInTypeSchema.cs" />
+    <Compile Include="Transcoder\Bec\Schema\SchemaMember.cs" />
+    <Compile Include="Transcoder\Bec\Schema\ITypeSchema.cs" />
+    <Compile Include="Transcoder\Bec\Schema\SchemaFactory.cs" />
+    <Compile Include="Transcoder\Bec\SchemaInfo.cs" />
+    <Compile Include="Transcoder\Bec\SchemaMessage.cs" />
+    <Compile Include="Transcoder\Bec\Engine\Reflection\BecSchemaSerializer.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SerializationEngine.cs" />
+    <Compile Include="Transcoder\Bec\Mapper.cs" />
+    <Compile Include="Transcoder\Bec\Engine\SerializationContext.cs" />
+    <Compile Include="Transcoder\Bec\StringMapper.cs" />
+    <Compile Include="Transcoder\Bec\StringMappingMessage.cs" />
+    <Compile Include="Transcoder\Bec\TransactionMapper.cs" />
+    <Compile Include="Transcoder\Dynamic\DynamicMessageCodec.cs" />
+    <Compile Include="Transcoder\Dynamic\DynamicCodecConfig.cs" />
+    <Compile Include="Transcoder\Xml\XmlMessageCodec.cs" />
+    <Compile Include="Transcoder\Xml\XmlCodecConfig.cs" />
+    <Compile Include="Transport\Stream\StreamMessageTransport.cs" />
+    <Compile Include="Transport\Tcp\TcpTransportClientConfig.cs" />
+    <Compile Include="Transport\Tcp\TcpTransportClient.cs" />
+    <Compile Include="Transport\Stream\StreamHandshake.cs" />
+    <Compile Include="Transport\Tcp\TcpTransportServer.cs" />
+    <Compile Include="Transport\Tcp\TcpTransportServerConfig.cs" />
+    <Compile Include="Peers\Transport\TransportServer.cs" />
+    <Compile Include="TypeName.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

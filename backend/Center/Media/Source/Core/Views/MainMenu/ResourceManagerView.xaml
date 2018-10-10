@@ -1,0 +1,956 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.MainMenu.ResourceManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Models="clr-namespace:Gorba.Center.Media.Core.Models"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels"
+             xmlns:dragDropExtension="clr-namespace:Gorba.Center.Media.Core.Extensions.DragDropExtension"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:presentation="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation"
+             xmlns:project="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Project"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             Name="Root"
+             d:DataContext="{d:DesignInstance interaction:ResourceManagementPrompt}"
+             d:DesignHeight="380"
+             d:DesignWidth="500"
+             mc:Ignorable="d">
+    <Grid x:Name="MainGrid">
+        <Grid.Resources>
+            <converters:FilenameConverter x:Key="FilenameConverter" />
+            <converters:RemovePathConverter x:Key="RemovePathConverter" />
+            <converters:ResourceInfoToMediaElementConverter x:Key="ResourceInfoToMediaElementConverter" />
+            <converters1:IsNullOrWhiteSpaceConverter x:Key="IsNullOrWhiteSpaceConverter" />
+            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <system:Boolean x:Key="True">True</system:Boolean>
+            <CollectionViewSource x:Key="Media" Filter="FilterMediaCollection" />
+            <CollectionViewSource x:Key="CsvMappings" />
+            <CollectionViewSource x:Key="Pool" />
+            <CollectionViewSource x:Key="Symbols" Filter="FilterMediaCollection" />
+
+            <Style TargetType="ToggleButton">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="Padding" Value="10 5 0 5" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border Name="bd"
+                                    Margin="{TemplateBinding Margin}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                    Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}">
+
+                                <TextBlock HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Text="{TemplateBinding Content}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="{StaticResource ResourceManagerSelectedPoolBackgroundColorBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Margin="15 5 0 5"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource ResourceManagerTabGroupTextColorBrush}"
+                       Text="{x:Static resources:MediaStrings.ResourceManagerView_Managed}" />
+
+            <ToggleButton Name="PicturesToggleButton"
+                          Grid.Row="1"
+                          Checked="OnPicturesChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Pictures}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuPicturesToggleButtonOpened">
+                        <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddPicture}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <ToggleButton Name="VideosToggleButton"
+                          Grid.Row="2"
+                          Checked="OnVideosChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Videos}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuVideosToggleButtonOpened">
+                        <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddVideo}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <ToggleButton Name="SymbolsToggleButton"
+                          Grid.Row="3"
+                          Checked="OnSymbolsChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Symbols}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuSymbolsToggleButtonOpened">
+                        <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddSymbol}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <ToggleButton Name="AudioToggleButton"
+                          Grid.Row="4"
+                          Checked="OnAudioChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Audio}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuAudioToggleButtonOpened">
+                        <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddAudio}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <ToggleButton Name="FontsToggleButton"
+                          Grid.Row="5"
+                          Checked="OnFontsChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Fonts}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuFontsToggleButtonOpened">
+                        <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddFont}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <ToggleButton Name="CsvToggleButton"
+                          Grid.Row="6"
+                          Checked="OnCsvChecked"
+                          Click="ToggleButtonPreventUncheck"
+                          Content="{x:Static resources:MediaStrings.ResourceManagerView_Csv}">
+                <ToggleButton.ContextMenu>
+                    <ContextMenu Opened="OnContextMenuCsvToggleButtonOpened">
+                        <MenuItem Click="OnAddCsvButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddCsv}" Style="{StaticResource FlatContextMenuItem}" />
+                        <MenuItem Click="OnImportCsvButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_ImportCsv}" Style="{StaticResource FlatContextMenuItem}" />
+                    </ContextMenu>
+                </ToggleButton.ContextMenu>
+            </ToggleButton>
+
+            <TextBlock Grid.Row="7"
+                       Margin="15 0 0 0"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource ResourceManagerTabGroupTextColorBrush}"
+                       Text="{x:Static resources:MediaStrings.ResourceManagerView_Pools}" />
+
+            <Rectangle Grid.Row="7"
+                       Grid.Column="0"
+                       Height="1"
+                       Margin="5 0 5 0"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Top"
+                       Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+            <ListBox Name="PoolList"
+                     Grid.Row="8"
+                     AllowDrop="True"
+                     BorderThickness="0"
+                     DragEnter="PoolList_OnDragEnter"
+                     DragOver="PoolList_OnDragOver"
+                     Drop="PoolList_OnDrop"
+                     ItemsSource="{Binding Shell.MediaApplicationState.CurrentProject.InfomediaConfig.Pools}"
+                     KeyUp="OnPoolListKeyUp"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     SelectedItem="{Binding SelectedPool}"
+                     SelectionChanged="OnPoolSelected">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="2 0 2 0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ResourceManagerSelectedPoolBackgroundColorBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="presentation:PoolConfigDataViewModel">
+                        <Control>
+                            <Control.Template>
+                                <ControlTemplate TargetType="Control">
+                                    <Border Background="Transparent">
+                                        <Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="25" />
+                                                    <ColumnDefinition Width="25" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <controls:EditableTextblock Grid.Column="0"
+                                                                            Margin="13 0 0 0"
+                                                                            VerticalAlignment="Center"
+                                                                            VerticalContentAlignment="Center"
+                                                                            IsInEditMode="{Binding IsInEditMode}"
+                                                                            SourceObject="{Binding}"
+                                                                            Text="{Binding Path=Name.Value,
+                                                                                           UpdateSourceTrigger=PropertyChanged}"
+                                                                            TextChanged="OnPoolNameChanged"
+                                                                            ToolTip="{Binding Name.Value,
+                                                                                              Mode=TwoWay}"
+                                                                            Validate="{Binding ElementName=Root,
+                                                                                               Path=IsValidPoolName}" />
+                                                <TextBlock Grid.Column="1"
+                                                           Margin="0 0 0 0"
+                                                           HorizontalAlignment="Right"
+                                                           VerticalAlignment="Center"
+                                                           Text="{Binding ResourceReferences.Count,
+                                                                          StringFormat={}({0})}" />
+
+                                                <Button Name="RemoveButton"
+                                                        Grid.Column="2"
+                                                        Width="20"
+                                                        Height="20"
+                                                        Click="OnRemovePoolClick"
+                                                        Visibility="Hidden">
+                                                    <Button.Template>
+                                                        <ControlTemplate>
+                                                            <Border>
+                                                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/remove_dark10x10.png" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
+                                            </Grid>
+
+
+
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="RemoveButton" Property="Visibility" Value="Visible" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Control.Template>
+                        </Control>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Grid.Row="9"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="OnCreateNewPoolClick">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="bd">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Margin="15 7 0 0" Text="{x:Static resources:MediaStrings.ResourceManagerView_NewPool}" />
+
+                                <Rectangle Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Height="1"
+                                           Margin="5 0 5 0"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Top"
+                                           Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+                                <Border Grid.Column="1"
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0 0 5 0"
+                                        Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                    <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/add_light_10x10.png" />
+                                </Border>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style x:Key="DeleteMenuItemStyle" BasedOn="{StaticResource FlatContextMenuItem}" TargetType="MenuItem">
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <ContextMenu x:Key="PictureContextMenu">
+                    <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddPicture}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteResourceClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemovePicture}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItem.Hash}" />
+                </ContextMenu>
+                <ContextMenu x:Key="SymbolContextMenu">
+                    <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddSymbol}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteResourceClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemoveSymbol}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItem.Hash}" />
+                </ContextMenu>
+                <ContextMenu x:Key="AudioContextMenu">
+                    <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddAudio}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteResourceClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemoveAudio}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItem.Hash}" />
+                </ContextMenu>
+                <ContextMenu x:Key="VideoContextMenu">
+                    <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddVideo}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteResourceClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemoveVideo}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItem.Hash}" />
+                </ContextMenu>
+                <ContextMenu x:Key="FontContextMenu">
+                    <MenuItem Click="OnAddButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddFont}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteResourceClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemoveFont}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItem.Hash}" />
+                </ContextMenu>
+                <ContextMenu x:Key="CsvContextMenu">
+                    <MenuItem Click="OnAddCsvButtonClicked" Header="{x:Static resources:MediaStrings.ResourceManagerView_AddCsv}" Style="{StaticResource FlatContextMenuItem}" />
+                    <MenuItem Click="OnDeleteCsvButtonClicked"
+                              Header="{x:Static resources:MediaStrings.ResourceManagerView_RemoveCsv}"
+                              Style="{StaticResource DeleteMenuItemStyle}"
+                              Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView},
+                                            Path=SelectedItems}" />
+                </ContextMenu>
+
+                <ContextMenu x:Key="PoolContextMenu">
+                    <MenuItem Click="OnRemoveReferenceButtonClick" Header="{x:Static resources:MediaStrings.ResourceManagerView_RemovePoolElement}" Style="{StaticResource FlatContextMenuItem}" />
+                </ContextMenu>
+
+                <DataTemplate x:Key="ResourceInfoDataTemplate" DataType="project:ResourceInfoDataViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.RowSpan="2"
+                               Grid.Column="0"
+                               MouseEnter="OnMouseEnterPreview"
+                               Source="{Binding Converter={StaticResource ResourceInfoToMediaElementConverter},
+                                                ConverterParameter={StaticResource True}}"
+                               Tag="{Binding Type}" />
+
+                        <Rectangle Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="1"
+                                   Width="1"
+                                   Margin="3 3 0 3"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Stretch"
+                                   Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Margin="10 15 0 0"
+                                   FontWeight="Bold"
+                                   Text="{Binding Path=Filename,
+                                                  Converter={StaticResource FilenameConverter}}"
+                                   ToolTip="{Binding Path=Filename,
+                                                     Converter={StaticResource FilenameConverter}}"
+                                   Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                        Path=IsEnabled,
+                                                        Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock.IsEnabled>
+                                <Binding Converter="{StaticResource EnumToBoolConverter}" Path="Type">
+                                    <Binding.ConverterParameter>
+                                        <x:Array Type="Models:ResourceType">
+                                            <Models:ResourceType>Image</Models:ResourceType>
+                                            <Models:ResourceType>Video</Models:ResourceType>
+                                            <Models:ResourceType>Symbol</Models:ResourceType>
+                                            <Models:ResourceType>Audio</Models:ResourceType>
+                                        </x:Array>
+                                    </Binding.ConverterParameter>
+                                </Binding>
+                            </TextBlock.IsEnabled>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Margin="10 15 0 0"
+                                   FontWeight="Bold"
+                                   IsEnabled="{Binding Path=Type,
+                                                       Converter={StaticResource EnumToBoolConverter},
+                                                       ConverterParameter={x:Static Models:ResourceType.Font}}"
+                                   Text="{Binding Path=Facename}"
+                                   ToolTip="{Binding Path=Facename}"
+                                   Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                        Path=IsEnabled,
+                                                        Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Width="25"
+                                Height="25"
+                                Margin="0 3 0 0"
+                                HorizontalAlignment="Right"
+                                BorderBrush="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}"
+                                BorderThickness="1"
+                                Padding="0">
+                            <!-- audio and symbolsare always exported -->
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:ResourceType.Audio}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:ResourceType.Symbol}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <telerik:RadToggleButton Width="24"
+                                                     Height="24"
+                                                     BorderThickness="0"
+                                                     FontFamily="/Gorba.Center.Common.Wpf.Views;component/Resources/#FontAwesome"
+                                                     FontSize="14"
+                                                     IsChecked="{Binding ForceExport}"
+                                                     Padding="0">
+                                <telerik:RadToggleButton.Style>
+                                    <Style TargetType="telerik:RadToggleButton">
+                                        <Setter Property="Content" Value="&#xf05e;" />
+                                        <Setter Property="ToolTip" Value="{x:Static resources:MediaStrings.ResourceManager_ResourceNotUploaded}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsUsedVisible}" Value="True">
+                                                <Setter Property="Content" Value="&#xf093;" />
+                                                <Setter Property="ToolTip" Value="{x:Static resources:MediaStrings.ResourceManager_ResourceUpload}" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ForceExport}" Value="True">
+                                                <Setter Property="Content" Value="&#xf093;" />
+                                                <Setter Property="ToolTip" Value="{x:Static resources:MediaStrings.ResourceManager_ResourceForceUpload}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </telerik:RadToggleButton.Style>
+                            </telerik:RadToggleButton>
+                        </Border>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Margin="10,0,10,0"
+                                       IsEnabled="{Binding Path=Dimension,
+                                                           Converter={StaticResource IsNullOrWhiteSpaceConverter},
+                                                           ConverterParameter={StaticResource True}}"
+                                       Text="{Binding Path=Dimension}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                            Path=IsEnabled,
+                                                            Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                            <TextBlock Margin="10,0,10,0"
+                                       IsEnabled="{Binding Path=Duration,
+                                                           Converter={StaticResource IsNullOrWhiteSpaceConverter},
+                                                           ConverterParameter={StaticResource True}}"
+                                       Text="{Binding Path=Duration}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                            Path=IsEnabled,
+                                                            Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                            <TextBlock IsEnabled="{Binding Path=Type,
+                                                           Converter={StaticResource EnumToBoolConverter},
+                                                           ConverterParameter={x:Static Models:ResourceType.Font}}"
+                                       Padding="10,0,10,0"
+                                       Text="{Binding Path=Filename,
+                                                      Converter={StaticResource RemovePathConverter}}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                            Path=IsEnabled,
+                                                            Converter={StaticResource BoolToVisibilityConverter}}" />
+                        </StackPanel>
+
+                        <!--  Metadata  -->
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate x:Key="CsvMappingInfoDataTemplate" DataType="dataViewModels:CsvMappingDataViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.RowSpan="2"
+                               Grid.Column="0"
+                               MouseEnter="OnMouseEnterPreview"
+                               Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/csvplaceholder_48x48.png"
+                               Tag="{x:Static Models:ResourceType.Csv}" />
+
+                        <Rectangle Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="1"
+                                   Width="1"
+                                   Margin="3 3 0 3"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Stretch"
+                                   Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+                        <!--  no filename converter required, extension is not stored  -->
+                        <controls:EditableTextblock Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Height="20"
+                                                    Margin="10 15 0 0"
+                                                    FontWeight="Bold"
+                                                    VerticalAlignment="Center"
+                                                    VerticalContentAlignment="Center"
+                                                    IsInEditMode="{Binding IsInEditMode}"
+                                                    SourceObject="{Binding}"
+                                                    Text="{Binding Path=Filename.Value,
+                                                                    UpdateSourceTrigger=PropertyChanged}"
+                                                    TextChanged="OnCsvMappingNameChanged"
+                                                    ToolTip="{Binding Filename.Value,
+                                                                        Mode=TwoWay}"
+                                                    Validate="{Binding ElementName=Root,
+                                                                        Path=IsValidCsvMappingName}" />
+
+
+
+                        <!--  Metadata  -->
+                        <!--<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <TextBlock Text="{Binding Path=Filename, Converter={StaticResource RemovePathConverter}}" Padding="10,0,10,0"
+                                       IsEnabled="{Binding Path=Type, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Models:ResourceType.Csv}}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </StackPanel>-->
+
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate x:Key="ResourceReferenceInfoDataTemplate" DataType="project:ResourceReferenceDataViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.RowSpan="2"
+                               Grid.Column="0"
+                               MouseEnter="OnMouseEnterPreview"
+                               Source="{Binding ResourceInfo,
+                                                Converter={StaticResource ResourceInfoToMediaElementConverter},
+                                                ConverterParameter={StaticResource True}}"
+                               Tag="{Binding ResourceInfo.Type}" />
+
+                        <Rectangle Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="1"
+                                   Width="1"
+                                   Margin="3 3 0 3"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Stretch"
+                                   Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Margin="10 15 0 0"
+                                   FontWeight="Bold"
+                                   Text="{Binding Path=ResourceInfo.Filename,
+                                                  Converter={StaticResource FilenameConverter}}" />
+
+                        <!--  Metadata  -->
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Margin="10,0,10,0" Text="{Binding Path=ResourceInfo.Dimension}" />
+                            <TextBlock Text="{Binding Path=ResourceInfo.Duration}" />
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+
+                <Style x:Key="ResourceInfoContainerStyle" TargetType="{x:Type ListViewItem}">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Height" Value="60" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Margin="2 0 0 0"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{StaticResource ResourceManagerMediaBorderColorBrush}"
+                                        BorderThickness="0 0 0 1">
+                                    <ContentPresenter Margin="5 0 5 0" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="{StaticResource ResourceManagerHoveredMediaBackgroundColorBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="{StaticResource ResourceManagerSelectedMediaBackgroundColorBrush}" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=PicturesToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource PictureContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=VideosToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource VideoContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=SymbolsToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource SymbolContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=AudioToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource AudioContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=FontsToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource FontContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=CsvToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource CsvContextMenu}" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, ElementName=VideosToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=PicturesToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=SymbolsToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=AudioToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=FontsToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=CsvToggleButton}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="ContextMenu" Value="{StaticResource PoolContextMenu}" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style x:Key="MediaListStyle" TargetType="ListView">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <TextBlock Margin="0 15 0 0"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="{StaticResource ResourceManagerEmptyTextColorBrush}"
+                                                   Text="{x:Static resources:MediaStrings.ResourceManagerView_NoMediaAvailable}" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=PicturesToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource PictureContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=VideosToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource VideoContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=SymbolsToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource SymbolContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=AudioToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource AudioContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=FontsToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource FontContextMenu}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=CsvToggleButton}" Value="True">
+                            <Setter Property="ContextMenu" Value="{StaticResource CsvContextMenu}" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, ElementName=VideosToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=PicturesToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=SymbolsToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=AudioToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=FontsToggleButton}" Value="False" />
+                                <Condition Binding="{Binding IsChecked, ElementName=CsvToggleButton}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="ContextMenu" Value="{StaticResource PoolContextMenu}" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+            </Grid.Resources>
+
+            <Rectangle Grid.RowSpan="2"
+                       Width="1"
+                       Margin="0 5 0 5"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Stretch"
+                       Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+            <ListView Name="MediaList"
+                      Grid.Row="0"
+                      AllowDrop="True"
+                      BorderThickness="1 0 0 0"
+                      DragLeave="MediaList_OnDragLeave"
+                      ItemContainerStyle="{StaticResource ResourceInfoContainerStyle}"
+                      ItemTemplate="{StaticResource ResourceInfoDataTemplate}"
+                      ItemsSource="{Binding Source={StaticResource ResourceKey=Media}}"
+                      KeyUp="OnMediaListKeyUp"
+                      PreviewMouseDown="MediaList_OnMouseDown"
+                      PreviewMouseMove="MediaList_OnMouseMove"
+                      PreviewMouseUp="MediaList_OnMouseUp"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      SelectionChanged="MediaList_OnSelectionChanged"
+                      Style="{StaticResource MediaListStyle}"
+                      Template="{DynamicResource FlatListViewTemplate}" />
+
+            <ListView Name="CsvMappingsList"
+                      Grid.Row="0"
+                      BorderThickness="1 0 0 0"
+                      ItemContainerStyle="{StaticResource ResourceInfoContainerStyle}"
+                      ItemTemplate="{StaticResource CsvMappingInfoDataTemplate}"
+                      ItemsSource="{Binding Source={StaticResource ResourceKey=CsvMappings}}"
+                      KeyUp="OnCsvMappingsListKeyUp"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Style="{StaticResource MediaListStyle}"
+                      Template="{DynamicResource FlatListViewTemplate}" />
+
+            <ListView Name="PoolMediaList"
+                      Grid.Row="0"
+                      BorderThickness="1 0 0 0"
+                      ItemContainerStyle="{StaticResource ResourceInfoContainerStyle}"
+                      ItemTemplate="{StaticResource ResourceReferenceInfoDataTemplate}"
+                      ItemsSource="{Binding Source={StaticResource ResourceKey=Pool}}"
+                      KeyUp="OnPoolMediaListKeyUp"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Style="{StaticResource MediaListStyle}"
+                      Template="{DynamicResource FlatListViewTemplate}"
+                      dragDropExtension:DragDropHelper.IsDragSource="True"
+                      dragDropExtension:DragDropHelper.IsDropTarget="True" />
+
+            <ListView Name="SymbolMediaList"
+                      Grid.Row="0"
+                      BorderThickness="1 0 0 0"
+                      ItemContainerStyle="{StaticResource ResourceInfoContainerStyle}"
+                      ItemTemplate="{StaticResource ResourceInfoDataTemplate}"
+                      ItemsSource="{Binding Source={StaticResource ResourceKey=Symbols}}"
+                      KeyUp="OnSymbolMediaListKeyUp"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Style="{StaticResource MediaListStyle}"
+                      Template="{DynamicResource FlatListViewTemplate}" />
+
+            <Grid Grid.Row="1" Margin="0 0 3 0" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="24" />
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.ColumnSpan="5"
+                           Height="1"
+                           Margin="5 0 0 0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" />
+
+                <!--  Buttons  -->
+                <Button Name="EditCsvButton"
+                        Grid.Column="1"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnEditCsvClicked"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_EditCsv}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/edit_light_16x16.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="ImportCsvButton"
+                        Grid.Column="2"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnImportCsvButtonClicked"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_ImportCsv}">
+                    &gt;
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/open_light_10x10.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="AddButton"
+                        Grid.Column="3"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnAddButtonClicked"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_Add}">
+                    &gt;
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/add_light_10x10.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="AddCsvButton"
+                        Grid.Column="3"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnAddCsvButtonClicked"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_Add}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/add_light_10x10.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="DeleteMediaButton"
+                        Grid.Column="4"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnDeleteResourceClicked"
+                        Tag="{Binding ElementName=MediaList,
+                                      Path=SelectedItem.Hash}"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_Delete}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/delete_light_16x16.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="DeleteSymbolButton"
+                        Grid.Column="4"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnDeleteResourceClicked"
+                        Tag="{Binding ElementName=SymbolMediaList,
+                                      Path=SelectedItem.Hash}"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_Delete}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/delete_light_16x16.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="RemoveReferenceButton"
+                        Grid.Column="4"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnRemoveReferenceButtonClick"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_RemoveReference}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/delete_light_16x16.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Name="DeleteCsvButton"
+                        Grid.Column="4"
+                        Width="20"
+                        Height="20"
+                        Margin="0"
+                        Click="OnDeleteCsvButtonClicked"
+                        Tag="{Binding ElementName=CsvMappingsList,
+                                      Path=SelectedItems}"
+                        ToolTip="{x:Static resources:MediaStrings.ResourceManager_ButtonTooltip_Delete}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" Background="{StaticResource LayoutNavigationAddButtonBackgroundColorBrush}">
+                                <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/delete_light_16x16.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <Canvas Name="PopupContainer" Grid.Row="1" />
+        </Grid>
+    </Grid>
+</UserControl>

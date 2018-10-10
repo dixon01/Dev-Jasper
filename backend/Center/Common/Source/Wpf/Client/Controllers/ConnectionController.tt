@@ -1,0 +1,227 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.Common.Wpf.Client.Controllers
+{
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;
+    
+    using Gorba.Center.Common.Client;
+    using Gorba.Center.Common.Client.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WriteUsing(partition);
+    }
+    #>
+
+    public partial interface IConnectionController : IDisposable
+    {
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteProperty(entity, true);
+        }
+    }
+    #>
+    }
+    
+    public partial class ConnectionController
+    {
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteProperty(entity, false);
+        }
+    }
+    #>
+
+        private async Task ConfigureChangeTrackingManagersAsync(
+            BackgroundSystemConfiguration configuration, UserCredentials userCredentials, Action<Exception[]> errorSummaryCallback = null)
+        {
+            var sessionId = NotificationManagerUtility.GenerateUniqueSessionId();
+            var bootstrapper = new RemoteChangeTrackingManagementBootstrapper(
+                configuration,
+                NotificationManagerUtility.GetApplicationName(),
+                sessionId);
+
+            var result = await bootstrapper.RunAsync(userCredentials);
+
+            // assign managers to this controller change trackers
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities)
+        {
+            if (entity.HasChangeTracking)
+            {
+                this.WriteEntityChangeTrackingSetup(entity, partition);
+            }
+            else
+            {
+                this.WriteEntityDataServiceSetup(entity);
+            }
+        }
+    }
+#>
+
+            // process errors from bootstrapper
+            if (result.Exceptions.Count > 0)
+            {
+                errorSummaryCallback(result.Exceptions.ToArray());
+            }
+
+            this.ConfigureNotGenerated();
+        }
+
+        private void UpdateChangeTrackingCredentials()
+        {
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteEntityUpdateCredentials(entity, partition);
+        }
+        
+    }
+    #>
+        }
+
+        private void DisposeChangeTrackingManagers()
+        {
+            var actions = new Action[]
+                              {
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            this.WriteEntityCleanup(entity, partition);
+        }
+        
+    }
+    #>
+                            };
+            actions.AsParallel().ForAll(action => action());
+
+        }
+
+        private void DisposeChangeTrackingManager(IChangeTrackingManager changeTrackingManager)
+        {
+            if (changeTrackingManager == null)
+            {
+                return;
+            }
+            
+            try
+            {
+                changeTrackingManager.Dispose();
+				changeTrackingManager = null;
+            }
+            catch (Exception exception)
+            {
+                Logger.DebugException("Error while disposing changeTrackingManager", exception);
+            }
+        }
+
+        partial void ConfigureNotGenerated();
+    }
+}
+
+<#+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {
+#>
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteEntityChangeTrackingSetup(EntitySpace.Entity entity, EntitySpace.Partition partition)
+    {
+        #>
+
+            this.<#= entity.Name #>ChangeTrackingManager = result.<#= entity.Name #>ChangeTrackingManager;
+            <#+
+    }
+
+    private void WriteEntityDataServiceSetup(EntitySpace.Entity entity)
+    {
+        #>
+
+            ChannelScopeFactoryUtility<I<#= entity.Name #>DataService>.ConfigureAsDataService(configuration.DataServices, "<#= entity.Name #>");<#+
+    }
+    
+    private void WriteEntityUpdateCredentials(EntitySpace.Entity entity, EntitySpace.Partition partition)
+    {
+        #>
+            this.<#= entity.Name #>ChangeTrackingManager.ChangeCredentials(this.credentials);
+<#+
+    }
+
+    private void WriteEntityCleanup(EntitySpace.Entity entity, EntitySpace.Partition partition)
+    {
+        #>
+                                () => this.DisposeChangeTrackingManager(this.<#= entity.Name #>ChangeTrackingManager),
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Entity entity, bool isInterface)
+    {
+        if (isInterface)
+        {
+#>	
+        I<#=entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager { get; }
+
+<#+
+        }
+        else
+        {
+#>
+        private I<#=entity.Name #>ChangeTrackingManager ctm<#=entity.Name #>;
+
+        public I<#=entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager
+        {
+            get
+            {
+                if (!this.IsConfigured)
+                {
+                    throw new NotSupportedException("Can't get the <#=entity.Name #>ChangeTrackingManager when not connected to a server");
+                }
+                
+                return ctm<#=entity.Name #>;
+            }
+            
+            private set
+            {
+                this.ctm<#=entity.Name #> = value;
+            }
+        }
+
+<#+
+        }
+    }
+    #>

@@ -1,0 +1,54 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="departures">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="traindepartures">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="departure" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="departuretime" use="optional"/>
+                      <xs:attribute type="xs:string" name="delay" use="optional"/>
+                      <xs:attribute type="xs:string" name="platform" use="optional"/>
+                      <xs:attribute type="xs:string" name="destination" use="optional"/>
+                      <xs:attribute type="xs:string" name="pto" use="optional"/>
+                      <xs:attribute type="xs:string" name="StopCode" use="optional"/>
+                      <xs:attribute type="xs:string" name="line" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="busdepartures">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="departure" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="departuretime" use="optional"/>
+                      <xs:attribute type="xs:string" name="delay" use="optional"/>
+                      <xs:attribute type="xs:string" name="platform" use="optional"/>
+                      <xs:attribute type="xs:string" name="destination" use="optional"/>
+                      <xs:attribute type="xs:string" name="pto" use="optional"/>
+                      <xs:attribute type="xs:string" name="StopCode" use="optional"/>
+                      <xs:attribute type="xs:string" name="line" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="device-id"/>
+      <xs:attribute type="xs:string" name="expiration"/>
+      <xs:attribute type="xs:string" name="stationname"/>
+      <xs:attribute type="xs:string" name="ETA"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

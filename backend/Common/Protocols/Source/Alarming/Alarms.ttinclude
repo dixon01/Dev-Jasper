@@ -1,0 +1,92 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#+
+public static List<Category> LoadAlarmCategories(string xmlFile)
+{
+    var serializer = new XmlSerializer(typeof(AlarmsList));
+    using (var input = File.OpenRead(xmlFile))
+    {
+        var alarms = (AlarmsList)serializer.Deserialize(input);
+        return alarms.Categories;
+    }
+}
+
+[XmlRoot("Alarms")]
+public class AlarmsList
+{
+    [XmlElement("Category")]
+    public List<Category> Categories { get; set; }
+}
+
+public class Category
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlElement("Event")]
+    public List<Event> Events { get; set; }
+}
+
+public class Event
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlElement("Attribute")]
+    public List<Attribute> Attributes { get; set; }
+}
+
+public class Attribute
+{
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlIgnore]
+    public int? Value { get; set; }
+    
+    [XmlAttribute("Value")]
+    public string ValueAttribute
+    {
+        get
+        {
+            return this.Value.HasValue ? this.Value.Value.ToString() : null;
+        }
+        
+        set
+        {
+            this.Value = string.IsNullOrEmpty(value) ? null : (int?)int.Parse(value);
+        }
+    }
+    
+    [XmlAttribute]
+    public Severity Severity { get; set; }
+    
+    [XmlElement("Description")]
+    public List<Description> Descriptions { get; set; }
+}
+
+public class Description
+{
+    [XmlAttribute]
+    public string Language { get; set; }
+    
+    [XmlAttribute]
+    public string Value { get; set; }
+}
+
+// IMPORTANT: this enum must have the same values as the AlarmSeverity enum!
+public enum Severity
+{
+    Critical = 0,
+    Severe = 1,
+    Error = 2,
+    Warning = 3,
+    Info = 4,
+}
+#>

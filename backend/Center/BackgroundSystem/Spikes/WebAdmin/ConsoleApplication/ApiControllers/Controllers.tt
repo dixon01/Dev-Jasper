@@ -1,0 +1,99 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\..\Common\Source\T4Templating\T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="Extensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="ConsoleApplication.ApiControllers" #>
+<#@ output extension=".generated.cs" #>
+<#
+	var path = this.Host.ResolvePath(@"..\..\..\..\..\BackgroundSystem\Source\Data\Model\EntitySpace.Data.generated.xml");
+	var entitySpace = EntitySpace.Load(path);
+	var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+	var entities = partitions.SelectMany(partition => partition.Entities);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace ConsoleApplication
+{
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+	using System.Web.Http;
+	using Gorba.Center.Common.ServiceModel;
+
+<#
+	foreach (var partition in partitions)
+	{
+		this.WriteUsing(partition);
+	}
+
+	foreach (var partition in partitions)
+	{
+		this.WritePartition(partition);
+	}
+#>
+}
+<#+
+	private void WriteUsing(EntitySpace.Partition partition)
+	{#>
+	using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+<#+
+	}
+
+	private void WritePartition(EntitySpace.Partition partition)
+	{#>
+
+	namespace <#= partition.Name #>
+	{<#+
+		foreach (var entity in partition.Entities)
+		{
+			this.WriteEntity(entity);
+		}
+#>
+	}
+<#+
+	}
+
+	private void WriteEntity(EntitySpace.Entity entity)
+	{#>
+
+		public partial class <#= entity.Name.Pluralize() #>Controller : ApiController
+		{
+			public async Task DeleteAsync(<#= entity.IdPropertyType #> id)
+			{
+				var dataService = DependencyResolver.Current.Get<I<#= entity.Name #>DataService>();
+				await dataService.DeleteAsync(new <#= entity.Name #> { Id = id });
+			}
+
+			public async Task<IEnumerable<<#= entity.Name #>>> GetAsync()
+			{
+				var dataService = DependencyResolver.Current.Get<I<#= entity.Name #>DataService>();
+				return await dataService.QueryAsync();
+			}
+
+			public async Task<<#= entity.Name #>> GetAsync(<#= entity.IdPropertyType #> id)
+			{
+				var dataService = DependencyResolver.Current.Get<I<#= entity.Name #>DataService>();
+				return await dataService.GetAsync(id);
+			}
+
+			public async Task<<#= entity.Name #>> PostAsync([FromBody] <#= entity.Name #> entity)
+			{
+				var dataService = DependencyResolver.Current.Get<I<#= entity.Name #>DataService>();
+				return await dataService.AddAsync(entity);
+			}
+
+			public async Task<<#= entity.Name #>> PutAsync(<#= entity.IdPropertyType #> id, [FromBody] <#= entity.Name #> entity)
+			{
+				var dataService = DependencyResolver.Current.Get<I<#= entity.Name #>DataService>();
+				return await dataService.UpdateAsync(entity);
+			}
+		}
+<#+
+	}
+#>

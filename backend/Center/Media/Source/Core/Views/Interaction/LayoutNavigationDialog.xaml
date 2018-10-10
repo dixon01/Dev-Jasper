@@ -1,0 +1,67 @@
+﻿<interaction:InteractionDialogBase x:Class="Gorba.Center.Media.Core.Views.Interaction.LayoutNavigationDialog"
+                                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                   xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+                                   xmlns:interaction1="clr-namespace:Gorba.Center.Media.Core.Interaction"
+                                   xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+                                   xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                   xmlns:presentation="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation"
+                                   xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                   xmlns:presentation1="clr-namespace:Gorba.Common.Configuration.Infomedia.Presentation;assembly=Gorba.Common.Configuration.Infomedia"
+                                   mc:Ignorable="d" Height="300" Name="Root"
+                                   d:DesignHeight="300" d:DesignWidth="480" d:DataContext="{d:DesignInstance interaction1:LayoutNavigationPrompt}"
+                                   Background="{StaticResource LayoutNavigationPopupBackgroundColorBrush}"
+                                   Foreground="{StaticResource LayoutNavigationPopupForegroundColorBrush}"
+                                   BorderThickness="1" BorderBrush="{StaticResource LayoutNavigationDialogBorderColorBrush}">
+    <Grid>
+        <Grid.Resources>
+            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+        </Grid.Resources>
+        <views:ReusableEntitySelector Entities="{Binding Layouts}" PreviouslyDefinedEntities="{Binding Projects}"
+                                      SelectedEntity="{Binding Path=Shell.MediaApplicationState.CurrentLayout, Mode=TwoWay}"
+                                      ChooseEntity="{Binding Path=ChooseLayoutCommand}"
+                                      DeleteEntity="{Binding Path=DeleteLayoutCommand}"
+                                      CloneEntity="{Binding Path=CloneLayoutCommand}"
+                                      LeftHandTitle="{x:Static resources:MediaStrings.LayoutNavigigationDialog_LayoutLibrary}"
+                                      RightHandTitle="{x:Static resources:MediaStrings.LayoutNavigigationDialog_UsedLayouts}"
+                                      NewButtonText="{x:Static resources:MediaStrings.LayoutNavigigationDialog_NewLayout}"
+                                      RenameButtonText="{x:Static resources:MediaStrings.LayoutNavigigationDialog_RenameLayout}"
+                                      RemoveButtonText="{x:Static resources:MediaStrings.LayoutNavigationDialog_RemoveLayoutTitle}"
+                                      CloneButtonText="{x:Static resources:MediaStrings.LayoutNavigationDialog_CloneButtonText}"
+                                      RadioButtonMouseDoubleClicked="LayoutSelectorOnButtonDoubleClicked"
+                                      RenameEntity="{Binding Path=RenameEntityCommand}">
+            <views:ReusableEntitySelector.PreviouslyDefinedEntitiesTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Layouts}" DataType="presentation:InfomediaConfigDataViewModel">
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate DataType="presentation:LayoutConfigDataViewModel">
+                            <Border Margin="0 0 0 10">
+                                <TextBlock Text="{Binding Name.Value}"/>
+                            </Border>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+
+                    <!--<Border Margin="0 30 0 10">
+                        <TextBlock Text="{Binding FileName}" FontWeight="Bold"/>
+                    </Border>-->
+                </HierarchicalDataTemplate>
+            </views:ReusableEntitySelector.PreviouslyDefinedEntitiesTemplate>
+            <views:ReusableEntitySelector.Style>
+                <Style TargetType="views:ReusableEntitySelector">
+                    <Setter Property="CreateNewEntity" Value="{Binding CreateTftLayoutCommand}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Shell.MediaApplicationState.CurrentPhysicalScreen.Type.Value, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static presentation1:PhysicalScreenType.LED}}"
+                                     Value="true">
+                            <Setter Property="CreateNewEntity" Value="{Binding Path=CreateLedLayoutCommand}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Shell.MediaApplicationState.CurrentPhysicalScreen.Type.Value, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static presentation1:PhysicalScreenType.Audio}}"
+                                     Value="true">
+                            <Setter Property="CreateNewEntity" Value="{Binding Path=CreateAudioLayoutCommand}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </views:ReusableEntitySelector.Style>
+        </views:ReusableEntitySelector>
+    </Grid>
+</interaction:InteractionDialogBase>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Infomedia Version="2.0" Created="2013-04-15 15:42:18">
+  <PhysicalScreens>
+    <PhysicalScreen Name="TftFront" Type="TFT" Id="0" Width="1440" Height="900"/>
+    <PhysicalScreen Name="TftBack" Type="TFT" Id="1" Width="1440" Height="900"/>
+    <PhysicalScreen Name="TftSide" Type="TFT" Id="2" Width="1920" Height="540"/>
+  </PhysicalScreens>
+
+  <VirtualDisplays>
+    <VirtualDisplay Name="TftStandard" CyclePackage="TftPackage" Width="1440" Height="900"/>
+    <VirtualDisplay Name="TftWidescreen" CyclePackage="TftPackage" Width="1920" Height="540"/>
+  </VirtualDisplays>
+
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MainCycle">
+        <MasterSection Duration="10" Layout="StandardMasterLayout" />
+      </MasterCycle>
+    </MasterCycles>
+
+    <MasterEventCycles />
+
+    <MasterLayouts>
+      <MasterLayout Name="StandardMasterLayout">
+        <PhysicalScreen Ref="TftFront">
+          <VirtualDisplay Ref="TftStandard" X="0" Y="0" ZIndex="0">
+            <Visible>
+              <IntegerCompare Begin="1" End="1">
+                <!-- show only if remote PC is working -->
+                <Generic Lang="0" Table="0" Column="2" Row="0" />
+              </IntegerCompare>
+            </Visible>
+          </VirtualDisplay>
+        </PhysicalScreen>
+        <PhysicalScreen Ref="TftBack">
+          <VirtualDisplay Ref="TftStandard" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="TftSide">
+          <VirtualDisplay Ref="TftWidescreen" X="0" Y="0" ZIndex="0" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="PerlschnurCycle">
+        <StandardSection Duration="10" Layout="PerlschnurLayout" />
+        <WebmediaSection Filename="webmedia.wm2" Layout="WebLayout" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles>
+      <EventCycle Name="MessageCycle">
+        <Trigger>
+          <Generic Lang="0" Table="20" Column="1" Row="0" />
+        </Trigger>
+        <Enabled>
+          <IntegerCompare Begin="1" End="2">
+            <Generic Lang="0" Table="20" Column="2" Row="0" />
+          </IntegerCompare>
+        </Enabled>
+        <StandardSection Duration="20" Layout="MessageLayout" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+
+  <CyclePackages>
+    <CyclePackage Name="TftPackage">
+      <StandardCycles>
+        <StandardCycle Ref="PerlschnurCycle" />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="MessageCycle" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+
+  <Layouts>
+    <Layout Name="PerlschnurLayout">
+      <Resolution Width="1440" Height="900">
+        <!-- layout elements -->
+      </Resolution>
+      <Resolution Width="1920" Height="540">
+        <!-- layout elements -->
+      </Resolution>
+    </Layout>
+    <Layout Name="WebLayout">
+      <Resolution Width="1440" Height="900">
+        <!-- layout elements -->
+      </Resolution>
+      <Resolution Width="1920" Height="540">
+        <!-- layout elements -->
+      </Resolution>
+    </Layout>
+    <Layout Name="MessageLayout">
+      <Resolution Width="1440" Height="900">
+        <!-- layout elements -->
+      </Resolution>
+      <Resolution Width="1920" Height="540">
+        <!-- layout elements -->
+      </Resolution>
+    </Layout>
+  </Layouts>
+</Infomedia>

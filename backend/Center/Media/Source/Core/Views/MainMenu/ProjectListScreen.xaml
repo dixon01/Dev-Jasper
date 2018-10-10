@@ -1,0 +1,398 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.MainMenu.ProjectListScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:project="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Project"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converters1="clr-namespace:Gorba.Center.Common.Wpf.Client.Converters;assembly=Gorba.Center.Common.Wpf.Client"
+             xmlns:converters2="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:local="clr-namespace:Gorba.Center.Common.ServiceModel.AccessControl;assembly=Gorba.Center.Common.ServiceModel"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction:ProjectListPrompt}" x:Name="Root"
+             Focusable="True" MouseDown="UIElement_OnMouseDown">
+    <UserControl.Resources>
+        <converters:ImageCacheConverter x:Key="ImageCacheConverter"/>
+        <converters1:UserHasDeletePermissionConverter x:Key="HasDeletePermissionConverter" />
+        <converters1:UserHasWritePermissionConverter x:Key="HasWritePermissionConverter" />
+        <converters:NotNullConverter x:Key="NotNullConverter" />
+        <converters2:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
+        <converters2:UtcToUiTimeConverter x:Key="UtcToUiTimeConverter" />
+        <converters:DeleteButtonVisibilityConverter x:Key="DeleteButtonVisibilityConverter" />
+        <converters:VersionToStringConverter x:Key="VersionToStringConverter" />
+        <DataTemplate x:Key="DeleteButtonTemplate">
+            <Button Margin="5 0 0 0" HorizontalAlignment="Center" Style="{StaticResource FlatButton}"
+                                            Command="{Binding Path=DataContext.DeleteProjectCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Name="RemoveButton"
+                                            ToolTip="{x:Static resources:MediaStrings.ProjectList_DeleteTooltip}">
+                <Button.Visibility>
+                    <MultiBinding Converter="{StaticResource DeleteButtonVisibilityConverter}">
+                        <Binding Path="." />
+                        <Binding Path="DataContext.Shell.MediaApplicationState.CurrentMediaConfiguration" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}" />
+                        <Binding RelativeSource="{RelativeSource AncestorType=telerik:GridViewRow}" Path="IsMouseOver" />
+                    </MultiBinding>
+                </Button.Visibility>
+                <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/remove_dark10x10.png" 
+                                                   Width="10" Height="10"/>
+            </Button>
+        </DataTemplate>
+
+        <DataTemplate x:Key="RowDetailsTemplate" DataType="dataViewModels:MediaConfigurationDataViewModel">
+            <Border Background="{StaticResource RadGridView_RowDetailsBackgroundColorBrush}"
+                    Margin="3" Padding="3">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="5 0 5 5" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsBusy}" Value="true">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left column -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_PhysicalScreens}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_VirtualDisplays}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_Resources}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_Layouts}" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_CyclePackages}" />
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_Cycles}" />
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_ProjectSize}" />
+                    <TextBlock Grid.Row="8" Grid.Column="0" Text="{x:Static resources:MediaStrings.ProjectList_Details_UserDetails}" />
+
+                    <!-- Right column -->
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PhysicalScreensCount}" HorizontalAlignment="Right"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding VirtualDisplaysCount}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ResourcesCount}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding LayoutsCount}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding CyclePackagesCount}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding CyclesCount}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding ProjectSize}" HorizontalAlignment="Right" />
+                    <TextBox VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="9" Grid.Column="0"
+                         Grid.ColumnSpan="2" Text="{Binding Description}" KeyUp="OnDescriptionTextBoxKeyUp"
+                             BorderThickness="1" BorderBrush="{StaticResource TextBoxBorderColorBrush}" Margin="5 0 5 5"
+                             TextWrapping="Wrap" MinLines="3" MaxLines="3"
+                             IsEnabled="{Binding HighlightedProject, Converter={StaticResource NotNullConverter}}">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MediaTextBoxStyle}">
+                                <Setter Property="IsReadOnly" Value="False" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Shell.PermissionController, Converter={StaticResource HasWritePermissionConverter}, ConverterParameter={x:Static local:DataScope.MediaConfiguration}}" Value="false">
+                                        <Setter Property="IsReadOnly" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VersionColumnTemplate">
+            <telerik:RadDropDownButton x:Name="VersionDropDownButton"
+                                       Height="20"
+                                       Padding="0"
+                                                           BorderThickness="0"
+                                                           CloseOnEscape="True"
+                                                           Content="{Binding}"
+                                                          IsOpen="{Binding Path=IsVersionSelectionOpen, Mode=TwoWay}">
+                <telerik:RadDropDownButton.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock HorizontalAlignment="Right"
+                                                       VerticalAlignment="Center"
+                                                       Text="{Binding  Path=CurrentVersion, Converter={StaticResource VersionToStringConverter}, Mode=TwoWay}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontStyle" Value="Normal"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsLatestVersionSelected}" Value="false">
+                                            <Setter Property="FontStyle" Value="Italic" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                            </TextBlock>
+                    </DataTemplate>
+                </telerik:RadDropDownButton.ContentTemplate>
+
+                <telerik:RadDropDownButton.DropDownContent>
+                    <Border Width="500"
+                                                Height="300"
+                                                BorderBrush="{StaticResource CheckedButtonForegroundBrush}"
+                                                BorderThickness="1"
+                                                FlowDirection="LeftToRight">
+
+                    <telerik:RadGridView Name="VersionSelectionGridView"
+                                         AutoGenerateColumns="False"
+                                         CanUserSortColumns="False"
+                                        FontSize="12"
+                                        GridLinesVisibility="Horizontal"
+                                        IsFilteringAllowed="True"
+                                        RowIndicatorVisibility="Collapsed"
+                                        ItemsSource="{Binding Path=Versions}"
+                                        CurrentItem="{Binding Path=CurrentVersion, Mode=TwoWay}"
+										IsSynchronizedWithCurrentItem="True"
+                                        SelectionMode="Single"
+                                        SelectionUnit="FullRow"
+                                        ShowGroupPanel="False"
+                                        DataLoaded="VersionSelectionGridViewOnDataLoaded"
+                                        SelectionChanged="VersionSelectionGridView_OnSelectionChanged">
+
+                            <telerik:RadGridView.SortDescriptors>
+                                <telerik:SortDescriptor Member="CreatedOn" SortDirection="Descending" />
+                            </telerik:RadGridView.SortDescriptors>
+
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn Width="auto" Header="Version" IsReadOnly="True">
+                                    <telerik:GridViewDataColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding Converter={StaticResource VersionToStringConverter}}" />
+                                          </DataTemplate>
+                                    </telerik:GridViewDataColumn.CellTemplate>
+                                </telerik:GridViewDataColumn>
+
+                                <telerik:GridViewDataColumn Width="auto"
+                                                                                DataMemberBinding="{Binding CreatedOn,
+                                                                                                            StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}"
+                                                                                Header="Created"
+                                                                                IsReadOnly="True" />
+                                <telerik:GridViewDataColumn Width="*"
+                                                                                DataMemberBinding="{Binding Description}"
+                                                                                Header="Description"
+                                                                                IsReadOnly="True">
+                                    <telerik:GridViewDataColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       ToolTip="{Binding Description}">
+                                                
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </telerik:GridViewDataColumn.CellTemplate>
+                                </telerik:GridViewDataColumn>
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+                    </Border>
+
+
+                </telerik:RadDropDownButton.DropDownContent>
+            </telerik:RadDropDownButton>
+        </DataTemplate>
+        <CollectionViewSource x:Key="FilteredRecentProjects" Filter="FilterRecentProjects"/>
+    </UserControl.Resources>
+    
+        <TabControl TabStripPlacement="Top"
+                Style="{StaticResource TopFullWidthTabControl}" 
+                ItemContainerStyle="{StaticResource OfficeLikeTabItemStyle}"
+                    IsEnabled="{Binding HighlightedProject.IsReadableModelDirty, Converter={StaticResource InvertedBooleanConverter}}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Static resources:MediaStrings.ProjectList_RecentlyUsed}" 
+                                   Margin="5 0 0 0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+            <telerik:RadBusyIndicator IsBusy="{Binding IsRecentProjectListBusy}"
+                              IsIndeterminate="True">
+                <telerik:RadBusyIndicator.BusyContent>
+                    <TextBlock Text="{Binding RecentProjectBusyContent}" />
+                </telerik:RadBusyIndicator.BusyContent>
+                <StackPanel>
+                    <ListView Margin="15 15 0 0" ItemsSource="{Binding Source={StaticResource FilteredRecentProjects}}"
+                          BorderThickness="0"
+                          Template="{DynamicResource FlatListViewTemplate}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="project:RecentProjectDataViewModel">
+                                <Button VerticalAlignment="Center"  CommandParameter="{Binding}" Command="{Binding ElementName=Root, Path=OpenProjectCommandWrapper}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Border Background="{TemplateBinding Background}" Padding="5 2 5 2">
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                                                <Image Source="{Binding PreviewThumbnailPath, Converter={StaticResource ImageCacheConverter}}" Width="40" Height="40"/>
+                                                                <TextBlock Text="{Binding ProjectName}" VerticalAlignment="Center" 
+                                                               Margin="5 0 0 0"/>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource ProjectListViewCurrentFolderHoverBackgroundBrush}"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource ProjectListViewCurrentFolderPressedBackgroundBrush}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+                </telerik:RadBusyIndicator>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Static resources:MediaStrings.ProjectList_Computer}" Margin="5 0 0 0"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+            <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}"
+                              IsIndeterminate="True">
+                <telerik:RadBusyIndicator.BusyContent>
+                    <TextBlock Text="{Binding BusyContentText}" />
+                </telerik:RadBusyIndicator.BusyContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <telerik:RadGridView Grid.Row="0" BorderThickness="0" VerticalAlignment="Top"
+                                         ItemsSource="{Binding Shell.MediaApplicationState.ExistingProjects}"
+                                         SelectedItem="{Binding HighlightedProject}"
+                                         ShowColumnSortIndexes="True"
+                                         RowIndicatorVisibility="Collapsed"
+                                         x:Name="ProjectsGridView"
+                                         ShowGroupPanel="False"
+                                         CellValidating="GridViewOnCellValidating"
+                                         EnableLostFocusSelectedState="True"
+                                         AutoGenerateColumns="False"
+                                         RowDetailsTemplate="{StaticResource RowDetailsTemplate}"
+                                         LoadingRowDetails="ProjectsGridView_OnLoadingRowDetails"
+                                         DataLoaded="GridViewOnDataLoaded"
+                                         CanUserSelect="{Binding HighlightedProject.IsReadableModelDirty, Converter={StaticResource InvertedBooleanConverter}}"
+                                         CanUserFreezeColumns="False"
+                                         RowDetailsVisibilityChanged="ProjectsGridViewOnRowDetailsVisibilityChanged"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         EnableRowVirtualization="False"
+                                         Margin="0 5">
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewToggleRowDetailsColumn />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Name, Mode=TwoWay}" Width="*" Header="{x:Static resources:MediaStrings.ProjectList_ColumnName}" UniqueName="ProjectName">
+                                <telerik:GridViewDataColumn.CellStyle>
+                                    <Style TargetType="{x:Type telerik:GridViewCell}" BasedOn="{StaticResource GridViewCellStyle}">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                    </Style>
+                                </telerik:GridViewDataColumn.CellStyle>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn 
+                                                        Header="{x:Static resources:MediaStrings.ProjectList_ColumnLatestVersion}"
+                                CellTemplate="{DynamicResource VersionColumnTemplate}">
+                               
+                              <!--<telerik:GridViewComboBoxColumn.ItemTemplate>
+                                  <DataTemplate>
+                                    <Border Width="500"
+                                                Height="300"
+                                                BorderBrush="{StaticResource CheckedButtonForegroundBrush}"
+                                                BorderThickness="1"
+                                                FlowDirection="LeftToRight">
+
+                                        <telerik:RadGridView Name="VersionSelectionGridView"
+                                                                 AutoGenerateColumns="False"
+                                                                 CanUserSortColumns="False"
+                                                                 FontSize="12"
+                                                                 GridLinesVisibility="Horizontal"
+                                                                 IsFilteringAllowed="True"
+                                                                 RowIndicatorVisibility="Collapsed"
+                                                                 
+                                                                 ItemsSource="{Binding}"
+                                                                 CurrentItem="{Binding CurrentVersion, Mode=TwoWay}"
+																 SelectionChanging="VersionSelectionGridView_OnSelectionChanging"
+                                                                 IsSynchronizedWithCurrentItem="True"
+
+                                                                 SelectionMode="Single"
+                                                                 SelectionUnit="FullRow"
+                                                                 ShowGroupPanel="False"
+                                                                 DataLoaded="VersionSelectionGridViewOnDataLoaded"
+                                                                 SelectionChanged="VersionSelectionGridView_OnSelectionChanged">
+
+                                            <telerik:RadGridView.SortDescriptors>
+                                                <telerik:SortDescriptor Member="CreatedOn" SortDirection="Descending" />
+                                            </telerik:RadGridView.SortDescriptors>
+
+                                            <telerik:RadGridView.Columns>
+                                                <telerik:GridViewDataColumn Width="auto" Header="Version" IsReadOnly="True">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="1.0" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+
+                                                <telerik:GridViewDataColumn Width="auto"
+                                                                                DataMemberBinding="{Binding CreatedOn,
+                                                                                                            StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}"
+                                                                                Header="Created"
+                                                                                IsReadOnly="True" />
+                                                <telerik:GridViewDataColumn Width="*"
+                                                                                DataMemberBinding="{Binding Description}"
+                                                                                Header="Description"
+                                                                                IsReadOnly="True" />
+                                            </telerik:RadGridView.Columns>
+                                        </telerik:RadGridView>
+                                    </Border>
+                                    </DataTemplate>
+                                </telerik:GridViewComboBoxColumn.ItemTemplate>-->
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding LastModifiedOn, Mode=TwoWay, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}', Converter={StaticResource UtcToUiTimeConverter}}"
+                                                        Header="{x:Static resources:MediaStrings.ProjectList_ColumnLastModifiedOn}"
+                                                        UniqueName="ProjectLastModified" IsReadOnly="True" />
+                            <telerik:GridViewColumn IsVisible="{Binding Shell.PermissionController, Converter={StaticResource HasDeletePermissionConverter}, ConverterParameter={x:Static local:DataScope.MediaConfiguration}}" IsReadOnly="True" CellTemplate="{StaticResource DeleteButtonTemplate}" />
+                        </telerik:RadGridView.Columns>
+                    </telerik:RadGridView>
+                    <Border Grid.Row="1" BorderThickness="0 1 0 0" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+                        <Button Style="{StaticResource FlatHighlightButton}"
+                                MinWidth="70" HorizontalAlignment="Right"
+                                Margin="0 5 3 0"
+                                Content="{x:Static resources:MediaStrings.MainMenu_Open}"
+                                Command="{Binding OpenProjectCommandWrapper, ElementName=Root}" CommandParameter="{Binding HighlightedProject}" />
+                    </Border>
+                </Grid>
+            </telerik:RadBusyIndicator>
+        </TabItem>
+        </TabControl>
+    
+</UserControl>

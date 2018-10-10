@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Composer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="file:///. Composer.xsd">
+  <EnableTimeSync>true</EnableTimeSync>
+  <XimpleInactivity Timeout="PT60S" AtStartup="true" />
+</Composer>

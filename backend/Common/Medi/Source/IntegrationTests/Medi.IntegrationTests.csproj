@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BBAA7619-27E8-467D-8691-D2F8BD825641}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Medi.IntegrationTests</RootNamespace>
+    <AssemblyName>Gorba.Common.Medi.IntegrationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\3rdParty\NLog\2.0.0.2000\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="IntegrationTestException.cs" />
+    <Compile Include="Messages\StringMessage.cs" />
+    <Compile Include="Messages\ListMessage.cs" />
+    <Compile Include="Messages\SimpleMessage.cs" />
+    <Compile Include="Messages\TreeMessage.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestRunner.cs" />
+    <Compile Include="Tests\EndToEnd\BecDynamicTcpConnectTest.cs" />
+    <Compile Include="Tests\EndToEnd\BecTcpConnectTest.cs" />
+    <Compile Include="Tests\EndToEnd\BigMessageXmlTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\ClientServerMessageTest.cs" />
+    <Compile Include="Tests\EndToEnd\ConnectClientServerTest.cs" />
+    <Compile Include="IIntegrationTest.cs" />
+    <Compile Include="Tests\EndToEnd\BigMessageBecTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\ListMessageBecTcpTest.cs" />
+    <Compile Include="Tests\Gateway\GatewayMultiHopRoutingTest.cs" />
+    <Compile Include="Tests\Gateway\GatewayRoutingTest.cs" />
+    <Compile Include="Tests\Gateway\GatewayRoutingTestBase.cs" />
+    <Compile Include="Tests\MediIntegrationTest.cs" />
+    <Compile Include="Tests\EndToEnd\NullValuesMessageBecTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\SimpleMessageBecGeneratedTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\SimpleMessageBecReflectionGeneratedTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\SimpleMessageBecReflectionTcpTest.cs" />
+    <Compile Include="Tests\EndToEnd\SimpleMessageXmlTcpTest.cs" />
+    <Compile Include="Tests\Resources\ClientServerNodeFactory.cs" />
+    <Compile Include="Tests\Resources\FileSendTestBase.cs" />
+    <Compile Include="Tests\Resources\GatewayMultiHopFileSendTest.cs" />
+    <Compile Include="Tests\Resources\GatewayMultiHopResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\INodeFactory.cs" />
+    <Compile Include="Tests\Resources\LocalNodeFactory.cs" />
+    <Compile Include="Tests\Resources\LocalResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\MediNode.cs" />
+    <Compile Include="Tests\Resources\GatewayFileSendTest.cs" />
+    <Compile Include="Tests\Resources\MixedMultiHopFileSendTest.cs" />
+    <Compile Include="Tests\Resources\GatewayMultiHopNodeFactory.cs" />
+    <Compile Include="Tests\Resources\MixedMultiHopNodeFactory.cs" />
+    <Compile Include="Tests\Resources\GatewayResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\MixedMultiHopResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\MultiHopFileSendTest.cs" />
+    <Compile Include="Tests\Resources\GatewayNodeFactory.cs" />
+    <Compile Include="Tests\Resources\MultiHopNodeFactory.cs" />
+    <Compile Include="Tests\Resources\MultiHopResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\ReconnectNodeFactory.cs" />
+    <Compile Include="Tests\Resources\ResourceSentInfo.cs" />
+    <Compile Include="Tests\Resources\SimpleFileSendTest.cs" />
+    <Compile Include="Tests\Resources\SimpleReconnectResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\SimpleResourceSendTest.cs" />
+    <Compile Include="Tests\Resources\ResourceSendTestBase.cs" />
+    <Compile Include="Tests\Streams\PipeStreamFactory.cs" />
+    <Compile Include="Tests\Streams\PipeTransportClient.cs" />
+    <Compile Include="Tests\Streams\PipeTransportClientConfig.cs" />
+    <Compile Include="Tests\Streams\PipeTransportServer.cs" />
+    <Compile Include="Tests\Streams\PipeTransportServerConfig.cs" />
+    <Compile Include="Tests\Streams\StreamSequenceServerClientTest.cs" />
+    <Compile Include="Tests\Streams\StreamSequenceClientServerTest.cs" />
+    <Compile Include="Tests\EndToEnd\XmlDynamicTcpConnectTest.cs" />
+    <Compile Include="Tests\EndToEnd\XmlTcpConnectTest.cs" />
+    <Compile Include="Utils\AppDomainMediProxy.cs" />
+    <Compile Include="Utils\AppDomainMediReceiver.cs" />
+    <Compile Include="Utils\AssemblyLoaderHelper.cs" />
+    <Compile Include="Utils\Assert.cs" />
+    <Compile Include="Utils\ExceptionEventArgs.cs" />
+    <Compile Include="Utils\IAppDomainMediProxy.cs" />
+    <Compile Include="Utils\IAssemblyLoaderHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{7DE464C7-E5FD-43B2-879F-5FE6E0490060}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\FilesTesting\Utility.FilesTesting.csproj">
+      <Project>{709EB99C-2F8F-4061-90BF-D859C43DDCDD}</Project>
+      <Name>Utility.FilesTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Tests\Medi.Core.Tests.csproj">
+      <Project>{30D95685-AB32-4831-AD42-D5DAD8F965EE}</Project>
+      <Name>Medi.Core.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Medi.Resources.csproj">
+      <Project>{31D9EAD4-9A25-48A1-8491-940C2A711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

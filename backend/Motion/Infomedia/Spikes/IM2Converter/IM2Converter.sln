@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM2Converter", "IM2Converter.csproj", "{A8909D6E-78FB-4672-BE58-163833E575E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{3B64931E-3AA1-4CE5-BD6D-807549F097AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Infomedia", "..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj", "{9411DF24-9043-480A-A8F4-F051F3253E2F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IM2Converter.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Infomedia\\Configuration.Infomedia.csproj
+		SccProjectTopLevelParentUniqueName2 = IM2Converter.sln
+		SccProjectName2 = ../../../../Common/Configuration/Source/Infomedia
+		SccLocalPath2 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Infomedia
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Debug|x86.ActiveCfg = Debug|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Debug|x86.Build.0 = Debug|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Release|Any CPU.ActiveCfg = Release|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Release|x86.ActiveCfg = Release|x86
+		{A8909D6E-78FB-4672-BE58-163833E575E1}.Release|x86.Build.0 = Release|x86
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9411DF24-9043-480A-A8F4-F051F3253E2F}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9411DF24-9043-480A-A8F4-F051F3253E2F} = {3B64931E-3AA1-4CE5-BD6D-807549F097AD}
+	EndGlobalSection
+EndGlobal

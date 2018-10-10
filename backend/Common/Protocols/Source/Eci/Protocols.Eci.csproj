@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CDB9D2E3-CA1E-4CE1-8695-3F0D4D33F9F6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Protocols.Eci</RootNamespace>
+    <AssemblyName>Gorba.Common.Protocols.Eci</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Messages\AckType.cs" />
+    <Compile Include="Messages\EciAck.cs" />
+    <Compile Include="Messages\EciAckTs.cs" />
+    <Compile Include="Messages\EciDelayedMessage.cs" />
+    <Compile Include="Messages\EciKeepAliveMessage.cs" />
+    <Compile Include="Messages\EciLogCode.cs" />
+    <Compile Include="Messages\EciNewMessage.cs" />
+    <Compile Include="Messages\EciPacketLengths.cs" />
+    <Compile Include="Messages\EciPositionBase.cs" />
+    <Compile Include="Messages\EciRequestCode.cs" />
+    <Compile Include="Messages\EciTextMessage.cs" />
+    <Compile Include="Messages\EciTrafficLightCode.cs" />
+    <Compile Include="Messages\EciLogMessage.cs" />
+    <Compile Include="Messages\EciDutyMessage.cs" />
+    <Compile Include="Messages\EciTrafficLightAck.cs" />
+    <Compile Include="Messages\EciTrafficLightBase.cs" />
+    <Compile Include="Messages\EciTrafficLightCheckPoint.cs" />
+    <Compile Include="Messages\EciTrafficLightExit.cs" />
+    <Compile Include="Messages\EciAlarmMessage.cs" />
+    <Compile Include="Messages\EciAlarmState.cs" />
+    <Compile Include="Messages\EciPassengerCountMessage.cs" />
+    <Compile Include="Messages\EciPositionMessage.cs" />
+    <Compile Include="Messages\EciTrafficLightEntry.cs" />
+    <Compile Include="Messages\EciUtilMessage.cs" />
+    <Compile Include="Messages\RequestPacketLength.cs" />
+    <Compile Include="Messages\MessageTarget.cs" />
+    <Compile Include="Serialization\EciBinaryPacket.cs" />
+    <Compile Include="Serialization\EciSerializer.cs" />
+    <Compile Include="Messages\GpsSatelliteState.cs" />
+    <Compile Include="Messages\EciMessageBase.cs" />
+    <Compile Include="Messages\GpsState.cs" />
+    <Compile Include="Messages\EciMessageCode.cs" />
+    <Compile Include="Messages\GpsAntennaState.cs" />
+    <Compile Include="Messages\PositionEvent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\EciMessageQueue.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

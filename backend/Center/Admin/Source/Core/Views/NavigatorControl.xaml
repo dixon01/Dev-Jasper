@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.NavigatorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:navigator="clr-namespace:Gorba.Center.Admin.Core.ViewModels.Navigator"
+             xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance navigator:NavigatorViewModel}" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             MinWidth="250">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBoolToVisibility"/>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource DarkRadPanelBarBackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="0" Margin="0 1 0 1"
+                Width="22" Height="22"
+                Command="{Binding GoHomeCommand}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource FlatIconButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HomeIsSelected}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource FlatImageButtonHoverBackgroundColorBrush}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock Text="&#xf015;" Style="{StaticResource LightIconTextBlock}"/>
+        </Button>
+
+        <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="0" Margin="0 1 1 1"
+                                     HorizontalAlignment="Stretch"  BorderThickness="0"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     WatermarkContent="{x:Static resources:AdminStrings.Navigator_Search}"/>
+
+        <telerik:RadPanelBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                             ExpandMode="Multiple"
+                             ItemsSource="{Binding FilteredPartitions}"
+                             VerticalAlignment="Top"
+                             SelectedItem="{Binding SelectedEntity, Mode=TwoWay}"
+                             PreviewSelected="RadTreeView_OnPreviewSelected"
+                             Style="{StaticResource DarkPanelBar}">
+            <telerik:RadPanelBar.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type navigator:PartitionViewModel}" ItemsSource="{Binding FilteredEntities}">
+                    <TextBlock Text="{Binding DisplayName}" Margin="5 1 5 2" />
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type navigator:NavigatorEntityViewModel}">
+                    <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                        <Image Width="16" Height="16" Source="{Binding Name, Converter={StaticResource StringFormatConverter}, ConverterParameter=../Resources/Icons/EntityTypes/EntityTypes_{0}_16x16.png}"/>
+
+                        <TextBlock Text="{Binding DisplayName}" Margin="5 1 5 0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </telerik:RadPanelBar.Resources>
+        </telerik:RadPanelBar>
+
+        <Grid VerticalAlignment="Top" Margin="0 0 1 0"
+              Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" MinHeight="100"
+              Visibility="{Binding HasRemovableMedia, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Background="{StaticResource DarkRadPanelBarLighterBackgroundColor}" Padding="0 2 0 2">
+                <TextBlock Text="{x:Static resources:AdminStrings.Navigator_RemovableMedia}" Margin="8 1 5 2" Foreground="{StaticResource DarkRadPanelBarForegroundColor}"/>
+            </Border>
+
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding RemovableMedia}" SelectedItem="{Binding SelectedRemovableMedia}"
+                     BorderThickness="0" Padding="0" Margin="0"
+                     Background="{StaticResource DarkRadPanelBarBackgroundColor}"
+                     ItemContainerStyle="{StaticResource DarkListBoxItem}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type navigator:RemovableMediaViewModel}">
+                        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                            <Image Width="16" Height="16" VerticalAlignment="Center"
+                                   Source="../Resources/Icons/thumbdrive_info_16x16.png"
+                                   Visibility="{Binding HasFeedback, Converter={StaticResource BoolToVisibility}}"/>
+                            <Image Width="16" Height="16" VerticalAlignment="Center"
+                                   Source="../Resources/Icons/thumbdrive_16x16.png"
+                                   Visibility="{Binding HasFeedback, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                            <TextBlock Text="{Binding Name}" Margin="5 3 5 2"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

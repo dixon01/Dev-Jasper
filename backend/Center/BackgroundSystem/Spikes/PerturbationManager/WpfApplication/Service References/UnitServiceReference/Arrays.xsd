@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.Filters" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" />
+  <xs:complexType name="ArrayOfKeyValueOfstringArrayOfFilterDataMdswYWdT">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringArrayOfFilterDataMdswYWdT">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.Filters" name="Value" nillable="true" type="q1:ArrayOfFilterData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfstringArrayOfFilterDataMdswYWdT" nillable="true" type="tns:ArrayOfKeyValueOfstringArrayOfFilterDataMdswYWdT" />
+  <xs:complexType name="ArrayOfKeyValueOfTenantUserRolePUe4ncJB">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfTenantUserRolePUe4ncJB">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" name="Key" nillable="true" type="q2:Tenant" />
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" name="Value" nillable="true" type="q3:UserRole" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfTenantUserRolePUe4ncJB" nillable="true" type="tns:ArrayOfKeyValueOfTenantUserRolePUe4ncJB" />
+  <xs:complexType name="ArrayOfKeyValueOfDataScopeArrayOfPermissionPUe4ncJB">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfDataScopeArrayOfPermissionPUe4ncJB">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" name="Key" nillable="true" type="q4:DataScope" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" name="Value" nillable="true" type="q5:ArrayOfPermission" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfDataScopeArrayOfPermissionPUe4ncJB" nillable="true" type="tns:ArrayOfKeyValueOfDataScopeArrayOfPermissionPUe4ncJB" />
+  <xs:complexType name="ArrayOfKeyValueOfstringstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element name="Value" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+  <xs:complexType name="ArrayOfint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
+</xs:schema>

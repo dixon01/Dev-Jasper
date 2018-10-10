@@ -1,0 +1,376 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="AccessExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Access" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).OrderBy(entity => entity.Name).ToList();
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Access
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+
+    using Gorba.Center.BackgroundSystem.Data;
+    using Gorba.Center.Common.ServiceModel.Filters;
+    using Gorba.Center.Common.ServiceModel;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WriteUsing(partition);
+    }
+
+    foreach (var partition in partitions)
+    {
+        this.WriteFiltersUsing(partition);
+    }
+
+    foreach (var entity in entities)
+    {
+        this.WriteUsing(entity);
+    }
+#>
+
+    using NLog;
+
+    using StringComparison = Gorba.Center.Common.ServiceModel.Filters.StringComparison;
+
+    public static partial class QueryExtensions
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteApply(entity);
+    }
+#>
+    }
+}
+<#+
+    private void WriteApply(EntitySpace.Entity entity)
+    {
+        var valueProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+                .OrderBy(property => property.Name).ToList();
+                
+        var xmlProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized)
+                .OrderBy(property => property.Name).ToList();
+                
+        var enumProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Enumeration)
+                .OrderBy(property => property.Name).ToList();
+
+        var referenceProperties = entity.Properties.OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference)
+                .OrderBy(property => property.Name).ToList();
+
+        var collectionProperties = entity.Properties.OfType<EntitySpace.CollectionProperty>()
+                .OrderBy(property => property.Name).ToList();
+
+        var properties = valueProperties
+            .OfType<EntitySpace.PropertyBase>()
+            .Union(collectionProperties.OfType<EntitySpace.PropertyBase>())
+            .Union(referenceProperties.OfType<EntitySpace.PropertyBase>())
+            .Union(enumProperties.OfType<EntitySpace.PropertyBase>());
+#>
+
+        public static IQueryable<<#= entity.Name #>> Apply(this IQueryable<<#= entity.Name #>> query, <#= entity.Name #>Query filter)
+        {
+            if (filter == null)
+            {
+                return query;
+            }
+
+            query = query.Apply(filter, null);
+
+            if (filter.Sorting.Any())
+            {
+                query = query.Sort(filter.Sorting);
+            }
+            
+            if (filter.Skip > 0)
+            {
+                Logger.Trace("Skipping {0} item(s)", filter.Skip);
+                query = query.Skip(filter.Skip);
+            }
+
+            if (filter.Take.HasValue)
+            {
+                Logger.Trace("Taking {0} item(s)", filter.Take.Value);
+                query = query.Take(filter.Take.Value);
+            }
+
+            return query;
+        }
+
+        public static IQueryable<T> Apply<T>(this IQueryable<T> query, <#= entity.Name #>Filter filter, string path = null)
+        {
+            if (filter == null)
+            {
+                return query;
+            }
+
+            var prefix = string.Empty;
+            if (path != null)
+            {
+                prefix = string.Format("{0} != null && ", path);
+                query = query.Include(path);
+                path += ".";
+            }
+
+<#+
+        this.WritePropertyApplyFiltering(new EntitySpace.Property{ Name = "Id", Type = "int" });
+        if (entity.HasChangeTracking)
+        {
+            this.WritePropertyApplyFiltering(new EntitySpace.Property { Name = "CreatedOn", Type = "DateTime" });
+            this.WritePropertyApplyFiltering(new EntitySpace.Property { Name = "LastModifiedOn", Type = "DateTime?" });
+        }
+
+        if (valueProperties.Any())
+        {
+            foreach (var property in valueProperties)
+            {
+                this.WritePropertyApplyFiltering(property);
+            }
+        }
+        else
+        {
+            this.WriteLine(String.Empty);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlPropertyApplyFiltering(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WritePropertyReferenceApplyFiltering(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteCollectionPropertyApplyFiltering(property);
+        }
+
+        foreach (var property in enumProperties)
+        {
+            this.WriteEnumPropertyApplyFiltering(property);
+        }
+#>
+
+            return query;
+        }
+<#+
+        this.WriteSortMethod(entity.Name, valueProperties.Union(enumProperties));
+    }
+
+    private void WriteSortMethod(string entityName, IEnumerable<EntitySpace.Property> properties)
+    {
+#>
+
+        private static IQueryable<<#= entityName #>> Sort(this IQueryable<<#= entityName #>> query, IEnumerable<<#= entityName #>Query.OrderClause> sorting)
+        {
+            var orderedQuery = query.Sort(sorting.First());
+            var others = sorting.Skip(1);
+            if (others.Any())
+            {
+                foreach (var orderClause in others)
+                {
+                    orderedQuery = orderedQuery.Sort(orderClause);
+                }
+            }
+
+            return orderedQuery;
+        }
+
+        private static IOrderedQueryable<<#= entityName #>> Sort(this IQueryable<<#= entityName #>> query, <#= entityName #>Query.OrderClause clause)
+        {
+            switch (clause.Property)
+            {
+<#+
+        foreach (var property in properties)
+        {#>
+                case <#= entityName #>Query.SortingProperties.<#= property.Name #>:
+                    switch (clause.Direction)
+                    {
+                        case SortDirection.Ascending:
+                            return query.OrderBy(entity => entity.<#= property.Name #>);
+                        case SortDirection.Descending:
+                            return query.OrderByDescending(entity => entity.<#= property.Name #>);
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+<#+
+        }
+#>
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private static IOrderedQueryable<<#= entityName #>> Sort(this IOrderedQueryable<<#= entityName #>> query, <#= entityName #>Query.OrderClause clause)
+        {
+            switch (clause.Property)
+            {
+<#+
+        foreach (var property in properties)
+        {#>
+                case <#= entityName #>Query.SortingProperties.<#= property.Name #>:
+                    switch (clause.Direction)
+                    {
+                        case SortDirection.Ascending:
+                            return query.ThenBy(entity => entity.<#= property.Name #>);
+                        case SortDirection.Descending:
+                            return query.ThenByDescending(entity => entity.<#= property.Name #>);
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+<#+
+        }
+#>
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+<#+
+    }
+
+    private void WriteCollectionPropertyApplyFiltering(EntitySpace.CollectionProperty property)
+    {
+        #>
+            query = query.Apply(filter.<#= property.Name #>, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteXmlPropertyApplyFiltering(EntitySpace.Property property)
+    {
+        #>
+
+            if (filter.Include<#= property.Name #>)
+            {
+                query = query.Include(path + "<#= property.Name #>");
+            }
+<#+
+    }
+
+    private void WritePropertyApplyFiltering(EntitySpace.Property property)
+    {
+        switch (property.Type)
+        {
+            case "int":
+                this.WriteInt32PropertyApplyFiltering(property);
+                break;
+            case "string":
+                this.WriteStringPropertyApplyFiltering(property);
+                break;
+            case "long":
+                this.WriteLongPropertyApplyFiltering(property);
+                break;
+            case "Guid":
+                this.WriteGuidPropertyApplyFiltering(property);
+                break;
+            case "bool":
+                this.WriteBooleanPropertyApplyFiltering(property);
+                break;
+            case "DateTime":
+                this.WriteDateTimePropertyApplyFiltering(property);
+                break;
+            case "DateTime?":
+                this.WriteNullableDateTimePropertyApplyFiltering(property);
+                break;
+            default:
+                throw new NotSupportedException(
+                    String.Format(
+                        "Type '{0}' is not supported in property '{1}.{2}'",
+                        property.Type,
+                        property.Entity.Name,
+                        property.Name));
+        }
+    }
+
+    private void WriteEnumPropertyApplyFiltering(EntitySpace.Property property)
+    {
+        var dataEnumType = "Gorba.Center.BackgroundSystem.Data.Model." + property.Entity.Partition.Name + "." + property.Type;
+    #>
+            query = query.Apply<T, <#= dataEnumType #>>(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteGuidPropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteBooleanPropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteStringPropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteInt32PropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteDateTimePropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteNullableDateTimePropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteLongPropertyApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, prefix, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WritePropertyReferenceApplyFiltering(EntitySpace.Property property)
+    {#>
+            query = query.Apply(filter.<#= property.Name #>, path + "<#= property.Name #>");
+<#+
+    }
+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteFiltersUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteUsing(EntitySpace.Entity entity)
+    {#>
+    using <#= entity.Name #> = Gorba.Center.BackgroundSystem.Data.Model.<#= entity.Partition.Name #>.<#= entity.Name #>;
+<#+
+    }
+#>

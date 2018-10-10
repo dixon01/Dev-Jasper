@@ -1,0 +1,264 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gorba.Center.Media.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ImageExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Images</Value>
+    </Setting>
+    <Setting Name="VideoExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Videos</Value>
+    </Setting>
+    <Setting Name="MaxRecentResources" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ProjectPreviewsRelativePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gorba\Center\Media\ProjectPreviews</Value>
+    </Setting>
+    <Setting Name="AppDataThumbnailsRelativePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gorba\Center\Media\Thumbnails</Value>
+    </Setting>
+    <Setting Name="ThumbnailsRelativePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Thumbnails</Value>
+    </Setting>
+    <Setting Name="MaxRecentProjects" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="AppDataResourcesRelativePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gorba\Center\Media\Resources</Value>
+    </Setting>
+    <Setting Name="ResourcesRelativePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Resources</Value>
+    </Setting>
+    <Setting Name="PreviewPopupDelay" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">00:00:01</Value>
+    </Setting>
+    <Setting Name="VideoThumbnailPlaceholder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gorba.Center.Media.Core.Resources.Images.ImageNotAvailable.png</Value>
+    </Setting>
+    <Setting Name="UriVideoThumbnailHash" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UriVideoPlaceholder</Value>
+    </Setting>
+    <Setting Name="UriVideoThumbnail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pack://application:,,,/Resources/Images/Icons/video_44x44.png</Value>
+    </Setting>
+    <Setting Name="DateEvalFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dd.MM.yyyy</Value>
+    </Setting>
+    <Setting Name="TimeEvalFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">hh\:mm\:ss</Value>
+    </Setting>
+    <Setting Name="PoolExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Pools</Value>
+    </Setting>
+    <Setting Name="SymbolExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Symbols</Value>
+    </Setting>
+    <Setting Name="RelativeFontsFolderPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Fonts</Value>
+    </Setting>
+    <Setting Name="CodeConversion_DefaultCode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">###</Value>
+    </Setting>
+    <Setting Name="CodeConversion_Filename" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">codeconversion.csv</Value>
+    </Setting>
+    <Setting Name="InstalledFontList" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Arial&lt;/string&gt;
+  &lt;string&gt;Ebrima&lt;/string&gt;
+  &lt;string&gt;Estrangelo Edessa&lt;/string&gt;
+  &lt;string&gt;Gadugi&lt;/string&gt;
+  &lt;string&gt;Gisha&lt;/string&gt;
+  &lt;string&gt;Impact&lt;/string&gt;
+  &lt;string&gt;Leelawadee&lt;/string&gt;
+  &lt;string&gt;Lucida Console&lt;/string&gt;
+  &lt;string&gt;Microsoft Sans Serif&lt;/string&gt;
+  &lt;string&gt;MoolBoran&lt;/string&gt;
+  &lt;string&gt;MV Boli&lt;/string&gt;
+  &lt;string&gt;Plantagenet Cherokee&lt;/string&gt;
+  &lt;string&gt;Segoe Script&lt;/string&gt;
+  &lt;string&gt;Segoe UI&lt;/string&gt;
+  &lt;string&gt;Segoe UI Symbol&lt;/string&gt;
+  &lt;string&gt;Symbol&lt;/string&gt;
+  &lt;string&gt;Tahoma&lt;/string&gt;
+  &lt;string&gt;Times New Roman&lt;/string&gt;
+  &lt;string&gt;Wingdings&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DuplicatedMediaPostfix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)"> ({0})</Value>
+    </Setting>
+    <Setting Name="ImageExtensions_Tft" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;.jpg&lt;/string&gt;
+  &lt;string&gt;.jpeg&lt;/string&gt;
+  &lt;string&gt;.png&lt;/string&gt;
+  &lt;string&gt;.gif&lt;/string&gt;
+  &lt;string&gt;.bmp&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="VideoExtensions" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;.asf&lt;/string&gt;
+  &lt;string&gt;.avi&lt;/string&gt;
+  &lt;string&gt;.mpg&lt;/string&gt;
+  &lt;string&gt;.mp2&lt;/string&gt;
+  &lt;string&gt;.mpeg&lt;/string&gt;
+  &lt;string&gt;.mp4&lt;/string&gt;
+  &lt;string&gt;.wmv&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="EdgeSnapTolerance" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="AudioPauseDefaultDuration" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">00:00:01</Value>
+    </Setting>
+    <Setting Name="TtsDefaultVoice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Sharon22k_HQ</Value>
+    </Setting>
+    <Setting Name="AudioExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Audio</Value>
+    </Setting>
+    <Setting Name="DefaultAhdlcFontSmall" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">G07X07_2_GORBA_V1.FON</Value>
+    </Setting>
+    <Setting Name="DefaultAhdlcFontBig" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">G16X07_2_GORBA_V2.FON</Value>
+    </Setting>
+    <Setting Name="LedDotRadius" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="LedDotSpace" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="ImageExtensions_Led" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;.egr&lt;/string&gt;
+  &lt;string&gt;.egl&lt;/string&gt;
+  &lt;string&gt;.egf&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="CreateProjectOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProjectSizeXmlPart" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">20480</Value>
+    </Setting>
+    <Setting Name="UpdateStartDate" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">2000-01-01</Value>
+    </Setting>
+    <Setting Name="UpdateEndDate" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">2100-12-31</Value>
+    </Setting>
+    <Setting Name="TimeEvalConvertTimeSpanFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HH\:mm\:ss</Value>
+    </Setting>
+    <Setting Name="InvalidFormulaNameChars" Type="System.Char[]" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfChar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;char&gt;32&lt;/char&gt;
+  &lt;char&gt;40&lt;/char&gt;
+  &lt;char&gt;41&lt;/char&gt;
+  &lt;char&gt;61&lt;/char&gt;
+  &lt;char&gt;36&lt;/char&gt;
+  &lt;char&gt;91&lt;/char&gt;
+  &lt;char&gt;93&lt;/char&gt;
+  &lt;char&gt;58&lt;/char&gt;
+  &lt;char&gt;59&lt;/char&gt;
+  &lt;char&gt;39&lt;/char&gt;
+&lt;/ArrayOfChar&gt;</Value>
+    </Setting>
+    <Setting Name="FontColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF0000</Value>
+    </Setting>
+    <Setting Name="Font" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="FontHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="FontWeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="HourCenterX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="HourCenterY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">41</Value>
+    </Setting>
+    <Setting Name="HourHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">56</Value>
+    </Setting>
+    <Setting Name="HourWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="HourX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="HourY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">23</Value>
+    </Setting>
+    <Setting Name="HourZIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="HourFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HourHand.png</Value>
+    </Setting>
+    <Setting Name="MinuteCenterX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="MinuteCenterY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">53</Value>
+    </Setting>
+    <Setting Name="MinuteHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">68</Value>
+    </Setting>
+    <Setting Name="MinuteWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="MinuteX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">61</Value>
+    </Setting>
+    <Setting Name="MinuteY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">11</Value>
+    </Setting>
+    <Setting Name="MinuteZIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="MinuteFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MinuteHand.png</Value>
+    </Setting>
+    <Setting Name="SecondsCenterX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="SecondsCenterY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">51</Value>
+    </Setting>
+    <Setting Name="SecondsHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">66</Value>
+    </Setting>
+    <Setting Name="SecondsWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="SecondsX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">58</Value>
+    </Setting>
+    <Setting Name="SecondsY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">13</Value>
+    </Setting>
+    <Setting Name="SecondsZIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="SecondsFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SecondsHand.png</Value>
+    </Setting>
+    <Setting Name="CsvMapping_DefaultExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.csv</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

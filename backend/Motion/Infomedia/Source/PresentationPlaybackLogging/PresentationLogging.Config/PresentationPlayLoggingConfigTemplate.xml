@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PresentationPlayLoggingConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ClientConfig>
+    <FileNameRolloverType>$FileNameRolloverType</FileNameRolloverType>
+    <MaxFileSize>$MaxFileSize</MaxFileSize>
+    <MaxRecords>$MaxRecords</MaxRecords>
+    <MaxZipFileEntries>$MaxZipFileEntries</MaxZipFileEntries>
+    <RollOverLogOutputFolder>RollOverLogOutputFolder</RollOverLogOutputFolder>    
+    <ZipOutput>$ZipOutput</ZipOutput>
+  </ClientConfig>
+  <ServerConfig>
+    <BadFileFolder>$BadFileFolder</BadFileFolder>
+    <ConnectionStringDebug>$ConnectionStringDebug</ConnectionStringDebug>
+    <ConnectionStringRelease>$ConnectionStringRelease</ConnectionStringRelease>
+    <DestinationsConnectionString>$DestinationsConnectionString</DestinationsConnectionString>
+    <DestinationsUnitUri>$DestinationsUnitUri</DestinationsUnitUri>
+    <FileWatchFolder>$FileWatchFolder</FileWatchFolder>
+    <LookupUnits>$LookupUnits</LookupUnits>
+    <WatchFileFilter>$WatchFileFilter</WatchFileFilter>
+  </ServerConfig>
+</PresentationPlayLoggingConfig>

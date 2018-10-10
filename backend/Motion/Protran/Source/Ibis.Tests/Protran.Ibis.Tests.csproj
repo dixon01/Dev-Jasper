@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3C57478B-01E1-4994-9903-6EDF27D7774D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Protran.Ibis.Tests</RootNamespace>
+    <AssemblyName>Gorba.Motion.Protran.Ibis.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\3rdParty\Moq\v4\NET20\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="ChannelTest.cs" />
+    <Compile Include="ConfigMngTest.cs" />
+    <Compile Include="Config\IbisConfigTest.cs" />
+    <Compile Include="Handlers\DS021CHandlerTest.cs" />
+    <Compile Include="Handlers\GO002HandlerTest.cs" />
+    <Compile Include="Handlers\DS021AHandlerTest.cs" />
+    <Compile Include="Handlers\DS080HandlerTest.cs" />
+    <Compile Include="Handlers\DS081HandlerTest.cs" />
+    <Compile Include="Handlers\GO004HandlerTest.cs" />
+    <Compile Include="Handlers\GO005HandlerTest.cs" />
+    <Compile Include="Handlers\GO007HandlerTest.cs" />
+    <Compile Include="Mocks\IbisConfigContextMock.cs" />
+    <Compile Include="Parsers\Verification\AnyTest.cs" />
+    <Compile Include="Parsers\Verification\CharRangeTest.cs" />
+    <Compile Include="Parsers\Verification\ConstantTest.cs" />
+    <Compile Include="Parsers\Verification\TelegramVerifierTest.cs" />
+    <Compile Include="Parsers\Verification\HexDigitTest.cs" />
+    <Compile Include="Parsers\Verification\DigitTest.cs" />
+    <Compile Include="SetupHelper.cs" />
+    <Compile Include="Mocks\IbisCfgLoader.cs" />
+    <Compile Include="Mocks\MockChannel.cs" />
+    <Compile Include="Mocks\TelegramProvider.cs" />
+    <Compile Include="Mocks\TelegramProvider16Bit.cs" />
+    <Compile Include="Mocks\TelegramProvider7Bit.cs" />
+    <Compile Include="Parsers\GO002ParserTest.cs" />
+    <Compile Include="Parsers\Parser16BitTest.cs" />
+    <Compile Include="Parsers\Parser7BitTest.cs" />
+    <Compile Include="Parsers\ParserTest.cs" />
+    <Compile Include="Parsers\SimpleHeaderTelegramParserTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationChannelTest.cs" />
+    <Compile Include="TimeSync\IbisTimeSyncTest.cs" />
+    <Compile Include="Transformations\AsciiTransformerTest.cs" />
+    <Compile Include="Transformations\CapitalizeTransformerTest.cs" />
+    <Compile Include="Transformations\HengartnerTransformerTest.cs" />
+    <Compile Include="Transformations\IntegerTransformerTest.cs" />
+    <Compile Include="Transformations\LawoStringTransformerTest.cs" />
+    <Compile Include="Transformations\RegexDividerTransformerTest.cs" />
+    <Compile Include="Transformations\RegexMappingTransformerTest.cs" />
+    <Compile Include="Transformations\StringMappingTransformerTest.cs" />
+    <Compile Include="Transformations\SymbolDividerTransformerTest.cs" />
+    <Compile Include="Transformations\UnicodeTransformerTest.cs" />
+    <Compile Include="Transformations\Utf8TransformerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Persistence\Configuration.Persistence.csproj">
+      <Project>{0FA444B9-B876-47EB-A78D-BB4BEBC9740D}</Project>
+      <Name>Configuration.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Protran\Configuration.Protran.csproj">
+      <Project>{159CE797-E084-488F-87B3-23857049BE50}</Project>
+      <Name>Configuration.Protran</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Vdv300\Protocols.Vdv300.csproj">
+      <Project>{D45A1354-2A0F-489A-A9B5-D45E13078A39}</Project>
+      <Name>Protocols.Vdv300</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Csv\Utility.Csv.csproj">
+      <Project>{B2015850-B540-40F7-9810-503139A44A14}</Project>
+      <Name>Utility.Csv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Ximple\Protocols.Ximple.csproj">
+      <Project>{016A923F-272C-403E-AFFE-F811A0C26045}</Project>
+      <Name>Protocols.Ximple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{7DE464C7-E5FD-43B2-879F-5FE6E0490060}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Protran.Core.csproj">
+      <Project>{C3036BE3-1D3C-4B40-87BB-DDBE33F53568}</Project>
+      <Name>Protran.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ibis\Protran.Ibis.csproj">
+      <Project>{38767532-4E74-4EB6-9911-1B58BCFB967D}</Project>
+      <Name>Protran.Ibis</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\IbisConfigV2_0_1326.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ibisConfigV2_5_0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

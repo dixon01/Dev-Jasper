@@ -1,0 +1,23 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="Luminator.Multicast.ReceiveSolo.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FtpUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">swt</Value>
+    </Setting>
+    <Setting Name="FtpPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">swtswt</Value>
+    </Setting>
+    <Setting Name="FtpUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">swdev230</Value>
+    </Setting>
+    <Setting Name="MulticastIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">239.255.100.2</Value>
+    </Setting>
+    <Setting Name="MulticastPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">31000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

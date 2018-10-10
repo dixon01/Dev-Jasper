@@ -1,0 +1,87 @@
+﻿<layoutElements:EditableLayoutElementBase x:Class="Gorba.Center.Media.Core.Views.LayoutElements.LiveStreamLayoutElement"
+                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                 xmlns:layout1="clr-namespace:Gorba.Common.Configuration.Infomedia.Layout;assembly=Gorba.Common.Configuration.Infomedia"
+                                 xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+                                 xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+                                 xmlns:layoutElements="clr-namespace:Gorba.Center.Media.Core.Views.LayoutElements"
+                                 xmlns:converters1="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Converters"
+                                 mc:Ignorable="d" 
+                                 d:DesignHeight="300" d:DesignWidth="300" x:Name="Root" d:DataContext="{d:DesignInstance layout:LiveStreamElementDataViewModel}">
+    <layoutElements:EditableLayoutElementBase.Resources>
+        <converters:ThumbnailHashToImageConverter x:Key="ThumbnailHashToImageConverter"/>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <converters1:ResourceFilenameToImageConverter x:Key="ResourceFilenameToImageConverter"/>
+        <converters:NotNullConverter x:Key="NotNullConverter" />
+    </layoutElements:EditableLayoutElementBase.Resources>
+    <Border BorderThickness="1">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource LayoutElementBorder}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowAdorner, ElementName=Root}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource LayoutElementAdorneredSelectedBackgroundBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource LayoutElementSelectedBorder}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/live_tool_44x44.png" 
+                   VerticalAlignment="Top" HorizontalAlignment="Left"
+                   Width="44" Height="44" 
+                   Visibility="{Binding PreviewImageHash, Converter={StaticResource StringToVisibilityConverter}}"/>
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Stretch" Value="Fill"/>
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Setter Property="Source" Value="{Binding Path=PreviewImageHash, Converter={StaticResource ThumbnailHashToImageConverter}}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding FallbackImage.Value, Converter={StaticResource NotNullConverter}}" Value="true">
+                                <Setter Property="Source" Value="{Binding Path=FallbackImage.Value, Converter={StaticResource ResourceFilenameToImageConverter}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Scaling.Value}" Value="{x:Static layout1:ElementScaling.Stretch}">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="Stretch" Value="Fill"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Scaling.Value}" Value="{x:Static layout1:ElementScaling.Scale}">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="Stretch" Value="Uniform"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Scaling.Value}" Value="{x:Static layout1:ElementScaling.Fixed}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Stretch" Value="None"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding PreviewImageHash}" Value="UriVideoPlaceholder">
+                                <Setter Property="Visibility" Value="Hidden"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xf152;" FontSize="72"
+                       FontFamily="/Gorba.Center.Media.Core;component/Resources/#FontAwesome">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PreviewImageHash}" Value="UriVideoPlaceholder">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </Border>
+</layoutElements:EditableLayoutElementBase>
+

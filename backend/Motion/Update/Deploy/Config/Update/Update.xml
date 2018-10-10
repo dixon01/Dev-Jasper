@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Update xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="file:///. Update.xsd">
+  <Agent Enabled="true">
+    <RestartApplications />
+  </Agent>
+  <Clients>
+    <USBUpdateClient Name="USB_E">
+      <RepositoryBasePath>D:\UpdateRoot\RepositoryDirectory\Update</RepositoryBasePath>
+      <USBDetectionTimeOut>PT3S</USBDetectionTimeOut>
+      <PollInterval>PT30S</PollInterval>
+    </USBUpdateClient>
+  </Clients>
+  <Providers>
+  </Providers>
+  <Visualization HideTimeout="PT30S">
+    <SplashScreen Enabled="true" />
+    <LED Enabled="true" DefaultFrequency="1.25" ErrorFrequency="5" />
+  </Visualization>
+</Update>

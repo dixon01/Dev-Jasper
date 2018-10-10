@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60C6BEB8-9BEE-4C77-A400-33C532614524}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.SystemManager.Core</RootNamespace>
+    <AssemblyName>Gorba.Motion.SystemManager.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__UseLuminatorTftDisplay</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLineParser">
+      <HintPath>..\..\..\..\3rdParty\CommandLineParser\2.6.0.2\net-20\CommandLineParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\3rdParty\Unity\v1.2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Hal\LuminatorHardwareAbstraction.cs" />
+    <Compile Include="SplashScreen\Form\LogoSplashScreenPart.FX20.cs">
+      <DependentUpon>LogoSplashScreenPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Form\ManagementSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\ShutDownInformationSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\ShutDownInformationSplashScreenPart.FX20.cs">
+      <DependentUpon>ShutDownInformationSplashScreenPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Form\SplashScreenForm.FX20.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\SplashScreenManager.FX20.cs">
+      <DependentUpon>SplashScreenManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Trigger\HotKeyTriggerHandler.FX20.cs" />
+    <Compile Include="SplashScreen\Trigger\MulticastCommandTriggerHandler.cs" />
+    <Compile Include="SystemManagerApplication.FX20.cs">
+      <DependentUpon>SystemManagerApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hal\GorbaHardwareAbstraction.FX20.cs" />
+    <Compile Include="Hal\HardwareAbstractionBase.cs" />
+    <Compile Include="Hal\HardwareAbstractionBase.FX20.cs">
+      <DependentUpon>HardwareAbstractionBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hal\MgiHardwareAbstraction.FX20.cs" />
+    <Compile Include="LaunchHelper.cs" />
+    <Compile Include="PopupBlocker.FX20.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashScreen\Form\ApplicationsSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\GioomSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\NetworkSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\TextSplashScreenPartBase.cs" />
+    <Compile Include="SplashScreen\Trigger\ApplicationStateChangeTriggerHandler.cs" />
+    <Compile Include="SplashScreen\Form\LogoSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Form\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Form\SplashScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen\Form\SplashScreenForm.Designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\SplashScreenHandler.cs" />
+    <Compile Include="SplashScreen\SplashScreenManager.cs" />
+    <Compile Include="SplashScreen\Form\SplashScreenPartBase.cs" />
+    <Compile Include="SplashScreen\Form\SplashScreenPartBase.FX20.cs">
+      <DependentUpon>SplashScreenPartBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Trigger\InputTriggerHandler.cs" />
+    <Compile Include="SplashScreen\Trigger\SystemBootTriggerHandler.cs" />
+    <Compile Include="SplashScreen\Trigger\SystemShutdownTriggerHandler.cs" />
+    <Compile Include="SplashScreen\Form\SystemSplashScreenPart.cs" />
+    <Compile Include="SplashScreen\Trigger\TimeoutTriggerHandler.cs" />
+    <Compile Include="SplashScreen\Trigger\TriggerHandlerBase.cs" />
+    <Compile Include="SystemManagerApplication.cs" />
+    <Compile Include="SystemManagerController.cs" />
+    <Compile Include="SystemManagerOptions.cs" />
+    <Compile Include="Watchdog\KontronWatchdogController.FX20.cs" />
+    <Compile Include="Watchdog\Port80WatchdogController.FX20.cs" />
+    <Compile Include="Watchdog\HardwareWatchdogControllerBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Kontron.Jida32\Kontron.Jida32.csproj">
+      <Project>{D1EE4794-32C2-4047-ACCA-457812A7FCC6}</Project>
+      <Name>Kontron.Jida32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj">
+      <Project>{E53548FE-1D9D-4A99-8FC0-F02B661D964F}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Persistence\Configuration.Persistence.csproj">
+      <Project>{0FA444B9-B876-47EB-A78D-BB4BEBC9740D}</Project>
+      <Name>Configuration.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\SystemManager\Configuration.SystemManager.csproj">
+      <Project>{A95FB6D7-9160-47C1-A80C-65C63AB38BDF}</Project>
+      <Name>Configuration.SystemManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7c6b5185-b035-465f-a760-7b7d45b3fbaa}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Alarming\Protocols.Alarming.csproj">
+      <Project>{0BE751C3-9AE0-4956-BE49-FD80E5DF29DC}</Project>
+      <Name>Protocols.Alarming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183B489-3AB4-4926-9B45-9FDDEADB9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Core\SystemManagement.Core.csproj">
+      <Project>{60c6beb8-cafe-ba5e-affe-33c532614524}</Project>
+      <Name>SystemManagement.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj">
+      <Project>{E11FBC4E-2EB6-461C-9310-094B6ADE9595}</Project>
+      <Name>SystemManagement.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Update\Source\Usb\Common.Update.Usb.csproj">
+      <Project>{C2D59B4D-2366-496D-AC39-DD795DEB64DB}</Project>
+      <Name>Common.Update.Usb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93AAE312-ADC9-4F65-BEAF-4266D171D348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Mgi\AtmelControl\Mgi.AtmelControl.csproj">
+      <Project>{365db5db-40ed-4418-b19b-286ccea083a1}</Project>
+      <Name>Mgi.AtmelControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Utility\Motion.Common.Utility.csproj">
+      <Project>{d0dbd79e-9637-4e45-948e-70e8f015295d}</Project>
+      <Name>Motion.Common.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Infomedia\Source\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="SplashScreen\Form\GorbaLogoTransparency.png" />
+    <Content Include="SplashScreen\Form\LuminatorTransparency.png" />
+    <Content Include="SystemManager.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SplashScreen\Form\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen\Form\SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

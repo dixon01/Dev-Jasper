@@ -1,0 +1,10 @@
+﻿<Window x:Class="Gorba.Center.Common.Wpf.Wizard.WizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wizard="http://schemas.actiprosoftware.com/winfx/xaml/wizard"
+        Title="{Binding Path=Title}" Height="480" Width="640" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+   <Grid>
+        <wizard:Wizard x:Name="Wizard" PageSequenceType="Stack" x:FieldModifier="public">
+        </wizard:Wizard>
+    </Grid>
+</Window>

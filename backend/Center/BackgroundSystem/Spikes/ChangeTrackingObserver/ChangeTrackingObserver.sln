@@ -1,0 +1,310 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "TestServer\TestServer.csproj", "{0A09171D-1E73-4204-B36D-C1199F93AA53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceModel", "..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj", "{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.Client", "..\..\..\Common\Source\Client\Center.Common.Client.csproj", "{5FC54EA9-187A-471E-889D-3D983E65B217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundSystem.Core", "..\..\Source\Core\BackgroundSystem.Core.csproj", "{D7418938-BA00-4E78-B57F-EE43C8914711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Update.ServiceModel", "..\..\..\..\Common\Update\Source\ServiceModel\Common.Update.ServiceModel.csproj", "{989648EE-7505-44B4-AF06-432554242964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Update", "..\..\..\..\Common\Configuration\Source\Update\Configuration.Update.csproj", "{E976240D-8A45-486D-B485-6D26AEF71A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundSystem.Data", "..\..\Source\Data\BackgroundSystem.Data.csproj", "{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceBus", "..\..\..\Common\Source\ServiceBus\Center.Common.ServiceBus.csproj", "{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{A5C64826-9DF6-4358-B103-7957B713C865}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundSystem.ConsoleHost", "..\..\Source\ConsoleHost\BackgroundSystem.ConsoleHost.csproj", "{EB870315-4C5D-4917-92E9-B15269340399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Client", "..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj", "{2183B489-3AB4-4926-9B45-9FDDEADB9811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Host", "..\..\..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj", "{E11FBC4E-2EB6-461C-9310-094B6ADE9595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.ServiceModel", "..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj", "{5BF74CBC-E88C-459E-B0DC-34069552A0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Messages", "..\..\..\..\Common\SystemManagement\Source\Messages\SystemManagement.Messages.csproj", "{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medi.Core", "..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj", "{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEditorClient", "TestEditorClient\TestEditorClient.csproj", "{3E410619-E4A5-4542-AFFB-23217164BF2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Win32", "..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj", "{817BB42A-324A-4243-9639-33C99F4F883C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundSystem.PowerShell", "..\..\Source\PowerShell\BackgroundSystem.PowerShell.csproj", "{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Center.Common.ServiceModel.Tests", "..\..\..\Common\Source\ServiceModel.Tests\Center.Common.ServiceModel.Tests.csproj", "{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 23
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TestServer\\TestServer.csproj
+		SccProjectName1 = TestServer
+		SccLocalPath1 = TestServer
+		SccProjectUniqueName2 = ..\\..\\..\\Common\\Source\\ServiceModel\\Center.Common.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName2 = ChangeTrackingObserver.sln
+		SccProjectName2 = ../../../Common/Source/ServiceModel
+		SccLocalPath2 = ..\\..\\..\\Common\\Source\\ServiceModel
+		SccProjectUniqueName3 = ..\\..\\..\\Common\\Source\\Client\\Center.Common.Client.csproj
+		SccProjectTopLevelParentUniqueName3 = ChangeTrackingObserver.sln
+		SccProjectName3 = ../../../Common/Source/Client
+		SccLocalPath3 = ..\\..\\..\\Common\\Source\\Client
+		SccProjectUniqueName4 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName4 = ChangeTrackingObserver.sln
+		SccProjectName4 = ../../../../Common/Configuration/Source/Core
+		SccLocalPath4 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName5 = ChangeTrackingObserver.sln
+		SccProjectName5 = ../../../../Common/Utility/Source/Compatibility
+		SccLocalPath5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName6 = ..\\..\\Source\\Core\\BackgroundSystem.Core.csproj
+		SccProjectTopLevelParentUniqueName6 = ChangeTrackingObserver.sln
+		SccProjectName6 = ../../Source/Core
+		SccLocalPath6 = ..\\..\\Source\\Core
+		SccProjectUniqueName7 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel\\Common.Update.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName7 = ChangeTrackingObserver.sln
+		SccProjectName7 = ../../../../Common/Update/Source/ServiceModel
+		SccLocalPath7 = ..\\..\\..\\..\\Common\\Update\\Source\\ServiceModel
+		SccProjectUniqueName8 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Update\\Configuration.Update.csproj
+		SccProjectTopLevelParentUniqueName8 = ChangeTrackingObserver.sln
+		SccProjectName8 = ../../../../Common/Configuration/Source/Update
+		SccLocalPath8 = ..\\..\\..\\..\\Common\\Configuration\\Source\\Update
+		SccProjectUniqueName9 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName9 = ChangeTrackingObserver.sln
+		SccProjectName9 = ../../../../Common/Utility/Source/Core
+		SccLocalPath9 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+		SccProjectUniqueName10 = ..\\..\\Source\\Data\\BackgroundSystem.Data.csproj
+		SccProjectTopLevelParentUniqueName10 = ChangeTrackingObserver.sln
+		SccProjectName10 = ../../Source/Data
+		SccLocalPath10 = ..\\..\\Source\\Data
+		SccProjectUniqueName11 = ..\\..\\..\\Common\\Source\\ServiceBus\\Center.Common.ServiceBus.csproj
+		SccProjectTopLevelParentUniqueName11 = ChangeTrackingObserver.sln
+		SccProjectName11 = ../../../Common/Source/ServiceBus
+		SccLocalPath11 = ..\\..\\..\\Common\\Source\\ServiceBus
+		SccProjectUniqueName12 = TestClient\\TestClient.csproj
+		SccProjectName12 = TestClient
+		SccLocalPath12 = TestClient
+		SccProjectUniqueName13 = ..\\..\\Source\\ConsoleHost\\BackgroundSystem.ConsoleHost.csproj
+		SccProjectTopLevelParentUniqueName13 = ChangeTrackingObserver.sln
+		SccProjectName13 = ../../Source/ConsoleHost
+		SccLocalPath13 = ..\\..\\Source\\ConsoleHost
+		SccProjectUniqueName14 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Client\\SystemManagement.Client.csproj
+		SccProjectTopLevelParentUniqueName14 = ChangeTrackingObserver.sln
+		SccProjectName14 = ../../../../Common/SystemManagement/Source/Client
+		SccLocalPath14 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Client
+		SccProjectUniqueName15 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Host\\SystemManagement.Host.csproj
+		SccProjectTopLevelParentUniqueName15 = ChangeTrackingObserver.sln
+		SccProjectName15 = ../../../../Common/SystemManagement/Source/Host
+		SccLocalPath15 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Host
+		SccProjectUniqueName16 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\ServiceModel\\SystemManagement.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName16 = ChangeTrackingObserver.sln
+		SccProjectName16 = ../../../../Common/SystemManagement/Source/ServiceModel
+		SccLocalPath16 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\ServiceModel
+		SccProjectUniqueName17 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Messages\\SystemManagement.Messages.csproj
+		SccProjectTopLevelParentUniqueName17 = ChangeTrackingObserver.sln
+		SccProjectName17 = ../../../../Common/SystemManagement/Source/Messages
+		SccLocalPath17 = ..\\..\\..\\..\\Common\\SystemManagement\\Source\\Messages
+		SccProjectUniqueName18 = ..\\..\\..\\..\\Common\\Medi\\Source\\Core\\Medi.Core.csproj
+		SccProjectTopLevelParentUniqueName18 = ChangeTrackingObserver.sln
+		SccProjectName18 = ../../../../Common/Medi/Source/Core
+		SccLocalPath18 = ..\\..\\..\\..\\Common\\Medi\\Source\\Core
+		SccProjectUniqueName19 = TestEditorClient\\TestEditorClient.csproj
+		SccProjectName19 = TestEditorClient
+		SccLocalPath19 = TestEditorClient
+		SccProjectUniqueName20 = ..\\..\\..\\..\\Common\\Utility\\Source\\Win32\\Utility.Win32.csproj
+		SccProjectTopLevelParentUniqueName20 = ChangeTrackingObserver.sln
+		SccProjectName20 = ../../../../Common/Utility/Source/Win32
+		SccLocalPath20 = ..\\..\\..\\..\\Common\\Utility\\Source\\Win32
+		SccProjectUniqueName21 = ..\\..\\Source\\PowerShell\\BackgroundSystem.PowerShell.csproj
+		SccProjectTopLevelParentUniqueName21 = ChangeTrackingObserver.sln
+		SccProjectName21 = ../../Source/PowerShell
+		SccLocalPath21 = ..\\..\\Source\\PowerShell
+		SccProjectUniqueName22 = ..\\..\\..\\Common\\Source\\ServiceModel.Tests\\Center.Common.ServiceModel.Tests.csproj
+		SccProjectTopLevelParentUniqueName22 = ChangeTrackingObserver.sln
+		SccProjectName22 = ../../../Common/Source/ServiceModel.Tests
+		SccLocalPath22 = ..\\..\\..\\Common\\Source\\ServiceModel.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A09171D-1E73-4204-B36D-C1199F93AA53}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC54EA9-187A-471E-889D-3D983E65B217}.Release|x86.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7418938-BA00-4E78-B57F-EE43C8914711}.Release|x86.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989648EE-7505-44B4-AF06-432554242964}.Release|x86.ActiveCfg = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E976240D-8A45-486D-B485-6D26AEF71A0C}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C64826-9DF6-4358-B103-7957B713C865}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB870315-4C5D-4917-92E9-B15269340399}.Release|x86.ActiveCfg = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|x86.ActiveCfg = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|x86.ActiveCfg = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.ActiveCfg = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.Build.0 = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.ActiveCfg = Release|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.Build.0 = Release|x86
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E410619-E4A5-4542-AFFB-23217164BF2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|x86.ActiveCfg = Release|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C98CA35-4D00-46FC-8C37-63B5C36E4C60} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{5FC54EA9-187A-471E-889D-3D983E65B217} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{D7418938-BA00-4E78-B57F-EE43C8914711} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{989648EE-7505-44B4-AF06-432554242964} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{E976240D-8A45-486D-B485-6D26AEF71A0C} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{3B8D7F5F-E79C-4539-8AD3-5FD94F549352} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{8C669C7C-1A25-41D4-9244-A8A6103DC4A2} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{EB870315-4C5D-4917-92E9-B15269340399} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{817BB42A-324A-4243-9639-33C99F4F883C} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{883688D5-5FDB-4EA6-8E35-5538DFE23B0B} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+		{F1CAA0B4-E2C8-4AAF-9737-F01EBC957159} = {AB675C66-7FE6-46FD-BB42-C41D0D61F9CF}
+	EndGlobalSection
+EndGlobal

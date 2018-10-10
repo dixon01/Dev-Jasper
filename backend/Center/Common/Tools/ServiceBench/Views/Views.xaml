@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Gorba.Center.Common.ServiceBench.ViewModels">
+    <DataTemplate DataType="{x:Type vm:Shell}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Service bench"/>
+            <TabControl Grid.Row="1" ItemsSource="{Binding Path=Tabs}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding Path=Header}"/>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:Operations}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Simple operations">
+                <UniformGrid>
+                    <Button Command="{Binding Path=AddCommand}" Content="Add"/>
+                    <Button Command="{Binding Path=GetAllCommand}" Content="Get all"/>
+                </UniformGrid>
+            </GroupBox>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Path=Items}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Id}"/>
+                    <DataGridTextColumn Binding="{Binding Path=Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

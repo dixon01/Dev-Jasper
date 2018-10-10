@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.AudioSkimmingElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Project"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="200" d:DataContext="{d:DesignInstance dataViewModels:ResourceInfoDataViewModel}"
+             Name="Root">
+    <UserControl.Resources>
+        <converters:FilenameToResourceFullFilenameConverter x:Key="FilenameToResourceFullFilenameConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <MediaElement VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      LoadedBehavior="Manual"
+                      UnloadedBehavior="Stop"
+                      Name="AudioElement"
+                      Visibility="Hidden"
+                      Source="{Binding Converter={StaticResource ResourceKey=FilenameToResourceFullFilenameConverter}, Path=Filename}"/>
+        <Grid Grid.Row="0" VerticalAlignment="Bottom" Margin="0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Slider Name="TimeLineSlider" Margin="3" ValueChanged="SliderValueChanged"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 3 0">
+                <TextBlock x:Name="CurrentTime" Text="{Binding ElementName=AudioElemet, Path=Position}" VerticalAlignment="Center"/>
+                <TextBlock Text=" / " VerticalAlignment="Center"/>
+                <TextBlock x:Name="Duration" Text="{Binding ElementName=AudioElemet, Path=Duration}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"  Margin="0" Click="OnPlayPressed">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource FlatIconButton}">
+                        <Setter Property="BorderBrush" Value="{StaticResource FlatImageButtonBackgroundColorBrush}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsPlaying, ElementName=Root}" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image  Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/play_dark_10x10.png" Width="10" Height="10"/>
+            </Button>
+            
+            <Button Grid.Column="1" Margin="0" Click= "OnPausePressed">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource FlatIconButton}">
+                        <Setter Property="BorderBrush" Value="{StaticResource FlatImageButtonBackgroundColorBrush}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsPaused, ElementName=Root}" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image  Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/pause_dark_10x10.png" Width="10" Height="10" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.Stages.UpdateGroupDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:update="clr-namespace:Gorba.Center.Admin.Core.DataViewModels.Update"
+             xmlns:widgets="clr-namespace:Gorba.Center.Admin.Core.Views.Widgets"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:core="clr-namespace:Gorba.Common.Utility.Core;assembly=Gorba.Common.Utility.Core"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:stages="clr-namespace:Gorba.Center.Admin.Core.Views.Stages"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance update:UpdateGroupReadOnlyDataViewModel}" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvBoolToVisibilityConverter"/>
+
+        <stages:HourIntervalFormatter x:Key="HourIntervalFormatter"/>
+
+        <DataTemplate x:Key="TimelineAnnotationTemplate">
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="Red" />
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <widgets:EntityCollectionWidget Grid.Column="0" DataContext="{Binding Units}"/>
+
+        <Border Grid.Column="1" BorderBrush="{StaticResource WidgetBorder}" BorderThickness="1" Margin="5">
+            <Grid Width="400" MinHeight="200" MaxHeight="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="{StaticResource WidgetHeaderBackground}" Padding="5"
+                        DataContext="{Binding UpdateParts}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="16" Height="16" VerticalAlignment="Center"
+                               Source="../../Resources/Icons/EntityTypes/EntityTypes_UpdatePart_16x16.png"/>
+
+                        <TextBlock Text="{Binding DisplayName}" Margin="5 0 0 0" VerticalAlignment="Center"
+                                   Foreground="{StaticResource WidgetHeaderForeground}"/>
+                        <TextBlock Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVisibilityConverter}}"
+                               Foreground="{StaticResource WidgetHeaderForeground}">
+                            <Run Text=" (" /><Run Text="{Binding Entities.Count, Mode=OneWay}" /><Run Text=")" />
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Background="{StaticResource WidgetBackground}" Padding="5">
+                    <telerik:RadTimeline x:Name="Timeline"
+                                         PeriodStart="{Binding UpdatePartsTimeline.StartDate, Mode=TwoWay}"
+                                         PeriodEnd="{Binding UpdatePartsTimeline.EndDate, Mode=TwoWay}"
+                                         VisiblePeriodStart="{Binding UpdatePartsTimeline.VisibleStartDate, Mode=TwoWay}"
+                                         VisiblePeriodEnd="{Binding UpdatePartsTimeline.VisibleEndDate, Mode=TwoWay}"
+                                         IsSelectionEnabled="True"
+                                         SelectionMode="Single"
+                                         StartPath="StartDate"
+                                         DurationPath="Duration"
+                                         GroupPath="Type"
+                                         GroupExpandMode="Multiple"
+                                         IsEnabled="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         ItemsSource="{Binding UpdatePartsTimeline.Parts}"
+                                         MaxZoomRange="365.00:00:00"
+                                         MinZoomRange="12:00:00"
+                                         SelectionChanged="TimelineOnSelectionChanged"
+                                         AnnotationStartPath="StartDate"
+                                         AnnotationContentTemplate="{StaticResource TimelineAnnotationTemplate}"
+                                         AnnotationsSource="{Binding UpdatePartsTimeline.Annotations}">
+                        <telerik:RadTimeline.Intervals>
+                            <telerik:HourInterval FormatterProvider="{StaticResource HourIntervalFormatter}" IntervalSpans="1,3,6,12" />
+                            <telerik:DayInterval />
+                            <telerik:WeekInterval />
+                            <telerik:MonthInterval IntervalSpans="1,3,6" />
+                            <telerik:YearInterval />
+                        </telerik:RadTimeline.Intervals>
+
+                        <telerik:RadTimeline.ToolTipTemplate>
+                            <DataTemplate>
+                                <telerik:RadToolTipContentView>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run Text="{Binding StartDate, Mode=OneWay}" />
+                                            <Run Text="-" />
+                                            <Run Text="{Binding EndDate, Mode=OneWay}" />
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding UpdatePart.Description, Mode=OneWay}" />
+                                    </StackPanel>
+                                </telerik:RadToolTipContentView>
+                            </DataTemplate>
+                        </telerik:RadTimeline.ToolTipTemplate>
+                    </telerik:RadTimeline>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

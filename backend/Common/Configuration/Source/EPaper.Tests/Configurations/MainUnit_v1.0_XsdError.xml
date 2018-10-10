@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MainUnit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="file:///. MainUnit.xsd" FirmwareHash="1acdd83ae662c3fa" AdditionalAttribute="SomeValue">
+</MainUnit>

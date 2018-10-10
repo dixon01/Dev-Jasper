@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Alarms" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Alarms" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" />
+  <xs:complexType name="ArrayOfAl">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Al" nillable="true" type="tns:Al" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAl" nillable="true" type="tns:ArrayOfAl" />
+  <xs:complexType name="Al">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlarmMessageId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Confirmation" nillable="true" type="tns:ConfirmationDetails" />
+      <xs:element minOccurs="0" name="DateReceived" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsConfirmed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Severity" type="tns:AlarmSeverity" />
+      <xs:element minOccurs="0" name="Type" type="tns:AlarmType" />
+      <xs:element minOccurs="0" name="UnconfirmedSince" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="Unit" nillable="true" type="q1:U" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Al" nillable="true" type="tns:Al" />
+  <xs:complexType name="ConfirmationDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="User" nillable="true" type="q2:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConfirmationDetails" nillable="true" type="tns:ConfirmationDetails" />
+  <xs:simpleType name="AlarmSeverity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Critical" />
+      <xs:enumeration value="AboveNormal" />
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="BelowNormal" />
+      <xs:enumeration value="Low" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AlarmSeverity" nillable="true" type="tns:AlarmSeverity" />
+  <xs:simpleType name="AlarmType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Major" />
+      <xs:enumeration value="Technical" />
+      <xs:enumeration value="Operational" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AlarmType" nillable="true" type="tns:AlarmType" />
+</xs:schema>

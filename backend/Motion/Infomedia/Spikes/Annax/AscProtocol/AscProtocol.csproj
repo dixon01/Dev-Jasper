@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{36D802E6-1F49-419D-84D8-FCCC9D32E59F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.Spikes.Annax.AscProtocol</RootNamespace>
+    <AssemblyName>Gorba.Motion.Infomedia.Spikes.Annax.AscProtocol</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\..\3rdParty\NLog\2.0.0.2000.netfx20\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationLayer.cs" />
+    <Compile Include="Commands\ClearAllCommand.cs" />
+    <Compile Include="Commands\CommandEventArgs.cs" />
+    <Compile Include="Commands\BaseAttr.cs" />
+    <Compile Include="Commands\BitmapCommand.cs" />
+    <Compile Include="Commands\ClearBitmapCommand.cs" />
+    <Compile Include="Commands\ClearWindowCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\DisplayAttr.cs" />
+    <Compile Include="Commands\DurationAttr.cs" />
+    <Compile Include="Commands\FontCommand.cs" />
+    <Compile Include="Commands\StatusRequest.cs" />
+    <Compile Include="Commands\StatusResponse.cs" />
+    <Compile Include="Commands\TextAttr.cs" />
+    <Compile Include="Commands\TextCommand.cs" />
+    <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="DataEventArgs.cs" />
+    <Compile Include="Fcs16.cs" />
+    <Compile Include="FrameReader.cs" />
+    <Compile Include="FrameWriter.cs" />
+    <Compile Include="IApplicationLayer.cs" />
+    <Compile Include="INetworkLayer.cs" />
+    <Compile Include="IPhysicalLayer.cs" />
+    <Compile Include="MacServiceType.cs" />
+    <Compile Include="AscNetworkLayer.cs" />
+    <Compile Include="NetworkServiceType.cs" />
+    <Compile Include="PhysicalLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

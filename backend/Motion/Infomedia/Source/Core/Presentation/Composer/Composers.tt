@@ -1,0 +1,396 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\Entities\Screen\ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+using Gorba.Common.Configuration.Infomedia.Layout;
+
+using Gorba.Motion.Infomedia.Entities;
+using Gorba.Motion.Infomedia.Entities.Screen;
+
+<#
+    var entitiesFile = @"..\..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(entitiesFile));
+    
+    var screenItemsFile = @"..\..\..\Entities\Screen\ScreenItems.xml";
+    this.screenItems = ScreenItems.LoadFrom(Host.ResolvePath(screenItemsFile));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Layout");
+
+    #>
+namespace Gorba.Motion.Infomedia.Core.Presentation.Composer
+{
+    public static class ComposerFactory
+    {
+        public static IComposer CreateComposer(IPresentationContext context, IComposer parent, ElementBase element)
+        {<#
+    // generate all classes in this namespace
+    foreach (var clazz in layoutNamespace.Classes)
+    {
+        var entity = clazz as ElementClass;
+        if (entity == null || entity.Name.Contains("Base") || !entity.Base.Contains("Base"))
+        {
+            continue;
+        }
+
+        var itemModification = this.screenItems.GetItem(clazz.Name);
+        if (itemModification != null && itemModification.Action == ItemAction.Remove)
+        {
+            continue;
+        }
+        
+        var composerClass = GetComposerClassName(entity.Name);
+        var elementClass = GetElementClassName(entity.Name);
+        #>
+
+            var elem<#= entity.Name #> = element as <#= elementClass #>;
+            if (elem<#= entity.Name #> != null)
+            {
+                return new <#= composerClass #>(context, parent, elem<#= entity.Name #>);
+            }
+        <#
+    }
+    #>
+    
+            throw new NotSupportedException(string.Format("Unsupported layout element {0}", element));
+        }
+    }
+
+    <#
+    // generate all classes in this namespace
+    foreach (var clazz in layoutNamespace.Classes)
+    {
+        this.GenerateClass(clazz);
+    }
+    #>
+
+}
+
+<#+
+private Entities entities;
+private ScreenItems screenItems;
+
+private void GenerateClass(Class clazz)
+{
+    var entity = clazz as ElementClass;
+    if (entity == null || string.IsNullOrEmpty(entity.Base) || !entity.Base.Contains("Base"))
+    {
+        // we ignore non-elements, the base class and special classes that inherit from another element
+        // (currently only AnalogClockHand)
+        return;
+    }
+
+    var itemModification = this.screenItems.GetItem(clazz.Name);
+    if (itemModification != null && itemModification.Action == ItemAction.Remove)
+    {
+        // remove all classes marked for removal
+        return;
+    }
+
+    // if a composer is "presentable", it has a ScreenItem assigned to it, otherwise not (e.g. Group is not presentable)
+    var presentable = itemModification == null || itemModification.Presentable;
+    var parentModification = this.screenItems.GetItem(entity.Base);
+    var parentPresentable = parentModification == null || parentModification.Presentable;
+    
+    var className = GetComposerClassName(entity.Name);
+    var inheritance = " : " + GetComposerClassName(entity.Base);
+    var isAbstract = entity.Name.Contains("Base");
+    var elementClass = GetElementClassName(entity.Name);
+    var itemClass = GetItemClassName(entity.Name);
+
+    var fullClassName = className;
+    var wheres = string.Empty;
+    if (isAbstract)
+    {
+        fullClassName += presentable ? "<TElement, TItem>" : "<TElement>";
+        inheritance += parentPresentable ? "<TElement, TItem>" : "<TElement>";
+        wheres = "\r\n        where TElement : " + elementClass;
+        if (presentable)
+        {
+            wheres += "\r\n        where TItem : " + itemClass + ", new()";
+        }
+    }
+    else
+    {
+        inheritance += "<" + elementClass;
+        if (parentPresentable)
+        {
+            inheritance += ", " + itemClass;
+        }
+
+        inheritance += ">";
+    }
+
+    if (presentable && !parentPresentable)
+    {
+        inheritance += ", IPresentableComposer";
+    }
+    #>
+
+    public <#= isAbstract ? "abstract" : "sealed" #> partial class <#= fullClassName #><#= inheritance #><#= wheres #>
+    {<#+
+    // create all dynamic property handler fields
+    foreach (var property in clazz.Properties)
+    {
+        var prop = property as Property;
+        if (prop != null && prop.Dynamic)
+        {#>
+
+        public DynamicPropertyHandler Handler<#= property.Name #> { get; private set; }<#+
+        }
+    }
+#>
+
+
+        public <#= className #>(IPresentationContext context, IComposer parent, <#= isAbstract ? "TElement" : elementClass #> element)
+            : base(context, parent, element)
+        {<#+
+
+    // initialize all dynamic property handlers
+    foreach (var property in clazz.Properties)
+    {
+        var prop = property as Property;
+        if (prop != null && prop.Dynamic)
+        {#>
+
+            this.Handler<#= property.Name #> = new DynamicPropertyHandler(element.<#= property.Name #>Property, element.<#= property.Name #>, context);
+            this.Handler<#= property.Name #>.ValueChanged += this.Handler<#= property.Name #>OnValueChanged;
+            <#+
+        }
+    }
+
+    if (!isAbstract && presentable)
+    {
+        #>
+        
+            this.InitializeItem();
+        <#+ 
+    }
+    #>
+
+            this.Initialize();<#+
+    if (!isAbstract)
+    {
+        // update should only be called for final classes, otherwise the item will not be initialized
+        #>
+
+            this.Update();<#+
+    }
+    #>
+
+        }
+    <#+
+    if (presentable && !parentPresentable)
+    {
+        // create the class members that are needed for the first presentable class in the hierarchy
+        #>
+        
+        public event EventHandler<AnimatedItemPropertyChangedEventArgs> ItemPropertyValueChanged;
+
+        public TItem Item { get; private set; }
+
+        ScreenItemBase IPresentableComposer.Item
+        {
+            get
+            {
+                return this.Item;
+            }
+        }
+        <#+
+    }
+    #>
+
+        public override void Dispose()
+        {<#+
+    // dispose all dynamic property handlers
+    foreach (var property in clazz.Properties)
+    {
+        var prop = property as Property;
+        if (prop != null && prop.Dynamic)
+        {#>
+
+            this.Handler<#= property.Name #>.ValueChanged -= this.Handler<#= property.Name #>OnValueChanged;
+            this.Handler<#= property.Name #>.Dispose();<#+
+        }
+    }
+    
+    if (presentable && !parentPresentable)
+    {
+        #>
+        
+            if (this.Item != null)
+            {
+                this.Item.PropertyValueChanged -= this.ItemOnPropertyValueChanged;
+            }
+        <#+ 
+    }
+    #>
+
+            this.Deinitialize();
+            base.Dispose();
+        }
+        <#+ 
+        
+
+    if (presentable && !parentPresentable)
+    {
+        #>
+        
+        protected virtual TItem InitializeItem()
+        {
+            if (this.Item != null)
+            {
+                this.Item.PropertyValueChanged -= this.ItemOnPropertyValueChanged;
+            }
+
+            var item = new TItem();<#+
+        this.GeneratePropertyAssignments(clazz);
+        #>
+
+            this.Item = item;
+			this.Item.ElementId = this.Element.Id;
+            this.PostInitializeItem();
+            this.Item.PropertyValueChanged += this.ItemOnPropertyValueChanged;
+            return item;
+        }
+
+        protected virtual void RaiseItemPropertyValueChanged(AnimatedItemPropertyChangedEventArgs e)
+        {
+            var handler = this.ItemPropertyValueChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        
+        private void ItemOnPropertyValueChanged(object sender, AnimatedPropertyChangedEventArgs e)
+        {
+            this.RaiseItemPropertyValueChanged(
+                new AnimatedItemPropertyChangedEventArgs(this.Item, e.PropertyName, e.Value, e.Animation));
+        }
+
+        partial void PostInitializeItem();
+        <#+
+    }
+    else if (!isAbstract && presentable)
+    {#>
+
+        protected override <#= itemClass #> InitializeItem()
+        {
+            var item = base.InitializeItem();<#+
+        this.GeneratePropertyAssignments(clazz);
+        #>
+
+            return item;
+        }
+        <#+
+    }
+    #>
+        
+        partial void Initialize();
+
+        partial void Update();
+
+        partial void Deinitialize();
+        <#+
+    // initialize all dynamic property handlers
+    foreach (var property in clazz.Properties)
+    {
+        var prop = property as Property;
+        if (prop != null && prop.Dynamic)
+        {#>
+
+        private void Handler<#= property.Name #>OnValueChanged(object sender, EventArgs args)
+        {
+            this.Update();
+        }
+        <#+
+        }
+    }
+    #>
+
+    }
+    <#+
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetComposerClassName(string className)
+{
+    return GetClassName(className, "Composer");
+}
+
+/// <summary>
+/// Creates the real element class name for an element.
+/// <summary>
+private static string GetElementClassName(string className)
+{
+    return GetClassName(className, "Element");
+}
+
+/// <summary>
+/// Creates the real screen item class name for an element.
+/// <summary>
+private static string GetItemClassName(string className)
+{
+    return GetClassName(className, "Item");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetClassName(string className, string category)
+{
+    return className.EndsWith("Base") ? className.Replace("Base", category + "Base") : className + category;
+}
+
+/// <summary>
+/// Generates the assignment of properties from the element to the item.
+/// <summary>
+private void GeneratePropertyAssignments(Class clazz)
+{
+    // initialize all static item properties
+    foreach (var property in clazz.Properties)
+    {
+        var prop = property as Property;
+        if (prop != null && prop.Dynamic)
+        {
+            continue;
+        }
+
+        var composite = property as CompositeProperty;
+        if (composite != null)
+        {
+            if (this.entities.GetClass(composite.Type) is ElementClass)
+            {
+                continue;
+            }
+        }
+        
+        var propModif = this.screenItems.GetProperty(clazz.Name, property.Name);
+        if (propModif != null && propModif.Action == PropertyAction.Remove)
+        {
+            continue;
+        }
+        #>
+
+            item.<#= property.Name #> = this.Element.<#= property.Name #>;<#+
+    }
+}
+#>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4ce006b0-f23f-411e-bf85-ba6d717fa6e4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/BackgroundSystem/UnitService.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="649c7fbe-d0ef-4e94-92e2-b0811dbe9aad" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="edefb534-79ea-4116-96f3-640ebac42276" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e0ac8533-4739-47c6-bd36-564ee9ffe1f1" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="c91ba034-cc4b-4b11-9346-e0ca5d5e72c5" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Roles.xsd" MetadataType="Schema" ID="8d291c4a-79a7-4cbd-a253-37f35bc6f4ac" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Units.xsd" MetadataType="Schema" ID="0b2e2de8-4717-4185-ab08-ef9c324823f4" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.xsd" MetadataType="Schema" ID="dde8fcaf-f09c-4341-8b02-5315fdc790c9" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c8cf8583-e096-48ae-9538-1d95ace3ffdc" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.Filters.xsd" MetadataType="Schema" ID="7f03ab10-65de-4e0d-a146-45b21121327b" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Alarms.xsd" MetadataType="Schema" ID="15a1b292-a7d6-4095-9b8e-425df57e6636" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Itcs.xsd" MetadataType="Schema" ID="f0eba7ad-47e6-450d-b8bb-a9cc71f9acbb" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Activities.xsd" MetadataType="Schema" ID="7eaf72a7-51c0-4c9c-ba0f-80e51c5c7677" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Operations.xsd" MetadataType="Schema" ID="97949261-3b61-4e75-aa53-a5ab9470097d" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+    <MetadataFile FileName="Gorba.Center.Common.ServiceModel.DTO.Realtime.xsd" MetadataType="Schema" ID="ff234da9-08b6-410e-bdee-b5ab1a9f1f86" SourceId="1" SourceUrl="http://localhost/BackgroundSystem/UnitService.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<InfomediaTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="2.0" Created="2016-08-12 14:13:38">
+  
+    <PhysicalScreen Name="1366x768" Type="TFT" Width="1366" Height="768" />
+ 
+</InfomediaTest>

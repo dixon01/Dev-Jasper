@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.ReusableEntitySelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:extensions="clr-namespace:Gorba.Center.Media.Core.Extensions"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             mc:Ignorable="d" Name="Root"
+             d:DesignHeight="300" d:DesignWidth="400" MouseDown="OnWindowMouseDown">
+    <UserControl.Resources>
+        <converters:EqualsConverter x:Key="EqualsConverter"/>
+        <converters:NotZeroConverter x:Key="NotZeroConverter" />
+
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}">
+
+                                <ContentPresenter ContentSource="Header"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            </Border>
+
+                            <ItemsPresenter Grid.Row="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Delete" Command="{Binding Path=DeleteEntity, ElementName=Root}" CommandParameter="{Binding ElementName=Root, Path=SelectedEntity}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/> <!-- Hidden Layout Library -->
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="20 15 0 0" Foreground="{StaticResource LayoutNavigationDialogTitleColorBrush}"
+                   Text="{Binding ElementName=Root, Path=LeftHandTitle}" FontWeight="Bold" FontFamily="/Gorba.Center.Media.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"
+                   FontSize="14" />
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20 15 0 0" Foreground="{StaticResource LayoutNavigationDialogTitleColorBrush}"
+                   Text="{Binding ElementName=Root, Path=RightHandTitle}" FontWeight="Bold" FontFamily="/Gorba.Center.Media.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"
+                   FontSize="14" />
+
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" BorderThickness="0 0 1 0"
+                Margin="0 5 0 5"
+                BorderBrush="{StaticResource ReusableEntitySelectorBorderColorBrush}">
+        </Border>
+
+        <TreeView Name="EntitiesTreeView" Grid.Column="0" Grid.Row="1" Margin="20 0 10 10" ItemsSource="{Binding ElementName=Root, Path=PreviouslyDefinedEntities}"
+                  BorderThickness="0" ItemTemplate="{Binding ElementName=Root, Path=PreviouslyDefinedEntitiesTemplate}">
+        </TreeView>
+
+        <GridSplitter Width="3" Grid.Column="0" Grid.Row="1"/>
+
+        <controls:ReusableList Grid.Column="1" Grid.Row="1" Margin="20 30 10 10" Focusable="True" x:Name="EntitiesGrid"
+                               NewButtonText="{Binding ElementName=Root, Path=NewButtonText}"
+                               CreateNewEntity="{Binding ElementName=Root, Path=CreateNewEntity, Mode=TwoWay}"
+                               DeleteEntity="{Binding ElementName=Root, Path=DeleteEntity}"
+                               ChooseEntity="{Binding ElementName=Root, Path=ChooseEntity}"
+                               SelectedEntity="{Binding ElementName=Root, Path=SelectedEntity, Mode=TwoWay}"
+                               Entities="{Binding ElementName=Root, Path=Entities}"
+                               CloneEntity="{Binding ElementName=Root, Path=CloneEntity}"
+                               CloneButtonText="{Binding ElementName=Root, Path=CloneButtonText}"
+                               RemoveButtonText="{Binding ElementName=Root, Path=RemoveButtonText}"
+                               RenameButtonText="{Binding ElementName=Root, Path=RenameButtonText}"
+                               RenameEntity="{Binding ElementName=Root, Path=RenameEntity}"
+                               RadioButtonMouseDoubleClicked="OnRadioButtonDoubleClick"
+                               UseOneClickSelection="True"/>
+        
+    </Grid>
+</UserControl>

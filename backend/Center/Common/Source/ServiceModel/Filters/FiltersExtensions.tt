@@ -1,0 +1,361 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name).OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).OrderBy(entity => entity.Name);
+    foreach (var entity in entities)
+    {
+        this.entityKeyTypes.Add(entity.Name, entity.IdPropertyType);
+        this.entityKeyTypes.Add(entity.Partition.Name + "." + entity.Name, entity.IdPropertyType);
+    }
+#>
+namespace Gorba.Center.Common.ServiceModel.Filters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Runtime.Serialization;
+
+    using Filters;
+    
+    using Gorba.Center.Common.ServiceModel;
+<#
+    foreach (var partition in partitions)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    }
+
+    foreach (var partition in partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}<#+
+    private readonly Dictionary<string, string> entityKeyTypes = new Dictionary<string, string>();
+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.OrderBy(entity => entity.Name).ToList();
+#>
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+
+<#+
+        foreach (var entity in entities)
+        {
+            this.WriteEntity(entity);
+        }
+#>
+    }
+<#+
+    }
+    
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var idType = entity.IdPropertyType == "int" ? "Int32" : entity.IdPropertyType;
+
+        var comparisonOperatorType = idType + "Comparison";
+#>
+        public static class <#= entity.Name #>FilterExtensions
+        {
+            public static <#= entity.Name #>Filter WithId(this <#= entity.Name #>Filter filter, <#= idType #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.Id = new <#= entity.Name #>Filter.IdPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+            
+            public static <#= entity.Name #>Query WithId(this <#= entity.Name #>Query filter, <#= idType #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.Id = new <#= entity.Name #>Filter.IdPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+
+            public static <#= entity.Name #>Filter WithCreatedOn(this <#= entity.Name #>Filter filter, DateTime value, DateTimeComparison comparison = DateTimeComparison.ExactMatch)
+            {
+                filter.CreatedOn = new <#= entity.Name #>Filter.CreatedOnPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= entity.Name #>Query WithCreatedOn(this <#= entity.Name #>Query filter, DateTime value, DateTimeComparison comparison = DateTimeComparison.ExactMatch)
+            {
+                filter.CreatedOn = new <#= entity.Name #>Filter.CreatedOnPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= entity.Name #>Filter WithLastModifiedOn(this <#= entity.Name #>Filter filter, DateTime? value, NullableDateTimeComparison comparison = NullableDateTimeComparison.ExactMatch)
+            {
+                filter.LastModifiedOn = new <#= entity.Name #>Filter.LastModifiedOnPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= entity.Name #>Query WithLastModifiedOn(this <#= entity.Name #>Query filter, DateTime? value, NullableDateTimeComparison comparison = NullableDateTimeComparison.ExactMatch)
+            {
+                filter.LastModifiedOn = new <#= entity.Name #>Filter.LastModifiedOnPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= entity.Name #>Filter WithVersion(this <#= entity.Name #>Filter filter, int value, Int32Comparison comparison = Int32Comparison.ExactMatch)
+            {
+                filter.Version = new <#= entity.Name #>Filter.VersionPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= entity.Name #>Query WithVersion(this <#= entity.Name #>Query filter, int value, Int32Comparison comparison = Int32Comparison.ExactMatch)
+            {
+                filter.Version = new <#= entity.Name #>Filter.VersionPropertyValueFilter
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+<#+
+        }
+
+        var valueProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+            .OrderBy(property => property.Name).ToList();
+            
+        var xmlProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized)
+            .OrderBy(property => property.Name).ToList();
+            
+        var enumProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Enumeration)
+            .OrderBy(property => property.Name).ToList();
+
+        var referenceProperties = entity.Properties
+            .OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference)
+            .OrderBy(property => property.Name).ToList();
+
+        var collectionProperties = entity.Properties
+            .OfType<EntitySpace.CollectionProperty>()
+            .OrderBy(property => property.Name).ToList();
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceProperty(property);
+            this.WriteIncludeReference(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteIncludeReference(property);
+        }
+
+        foreach (var property in enumProperties)
+        {
+            this.WriteEnumProperty(property);
+        }
+
+        foreach (var property in valueProperties)
+        {
+            this.WriteProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlProperty(property);
+        }
+#>
+        }
+
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {
+        var filterType = property.Entity.Name + "Filter." + property.Name + "PropertyValueFilter";
+        var comparisonOperatorType = property.Type.GetPropertyValueName() + "Comparison";
+#>
+
+            public static <#= property.Entity.Name #>Filter With<#= property.Name #>(this <#= property.Entity.Name #>Filter filter, <#= property.Type #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.<#= property.Name #> = new <#= filterType #>
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= property.Entity.Name #>Query With<#= property.Name #>(this <#= property.Entity.Name #>Query filter, <#= property.Type #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.<#= property.Name #> = new <#= filterType #>
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+<#+
+    }
+
+    private void WriteXmlProperty(EntitySpace.Property property)
+    {
+#>
+
+            public static <#= property.Entity.Name #>Filter Include<#= property.Name #>(this <#= property.Entity.Name #>Filter filter)
+            {
+                filter.Include<#= property.Name #> = true;
+                return filter;
+            }
+
+            public static <#= property.Entity.Name #>Query Include<#= property.Name #>(this <#= property.Entity.Name #>Query query)
+            {
+                query.Include<#= property.Name #> = true;
+                return query;
+            }
+<#+
+    }
+
+    private void WriteEnumProperty(EntitySpace.Property property)
+    {
+        var filterType = property.Entity.Name + "Filter." + property.Name + "PropertyValueFilter";
+        var comparisonOperatorType = "EnumComparison";
+#>
+
+            public static <#= property.Entity.Name #>Filter With<#= property.Name #>(this <#= property.Entity.Name #>Filter filter, <#= property.Type #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.<#= property.Name #> = new <#= filterType #>
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+
+            public static <#= property.Entity.Name #>Query With<#= property.Name #>(this <#= property.Entity.Name #>Query filter, <#= property.Type #> value, <#= comparisonOperatorType #> comparison = <#= comparisonOperatorType #>.ExactMatch)
+            {
+                filter.<#= property.Name #> = new <#= filterType #>
+                {
+                    Comparison = comparison,
+                    Value = value
+                };
+                return filter;
+            }
+<#+
+    }
+
+    private void WriteReferenceProperty(EntitySpace.Property property)
+    {
+        var propertyType = "Gorba.Center.Common.ServiceModel.";
+        if (property.Type.IndexOf('.') < 0)
+        {
+            propertyType += property.Entity.Partition.Name + ".";
+        }
+
+        propertyType += property.Type;
+#>
+
+            public static <#= property.Entity.Name #>Filter With<#= property.Name #>(
+                this <#= property.Entity.Name #>Filter filter, <#= propertyType #> value)
+            {
+                return filter.Include<#= property.Name #>(<#= property.Type #>Filter.Create().WithId(value.Id));
+            }
+
+            public static <#= property.Entity.Name #>Query With<#= property.Name #>(
+                this <#= property.Entity.Name #>Query filter, <#= propertyType #> value)
+            {
+                return filter.Include<#= property.Name #>(<#= property.Type #>Filter.Create().WithId(value.Id));
+            }
+<#+
+    }
+
+    private void WriteIncludeReference(EntitySpace.Property property)
+    {#>
+
+            public static <#= property.Entity.Name #>Filter Include<#= property.Name #>(
+                this <#= property.Entity.Name #>Filter filter,
+                <#= property.Type #>Filter filter<#= property.Name #> = null)
+            {
+                filter.<#= property.Name #> = filter<#= property.Name #> ?? <#= property.Type #>Filter.Create();
+                return filter;
+            }
+
+            public static <#= property.Entity.Name #>Query Include<#= property.Name #>(
+                this <#= property.Entity.Name #>Query filter,
+                <#= property.Type #>Filter filter<#= property.Name #> = null)
+            {
+                filter.<#= property.Name #> = filter<#= property.Name #> ?? <#= property.Type #>Filter.Create();
+                return filter;
+            }
+<#+
+    }
+
+    private void WriteIncludeReference(EntitySpace.CollectionProperty property)
+    {#>
+
+            public static <#= property.Entity.Name #>Filter Include<#= property.Name #>(
+                this <#= property.Entity.Name #>Filter filter,
+                <#= property.ItemType #>Filter filter<#= property.Name #> = null)
+            {
+                if (filter<#= property.Name #> != null)
+                {
+                    throw new NotSupportedException("Filtering on collection properties is not yet supported");
+                }
+
+                filter.<#= property.Name #> = <#= property.ItemType #>Filter.Create();
+                return filter;
+            }
+
+            public static <#= property.Entity.Name #>Query Include<#= property.Name #>(
+                this <#= property.Entity.Name #>Query filter,
+                <#= property.ItemType #>Filter filter<#= property.Name #> = null)
+            {
+                filter.<#= property.Name #> = filter<#= property.Name #> ?? <#= property.ItemType #>Filter.Create();
+                return filter;
+            }
+<#+
+    }
+#>

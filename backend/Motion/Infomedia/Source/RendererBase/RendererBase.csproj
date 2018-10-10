@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{646028B8-57A6-4017-BEE2-0064B2F78B0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Infomedia.RendererBase</RootNamespace>
+    <AssemblyName>Gorba.Motion.Infomedia.RendererBase</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Engine\Engines.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Engines.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Engine\IIncludeRenderEngine.cs" />
+    <Compile Include="Engine\IRenderEngine.cs" />
+    <Compile Include="IRenderContext.cs" />
+    <Compile Include="Layouting\FixedLayoutEngine.cs" />
+    <Compile Include="Layouting\ILayoutItem.cs" />
+    <Compile Include="Layouting\ISplittable.cs" />
+    <Compile Include="Layouting\LayoutEngineBase.cs" />
+    <Compile Include="Layouting\LayoutLine.cs" />
+    <Compile Include="Layouting\LayoutManager.cs" />
+    <Compile Include="Layouting\ScalingLayoutEngine.cs" />
+    <Compile Include="Layouting\WrappingLayoutEngine.cs" />
+    <Compile Include="Manager\AnalogClockHandRenderManager.cs" />
+    <Compile Include="Manager\Animation\AlphaAnimator.cs" />
+    <Compile Include="Manager\AnalogClockRenderManager.cs" />
+    <Compile Include="Manager\DrawableRenderManagerBase.cs" />
+    <Compile Include="Manager\PlaybackRenderManagerBase.cs" />
+    <Compile Include="Manager\RenderManagerList.cs" />
+    <Compile Include="Manager\Animation\DualValueAnimatorStrategy.cs" />
+    <Compile Include="Manager\GraphicalRenderManagerBase.cs" />
+    <Compile Include="Manager\IScreenItemRenderManager.cs" />
+    <Compile Include="Manager\IncludeRenderManager.cs" />
+    <Compile Include="Manager\RenderManagerBase.cs" />
+    <Compile Include="Manager\RenderManagers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenderManagers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RootRenderManager.cs" />
+    <Compile Include="Manager\ScreenItemRenderManagerBase.cs" />
+    <Compile Include="Manager\ScreenRootRenderManager.cs" />
+    <Compile Include="Manager\Animation\SingleValueAnimatorStrategy.cs" />
+    <Compile Include="Manager\Animation\ValueAnimator.cs" />
+    <Compile Include="Manager\VideoRenderManager.cs" />
+    <Compile Include="RenderHelper.cs" />
+    <Compile Include="RenderManagerFactoryBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderManagerFactoryBase.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenderManagerFactoryBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Text\AlternationList.cs" />
+    <Compile Include="Text\FormattedText.cs" />
+    <Compile Include="Text\FormattedTextLine.cs" />
+    <Compile Include="Text\IImagePart.cs" />
+    <Compile Include="Text\IPart.cs" />
+    <Compile Include="Text\ITextPart.cs" />
+    <Compile Include="Text\IVideoPart.cs" />
+    <Compile Include="Text\SimpleImagePart.cs" />
+    <Compile Include="Text\SimplePartBase.cs" />
+    <Compile Include="Text\SimpleTextFactory.cs" />
+    <Compile Include="Text\SimpleTextPart.cs" />
+    <Compile Include="Text\SimpleTimePart.cs" />
+    <Compile Include="Text\SimpleVideoPart.cs" />
+    <Compile Include="Text\TextFactoryBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Configuration\Source\Infomedia\Configuration.Infomedia.csproj">
+      <Project>{9411DF24-9043-480A-A8F4-F051F3253E2F}</Project>
+      <Name>Configuration.Infomedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BbCode\BbCode.csproj">
+      <Project>{D9E310CB-7DB7-46D2-8F0D-8A799660A106}</Project>
+      <Name>BbCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Infomedia.Entities.csproj">
+      <Project>{E8E7FA36-2709-4F9D-B2B9-A3F24B7D3578}</Project>
+      <Name>Infomedia.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="All Classes.cd" />
+    <None Include="Engine\Engines.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Engines.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Manager\RenderManagers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RenderManagers.generated.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="RenderManagerFactoryBase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RenderManagerFactoryBase.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.AnalogClockItem" Collapsed="true">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAABAAAAACIAAAABAAAAABA=</HashCode>
+      <FileName>Screen\AnalogClockItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ImageItem" Collapsed="true">
+    <Position X="1" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAABAAAEAQAAEAAAAAAQAAAEAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Screen\ImageItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ImageListItem" Collapsed="true">
+    <Position X="9" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAABBAAAACAAAAJgEAEAAhAEAAAAAAAAABA=</HashCode>
+      <FileName>Screen\ImageListItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.DrawableItemBase" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAE=</HashCode>
+      <FileName>Screen\DrawableItemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.IncludeItem" Collapsed="true">
+    <Position X="11" Y="7.25" Width="1.5" />
+    <AssociationLine Name="Include" Type="Gorba.Motion.Infomedia.Entities.Screen.RootItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.688" Y="7.941" />
+        <Point X="11.688" Y="8.316" />
+        <Point X="13" Y="8.316" />
+        <Point X="13" Y="3.941" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAMAAAACAABAAEAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Screen\IncludeItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Include" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ItemBase" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAAABAAAAABAAEAQIAAAAAAAAAAAJA=</HashCode>
+      <FileName>Screen\ItemBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.RootItem" Collapsed="true">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAACAAEAAAAAEABAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Screen\RootItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.TextItem" Collapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAACACAAAAAAAEAoAAAAIAgAUAAAAMIAAACAACAAA=</HashCode>
+      <FileName>Screen\TextItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.VideoItem" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEABAAEAAAAAAAAAAEAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Screen\VideoItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.GraphicalItemBase" Collapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAQAQAAAAEAAAAEAAAAIAABgCAAAYAA=</HashCode>
+      <FileName>Screen\GraphicalItemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ScreenItemBase" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Screen\ScreenItemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ItemUpdate" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAgAQAgAAA=</HashCode>
+      <FileName>Screen\ItemUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.Entities.Screen.ScreenRoot" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAEAAAAAAABAAEAAAAIAAAACAAAABA=</HashCode>
+      <FileName>Screen\ScreenRoot.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Root" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

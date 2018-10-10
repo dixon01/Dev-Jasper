@@ -1,0 +1,94 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@".\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).ToList();
+#>
+namespace Gorba.Center.Common.ServiceModel
+{
+    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.Threading.Tasks;
+
+    using Filters;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WriteUsing(partition);
+    }
+
+    foreach (var partition in partitions)
+    {
+        this.WriteFiltersUsing(partition);
+    }
+
+    foreach (var entity in entities)
+    {
+        this.WriteDataServiceContract(entity);
+    }
+#>
+}<#+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteFiltersUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteDataServiceContract(EntitySpace.Entity entity)
+    {
+#>
+
+    [ServiceContract]
+    public partial interface I<#= entity.Name #>DataService
+    {
+        [OperationContract]
+        Task<<#= entity.Name #>> AddAsync(<#= entity.Name #> entity);
+<#+
+        if (!entity.HasChangeTracking)
+        {
+            #>
+            
+        [OperationContract]
+        Task AddRangeAsync(IEnumerable<<#= entity.Name #>> entities);
+            
+        [OperationContract(Name = "DeleteByFilter")]
+        Task<int> DeleteAsync(<#= entity.Name #>Filter filter);
+<#+
+        }
+#>
+
+        [OperationContract]
+        Task DeleteAsync(<#= entity.Name #> entity);
+
+        [OperationContract]
+        Task<<#= entity.Name #>> GetAsync(<#= entity.IdPropertyType #> id);
+
+        [OperationContract]
+        Task<IEnumerable<<#= entity.Name #>>> QueryAsync(<#= entity.Name #>Query query = null);
+
+        [OperationContract]
+        Task<int> CountAsync(<#= entity.Name #>Query query = null);
+
+        [OperationContract]
+        Task<<#= entity.Name #>> UpdateAsync(<#= entity.Name #> entity);
+    }
+<#+
+    }
+#>

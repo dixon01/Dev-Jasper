@@ -1,0 +1,83 @@
+﻿@using System.Linq
+@model Gorba.Center.Portal.Host.Middlewares.PageModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - iCenter Portal</title>
+    {Meta}
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">icenter Portal</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/About">About</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+                {Login}
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        <h2>System requirements on customer side</h2>
+        <div><strong>Use Only <mark>Internet Explorer</mark> to Install the Below Applications</strong></div>
+        <div>The following software must be installed on customer's machines before proceeding with download of all applications</div>
+
+        
+        <ul>
+    <li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=42642">.NET 4.5.2  (https://www.microsoft.com/en-us/download/details.aspx?id=42642)</a></li>
+</ul>
+<h2>Additional icenter.media prerequisites</h2>
+<div>The following software must be installed on customer's machines before proceeding with download of icenter.Media application</div>
+<ul>
+    <li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=8109">DirectX 9c End-User Runtimes (June 2010) (https://www.microsoft.com/en-us/download/details.aspx?id=8109)</a></li>
+</ul>
+
+
+        <h2>Applications</h2>
+        @if (this.Model.CenterApplications.Any())
+        {
+            <ul>
+              
+                @foreach (var application in this.Model.CenterApplications)
+                {
+                    <li><a href="/ClickOnce/@(application.Path)/icenter.@(application.Key).application">@(application.DisplayName)</a></li>
+                }
+               
+                <div>
+                    <li><a href="/ClickOnce/assetspackager/Luminator.Gui.AssetPackager.application">  Assets Packager </a></li>
+                </div>
+               
+               
+            </ul>
+        }
+        else
+        {
+            <div>No application is available</div>
+        }
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2016 - Luminator Technology Group</p>
+        </footer>
+    </div>
+
+    
+</body>
+</html>

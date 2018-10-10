@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Gorba.Center.Media.Core.Views.MainMenu.SaveAsScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+             xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:client="clr-namespace:Gorba.Center.Common.Wpf.Client;assembly=Gorba.Center.Common.Wpf.Client"
+             mc:Ignorable="d" 
+             x:Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModels:SaveAsScreenViewModel}">
+    <UserControl.Resources>
+        <CollectionViewSource Source="{Binding Shell.MediaApplicationState.AuthorizedTenants}" Filter="FilterTenantsSource" x:Key="TenantsViewSource" />
+    </UserControl.Resources>
+    <Grid Margin="8 30 8 8">
+        <Grid.Resources>
+            <Style TargetType="TextBox" x:Key="TextBoxWithValidation" BasedOn="{StaticResource MediaTextBoxStyle}">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static resources:MediaStrings.MainMenu_SaveAsTenantSelection}" Margin="0 0 5 5"/>
+        <telerik:RadComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Source={StaticResource TenantsViewSource}}" DisplayMemberPath="Name" 
+                             SelectedItem="{Binding SelectedTenant}" x:Name="TenantComboBox" Margin="0 0 0 5"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static resources:MediaStrings.NewMenu_Name}" Margin="0 0 5 5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 Style="{StaticResource TextBoxWithValidation}" Margin="0 0 0 5"  KeyUp="OnKeyUpHandleEnter"
+                 x:Name="ProjectnameTextBox"/>
+        <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static resources:MediaStrings.NewMenu_Description}" KeyUp="OnKeyUpHandleEnter" Margin="0 0 5 5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}" Style="{StaticResource TextBoxWithValidation}" MinLines="2" Margin="0 0 5 5"  KeyUp="OnKeyUpHandleEnter"/>-->
+        
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}">
+            <Button Style="{StaticResource FlatHighlightButton}"
+                        MinWidth="70" HorizontalAlignment="Right" Margin="0 5 0 0"
+                        Content="{x:Static client:Strings.CheckInDialog_Checkin}"
+                        Command="{Binding SaveCommandWrapper, ElementName=Root}" />
+        </Border>
+    </Grid>
+</UserControl>

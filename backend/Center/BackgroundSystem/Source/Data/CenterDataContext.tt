@@ -1,0 +1,73 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@".\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities);
+#>
+namespace Gorba.Center.BackgroundSystem.Data
+{
+    using System.Data.Entity;
+
+<#
+    foreach (var partition in partitions)
+    {
+        this.WriteUsing(partition);
+    }
+#>
+
+    public partial class CenterDataContext : DbContext
+    {<#
+    foreach (var entity in entities)
+    {
+        this.WriteEntity(entity);
+    }
+#>
+
+        private void DisableReferenceCascadeDelete(DbModelBuilder modelBuilder)
+        {<#
+    foreach (var entity in entities)
+    {
+        foreach (
+            var property in
+                entity.Properties.OfType<EntitySpace.Property>()
+                    .Where(p => p.PropertyType == EntitySpace.PropertyType.Reference && p.IsRequired))
+        {#>
+
+            // <#= entity.Name #>.<#= property.Name #>
+            modelBuilder.Entity<<#= entity.Name #>>()
+                .HasRequired(e => e.<#= property.Name #>)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+<#
+        }
+    }
+#>
+        }
+    }
+}<#+
+    private PluralizationService pluralizer =
+        PluralizationService.CreateService(System.Globalization.CultureInfo.GetCultureInfo("en-us"));
+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.BackgroundSystem.Data.Model.<#= partition.Name #>;
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity)
+    {#>
+
+        public IDbSet<<#= entity.Name #>> <#= this.pluralizer.Pluralize(entity.Name) #> { get; set; }
+<#+
+    }
+#>

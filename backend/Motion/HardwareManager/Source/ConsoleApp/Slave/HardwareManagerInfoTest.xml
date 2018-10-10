@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HardwareManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BroadcastTimeChanges>true</BroadcastTimeChanges>
+  <Mgi Enabled="false">
+    <PollingInterval>PT0.2S</PollingInterval>
+    <GPIO />
+    <DviLevelShifters />
+    <Transceivers />
+    <DefaultBacklightValue>-1</DefaultBacklightValue>
+  </Mgi>
+  <GPS>
+    <ConnectionType>GpsPilot</ConnectionType>
+  </GPS>
+  <SNTP Enabled="false" Version="3" UpdateInterval="PT23H59M59.999S" />
+  <VDV301 ValidateHttpRequests="false" ValidateHttpResponses="false" VerifyVersion="false" Enabled="false" DeviceClass="InteriorDisplay">
+    <TimeSync Enabled="false" Version="3" />
+  </VDV301>
+  <Settings>
+    <Setting>
+      <Conditions />
+      <HostnameSource>MacAddress</HostnameSource>
+      <TimeZone>Central Standard Time</TimeZone>
+      <IPAddress>192.168.135.8</IPAddress>
+      <SubnetMask>255.255.255.224</SubnetMask>
+      <Gateway>192.168.135.1</Gateway>
+      <DNS>10.210.0.29</DNS>
+      <DNS>10.210.0.28</DNS>
+      <Display Mode="Clone">
+        <Screens>
+          <Screen Width="1366" Height="768" Orientation="LandscapeFlipped" IsMainDisplay="true" />
+        </Screens>
+      </Display>
+    </Setting>
+  </Settings>
+</HardwareManager>

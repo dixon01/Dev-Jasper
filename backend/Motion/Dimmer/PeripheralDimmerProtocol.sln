@@ -1,0 +1,249 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luminator.PeripheralDimmer", "Source\PeripheralDimmerProtocol\Luminator.PeripheralDimmer\Luminator.PeripheralDimmer.csproj", "{7F772AA4-1766-44FF-86ED-0D6D9F499724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luminator.PeripheralDimmerProtocol.Test", "Source\Test\PeripheralDimmerProtocol.Test\Luminator.PeripheralDimmerProtocol.Test.csproj", "{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luminator.PeripheralDimmer.Processor", "Source\PeripheralDimmerProtocol\Luminator.PeripheralDimmer.Processor\Luminator.PeripheralDimmer.Processor.csproj", "{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Host", "..\..\Common\SystemManagement\Source\Host\SystemManagement.Host.csproj", "{E11FBC4E-2EB6-461C-9310-094B6ADE9595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medi.Core", "..\..\Common\Medi\Source\Core\Medi.Core.csproj", "{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "..\..\Common\Configuration\Source\Core\Configuration.Core.csproj", "{E53548FE-1D9D-4A99-8FC0-F02B661D964F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Win32", "..\..\Common\Utility\Source\Win32\Utility.Win32.csproj", "{817BB42A-324A-4243-9639-33C99F4F883C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.OSWrappers", "..\..\Common\Utility\Source\OSWrappers\Utility.OSWrappers.csproj", "{5202B147-B5CB-49D2-AF14-F3887E2210B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.ServiceModel", "..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj", "{5BF74CBC-E88C-459E-B0DC-34069552A0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Messages", "..\..\Common\SystemManagement\Source\Messages\SystemManagement.Messages.csproj", "{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{6A96BEBF-C086-40A9-9973-5C520AD60717}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{61A2E0BB-B341-43CF-BA4C-C527D88ADBEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemManagement.Client", "..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj", "{2183B489-3AB4-4926-9B45-9FDDEADB9811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luminator.PeripheralDimmer.Processor.Tests", "Source\Test\PeripheralDimmer.Processor.Tests\Luminator.PeripheralDimmer.Processor.Tests.csproj", "{79D40809-DF4F-45DD-B604-0D1DEFB301B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luminator.PeripheralDimmer.Console", "Source\PeripheralDimmerProtocol\Luminator.PeripheralDimmer.Console\Luminator.PeripheralDimmer.Console.csproj", "{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Debug|x86.Build.0 = Debug|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F772AA4-1766-44FF-86ED-0D6D9F499724}.Release|x86.Build.0 = Release|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC}.Release|x86.Build.0 = Release|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Debug|x86.Build.0 = Debug|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Release|x86.ActiveCfg = Release|Any CPU
+		{F17544CC-E77C-4955-82E4-0FA6F5A4FE6D}.Release|x86.Build.0 = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Debug|x86.Build.0 = Debug|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|x86.ActiveCfg = Release|Any CPU
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595}.Release|x86.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.ActiveCfg = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.Build.0 = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.ActiveCfg = Release|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.Build.0 = Release|x86
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Debug|x86.Build.0 = Debug|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|x86.ActiveCfg = Release|Any CPU
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F}.Release|x86.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.Build.0 = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Debug|x86.Build.0 = Debug|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|x86.ActiveCfg = Release|Any CPU
+		{817BB42A-324A-4243-9639-33C99F4F883C}.Release|x86.Build.0 = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Debug|x86.Build.0 = Debug|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|x86.ActiveCfg = Release|Any CPU
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1}.Release|x86.Build.0 = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Debug|x86.Build.0 = Debug|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3}.Release|x86.Build.0 = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Debug|x86.Build.0 = Debug|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}.Release|x86.Build.0 = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Debug|x86.Build.0 = Debug|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|x86.ActiveCfg = Release|Any CPU
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811}.Release|x86.Build.0 = Release|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Debug|x86.Build.0 = Debug|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0}.Release|x86.Build.0 = Release|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Debug|x86.Build.0 = Debug|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Release|x86.ActiveCfg = Release|Any CPU
+		{A6962BCD-1E43-4DA7-9ED6-DE21AD65D714}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F13D92F9-BF1D-404A-B2A4-A391D352F4CC} = {61A2E0BB-B341-43CF-BA4C-C527D88ADBEF}
+		{E11FBC4E-2EB6-461C-9310-094B6ADE9595} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{E53548FE-1D9D-4A99-8FC0-F02B661D964F} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{817BB42A-324A-4243-9639-33C99F4F883C} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{5202B147-B5CB-49D2-AF14-F3887E2210B1} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{5BF74CBC-E88C-459E-B0DC-34069552A0A3} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{2183B489-3AB4-4926-9B45-9FDDEADB9811} = {6A96BEBF-C086-40A9-9973-5C520AD60717}
+		{79D40809-DF4F-45DD-B604-0D1DEFB301B0} = {61A2E0BB-B341-43CF-BA4C-C527D88ADBEF}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Common\\Configuration\\Source\\Core\\Configuration.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = PeripheralDimmerProtocol.sln
+		SccProjectName1 = ../../Common/Configuration/Source/Core
+		SccLocalPath1 = ..\\..\\Common\\Configuration\\Source\\Core
+		SccProjectUniqueName2 = ..\\..\\Common\\Medi\\Source\\Core\\Medi.Core.csproj
+		SccProjectTopLevelParentUniqueName2 = PeripheralDimmerProtocol.sln
+		SccProjectName2 = ../../Common/Medi/Source/Core
+		SccLocalPath2 = ..\\..\\Common\\Medi\\Source\\Core
+		SccProjectUniqueName3 = ..\\..\\Common\\SystemManagement\\Source\\Host\\SystemManagement.Host.csproj
+		SccProjectTopLevelParentUniqueName3 = PeripheralDimmerProtocol.sln
+		SccProjectName3 = ../../Common/SystemManagement/Source/Host
+		SccLocalPath3 = ..\\..\\Common\\SystemManagement\\Source\\Host
+		SccProjectUniqueName4 = ..\\..\\Common\\SystemManagement\\Source\\Messages\\SystemManagement.Messages.csproj
+		SccProjectTopLevelParentUniqueName4 = PeripheralDimmerProtocol.sln
+		SccProjectName4 = ../../Common/SystemManagement/Source/Messages
+		SccLocalPath4 = ..\\..\\Common\\SystemManagement\\Source\\Messages
+		SccProjectUniqueName5 = ..\\..\\Common\\SystemManagement\\Source\\ServiceModel\\SystemManagement.ServiceModel.csproj
+		SccProjectTopLevelParentUniqueName5 = PeripheralDimmerProtocol.sln
+		SccProjectName5 = ../../Common/SystemManagement/Source/ServiceModel
+		SccLocalPath5 = ..\\..\\Common\\SystemManagement\\Source\\ServiceModel
+		SccProjectUniqueName6 = ..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName6 = PeripheralDimmerProtocol.sln
+		SccProjectName6 = ../../Common/Utility/Source/Compatibility
+		SccLocalPath6 = ..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName7 = ..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName7 = PeripheralDimmerProtocol.sln
+		SccProjectName7 = ../../Common/Utility/Source/Core
+		SccLocalPath7 = ..\\..\\Common\\Utility\\Source\\Core
+		SccProjectUniqueName8 = ..\\..\\Common\\Utility\\Source\\OSWrappers\\Utility.OSWrappers.csproj
+		SccProjectTopLevelParentUniqueName8 = PeripheralDimmerProtocol.sln
+		SccProjectName8 = ../../Common/Utility/Source/OSWrappers
+		SccLocalPath8 = ..\\..\\Common\\Utility\\Source\\OSWrappers
+		SccProjectUniqueName9 = ..\\..\\Common\\Utility\\Source\\Win32\\Utility.Win32.csproj
+		SccProjectTopLevelParentUniqueName9 = PeripheralDimmerProtocol.sln
+		SccProjectName9 = ../../Common/Utility/Source/Win32
+		SccLocalPath9 = ..\\..\\Common\\Utility\\Source\\Win32
+		SccProjectUniqueName10 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer\\Luminator.PeripheralDimmer.csproj
+		SccProjectName10 = Source/PeripheralDimmerProtocol/Luminator.PeripheralDimmer
+		SccLocalPath10 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer
+		SccProjectUniqueName11 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer.Processor\\Luminator.PeripheralDimmer.Processor.csproj
+		SccProjectName11 = Source/PeripheralDimmerProtocol/Luminator.PeripheralDimmer.Processor
+		SccLocalPath11 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer.Processor
+		SccProjectUniqueName12 = ..\\..\\Common\\SystemManagement\\Source\\Client\\SystemManagement.Client.csproj
+		SccProjectTopLevelParentUniqueName12 = PeripheralDimmerProtocol.sln
+		SccProjectName12 = ../../Common/SystemManagement/Source/Client
+		SccLocalPath12 = ..\\..\\Common\\SystemManagement\\Source\\Client
+		SccProjectUniqueName13 = Source\\Test\\PeripheralDimmer.Processor.Tests\\Luminator.PeripheralDimmer.Processor.Tests.csproj
+		SccProjectTopLevelParentUniqueName13 = PeripheralDimmerProtocol.sln
+		SccProjectName13 = Source/Test/PeripheralDimmer.Processor.Tests
+		SccLocalPath13 = Source\\Test\\PeripheralDimmer.Processor.Tests
+		SccProjectUniqueName14 = Source\\Test\\PeripheralDimmerProtocol.Test\\Luminator.PeripheralDimmerProtocol.Test.csproj
+		SccProjectTopLevelParentUniqueName14 = PeripheralDimmerProtocol.sln
+		SccProjectName14 = Source/Test/PeripheralDimmerProtocol.Test
+		SccLocalPath14 = Source\\Test\\PeripheralDimmerProtocol.Test
+		SccProjectUniqueName15 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer.Console\\Luminator.PeripheralDimmer.Console.csproj
+		SccProjectName15 = Source/PeripheralDimmerProtocol/Luminator.PeripheralDimmer.Console
+		SccLocalPath15 = Source\\PeripheralDimmerProtocol\\Luminator.PeripheralDimmer.Console
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Port80Writer", "Port80Writer.csproj", "{D599C7AA-986B-4508-BCAA-8263FFFA2223}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Port80Writer.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D599C7AA-986B-4508-BCAA-8263FFFA2223}.Debug|x86.ActiveCfg = Debug|x86
+		{D599C7AA-986B-4508-BCAA-8263FFFA2223}.Debug|x86.Build.0 = Debug|x86
+		{D599C7AA-986B-4508-BCAA-8263FFFA2223}.Release|x86.ActiveCfg = Release|x86
+		{D599C7AA-986B-4508-BCAA-8263FFFA2223}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

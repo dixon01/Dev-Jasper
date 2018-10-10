@@ -1,0 +1,409 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="ModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Model" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var enums = partitions.SelectMany(partition => partition.Enums).OrderBy(@enum => @enum.Name).ToList();
+    this.entities = partitions.SelectMany(partition => partition.Entities).OrderBy(entity => entity.Name).ToList();
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Model
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    
+<#
+    foreach (var partition in partitions)
+    {
+#>
+    using Gorba.Center.Common.ServiceModel.Filters.<#= partition.Name #>;
+<#
+    
+    }
+#>
+
+<#
+    foreach (var @enum in enums)
+    {
+        this.WriteAlias(Types.Database, @enum);
+    }
+#>
+
+<#
+    foreach (var @enum in enums)
+    {
+        this.WriteAlias(Types.Dto, @enum);
+    }
+#>
+
+    using DatabaseXmlData = Gorba.Center.BackgroundSystem.Data.Model.XmlData;
+<#
+    foreach (var entity in this.entities)
+    {
+        this.WriteAlias(Types.Database, entity);
+    }
+#>
+
+    using DtoXmlData = Gorba.Center.Common.ServiceModel.XmlData;
+<#
+    foreach (var entity in this.entities)
+    {
+        this.WriteAlias(Types.Dto, entity);
+    }
+#>
+
+    internal enum ReferenceTypes
+    {
+<#
+    enums.Select((e, i) => new { Entity = e, Index = i, Comma = i < enums.Count - 1 ? "," : string.Empty })
+        .ToList().ForEach(type =>
+    {
+        #>
+        <#= this.GetAlias(Types.Database, type.Entity) #> = <#= type.Index #>,
+<#
+    });
+    enums.Select((e, i) => new { Entity = e, Index = i + enums.Count, Comma = i < enums.Count - 1 ? "," : string.Empty })
+        .ToList().ForEach(type =>
+    {
+        #>
+        <#= this.GetAlias(Types.Dto, type.Entity) #> = <#= type.Index #>,
+<#
+    });
+
+    entities.Select((e, i) => new { Entity = e, Index = i + enums.Count * 2, Comma = i < enums.Count - 1 ? "," : string.Empty })
+        .ToList().ForEach(type =>
+    {
+        #>
+        <#= this.GetAlias(Types.Database, type.Entity) #> = <#= type.Index #>,
+<#
+    });
+
+    entities.Select((e, i) => new { Entity = e, Index = i + enums.Count * 3, Comma = i < entities.Count - 1 ? "," : string.Empty })
+        .ToList().ForEach(type =>
+    {
+        #>
+        <#= this.GetAlias(Types.Dto, type.Entity) #> = <#= type.Index + type.Comma #>
+<#
+    });
+#>
+    }
+
+    public static partial class Extensions
+    {<#
+    foreach (var entity in this.entities)
+    {
+        var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+        this.WriteToExtension(Types.Dto, Types.Database, entity, userDefinedPropertiesEnabled);
+    }
+
+    foreach (var entity in this.entities)
+    {
+        var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+        this.WriteToExtension(Types.Database, Types.Dto, entity, userDefinedPropertiesEnabled);
+    }
+#>
+
+        public static DatabaseXmlData ToDatabase(this DtoXmlData source)
+        {
+            return source == default(DtoXmlData) ? default(DatabaseXmlData) : new DatabaseXmlData { Xml = source.Xml, Type = source.Type };
+        }
+
+        public static DtoXmlData ToDto(this DatabaseXmlData source)
+        {
+            return source == default(DatabaseXmlData) ? default(DtoXmlData) : new DtoXmlData(source.Xml, source.Type);
+        }
+    }
+}<#+
+
+    private List<EntitySpace.Entity> entities;
+     
+    private enum Types
+    {
+        Database = 0,
+
+        Dto = 1
+    }
+
+    private string GetNamespace(Types type)
+    {
+        switch (type)
+        {
+            case Types.Database:
+                return "Gorba.Center.BackgroundSystem.Data.Model";
+                break;
+            case Types.Dto:
+                return "Gorba.Center.Common.ServiceModel";
+                break;
+            default:
+                throw new NotSupportedException();
+        }
+    }
+
+    private void WriteAlias(Types type, EntitySpace.Enum @enum)
+    {
+        var name = this.GetAlias(type, @enum);
+        var @namespace = this.GetNamespace(type);
+        #>
+    using <#= name #> = <#= @namespace #>.<#= @enum.Partition.Name #>.<#= @enum.Name #>;
+<#+
+    }
+
+    private void WriteAlias(Types type, EntitySpace.Entity entity)
+    {
+        var name = this.GetAlias(type, entity);
+        var @namespace = this.GetNamespace(type);
+        
+        #>
+    using <#= name #> = <#= @namespace #>.<#= entity.Partition.Name #>.<#= entity.Name #>;
+<#+
+    }
+
+    private string GetAlias(Types type, EntitySpace.Enum @enum)
+    {
+        return type + @enum.Partition.Name + @enum.Name;
+    }
+
+    private string GetAlias(Types type, EntitySpace.Entity entity)
+    {
+        return type + entity.Partition.Name + entity.Name;
+    }
+
+    private string GetAlias(Types type, string qualifiedName)
+    {
+        if (!qualifiedName.Contains('.'))
+        {
+            return this.GetAlias(type, this.entities.Single(e => e.Name == qualifiedName));
+        }
+
+        return type + qualifiedName.Replace(".", string.Empty);
+    }
+
+    private void WriteToExtension(Types source, Types destination, EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var addFilter = destination == Types.Dto;
+        var filterArg = string.Empty;
+        var filterParam = string.Empty;
+        if (addFilter)
+        {
+            filterArg = ", " + entity.Name + "Filter filter = null";
+            filterParam = ", filter";
+        }
+
+        var sourceName = this.GetAlias(source, entity);
+        var destinationName = this.GetAlias(destination, entity);
+    #>
+
+        public static <#= destinationName #> To<#= destination #>(
+            this <#= sourceName #> source<#= filterArg #>)
+        {
+            var mappedObjects = new Dictionary<EntityKey, object>();
+            return source.To<#= destination #>Internal(mappedObjects<#= filterParam #>);
+        }
+
+        internal static <#= destinationName #> To<#= destination #>Internal(
+            this <#= sourceName #> source, IDictionary<EntityKey, object> mappedObjects<#= filterArg #>)
+        {
+            var key = new EntityKey(source.Id, ReferenceTypes.<#= destinationName #>);
+            if (mappedObjects.ContainsKey(key))
+            {
+                return (<#= destinationName #>)mappedObjects[key];
+            }
+
+            var destination = new <#= destinationName #>();
+            mappedObjects.Add(key, destination);
+            destination.Id = source.Id;
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+            destination.CreatedOn = source.CreatedOn;
+            destination.LastModifiedOn = source.LastModifiedOn;
+            destination.Version = source.Version;
+<#+
+        }
+        else if (destination == Types.Database)
+        {
+            var foreignKeyRequiredProperties = entity.Properties.OfType<EntitySpace.Property>().Where(p => !p.Entity.HasChangeTracking
+                && p.PropertyType == EntitySpace.PropertyType.Reference);
+            foreach (var property in foreignKeyRequiredProperties)
+            {
+                var foreignKeyName = property.Name.GetForeignKeyName();
+                #>
+
+            if (source.<#= property.Name #> != null)
+            {
+                destination.<#= foreignKeyName #> = source.<#= property.Name #>.Id;
+            }
+<#+
+            }
+        }
+
+            foreach (var property in entity.Properties)
+            {
+                this.WriteToProperty(destination, property);
+            }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            switch (destination)
+            {
+                case Types.Database:
+                #>
+
+			if (source.UserDefinedProperties != null)
+			{
+				foreach (var k in source.UserDefinedProperties.Keys)
+				{
+					destination.RawUserDefinedProperties.Add(k, source.UserDefinedProperties[k]);
+				}
+			}
+<#+
+                    break;
+                case Types.Dto:
+                #>
+
+            foreach (var userDefinedProperty in source.UserDefinedProperties)
+            {
+                destination.UserDefinedProperties
+                        .Add(userDefinedProperty.PropertyDefinition.Name, userDefinedProperty.Value);
+            }
+<#+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("destination");
+            }
+        }
+#>
+
+            return destination;
+        }
+<#+
+    }
+
+    private void WriteToProperty(Types destination, EntitySpace.CollectionProperty collection)
+    {
+        var filterCheck = string.Empty;
+        var subFilterVar = string.Empty;
+        var subFilterArg = String.Empty;
+        if (destination == Types.Dto)
+        {
+            filterCheck = " || (filter != null && filter." + collection.Name + " == null)";
+            subFilterVar = "var subFilter = filter == null ? null : filter." + collection.Name +";";
+            subFilterArg = ", subFilter";
+        }
+    #>
+
+            if (source.<#= collection.Name #> == null<#= filterCheck #>)
+            {
+                destination.<#= collection.Name #> = null;
+            }
+            else
+            {
+                <#= subFilterVar #>
+                destination.<#= collection.Name #> = source
+                    .<#= collection.Name #>.Select(entity => To<#= destination #>Internal(entity, mappedObjects<#= subFilterArg #>))
+                    .ToList();
+            }
+<#+
+    }
+
+    private void WriteToProperty(Types destination, EntitySpace.Property property)
+    {
+        if (property.IsXmlSerialized)
+        {
+            this.WriteToXmlSerializedProperty(destination, property);
+            return;
+        }
+
+        if (property.PropertyType == EntitySpace.PropertyType.Reference)
+        {
+            this.WriteToPropertyReference(destination, property);
+            return;
+        }
+
+        if (property.PropertyType == EntitySpace.PropertyType.Enumeration)
+        {
+            this.WriteToPropertyEnumeration(destination, property);
+            return;
+        }
+    #>
+            destination.<#= property.Name #> = source.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteToXmlSerializedProperty(Types destination, EntitySpace.Property property)
+    {
+#>
+            destination.<#= property.Name #> = source.<#= property.Name #>.To<#= destination #>();
+<#+
+    }
+
+    private void WriteToPropertyEnumeration(Types destination, EntitySpace.Property property)
+    {
+        var qualifiedName = property.Type.Contains('.') ?
+                                property.Type : property.Entity.Partition.Name + '.' + property.Type;
+        var destinationType = this.GetAlias(destination, qualifiedName);
+    #>
+            destination.<#= property.Name #> = (<#= destinationType #>)source.<#= property.Name #>;
+<#+
+    }
+
+    private void WriteToPropertyReference(Types destination, EntitySpace.Property property)
+    {#>
+    
+            <#+
+        var filter = string.Empty;
+        var filterCheck = string.Empty;
+        if (destination == Types.Database)
+        {
+            #>if (source.<#= property.Name #> == <#= this.GetAlias(Types.Dto, property.Type) #>.Null)
+            {
+                destination.<#= property.Name #> = <#= this.GetAlias(Types.Database, property.Type) #>.Null;
+            }
+            else <#+
+        }
+        else
+        {
+            filter = ", filter == null ? null : filter." + property.Name;
+            filterCheck = " && (filter == null || filter." + property.Name + " != null)";
+        }
+        #>if (source.<#= property.Name #> != null<#= filterCheck #>)
+            {
+                destination.<#= property.Name #> = source.<#= property.Name #>.To<#= destination #>Internal(mappedObjects<#= filter #>);
+            }
+<#+
+    }
+
+    private void WriteToProperty(Types destination, EntitySpace.PropertyBase propertyBase)
+    {
+        var collection = propertyBase as EntitySpace.CollectionProperty;
+        if (collection != null)
+        {
+            this.WriteToProperty(destination, collection);
+            return;
+        }
+
+        var property = propertyBase as EntitySpace.Property;
+        if (property == null)
+        {
+            throw new NotSupportedException(
+                "Property of type '" + propertyBase.GetType().FullName + "' is not supported");
+        }
+
+        this.WriteToProperty(destination, property);
+    }
+#>

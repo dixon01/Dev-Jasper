@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<IO>
+  <SerialPorts>
+    <SerialPort/>
+  </SerialPorts>
+
+  <Inputs>
+    <Input Name="StopRequest" TransfRef="Default" Enabled="true">
+      <UsedFor Table="SystemStatus" Column="StopRequestedState" Row="0"/>
+    </Input>
+  </Inputs>
+
+  <Transformations>
+    <Chain id="Default" />
+  </Transformations>
+</IO>

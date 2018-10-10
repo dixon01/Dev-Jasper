@@ -1,0 +1,481 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="ModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Data.Model" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@".\EntitySpace.Data.generated.xml");
+    var options = new EntitySpace.EntitySpaceLoadOptions();
+    options.AddEntityPropertiesArrayItemType("DataProperty", typeof(DataProperty), "http://schemas.gorba.com/Center/Data/ExtendedEntitySpace");
+    var entitySpace = EntitySpace.Load(path, options);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.BackgroundSystem.Data.Model
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Runtime.CompilerServices;
+
+    using NLog;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition, userDefinedPropertiesEnabledEntityNames);
+    }
+#>
+}<#+
+     
+    private void WritePartition(EntitySpace.Partition partition, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    {#>
+
+    namespace <#= partition.Name #>
+    {<#+
+        foreach (var @enum in partition.Enums)
+        {
+            this.WriteEnum(@enum);
+        }
+
+        foreach (var entity in partition.Entities)
+        {
+            this.WriteEntity(entity, userDefinedPropertiesEnabledEntityNames);
+        }
+
+        foreach (var association in partition.Associations)
+        {
+            this.WriteAssociation(association);
+        }
+#>
+    }
+<#+
+    }
+
+    private void WriteAssociation(EntitySpace.Association association)
+    {#>
+        public partial class <#= association.Ends.Select(end => end.Type).GetAssociationName() #>
+        {<#+
+        foreach (var associationEnd in association.Ends)
+        {
+         this.WriteAssociationEnd(associationEnd);
+        }
+#>
+        }
+<#+
+    }
+
+    private void WriteAssociationEnd(EntitySpace.AssociationEnd associationEnd)
+    {#>
+
+            [Required]
+            public <#= associationEnd.Type #> <#= associationEnd.Type.GetEntityName() #> { get; set; }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    {
+        var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+#>
+
+        public partial class <#= entity.Name #> : ICloneable
+        {
+            private static readonly Logger EntityLogger = LogManager.GetCurrentClassLogger();
+
+            public static readonly <#= entity.Name #> Null = new <#= entity.Name #>();
+            <#+
+        if (userDefinedPropertiesEnabled)
+        {
+            this.WriteUserDefinedPropertiesEntityConstructor(entity);
+        }
+#>
+
+            public <#= entity.IdPropertyType #> Id { get; set; }
+<#+
+        if (entity.HasChangeTracking)
+        {
+            #>
+
+            private DateTime createdOn;
+
+            [Column(TypeName = "datetime2")]
+            [Required]
+            public DateTime CreatedOn
+            {
+                get
+                {
+                    return this.createdOn;
+                }
+
+                set
+                {
+                    SetDateTime(ref this.createdOn, value);
+                }
+            }
+
+            private DateTime? lastModifiedOn;
+
+            [Column(TypeName = "datetime2")]
+            public DateTime? LastModifiedOn
+            {
+                get
+                {
+                    return this.lastModifiedOn;
+                }
+
+                set
+                {
+                    SetDateTime(ref this.lastModifiedOn, value);
+                }
+            }
+
+            public int Version { get; set; }
+<#+
+        }
+
+        foreach (var property in entity.Properties)
+        {
+            this.WriteProperty(property);
+        }
+
+        if (userDefinedPropertiesEnabled)
+        {
+            this.WriteUserDefinedPropertiesProperty(entity);
+        }
+#>
+
+            public <#= entity.Name #> Clone()
+            {
+                var clone = (<#= entity.Name #>)this.MemberwiseClone();<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+                clone.RawUserDefinedProperties = new Dictionary<string, string>(this.RawUserDefinedProperties);<#+
+        }
+                #>
+
+                return clone;
+            }
+
+            object ICloneable.Clone()
+            {
+                return this.Clone();
+            }
+
+            private static void SetDateTime(
+                ref DateTime field, DateTime value, [CallerMemberName] string propertyName = null)
+            {
+                switch(value.Kind)
+                {
+                    case DateTimeKind.Unspecified:
+                        field = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                        break;
+                    case DateTimeKind.Utc:
+                        field = value;
+                        break;
+                    case DateTimeKind.Local:
+                        field = value.ToUniversalTime();
+                        EntityLogger.Debug("Local date value converted to Utc for property '{0}'", propertyName);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            private static void SetDateTime(
+                ref DateTime? field, DateTime? value, [CallerMemberName] string propertyName = null)
+            {
+                if (!value.HasValue)
+                {
+                    field = null;
+                    return;
+                }
+                
+                switch(value.Value.Kind)
+                {
+                    case DateTimeKind.Unspecified:
+                        field = DateTime.SpecifyKind(value.Value, DateTimeKind.Utc);
+                        break;
+                    case DateTimeKind.Utc:
+                        field = value;
+                        break;
+                    case DateTimeKind.Local:
+                        field = value.Value.ToUniversalTime();
+                        EntityLogger.Debug("Local date value converted to Utc for property '{0}'", propertyName);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+<#+
+        if (userDefinedPropertiesEnabledEntityNames.Contains(entity.Name))
+        {
+            this.WriteUserDefinedPropertiesEntity(entity);
+        }
+    }
+
+    private void WriteProperty(EntitySpace.PropertyBase propertyBase)
+    {
+        var dataProperty = propertyBase as DataProperty;
+        if (dataProperty != null)
+        {
+            this.WriteProperty(dataProperty);
+            return;
+        }
+
+        var collectionProperty = propertyBase as EntitySpace.CollectionProperty;
+        if (collectionProperty != null)
+        {
+            this.WriteProperty(collectionProperty);
+            return;
+        }
+
+        var property = propertyBase as EntitySpace.Property;
+        if (property == null)
+        {
+            throw new NotSupportedException("Property of type " + propertyBase.GetType().FullName + " not supported");
+        }
+
+        if (property.IsXmlSerialized)
+        {
+            this.WriteXmlSerializedProperty(property);
+            return;
+        }
+
+        this.WriteProperty(property);
+    }
+
+    private void WriteProperty(DataProperty property)
+    {#>
+
+            public <#= property.Type #> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WritePropertyInitialization(EntitySpace.CollectionProperty property)
+    {
+#>
+
+                this.<#= property.Name #> = new List<<#= property.ItemType #>>();
+<#+
+    }
+
+    private void WritePropertyInitialization(EntitySpace.PropertyBase propertyBase)
+    {
+        var collectionProperty = propertyBase as EntitySpace.CollectionProperty;
+        if (collectionProperty == null)
+        {
+            return;
+        }
+
+        this.WritePropertyInitialization(collectionProperty);
+    }
+
+    private void WriteProperty(EntitySpace.CollectionProperty property)
+    {
+        this.Write(String.Empty);
+        if (!string.IsNullOrEmpty(property.InverseProperty))
+        {#>
+
+            [InverseProperty("<#= property.InverseProperty #>")]
+<#+
+        }
+        #>
+            public ICollection<<#= property.ItemType #>> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {
+        this.WriteLine(string.Empty);
+        var isDateTime = property.Type == "DateTime" || property.Type == "DateTime?";
+        var isNullable = property.Type.EndsWith("?");
+        var fieldName = "field" + property.Name;
+        if (isDateTime)
+        {#>
+            private <#= property.Type #> <#= fieldName #>;
+
+            [Column(TypeName = "datetime2")]
+<#+
+        }
+
+        if (property.IsRequired)
+        {#>
+            [Required]
+<#+
+        }
+
+        if (property.IsUnique)
+        {
+			if (string.IsNullOrEmpty(property.IndexName))
+			{#>
+            [Index(IsUnique = true)]
+<#+
+			}
+			else
+			{#>
+			[Index("<#= property.IndexName #>", <#= property.IndexOrder #>, IsUnique=true)]
+<#+
+			}
+
+            if (property.Type == "string")
+            {#>
+            [MaxLength(100)]
+<#+
+            }
+        }
+		else if (!string.IsNullOrEmpty(property.IndexName))
+		{#>
+		[Index("<#= property.IndexName #>", <#= property.IndexOrder #>)]
+<#+
+		}
+
+        if (!property.Entity.HasChangeTracking && property.PropertyType == EntitySpace.PropertyType.Reference)
+        {
+            var foreignKeyName = property.Name.GetForeignKeyName();
+            var foreignKeyType = property.IsRequired
+                                     ? property.Entity.IdPropertyType
+                                     : "System.Nullable<" + property.Entity.IdPropertyType + ">";
+        #>
+            public <#= foreignKeyType #> <#= foreignKeyName #> { get; set; }
+
+            [ForeignKey("<#= foreignKeyName #>")]
+<#+
+        }
+
+        if (isDateTime)
+        {#>
+            public <#= property.Type #> <#= property.Name #>
+            {
+                get
+                {
+                    return this.<#= fieldName #>;
+                }
+
+                set
+                {
+                    SetDateTime(ref this.<#= fieldName #>, value);
+                }
+            }
+<#+
+            return;
+        }
+#>
+            public <#= property.Type #> <#= property.Name #> { get; set; }
+<#+
+    }
+
+    private void WriteEnum(EntitySpace.Enum @enum)
+    {#>
+
+        public enum <#= @enum.Name #>
+        {<#+
+        if (@enum.Members.Count > 0)
+        {
+            var take = @enum.Members.Count - 1;
+            foreach (var member in @enum.Members.Take(take))
+            {
+                this.WriteEnumMember(member);
+            }
+
+            var last = @enum.Members.Skip(take).Single();
+            this.WriteEnumMember(last, true);
+        }
+#>
+        }
+<#+
+    }
+
+    private void WriteEnumMember(EntitySpace.EnumMember enumMember, bool isLast = false)
+    {
+        var comma = isLast ? string.Empty : ",";
+    #>
+
+            <#= enumMember.Name #>  = <#= enumMember.Value #><#= comma #>
+<#+
+    }
+
+    private void WriteUserDefinedPropertiesEntityConstructor(EntitySpace.Entity entity)
+    {#>
+
+            public <#= entity.Name #>()
+            {
+                this.UserDefinedProperties = new List<<#= entity.Name #>UserDefinedProperty>();
+                this.RawUserDefinedProperties = new Dictionary<string, string>();
+            }
+<#+
+    }
+
+    private void WriteUserDefinedPropertiesProperty(EntitySpace.Entity entity)
+    {#>
+    
+            public ICollection<<#= entity.Name #>UserDefinedProperty> UserDefinedProperties { get; set; }
+            
+            [NotMapped]
+            public IDictionary<string, string> RawUserDefinedProperties { get; set; }
+<#+
+    }
+
+    private void WriteUserDefinedPropertiesEntity(EntitySpace.Entity entity)
+    {
+        #>
+
+        public partial class <#= entity.Name #>UserDefinedProperty : ICloneable
+        {
+            public <#= entity.Name #>UserDefinedProperty(Meta.UserDefinedProperty propertyDefinition, string value)
+            {
+                this.PropertyDefinition = propertyDefinition;
+                this.Value = value;
+            }
+
+            public <#= entity.Name #>UserDefinedProperty()
+            {
+            }
+
+            public int Id { get; set; }
+            
+            [Index("Index_<#= entity.Name #>UserDefinedProperty", IsUnique = true)]
+            [Required]
+            public Meta.UserDefinedProperty PropertyDefinition { get; set; }
+
+            public string Value { get; set; }
+
+            public <#= entity.Name #>UserDefinedProperty Clone()
+            {
+                var clone = ((ICloneable)this).Clone();
+                return (<#= entity.Name #>UserDefinedProperty)clone;
+            }
+
+            object ICloneable.Clone()
+            {
+                return this.MemberwiseClone();
+            }
+        }
+<#+
+    }
+
+    private void WriteXmlSerializedProperty(EntitySpace.Property property)
+    {#>
+
+            public XmlData <#= property.Name #> { get; set; }
+<#+
+    }
+
+    [XmlType("DataProperty", Namespace = "http://schemas.gorba.com/Center/Data/ExtendedEntitySpace")]
+    public class DataProperty : EntitySpace.Property
+    {
+        [XmlAttribute("sqlType")]
+        public string SqlType { get; set; }
+    }
+#>

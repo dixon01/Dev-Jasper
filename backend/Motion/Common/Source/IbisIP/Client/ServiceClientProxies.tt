@@ -1,0 +1,352 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Protocols.Vdv301.Messages;
+using Gorba.Common.Protocols.Vdv301.Services;
+
+using Gorba.Common.Utility.Core;
+
+using Gorba.Motion.Common.IbisIP.Server;
+
+using NLog;
+
+<#
+    var services = LoadServices(this.Host.ResolvePath(@"..\..\..\..\..\Common\Protocols\Source\Vdv301\Services.xml"));
+    
+    #>
+namespace Gorba.Motion.Common.IbisIP.Client
+{
+    public static partial class ServiceClientProxyFactory
+    {
+        public static T Create<T>(string hostName, int port, string path)
+            where T : class, IVdv301Service
+        {
+            return Create<T>(hostName, port, path, null);
+        }
+
+        public static T Create<T>(string hostName, int port, string path, IbisHttpServer localServer)
+            where T : class, IVdv301Service
+        {
+            if (path != null)
+            {
+                path = path.Trim('/');
+                if (path.Length > 0)
+                {
+                    path += "/";
+                }
+            }
+
+            var url = string.Format("http://{0}:{1}/{2}{3}", hostName, port, path, typeof(T).Name.Substring(1));<#
+
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            continue;
+        }
+        #>
+
+            if (typeof(T) == typeof(I<#= service.Name #>))
+            {
+                return (T)(object)new <#= service.Name #>ClientProxy(url, localServer);
+            }
+        <#
+    }
+    #>
+
+            throw new NotSupportedException(string.Format("Service {0} not supported", typeof(T).FullName));
+        }
+
+        public static T Create<T>(IPAddress address, int port)
+            where T : class, IVdv301Service
+        {
+            var endPoint = new IPEndPoint(address, port);<#
+
+    foreach (var service in services)
+    {
+        if (!service.IsMulticast)
+        {
+            continue;
+        }
+        #>
+
+            if (typeof(T) == typeof(I<#= service.Name #>))
+            {
+                return (T)(object)new <#= service.Name #>ClientProxy(endPoint);
+            }
+        <#
+    }
+    #>
+
+            throw new NotSupportedException(string.Format("Service {0} not supported", typeof(T).FullName));
+        }
+    }<#
+
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            this.GenerateUdpServiceClientProxy(service);
+            continue;
+        }
+        
+        this.GenerateHttpServiceClientProxy(service);
+    }
+    #>
+
+}
+
+<#+
+private void GenerateUdpServiceClientProxy(Service service)
+{
+    var multicastType = GetClassName(service.MulticastType.Name);
+    var eventName = service.Name.Replace("Service", string.Empty) + "Changed";
+    var fieldName = "eventHandler";
+    #>
+    
+
+    internal partial class <#= service.Name #>ClientProxy : UdpClientProxyBase, I<#= service.Name #>
+    {
+        private readonly XmlSerializer serializer;
+        private EventHandler<DataUpdateEventArgs<<#= multicastType #>>> <#= fieldName #>;
+
+        public <#= service.Name #>ClientProxy(IPEndPoint endPoint)
+            : base(endPoint)
+        {
+            this.serializer = new XmlSerializer(typeof(<#= multicastType #>));
+        }
+        
+        public event EventHandler<DataUpdateEventArgs<<#= multicastType #>>> <#= eventName #>
+        {
+            add
+            {
+                var subscribe = this.<#= fieldName #> == null;
+                this.<#= fieldName #> = (EventHandler<DataUpdateEventArgs<<#= multicastType #>>>)Delegate.Combine(this.<#= fieldName #>, value);
+                if (subscribe)
+                {
+                    this.Subscribe();
+                }
+            }
+
+            remove
+            {
+                this.<#= fieldName #> = (EventHandler<DataUpdateEventArgs<<#= multicastType #>>>)Delegate.Remove(this.<#= fieldName #>, value);
+                if (this.<#= fieldName #> == null)
+                {
+                    this.Unsubscribe();
+                }
+            }
+        }
+
+        protected override void HandleDatagram(byte[] data, int offset, int size)
+        {
+            var handler = this.<#= fieldName #>;
+            if (handler == null)
+            {
+                return;
+            }
+
+            using (var input = new MemoryStream(data, offset, size))
+            {
+                var received = (<#= multicastType #>)this.serializer.Deserialize(input);
+                handler(this, new DataUpdateEventArgs<<#= multicastType #>>(received));
+            }
+        }
+    }<#+
+}
+
+private void GenerateHttpServiceClientProxy(Service service)
+{
+    #>
+    
+
+    internal partial class <#= service.Name #>ClientProxy : HttpClientProxyBase, I<#= service.Name #>
+    {
+        private readonly EventHandlerList eventHandlers = new EventHandlerList();
+        private readonly IbisHttpServer localServer;
+        <#+ 
+    // generate events for Get operations
+    foreach (Operation operation in service.Operations)
+    {
+        if (!operation.Name.StartsWith("Get") || operation.Return == null)
+        {
+            continue;
+        }
+        
+        var resultWrapperType = GetClassName(operation.ResponseType.Name);
+        var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+        var shortName = operation.Name.Substring(3);
+        #>
+
+        private Subscription<<#= resultWrapperType #>> subscription<#= shortName #>;<#+
+    }#>
+
+
+        public <#= service.Name #>ClientProxy(string url, IbisHttpServer localServer)
+            : base(url)
+        {
+            this.localServer = localServer;
+        }<#+
+    
+    // generate events for Get operations
+    foreach (Operation operation in service.Operations)
+    {
+        if (!operation.Name.StartsWith("Get") || operation.Return == null)
+        {
+            continue;
+        }
+        
+        var resultWrapperType = GetClassName(operation.ResponseType.Name);
+        var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+        var shortName = operation.Name.Substring(3);
+        #>
+
+
+        public event EventHandler<DataUpdateEventArgs<<#= returnType #>>> <#= shortName #>Changed
+        {
+            add
+            {
+                this.eventHandlers.AddHandler("<#= shortName #>", value);
+                if (this.subscription<#= shortName #> == null)
+                {
+                    this.subscription<#= shortName #> = new Subscription<<#= resultWrapperType #>>();
+                    this.subscription<#= shortName #>.Updated += this.Subscription<#= shortName #>OnUpdated;
+                    this.subscription<#= shortName #>.Start(this.localServer);
+                    this.Subscribe("<#= shortName #>", this.subscription<#= shortName #>.CallbackUri);
+                }
+            }
+
+            remove
+            {
+                this.eventHandlers.RemoveHandler("<#= shortName #>", value);
+                if (this.eventHandlers["<#= shortName #>"] == null && this.subscription<#= shortName #> != null)
+                {
+                    this.Unsubscribe("<#= shortName #>", this.subscription<#= shortName #>.CallbackUri);
+                    this.subscription<#= shortName #>.Stop();
+                    this.subscription<#= shortName #>.Updated -= this.Subscription<#= shortName #>OnUpdated;
+                    this.subscription<#= shortName #> = null;
+                }
+            }
+        }<#+
+    }
+
+    foreach (Operation operation in service.Operations)
+    {
+        var resultWrapperType = "DataAcceptedResponseStructure";
+        var returnType = "DataAcceptedResponseDataStructure";
+        var arguments = new StringBuilder();
+        foreach (var arg in operation.Arguments)
+        {
+            if (arguments.Length > 0)
+            {
+                arguments.Append(", ");
+            }
+
+            arguments.Append(GetClassName(arg.ElementSchemaType.Name));
+            arguments.Append(" ");
+            arguments.Append(char.ToLower(arg.Name[0]));
+            arguments.Append(arg.Name.Substring(1));
+        }
+        
+        if (operation.Return != null)
+        {
+            returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+            resultWrapperType = GetClassName(operation.ResponseType.Name);
+        }
+        #>
+
+
+        public <#= returnType #> <#= operation.Name #>(<#= arguments #>)
+        {
+<#+
+        if (operation.RequestType != null)
+        {
+            var requestType = GetClassName(operation.RequestType.Name);
+        #>
+            var requestWrapper = new <#= requestType #>();
+<#+
+        foreach (var arg in operation.Arguments)
+        {
+            #>
+            requestWrapper.<#= arg.Name #> = <#= char.ToLower(arg.Name[0]) + arg.Name.Substring(1) #>;
+<#+
+        }
+        #>
+            var responseWrapper = this.ExecutePostRequest<<#= resultWrapperType #>>(
+                "<#= operation.Name #>", requestWrapper);
+<#+ 
+        }
+        else
+        {
+        #>
+            var responseWrapper = this.ExecuteGetRequest<<#= resultWrapperType #>>(
+                "<#= operation.Name #>");
+<#+ 
+        }
+        #>
+
+            var error = responseWrapper.Item as IBISIPstring;
+            if (error != null)
+            {
+                throw new IbisIPException(error.Value);
+            }
+
+            var result = responseWrapper.Item as <#= returnType #>;
+            if (result == null)
+            {
+                throw new IbisIPException("Returned item from " + this.Url + " was null");
+            }
+            
+            return result;
+        }<#+
+    }
+    
+    
+    // generate events for Get operations
+    foreach (Operation operation in service.Operations)
+    {
+        if (!operation.Name.StartsWith("Get") || operation.Return == null)
+        {
+            continue;
+        }
+        
+        var resultWrapperType = GetClassName(operation.ResponseType.Name);
+        var returnType = GetClassName(operation.Return.ElementSchemaType.Name);
+        var shortName = operation.Name.Substring(3);
+        #>
+
+
+        private void Subscription<#= shortName #>OnUpdated(object source, DataUpdateEventArgs<<#= resultWrapperType #>> e)
+        {
+            var value = e.Value.Item as <#= returnType #>;
+            var handler = this.eventHandlers["<#= shortName #>"] as EventHandler<DataUpdateEventArgs<<#= returnType #>>>;
+            if (value != null && handler != null)
+            {
+                handler(this, new DataUpdateEventArgs<<#= returnType #>>(value));
+            }
+        }<#+
+    }
+    #>
+
+    }<#+
+}
+#>

@@ -1,0 +1,100 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+ 
+
+/// <summary>
+/// Generates recursively the attribute reader calls for ICompositeElement implementors.
+/// <summary>
+private void GenerateAttributeReaders(Class clazz, bool recursive = true)
+{
+    if (recursive)
+    {
+        var baseClass = this.entities.GetClass(clazz.Base);
+        if (baseClass != null)
+        {
+            this.GenerateAttributeReaders(baseClass);
+        }
+    }
+
+    foreach (var prop in clazz.Properties)
+    {
+        var property = prop as Property;
+        if (property == null)
+        {
+            continue;
+        }
+
+        var converter = "attr" + property.Name;
+        switch (property.Type)
+        {
+            // TODO: add more supported types
+            case "int":
+                converter = "XmlConvert.ToInt32(" + converter + ")";
+                break;
+            case "bool":
+                converter = "XmlConvert.ToBoolean(" + converter + ")";
+                break;
+            default:
+                break;
+        }
+
+        #>
+
+            var attr<#= property.Name #> = reader.GetAttribute("<#= property.Name #>");
+            if (attr<#= property.Name #> != null)
+            {
+                this.<#= property.Name #> = <#= converter #>;
+            }
+        <#+
+    }
+}
+
+/// <summary>
+/// Generates recursively the attribute writer calls for ICompositeElement implementors.
+/// <summary>
+private void GenerateAttributeWriters(Class clazz, bool recursive = true)
+{
+    if (recursive)
+    {
+        var baseClass = this.entities.GetClass(clazz.Base);
+        if (baseClass != null)
+        {
+            this.GenerateAttributeWriters(baseClass);
+        }
+    }
+    
+    foreach (var prop in clazz.Properties)
+    {
+        var property = prop as Property;
+        if (property == null)
+        {
+            continue;
+        }
+
+        var converter = "XmlConvert.ToString(this." + property.Name +")";
+        if (property.Type == "string")
+        {
+            converter = "this." + property.Name;
+        }
+
+        if (!string.IsNullOrEmpty(property.DefaultValue))
+        {
+            #>
+
+            if (this.<#= property.Name #> != <#= property.GetEscapedDefaultValue() #>)
+            {
+                writer.WriteAttributeString("<#= property.Name #>", <#= converter #>);
+            }
+<#+
+        }
+        else
+        {
+            #>
+
+            writer.WriteAttributeString("<#= property.Name #>", <#= converter #>);
+<#+
+        }
+    }
+}
+#>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Created="2013-04-25 13:16:21">
+  <PhysicalScreens>
+    <PhysicalScreen Name="PS1" Type="TFT" Width="720" Height="500" />
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="VD1" CyclePackage="CP1" Width="720" Height="500" />
+    <VirtualDisplay Name="VD2" CyclePackage="CP2" Width="720" Height="500" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="MC1">
+        <MasterSection Duration="86400" Layout="ML1" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="ML1">
+        <PhysicalScreen Ref="PS1">
+          <VirtualDisplay X="0" Y="0" Ref="VD1" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations />
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="Cycle1">
+        <StandardSection Duration="10" Layout="DefaultLayout" />
+        <MultiSection Duration="10" Layout="PagedLayout" Language="0" Table="12" RowsPerPage="3" Mode="AllPages" />
+      </StandardCycle>
+      <StandardCycle Name="Cycle2">
+        <StandardSection Duration="10" Layout="DefaultLayout" />
+        <MultiSection Duration="10" Layout="PagedLayout" Language="0" Table="12" RowsPerPage="3" Mode="OnePage" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles />
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="CP1">
+      <StandardCycles>
+        <StandardCycle Ref="Cycle1" />
+      </StandardCycles>
+      <EventCycles />
+    </CyclePackage>
+    <CyclePackage Name="CP2">
+      <StandardCycles>
+        <StandardCycle Ref="Cycle2" />
+      </StandardCycles>
+      <EventCycles />
+    </CyclePackage>
+  </CyclePackages>
+  <Layouts>
+    <Layout Name="DefaultLayout">
+      <Resolution Width="720" Height="500">
+        <Text X="0" Y="0" Width="200" Height="25" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="1" Row="0" />
+          </Value>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="PagedLayout">
+      <Resolution Width="720" Height="500">
+        <Text X="0" Y="0" Width="200" Height="25" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="1" Row="0" />
+          </Value>
+        </Text>
+        <Text X="0" Y="30" Width="200" Height="25" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="1" Row="1" />
+          </Value>
+        </Text>
+        <Text X="0" Y="60" Width="200" Height="25" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="1" Row="2" />
+          </Value>
+        </Text>
+        <Text X="0" Y="60" Width="200" Height="25" Align="Left" Overflow="Scale">
+          <Font Face="Arial" Height="16" Weight="100" Italic="false" Color="#6666FF" />
+          <Value>
+            <Format Format="{0} / {1}">
+              <Generic Lang="0" Table="1" Column="1" Row="0" />
+              <Generic Lang="0" Table="1" Column="0" Row="0" />
+            </Format>
+          </Value>
+        </Text>
+      </Resolution>
+    </Layout>
+  </Layouts>
+</Infomedia>

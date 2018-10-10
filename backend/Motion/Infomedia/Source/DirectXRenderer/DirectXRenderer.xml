@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectXRenderer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="file:///. DirectXRenderer.xsd">
+  <WindowMode>FullScreenWindowed</WindowMode>
+  <FallbackTimeout>PT60S</FallbackTimeout>
+  <Screens>
+    <!-- leave this tag empty for default behavior (running on Topbox) -->
+
+    <Screen Adapter="0" Width="1366" Height="768">
+      <VisibleRegion Width="1366" Height="768"/>
+      <FallbackImage>D:\Presentation\Images\Fallback.jpg</FallbackImage>
+    </Screen>
+      
+    <!--
+    define single screen with the default resolution:
+    <Screen />
+    -->
+    <!--
+    define a special resolution on a single screen:
+    <Screen Adapter="0" Width="1440" Height="900" />
+    -->
+    <!--
+    define a special id for a single screen (otherwise Id = Adapter):
+    <Screen Adapter="0" Id="MySpecialScreen" Width="1440" Height="900" />
+    -->
+    <!--
+    define a special resolution on two screens:
+    <Screen Adapter="0" Width="1280" Height="800" />
+    <Screen Adapter="1" Width="1280" Height="800" />
+    -->
+  </Screens>
+  <Device>
+    <MultiSample>None</MultiSample>
+    <MultiSampleQuality>0</MultiSampleQuality>
+  </Device>
+  <Text>
+    <!-- Possible TextMode values: Font, FontSprite, Gdi* (*= experimental only!) -->
+    <TextMode>FontSprite</TextMode>
+    <!-- Possible FontQuality values: Default, Draft, Proof, NonAntiAliased, AntiAliased, ClearType, ClearTypeNatural -->
+    <FontQuality>Default</FontQuality>
+    <AlternationInterval>PT3S</AlternationInterval>
+    <BlinkInterval>PT0.5S</BlinkInterval>
+  </Text>
+  <Image>
+    <!-- 3600 = 1 hour -->
+    <BitmapCacheTimeout>PT1H</BitmapCacheTimeout>
+    <!-- 52428800 = 50 MB -->
+    <MaxBitmapCacheBytes>262144000</MaxBitmapCacheBytes>
+    <!-- 1000000 = 500x500 pixels (x4 bytes) -->
+    <MaxCacheBytesPerBitmap>10485760</MaxCacheBytesPerBitmap>
+    <PreloadDirectory>..\..\Presentation\Images</PreloadDirectory>
+    <PreloadDirectory>..\..\Presentation\Symbols</PreloadDirectory>
+  </Image>
+  <Video>
+    <!-- Possible VideoMode values: DirectShow, DirectXWindow, VlcWindow -->
+    <VideoMode>VlcWindow</VideoMode>
+  </Video>
+  <EnablePresentationLogging>true</EnablePresentationLogging>
+</DirectXRenderer>

@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cu5Simulator", "Cu5Simulator\Cu5Simulator.csproj", "{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{4D0195C4-12DA-4104-9919-F3A2B320AEA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Ctu", "..\..\..\..\Common\Protocols\Source\Ctu\Protocols.Ctu.csproj", "{31CDBD33-6A2C-4850-BE80-2ADA677D1564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopboxSimulator", "TopboxSimulator\TopboxSimulator.csproj", "{F9D28775-DF45-4F5E-BA8F-71305DBC1454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Ftp", "..\..\..\..\Common\Protocols\Source\Ftp\Protocols.Ftp.csproj", "{544A70C1-68F7-4F03-A487-1D9297C860A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ctu\\Protocols.Ctu.csproj
+		SccProjectTopLevelParentUniqueName1 = Cu5Simulator.sln
+		SccProjectName1 = ../../../../Common/Protocols/Source/Ctu
+		SccLocalPath1 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ctu
+		SccProjectUniqueName2 = Cu5Simulator\\Cu5Simulator.csproj
+		SccProjectName2 = Cu5Simulator
+		SccLocalPath2 = Cu5Simulator
+		SccProjectUniqueName3 = TopboxSimulator\\TopboxSimulator.csproj
+		SccProjectName3 = TopboxSimulator
+		SccLocalPath3 = TopboxSimulator
+		SccProjectUniqueName4 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ftp\\Protocols.Ftp.csproj
+		SccProjectTopLevelParentUniqueName4 = Cu5Simulator.sln
+		SccProjectName4 = ../../../../Common/Protocols/Source/Ftp
+		SccLocalPath4 = ..\\..\\..\\..\\Common\\Protocols\\Source\\Ftp
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName5 = Cu5Simulator.sln
+		SccProjectName5 = ../../../../Common/Utility/Source/Core
+		SccLocalPath5 = ..\\..\\..\\..\\Common\\Utility\\Source\\Core
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|x86.ActiveCfg = Debug|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Debug|x86.Build.0 = Debug|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|x86.ActiveCfg = Release|x86
+		{3CC94D45-7A9E-4038-BF3B-BF2CE6F5EB86}.Release|x86.Build.0 = Release|x86
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|x86.ActiveCfg = Debug|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Debug|x86.Build.0 = Debug|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|x86.ActiveCfg = Release|x86
+		{F9D28775-DF45-4F5E-BA8F-71305DBC1454}.Release|x86.Build.0 = Release|x86
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{544A70C1-68F7-4F03-A487-1D9297C860A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31CDBD33-6A2C-4850-BE80-2ADA677D1564} = {4D0195C4-12DA-4104-9919-F3A2B320AEA9}
+		{544A70C1-68F7-4F03-A487-1D9297C860A5} = {4D0195C4-12DA-4104-9919-F3A2B320AEA9}
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {4D0195C4-12DA-4104-9919-F3A2B320AEA9}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Bus>
+  <Schedule>
+    <DayStart>03:00</DayStart>
+  </Schedule>
+  <CenterClient>
+    <IpAddress>213.142.176.65</IpAddress>
+    <Port>10200</Port>
+    <ReconnectTime>PT7S</ReconnectTime>
+    <RebootIfAckMissing>false</RebootIfAckMissing>
+  </CenterClient>
+  <BusInfo>
+    <VehicleId>224</VehicleId>
+    <VehicleType>BUS_NORMALFLOOR</VehicleType>
+    <ConfigType>0</ConfigType>
+  </BusInfo>
+</Bus>

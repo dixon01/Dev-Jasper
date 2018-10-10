@@ -1,0 +1,522 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\Entities.ttinclude" #>
+<#@ include file="..\Local.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+
+<#
+    var inputFile = @"..\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(inputFile));
+
+    // this template is only about the "Eval" namespace
+    var evalNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Eval");
+    this.baseNamespace = "Gorba.Common.Configuration.Infomedia";
+
+        #>
+namespace <#= this.baseNamespace #>.<#= evalNamespace.Name #>
+{<#
+    // generate all classes in this namespace
+    foreach (var clazz in evalNamespace.Classes)
+    {
+        this.GenerateClass(clazz);
+    }
+    #>
+}
+
+<#+
+private Entities entities;
+private string baseNamespace;
+
+private void GenerateClass(Class clazz)
+{
+    var className = this.GetClassName(clazz.Name);
+    var inheritance = !string.IsNullOrEmpty(clazz.Base) ? " : " + this.GetClassName(clazz.Base) : string.Empty;
+    
+    ListProperty complexListProperty;
+    CompositeProperty singleEvalProperty;
+    this.GetComplexProperty(clazz, out complexListProperty, out singleEvalProperty);
+
+    var xmlSerializationMembersModifier = clazz.Base != null && clazz.Base.EndsWith("DynamicProperty") ? "override" : null;
+    var baseClass = clazz;
+    while ((baseClass = this.entities.GetClass(baseClass.Base)) != null)
+    {
+        ListProperty listTest;
+        CompositeProperty compositeTest;
+        this.GetComplexProperty(baseClass, out listTest, out compositeTest);
+        if (listTest != null || compositeTest != null)
+        {
+            xmlSerializationMembersModifier = "override";
+            break;
+        }
+    }
+
+    if (complexListProperty != null || singleEvalProperty != null)
+    {
+        inheritance = inheritance.Length == 0 ? " : IXmlSerializable" : inheritance + ", IXmlSerializable";
+        xmlSerializationMembersModifier = "virtual";
+    }
+    #>
+    
+    [XmlRoot("<#= clazz.Name #>")]
+    [Serializable]
+    public partial class <#= className + inheritance #>
+    {
+        public <#= className #>()
+        {<#+
+    // set the property values in the constructor
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateDefaultPropertyValues(property);
+    }
+    #>
+
+            this.Initialize();
+        }
+
+        partial void Initialize();
+    <#+
+    // create all properties
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateProperty(property);
+    }
+
+    if (complexListProperty != null || singleEvalProperty != null)
+    {
+        var serializedType = complexListProperty != null ? complexListProperty.ElementType : singleEvalProperty.Type;
+        var serializerType = this.GetClassName(serializedType).Replace("Base", string.Empty) + "Serializer";
+        #>
+
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
+        
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {<#+ 
+        if (complexListProperty != null)
+        {
+        #>
+
+            this.<#= complexListProperty.Name #>.Clear();
+            <#+
+        }
+        #>
+
+            this.ReadXmlAttributes(reader);
+
+            if (reader.IsEmptyElement)
+            {
+                reader.ReadStartElement();
+                return;
+            }
+
+            reader.ReadStartElement();
+            reader.MoveToContent();
+            <#+ 
+        if (complexListProperty != null)
+        {
+            #>
+
+            while (reader.NodeType == XmlNodeType.Element || reader.NodeType == XmlNodeType.Text)
+            {
+                if (!this.ReadXmlElement(reader.Name, reader))
+                {
+                    var item = <#= serializerType #>.Deserialize(reader);
+                    if (item != null)
+                    {
+                        this.<#= complexListProperty.Name #>.Add(item);
+                    }
+
+                }
+
+                reader.MoveToContent();
+            }
+            <#+
+        }
+        else
+        {
+            #>
+
+            this.<#= singleEvalProperty.Name #> = <#= serializerType #>.Deserialize(reader);
+            <#+
+        }
+        #>
+
+            reader.ReadEndElement();
+        }
+        
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            this.WriteXmlAttributes(writer);
+            this.WriteXmlElements(writer);
+            <#+ 
+        if (complexListProperty != null)
+        {
+        #>
+
+            foreach (var item in this.<#= complexListProperty.Name #>)
+            {
+                <#= serializerType #>.Serialize(item, writer);
+            }
+            <#+
+        }
+        else
+        {
+            #>
+
+            <#= serializerType #>.Serialize(this.<#= singleEvalProperty.Name #>, writer);
+            <#+
+        }
+        #>
+
+        }
+        <#+ 
+    }
+
+    if (xmlSerializationMembersModifier != null)
+    {
+         #>
+        
+        protected <#= xmlSerializationMembersModifier #> void ReadXmlAttributes(XmlReader reader)
+        {<#+
+        if (xmlSerializationMembersModifier == "override")
+        {
+            #>
+
+            base.ReadXmlAttributes(reader);
+            <#+
+        }
+
+        this.GenerateAttributeReaders(clazz, false);
+        #>
+
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> bool ReadXmlElement(string elementName, XmlReader reader)
+        {<#+
+        this.GenerateElementReaders(clazz);
+
+        if (xmlSerializationMembersModifier == "override")
+        {
+            #>
+
+            return base.ReadXmlElement(elementName, reader);
+            <#+
+        }
+        else
+        {
+            #>
+
+            return false;
+            <#+
+        }
+        #>
+
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> void WriteXmlAttributes(XmlWriter writer)
+        {<#+
+        if (xmlSerializationMembersModifier == "override")
+        {
+            #>
+
+            base.WriteXmlAttributes(writer);
+            <#+
+        }
+
+        this.GenerateAttributeWriters(clazz, false);
+        #>
+
+        }
+        
+        protected <#= xmlSerializationMembersModifier #> void WriteXmlElements(XmlWriter writer)
+        {<#+
+        if (xmlSerializationMembersModifier == "override")
+        {
+            #>
+
+            base.WriteXmlElements(writer);
+            <#+
+        }
+
+        this.GenerateElementWriters(clazz);
+        #>
+
+        }
+        <#+
+    }
+    #>
+
+    }
+<#+
+}
+
+/// <summary>
+/// Creates the real class name for an element.
+/// <summary>
+private string GetClassName(string className)
+{
+    if (className.EndsWith("DynamicProperty"))
+    {
+        return className;
+    }
+
+    return GetClassNameWithSuffix(className, "Eval");
+}
+
+private static string GetClassNameWithSuffix(string className, string suffix)
+{
+    if (className.EndsWith("Base"))
+    {
+        return className.Substring(0, className.Length - 4) + suffix + "Base";
+    }
+
+    return className + suffix;
+}
+
+private void GetComplexProperty(Class clazz, out ListProperty complexListProperty, out CompositeProperty singleEvalProperty)
+{
+    complexListProperty = null;
+    singleEvalProperty = null;
+    foreach (var property in clazz.Properties)
+    {
+        var listProperty = property as ListProperty;
+        if (listProperty != null && listProperty.ElementType.EndsWith("Base"))
+        {
+            complexListProperty = listProperty;
+            break;
+        }
+
+        var compositeProperty = property as CompositeProperty;
+        if (compositeProperty != null && compositeProperty.Type == "Base")
+        {
+            singleEvalProperty = compositeProperty;
+            break;
+        }
+    }
+}
+
+/// <summary>
+/// Generates the default property setter in the constructor.
+/// <summary>
+private void GenerateDefaultPropertyValues(PropertyBase propertyBase)
+{
+    var listProperty = propertyBase as ListProperty;
+    if (listProperty != null)
+    {
+        #>   
+            this.<#= listProperty.Name #> = new List<<#= this.GetClassName(listProperty.ElementType) #>>();<#+
+        return;
+    }
+
+    var property = propertyBase as Property;
+    if (property == null || string.IsNullOrEmpty(property.DefaultValue))
+    {
+        return;
+    }
+
+    #>   
+            this.<#= property.Name #> = <#= property.GetEscapedDefaultValue() #>;
+    <#+
+}
+
+/// <summary>
+/// Generates a property.
+/// <summary>
+private void GenerateProperty(PropertyBase propertyBase)
+{
+    var listProperty = propertyBase as ListProperty;
+    if (listProperty != null)
+    {
+        string attribute;
+        if (listProperty.Inline)
+        {
+            attribute = "XmlElement(\"" + (listProperty.XmlName ?? listProperty.ElementType) + "\")";
+        }
+        else
+        {
+            attribute = "XmlArrayItem(\"" + (listProperty.XmlName ?? listProperty.ElementType) + "\")";
+        }
+
+        #>
+
+        [<#= attribute #>]
+        public List<<#= this.GetClassName(listProperty.ElementType) #>> <#= listProperty.Name #> { get; set; }
+        <#+
+        return;
+    }
+    
+    var compositeProperty = propertyBase as CompositeProperty;
+    if (compositeProperty != null)
+    {
+        var compositeType = this.GetClassName(compositeProperty.Type);
+
+        #>
+
+        [XmlElement("<#= compositeProperty.XmlName ?? compositeProperty.Name #>")]
+        public <#= compositeType #> <#= compositeProperty.Name #> { get; set; }
+        <#+
+        return;
+    }
+    
+    var referenceProperty = propertyBase as ReferenceProperty;
+    if (referenceProperty != null)
+    {
+        #>
+
+        [XmlAttribute("<#= referenceProperty.XmlName ?? referenceProperty.Name #>")]
+        public <#= referenceProperty.Type #> <#= referenceProperty.Name #> { get; set; }
+        <#+
+        return;
+    }
+
+    var property = propertyBase as Property;
+    if (property == null)
+    {
+        return;
+    }
+
+    var propertyName = property.Name;
+    var xmlName = property.XmlName ?? property.Name;
+    var propertyType = property.Type;
+    var getterSetter = "get; set;";
+
+    if (property.Type == "TimeSpan")
+    {
+        // TimeSpan needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= property.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return XmlConvert.ToString(this." + propertyName + "); } "
+                       + "set { this." + propertyName + " = XmlConvert.ToTimeSpan(value); }";
+        propertyName += "Xml";
+        xmlName += "\", DataType = \"duration";
+        propertyType = "string";
+    }
+    else if (property.Type == "DateTime")
+    {
+        // DateTime needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= property.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return this." + propertyName + ".ToString(\"" + property.Format + "\"); } "
+                       + "set { this." + propertyName + " = DateTime.ParseExact(value, \"" + property.Format + "\", CultureInfo.InvariantCulture); }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+    else if (property.Type == "Time")
+    {
+        // time (of day) needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public TimeSpan <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return new DateTime(2000, 1, 1).Add(this." + propertyName + ").ToString(\"" + property.Format + "\"); } "
+                       + "set { this." + propertyName + " = DateTime.ParseExact(value, \"" + property.Format + "\", CultureInfo.InvariantCulture).TimeOfDay; }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+    else if (property.Type == "Version")
+    {
+        // Version needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= property.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return this." + propertyName + ".ToString(); } "
+                       + "set { this." + propertyName + " = new Version(value); }";
+        propertyName += "Xml";
+        propertyType = "string";
+    }
+
+    #>
+
+        [XmlAttribute("<#= xmlName #>")]
+<#+
+    if (!string.IsNullOrEmpty(property.DefaultValue))
+    {#>
+        [DefaultValue(<#= property.GetEscapedDefaultValue() #>)]
+<#+
+    }
+    #>
+        public <#= propertyType #> <#= propertyName #> { <#= getterSetter #> }
+    <#+
+    if (!property.Dynamic)
+    {
+        return;
+    }
+
+    var propType = property.Animated ? "AnimatedDynamicProperty" : "DynamicProperty";
+    #>
+                
+        [XmlElement("<#= property.Name #>")]
+        public <#= propType #> <#= property.Name #>Property { get; set; }
+    <#+
+}
+
+/// <summary>
+/// Generates recursively the element reader calls for complex property owners.
+/// <summary>
+private void GenerateElementReaders(Class clazz)
+{
+    foreach (var prop in clazz.Properties)
+    {
+        var property = prop as Property;
+        if (property == null || !property.Dynamic)
+        {
+            continue;
+        }
+
+        #>
+
+            if (elementName == "<#= property.Name #>")
+            {
+                this.<#= property.Name #>Property = DynamicProperty.ReadFromXml(reader);
+                return true;
+            }
+<#+
+    }
+}
+
+/// <summary>
+/// Generates recursively the element writer calls for complex property owners.
+/// <summary>
+private void GenerateElementWriters(Class clazz)
+{
+    foreach (var prop in clazz.Properties)
+    {
+        var property = prop as Property;
+        if (property == null || !property.Dynamic)
+        {
+            continue;
+        }
+
+        #>
+
+            DynamicProperty.WriteToXml("<#= property.Name #>", this.<#= property.Name #>Property, writer);
+<#+
+    }
+}
+#>

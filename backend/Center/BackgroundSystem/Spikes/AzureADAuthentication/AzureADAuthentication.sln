@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureADAuthentication", "AzureADAuthentication\AzureADAuthentication.ccproj", "{C406B9D8-EA00-46E0-9BCB-0CF53C436E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRole", "WorkerRole\WorkerRole.csproj", "{85DD9019-982C-4A32-8DBE-08F5504B5F5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModel", "ServiceModel\ServiceModel.csproj", "{D4E57CB5-CF98-4371-A820-D6CD5157BD9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{165FEE36-1E19-4C78-9B52-F37F230E5DC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHost", "ConsoleHost\ConsoleHost.csproj", "{F9066067-C8E0-47E7-847F-DD6CBED6B9FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{79DE464D-5882-4BEF-BDFB-C8AA93588636}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AzureADAuthentication\\AzureADAuthentication.ccproj
+		SccProjectName1 = AzureADAuthentication
+		SccLocalPath1 = AzureADAuthentication
+		SccProjectUniqueName2 = WorkerRole\\WorkerRole.csproj
+		SccProjectName2 = WorkerRole
+		SccLocalPath2 = WorkerRole
+		SccProjectUniqueName3 = ServiceModel\\ServiceModel.csproj
+		SccProjectName3 = ServiceModel
+		SccLocalPath3 = ServiceModel
+		SccProjectUniqueName4 = TestClient\\TestClient.csproj
+		SccProjectName4 = TestClient
+		SccLocalPath4 = TestClient
+		SccProjectUniqueName5 = ConsoleHost\\ConsoleHost.csproj
+		SccProjectName5 = ConsoleHost
+		SccLocalPath5 = ConsoleHost
+		SccProjectUniqueName6 = Host\\Host.csproj
+		SccProjectName6 = Host
+		SccLocalPath6 = Host
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C406B9D8-EA00-46E0-9BCB-0CF53C436E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C406B9D8-EA00-46E0-9BCB-0CF53C436E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C406B9D8-EA00-46E0-9BCB-0CF53C436E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C406B9D8-EA00-46E0-9BCB-0CF53C436E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DD9019-982C-4A32-8DBE-08F5504B5F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DD9019-982C-4A32-8DBE-08F5504B5F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DD9019-982C-4A32-8DBE-08F5504B5F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DD9019-982C-4A32-8DBE-08F5504B5F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E57CB5-CF98-4371-A820-D6CD5157BD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E57CB5-CF98-4371-A820-D6CD5157BD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E57CB5-CF98-4371-A820-D6CD5157BD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E57CB5-CF98-4371-A820-D6CD5157BD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{165FEE36-1E19-4C78-9B52-F37F230E5DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{165FEE36-1E19-4C78-9B52-F37F230E5DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{165FEE36-1E19-4C78-9B52-F37F230E5DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{165FEE36-1E19-4C78-9B52-F37F230E5DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9066067-C8E0-47E7-847F-DD6CBED6B9FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9066067-C8E0-47E7-847F-DD6CBED6B9FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9066067-C8E0-47E7-847F-DD6CBED6B9FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9066067-C8E0-47E7-847F-DD6CBED6B9FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79DE464D-5882-4BEF-BDFB-C8AA93588636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79DE464D-5882-4BEF-BDFB-C8AA93588636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79DE464D-5882-4BEF-BDFB-C8AA93588636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79DE464D-5882-4BEF-BDFB-C8AA93588636}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

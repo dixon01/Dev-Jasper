@@ -1,0 +1,5 @@
+[From http://www.hibernatingrhinos.com/oss/rhino-mocks]
+
+Rhino Mocks is Open Source and released under the BSD license.
+
+BSD license: http://opensource.org/licenses/bsd-license.php

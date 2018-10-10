@@ -1,0 +1,2613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddResources_NotEnoughSpace_Message" xml:space="preserve">
+    <value>L'espace disque disponible n'est pas suffisant sur '{0}'. Le fichier '{1}' ne peut être ajouté. 
+
+Veuillez libérer de l'espace sur le disque et vérifier les valeurs dans ConfigurationSupport.xml.</value>
+  </data>
+  <data name="AddResources_NotEnoughSpace_Title" xml:space="preserve">
+    <value>Espace disque disponible insuffisant</value>
+  </data>
+  <data name="DictionaryValueLanguageName_ar" xml:space="preserve">
+    <value>Arabe</value>
+  </data>
+  <data name="DictionaryValueLanguageName_de" xml:space="preserve">
+    <value>Allemand</value>
+  </data>
+  <data name="DictionaryValueLanguageName_default" xml:space="preserve">
+    <value>Par défaut</value>
+  </data>
+  <data name="DictionaryValueLanguageName_en" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="DictionaryValueLanguageName_es" xml:space="preserve">
+    <value>Espagnol</value>
+  </data>
+  <data name="DictionaryValueLanguageName_fr" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="DictionaryValueLanguageName_he" xml:space="preserve">
+    <value>Hébreu</value>
+  </data>
+  <data name="DictionaryValueLanguageName_it" xml:space="preserve">
+    <value>Italien</value>
+  </data>
+  <data name="DictionaryValueLanguageName_pt" xml:space="preserve">
+    <value>Portugais</value>
+  </data>
+  <data name="DictionaryValueLanguageName_ru" xml:space="preserve">
+    <value>Russe</value>
+  </data>
+  <data name="DictionaryValueLanguageName_zh" xml:space="preserve">
+    <value>Chinois</value>
+  </data>
+  <data name="EditDynamicTextPopup_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="EditDynamicTextPopup_RecentlyUsed" xml:space="preserve">
+    <value>Récemment Utilisé</value>
+  </data>
+  <data name="EditDynamicTextPopup_Row" xml:space="preserve">
+    <value>Ligne</value>
+  </data>
+  <data name="EditMenu_Copy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="EditMenu_Cut" xml:space="preserve">
+    <value>Couper</value>
+  </data>
+  <data name="EditMenu_Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="EditMenu_Paste" xml:space="preserve">
+    <value>Coller</value>
+  </data>
+  <data name="EditMenu_Redo" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="EditMenu_SelectAll" xml:space="preserve">
+    <value>Sélectionner Tout</value>
+  </data>
+  <data name="EditMenu_Undo" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ExportController_FileAlreadyExists" xml:space="preserve">
+    <value>Le fichier existe déjà. Si vous continuez, il sera remplacé. Continuer?</value>
+  </data>
+  <data name="ExportController_FileAlreadyExistsTitle" xml:space="preserve">
+    <value>Fichier déjà existant</value>
+  </data>
+  <data name="ExportController_PresentationExportedErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ExportController_PresentationExportError" xml:space="preserve">
+    <value>Quelque chose a échoué durant l'exportation du projet.
+
+Veuillez consulter les logs pour plus d'informations.</value>
+  </data>
+  <data name="ExportController_PresentationSuccessfullyExported" xml:space="preserve">
+    <value>Projet exporté</value>
+  </data>
+  <data name="ExportController_PresentationSuccessfullyExportedTitle" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="GraphicalEditor_100Percent" xml:space="preserve">
+    <value>100%</value>
+  </data>
+  <data name="GraphicalEditor_200Percent" xml:space="preserve">
+    <value>200%</value>
+  </data>
+  <data name="GraphicalEditor_FitOnScreen" xml:space="preserve">
+    <value>Ajuster à l'Écran</value>
+  </data>
+  <data name="GraphicalEditor_ZoomIn" xml:space="preserve">
+    <value>Zoom Avant</value>
+  </data>
+  <data name="GraphicalEditor_ZoomOut" xml:space="preserve">
+    <value>Zoom Arrière</value>
+  </data>
+  <data name="LayoutNavigigationDialog_LayoutLibrary" xml:space="preserve">
+    <value>Bibliothèque de Présentations</value>
+  </data>
+  <data name="LayoutNavigigationDialog_NewLayout" xml:space="preserve">
+    <value>Nouvelle Présentation</value>
+  </data>
+  <data name="LayoutNavigigationDialog_UsedLayouts" xml:space="preserve">
+    <value>Présentations</value>
+  </data>
+  <data name="MainMenu_About" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="MainMenu_Exit" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="MainMenu_FormulaManager" xml:space="preserve">
+    <value>Formule</value>
+  </data>
+  <data name="MainMenu_ResourceManagement" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="MainMenu_New" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="MainMenu_Open" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="MainMenu_Projects" xml:space="preserve">
+    <value>Projets</value>
+  </data>
+  <data name="MainMenu_SampleData" xml:space="preserve">
+    <value>Échantillons de Données</value>
+  </data>
+  <data name="MainMenu_Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="MainMenu_SaveAs" xml:space="preserve">
+    <value>Enregistrer Sous</value>
+  </data>
+  <data name="MainMenu_TextualReplacement" xml:space="preserve">
+    <value>Remplacements Textuels</value>
+  </data>
+  <data name="ResourceManagerView_AddPicture" xml:space="preserve">
+    <value>Ajouter Image</value>
+  </data>
+  <data name="ResourceManagerView_AddVideo" xml:space="preserve">
+    <value>Ajouter Vidéo</value>
+  </data>
+  <data name="ResourceManagerView_Managed" xml:space="preserve">
+    <value>Ressources Gérés</value>
+  </data>
+  <data name="ResourceManagerView_NewPool" xml:space="preserve">
+    <value>Nouveau Pool</value>
+  </data>
+  <data name="ResourceManagerView_NoMediaAvailable" xml:space="preserve">
+    <value>Pas de ressource ajouté pour le moment</value>
+  </data>
+  <data name="ResourceManagerView_Pictures" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="ResourceManagerView_Pools" xml:space="preserve">
+    <value>Pools</value>
+  </data>
+  <data name="ResourceManagerView_RemovePicture" xml:space="preserve">
+    <value>Supprimer Image</value>
+  </data>
+  <data name="ResourceManagerView_RemovePoolElement" xml:space="preserve">
+    <value>Supprimer l'élément du pool</value>
+  </data>
+  <data name="ResourceManagerView_RemoveVideo" xml:space="preserve">
+    <value>Supprimer Vidéo</value>
+  </data>
+  <data name="ResourceManagerView_Videos" xml:space="preserve">
+    <value>Vidéos</value>
+  </data>
+  <data name="OpenFileDialog_ImageFilterTft" xml:space="preserve">
+    <value>Fichiers Image TFT (*.bmp;*.gif;*.jpg;*.jpeg;*.png)|*.bmp;*.gif;*.jpg;*.jpeg;*.png</value>
+  </data>
+  <data name="OpenFileDialog_VideoFilter" xml:space="preserve">
+    <value>Fichiers Vidéo (*.asf;*.avi;*.mpg;*.mp2;*.mpeg;*.mp4;*.wmv)|*.asf;*.avi;*.mpg;*.mp2;*.mpeg;*.mp4;*.wmv</value>
+  </data>
+  <data name="ProjectList_Computer" xml:space="preserve">
+    <value>Serveur</value>
+  </data>
+  <data name="ProjectList_CurrentFolder" xml:space="preserve">
+    <value>Dossier Actuel</value>
+  </data>
+  <data name="ProjectList_RecentFolders" xml:space="preserve">
+    <value>Dossiers Récents</value>
+  </data>
+  <data name="ProjectList_RecentlyUsed" xml:space="preserve">
+    <value>Projets Récents</value>
+  </data>
+  <data name="Project_DeleteResourceIsUsed" xml:space="preserve">
+    <value>La ressource {0} ne peut être supprimée. Elle est utilisée dans le projet.</value>
+  </data>
+  <data name="Project_DeleteResourceTitle" xml:space="preserve">
+    <value>Supprimer Ressource</value>
+  </data>
+  <data name="Project_OpenRecent_ErrorMessage" xml:space="preserve">
+    <value>Erreur durant le chargement du projet. Il sera supprimé de la liste des projets récents.</value>
+  </data>
+  <data name="Project_OpenRecent_ErrorTitle" xml:space="preserve">
+    <value>Projet non trouvé</value>
+  </data>
+  <data name="Project_Open_NotEnoughSpace_Message" xml:space="preserve">
+    <value>L'espace disque disponible n'est pas suffisant sur '{0}'. Le projet '{1}' ne peut être ouvert.
+
+Veuillez libérer de l'espace sur le disque et vérifier les valeurs dans ConfigurationSupport.xml.</value>
+  </data>
+  <data name="Project_Open_Title" xml:space="preserve">
+    <value>Ouvrir l'emplacement du fichier du projet</value>
+  </data>
+  <data name="Project_SaveAs_Title" xml:space="preserve">
+    <value>Emplacement du fichier du projet</value>
+  </data>
+  <data name="Project_UnsavedBox_Content" xml:space="preserve">
+    <value>Le projet actuel contient des modifications non enregistrées.{0}Oui: Enregistrer localement les modifications{0}Non: Restaurer au dernier point de sauvegarde</value>
+  </data>
+  <data name="Project_UnsavedBox_Title" xml:space="preserve">
+    <value>Enregistrer le projet actuel?</value>
+  </data>
+  <data name="PropertyGrid_ContextMenu_RemoveFormula" xml:space="preserve">
+    <value>Supprimer Formule</value>
+  </data>
+  <data name="SelectMediaPopup_Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="SelectMediaPopup_DimensionColumnHeader" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="Shell_Information_OnlyOneFrameAllowed" xml:space="preserve">
+    <value>Seul un cadre par présentation est autorisé</value>
+  </data>
+  <data name="Shell_Layers" xml:space="preserve">
+    <value>Couches</value>
+  </data>
+  <data name="Shell_NewPoolName" xml:space="preserve">
+    <value>Pool </value>
+  </data>
+  <data name="Shell_NewResourceName" xml:space="preserve">
+    <value>Ressource </value>
+  </data>
+  <data name="Shell_Properties" xml:space="preserve">
+    <value>Propriétés</value>
+  </data>
+  <data name="Toolbar_TT_DynamicText" xml:space="preserve">
+    <value>Texte Dynamique (D)</value>
+  </data>
+  <data name="Toolbar_TT_Frame" xml:space="preserve">
+    <value>Cadre (F)</value>
+  </data>
+  <data name="Toolbar_TT_Hand" xml:space="preserve">
+    <value>Main (H)</value>
+  </data>
+  <data name="Toolbar_TT_Image" xml:space="preserve">
+    <value>Image (I)</value>
+  </data>
+  <data name="Toolbar_TT_Move" xml:space="preserve">
+    <value>Déplacer (V)</value>
+  </data>
+  <data name="Toolbar_TT_StaticText" xml:space="preserve">
+    <value>Texte Statique (T)</value>
+  </data>
+  <data name="Toolbar_TT_Video" xml:space="preserve">
+    <value>Vidéo (M)</value>
+  </data>
+  <data name="Toolbar_TT_Zoom" xml:space="preserve">
+    <value>Zoom (Z)</value>
+  </data>
+  <data name="Window_Edit" xml:space="preserve">
+    <value>Éditer</value>
+  </data>
+  <data name="Window_File" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="FormulaEditor_ExpertTab" xml:space="preserve">
+    <value>Expert</value>
+  </data>
+  <data name="FormulaEditor_SimpleTab" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="FormulaEditor_Formula" xml:space="preserve">
+    <value>Formule:</value>
+  </data>
+  <data name="FormulaEditor_ResultPreview" xml:space="preserve">
+    <value>Résultat=</value>
+  </data>
+  <data name="ExportController_DestinationNotEmpty" xml:space="preserve">
+    <value>Un ou plusieurs des répertoires de ressources 'Images', 'Vidéos', 'Pools', 'Symboles', 'Polices', 'Audio', '*.csv' existent déjà. Si vous continuez, ils seront remplacés. Continuer?</value>
+  </data>
+  <data name="ExportController_DestinationNotEmptyTitle" xml:space="preserve">
+    <value>Répertoire déjà existant</value>
+  </data>
+  <data name="ExportController_InfomediaFilter" xml:space="preserve">
+    <value>Fichiers infomédia (*.im2)|*.im2</value>
+  </data>
+  <data name="ExportController_SaveAs_LocalTitle" xml:space="preserve">
+    <value>Emplacement du fichier im2</value>
+  </data>
+  <data name="FormulaEditor_HelpLabel" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="FormulaEditor_Help_And" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si tous les arguments sont évalués à VRAI. Si un ou plusieurs arguments sont évalués à FAUX, la fonction renvoie la valeur FAUX.</value>
+  </data>
+  <data name="FormulaEditor_Help_Constant" xml:space="preserve">
+    <value>Non pris en charge.</value>
+  </data>
+  <data name="FormulaEditor_Help_CsvMapping" xml:space="preserve">
+    <value>La fonction renvoie la valeur de la colonne définie dans « OutputFormat » si les valeurs des opérandes (colonnes) correspondent. « FileName » contient le fichier csv à utiliser.</value>
+  </data>
+  <data name="FormulaEditor_Help_Date" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si la date actuelle est comprise entre Début et Fin.</value>
+  </data>
+  <data name="FormulaEditor_Help_DayOfWeek" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si le jour actuel de la semaine est défini à VRAI.</value>
+  </data>
+  <data name="FormulaEditor_Help_Equals" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «=».</value>
+  </data>
+  <data name="FormulaEditor_Help_Evaluation" xml:space="preserve">
+    <value>Formule prédéfinie.</value>
+  </data>
+  <data name="FormulaEditor_Help_Format" xml:space="preserve">
+    <value>La fonction remplace les espaces réservés définis dans «Format» par les valeurs des arguments.</value>
+  </data>
+  <data name="FormulaEditor_Help_Generic" xml:space="preserve">
+    <value>La fonction renvoie la valeur de la cellule de dictionnaire sélectionnée.</value>
+  </data>
+  <data name="FormulaEditor_Help_GreaterThan" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «&gt;».</value>
+  </data>
+  <data name="FormulaEditor_Help_GreaterThanOrEqual" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «&gt;=».</value>
+  </data>
+  <data name="FormulaEditor_Help_If" xml:space="preserve">
+    <value>La fonction renvoie la valeur de «Alors» si la «Condition» est évaluée à VRAI. Autrement, la fonction renvoie la valeur de «Sinon».</value>
+  </data>
+  <data name="FormulaEditor_Help_IntegerCompare" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si la valeur est comprise entre Début et Fin.</value>
+  </data>
+  <data name="FormulaEditor_Help_LessThan" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «&lt;».</value>
+  </data>
+  <data name="FormulaEditor_Help_LessThanOrEqual" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «&lt;=».</value>
+  </data>
+  <data name="FormulaEditor_Help_None" xml:space="preserve">
+    <value>Pas de formule sélectionnée.</value>
+  </data>
+  <data name="FormulaEditor_Help_Not" xml:space="preserve">
+    <value>La fonction transforme FAUX en VRAI, ou VRAI en FAUX.</value>
+  </data>
+  <data name="FormulaEditor_Help_NotEquals" xml:space="preserve">
+    <value>Non pris en charge.
+Suffisant pour utiliser «&lt;&gt;».</value>
+  </data>
+  <data name="FormulaEditor_Help_Or" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si au moins un argument est évalué à VRAI. Autrement, elle renvoie la valeur FAUX.</value>
+  </data>
+  <data name="FormulaEditor_Help_StringCompare" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si «Valeur» et «Évaluation» sont identiques.</value>
+  </data>
+  <data name="FormulaEditor_Help_Switch" xml:space="preserve">
+    <value>La fonction renvoie la valeur de l'opérande dont le «cas» est identique à la «Valeur». Si aucun «cas» est identique, la «Valeur par défaut» est renvoyée.</value>
+  </data>
+  <data name="FormulaEditor_Help_TextToImage" xml:space="preserve">
+    <value>La fonction renvoie l'image avec le nom renvoyé par la valeur du texte dynamique.</value>
+  </data>
+  <data name="FormulaEditor_Help_Time" xml:space="preserve">
+    <value>La fonction renvoie la valeur VRAI si l'heure est comprise entre Début et Fin.</value>
+  </data>
+  <data name="PropertyGrid_ContextMenu_Formula" xml:space="preserve">
+    <value>Éditeur de formule</value>
+  </data>
+  <data name="FormulaEditor_AddNewPropertyItem" xml:space="preserve">
+    <value>Ajouter Opérateur</value>
+  </data>
+  <data name="FormulaEditor_CollectionPropertyItem" xml:space="preserve">
+    <value>Opérateur</value>
+  </data>
+  <data name="FormulaParser_Error_Container_TooManyArguments" xml:space="preserve">
+    <value>L'expression peut uniquement contenir un argument.</value>
+  </data>
+  <data name="FormulaParser_Error_IF_MissingConditionArgument" xml:space="preserve">
+    <value>Une expression si nécessite un argument &lt;condition&gt;. Utilisation: IF ( &lt;condition&gt; ; &lt;alors&gt; ; &lt;sinon&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_IF_MissingThenArgument" xml:space="preserve">
+    <value>Une expression si nécessite un argument &lt;alors&gt;. Utilisation: IF ( &lt;condition&gt; ; &lt;alors&gt; ; &lt;sinon&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_IF_TooManyArguments" xml:space="preserve">
+    <value>Trop d'arguments pour une expression si. Utilisation: IF ( &lt;condition&gt; ; &lt;alors&gt; ; &lt;sinon&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_Collection_NotEnoughArguments" xml:space="preserve">
+    <value>L'expression nécessite au moins deux arguments.</value>
+  </data>
+  <data name="FormulaParser_Error_FORMAT_FirstArgumentNotString" xml:space="preserve">
+    <value>Le premier argument d'une expression Format doit être une chaîne. Utilisation: FORMAT ( &lt;format chaînes&gt; ; &lt;paramètres&gt; ; ... )</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_NoNegativeRowsAllowed" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, des bValeurs de ligne négatives ne sont pas autorisées.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_NoSuchColumnFound" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, la colonne '{0}' n'existe pas.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_NoSuchTableFound" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, le tableau '{0}' n'existe pas.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_TableIsMultiRow" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, le tableau nécessite un index de lignes.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_TableIsNotMultirow" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, le tableau ne nécessite pas d'index de lignes.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_TablIsMultiLanguage" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, le tableau nécessite un nom de langue.</value>
+  </data>
+  <data name="FormulaParser_Error_GENERIC_TablIsNotMultiLanguage" xml:space="preserve">
+    <value>Erreur dans la sélection du dictionnaire, le tableau ne nécessite pas de nom de langue.</value>
+  </data>
+  <data name="FormulaParser_Error_CSVMAPPING_FirstArgumentNotString" xml:space="preserve">
+    <value>Le premier argument de l'expression CsvMapping doit être une chaîne.</value>
+  </data>
+  <data name="LayoutNavigationDialog_RemoveLayoutMessage" xml:space="preserve">
+    <value>La présentation '{0}' ne peut être supprimée car elle est utilisée dans les sections suivantes:</value>
+  </data>
+  <data name="LayoutNavigationDialog_RemoveLayoutMessage_Cycle" xml:space="preserve">
+    <value>Cycle '{0}':</value>
+  </data>
+  <data name="LayoutNavigationDialog_RemoveLayoutMessage_Section" xml:space="preserve">
+    <value>    Section '{0}'</value>
+  </data>
+  <data name="LayoutNavigationDialog_RemoveLayoutTitle" xml:space="preserve">
+    <value>Supprimer Présentation</value>
+  </data>
+  <data name="FormulaParser_Error_CSVMAPPING_SecondArgumentNotString" xml:space="preserve">
+    <value>Le deuxième argument de l'expression CsvMapping doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_FirstArgumentNotString" xml:space="preserve">
+    <value>Le premier argument de l'expression Date doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_SecondArgumentNotString" xml:space="preserve">
+    <value>Le deuxième argument de l'expression Date doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_TooManyArguments" xml:space="preserve">
+    <value>L'expression Date contient trop d'arguments.</value>
+  </data>
+  <data name="FormulaParser_Error_DayOfWeek_ArgumentsNeedToBeBool" xml:space="preserve">
+    <value>Les arguments DayOfWeek doivent être booléens.</value>
+  </data>
+  <data name="FormulaParser_Error_DayOfWeek_TooManyArguments" xml:space="preserve">
+    <value>L'expression DayOfWeek contient trop d'arguments.</value>
+  </data>
+  <data name="FormulaParser_Error_Time_FirstArgumentNotString" xml:space="preserve">
+    <value>Le premier argument de l'expression Time doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_Time_SecondArgumentNotString" xml:space="preserve">
+    <value>Le deuxième argument de l'expression Time doit être une chaîne.</value>
+  </data>
+  <data name="FormulaValuesToStringColumnNotFound" xml:space="preserve">
+    <value>&lt;Colonne {0} non trouvée&gt;</value>
+  </data>
+  <data name="FormulaValuesToStringTableNotFound" xml:space="preserve">
+    <value>&lt;Tableau {0} non trouvé&gt;</value>
+  </data>
+  <data name="LayoutNavigationDialog_CloneButtonText" xml:space="preserve">
+    <value>Dupliquer</value>
+  </data>
+  <data name="Keyboard_Shortcuts_Delete" xml:space="preserve">
+    <value>Suppr</value>
+  </data>
+  <data name="LayoutNavigationDialog_CloneNamePrefix" xml:space="preserve">
+    <value>Copie de</value>
+  </data>
+  <data name="FormulaValuesToStringLanguageNotFound" xml:space="preserve">
+    <value>&lt;Langue {0} non trouvée&gt;</value>
+  </data>
+  <data name="FormulaValuesToStringRowNotFound" xml:space="preserve">
+    <value>&lt;Ligne {0} non valable&gt;</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Friday" xml:space="preserve">
+    <value>Ven</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Monday" xml:space="preserve">
+    <value>Lun</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Saturday" xml:space="preserve">
+    <value>Sam</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Sunday" xml:space="preserve">
+    <value>Dim</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Thursday" xml:space="preserve">
+    <value>Jeu</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Tuesday" xml:space="preserve">
+    <value>Mar</value>
+  </data>
+  <data name="FormulaEditor_DayOfWeek_Wednesday" xml:space="preserve">
+    <value>Mer</value>
+  </data>
+  <data name="FormulaParser_Error_Case_FirstArgumentNotConstant" xml:space="preserve">
+    <value>La partie gauche du cas de commutation doit être constante</value>
+  </data>
+  <data name="FormulaParser_Error_IntegerCompare_SecondArgumentNotInt" xml:space="preserve">
+    <value>Le deuxième argument de l'expression IntegerCompare doit être un entier.</value>
+  </data>
+  <data name="FormulaParser_Error_IntegerCompare_ThirdArgumentNotInt" xml:space="preserve">
+    <value>Le troisième argument de l'expression IntegerCompare doit être un entier.</value>
+  </data>
+  <data name="FormulaParser_Error_IntegerCompare_TooManyArguments" xml:space="preserve">
+    <value>Trop d'arguments pour l'expression IntegerCompare. Utilisation: IntegerCompare ( &lt;Générique&gt; ; &lt;int&gt; ; &lt;int&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_StringCompare_SecondArgumentNotConstant" xml:space="preserve">
+    <value>Le deuxième argument de l'expression StringCompare doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_StringCompare_ThirdArgumentNotBool" xml:space="preserve">
+    <value>Le troisième argument de l'expression StringCompare doit être bool (VRAI, FAUX).</value>
+  </data>
+  <data name="FormulaParser_Error_StringCompare_TooManyArguments" xml:space="preserve">
+    <value>Trop d'arguments pour l'expression StringCompare. Utilisation: StringCompare ( &lt;Générique&gt; ; &lt;chaîne&gt; ; &lt;bool&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_TextToImage_SecondArgumentNotString" xml:space="preserve">
+    <value>Le deuxième argument de l'expression TextToImage doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_TextToImage_TooManyArguments" xml:space="preserve">
+    <value>Trop d'arguments pour une expression TextToImage. Utilisation: TextToImage ( &lt;Générique&gt; ; &lt;chaîne&gt; )</value>
+  </data>
+  <data name="FormulaParser_Error_Date_FirstArgumentNotDate" xml:space="preserve">
+    <value>La première chaîne ne contient pas de date. Utiliser le format &lt;jj.mm.aaaa&gt;</value>
+  </data>
+  <data name="FormulaParser_Error_Date_SecondArgumentNotDate" xml:space="preserve">
+    <value>La deuxième chaîne ne contient pas de date. Utiliser le format &lt;jj.mm.aaaa&gt;</value>
+  </data>
+  <data name="FormulaParser_Error_Binary_MissingLeftArgument" xml:space="preserve">
+    <value>Une expression binaire nécessite un argument &lt;gauche&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Binary_MissingRightArgument" xml:space="preserve">
+    <value>Une expression binaire nécessite un argument &lt;droite&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Container_MissingEvaluationArgument" xml:space="preserve">
+    <value>L'expression nécessite un argument &lt;evaluation&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Csv_MissingDefaultValue" xml:space="preserve">
+    <value>Une expression CsvMapping nécessite un argument &lt;default&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Csv_MissingFilename" xml:space="preserve">
+    <value>Une expression CsvMapping nécessite un argument &lt;filename&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Csv_MissingOutputFormat" xml:space="preserve">
+    <value>Une expression CsvMapping nécessite un argument &lt;output format&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_EndLessThanBegin" xml:space="preserve">
+    <value>L'argument &lt;begin&gt; ne peut être supérieur à la valeur &lt;end&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_MissingBeginArgument" xml:space="preserve">
+    <value>Une expression Date nécessite un argument &lt;début&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Date_MissingEndArgument" xml:space="preserve">
+    <value>Une expression Date nécessite un argument &lt;fin&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_DayOfWeek_UnknownDay" xml:space="preserve">
+    <value>Le jour '{0}' est inconnu.</value>
+  </data>
+  <data name="FormulaParser_Error_Switch_MissingDefaultArgument" xml:space="preserve">
+    <value>Une expression Switch nécessite un argument &lt;par défaut&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Switch_MissingValueArgument" xml:space="preserve">
+    <value>Une expression Switch nécessite un argument &lt;valeur&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_TextToImage_MissingEvaluationArgument" xml:space="preserve">
+    <value>Une expression TextToImage nécessite un argument &lt;évaluation&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Time_MissingBeginArgument" xml:space="preserve">
+    <value>Une expression Time nécessite un argument &lt;début&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_Time_MissingEndArgument" xml:space="preserve">
+    <value>Une expression Time nécessite un argument &lt;fin&gt;.</value>
+  </data>
+  <data name="FormulaParser_Error_CsvMapping_LeftSideOfCaseIsNoInteger" xml:space="preserve">
+    <value>La partie gauche de la condition {0} n'est pas un nombre entier</value>
+  </data>
+  <data name="LayoutNavigationDialog_UsedLayoutTooltip" xml:space="preserve">
+    <value>Cette présentation est utilisée dans {0} section(s).</value>
+  </data>
+  <data name="FormulaParser_Error_RegexReplace_SecondArgumentNotString" xml:space="preserve">
+    <value>Le deuxième argument de l'expression RegexReplace doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_RegexReplace_ThirdArgumentNotString" xml:space="preserve">
+    <value>Le troisième argument de l'expression RegexReplace doit être une chaîne.</value>
+  </data>
+  <data name="FormulaParser_Error_RegexReplace_TooManyArguments" xml:space="preserve">
+    <value>Trop d'arguments pour une expression RegexReplace. Utilisation: RegexReplace ( &lt;Générique&gt; ; &lt;configuration&gt;; &lt;remplacement&gt; )</value>
+  </data>
+  <data name="CycleDetailsNavigator_CreateNewCycle" xml:space="preserve">
+    <value>Nouveau Cycle</value>
+  </data>
+  <data name="CycleDetailsNavigator_CreateNewSection" xml:space="preserve">
+    <value>Nouvelle Section</value>
+  </data>
+  <data name="SectionConfigNameFallback_ImageSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Image</value>
+  </data>
+  <data name="SectionConfigNameFallback_MasterSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Principale</value>
+  </data>
+  <data name="SectionConfigNameFallback_MultiSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Multiple</value>
+  </data>
+  <data name="SectionConfigNameFallback_PoolSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Pool</value>
+  </data>
+  <data name="SectionConfigNameFallback_StandardSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Standard</value>
+  </data>
+  <data name="SectionConfigNameFallback_VideoSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Vidéo</value>
+  </data>
+  <data name="SectionConfigNameFallback_WebmediaSectionConfigDataViewModel" xml:space="preserve">
+    <value>Section Webmedia</value>
+  </data>
+  <data name="CycleController_NewCycleName" xml:space="preserve">
+    <value>Nouveau Cycle </value>
+  </data>
+  <data name="CycleController_CantDeleteLastCycle" xml:space="preserve">
+    <value>Le dernier Cycle Standard ne peut être supprimé</value>
+  </data>
+  <data name="CycleController_CantDeleteLastSection" xml:space="preserve">
+    <value>La dernière Section ne peut être supprimée</value>
+  </data>
+  <data name="CycleController_CreateCycleHistoryEntry" xml:space="preserve">
+    <value>Nouveau cycle créé</value>
+  </data>
+  <data name="CycleDetailsNavigator_CloneCycle" xml:space="preserve">
+    <value>Dupliquer Cycle</value>
+  </data>
+  <data name="CycleDetailsNavigator_CloneSection" xml:space="preserve">
+    <value>Dupliquer Section</value>
+  </data>
+  <data name="CycleDetailsNavigator_DeleteCycle" xml:space="preserve">
+    <value>Supprimer Cycle</value>
+  </data>
+  <data name="CycleDetailsNavigator_DeleteSection" xml:space="preserve">
+    <value>Supprimer Section</value>
+  </data>
+  <data name="ViewMenu_ShowSimulation" xml:space="preserve">
+    <value>Montrer Simulation</value>
+  </data>
+  <data name="Window_View" xml:space="preserve">
+    <value>Vue</value>
+  </data>
+  <data name="CycleController_CloneCycleHistoryEntry" xml:space="preserve">
+    <value>Cycle dupliqué</value>
+  </data>
+  <data name="CycleController_CloneSectionHistoryEntry" xml:space="preserve">
+    <value>Section dupliquée</value>
+  </data>
+  <data name="CycleController_CreateSectionHistoryEntry" xml:space="preserve">
+    <value>Section créée</value>
+  </data>
+  <data name="CycleController_DeleteCycleHistoryEntry" xml:space="preserve">
+    <value>Cycle supprimé</value>
+  </data>
+  <data name="CycleController_DeleteSectionHistoryEntry" xml:space="preserve">
+    <value>Section supprimée</value>
+  </data>
+  <data name="CycleController_RenameCycleHistoryEntry" xml:space="preserve">
+    <value>Cycle renommé</value>
+  </data>
+  <data name="CycleController_RenameSectionHistoryEntry" xml:space="preserve">
+    <value>Section renommée</value>
+  </data>
+  <data name="MediaShellController_RenameLayoutHistoryEntry" xml:space="preserve">
+    <value>Présentation renommée</value>
+  </data>
+  <data name="CycleDetailsNavigator_RenameCycle" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="CreateCyclePopup_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CreateCyclePopup_CreateCycle" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="CreateCyclePopup_EventCycle" xml:space="preserve">
+    <value>Cycle évènement</value>
+  </data>
+  <data name="CreateCyclePopup_StandardCycle" xml:space="preserve">
+    <value>Cycle standard</value>
+  </data>
+  <data name="CycleController_NewEventCycleName" xml:space="preserve">
+    <value>Nouveau Cycle Évènement </value>
+  </data>
+  <data name="CycleDetailsNavigator_TreeViewCycleTypes" xml:space="preserve">
+    <value>Cycles évènements, Cycles standards</value>
+  </data>
+  <data name="SelectSection_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="SelectSection_Multi" xml:space="preserve">
+    <value>Multiple</value>
+  </data>
+  <data name="SelectSection_Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="SelectSection_Standard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="SelectSection_Video" xml:space="preserve">
+    <value>Vidéo</value>
+  </data>
+  <data name="SelectSection_Dynamic" xml:space="preserve">
+    <value>Dynamique</value>
+  </data>
+  <data name="SelectSection_SelectLayoutHeader" xml:space="preserve">
+    <value>Présentation: </value>
+  </data>
+  <data name="SelectSection_SelectTypeHeader" xml:space="preserve">
+    <value>Type de section: </value>
+  </data>
+  <data name="Toolbar_TT_AnalogClock" xml:space="preserve">
+    <value>Horloge Analogique (C)</value>
+  </data>
+  <data name="Toolbar_TT_ImageList" xml:space="preserve">
+    <value>Liste Images (L)</value>
+  </data>
+  <data name="GeneralEditorController_UpdateLayoutHistoryEntryLabel" xml:space="preserve">
+    <value>Mise à jour Présentation</value>
+  </data>
+  <data name="TftEditorController_CreateAnalogClockElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Horloge Analogique</value>
+  </data>
+  <data name="GraphicalEditorController_CreateDynamicElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Texte Dynamique</value>
+  </data>
+  <data name="TftEditorController_CreateFrameElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Cadre</value>
+  </data>
+  <data name="GraphicalEditorController_CreateImageElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Image</value>
+  </data>
+  <data name="GraphicalEditorController_CreateStaticElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Texte Statique</value>
+  </data>
+  <data name="TftEditorController_CreateVideoElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Vidéo</value>
+  </data>
+  <data name="GeneralEditorController_DeleteElementsHistoryEntryLabel" xml:space="preserve">
+    <value>Supprimer {0} éléments de présentation</value>
+  </data>
+  <data name="GeneralEditorController_MoveLayoutElementsHistoryEntryLabel" xml:space="preserve">
+    <value>Déplacer {0} éléments de présentation sélectionnés</value>
+  </data>
+  <data name="GeneralEditorController_ResizeLayoutElementsHistoryEntryLabel" xml:space="preserve">
+    <value>Redimensionner l'élément</value>
+  </data>
+  <data name="ResourceManagerView_AddSymbol" xml:space="preserve">
+    <value>Ajouter Symbole</value>
+  </data>
+  <data name="ResourceManagerView_RemoveSymbol" xml:space="preserve">
+    <value>Supprimer Symbole</value>
+  </data>
+  <data name="ResourceManagerView_Symbols" xml:space="preserve">
+    <value>Symboles</value>
+  </data>
+  <data name="ProjectController_UnsavedProject" xml:space="preserve">
+    <value>Nouveau Projet non enregistré</value>
+  </data>
+  <data name="GraphicalEditor_100PercentShortcut" xml:space="preserve">
+    <value>DÉBUT</value>
+  </data>
+  <data name="GraphicalEditor_ZoomInShortcut" xml:space="preserve">
+    <value>CTRL + «+»</value>
+  </data>
+  <data name="GraphicalEditor_ZoomOutShortcut" xml:space="preserve">
+    <value>CTRL + «-»</value>
+  </data>
+  <data name="TftEditorController_CreateImageListElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Liste Images</value>
+  </data>
+  <data name="ExportMenu_Export" xml:space="preserve">
+    <value>Parcourir...</value>
+  </data>
+  <data name="ExportMenu_ExportTo" xml:space="preserve">
+    <value>Exporter vers </value>
+  </data>
+  <data name="MainMenu_NewProjectButton" xml:space="preserve">
+    <value>Nouveau projet</value>
+  </data>
+  <data name="ExportController_PresentationSuccessfullyExportedWithMissingFonts" xml:space="preserve">
+    <value>Présentation exportée.
+Ces Polices ont été copiées vers le dossier Fonts:
+
+{0}</value>
+  </data>
+  <data name="PropertyGridField_Align" xml:space="preserve">
+    <value>Aligner</value>
+  </data>
+  <data name="PropertyGridField_CenterX" xml:space="preserve">
+    <value>Centre X [px]</value>
+  </data>
+  <data name="PropertyGridField_CenterY" xml:space="preserve">
+    <value>Centre Y [px]</value>
+  </data>
+  <data name="PropertyGridField_Color" xml:space="preserve">
+    <value>Couleur</value>
+  </data>
+  <data name="PropertyGridField_Delimiter" xml:space="preserve">
+    <value>Délimiteur</value>
+  </data>
+  <data name="PropertyGridField_Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="PropertyGridField_Duration" xml:space="preserve">
+    <value>Durée [hh:mm:ss.f]</value>
+  </data>
+  <data name="PropertyGridField_Enabled" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="PropertyGridField_Face" xml:space="preserve">
+    <value>Type de Police</value>
+  </data>
+  <data name="PropertyGridField_FallbackImage" xml:space="preserve">
+    <value>Image de Secours</value>
+  </data>
+  <data name="PropertyGridField_Filename" xml:space="preserve">
+    <value>Nom de Fichier</value>
+  </data>
+  <data name="PropertyGridField_FilePatterns" xml:space="preserve">
+    <value>Configurations Fichier</value>
+  </data>
+  <data name="PropertyGridField_Frame" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="PropertyGridField_FrameId" xml:space="preserve">
+    <value>Identifiant Cadre</value>
+  </data>
+  <data name="PropertyGridField_Height" xml:space="preserve">
+    <value>Hauteur [px]</value>
+  </data>
+  <data name="PropertyGridField_HorizontalImageGap" xml:space="preserve">
+    <value>Déficit Image Horizontal [px]</value>
+  </data>
+  <data name="PropertyGridField_ImageHeight" xml:space="preserve">
+    <value>Hauteur Image [px]</value>
+  </data>
+  <data name="PropertyGridField_ImageWidth" xml:space="preserve">
+    <value>Largeur Image [px]</value>
+  </data>
+  <data name="PropertyGridField_Italic" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="PropertyGridField_Layout" xml:space="preserve">
+    <value>Présentation</value>
+  </data>
+  <data name="PropertyGridField_MaxPages" xml:space="preserve">
+    <value>Pages Max</value>
+  </data>
+  <data name="PropertyGridField_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="PropertyGridField_Overflow" xml:space="preserve">
+    <value>Dépassement</value>
+  </data>
+  <data name="PropertyGridField_Replay" xml:space="preserve">
+    <value>Relecture</value>
+  </data>
+  <data name="PropertyGridField_Rotation" xml:space="preserve">
+    <value>Rotation [°]</value>
+  </data>
+  <data name="PropertyGridField_RowsPerPage" xml:space="preserve">
+    <value>Lignes Par Page</value>
+  </data>
+  <data name="PropertyGridField_Scaling" xml:space="preserve">
+    <value>Mise à l'échelle</value>
+  </data>
+  <data name="PropertyGridField_ScrollSpeed" xml:space="preserve">
+    <value>Vitesse de Défilement [px/sec]</value>
+  </data>
+  <data name="PropertyGridField_Table" xml:space="preserve">
+    <value>Tableau</value>
+  </data>
+  <data name="PropertyGridField_TestData" xml:space="preserve">
+    <value>Données de Test</value>
+  </data>
+  <data name="PropertyGridField_VAlign" xml:space="preserve">
+    <value>Alignement Vertical</value>
+  </data>
+  <data name="PropertyGridField_Value" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="PropertyGridField_Values" xml:space="preserve">
+    <value>Valeurs</value>
+  </data>
+  <data name="PropertyGridField_VerticalImageGap" xml:space="preserve">
+    <value>Déficit Image Vertical [px]</value>
+  </data>
+  <data name="PropertyGridField_VideoEndMode" xml:space="preserve">
+    <value>Mode Fin Vidéo</value>
+  </data>
+  <data name="PropertyGridField_VideoUri" xml:space="preserve">
+    <value>URI Vidéo</value>
+  </data>
+  <data name="PropertyGridField_Visible" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="PropertyGridField_Weight" xml:space="preserve">
+    <value>Poids [int]</value>
+  </data>
+  <data name="PropertyGridField_Width" xml:space="preserve">
+    <value>Largeur [px]</value>
+  </data>
+  <data name="PropertyGridField_X" xml:space="preserve">
+    <value>X [px]</value>
+  </data>
+  <data name="PropertyGridField_Y" xml:space="preserve">
+    <value>Y [px]</value>
+  </data>
+  <data name="ProjectList_Browse" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
+  <data name="PropertyGridField_Common" xml:space="preserve">
+    <value>Commun</value>
+  </data>
+  <data name="PropertyGridField_Content" xml:space="preserve">
+    <value>Contenu</value>
+  </data>
+  <data name="PropertyGridField_Font" xml:space="preserve">
+    <value>Police</value>
+  </data>
+  <data name="PropertyGridField_Hour" xml:space="preserve">
+    <value>Heure</value>
+  </data>
+  <data name="PropertyGridField_Minute" xml:space="preserve">
+    <value>Minute</value>
+  </data>
+  <data name="PropertyGridField_Seconds" xml:space="preserve">
+    <value>Secondes</value>
+  </data>
+  <data name="PropertyGridField_Column" xml:space="preserve">
+    <value>Colonne</value>
+  </data>
+  <data name="PropertyGridField_Trigger" xml:space="preserve">
+    <value>Déclenchement</value>
+  </data>
+  <data name="EditMenu_RedoInputGestureText" xml:space="preserve">
+    <value>Ctrl+Y</value>
+  </data>
+  <data name="EditMenu_SelectAllInputGestureText" xml:space="preserve">
+    <value>Ctrl+A</value>
+  </data>
+  <data name="EditMenu_UndoInputGestureText" xml:space="preserve">
+    <value>Ctrl+Z</value>
+  </data>
+  <data name="SelectMediaPopup_ExpanderHeader" xml:space="preserve">
+    <value>Sélection du média</value>
+  </data>
+  <data name="ResourceManager_couldNotFindMedia" xml:space="preserve">
+    <value>Ressource non trouvé dans la collection</value>
+  </data>
+  <data name="ResourceManager_couldNotFindMediaTitle" xml:space="preserve">
+    <value>Collection de ressource</value>
+  </data>
+  <data name="ResourceManager_canNotRemovePool" xml:space="preserve">
+    <value>Le pool est utilisé et ne peut être supprimé.</value>
+  </data>
+  <data name="MainMenu_SaveAsTooltip" xml:space="preserve">
+    <value>Committer Sous (F12)</value>
+  </data>
+  <data name="MainMenu_SaveTooltip" xml:space="preserve">
+    <value>Enregistrer (Ctrl+S)</value>
+  </data>
+  <data name="ProjectController_UpdateTextReplacementHistoryEntryLabel" xml:space="preserve">
+    <value>Remplacement Mis à Jour</value>
+  </data>
+  <data name="TextReplaceControl_NewReplacement" xml:space="preserve">
+    <value>Nouveau Remplacement</value>
+  </data>
+  <data name="SelectableImage_NoImageSelectedToolTipText" xml:space="preserve">
+    <value>Pas d'image sélectionnée</value>
+  </data>
+  <data name="ProjectController_TooManyReplacements" xml:space="preserve">
+    <value>Il peut uniquement y avoir 99 remplacements à la fois</value>
+  </data>
+  <data name="ProjectController_TooManyReplacementsTitle" xml:space="preserve">
+    <value>Trop de Remplacements</value>
+  </data>
+  <data name="TextReplaceControl_CodeHelp" xml:space="preserve">
+    <value>#,&amp; sont des espaces réservés pour le numérodetrajet
+#: ignorer zéro en tête (p. ex. N1)
+&amp;: prendre en charge zéro en tête (p. ex. N01)</value>
+  </data>
+  <data name="Evaluation_UsedLayoutTooltip" xml:space="preserve">
+    <value>Cette formule est utilisée {0} fois.</value>
+  </data>
+  <data name="FormulaManager_CreateNewFormula" xml:space="preserve">
+    <value>Créer Formule</value>
+  </data>
+  <data name="ProjectController_CreatePredefinedFormulaHistoryEntry" xml:space="preserve">
+    <value>Formule prédéfinie créée.</value>
+  </data>
+  <data name="ProjectController_DeletePredefinedFormulaHistoryEntry" xml:space="preserve">
+    <value>Formule prédéfinie supprimée.</value>
+  </data>
+  <data name="ProjectController_NewPredefinedFormulaName" xml:space="preserve">
+    <value>Formule_</value>
+  </data>
+  <data name="ExportController_csvFileAlreadyExists" xml:space="preserve">
+    <value>Le fichier de code de conversion 'codeconversion.csv' existe déjà. Si vous continuez, il sera remplacé. Continuer?</value>
+  </data>
+  <data name="TextReplaceControl_1stColumnHeader" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="TextReplaceControl_2ndColumnHeader" xml:space="preserve">
+    <value>Texte/Symbole</value>
+  </data>
+  <data name="TextReplaceControl_3rdColumnHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="FormulaManagerController_CloneNamePrefix" xml:space="preserve">
+    <value>Copie_de_</value>
+  </data>
+  <data name="FormulaManagerController_ClonePredefinedFormulaHistoryEntry" xml:space="preserve">
+    <value>Formule Prédéfinie dupliquée</value>
+  </data>
+  <data name="FormulaManagerController_RenameEvaluationHistoryEntry" xml:space="preserve">
+    <value>Formule Prédéfinie renommée</value>
+  </data>
+  <data name="FormulaManagerController_UpdatePredefinedFormulaHistoryEntryLabel" xml:space="preserve">
+    <value>Formule Prédéfinie mise à jour</value>
+  </data>
+  <data name="FormulaManager_CanNotRemoveFormula" xml:space="preserve">
+    <value>La formule est utilisée et ne peut être supprimée.</value>
+  </data>
+  <data name="Evaluation_NoSpecialCharactersInName" xml:space="preserve">
+    <value>Le nom de la formule ne peut contenir des caractères spéciaux: ' ', '=', '$', '(', ')', '[', ']', ':', ';', '''</value>
+  </data>
+  <data name="Evaluation_SystemNamesNotAllowed" xml:space="preserve">
+    <value>Le nom de la formule ne peut être le même que celui des formules du système.</value>
+  </data>
+  <data name="Evaluation_UniqueName" xml:space="preserve">
+    <value>Le nom de la formule doit être unique!</value>
+  </data>
+  <data name="ProjectController_DefaultCyclePackageName" xml:space="preserve">
+    <value>Ensemble Cycles TFT</value>
+  </data>
+  <data name="ProjectController_DefaultEventCycleName" xml:space="preserve">
+    <value>Cycle évènement 1</value>
+  </data>
+  <data name="ProjectController_DefaultLayoutName" xml:space="preserve">
+    <value>Présentation 1</value>
+  </data>
+  <data name="ProjectController_DefaultMasterCycleName" xml:space="preserve">
+    <value>Cycle principal</value>
+  </data>
+  <data name="ProjectController_DefaultMasterLayoutName" xml:space="preserve">
+    <value>Présentation Principale Standard</value>
+  </data>
+  <data name="ProjectController_DefaultPhysicalScreenName" xml:space="preserve">
+    <value>Écran TFT</value>
+  </data>
+  <data name="ProjectController_DefaultStandardCycleName" xml:space="preserve">
+    <value>Cycle standard 1</value>
+  </data>
+  <data name="ProjectController_DefaultVirtualDisplayName" xml:space="preserve">
+    <value>Affichage TFT</value>
+  </data>
+  <data name="ProjectController_DefaultVirtualDisplayText" xml:space="preserve">
+    <value>Plein écran</value>
+  </data>
+  <data name="Consistency_ErrorTooltip" xml:space="preserve">
+    <value>Le projet actuel contient des erreurs</value>
+  </data>
+  <data name="Consistency_WarningTooltip" xml:space="preserve">
+    <value>Le projet actuel contient des avertissements</value>
+  </data>
+  <data name="ExportController_TryingToExportWithErrors" xml:space="preserve">
+    <value>Votre projet contient toujours des erreurs. Êtes-vous sûr de vouloir continuer l'exportation?</value>
+  </data>
+  <data name="ExportController_TryingToExportWithErrorsTitle" xml:space="preserve">
+    <value>Erreurs dans le Projet</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutWithoutElements" xml:space="preserve">
+    <value>Les présentations sans éléments n'afficheront aucun contenu.</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutWithoutElementsTitle" xml:space="preserve">
+    <value>La présentation '{0}' ne contient aucun élément pour la résolution '{1}x{2}'.</value>
+  </data>
+  <data name="ConsistencyChecker_UnusedLayoutTitle" xml:space="preserve">
+    <value>La présentation '{0}' n'est pas utilisée.</value>
+  </data>
+  <data name="ConsistencyDialog_Severity" xml:space="preserve">
+    <value>Gravité</value>
+  </data>
+  <data name="ConsistencyDialog_Text" xml:space="preserve">
+    <value>Texte</value>
+  </data>
+  <data name="ConsistencyDialog_Title" xml:space="preserve">
+    <value>Le projet actuel contient les erreurs et/ou avertissements suivant(e)s:</value>
+  </data>
+  <data name="ExportController_TryingToExportWithWarnings" xml:space="preserve">
+    <value>Votre projet contient toujours des avertissements. Êtes-vous sûr de vouloir continuer l'exportation?</value>
+  </data>
+  <data name="ExportController_TryingToExportWithWarningsTitle" xml:space="preserve">
+    <value>Avertissements dans le Projet</value>
+  </data>
+  <data name="ConsistencyChecker_FontNotFound" xml:space="preserve">
+    <value>La police utilisée '{0} {1}' n'est pas installée et sur le système actuel, et pas prise en charge dans les ressources.
+Emplacement: {2}</value>
+  </data>
+  <data name="ConsistencyChecker_FontNotFoundTitle" xml:space="preserve">
+    <value>Police non trouvée</value>
+  </data>
+  <data name="ConsistencyChecker_FontNotInstalledOnTFT" xml:space="preserve">
+    <value>Assurez-vous d'avoir la licence adéquate pour cette police.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_FontNotInstalledOnTFTTitle" xml:space="preserve">
+    <value>La police utilisée '{0}' ne fait pas partie de l'image Windows du TFT</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidFormula" xml:space="preserve">
+    <value>La formule '{0}' n'est pas valable.
+Emplacement: {1}</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidFormulaTitle" xml:space="preserve">
+    <value>Formule non valable</value>
+  </data>
+  <data name="ConsistencyChecker_NameSeperator" xml:space="preserve">
+    <value> / </value>
+  </data>
+  <data name="ConsistencyChecker_NoCyclePackage" xml:space="preserve">
+    <value>Le projet doit au moins contenir un ensemble de cycles.</value>
+  </data>
+  <data name="ConsistencyChecker_NoCyclePackageTitle" xml:space="preserve">
+    <value>Pas d'ensemble de cycles</value>
+  </data>
+  <data name="ConsistencyChecker_NoLayout" xml:space="preserve">
+    <value>Le projet doit au moins contenir une présentation.</value>
+  </data>
+  <data name="ConsistencyChecker_NoLayoutTitle" xml:space="preserve">
+    <value>Pas de présentation</value>
+  </data>
+  <data name="ConsistencyChecker_NoPhysicalScreen" xml:space="preserve">
+    <value>Le projet doit au moins contenir un écran physique.</value>
+  </data>
+  <data name="ConsistencyChecker_NoPhysicalScreenTitle" xml:space="preserve">
+    <value>Pas d'écran physique</value>
+  </data>
+  <data name="ConsistencyChecker_NoProject" xml:space="preserve">
+    <value>L'application ne contient pas de projet.</value>
+  </data>
+  <data name="ConsistencyChecker_NoProjectTitle" xml:space="preserve">
+    <value>Pas de projet trouvé</value>
+  </data>
+  <data name="ConsistencyChecker_NoStandardCycle" xml:space="preserve">
+    <value>Le projet doit au moins contenir un cycle standard.</value>
+  </data>
+  <data name="ConsistencyChecker_NoStandardCycleTitle" xml:space="preserve">
+    <value>Pas de cycle standard</value>
+  </data>
+  <data name="ConsistencyChecker_NoVirtualDisplay" xml:space="preserve">
+    <value>Le projet doit au moins contenir un affichage virtuel.</value>
+  </data>
+  <data name="ConsistencyChecker_NoVirtualDisplayTitle" xml:space="preserve">
+    <value>Pas d'affichages virtuels</value>
+  </data>
+  <data name="ConsistencyChecker_ReplacementImageNotSet" xml:space="preserve">
+    <value>Le remplacement '{0}' est défini en mode image mais l'image n'est pas spécifiée.</value>
+  </data>
+  <data name="ConsistencyChecker_ReplacementImageNotSetTitle" xml:space="preserve">
+    <value>Le remplacement textuel contient une image non définie</value>
+  </data>
+  <data name="ConsistencyChecker_VirtualDisplayNotLinked" xml:space="preserve">
+    <value>L'affichage virtuel '{0}' ne contient pas de lien vers un ensemble de cycles</value>
+  </data>
+  <data name="ConsistencyChecker_VirtualDisplayNotLinkedTitle" xml:space="preserve">
+    <value>L'affichage virtuel n'est pas mis en lien</value>
+  </data>
+  <data name="ConsistencyChecker_UnusedCycleTitle" xml:space="preserve">
+    <value>Le cycle '{0}' n'est pas utilisé</value>
+  </data>
+  <data name="ExportController_PresentationSuccessfullyExportedWithMissingFontsNotCopied" xml:space="preserve">
+    <value>Présentation exportée.
+Ces Polices n'ont pas pu être copiées vers le dossier Fonts:
+
+{0}
+
+Veuillez consulter les logs pour plus d'informations.</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementImageNotInMediaTitle" xml:space="preserve">
+    <value>Image '{0}' non contenue dans les médias</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementImageNotSetTitle" xml:space="preserve">
+    <value>Image non définie dans l'élément de présentation</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementVideoNotInMediaTitle" xml:space="preserve">
+    <value>Vidéo '{0}' non contenue dans les médias</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementVideoNotSetTitle" xml:space="preserve">
+    <value>Vidéo non définie dans l'élément de présentation</value>
+  </data>
+  <data name="ConsistencyChecker_ImageSectionImageNotSetTitle" xml:space="preserve">
+    <value>Image non définie dans la section</value>
+  </data>
+  <data name="ConsistencyChecker_VideoSectionVideoNotSetTitle" xml:space="preserve">
+    <value>Vidéo non définie dans la section</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidPredefinedFormulaTitle" xml:space="preserve">
+    <value>La formule prédéfinie '{0}' n'est pas valable</value>
+  </data>
+  <data name="ConsistencyChecker_PoolSectionPoolNotSetTitle" xml:space="preserve">
+    <value>La section Pool n'a pas de pool configuré</value>
+  </data>
+  <data name="ConsistencyChecker_PredefinedFormulaNotSetTitle" xml:space="preserve">
+    <value>La formule prédéfinie '{0}' est vide</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementVideoInvalidUriTitle" xml:space="preserve">
+    <value>La vidéo '{0}' contient un URI non valable</value>
+  </data>
+  <data name="Paste_ConfirmAddResourceMessage" xml:space="preserve">
+    <value>Voulez-vous ajouter les ressources du presse-papiers?</value>
+  </data>
+  <data name="Paste_ConfirmAddResourceTitle" xml:space="preserve">
+    <value>Ajouter ressource</value>
+  </data>
+  <data name="Paste_DisplayText" xml:space="preserve">
+    <value>Coller {0} éléments de présentation</value>
+  </data>
+  <data name="FormulaEditor_Help_RegexReplace" xml:space="preserve">
+    <value>La fonction remplace une chaîne définie en tant qu'expression régulière dans «Pattern» dans «Evaluation», avec la valeur définie dans le «Replacement»</value>
+  </data>
+  <data name="FormulaEditor_MoreInformationLinkText" xml:space="preserve">
+    <value>Plus d'Informations</value>
+  </data>
+  <data name="ViewMenu_UseEdgeSnap" xml:space="preserve">
+    <value>Utiliser Bords à Encliquetage</value>
+  </data>
+  <data name="AnimationEditor_AnimationDuration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="AnimationEditor_AnimationType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AnimationEditor_EditAnimation" xml:space="preserve">
+    <value>Éditer Animation</value>
+  </data>
+  <data name="PropertyGrid_ContextMenu_Animation" xml:space="preserve">
+    <value>Éditeur Animation</value>
+  </data>
+  <data name="PropertyGrid_ContextMenu_RemoveAnimation" xml:space="preserve">
+    <value>Supprimer Animation</value>
+  </data>
+  <data name="AnimationEditor_Eval_FadeThroughNothing" xml:space="preserve">
+    <value>Fondu à travers rien</value>
+  </data>
+  <data name="AnimationEditor_Eval_Linear" xml:space="preserve">
+    <value>Linéaire</value>
+  </data>
+  <data name="AnimationEditor_DurationTooltip" xml:space="preserve">
+    <value>Heure en millisecondes pour cette animation.</value>
+  </data>
+  <data name="MediaShellController_CreateLayoutHistoryEntry" xml:space="preserve">
+    <value>Présentation créée</value>
+  </data>
+  <data name="MediaShellController_DeleteLayoutHistoryEntry" xml:space="preserve">
+    <value>Présentation supprimée</value>
+  </data>
+  <data name="TriggerEditor_Title" xml:space="preserve">
+    <value>Éditer Déclenchement</value>
+  </data>
+  <data name="TriggerEditor_AddCoordinate" xml:space="preserve">
+    <value>Ajouter Coordonnée</value>
+  </data>
+  <data name="TriggerEditor_CantRemoveLastCoordinateError" xml:space="preserve">
+    <value>La dernière Coordonnée n'a pas pu être supprimée</value>
+  </data>
+  <data name="EditMenu_CopyInputGestureText" xml:space="preserve">
+    <value>Ctrl + C</value>
+  </data>
+  <data name="EditMenu_CutInputGestureText" xml:space="preserve">
+    <value>Ctrl + X</value>
+  </data>
+  <data name="EditMenu_PasteInputGestureText" xml:space="preserve">
+    <value>Ctrl + V</value>
+  </data>
+  <data name="LayerEditor_RenameLayoutElementHistoryEntry" xml:space="preserve">
+    <value>Renommer l'élément de présentation</value>
+  </data>
+  <data name="ProjectController_AddResource" xml:space="preserve">
+    <value>Ajouter Ressource</value>
+  </data>
+  <data name="SelectMediaNoMediaMessage" xml:space="preserve">
+    <value>Veuillez sélectionner un média</value>
+  </data>
+  <data name="FitToOriginalSizeTooltip" xml:space="preserve">
+    <value>Redimensionne l'élément de présentation à la résolution du média original.</value>
+  </data>
+  <data name="ProjectController_AddMediaPool" xml:space="preserve">
+    <value>Ajouter Nouveau Pool Médias</value>
+  </data>
+  <data name="ProjectController_UpdateMediaPoolHistoryEntryLabel" xml:space="preserve">
+    <value>Mise à jour Pool Médias</value>
+  </data>
+  <data name="ProjectController_DeleteMediaPool" xml:space="preserve">
+    <value>Supprimer un Pool Médias</value>
+  </data>
+  <data name="ProjectController_DeleteResource" xml:space="preserve">
+    <value>Supprimer Ressource</value>
+  </data>
+  <data name="ResolutionNavigationDialog_Identifier" xml:space="preserve">
+    <value>Identificateur</value>
+  </data>
+  <data name="ResolutionNavigationDialog_LeftTitle" xml:space="preserve">
+    <value>Écrans Physiques</value>
+  </data>
+  <data name="ResolutionNavigationDialog_MasterLayout" xml:space="preserve">
+    <value>Présentation Principale</value>
+  </data>
+  <data name="ResolutionNavigationDialog_NewScreen" xml:space="preserve">
+    <value>Nouvel Écran Physique</value>
+  </data>
+  <data name="ResolutionNavigationDialog_Resolution" xml:space="preserve">
+    <value>Résolution</value>
+  </data>
+  <data name="ResolutionNavigationDialog_CloneScreen" xml:space="preserve">
+    <value>Dupliquer Écran Physique</value>
+  </data>
+  <data name="ResolutionNavigationDialog_DeleteScreen" xml:space="preserve">
+    <value>Supprimer Écran Physique</value>
+  </data>
+  <data name="PhysicalScreenController_CreatePhysicalScreenHistoryEntry" xml:space="preserve">
+    <value>Créer Écran Physique</value>
+  </data>
+  <data name="PhysicalScreenController_DefaultCyclePackageName" xml:space="preserve">
+    <value>Ensemble Cycles</value>
+  </data>
+  <data name="ResolutionNavigationDialog_MasterLayoutConfirmMessage" xml:space="preserve">
+    <value>Si vous changez la présentation principale, tous les contenus de l'écran physique actuel seront supprimés. Voulez-vous continuer?</value>
+  </data>
+  <data name="ResolutionNavigationDialog_MasterLayoutConfirmTitle" xml:space="preserve">
+    <value>Changer la présentation principale</value>
+  </data>
+  <data name="ResolutionNavigationDialog_CantDeleteLastPhysicalScreen" xml:space="preserve">
+    <value>Le dernier Écran Physique ne peut être supprimé.</value>
+  </data>
+  <data name="ResolutionNavigationDialog_UniqueNameError" xml:space="preserve">
+    <value>Le nom de l'Écran Physique doit être unique</value>
+  </data>
+  <data name="ResourceManagerView_PoolNameDuplicate" xml:space="preserve">
+    <value>Le nom du pool doit être unique.</value>
+  </data>
+  <data name="ResourceManagerView_PoolNameMissing" xml:space="preserve">
+    <value>Le nom du pool ne peut être vide.</value>
+  </data>
+  <data name="CycleController_RenameCyclePackageHistoryEntry" xml:space="preserve">
+    <value>Ensemble de cycles renommé</value>
+  </data>
+  <data name="CycleDetailsNavigator_CycleNameDuplicate" xml:space="preserve">
+    <value>Le nom du cycle doit être unique</value>
+  </data>
+  <data name="CycleDetailsNavigator_CycleNameMissing" xml:space="preserve">
+    <value>Le nom du cycle ne peut être vide</value>
+  </data>
+  <data name="CycleDetailsNavigator_CyclePackageNameDuplicate" xml:space="preserve">
+    <value>Le nom de l'ensemble de cycles doit être unique</value>
+  </data>
+  <data name="CycleDetailsNavigator_CyclePackageNameMissing" xml:space="preserve">
+    <value>Le nom de l'ensemble de cycles ne peut être vide</value>
+  </data>
+  <data name="LayoutNavigationDialog_LayoutNameDuplicate" xml:space="preserve">
+    <value>Le nom de la présentation doit être unique</value>
+  </data>
+  <data name="LayoutNavigationDialog_LayoutNameMissing" xml:space="preserve">
+    <value>Le nom de la présentation ne peut être vide</value>
+  </data>
+  <data name="CycleController_CreateCycleReferenceHistoryEntry" xml:space="preserve">
+    <value>Nouvelle référence de cycle créée</value>
+  </data>
+  <data name="CycleDetailsNavigator_CreateCycleReference" xml:space="preserve">
+    <value>Créer référence</value>
+  </data>
+  <data name="ResolutionNavigationDialog_NameMissing" xml:space="preserve">
+    <value>Le nom de l'écran physique ne peut être vide</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_LED" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_TFT" xml:space="preserve">
+    <value>TFT</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Unknown" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="CycleRefConfig_UsedReferencesTooltip" xml:space="preserve">
+    <value>Ce cycle est utilisée {0} fois.</value>
+  </data>
+  <data name="LayoutElement_AudioFileToolTip" xml:space="preserve">
+    <value>Fichier audio MP3 en tant que source audio.</value>
+  </data>
+  <data name="LayoutElement_AudioPauseLabel" xml:space="preserve">
+    <value>Silence: </value>
+  </data>
+  <data name="LayoutElement_AudioPauseToolTip" xml:space="preserve">
+    <value>Silence dans la lecture audio.</value>
+  </data>
+  <data name="LayoutElement_AudioDynamicTtsToolTip" xml:space="preserve">
+    <value>Source audio du synthétiseur de parole générée de façon dynamique.</value>
+  </data>
+  <data name="LayoutElement_AudioStaticTtsToolTip" xml:space="preserve">
+    <value>Source audio du synthétiseur de parole générée.</value>
+  </data>
+  <data name="Toolbar_TT_AudioFile" xml:space="preserve">
+    <value>Fichier audio (A)</value>
+  </data>
+  <data name="Toolbar_TT_AudioPause" xml:space="preserve">
+    <value>Silence (S)</value>
+  </data>
+  <data name="Toolbar_TT_DynamicTts" xml:space="preserve">
+    <value>Texte TTS dynamique (D)</value>
+  </data>
+  <data name="Toolbar_TT_StaticTts" xml:space="preserve">
+    <value>Texte TTS statique (T)</value>
+  </data>
+  <data name="ResourceManagerView_AddAudio" xml:space="preserve">
+    <value>Ajouter Audio</value>
+  </data>
+  <data name="ResourceManagerView_RemoveAudio" xml:space="preserve">
+    <value>Supprimer Audio</value>
+  </data>
+  <data name="OpenFileDialog_AudioFilter" xml:space="preserve">
+    <value>Fichiers Audio (*.mp3;*.wav)|*.mp3;*.wav</value>
+  </data>
+  <data name="AudioEditorController_CreateAudioDynamicTtsElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément TTS Dynamique</value>
+  </data>
+  <data name="AudioEditorController_CreateAudioFileElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Fichier Audio</value>
+  </data>
+  <data name="AudioEditorController_CreateAudioPauseElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Silence Audio</value>
+  </data>
+  <data name="AudioEditorController_CreateAudioTtsElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément TTS Statique</value>
+  </data>
+  <data name="AudioEditor_NoAudioAddedMessage" xml:space="preserve">
+    <value>Veuillez ajouter un élément audio.</value>
+  </data>
+  <data name="ConsistencyChecker_AudioFileNotSet" xml:space="preserve">
+    <value>L'élément n'a pas de fichier audio ou de formules. Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_AudioFileNotSetTitle" xml:space="preserve">
+    <value>La sortie du fichier audio est vide</value>
+  </data>
+  <data name="ConsistencyChecker_AudioFrameEmptyTitle" xml:space="preserve">
+    <value>La présentation audio ne contient aucun élément.</value>
+  </data>
+  <data name="ConsistencyChecker_DynamicTtsEmptyTitle" xml:space="preserve">
+    <value>La synthétisation de parole dynamique ne contient pas de texte </value>
+  </data>
+  <data name="ConsistencyChecker_StaticTtsEmptyTitle" xml:space="preserve">
+    <value>La synthétisation de parole statique ne contient pas de texte</value>
+  </data>
+  <data name="ResourceManagerView_AddFont" xml:space="preserve">
+    <value>Ajouter Police</value>
+  </data>
+  <data name="ResourceManagerView_Fonts" xml:space="preserve">
+    <value>Polices</value>
+  </data>
+  <data name="OpenFileDialog_FontsFilter" xml:space="preserve">
+    <value>Fichiers Polices (*.ttf;*.fnt;*.fon;*.otf;*.cux)|*.ttf;*.fnt;*.fon;*.otf;*.cux</value>
+  </data>
+  <data name="ResourceManager_ResourceAlreadyPresent" xml:space="preserve">
+    <value>Déjà trouvé la ressource '{0}' avec le même contenu que '{1}'.{2}Ressource non ajoutée une nouvelle fois.</value>
+  </data>
+  <data name="ResourceManager_ResourceAlreadyPresentTitle" xml:space="preserve">
+    <value>Ressource déjà présente</value>
+  </data>
+  <data name="ResourceManager_CouldNotOpenFont" xml:space="preserve">
+    <value>Impossible d'ouvrir le fichier des polices '{0}'. La police peut être endommagée.</value>
+  </data>
+  <data name="FontPreview_Text" xml:space="preserve">
+    <value>Voix ambiguë d'un cœur qui, au zéphyr, préfère les jattes de kiwis.</value>
+  </data>
+  <data name="PropertyGrid_NavigateMediaText" xml:space="preserve">
+    <value>Prendre en charge...</value>
+  </data>
+  <data name="ResourceManager_AddedFontInvalid" xml:space="preserve">
+    <value>Le fichier de polices '{0}' ne peut être lu.</value>
+  </data>
+  <data name="ResourceManager_AddedFontInvalidTitle" xml:space="preserve">
+    <value>Impossible d'ajouter une ressource</value>
+  </data>
+  <data name="Toolbar_TT_Rectangle" xml:space="preserve">
+    <value>Rectangle (R)</value>
+  </data>
+  <data name="LedEditorController_CreateRectangleElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer un élément Rectangle</value>
+  </data>
+  <data name="ResourceManagerView_RemoveFont" xml:space="preserve">
+    <value>Supprimer Police</value>
+  </data>
+  <data name="OpenFileDialog_ImageFilter" xml:space="preserve">
+    <value>Fichiers Image (*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.egr;*.egl;*.egf)|*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.egr;*.egl;*.egf</value>
+  </data>
+  <data name="OpenFileDialog_ImageFilterLed" xml:space="preserve">
+    <value>Fichiers Image LED (*.egr;*.egl;*.egf)|*.egr;*.egl;*.egf</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementTextNotSetTitle" xml:space="preserve">
+    <value>Texte non défini dans l'élément de présentation</value>
+  </data>
+  <data name="Connection_LogoutConfirmation" xml:space="preserve">
+    <value>Voulez-vous vous déconnecter?  </value>
+  </data>
+  <data name="Connection_LogoutConfirmationTitle" xml:space="preserve">
+    <value>Déconnexion </value>
+  </data>
+  <data name="MainMenu_DuplicateProjectName" xml:space="preserve">
+    <value>Le nom du projet existe déjà pour le client actuellement sélectionné. Veuillez saisir un nom différent.</value>
+  </data>
+  <data name="ProjectController_CreateServerFailedMessage" xml:space="preserve">
+    <value>La création du projet sur le serveur a échoué.
+Veuillez inspecter les logs pour plus d'informations.</value>
+  </data>
+  <data name="ProjectController_CreateServerFailedTitle" xml:space="preserve">
+    <value>Création du projet échouée</value>
+  </data>
+  <data name="ProjectController_ProjectCreated" xml:space="preserve">
+    <value>Projet {0} créé sur le serveur</value>
+  </data>
+  <data name="ProjectList_ColumnCreatedOn" xml:space="preserve">
+    <value>Créé le</value>
+  </data>
+  <data name="ProjectList_ColumnLastModifiedOn" xml:space="preserve">
+    <value>Dernière modification</value>
+  </data>
+  <data name="ProjectList_DeleteTooltip" xml:space="preserve">
+    <value>Supprime le projet sélectionné</value>
+  </data>
+  <data name="ProjectList_Details_CyclePackages" xml:space="preserve">
+    <value>Ensemble de cycles:</value>
+  </data>
+  <data name="ProjectList_Details_Cycles" xml:space="preserve">
+    <value>Cycles:</value>
+  </data>
+  <data name="ProjectList_Details_Layouts" xml:space="preserve">
+    <value>Présentations:</value>
+  </data>
+  <data name="ProjectList_Details_PhysicalScreens" xml:space="preserve">
+    <value>Écrans physiques:</value>
+  </data>
+  <data name="ProjectList_Details_ProjectSize" xml:space="preserve">
+    <value>Taille (Ko):</value>
+  </data>
+  <data name="ProjectList_Details_Resources" xml:space="preserve">
+    <value>Ressources:</value>
+  </data>
+  <data name="ProjectList_Details_UserDetails" xml:space="preserve">
+    <value>Description du projet:</value>
+  </data>
+  <data name="ProjectList_Details_VirtualDisplays" xml:space="preserve">
+    <value>Affichages virtuels:</value>
+  </data>
+  <data name="ProjectList_Details_Header" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="OpenProjectDialog_Loading" xml:space="preserve">
+    <value>Chargement des projets...</value>
+  </data>
+  <data name="Project_Open_ServerErrorMessage" xml:space="preserve">
+    <value>Une erreur est survenue en essayant de chargé le projet {0}</value>
+  </data>
+  <data name="Project_Open_ServerErrorTitle" xml:space="preserve">
+    <value>Projet ne peut pas être chargé</value>
+  </data>
+  <data name="BackgroundSystem_CouldNotCommmitNewDocument" xml:space="preserve">
+    <value>Erreur. Impossible de créer un nouveau projet sur le serveur.</value>
+  </data>
+  <data name="BackgroundSystem_CouldNotCommmitNewDocumentVersion" xml:space="preserve">
+    <value>Erreur. Impossible de créer une nouvelle version de projet.</value>
+  </data>
+  <data name="BackgroundSystem_CouldNotRenameProject" xml:space="preserve">
+    <value>Erreur. Impossible de renommer le projet.</value>
+  </data>
+  <data name="BackgroundSystem_CouldNotUpdatemediaConfiguration" xml:space="preserve">
+    <value>Erreur. Impossible de mettre à jour la configuration des médias.</value>
+  </data>
+  <data name="ProjectList_LoadingMessage" xml:space="preserve">
+    <value>Chargement de la ressource {0} / {1}</value>
+  </data>
+  <data name="BackgroundSystem_CouldNotUpdateProject" xml:space="preserve">
+    <value>Erreur. Impossible de mettre à jour le projet.</value>
+  </data>
+  <data name="ProjectController_DeleteConfirmMessage" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer le projet {0}?</value>
+  </data>
+  <data name="ProjectController_DeleteConfirmTitle" xml:space="preserve">
+    <value>Supprimer le projet</value>
+  </data>
+  <data name="ProjectController_DeleteProjectServerFailedMessage" xml:space="preserve">
+    <value>Erreur en essayant de supprimer le projet {0}.</value>
+  </data>
+  <data name="MainMenu_Import" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="ImportMenu_Description" xml:space="preserve">
+    <value>Description </value>
+  </data>
+  <data name="ImportMenu_Name" xml:space="preserve">
+    <value>Nom </value>
+  </data>
+  <data name="ImportMenu_OpenAfterImport" xml:space="preserve">
+    <value>Ouvrir le projet après importation</value>
+  </data>
+  <data name="ImportMenu_Path" xml:space="preserve">
+    <value>Chemin </value>
+  </data>
+  <data name="ImportMenu_ImportPathTitle" xml:space="preserve">
+    <value>Chemin d'Importation</value>
+  </data>
+  <data name="OpenFileDialog_ProjectFilter" xml:space="preserve">
+    <value>Fichiers du Projet (*.icm)|*.icm</value>
+  </data>
+  <data name="ImportMenu_BusyIndicatorText" xml:space="preserve">
+    <value>Importation Ressource {0} / {1}</value>
+  </data>
+  <data name="ImportMenu_ResourceUploadeFailedTitle" xml:space="preserve">
+    <value>Téléchargement de la ressource</value>
+  </data>
+  <data name="ImportMenu_ResourceUploadFailedMessage" xml:space="preserve">
+    <value>Échec de téléchargement d'une ou plusieurs ressources vers le serveur.</value>
+  </data>
+  <data name="ImportMenu_ImportFileNotFound" xml:space="preserve">
+    <value>Fichier donné à l'importation '{0}' non trouvé. Rien n'a été importé.</value>
+  </data>
+  <data name="ImportMenu_ImportFileNotFoundTitle" xml:space="preserve">
+    <value>Fichier non trouvé</value>
+  </data>
+  <data name="ProjectController_SaveLocal" xml:space="preserve">
+    <value>Projet '{0}' enregistré localement</value>
+  </data>
+  <data name="MainMenu_CheckInTooltip" xml:space="preserve">
+    <value>Committer (Ctrl+Maj+S)</value>
+  </data>
+  <data name="ProjectController_CheckedIn" xml:space="preserve">
+    <value>Projet '{0}' commité</value>
+  </data>
+  <data name="ProjectController_CheckInFailed" xml:space="preserve">
+    <value>Erreur en essayant de commiter le projet {0}.</value>
+  </data>
+  <data name="ProjectController_CheckInFailedTitle" xml:space="preserve">
+    <value>Commiter projet</value>
+  </data>
+  <data name="ProjectController_CreateProjectInitialVersion" xml:space="preserve">
+    <value>Document créé</value>
+  </data>
+  <data name="ProjectController_SaveLocalFailedMessage" xml:space="preserve">
+    <value>Erreur en essayant de sauvegarder le projet localement.</value>
+  </data>
+  <data name="ProjectController_SaveLocalFailedTitle" xml:space="preserve">
+    <value>Sauvegarder le projet localement</value>
+  </data>
+  <data name="ProjectController_CheckingIn" xml:space="preserve">
+    <value>Commitement en cours...</value>
+  </data>
+  <data name="Project_SavedLocallyMessage" xml:space="preserve">
+    <value>Le projet n'a pas été commité. Il sera automatiquement ouvert à la prochaine connexion.</value>
+  </data>
+  <data name="Project_SavedLocallyTitle" xml:space="preserve">
+    <value>Projet non commité</value>
+  </data>
+  <data name="ProjectController_OpenPendingFailedTitle" xml:space="preserve">
+    <value>Ouvrir projet en instance</value>
+  </data>
+  <data name="Shell_LoadingPendingProject" xml:space="preserve">
+    <value>Chargement du projet en instance...</value>
+  </data>
+  <data name="CheckInDialog_BusyIndicatorText" xml:space="preserve">
+    <value>Téléchargement Ressource  {0} / {1}</value>
+  </data>
+  <data name="ExportScreen_EndDateEarlierStart" xml:space="preserve">
+    <value>La date de fin ne peut être inférieure à la date de début</value>
+  </data>
+  <data name="ExportScreen_EndDateEmpty" xml:space="preserve">
+    <value>La date de fin ne peut être vide.</value>
+  </data>
+  <data name="ExportScreen_EndDateHeader" xml:space="preserve">
+    <value>Date de Fin </value>
+  </data>
+  <data name="ExportScreen_ExportLocalHeader" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="ExportScreen_ExportServerHeader" xml:space="preserve">
+    <value>Vers serveur</value>
+  </data>
+  <data name="ExportScreen_StartDateEmpty" xml:space="preserve">
+    <value>La date de début ne peut être vide.</value>
+  </data>
+  <data name="ExportScreen_StartDateHeader" xml:space="preserve">
+    <value>Date Début </value>
+  </data>
+  <data name="ExportScreen_UpdateGroupsHeader" xml:space="preserve">
+    <value>Groupes Mise à Jour</value>
+  </data>
+  <data name="ExportController_ProjectFilter" xml:space="preserve">
+    <value>Fichiers de projet (*.icm)|*.icm</value>
+  </data>
+  <data name="ExportController_ProjectSuccessfullyTransferred" xml:space="preserve">
+    <value>Projet '{0}' transféré</value>
+  </data>
+  <data name="ExportController_SaveAs_ProjectTitle" xml:space="preserve">
+    <value>Emplacement du fichier icm</value>
+  </data>
+  <data name="ExportController_TranserErrorMessage" xml:space="preserve">
+    <value>Quelque chose a échoué durant le transfert du projet.</value>
+  </data>
+  <data name="ExportScreen_TransferDescription" xml:space="preserve">
+    <value>Cette fonction exporte le projet entier, y compris toutes les ressources, vers un fichier de projet stocké localement.</value>
+  </data>
+  <data name="ExportScreen_TransferHeader" xml:space="preserve">
+    <value>Transférer le projet</value>
+  </data>
+  <data name="ExportScreen_TransferTo" xml:space="preserve">
+    <value>Transférer vers </value>
+  </data>
+  <data name="MainMenu_ProjectNameEmpty" xml:space="preserve">
+    <value>Le nom de projet ne peut être vide.</value>
+  </data>
+  <data name="MainMenu_SaveAsTenantSelection" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ProjectController_SaveAsDocumentDescription" xml:space="preserve">
+    <value>Copié depuis le projet '{0}', client '{1}'</value>
+  </data>
+  <data name="MainMenu_CheckInShortcut" xml:space="preserve">
+    <value>Ctrl+Maj+S</value>
+  </data>
+  <data name="MainMenu_ExitShortcut" xml:space="preserve">
+    <value>Alt+F4</value>
+  </data>
+  <data name="MainMenu_ExitTooltip" xml:space="preserve">
+    <value>Fin (Alt+F4)</value>
+  </data>
+  <data name="MainMenu_SaveAsShortcut" xml:space="preserve">
+    <value>F12</value>
+  </data>
+  <data name="MainMenu_SaveShortcut" xml:space="preserve">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="ExportScreen_LocalHelp" xml:space="preserve">
+    <value>Cette fonction exporte le projet actuel (im2) vers un répertoire de destination local et copie toutes les ressources nécessaires vers les dossiers liés à la destination d'exportation.</value>
+  </data>
+  <data name="ExportScreen_ServerHelp" xml:space="preserve">
+    <value>Cette fonction rend le projet actuel disponible sur le serveur pour mettre à jour les groupes de mise à jour sélectionnés.</value>
+  </data>
+  <data name="ExportScreen_TransferHelp" xml:space="preserve">
+    <value>Cette fonction transfère le projet actuel (icm) vers une destination locale. Le fichier contient la structure du projet et toutes les ressources.
+
+Ce fichier peut être utilisé pour importer le projet sur un serveur différent.</value>
+  </data>
+  <data name="ExportController_LocalBusyContentText" xml:space="preserve">
+    <value>Exportation du projet vers '{0}'</value>
+  </data>
+  <data name="ExportController_ServerBusyContentText" xml:space="preserve">
+    <value>Exportation du projet vers le serveur
+
+Téléchargement Ressource  {0} / {1}</value>
+  </data>
+  <data name="ExportController_TransferBusyContentText" xml:space="preserve">
+    <value>Transfert du projet vers '{0}'</value>
+  </data>
+  <data name="ProjectController_CheckedInAsMessage" xml:space="preserve">
+    <value>Le projet commité '{0}' avec le client '{1}' a été ouvert.</value>
+  </data>
+  <data name="ProjectController_CheckedInAsTitle" xml:space="preserve">
+    <value>Commité</value>
+  </data>
+  <data name="ProjectList_ColumnLatestVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="CycleDetailsNavigator_CycleReferenceButtonTooltip" xml:space="preserve">
+    <value>Créer une référence de ce cycle</value>
+  </data>
+  <data name="CycleDetailsNavigator_DuplicateSectionButtonTooltip" xml:space="preserve">
+    <value>Dupliquer la section</value>
+  </data>
+  <data name="ReusableList_DeleteButtonTooltip" xml:space="preserve">
+    <value>Supprimer l'élément</value>
+  </data>
+  <data name="CheckInDialog_ProjectLabel" xml:space="preserve">
+    <value>Projet:</value>
+  </data>
+  <data name="MediaShell_CheckedInTooltip" xml:space="preserve">
+    <value>Le projet est commité.</value>
+  </data>
+  <data name="MediaShell_NotCheckedInTooltip" xml:space="preserve">
+    <value>Le projet n'est pas commité.</value>
+  </data>
+  <data name="Project_CheckIn_SkipWillReset" xml:space="preserve">
+    <value>Le fait de sauter ce commit supprimera tous les changements locaux.</value>
+  </data>
+  <data name="CycleDetailsNavigator_CollapseAllTooltip" xml:space="preserve">
+    <value>Réduire tout</value>
+  </data>
+  <data name="CycleDetailsNavigator_ExpandAllTooltip" xml:space="preserve">
+    <value>Développer tout</value>
+  </data>
+  <data name="ProjectController_CheckInAsNamePrefix" xml:space="preserve">
+    <value>Copie de </value>
+  </data>
+  <data name="ExportAsBusyText" xml:space="preserve">
+    <value>Exportation du projet...</value>
+  </data>
+  <data name="Shell_LoadingProjectList" xml:space="preserve">
+    <value>Chargement Liste Projets</value>
+  </data>
+  <data name="PropertyGridField_RotationTooltip" xml:space="preserve">
+    <value>Rotation:
+rotation sens horaire en degrés</value>
+  </data>
+  <data name="PropertyGridField_ScrollSpeedTooltip" xml:space="preserve">
+    <value>Vitesse de défilement:
+- de droite à gauche
++ de gauche à droite</value>
+  </data>
+  <data name="PropertyGridField_WeightTooltip" xml:space="preserve">
+    <value>Poids des polices:
+&lt;200: mince
+&lt;300: ultra léger
+&lt;400: léger
+&lt;500: normal 
+&lt;600: moyen
+&lt;700: semi gras
+&lt;800: gras
+&lt;900: ultra gras
+&gt;900: lourd</value>
+  </data>
+  <data name="PropertyGridField_Volume" xml:space="preserve">
+    <value>Volume [%]</value>
+  </data>
+  <data name="TextReplaceControl_InvalidNumber" xml:space="preserve">
+    <value>Numéro non valable. La valeur doit être comprise entre 1 et 99.</value>
+  </data>
+  <data name="FormulaParser_Error_CollectionEmpty" xml:space="preserve">
+    <value>La formule '{0}' n'a pas de contenu.</value>
+  </data>
+  <data name="FormulaParser_Error_CollectionItemNull" xml:space="preserve">
+    <value>La formule '{0}' est vide de contenu.</value>
+  </data>
+  <data name="FormulaEditor_DictionarySelectorButtonTooltip" xml:space="preserve">
+    <value>Choisir cellule de dictionnaire</value>
+  </data>
+  <data name="SelectMediaPopup_Search" xml:space="preserve">
+    <value>Filtres liste médias. Les résultats doivent contenir la chaîne de recherche.</value>
+  </data>
+  <data name="ProjectController_ErrorBackend" xml:space="preserve">
+    <value>Erreur lors de l'appel du système d'arrière-plan.</value>
+  </data>
+  <data name="ProjectController_NoConnectionToBackend" xml:space="preserve">
+    <value>Erreur lors de la connexion au système d'arrière-plan. L'enregistrement n'a pas été possible. Le projet est sauvegardé localement.</value>
+  </data>
+  <data name="BusyCreateProject" xml:space="preserve">
+    <value>Création projet...</value>
+  </data>
+  <data name="Project_Open_ServerResourceNotFoundErrorMessage" xml:space="preserve">
+    <value>N'a pu obtenir de ressource '{0}' du serveur.</value>
+  </data>
+  <data name="ConsistencyChecker_AudioStandardCycleLayoutNotEmpty" xml:space="preserve">
+    <value>Le contenu des cycles standard est joué continuant.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_AudioStandardCycleLayoutNotEmptyTitle" xml:space="preserve">
+    <value>Cycle standard pour audio contient des éléments.</value>
+  </data>
+  <data name="ConsistencyChecker_EventCycleContainsWrongTriggerTitle" xml:space="preserve">
+    <value>Cycle d'évènement ne peut être déclenché par 'SystemStatus.Date'.</value>
+  </data>
+  <data name="ConsistencyChecker_EventcycleSectionSetToSilentLayoutTitle" xml:space="preserve">
+    <value>La section d'un cycle d'évènement utilise une présentation silencieuse.</value>
+  </data>
+  <data name="ConsistencyChecker_FontStyleItalic" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="ConsistencyChecker_ImageSectionImageNotInMediaTitle" xml:space="preserve">
+    <value>L'image '{0}' n'est pas contenue dans les médias</value>
+  </data>
+  <data name="ConsistencyChecker_LedLayoutElementWrongOverflowTitle" xml:space="preserve">
+    <value>Dépassement d'un élément text LED ne doit pas être 'Scale' ou 'WrapScale'.</value>
+  </data>
+  <data name="ConsistencyChecker_VideoSectionVideoNotInMediaTitle" xml:space="preserve">
+    <value>Vidéo '{0}' n'est pas contenue dans les médias</value>
+  </data>
+  <data name="ConsistencyDialog_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_MasterLayout" xml:space="preserve">
+    <value>Présentation Principale</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Resolution" xml:space="preserve">
+    <value>Résolution</value>
+  </data>
+  <data name="CreatePhysicalScreenPopup_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CycleController_CloneNamePrefix" xml:space="preserve">
+    <value>Copie de </value>
+  </data>
+  <data name="CycleDetailsNavigator_RenameSection" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="EditMenu_DeleteInputGestureText" xml:space="preserve">
+    <value>Suppr</value>
+  </data>
+  <data name="ExportController_csvFileAlreadyExistsTitle" xml:space="preserve">
+    <value>Fichier existe déjà</value>
+  </data>
+  <data name="ExportController_TransferErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ExportScreen_DescriptionHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ExportScreen_ExportButton" xml:space="preserve">
+    <value>Exportation</value>
+  </data>
+  <data name="FormulaManager_CloneFormula" xml:space="preserve">
+    <value>Dupliquer</value>
+  </data>
+  <data name="FormulaManager_DeleteFormula" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="FormulaManager_RenameFormula" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="FormulaParser_Error_CollectionItemConstant" xml:space="preserve">
+    <value>La formule '{0}' a un contenu constant.</value>
+  </data>
+  <data name="FormulaParser_Error_Time_EndLessThanBegin" xml:space="preserve">
+    <value>L'argument &lt;begin&gt; ne peut être supérieur à la valeur &lt;end&gt;.</value>
+  </data>
+  <data name="ImportMenu_Browse" xml:space="preserve">
+    <value>Parcourir...</value>
+  </data>
+  <data name="ImportMenu_Import" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="LayoutNavigationDialog_CycleNameDuplicate" xml:space="preserve">
+    <value>Le nom du cycle doit être unique</value>
+  </data>
+  <data name="LayoutNavigationDialog_CycleNameMissing" xml:space="preserve">
+    <value>Le nom du cycle ne peut être vide</value>
+  </data>
+  <data name="LayoutNavigigationDialog_RenameLayout" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="MainMenu_CheckIn" xml:space="preserve">
+    <value>Committer</value>
+  </data>
+  <data name="MainMenu_Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="MediaApplicationController_GetProjectsErrorMessage" xml:space="preserve">
+    <value>Erreur de connexion au serveur. Veuillez redémarrer l'application.</value>
+  </data>
+  <data name="MediaApplicationController_GetProjectsErrorMessageTitle" xml:space="preserve">
+    <value>Erreur de communication au serveur</value>
+  </data>
+  <data name="ResourceManager_CouldNotOpenFontTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ResourceManagerView_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="NewMenu_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="NewMenu_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="PhysicalScreenController_DefaultEventAudioLayoutName" xml:space="preserve">
+    <value>Présentation Audio d'Évènement</value>
+  </data>
+  <data name="PhysicalScreenController_DefaultLayoutName" xml:space="preserve">
+    <value>Présentation</value>
+  </data>
+  <data name="PhysicalScreenController_DefaultStandardAudioLayoutName" xml:space="preserve">
+    <value>Présentation Audio Standard</value>
+  </data>
+  <data name="Project_CheckIn_SkipWillResetTitle" xml:space="preserve">
+    <value>Sauter</value>
+  </data>
+  <data name="Project_NewTitle" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="Project_Open_NotEnoughSpace_Title" xml:space="preserve">
+    <value>Espace disque disponible insuffisant</value>
+  </data>
+  <data name="ProjectController_DeleteProjectServerFailedTitle" xml:space="preserve">
+    <value>Supprimer le projet</value>
+  </data>
+  <data name="ProjectList_ColumnDelete" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="ProjectList_ColumnName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="PropertyGridField_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="PropertyGridField_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="PropertyGridField_Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="PropertyGridField_Row" xml:space="preserve">
+    <value>Ligne</value>
+  </data>
+  <data name="ResolutionNavigationDialog_RenameScreen" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="ResolutionNavigationDialog_ScreenName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="ResolutionNavigationDialog_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ResolutionNavigationDialog_Visible" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="TextReplaceControl_Title" xml:space="preserve">
+    <value>Remplacements Textuels</value>
+  </data>
+  <data name="TriggerEditor_CantRemoveLastCoordinateErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ResourceManager_couldNotDetectResourceTypeTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ResourceManager_couldNotDetectResourceType" xml:space="preserve">
+    <value>Il n'est pas possible d'identifier le type du fichier '{0}'.
+Le fichier ne sera pas ajouté au projet.</value>
+  </data>
+  <data name="ResourceManager_AddedImageInvalid" xml:space="preserve">
+    <value>Lecture du fichier image '{0}' a échouée.</value>
+  </data>
+  <data name="ResourceManager_AddedImageInvalidTitle" xml:space="preserve">
+    <value>Impossible d'ajouter la ressource image</value>
+  </data>
+  <data name="ResourceManager_AddedImageStreamInvalid" xml:space="preserve">
+    <value>Lecture de l'image a échouée.</value>
+  </data>
+  <data name="ConsistencyChecker_AudioScreenIdentifierOutOfRange" xml:space="preserve">
+    <value>L'identifiant d'un écran physique audio doit être entre 1 et 3.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_AudioScreenIdentifierOutOfRangeTitle" xml:space="preserve">
+    <value>Identifiant d'écran physique audio hors gamme valable</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidAudioScreenIdentifier" xml:space="preserve">
+    <value>L'identifiant d'un écran physique audio doit être un chiffre et doit être unique.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidAudioScreenIdentifierTitle" xml:space="preserve">
+    <value>Identifiant d'écran physique audio non valable</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidLedScreenIdentifier" xml:space="preserve">
+    <value>L'identifiant d'un écran physique LED doit être un chiffre.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidLedScreenIdentifierTitle" xml:space="preserve">
+    <value>Identifiant d'écran physique LED non valable</value>
+  </data>
+  <data name="ConsistencyChecker_LedScreenIdentifierOutOfRange" xml:space="preserve">
+    <value>L'identifiant d'un écran physique audio doit être entre 1 et 15.
+Emplacement: {0}</value>
+  </data>
+  <data name="ConsistencyChecker_LedScreenIdentifierOutOfRangeTitle" xml:space="preserve">
+    <value>Identifiant d'écran physique LED hors gamme valable</value>
+  </data>
+  <data name="PropertyGridField_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PropertyGridField_Identifier" xml:space="preserve">
+    <value>Identificateur</value>
+  </data>
+  <data name="ImageElement_CouldNotCreateImageTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ImageElement_CouldNotCreateImage" xml:space="preserve">
+    <value>Impossible de créer une image depuis la ressource.</value>
+  </data>
+  <data name="MainMenu_FormulaManagerShortcut" xml:space="preserve">
+    <value>F7</value>
+  </data>
+  <data name="MainMenu_ImportShortcut" xml:space="preserve">
+    <value>Ctrl+I</value>
+  </data>
+  <data name="MainMenu_ResourceManagementShortcut" xml:space="preserve">
+    <value>F5</value>
+  </data>
+  <data name="MainMenu_NewShortcut" xml:space="preserve">
+    <value>Ctrl+N</value>
+  </data>
+  <data name="MainMenu_OpenShortcut" xml:space="preserve">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="MainMenu_TextualReplacementShortcut" xml:space="preserve">
+    <value>F6</value>
+  </data>
+  <data name="MainMenu_ExportShortcut" xml:space="preserve">
+    <value>Ctrl+E</value>
+  </data>
+  <data name="ViewMenu_ShowSimulationShortcut" xml:space="preserve">
+    <value>F9</value>
+  </data>
+  <data name="ViewMenu_UseEdgeSnapShortcut" xml:space="preserve">
+    <value>F10</value>
+  </data>
+  <data name="ConsistencyChecker_LocationPlaceholder" xml:space="preserve">
+    <value>Emplacement: {0}</value>
+  </data>
+  <data name="ProjectController_OpenPendingFailedMessage" xml:space="preserve">
+    <value>Erreur lors de la tentative d'ouverture le projet en cours '{0}'.
+Le fichier du projet enregistré localement sera supprimé et les modifications en cours seront perdues.</value>
+  </data>
+  <data name="MainMenu_ExportToolTip" xml:space="preserve">
+    <value>Exporte le projet actuel (Ctrl+E)</value>
+  </data>
+  <data name="MainMenu_FormulaManagerToolTip" xml:space="preserve">
+    <value>Éditer éditer et créer les formules prédéfinies (F7)</value>
+  </data>
+  <data name="MainMenu_ImportToolTip" xml:space="preserve">
+    <value>Importer un projet à partir du serveur ou d'un fichier vers ce client (Ctrl+I)</value>
+  </data>
+  <data name="MainMenu_ResourceManagementToolTip" xml:space="preserve">
+    <value>Ouvrir le gestionnaire des ressources pour ajouter et supprimer ressources (F5)</value>
+  </data>
+  <data name="MainMenu_NewToolTip" xml:space="preserve">
+    <value>Créer un nouveau projet (Ctrl+N)</value>
+  </data>
+  <data name="MainMenu_OpenToolTip" xml:space="preserve">
+    <value>Ouvrir un projet à partir du serveur (Ctrl+O)</value>
+  </data>
+  <data name="MainMenu_TextualReplacementToolTip" xml:space="preserve">
+    <value>Éditer les remplacements textuels (F6)</value>
+  </data>
+  <data name="ViewMenu_ShowSimulationToolTip" xml:space="preserve">
+    <value>Ouvrir une simulation du projet actuel (F9)</value>
+  </data>
+  <data name="ViewMenu_UseEdgeSnapToolTip" xml:space="preserve">
+    <value>Lorsque cela est activé, les éléments de la mise en page déplacés seront alignés sur les autres éléments (F10).</value>
+  </data>
+  <data name="FormulaParser_Error_CodeConversion_ArgumentNeedToBeBool" xml:space="preserve">
+    <value>L'argument de conversion du code doit être booléen.</value>
+  </data>
+  <data name="FormulaEditor_Help_CodeConversion" xml:space="preserve">
+    <value>Cette fonction remplace le numéro de ligne par le texte (drapeau Utiliser image non activé) ou l'image (drapeau Utiliser image activé) défini dans les remplacements de texte.</value>
+  </data>
+  <data name="ProjectList_DeleteProjectMessage" xml:space="preserve">
+    <value>Suppression du projet en cours {0}</value>
+  </data>
+  <data name="ProjectList_LoadingRecentProjects" xml:space="preserve">
+    <value>Recherche des projets récents...</value>
+  </data>
+  <data name="ProjectList_LoadingServerProjects" xml:space="preserve">
+    <value>Recherche des projets</value>
+  </data>
+  <data name="ConsistencyChecker_RssTickerAddressEmpty" xml:space="preserve">
+    <value>RSS URL est vide</value>
+  </data>
+  <data name="ConsistencyChecker_RssTickerInvalidValidity" xml:space="preserve">
+    <value>La validité ne peut pas être inférieure à 1 minute</value>
+  </data>
+  <data name="ConsistencyChecker_ScrollSpeedZero" xml:space="preserve">
+    <value>Vitesse de défilement est 0</value>
+  </data>
+  <data name="PropertyGridField_Validity" xml:space="preserve">
+    <value>Validité  [dd:hh:mm:ss]</value>
+  </data>
+  <data name="TftEditorController_CreateRssTickerElementHistoryEntryLabel" xml:space="preserve">
+    <value>Créer élément téléscripteur TSS</value>
+  </data>
+  <data name="Toolbar_TT_RssTicker" xml:space="preserve">
+    <value>Téléscripteur RSS/DAB (R)</value>
+  </data>
+  <data name="Toolbar_TT_Live" xml:space="preserve">
+    <value>Stream en live (J)</value>
+  </data>
+  <data name="ResourceController_AddResourceBusyFormat" xml:space="preserve">
+    <value>Ajout de ressource {0} / {1} au projet en cours</value>
+  </data>
+  <data name="ExportController_BusyText_CollectLiveFeed" xml:space="preserve">
+    <value>Collecte d'informations du stream en live en cours...</value>
+  </data>
+  <data name="ConsistencyChecker_LayoutElementStreamNotSetTitle" xml:space="preserve">
+    <value>Stream URI non absolu ou incorrect</value>
+  </data>
+  <data name="ConsistencyChecker_LiveStreamFallbackNotInRessourcesTitle" xml:space="preserve">
+    <value>Image de secours pour le stream en live non trouvée dans les ressources</value>
+  </data>
+  <data name="ConsistencyChecker_LiveStreamHasNoFallbackTitle" xml:space="preserve">
+    <value>Le stream en live n'a pas d'image de secours</value>
+  </data>
+  <data name="PropertyGridField_UpdateInterval" xml:space="preserve">
+    <value>Mise à jour de l'intervalle [dd:hh:mm:ss]</value>
+  </data>
+  <data name="Toolbar_TT_MultiTool_Stream" xml:space="preserve">
+    <value>Outils de stream qui fournissent différentes sources d'information en live.
+Sélectionné :</value>
+  </data>
+  <data name="StatusBar_ProjectState_CheckedIn" xml:space="preserve">
+    <value>vérifié à</value>
+  </data>
+  <data name="StatusBar_ProjectState_Modified" xml:space="preserve">
+    <value>modifié</value>
+  </data>
+  <data name="StatusBar_ProjectState_NoProject" xml:space="preserve">
+    <value>aucun projet</value>
+  </data>
+  <data name="StatusBar_ProjectState_Saved" xml:space="preserve">
+    <value>enregistré</value>
+  </data>
+  <data name="CheckInDialog_CollectingInformation" xml:space="preserve">
+    <value>Collecte d'informations en cours...</value>
+  </data>
+  <data name="ResourceManager_ResourceForceUpload" xml:space="preserve">
+    <value>Export forcé des ressources.</value>
+  </data>
+  <data name="ResourceManager_ResourceNotUploaded" xml:space="preserve">
+    <value>Les ressources ne seront pas exportées car aucune utilisation active n'a été trouvée. Basculer pour forcer l'export si la ressource est utilisée dans les formules.</value>
+  </data>
+  <data name="ResourceManager_ResourceUpload" xml:space="preserve">
+    <value>Les ressources vont être exportées.</value>
+  </data>
+  <data name="PropertyGridField_Audio_IdentifierTooltip" xml:space="preserve">
+    <value>Identifiant utilisé pour configurer l'appareil audio configuré dans icenter.admin</value>
+  </data>
+  <data name="PropertyGridField_LED_IdentifierTooltip" xml:space="preserve">
+    <value>Identifiant utilisé pour configurer l'adresse de l'écran à LED Cela doit être situé entre 1 et 15</value>
+  </data>
+  <data name="PropertyGridField_TFT_IdentifierTooltip" xml:space="preserve">
+    <value>Identifiant pour les écrans TFT. Cela peut être vide par défaut.</value>
+  </data>
+  <data name="ResourceManagerView_AddCsv" xml:space="preserve">
+    <value>Ajouter CSV</value>
+  </data>
+  <data name="ResourceManagerView_Csv" xml:space="preserve">
+    <value>CSV</value>
+  </data>
+  <data name="ResourceManagerView_RemoveCsv" xml:space="preserve">
+    <value>Supprimer CSV</value>
+  </data>
+  <data name="ResourceManager_ButtonTooltip_Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="ResourceManager_ButtonTooltip_Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ResourceManager_ButtonTooltip_EditCsv" xml:space="preserve">
+    <value>Éditer CSV actuel</value>
+  </data>
+  <data name="ResourceManager_ButtonTooltip_ImportCsv" xml:space="preserve">
+    <value>Importer un fichier CSV</value>
+  </data>
+  <data name="ResourceManager_ButtonTooltip_RemoveReference" xml:space="preserve">
+    <value>Supprimer référence</value>
+  </data>
+  <data name="CsvEditor_Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="CsvEditor_Save" xml:space="preserve">
+    <value>Enregistrer modifications</value>
+  </data>
+  <data name="CsvMappingController_CsvMappingDefaultFilename" xml:space="preserve">
+    <value>Mapping</value>
+  </data>
+  <data name="CsvMappingController_CsvMappingDefaultHeader" xml:space="preserve">
+    <value>#Colonne1;#Colonne2;#Colonne3;</value>
+  </data>
+  <data name="OpenFileDialog_CsvFilter" xml:space="preserve">
+    <value>Fichiers CSV (*.csv)|*.csv</value>
+  </data>
+  <data name="ResourceManagerView_ImportCsv" xml:space="preserve">
+    <value>Importer fichier CSV</value>
+  </data>
+  <data name="ResourceManagerView_CsvMappingNameDuplicate" xml:space="preserve">
+    <value>Le nom de la cartographie CSV doit être unique.</value>
+  </data>
+  <data name="ResourceManagerView_CsvMappingNameMissing" xml:space="preserve">
+    <value>Le nom de la cartographie CSV ne peut pas être vide.</value>
+  </data>
+  <data name="FormulaEditor_CsvMappingSelectionLabel" xml:space="preserve">
+    <value>Nom du fichier</value>
+  </data>
+  <data name="ConsistencyChecker_CsvFileNotFound" xml:space="preserve">
+    <value>Impossible de trouver le fichier de cartographie '{0}' dans la formule '{1}' dans le gestionnaire des ressources.
+Site : {2}</value>
+  </data>
+  <data name="LedEditor_RenderExceptionTitle" xml:space="preserve">
+    <value>Erreur de rendu</value>
+  </data>
+  <data name="LedEditor_RenderFontExceptionMessage" xml:space="preserve">
+    <value>La police sélectionnée pour l'élément '{0}' n'a pas de caractère spécifique.</value>
+  </data>
+  <data name="TextReplaceControl_ContainsSemicolon" xml:space="preserve">
+    <value>Entrée invalide. Le texte ne doit contenir aucun point-virgule ';'</value>
+  </data>
+  <data name="FormulaEditor_EmptyPredefinedFormula" xml:space="preserve">
+    <value>La formule prédéfinie sélectionnée est vide et ne peut pas être utilisée</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceAfterLabel" xml:space="preserve">
+    <value>Supprimer les ressources locales après  [jours]</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceAfterTooltip" xml:space="preserve">
+    <value>Le jour après lequel une ressource locale doit être supprimée</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceCategoryTitle" xml:space="preserve">
+    <value>Ressources</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceCategoryTooltip" xml:space="preserve">
+    <value>Options relatives à la configuration des ressources locales</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceGroupLabel" xml:space="preserve">
+    <value>Ressources locales</value>
+  </data>
+  <data name="OptionsDialog_LocalResourceGroupTooltip" xml:space="preserve">
+    <value>Configurer le comportement des ressources enregistrées localement</value>
+  </data>
+  <data name="OptionsDialog_RendererCategoryTitle" xml:space="preserve">
+    <value>Simulation</value>
+  </data>
+  <data name="OptionsDialog_RendererCategoryTooltip" xml:space="preserve">
+    <value>Configurer les options relatives à la simulation</value>
+  </data>
+  <data name="OptionsDialog_RendererFontQualityLabel" xml:space="preserve">
+    <value>Qualité de la police</value>
+  </data>
+  <data name="OptionsDialog_RendererFontQualityTooltip" xml:space="preserve">
+    <value>Sélectionner comme la qualité de la police doit être</value>
+  </data>
+  <data name="OptionsDialog_RendererGroupLabel" xml:space="preserve">
+    <value>Modes Renderer</value>
+  </data>
+  <data name="OptionsDialog_RendererGroupTooltip" xml:space="preserve">
+    <value>Configurer les modes de rendu pour la simulation (mode texte, qualité police et mode vidéo)</value>
+  </data>
+  <data name="OptionsDialog_RendererTextModeLabel" xml:space="preserve">
+    <value>Mode Texte</value>
+  </data>
+  <data name="OptionsDialog_RendererTextModeTooltip" xml:space="preserve">
+    <value>Sélectionner comme le texte doit être rendu</value>
+  </data>
+  <data name="OptionsDialog_RendererVideoModeLabel" xml:space="preserve">
+    <value>Mode vidéo</value>
+  </data>
+  <data name="OptionsDialog_RendererVideoModeTooltip" xml:space="preserve">
+    <value>Sélectionner comme une vidéo doit être rendue</value>
+  </data>
+  <data name="MediaShellController_CloneLayoutHistoryEntry" xml:space="preserve">
+    <value>Présentation dupliquer</value>
+  </data>
+  <data name="Paste_WrongScreenTypeMessage" xml:space="preserve">
+    <value>Kopierte Element(e) können nicht eingefügt werden.
+Bildschirmtyp der Quelle: {0}
+Bildschirmtyp des Ziels: {1}</value>
+  </data>
+  <data name="Paste_WrongScreenTypeTitle" xml:space="preserve">
+    <value>Einfügen nicht möglich</value>
+  </data>
+  <data name="ElementName_AnalogClock" xml:space="preserve">
+    <value>Horloge analogique</value>
+  </data>
+  <data name="ElementName_AudioFile" xml:space="preserve">
+    <value>Fichier audio</value>
+  </data>
+  <data name="ElementName_AudioOutput" xml:space="preserve">
+    <value>Sortie d'audio</value>
+  </data>
+  <data name="ElementName_AudioPause" xml:space="preserve">
+    <value>Silence</value>
+  </data>
+  <data name="ElementName_DynamicText" xml:space="preserve">
+    <value>Texte dynamique</value>
+  </data>
+  <data name="ElementName_DynamicTts" xml:space="preserve">
+    <value>Texte TTS dynamique</value>
+  </data>
+  <data name="ElementName_Frame" xml:space="preserve">
+    <value>Cadre</value>
+  </data>
+  <data name="ElementName_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ElementName_ImageList" xml:space="preserve">
+    <value>Liste Images</value>
+  </data>
+  <data name="ElementName_LiveStream" xml:space="preserve">
+    <value>Stream en live</value>
+  </data>
+  <data name="ElementName_Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="ElementName_RssTicker" xml:space="preserve">
+    <value>Téléscripteur</value>
+  </data>
+  <data name="ElementName_StaticText" xml:space="preserve">
+    <value>Texte statique</value>
+  </data>
+  <data name="ElementName_TextToSpeech" xml:space="preserve">
+    <value>Texte TTS statique</value>
+  </data>
+  <data name="ElementName_Video" xml:space="preserve">
+    <value>Vidéo</value>
+  </data>
+  <data name="CompatibilityChecker_NoIssues" xml:space="preserve">
+    <value>N'a pas trouvé d'erreurs de compatibilité</value>
+  </data>
+  <data name="CompatibilityChecker_Title" xml:space="preserve">
+    <value>Le projet actuel contient les erreurs de compatibilité suivantes :</value>
+  </data>
+  <data name="Compatibility_ErrorTooltip" xml:space="preserve">
+    <value>Le projet actuel contient les erreurs de compatibilité</value>
+  </data>
+  <data name="ConsistencyDialog_NoMessages" xml:space="preserve">
+    <value>Ne trouver pas des erreurs ou avertissements</value>
+  </data>
+  <data name="Project_Open_ServerErrorMessageWithReason" xml:space="preserve">
+    <value>Une erreur est survenue en essayant de chargé le projet {0}.
+
+Raison:
+{1}</value>
+  </data>
+  <data name="AudioEditor_StandardtAudioLayoutIsSilent" xml:space="preserve">
+    <value>Ce modèle audio ne pas pas être modifié.
+Il s'agit d'un garde-place si vous ne désirez pas de message audio</value>
+  </data>
+  <data name="CompatibilityChecker_BadUnitConfiguration" xml:space="preserve">
+    <value>Ne peut pas charger de version software du groupe update: {0}</value>
+  </data>
+  <data name="CompatibilityChecker_BadVersion" xml:space="preserve">
+    <value>La version {0} est trop basse pour le groupe update {1} sélectionné</value>
+  </data>
+  <data name="CompatibilityChecker_BadVersionDescription" xml:space="preserve">
+    <value>installé {0} - version correcte  {1}</value>
+  </data>
+  <data name="CompatibilityChecker_NoVersionInformation" xml:space="preserve">
+    <value>Pas d'information de version</value>
+  </data>
+  <data name="CompatibilityChecker_PleaseContactSupport" xml:space="preserve">
+    <value>Contactez s.v.p. notre support</value>
+  </data>
+  <data name="CompatibilityChecker_UnsupportedFeatureUsed" xml:space="preserve">
+    <value>Utilisation de la fonction {0} non supportée</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidFontHeight" xml:space="preserve">
+    <value>La taille de police doit être un nombre positif</value>
+  </data>
+  <data name="ConsistencyChecker_InvalidFontWeight" xml:space="preserve">
+    <value>La taille de police doit être un nombre positif</value>
+  </data>
+  <data name="ExportController_TryingToExportCompatibilityIssues" xml:space="preserve">
+    <value>Le projet ne peut pas être exporté parce que les groupes d'update sélectionnés ne sont pas compatibles. Résolvez d'abord les problèmes de compatibilité, puis refaites une export</value>
+  </data>
+  <data name="ExportController_TryingToExportCompatibilityIssuesTitle" xml:space="preserve">
+    <value>Problèmes de compatibilité</value>
+  </data>
+  <data name="ExportController_UpdateGroupHasNoUnitConfiguration" xml:space="preserve">
+    <value>Le groupe d'update ne comporte pas de configuration d'unité </value>
+  </data>
+  <data name="ExportScreen_UpdateGroupsCompatibilityIssue_Tooltop" xml:space="preserve">
+    <value>Problème de compatibilité. Le projet ne peut pas être exporté pour ce groupe d'update</value>
+  </data>
+</root>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>2.9</ProductVersion>
+    <ProjectGuid>03069c1c-38b7-47a5-9b30-ead0af6e882a</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AzureCloudService</RootNamespace>
+    <AssemblyName>BackgroundSystem.AzureCloudService</AssemblyName>
+    <StartDevelopmentStorage>True</StartDevelopmentStorage>
+    <Name>BackgroundSystem.AzureCloudService</Name>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Items for the project -->
+  <ItemGroup>
+    <ServiceDefinition Include="ServiceDefinition.csdef" />
+    <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Profiles" />
+    <Folder Include="BackgroundSystem.WorkerRoleContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BackgroundSystem.WorkerRoleContent\diagnostics.wadcfg">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\icenter-rem.azurePubxml" />
+    <PublishProfile Include="Profiles\icenter-wes-bs.azurePubxml" />
+    <PublishProfile Include="Profiles\icenter-ept.azurePubxml" />
+    <PublishProfile Include="Profiles\icenter-lef.azurePubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkerRole\BackgroundSystem.WorkerRole.csproj">
+      <Name>BackgroundSystem.WorkerRole</Name>
+      <Project>{1f3035e9-2130-452c-91f9-57d886ca7422}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>BackgroundSystem.WorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- Import the target files for this project template -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.9\</CloudExtensionsDir>
+  </PropertyGroup>
+  <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
+  <Target Name="CopyPackageToDropLocation" AfterTargets="CorePublish" DependsOnTargets="CorePublish" Condition="$(AutomatedBuild) != ''">
+    <Message Text="Copying package and config file to drop location." />
+    <Copy SourceFiles="$(PublishDir)$(AssemblyName).cspkg" DestinationFiles="$(OutDir)\app.publish\$(AssemblyName).cspkg" />
+    <Copy SourceFiles="$(PublishDir)ServiceConfiguration.$(TargetProfile).cscfg" DestinationFiles="$(OutDir)\app.publish\ServiceConfiguration.$(TargetProfile).cscfg" />
+    <CreateProperty Value="True">
+      <Output TaskParameter="Value" PropertyName="IsPackage" />
+    </CreateProperty>
+  </Target>
+  <!-- <Target Name="DeployToAzure" AfterTargets="CopyPackageToDropLocation">
+    <PropertyGroup>
+      <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">
+        %SystemRoot%\sysnative\WindowsPowerShell\v1.0\powershell.exe
+      </PowerShellExe>
+    </PropertyGroup>
+    <Exec Command="$(PowerShellExe) -ExecutionPolicy Unrestricted -noprofile -nologo &quot; &amp; { Write-Output 'Test' } &quot;" />
+  </Target> -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

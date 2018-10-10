@@ -1,0 +1,2083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Editors_UnitConfiguration_Edit" xml:space="preserve">
+    <value>Edit...</value>
+  </data>
+  <data name="Editor_Saving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="EntityList_ChooseColumn" xml:space="preserve">
+    <value>Choose visible columns</value>
+  </data>
+  <data name="FileMenu_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="FileMenu_ExitGestureText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Navigator_RemovableMedia" xml:space="preserve">
+    <value>Removable Media</value>
+  </data>
+  <data name="Navigator_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="UnitConfig_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness" xml:space="preserve">
+    <value>Display Brightness</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Description" xml:space="preserve">
+    <value>Choose the brightness mode and parameters for the displays.
+The speed is between 1 (about one minute) and 10 (instantly).</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Options" xml:space="preserve">
+    <value>Brightness Control</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Options_Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Options_Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="UnitConfig_Hardware_Brightness_Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel" xml:space="preserve">
+    <value>DVI Level Shifters</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Description" xml:space="preserve">
+    <value>Configure the levels and output currents of the DVI ports.</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_LabelFormat" xml:space="preserve">
+    <value>Level Shifter of DVI Port {0}</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Level_Format" xml:space="preserve">
+    <value>{0} dB</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Trim" xml:space="preserve">
+    <value>Trim</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Trim_Increased" xml:space="preserve">
+    <value>Increased Current</value>
+  </data>
+  <data name="UnitConfig_Hardware_DviLevel_Trim_Standard" xml:space="preserve">
+    <value>Standard Current</value>
+  </data>
+  <data name="UnitConfig_Hardware_Inputs" xml:space="preserve">
+    <value>Digital Inputs</value>
+  </data>
+  <data name="UnitConfig_Hardware_Inputs_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="UnitConfig_Hardware_Inputs_Description" xml:space="preserve">
+    <value>Define the names of all digital inputs in a unit.
+These names will be used later wherever you have to select a digital input.</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen" xml:space="preserve">
+    <value>Multiple Screen Mode</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen_Description" xml:space="preserve">
+    <value>Choose how content should be displayed on the two screens.
+Cloning is only possible if both screens have the same resolution.</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen_Main" xml:space="preserve">
+    <value>Main Screen</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen_Mode" xml:space="preserve">
+    <value>Screen Mode</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen_Mode_Clone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="UnitConfig_Hardware_MultiScreen_Mode_Extend" xml:space="preserve">
+    <value>Extend</value>
+  </data>
+  <data name="UnitConfig_Hardware_Outputs" xml:space="preserve">
+    <value>Digital Outputs</value>
+  </data>
+  <data name="UnitConfig_Hardware_Outputs_Description" xml:space="preserve">
+    <value>Define the names of all digital outputs in a unit.
+These names will be used later wherever you have to select a digital output.</value>
+  </data>
+  <data name="UnitConfig_Hardware_Outputs_LED" xml:space="preserve">
+    <value>Update LED</value>
+  </data>
+  <data name="UnitConfig_Hardware_Rs485Mode" xml:space="preserve">
+    <value>RS-485 Connection</value>
+  </data>
+  <data name="UnitConfig_Hardware_Rs485Mode_AT91" xml:space="preserve">
+    <value>AT91 Controller</value>
+  </data>
+  <data name="UnitConfig_Hardware_Rs485Mode_CPU" xml:space="preserve">
+    <value>Application (CPU)</value>
+  </data>
+  <data name="UnitConfig_Hardware_Rs485Mode_Description" xml:space="preserve">
+    <value>Choose whether the RS-485 port is used by the AT91 controller or whether it should be accessible by an application.
+If it is not connected to the AT91, it will not be possible to control the attached TFT displays.</value>
+  </data>
+  <data name="UnitConfig_Hardware_Rs485Mode_Label" xml:space="preserve">
+    <value>Connected to</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions" xml:space="preserve">
+    <value>Screen Resolutions</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions_Description" xml:space="preserve">
+    <value>Select the screen resolution(s)</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions_Format" xml:space="preserve">
+    <value>{0} ({1}x{2})</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions_Primary" xml:space="preserve">
+    <value>Primary Screen</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenResolutions_Secondary" xml:space="preserve">
+    <value>Secondary Screen</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenOrientation_Format" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenOrientation" xml:space="preserve">
+    <value>Screen Orientation</value>
+  </data>
+  <data name="UnitConfig_Hardware_ScreenOrientation_Description" xml:space="preserve">
+    <value>Select the screen orientation</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers" xml:space="preserve">
+    <value>Multi-Protocol Transceivers</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Description" xml:space="preserve">
+    <value>Configure the multi-protocol transceivers with their type, mode and termination.</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_LabelFormat" xml:space="preserve">
+    <value>Multi-Protocol Transceiver {0}</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Mode" xml:space="preserve">
+    <value>Duplex Mode</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Mode_FullDuplex" xml:space="preserve">
+    <value>Full Duplex</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Mode_HalfDuplex" xml:space="preserve">
+    <value>Half Duplex</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Term" xml:space="preserve">
+    <value>Termination</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Term_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Term_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="UnitConfig_Hardware_Transceivers_Type" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="UnitConfig_Title" xml:space="preserve">
+    <value>Unit Configuration</value>
+  </data>
+  <data name="Widget_Recently_Edited" xml:space="preserve">
+    <value>Recently Edited</value>
+  </data>
+  <data name="Window_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="AddEntityTooltip" xml:space="preserve">
+    <value>Add Entity</value>
+  </data>
+  <data name="CopyEntityTooltip" xml:space="preserve">
+    <value>Copy Entity</value>
+  </data>
+  <data name="DeleteEntityTooltip" xml:space="preserve">
+    <value>Delete Entity</value>
+  </data>
+  <data name="EditEntityTooltip" xml:space="preserve">
+    <value>Edit Entity</value>
+  </data>
+  <data name="UnitConfiguration_UnsavedBox_Content" xml:space="preserve">
+    <value>The current Unit Configuration has unsaved changes. Do you want to save them?</value>
+  </data>
+  <data name="UnitConfiguration_UnsavedBox_Title" xml:space="preserve">
+    <value>Save current Unit Configuration?</value>
+  </data>
+  <data name="Errors_DuplicateName" xml:space="preserve">
+    <value>This name is already used, please use a different name.</value>
+  </data>
+  <data name="Errors_NoItemSelected" xml:space="preserve">
+    <value>Please select an item from the list.</value>
+  </data>
+  <data name="Errors_TextNotWhitespace" xml:space="preserve">
+    <value>Text cannot be empty or only contain whitespace.</value>
+  </data>
+  <data name="RemovableMedia_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RemovableMedia_Importing" xml:space="preserve">
+    <value>Importing Feedback...</value>
+  </data>
+  <data name="XmlEditor_Label" xml:space="preserve">
+    <value>XML Data: {0} characters</value>
+  </data>
+  <data name="RemovableMedia_ExportUpdates" xml:space="preserve">
+    <value>Export Updates</value>
+  </data>
+  <data name="RemovableMedia_FromUnits" xml:space="preserve">
+    <value>From Units:</value>
+  </data>
+  <data name="RemovableMedia_ImportFeedback" xml:space="preserve">
+    <value>Import Feedback</value>
+  </data>
+  <data name="RemovableMedia_Exporting" xml:space="preserve">
+    <value>Exporting updates...</value>
+  </data>
+  <data name="SaveXml" xml:space="preserve">
+    <value>Save XML</value>
+  </data>
+  <data name="UnitConfig_Conclusion" xml:space="preserve">
+    <value>Conclusion</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportPreparation" xml:space="preserve">
+    <value>Export Preparation</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportPreparation_Description" xml:space="preserve">
+    <value>Changes made here are not stored in the unit configuration.</value>
+  </data>
+  <data name="Errors_DuplicateValue" xml:space="preserve">
+    <value>This value is already used, please use a different value.</value>
+  </data>
+  <data name="Errors_ValidDateTime" xml:space="preserve">
+    <value>Please select a valid date and time</value>
+  </data>
+  <data name="Errors_ValidEmail" xml:space="preserve">
+    <value>Value must be a valid e-mail address.</value>
+  </data>
+  <data name="Errors_ValidUnitName" xml:space="preserve">
+    <value>The unit name must be in the format TFT-xx-xx-xx with 'x' being a hex character (0-9, A-F).</value>
+  </data>
+  <data name="Errors_ValidXml" xml:space="preserve">
+    <value>The value must be a valid XML document.</value>
+  </data>
+  <data name="Requests_Delete_MessageFormat" xml:space="preserve">
+    <value>Do you really want to delete the {0} "{1}" (id={2})?</value>
+  </data>
+  <data name="Requests_Delete_Title" xml:space="preserve">
+    <value>Delete Entity</value>
+  </data>
+  <data name="ServerError_DeleteEntity_MessageFormat" xml:space="preserve">
+    <value>Failed to delete the {0} "{1}".
+Please inspect the logs for details.</value>
+  </data>
+  <data name="ServerError_DeleteEntity_Title" xml:space="preserve">
+    <value>Delete Failed</value>
+  </data>
+  <data name="ServerError_LoadEntityDetails_MessageFormat" xml:space="preserve">
+    <value>Couldn't load details of the {0} "{1}".
+Please inspect the logs for details.</value>
+  </data>
+  <data name="ServerError_LoadEntityDetails_Title" xml:space="preserve">
+    <value>Load Details Failed</value>
+  </data>
+  <data name="ServerError_NavigateTo_MessageFormat" xml:space="preserve">
+    <value>Failed to navigate to the {0} "{1}".
+Please inspect the logs for details.</value>
+  </data>
+  <data name="ServerError_NavigateTo_Title" xml:space="preserve">
+    <value>Navigation Failed</value>
+  </data>
+  <data name="ServerError_SaveEntity_MessageFormat" xml:space="preserve">
+    <value>Failed to save the {0} "{1}".
+Please inspect the logs for details.</value>
+  </data>
+  <data name="ServerError_SaveEntity_Title" xml:space="preserve">
+    <value>Save Failed</value>
+  </data>
+  <data name="UserRole_SelectAuthorizations" xml:space="preserve">
+    <value>Select Authorizations...</value>
+  </data>
+  <data name="Editor_ClearSelection" xml:space="preserve">
+    <value>Clear Selection</value>
+  </data>
+  <data name="FileDialog_AddFiles" xml:space="preserve">
+    <value>Add files...</value>
+  </data>
+  <data name="FileDialog_AllFilesFilter" xml:space="preserve">
+    <value>All files (*.*)|*.*</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportPreparation_ReloadQuery" xml:space="preserve">
+    <value>The unit configuration has changed, you should reload the entire export preview. All changes done manually to any files will be lost.
+Do you want to reload the export?</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportPreparation_ErrorFormat" xml:space="preserve">
+    <value>There was an error while creating the export folder structure, the resulting structure might be incomplete.
+({0})</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportPreparation_ErrorTitle" xml:space="preserve">
+    <value>Export Structure Error</value>
+  </data>
+  <data name="UnitConfig_Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming" xml:space="preserve">
+    <value>Incoming Data</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Description" xml:space="preserve">
+    <value>Choose all the kinds of data that are coming into your system from other systems.</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Ibis" xml:space="preserve">
+    <value>VDV 300 (IBIS)</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Medi" xml:space="preserve">
+    <value>Medi (this Unit is a Medi slave connected to a Medi master)</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Sntp" xml:space="preserve">
+    <value>SNTP (Simple Network Time Protocol)</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Vdv301" xml:space="preserve">
+    <value>VDV 301 (IBIS-IP)</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Ximple" xml:space="preserve">
+    <value>Ximple (Gorba Simple XML Structure)</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_Rss" xml:space="preserve">
+    <value>RSS News Feed</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_LamXimple" xml:space="preserve">
+    <value> LAM (Location Awareness Module Ximple Protocol) Stops, Route Ladder, WiFi Zones, GPS </value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_AudioPeripheral" xml:space="preserve">
+    <value>Audio MUX/GPIO (Audio Peripheral Protocol)</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing" xml:space="preserve">
+    <value>Outgoing Data</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing_Ahdlc" xml:space="preserve">
+    <value>AHDLC (exterior and interior signs)</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing_Audio" xml:space="preserve">
+    <value>Audio (loudspeaker)</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing_Description" xml:space="preserve">
+    <value>Choose all the kinds of data that are leaving your system towards other systems or the passenger.</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing_DirectX" xml:space="preserve">
+    <value>DirectX (screen)</value>
+  </data>
+  <data name="UnitConfig_Software_Outgoing_Medi" xml:space="preserve">
+    <value>Medi (this Unit is a Medi master to which Medi slaves can connect)</value>
+  </data>
+  <data name="Errors_MediMasterAndSlave" xml:space="preserve">
+    <value>The configuration contains both a Medi master and a Medi slave, this is probably wrong.</value>
+  </data>
+  <data name="Errors_NoExportDueToError" xml:space="preserve">
+    <value>The configuration can't be exported due to errors. Please fix the errors above first before continuing with the export.</value>
+  </data>
+  <data name="Errors_NoIncomingOutgoing" xml:space="preserve">
+    <value>The configuration doesn't contain any incoming or outgoing data, this is probably wrong.</value>
+  </data>
+  <data name="Errors_LamButNoAudio" xml:space="preserve">
+    <value>When Ximple (LAM) is selected, Audio MUX must also be selected.</value>
+  </data>
+  <data name="Errors_AudioButNoLam" xml:space="preserve">
+    <value>When Audio MUX is selected, Ximple (LAM) must also be selected.</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_Description" xml:space="preserve">
+    <value>Here you can export the configuration to the selected Update Groups.
+Exporting the configuration will save it to the database and then create the necessary data to be sent to the Units.</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_FolderStructure" xml:space="preserve">
+    <value>Folder structure</value>
+  </data>
+  <data name="ServerError_ExportUpdates_Message" xml:space="preserve">
+    <value>Couldn't export updates for the selected Units to the removable media.</value>
+  </data>
+  <data name="ServerError_ExportUpdates_Title" xml:space="preserve">
+    <value>Export Update Failed</value>
+  </data>
+  <data name="ServerError_ImportFeedback_Message" xml:space="preserve">
+    <value>Couln't import feedback from the removable media.</value>
+  </data>
+  <data name="ServerError_ImportFeedback_Title" xml:space="preserve">
+    <value>Import Feedback Failed</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_EndTime" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_Exported" xml:space="preserve">
+    <value>The Unit Configuration was successfully exported to the selected Update Group(s).
+You can now close this editor or create and export a new version.</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_StartTime" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="UnitConfig_Conclusion_LocalDownload" xml:space="preserve">
+    <value>Local Download</value>
+  </data>
+  <data name="UnitConfig_Conclusion_LocalDownload_Description" xml:space="preserve">
+    <value>You have the possibility to download locally the folder structure you just exported.
+Be aware that only the Unit Configuration including the software will be exported and no other files are included (e.g. from icenter.media).</value>
+  </data>
+  <data name="UnitConfig_Conclusion_LocalDownload_Download" xml:space="preserve">
+    <value>Download...</value>
+  </data>
+  <data name="UnitConfig_Conclusion_LocalDownload_FolderSelection" xml:space="preserve">
+    <value>Select a local folder to download structure</value>
+  </data>
+  <data name="Warnings_FolderNotEmpty_MessageFormat" xml:space="preserve">
+    <value>The folder '{0}' is not empty. It will be cleared before continuing with the download.</value>
+  </data>
+  <data name="Warnings_FolderNotEmpty_Title" xml:space="preserve">
+    <value>Folder not empty</value>
+  </data>
+  <data name="Editor_EnterDuration" xml:space="preserve">
+    <value>Enter a valid duration</value>
+  </data>
+  <data name="UnitConfig_TimeSync" xml:space="preserve">
+    <value>Time Synchronization</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Broadcast" xml:space="preserve">
+    <value>Broadcast Time Changes</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis" xml:space="preserve">
+    <value>VDV 300 (IBIS)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_Description" xml:space="preserve">
+    <value>Set the correct configuration for IBIS telegrams DS005, DS006 and DS006a.</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_Ds005_Ds006" xml:space="preserve">
+    <value>DS005 (time) and DS006 (date)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_Ds006a" xml:space="preserve">
+    <value>DS006a (date/time)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_InitialDelay" xml:space="preserve">
+    <value>Initial Delay</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_Records" xml:space="preserve">
+    <value>Use IBIS Telegram(s)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_Tolerance" xml:space="preserve">
+    <value>Tolerance</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_UpdateInterval" xml:space="preserve">
+    <value>Update Interval</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Ibis_WaitTelegrams" xml:space="preserve">
+    <value>Number of Telegrams to Wait</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp" xml:space="preserve">
+    <value>Simple Network Time Protocol</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Description" xml:space="preserve">
+    <value>Select the options for time synchronization using Simple Network Time Protocol (SNTP).</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Host" xml:space="preserve">
+    <value>Host Name (or IP Address)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Port" xml:space="preserve">
+    <value>Port Number</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_RetryCount" xml:space="preserve">
+    <value>Retry Count</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_RetryInterval" xml:space="preserve">
+    <value>Retry Interval</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_UpdateInterval" xml:space="preserve">
+    <value>Update Interval</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Version" xml:space="preserve">
+    <value>SNTP Version</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Version3" xml:space="preserve">
+    <value>Version 3</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Sntp_Version4" xml:space="preserve">
+    <value>Version 4</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Source" xml:space="preserve">
+    <value>Synchronization Source</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Source_Description" xml:space="preserve">
+    <value>Choose how to synchronize the system time from an outside source.</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Source_None" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Source_Selection" xml:space="preserve">
+    <value>Time Synchronization Source</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Vdv301" xml:space="preserve">
+    <value>VDV 301 (IBIS-IP)</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Vdv301_Description" xml:space="preserve">
+    <value>Select the options for time synchronization via VDV 301 (IBIS over IP).</value>
+  </data>
+  <data name="UnitConfig_SystemConfig" xml:space="preserve">
+    <value>System Settings</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode" xml:space="preserve">
+    <value>Configuration Mode</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_Description" xml:space="preserve">
+    <value>Select if you wish to configure the system differently for different I/O values.
+For each setting you can choose how it is configured.
+This can be used for example with coded cables.</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_Multi" xml:space="preserve">
+    <value>Different settings for different I/O values</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_NumConfigs" xml:space="preserve">
+    <value>Number of Settings</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_Single" xml:space="preserve">
+    <value>Single setting</value>
+  </data>
+  <data name="Errors_ValidIpAddress" xml:space="preserve">
+    <value>Value must be a valid IP address.</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_NotConfigured" xml:space="preserve">
+    <value>Don't configure</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_UseGlobal" xml:space="preserve">
+    <value>Use global setting</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_ConfigMode_UseSpecific" xml:space="preserve">
+    <value>Define per I/O value</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_Global" xml:space="preserve">
+    <value>Global Settings</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_Global_Description" xml:space="preserve">
+    <value>Choose the global settings that are valid independent of I/O states to be used in this step.
+Editors are only enabled if they were selected in the "Configuration Mode" before.</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_Description" xml:space="preserve">
+    <value>Choose the I/O states as well as the settings to be used in this step.
+Editors are only enabled if they were selected in the "Configuration Mode" before.</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_Format" xml:space="preserve">
+    <value>I/O Based Settings #{0}</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IpAddress" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IpGateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_NetworkMask" xml:space="preserve">
+    <value>Network Mask</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_Single" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_Single_Description" xml:space="preserve">
+    <value>Set your system settings here.
+Editors are only enabled if they were selected in the "Configuration Mode" before.</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_TimeZone" xml:space="preserve">
+    <value>Time Zone</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_IOTitle" xml:space="preserve">
+    <value>Inputs</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_Off" xml:space="preserve">
+    <value>Off (0)</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_On" xml:space="preserve">
+    <value>On (1)</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_IO_SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Errors_SelectOneAtLeast" xml:space="preserve">
+    <value>Please select at least one item from the list.</value>
+  </data>
+  <data name="Errors_SelectOnlyOne" xml:space="preserve">
+    <value>Please select only one item from the list.</value>
+  </data>
+  <data name="Errors_SelectBoth" xml:space="preserve">
+    <value>Both must be selected for this channel.</value>
+  </data>
+  <data name="UnitConfig_Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UnitConfig_Update_Azure" xml:space="preserve">
+    <value>Azure</value>
+  </data>
+  <data name="UnitConfig_Update_Azure_Description" xml:space="preserve">
+    <value>AzureConfigure the options for updates via Azure.</value>
+  </data>
+  <data name="UnitConfig_Update_FTP" xml:space="preserve">
+    <value>FTP Server</value>
+  </data>
+  <data name="UnitConfig_Update_FTP_Description" xml:space="preserve">
+    <value>Configure the options for updates via an FTP server.</value>
+  </data>
+  <data name="UnitConfig_Update_FTP_Servers" xml:space="preserve">
+    <value>FTP Servers</value>
+  </data>
+  <data name="UnitConfig_Update_Methods" xml:space="preserve">
+    <value>Update Methods</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_ChooseOne" xml:space="preserve">
+    <value>At least USB, FTP or Medi Slave update should be chosen, otherwise the system is not updateable anymore in the future.</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_Description" xml:space="preserve">
+    <value>Choose from the possbile methods how to update the system.
+If FTP is not available, it means that your icenter.BackgroundSystem is not configured to use FTP.</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_FTP" xml:space="preserve">
+    <value>FTP Server</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_USB" xml:space="preserve">
+    <value>USB Stick</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_Azure" xml:space="preserve">
+    <value>Azure</value>
+  </data>
+  <data name="UnitConfig_Update_ShowVisualizations" xml:space="preserve">
+    <value>Show Update Visualizations</value>
+  </data>
+  <data name="UnitConfig_Update_Azure_RepositoryUrl" xml:space="preserve">
+    <value>The url of the repository.</value>
+  </data>
+  <data name="UnitConfig_Update_USB" xml:space="preserve">
+    <value>USB Stick</value>
+  </data>
+  <data name="UnitConfig_Update_USB_Description" xml:space="preserve">
+    <value>Configure the options for updates via USB stick.</value>
+  </data>
+  <data name="UnitConfig_Software_MediSlave" xml:space="preserve">
+    <value>Medi Slave</value>
+  </data>
+  <data name="UnitConfig_Software_MediSlave_Description" xml:space="preserve">
+    <value>Choose how to connect this unit to the Medi Master.</value>
+  </data>
+  <data name="UnitConfig_Software_MediSlave_MasterAddress" xml:space="preserve">
+    <value>Medi Master Address</value>
+  </data>
+  <data name="UnitConfig_Update_Agent" xml:space="preserve">
+    <value>Local Installer</value>
+  </data>
+  <data name="UnitConfig_Update_Agent_Description" xml:space="preserve">
+    <value>Configure the local update installation.</value>
+  </data>
+  <data name="UnitConfig_Update_MediMaster" xml:space="preserve">
+    <value>Medi Master</value>
+  </data>
+  <data name="UnitConfig_Update_MediMaster_Description" xml:space="preserve">
+    <value>Configure the options for updates towards Medi Slaves (this Unit acts as a Medi Master).</value>
+  </data>
+  <data name="UnitConfig_Update_MediSlave" xml:space="preserve">
+    <value>Medi Slave</value>
+  </data>
+  <data name="UnitConfig_Update_MediSlave_Description" xml:space="preserve">
+    <value>Configure the options for updates from a Medi Master (this Unit acts as a Medi Slave).</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_BothMedi" xml:space="preserve">
+    <value>A unit can't be Medi Master and Medi Slave at the same time, please choose only one option.</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_MediMaster" xml:space="preserve">
+    <value>Medi Update Master</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_MediSlave" xml:space="preserve">
+    <value>Medi Update Slave</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_RequireWifi" xml:space="preserve">
+    <value>Require Wifi Network Connection</value>
+  </data>
+  <data name="RemovableMedia_NoUnitsDefined" xml:space="preserve">
+    <value>No Units defined or assigned.</value>
+  </data>
+  <data name="XmlEditor_Errors_Format" xml:space="preserve">
+    <value>Found {0} errors on lines {1} and {2}.</value>
+  </data>
+  <data name="XmlEditor_OK_NoSchema" xml:space="preserve">
+    <value>XML is valid (no schema validation done).</value>
+  </data>
+  <data name="XmlEditor_OK_WithSchema" xml:space="preserve">
+    <value>XML is valid and validated against schema.</value>
+  </data>
+  <data name="XmlEditor_OneError_Format" xml:space="preserve">
+    <value>Found one error on line {0}.</value>
+  </data>
+  <data name="Errors_NoResourceSelected" xml:space="preserve">
+    <value>Please upload a file.</value>
+  </data>
+  <data name="Errors_PositiveValue" xml:space="preserve">
+    <value>Please enter a positive value.</value>
+  </data>
+  <data name="ResourceUploadEditor_SelectFile" xml:space="preserve">
+    <value>Select File...</value>
+  </data>
+  <data name="UnitConfig_Ahdlc" xml:space="preserve">
+    <value>AHDLC Renderer</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_General" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_General_Addresses" xml:space="preserve">
+    <value>Connected AHDLC Signs</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_General_ComPort" xml:space="preserve">
+    <value>Serial Port</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_General_Description" xml:space="preserve">
+    <value>Configure the general settings for the AHDLC Renderer.</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Brightness" xml:space="preserve">
+    <value>Brightness</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Brightness_1" xml:space="preserve">
+    <value>Brightness 1</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Brightness_2" xml:space="preserve">
+    <value>Brightness 2</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Brightness_3" xml:space="preserve">
+    <value>Brightness 3</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Brightness_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Description" xml:space="preserve">
+    <value>Configure the properties of the sign.</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Format" xml:space="preserve">
+    <value>Sign Address {0}</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Mode" xml:space="preserve">
+    <value>Sign Mode</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Mode_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Mode_Monochrome" xml:space="preserve">
+    <value>Monochrome</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Mode_Text" xml:space="preserve">
+    <value>Text Only</value>
+  </data>
+  <data name="UnitConfig_Ahdlc_Sign_Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="UnitConfig_Composer" xml:space="preserve">
+    <value>Infomedia Composer</value>
+  </data>
+  <data name="UnitConfig_Composer_General" xml:space="preserve">
+    <value>Composer Settings</value>
+  </data>
+  <data name="UnitConfig_Composer_General_Description" xml:space="preserve">
+    <value>Choose the settings for Infomedia Composer.</value>
+  </data>
+  <data name="UnitConfig_Composer_XimpleInactivityAtStartup" xml:space="preserve">
+    <value>Inactive at start-up</value>
+  </data>
+  <data name="UnitConfig_Composer_XimpleInactivityEnabled" xml:space="preserve">
+    <value>Check for Ximple inactivity</value>
+  </data>
+  <data name="UnitConfig_Composer_XimpleInactivityTimeout" xml:space="preserve">
+    <value>Inactivity timeout</value>
+  </data>
+  <data name="UnitConfig_Composer_PresentationLoggingEnabled" xml:space="preserve">
+    <value>Enable presentation play logging</value>
+  </data>
+  <data name="UnitConfig_DirectX" xml:space="preserve">
+    <value>DirectX Renderer</value>
+  </data>
+  <data name="UnitConfig_DirectX_General" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_BadTimeout" xml:space="preserve">
+    <value>Fallback timeout must be at least 20 seconds (or zero to disable it)</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_Description" xml:space="preserve">
+    <value>Choose the general settings for DirectX Renderer.
+The default fallback image (when no data is available) is the DirectX Renderer splash screen, if you wish to show a customer specific image, please choose one above.</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_FallbackImage" xml:space="preserve">
+    <value>Special Fallback Image</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_FallbackTimeout" xml:space="preserve">
+    <value>Fallback Timeout</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_UseDefaultFallbackImage" xml:space="preserve">
+    <value>Use Default Fallback Image</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image" xml:space="preserve">
+    <value>Image Rendering</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image_CacheMegaBytes" xml:space="preserve">
+    <value>Maximum Size of Bitmap Cache (in MB)</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image_CacheTimeout" xml:space="preserve">
+    <value>Bitmap Cache Timeout</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image_Description" xml:space="preserve">
+    <value>Choose the image rendering options.
+Modifying the cache size can cause big memory consumption by DirectX Renderer.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image_MegaBytesPerBitmap" xml:space="preserve">
+    <value>Maximum Megabytes per Bitmap to Cache</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text" xml:space="preserve">
+    <value>Text Rendering</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_Description" xml:space="preserve">
+    <value>Choose the mode in which text should be rendered.
+GDI mode is only experimental and should only be used when rotated texts are required.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_TextMode" xml:space="preserve">
+    <value>Text Rendering Mode</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_TextMode_DirectX" xml:space="preserve">
+    <value>DirectX fonts with caching</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_TextMode_Gdi" xml:space="preserve">
+    <value>GDI fonts</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video" xml:space="preserve">
+    <value>Video Playback</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_Description" xml:space="preserve">
+    <value>Choose the mode in which video should be played back.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_VideoMode" xml:space="preserve">
+    <value>Video Playback Mode</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_VideoMode_DirectShow" xml:space="preserve">
+    <value>DirectShow on a DirectX Texture</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_VideoMode_DirectXWindow" xml:space="preserve">
+    <value>DirectX in a Separate Window</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_VideoMode_None" xml:space="preserve">
+    <value>No Video Playback</value>
+  </data>
+  <data name="UnitConfig_DirectX_Video_VideoMode_VlcWindow" xml:space="preserve">
+    <value>VLC Player in a Separate Window</value>
+  </data>
+  <data name="UnitConfig_Audio" xml:space="preserve">
+    <value>Audio Renderer</value>
+  </data>
+  <data name="UnitConfig_Audio_Acapela" xml:space="preserve">
+    <value>Acapela Text-to-Speech</value>
+  </data>
+  <data name="UnitConfig_Audio_Acapela_Description" xml:space="preserve">
+    <value>Configure the voices that should be available for Acapela text-to-speech.
+Be aware that every voice takes about 100-200 MB of harddisk space, so choose wisely!</value>
+  </data>
+  <data name="UnitConfig_Audio_Acapela_Voices" xml:space="preserve">
+    <value>Voices</value>
+  </data>
+  <data name="UnitConfig_Audio_Channel_Description" xml:space="preserve">
+    <value>Configure the speaker I/Os for this audio channel.</value>
+  </data>
+  <data name="UnitConfig_Audio_Channel_Format" xml:space="preserve">
+    <value>Audio Channel #{0}</value>
+  </data>
+  <data name="UnitConfig_Audio_Channel_SpeakerPorts" xml:space="preserve">
+    <value>Speaker I/Os</value>
+  </data>
+  <data name="UnitConfig_Audio_General" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="UnitConfig_Audio_General_Description" xml:space="preserve">
+    <value>Configure the general settings for the Audio Renderer.</value>
+  </data>
+  <data name="UnitConfig_Audio_General_NumChannels" xml:space="preserve">
+    <value>Number of Channels</value>
+  </data>
+  <data name="UnitConfig_Audio_General_UseAcapela" xml:space="preserve">
+    <value>Use Acapela TTS</value>
+  </data>
+  <data name="UnitConfig_Conclusion_SoftwareVersions" xml:space="preserve">
+    <value>Software Versions</value>
+  </data>
+  <data name="UnitConfig_Conclusion_SoftwareVersions_Description" xml:space="preserve">
+    <value>Select the version for each software package to be installed.
+Be careful to choose versions that are compatible with each other.</value>
+  </data>
+  <data name="Editor_EnterDurationOrEmpty" xml:space="preserve">
+    <value>Enter a valid duration or leave empty</value>
+  </data>
+  <data name="UnitConfig_Hardware_Reboot" xml:space="preserve">
+    <value>Scheduled Reboot</value>
+  </data>
+  <data name="UnitConfig_Hardware_Reboot_Description" xml:space="preserve">
+    <value>Choose if and when to automatically reboot the system.
+Not selecting any value will disable the respective type of reboot.</value>
+  </data>
+  <data name="UnitConfig_Hardware_Reboot_RebootAfter" xml:space="preserve">
+    <value>Reboot After (Hours)</value>
+  </data>
+  <data name="UnitConfig_Hardware_Reboot_RebootAt" xml:space="preserve">
+    <value>Reboot At (Time of Day)</value>
+  </data>
+  <data name="ImageFileFilters" xml:space="preserve">
+    <value>Images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png</value>
+  </data>
+  <data name="UnitConfig_SplashScreens" xml:space="preserve">
+    <value>Splash Screens</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_Background" xml:space="preserve">
+    <value>Background Color</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_Foreground" xml:space="preserve">
+    <value>Foreground Color</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_HotKey" xml:space="preserve">
+    <value>Hot Key</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_HotKey_Description" xml:space="preserve">
+    <value>Configure the splash screen shown when the user presses Win-S on the Unit.</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_LocalButton" xml:space="preserve">
+    <value>Local Button</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_LocalButton_Description" xml:space="preserve">
+    <value>Configure the splash screen shown when the user presses the hardware button on the Unit.</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_Logo" xml:space="preserve">
+    <value>Custom Logo</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_RemoteButton" xml:space="preserve">
+    <value>Remote Button</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_RemoteButton_Description" xml:space="preserve">
+    <value>Configure the splash screen shown when the user presses the hardware button on a Unit connected to the one being configured.
+Be aware that the button must be named "Button" on the other Unit for this splash screen to show.</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems" xml:space="preserve">
+    <value>Items to Show</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications" xml:space="preserve">
+    <value>Registered Applications</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_Cpu" xml:space="preserve">
+    <value>CPU Usage</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_ExitReason" xml:space="preserve">
+    <value>Last Exit Reason</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_LaunchReason" xml:space="preserve">
+    <value>Last Launch Reason</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_Ram" xml:space="preserve">
+    <value>RAM Usage</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_Uptime" xml:space="preserve">
+    <value>Time Running</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Applications_Version" xml:space="preserve">
+    <value>Version Number</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Misc" xml:space="preserve">
+    <value>Miscellaneous</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Misc_IbisAddress" xml:space="preserve">
+    <value>IBIS Address</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Misc_Temperature" xml:space="preserve">
+    <value>System Temperature</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network" xml:space="preserve">
+    <value>Network Interfaces</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network_Gateway" xml:space="preserve">
+    <value>IP Gateway</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network_Ip" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network_Mac" xml:space="preserve">
+    <value>MAC Address</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Network_Status" xml:space="preserve">
+    <value>Interface Status</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System" xml:space="preserve">
+    <value>System Information</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System_Cpu" xml:space="preserve">
+    <value>CPU Usage</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System_MachineName" xml:space="preserve">
+    <value>Unit Name</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System_Ram" xml:space="preserve">
+    <value>RAM Usage</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System_Serial" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_System_Uptime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_StartUp" xml:space="preserve">
+    <value>System Boot</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_StartUp_Description" xml:space="preserve">
+    <value>Configure the splash screen shown when the device starts up.</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_UseDefaultLogo" xml:space="preserve">
+    <value>Use Default Logo</value>
+  </data>
+  <data name="UnitConfig_Transformations" xml:space="preserve">
+    <value>Protran: Transformations</value>
+  </data>
+  <data name="UnitConfig_Transformations_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="UnitConfig_Transformations_General_Count" xml:space="preserve">
+    <value>Number of Transformations</value>
+  </data>
+  <data name="UnitConfig_Transformations_General_Description" xml:space="preserve">
+    <value>Choose the number of transformations to be available in this configuration.</value>
+  </data>
+  <data name="UnitConfig_Transformations_Transformation_Description" xml:space="preserve">
+    <value>Edit this transformation by adding or removing items to the list.
+You can also rearrange and duplicate items using drag-and-drop.</value>
+  </data>
+  <data name="UnitConfig_IoProtocol" xml:space="preserve">
+    <value>Protran: I/O Protocol</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_General_Count" xml:space="preserve">
+    <value>Number of Inputs</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_General_Description" xml:space="preserve">
+    <value>Choose the number of inputs you want to handle with Protran.</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Application" xml:space="preserve">
+    <value>Application Name</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Description" xml:space="preserve">
+    <value>Configure which input should be handled, through which transformation it should go and in which generic cell the data should be put.
+As an input name you can choose a known one from this configuration or enter the name yourself.</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Format" xml:space="preserve">
+    <value>Input Handler {0}</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_InputName" xml:space="preserve">
+    <value>Input Name</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Select" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Select_Manual" xml:space="preserve">
+    <value>&lt;Enter manually below&gt;</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Transformation" xml:space="preserve">
+    <value>Transformation</value>
+  </data>
+  <data name="UnitConfig_IoProtocol_Input_Unit" xml:space="preserve">
+    <value>Unit Name</value>
+  </data>
+  <data name="UnitConfig_Protran_GenericUsage" xml:space="preserve">
+    <value>Generic Cell</value>
+  </data>
+  <data name="UnitConfig_Protran_NoTransformation" xml:space="preserve">
+    <value>&lt;No Transformation&gt;</value>
+  </data>
+  <data name="UnitConfig_Ibis" xml:space="preserve">
+    <value>Protran: VDV 300 (IBIS)</value>
+  </data>
+  <data name="UnitConfig_Ibis_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_Addresses" xml:space="preserve">
+    <value>IBIS Address(es)</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_ByteType" xml:space="preserve">
+    <value>Telegram Format</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_ByteType_Ascii7" xml:space="preserve">
+    <value>Default (7-Bit ASCII)</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_ByteType_Hengartner8" xml:space="preserve">
+    <value>8-Bit from CU5</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_ByteType_UnicodeBigEndian" xml:space="preserve">
+    <value>16-Bit Big Endian Unicode</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_CheckCrc" xml:space="preserve">
+    <value>Verify Checksum</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_ConnectionTimeout" xml:space="preserve">
+    <value>Connection Timeout</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_Description" xml:space="preserve">
+    <value>Configure the general options of VDV 300 (IBIS) handling in Protran.</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_Recording" xml:space="preserve">
+    <value>Record Received Telegrams</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_SourceType" xml:space="preserve">
+    <value>Source of IBIS Telegrams</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_SourceType_Json" xml:space="preserve">
+    <value>JSON through Atmel controller</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_SourceType_Serial" xml:space="preserve">
+    <value>Serial Port</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_SourceType_Simulation" xml:space="preserve">
+    <value>Simulation File</value>
+  </data>
+  <data name="UnitConfig_Ibis_General_SourceType_UdpServer" xml:space="preserve">
+    <value>UDP Server (IBIS over UDP)</value>
+  </data>
+  <data name="UnitConfig_Ibis_Simulation" xml:space="preserve">
+    <value>Simulation</value>
+  </data>
+  <data name="UnitConfig_Ibis_Simulation_DescriptionFormat" xml:space="preserve">
+    <value>Configure the IBIS simulation which uses the data file under {0}.
+If the "Interval Between Telegrams" is left empty, the telegrams will be replayed with the timing in the recording.</value>
+  </data>
+  <data name="UnitConfig_Ibis_Simulation_InitialDelay" xml:space="preserve">
+    <value>Delay Before Simulation</value>
+  </data>
+  <data name="UnitConfig_Ibis_Simulation_IntervalBetween" xml:space="preserve">
+    <value>Interval Between Telegrams</value>
+  </data>
+  <data name="UnitConfig_Ibis_Simulation_TimesToRepeat" xml:space="preserve">
+    <value>Number of Times to Repeat File</value>
+  </data>
+  <data name="UnitConfig_Ibis_TelegramSelection" xml:space="preserve">
+    <value>Telegram Selection</value>
+  </data>
+  <data name="UnitConfig_Ibis_TelegramSelection_Description" xml:space="preserve">
+    <value>Check the IBIS telegrams to be handled by Protran.
+The date and time telegrams (DS005, DS006 and DS006a) are configured in the category "Time Synchronization".</value>
+  </data>
+  <data name="UnitConfig_Ibis_Telegram_DescriptionFormat" xml:space="preserve">
+    <value>Configure how to handle {0} , through which transformation it should go and in which generic cell(s) the data should be put.</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer" xml:space="preserve">
+    <value>UDP Server</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_Description" xml:space="preserve">
+    <value>Configure the IBIS over UDP server.</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_Format_Full" xml:space="preserve">
+    <value>Full telegram including header, payload, &lt;CR&gt; and checksum.</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_Format_NoChecksum" xml:space="preserve">
+    <value>Header, payload and &lt;CR&gt; but no checksum.</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_Format_NoFooter" xml:space="preserve">
+    <value>Header and payload, but no &lt;CR&gt; and checksum.</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_LocalPort" xml:space="preserve">
+    <value>Local UDP Port</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_ReceiveFormat" xml:space="preserve">
+    <value>Receive Telegram Format</value>
+  </data>
+  <data name="UnitConfig_Ibis_UdpServer_SendFormat" xml:space="preserve">
+    <value>Send Telegram Format</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS020_DefaultAnswer" xml:space="preserve">
+    <value>Default Response</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS020_MissingDataAnswer" xml:space="preserve">
+    <value>Missing Data Response</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS020_NoDataAnswer" xml:space="preserve">
+    <value>No Data Response</value>
+  </data>
+  <data name="UnitConfig_IbisProtocol_Telegram_Transformation" xml:space="preserve">
+    <value>Transformation</value>
+  </data>
+  <data name="UnitConfig_Vdv301" xml:space="preserve">
+    <value>Protran: VDV 301 (IBIS-IP)</value>
+  </data>
+  <data name="UnitConfig_Vdv301_DataItemSelection" xml:space="preserve">
+    <value>Data Item Selection</value>
+  </data>
+  <data name="UnitConfig_Vdv301_DataItemSelection_Description" xml:space="preserve">
+    <value>Select the data items to be used by Protran.
+For each selected data item, you will be able to configure its transformation and usage.</value>
+  </data>
+  <data name="UnitConfig_Vdv301_DataItem_DateTimeFormat" xml:space="preserve">
+    <value>Date / Time Format</value>
+  </data>
+  <data name="UnitConfig_Vdv301_DataItem_DescriptionFormat" xml:space="preserve">
+    <value>Data item "{0}":
+Configure how to handle recived data , through which transformation(s) it should go and in which generic cell(s) the data should be put.</value>
+  </data>
+  <data name="UnitConfig_Vdv301_DataItem_Transformation" xml:space="preserve">
+    <value>Transformation</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General_Description" xml:space="preserve">
+    <value>Configure the general options of VDV 301 (IBIS-IP) handling in Protran.
+If the Subscription Timeout is not set, it will never time out.</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General_SubscriptionTimeout" xml:space="preserve">
+    <value>Subscription Timeout</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General_ValidateHttpRequests" xml:space="preserve">
+    <value>Validate XML of HTTP Requests</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General_ValidateHttpResponses" xml:space="preserve">
+    <value>Validate XML of HTTP Responses</value>
+  </data>
+  <data name="UnitConfig_Vdv301_General_VerifyVersion" xml:space="preserve">
+    <value>Verify Version Number</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Service_DescriptionFormat" xml:space="preserve">
+    <value>Configure the general options for the service "{0}".
+Usually you should let Protran find the service with DNS-SD.
+The operations can be configured in the next steps.</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Service_Host" xml:space="preserve">
+    <value>Host Name</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Service_Path" xml:space="preserve">
+    <value>Service Base Path</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Service_Port" xml:space="preserve">
+    <value>Port Number</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Service_UseDnsSd" xml:space="preserve">
+    <value>Use DNS-SD to Find Service</value>
+  </data>
+  <data name="Errors_NoLanguageDefined" xml:space="preserve">
+    <value>Please define at least one language mapping.</value>
+  </data>
+  <data name="Errors_NoSemicolon" xml:space="preserve">
+    <value>The text should contain a semicolon delimited (CSV) list</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS080_CloseValue" xml:space="preserve">
+    <value>Closed Door Value</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS080_OpenValue" xml:space="preserve">
+    <value>Open Door Value</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS080_ResetWithDS010B" xml:space="preserve">
+    <value>Reset with DS010b</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS081_Value" xml:space="preserve">
+    <value>Closed Door Value</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO004_UsedForTitle" xml:space="preserve">
+    <value>Usage of Title</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO004_UsedForType" xml:space="preserve">
+    <value>Usage of Type</value>
+  </data>
+  <data name="UnitConfig_Ibis_HPW074_Description" xml:space="preserve">
+    <value>Configure how to handle HPW074 , through which transformation it should go and in which generic cell the data should be put.
+The Special Text is a semicolon delimited (CSV) list of index (received from the telegram) and lines of text to send out.</value>
+  </data>
+  <data name="UnitConfig_Ibis_HPW074_SpecialText" xml:space="preserve">
+    <value>Special Text</value>
+  </data>
+  <data name="UnitConfig_Protran" xml:space="preserve">
+    <value>Protran</value>
+  </data>
+  <data name="UnitConfig_Protran_Persistence" xml:space="preserve">
+    <value>Persistence</value>
+  </data>
+  <data name="UnitConfig_Protran_Persistence_DefaultValidity" xml:space="preserve">
+    <value>Default Validity</value>
+  </data>
+  <data name="UnitConfig_Protran_Persistence_Description" xml:space="preserve">
+    <value>Choose if you want to persist data from certain telegrams to the disk and for how long the data should be valid afterwards. If enabled the last messages from news feeds will be restored on startup.</value>
+  </data>
+  <data name="UnitConfig_Protran_Persistence_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Languages" xml:space="preserve">
+    <value>Language Mapping</value>
+  </data>
+  <data name="UnitConfig_Vdv301_Languages_Description" xml:space="preserve">
+    <value>Define which Ximple languages (left) should be filled with which VDV 301 languages (right). If there is no mapping for a given Ximple language, enter dash ("-") in the text box.</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections" xml:space="preserve">
+    <value>DS021a: Connections</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_Description" xml:space="preserve">
+    <value>Configure the DS021a telegram's connection handling ('A' variant).</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_LineNumberFormat" xml:space="preserve">
+    <value>Format for Connection Line Number</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_ShowForStop" xml:space="preserve">
+    <value>Show Connections For</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_ShowForStop_Any" xml:space="preserve">
+    <value>Any following stop that has connections</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_ShowForStop_Next" xml:space="preserve">
+    <value>Only for the next stop</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_UsedFor" xml:space="preserve">
+    <value>Generic Cell for Connection Destination</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_UsedForDepartureTime" xml:space="preserve">
+    <value>Generic Cell for Connection Transfer Time</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_UsedForLineNumber" xml:space="preserve">
+    <value>Generic Cell for Connection Line Number</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021aConnections_UsedForStopName" xml:space="preserve">
+    <value>Generic Cell for Stop Name of Connections</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_AbsoluteTimeFormat" xml:space="preserve">
+    <value>Absolute Time Format</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_ConnectionsEnabled" xml:space="preserve">
+    <value>Handle Connections ('A' Variant)</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_DeleteRoute" xml:space="preserve">
+    <value>Delete Route with Index 0</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_EndingStopIndexValue" xml:space="preserve">
+    <value>Value of Ending Stop Index</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_UsedForAbsoluteTime" xml:space="preserve">
+    <value>Generic Cell for Absolute Stop Time</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_UsedForDestinationAbsoluteTime" xml:space="preserve">
+    <value>Generic Cell for Absolute Destination Time</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_UsedForDestinationRelativeTime" xml:space="preserve">
+    <value>Generic Cell for Relative Destination Time</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_UsedForRelativeTime" xml:space="preserve">
+    <value>Generic Cell for Relative Stop Time</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021a_UsedForText" xml:space="preserve">
+    <value>Generic Cell for Text Messages ('S' Variant)</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_DefaultBlock" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_FlushNumberOfStations" xml:space="preserve">
+    <value>Flush after Number of Stops</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_FlushTimeout" xml:space="preserve">
+    <value>Automatic Flush Timeout</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_FromBlock" xml:space="preserve">
+    <value>Block from which to take the information</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_HideDestinationBelow" xml:space="preserve">
+    <value>Hide Destination Below</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_LastStopMode" xml:space="preserve">
+    <value>Last Stop Handling</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_LastStopMode_HideDestination" xml:space="preserve">
+    <value>Hide destination when last stop is visible in stop list</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_LastStopMode_HideLastStop" xml:space="preserve">
+    <value>Show last stop only as destination (never in stop list)</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_LastStopMode_ShowAll" xml:space="preserve">
+    <value>Always show last stop in stop list and as destination</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedFor" xml:space="preserve">
+    <value>Generic Cell for Stop Name</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedForDestination" xml:space="preserve">
+    <value>Generic Cell for Destination Name</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedForDestinationTransfers" xml:space="preserve">
+    <value>Generic Cell for Destination Transfer Names</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedForDestinationTransferSymbols" xml:space="preserve">
+    <value>Generic Cell for Destination Transfer Symbols</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedForTransfers" xml:space="preserve">
+    <value>Generic Cell for Stop Transfer Names</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021Base_UsedForTransferSymbols" xml:space="preserve">
+    <value>Generic Cell for Stop Transfer Symbols</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021c_AsciiLineNumberUsedFor" xml:space="preserve">
+    <value>Generic Cell for ASCII Line Number</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021c_DestinationFrom" xml:space="preserve">
+    <value>Source of Destination Information</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021c_DestinationFrom_Index101" xml:space="preserve">
+    <value>Record with index 101</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021c_DestinationFrom_LastStop" xml:space="preserve">
+    <value>Last stop from regular records (&lt;100)</value>
+  </data>
+  <data name="UnitConfig_Ibis_DS021c_FirstStopIndexValue" xml:space="preserve">
+    <value>Value of First Stop Index</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO005_BufferNextRoute" xml:space="preserve">
+    <value>Buffer Next Route Until Index Reset</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO005_DeleteRoute" xml:space="preserve">
+    <value>Delete Route with Run Number 0</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO005_HideNextStopForIndex" xml:space="preserve">
+    <value>Hide Next Stop When Index Received</value>
+  </data>
+  <data name="UnitConfig_Ibis_TelegramSelection_DS021andGO005" xml:space="preserve">
+    <value>The DS021 and GO005 telegrams can't be selected at the same time since they use the same header.</value>
+  </data>
+  <data name="UnitConfig_Ibis_TelegramSelection_XexcludesY_Format" xml:space="preserve">
+    <value>Telegrams {0} and {1} can't be selected at the same time.</value>
+  </data>
+  <data name="UnitConfig_Ibis_TelegramSelection_XrequiresY_Format" xml:space="preserve">
+    <value>Telegram {0} requires {1} also to be selected as well.</value>
+  </data>
+  <data name="Errors_NoRS485Configured_Format" xml:space="preserve">
+    <value>Your hardware configuration doesn't contain an RS-485 serial port. Most probably AHDLC will not work. Please check {0} &gt; {1}</value>
+  </data>
+  <data name="ServerError_AddEntity_MessageFormat" xml:space="preserve">
+    <value>Failed to add a {0}.
+Please inspect the logs for details.</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_PrimaryScreenId" xml:space="preserve">
+    <value>Primary Screen ID</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_ScreenId_Watermark" xml:space="preserve">
+    <value>Leave empty to use default screen id or set your own id</value>
+  </data>
+  <data name="UnitConfig_DirectX_General_SecondaryScreenId" xml:space="preserve">
+    <value>Secondary Screen ID</value>
+  </data>
+  <data name="UnitConfig_Conclusion_ExportExecution_NoUpdateGroupSelected" xml:space="preserve">
+    <value>Please select at least one Update Group to perform the export.</value>
+  </data>
+  <data name="UnitConfig_SplashScreens_ShowItems_Misc_AtRevision" xml:space="preserve">
+    <value>Atmel Controller Version</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_UseDhcp" xml:space="preserve">
+    <value>Use DHCP</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_DnsServer1" xml:space="preserve">
+    <value>DNS Server 1</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_DnsServer2" xml:space="preserve">
+    <value>DNS Server 2</value>
+  </data>
+  <data name="UnitConfig_SystemConfig_DnsServers" xml:space="preserve">
+    <value>DNS Server(s)</value>
+  </data>
+  <data name="UnitConfig_SettingValidator_UnsupportedValueFormat" xml:space="preserve">
+    <value>'{0}' is not supported by the selected software version, it should be left at its default value '{1}' or {2} version {3} (or higher) should be selected.</value>
+  </data>
+  <data name="ServerError_CopyEntity_MessageFormat" xml:space="preserve">
+    <value>Failed to copy the selected {0}.
+Please inspect the logs for details.</value>
+  </data>
+  <data name="ServerError_EditEntity_MessageFormat" xml:space="preserve">
+    <value>Failed to edit the selected {0}.
+Please inspect the logs for details.</value>
+  </data>
+  <data name="UnitConfig_Ibis_GO007_UsedForLineNumber" xml:space="preserve">
+    <value>Generic Cell for Line Number</value>
+  </data>
+  <data name="Errors_ValidVersion" xml:space="preserve">
+    <value>Value must be a valid version number.</value>
+  </data>
+  <data name="SystemConfig_MaintenanceModeDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="SystemConfig_MaintenanceModeEnabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="SystemConfig_MaintenanceMode" xml:space="preserve">
+    <value>Maintenance mode</value>
+  </data>
+  <data name="BgsSettings_MaintenanceModeConfirmationMessage" xml:space="preserve">
+    <value>Activating the maintenance mode disables all users in the system.
+Do you want to continue?</value>
+  </data>
+  <data name="BgsSettings_MaintenanceModeConfirmationTitle" xml:space="preserve">
+    <value>Activate maintenance mode</value>
+  </data>
+  <data name="SystemConfig_MaintenanceModeReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="SystemConfig_ReasonWatermark" xml:space="preserve">
+    <value>Please enter a reason. This will be shown in all applications.</value>
+  </data>
+  <data name="Editors_FtpServer_Verify" xml:space="preserve">
+    <value>Check connection</value>
+  </data>
+  <data name="BgsSettingsError_LoadData_Message" xml:space="preserve">
+    <value>Couldn't load data for the BackgroundSystemSettings.
+Please inspect the logs for further details.</value>
+  </data>
+  <data name="BgsSettingsError_LoadData_Title" xml:space="preserve">
+    <value>Load BackgroundSystemSettings failed</value>
+  </data>
+  <data name="BgsSettingsError_UpdateMaintenanceMode_Message" xml:space="preserve">
+    <value>Couldn't update maintenance mode settings.
+Please inspect the logs for further details.</value>
+  </data>
+  <data name="BgsSettingsError_UpdateMaintenanceMode_Title" xml:space="preserve">
+    <value>Update maintenance mode failed</value>
+  </data>
+  <data name="BgsSettings_NotAdminUser" xml:space="preserve">
+    <value>Only the user 'admin' is allowed to change BackgroundSystem settings</value>
+  </data>
+  <data name="UnitConfiguration_Export_FileFilters" xml:space="preserve">
+    <value>Unit Configuration (*.ucg)|*.ucg</value>
+  </data>
+  <data name="UnitConfiguration_Export_Title" xml:space="preserve">
+    <value>Export Unit Configuration</value>
+  </data>
+  <data name="UnitConfig_Init" xml:space="preserve">
+    <value>Initialization</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData" xml:space="preserve">
+    <value>Load Initial Data</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_Description" xml:space="preserve">
+    <value>Choose how this Unit Configuration should be initialized.</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_Empty" xml:space="preserve">
+    <value>Default empty Unit Configuration</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_Import" xml:space="preserve">
+    <value>Import from Unit Configuration file (*.ucg)</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_Copy" xml:space="preserve">
+    <value>Copy from existing Unit Configuration</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_ImportTitle" xml:space="preserve">
+    <value>Import Unit Configuration</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_WrongProductTypeFormat" xml:space="preserve">
+    <value>The selected Unit Configuration has a different Product Type than the current ({0}).</value>
+  </data>
+  <data name="UnitConfig_Init_LoadData_Load" xml:space="preserve">
+    <value>Initialize</value>
+  </data>
+  <data name="EntityList_CollapseAll" xml:space="preserve">
+    <value>Collapse all</value>
+  </data>
+  <data name="EntityList_CountFormat" xml:space="preserve">
+    <value>({0} Entities)</value>
+  </data>
+  <data name="EntityList_CountPostfix" xml:space="preserve">
+    <value>Entities</value>
+  </data>
+  <data name="EntityList_ExpandAll" xml:space="preserve">
+    <value>Expand all</value>
+  </data>
+  <data name="UnitConfig_TimeSync_Broadcast_MediWarning" xml:space="preserve">
+    <value>Broadcast of time changes should be enabled in Medi Slave mode.</value>
+  </data>
+  <data name="Errors_ProvidePasswordOrDomain" xml:space="preserve">
+    <value>Please enter a password or provide the domain name.</value>
+  </data>
+  <data name="Editor_DiscardTooltip" xml:space="preserve">
+    <value>Discard changes and exit editor</value>
+  </data>
+  <data name="Editor_SaveNewEntityTooltip" xml:space="preserve">
+    <value>Save new entity to the database</value>
+  </data>
+  <data name="Editor_SaveTooltip" xml:space="preserve">
+    <value>Save changes to database</value>
+  </data>
+  <data name="Editor_SetNewPasswordTooltip" xml:space="preserve">
+    <value>Set a new password</value>
+  </data>
+  <data name="Stage_AddNewEntityTooltip" xml:space="preserve">
+    <value>Create new entity</value>
+  </data>
+  <data name="Stage_CopyCurrentEntryTooltip" xml:space="preserve">
+    <value>Copy current entity and edit it</value>
+  </data>
+  <data name="Stage_DeleteCurrentEntryTooltip" xml:space="preserve">
+    <value>Delete current entity</value>
+  </data>
+  <data name="Stage_EditCurrentEntryTooltip" xml:space="preserve">
+    <value>Edit the current entity</value>
+  </data>
+  <data name="Editors_PackageVersion_AddFileTooltip" xml:space="preserve">
+    <value>Upload a file to be added to the selected folder</value>
+  </data>
+  <data name="Editors_PackageVersion_AddFolderTooltip" xml:space="preserve">
+    <value>Add a subfolder to the selected folder</value>
+  </data>
+  <data name="Editors_PackageVersion_DeleteItemTooltip" xml:space="preserve">
+    <value>Delete the selected file/folder</value>
+  </data>
+  <data name="UnitConfiguration_Export_Tooltip" xml:space="preserve">
+    <value>Export the Unit Configuration to a file</value>
+  </data>
+  <data name="UnitConfiguration_Next_Tooltip" xml:space="preserve">
+    <value>Navigate to the next step</value>
+  </data>
+  <data name="UnitConfiguration_Previous_Tooltip" xml:space="preserve">
+    <value>Navigate to the previous step</value>
+  </data>
+  <data name="UnitConfig_NamedList_Add_Tooltip" xml:space="preserve">
+    <value>Add an item to the list</value>
+  </data>
+  <data name="UnitConfig_NamedList_Goto_Tooltip" xml:space="preserve">
+    <value>Navigate to this item</value>
+  </data>
+  <data name="UnitConfig_NamedList_Remove_Tooltip" xml:space="preserve">
+    <value>Remove the selected item from the list</value>
+  </data>
+  <data name="UnitConfig_Protran_Transformations_Add_Tooltip" xml:space="preserve">
+    <value>Add a new transformation after the selected transformation</value>
+  </data>
+  <data name="UnitConfig_Protran_Transformations_Remove_Tooltip" xml:space="preserve">
+    <value>Remove the selected transformation</value>
+  </data>
+  <data name="XmlEditor_EditTooltip" xml:space="preserve">
+    <value>Edit XML structure</value>
+  </data>
+  <data name="UnitConfig_Software_BGSConnection" xml:space="preserve">
+    <value>Connection to icenter.suite</value>
+  </data>
+  <data name="UnitConfig_Software_BGSConnection_Connect" xml:space="preserve">
+    <value>Connect to icenter.suite using Medi</value>
+  </data>
+  <data name="UnitConfig_Software_BGSConnection_Connect_Slave" xml:space="preserve">
+    <value>A Medi slave should never be connected to the icenter.suite directly. This should be done in the Medi master.</value>
+  </data>
+  <data name="UnitConfig_Software_BGSConnection_Description" xml:space="preserve">
+    <value>Configure if this Unit should connect to the Background System of the icenter.suite.
+This requires that the Unit has a permanent connection to the internet.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality" xml:space="preserve">
+    <value>Font quality</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_AntiAliased" xml:space="preserve">
+    <value>Anti aliased</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_AntiAliased_Description" xml:space="preserve">
+    <value>Font is antialiased, if it supports antialiasing and if its size falls within the accepted range.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_ClearType" xml:space="preserve">
+    <value>Clear type</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_ClearTypeNatural" xml:space="preserve">
+    <value>Clear type natural</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_ClearTypeNatural_Description" xml:space="preserve">
+    <value>Text is rendered using the ClearType antialiasing method when possible. The font quality is given more importance than maintaining the text size; thus, the text width can change.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_ClearType_Description" xml:space="preserve">
+    <value>Text is rendered using the ClearType antialiasing method when possible. The font quality is given less importance than maintaining the text size.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Default_Description" xml:space="preserve">
+    <value>Lowest setting. The font's appearence does not matter.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Draft_Desciption" xml:space="preserve">
+    <value>Missing font sizes are calculated, but their quality migth be lower. Bold, italic, underline, and strikeout fonts are synthesized if necessary.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_NonAntiAliased" xml:space="preserve">
+    <value>Non anti aliased</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_NonAntiAliased_Description" xml:space="preserve">
+    <value>Font is never antialiased.</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Proof" xml:space="preserve">
+    <value>Proof</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_Proof_Description" xml:space="preserve">
+    <value>The font's character quality is more important than exact logical-font attributes. Font scaling is disabled and the font closest in size is chosen. Bold, italic, underline, and strikeout fonts are synthesized if necessary.</value>
+  </data>
+  <data name="UnitConfig_Update_FTP_UpdateInterval" xml:space="preserve">
+    <value>Update interval</value>
+  </data>
+  <data name="UnitConfig_DirectX_Image_PreloadImages" xml:space="preserve">
+    <value>Preload Images at Renderer Start-Up</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_AzureAndMediSlave" xml:space="preserve">
+    <value>A Medi Slave shouldn't directly connect to Azure. Only the Medi Master should do so.</value>
+  </data>
+  <data name="UnitConfig_Update_Methods_AzureNoBGS" xml:space="preserve">
+    <value>Can't use Azure as an update method if the Unit is not connected to the icenter.suite.</value>
+  </data>
+  <data name="BgsSettingsError_UpdateAzureProvider_Message" xml:space="preserve">
+    <value>Couldn't update settings for Azure Update Provider.
+Please inspect the logs for further details.</value>
+  </data>
+  <data name="BgsSettingsError_UpdateAzureProvider_Title" xml:space="preserve">
+    <value>Update of Azure Update Provider failed</value>
+  </data>
+  <data name="SystemConfig_AzureUpdateProvider" xml:space="preserve">
+    <value>Azure Update Provider</value>
+  </data>
+  <data name="SystemConfig_AzureUpdateProviderRetryInterval" xml:space="preserve">
+    <value>Retry interval</value>
+  </data>
+  <data name="SystemConfig_EnableAzureUpdateProvider" xml:space="preserve">
+    <value>Enable Azure Update Provider</value>
+  </data>
+  <data name="Editors_InstallationAction_AddFile" xml:space="preserve">
+    <value>Add local file</value>
+  </data>
+  <data name="Editors_InstallationAction_AddFileTooltip" xml:space="preserve">
+    <value>Add a local file to be transfered to the temporary folder on the unit.</value>
+  </data>
+  <data name="Editors_InstallationAction_AddLocalExecutable" xml:space="preserve">
+    <value>Add local executable</value>
+  </data>
+  <data name="Editors_InstallationAction_AddLocalExecutableTooltip" xml:space="preserve">
+    <value>Adds a local executable to the action list. The executable will be transfered to the unit and executed in the temporary folder as working directory.</value>
+  </data>
+  <data name="Editors_InstallationAction_AddUnitExecutable" xml:space="preserve">
+    <value>Add unit executable</value>
+  </data>
+  <data name="Editors_InstallationAction_AddUnitExecutableTooltip" xml:space="preserve">
+    <value>Add a path to an executable on the unit to the action list. The executable is executed useing the temporary folder as working directory.</value>
+  </data>
+  <data name="UnitConfig_Conclusion_PostInstallationAction" xml:space="preserve">
+    <value>Post Installation Actions</value>
+  </data>
+  <data name="UnitConfig_Conclusion_PostInstallationAction_Description" xml:space="preserve">
+    <value>Specify actions which will be executed after the unit update. Additional files will be copied immediately before the actions are executed.</value>
+  </data>
+  <data name="UnitConfig_Conclusion_PreInstallationAction" xml:space="preserve">
+    <value>Pre Installation Actions</value>
+  </data>
+  <data name="UnitConfig_Conclusion_PreInstallationAction_Description" xml:space="preserve">
+    <value>Specify actions which will be executed before the unit update. Additional files will be copied immediately before the actions are executed.</value>
+  </data>
+  <data name="Editors_InstallationAction_ActionsTitle" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Editors_InstallationAction_AdditionalFilesTitle" xml:space="preserve">
+    <value>Additional files</value>
+  </data>
+  <data name="Editors_InstallationAction_ArgumentTooltip" xml:space="preserve">
+    <value>Arguments to be passed to the executable.</value>
+  </data>
+  <data name="Editors_InstallationAction_ArgumentWatermark" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="Editors_InstallationAction_FileAlreadyPressent" xml:space="preserve">
+    <value>File{0} already added:{1}{2}</value>
+  </data>
+  <data name="Editors_InstallationAction_FileAlreadyPressentTitle" xml:space="preserve">
+    <value>Add file</value>
+  </data>
+  <data name="Editors_InstallationAction_RemoveActionTooltip" xml:space="preserve">
+    <value>Remove action from list.</value>
+  </data>
+  <data name="Editors_InstallationAction_RemoveAdditionalFileTooltip" xml:space="preserve">
+    <value>Remove the file from the transfer list.</value>
+  </data>
+  <data name="Editors_InstallationAction_SelectFileDialog_ExecutableFilter" xml:space="preserve">
+    <value>Executables (*.bat;*.exe)|*.bat;*.exe|All files (*.*)|*.*</value>
+  </data>
+  <data name="Editors_InstallationAction_SelectFileDialog_FileFilter" xml:space="preserve">
+    <value>All files (*.*)|*.*</value>
+  </data>
+  <data name="Editors_InstallationAction_TextBoxUnitExecutableTooltip" xml:space="preserve">
+    <value>The path to the executable on the unit.</value>
+  </data>
+  <data name="Editors_InstallationAction_UnitExecutableWatermark" xml:space="preserve">
+    <value>Path to unit executable</value>
+  </data>
+  <data name="Editors_InstallationAction_ColumnActionsTitle" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Editors_InstallationAction_ColumnArgumentsTitle" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="Editors_InstallationAction_Error_EmptyUnitExecutable" xml:space="preserve">
+    <value>Unit executable action without a path.</value>
+  </data>
+  <data name="UnitConfiguration_Header_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="UnitConfiguration_UnsavedConfiguration_Content" xml:space="preserve">
+    <value>The current configuration contains unsaved changes or installation actions. Continue?{0}Yes: Save changes {0}No: Discard changes</value>
+  </data>
+  <data name="UnitConfiguration_UnsavedConfiguration_Title" xml:space="preserve">
+    <value>Load version</value>
+  </data>
+  <data name="UnitConfiguration_VersionLoadHeader_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="UnitConfiguration_VersionLoadHeader_TimeStamp" xml:space="preserve">
+    <value>Time stamp</value>
+  </data>
+  <data name="UnitConfiguration_VersionLoadHeader_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_DefaultFontGdi" xml:space="preserve">
+    <value>Default (Non anti aliased)</value>
+  </data>
+  <data name="UnitConfig_DirectX_Text_FontQuality_DefaultFontSprite" xml:space="preserve">
+    <value>Default (Clear type natural)</value>
+  </data>
+  <data name="Errors_ValidMd5Hash" xml:space="preserve">
+    <value>The value must be a valid MD5 hash</value>
+  </data>
+  <data name="UnitConfig_ThorebC90" xml:space="preserve">
+    <value>Thoreb C90 + c74</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Bus_Description" xml:space="preserve">
+    <value>Configure the xml settings for the Bus module</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Ibis" xml:space="preserve">
+    <value>IBIS Control</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Ibis_Description" xml:space="preserve">
+    <value>Configure the xml settings for the IBIS Control module</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="UnitConfig_ThorebC90_Terminal_Description" xml:space="preserve">
+    <value>Configure the xml settings for the Terminal module</value>
+  </data>
+  <data name="UnitConfig_MainUnit" xml:space="preserve">
+    <value>Main Unit</value>
+  </data>
+  <data name="UnitConfig_MainUnit_Configuration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="UnitConfig_MainUnit_Configuration_Description" xml:space="preserve">
+    <value>Configure the xml settings for the Main Unit</value>
+  </data>
+  <data name="UnitConfig_MainUnit_DisplayUnit" xml:space="preserve">
+    <value>Display unit {0}</value>
+  </data>
+  <data name="UnitConfig_MainUnit_DisplayUnit_Description" xml:space="preserve">
+    <value>The content of a display unit can be set by a file or a URL. An URL will be polled for new content in the given update interval.</value>
+  </data>
+  <data name="Errors_InvalidUrl" xml:space="preserve">
+    <value>The given URL is invalid.</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_DynamcContentUpdateLabel" xml:space="preserve">
+    <value>Update interval:</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_DynamcContentUpdateWatermark" xml:space="preserve">
+    <value>select</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_DynamciContent" xml:space="preserve">
+    <value>Dynamic content</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_DynamciContentWatermark" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_StaticContent" xml:space="preserve">
+    <value>Static content</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_StaticContentWatermark" xml:space="preserve">
+    <value>select a file</value>
+  </data>
+  <data name="UnitConfig_MainUnit_DisplayUnit_StaticContentFile_DialogFilter" xml:space="preserve">
+    <value>E-Paper content (*.jpg;*.jpeg;*.png;*.pdf)|*.jpg;*.jpeg;*.png;*.pdf</value>
+  </data>
+  <data name="UnitConfig_MainUnit_DisplayUnit_StaticContentFile_DialogTitle" xml:space="preserve">
+    <value>Select a file to be displayed</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_CanNotConvertImageTooltip" xml:space="preserve">
+    <value>Could not generate preview.</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_DynamciContent_PreviewInBrowser" xml:space="preserve">
+    <value>Preview in browser</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_ErrorShowingUrl" xml:space="preserve">
+    <value>Can not open previw in browser.</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_ErrorShowingUrlTitle" xml:space="preserve">
+    <value>Preview error</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_ErrorUploadingStaticResource" xml:space="preserve">
+    <value>Could not upload selected static resource for display unit:
+{0}</value>
+  </data>
+  <data name="UnitConfig_DisplayUnit_ErrorUploadingStaticResourceTitle" xml:space="preserve">
+    <value>Upload error</value>
+  </data>
+  <data name="UnitConfiguration_Export_ErrorTitle" xml:space="preserve">
+    <value>Export error</value>
+  </data>
+  <data name="UnitConfiguration_Export_Error_NoUnitsInUpdateGroup" xml:space="preserve">
+    <value>Couldn't export to update group '{0}' because it doesn't contain any units.</value>
+  </data>
+  <data name="UnitConfiguration_Export_Error_TooManyUnitsInUpdateGroup" xml:space="preserve">
+    <value>Couldn't export to update group '{0}' because it contains more than one unit.</value>
+  </data>
+  <data name="UnitConfig_Software_Incoming_AdHoc" xml:space="preserve">
+    <value>AdHoc Messaging Protocol</value>
+  </data>
+</root>

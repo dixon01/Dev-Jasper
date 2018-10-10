@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="MainUnit" type="MainUnitConfig" />
+  <xs:complexType name="MainUnitConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Contains the entire configuration of an E-Paper Main Unit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="DisplayUnits" type="ArrayOfUnitDisplayConfig">
+        <xs:annotation>
+          <xs:documentation>
+            List of all the display units the MainUnit has.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LCD" minOccurs="0" maxOccurs="1" type="LcdConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Defines the configuration for the LCD panel. It is optional, since not all units have an LCD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+	<xs:attribute name="FirmwareHash" type="xs:string" use="required">
+		<xs:annotation>
+			<xs:documentation>
+				The Hash of the current firmware for the unit, evaluated using the xxHash64 algorithm.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+    <xs:attribute name="OperationDayStartUtc" type="xs:string" default="04:00:00">
+      <xs:annotation>
+        <xs:documentation>
+          The start of an operational day. At this time of day the unit will request new data.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUnitDisplayConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The general configuration settings of a display unit.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DisplayUnit" minOccurs="1" maxOccurs="unbounded" type="DisplayUnitConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Defines the configuration for a display unit.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DisplayUnitConfig">
+    <xs:attribute name="FirmwareHash" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The Hash of the current firmware for the display unit, evaluated using the xxHash64 algorithm.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="LcdConfig">
+    <xs:attribute name="RefreshInterval" type="xs:duration" default="PT5M">
+      <xs:annotation>
+        <xs:documentation>
+          Defines the amount of time between each request of the LCD content by the unit.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

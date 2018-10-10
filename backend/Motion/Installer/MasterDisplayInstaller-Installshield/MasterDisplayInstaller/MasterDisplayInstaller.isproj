@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infomedia\Source\AudioRenderer\AudioRenderer.csproj">
+			<Name>AudioRenderer</Name>
+			<Project>{BB48C47C-299E-4CE6-967F-9E1EB24066B9}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Infomedia\Source\AudioRendererApp\AudioRendererApp.csproj">
+			<Name>AudioRendererApp</Name>
+			<Project>{0435A787-30D5-4ECA-B69B-E5CBE4CA01C3}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Infomedia\Source\DirectXRenderer\DirectXRenderer.csproj">
+			<Name>DirectXRenderer</Name>
+			<Project>{7FE018F4-F60A-4817-A273-F6AA726E0931}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Infomedia\Source\DirectXRendererApp\DirectXRendererApp.csproj">
+			<Name>DirectXRendererApp</Name>
+			<Project>{E8756558-EEB1-4EF1-8FC6-A8D960561E20}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\HardwareManager\Source\ConsoleApp\HardwareManager.ConsoleApp.csproj">
+			<Name>HardwareManager.ConsoleApp</Name>
+			<Project>{21C45F02-5DC5-4021-BBB1-1E9472D038B0}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\HardwareManager\Source\Core\HardwareManager.Core.csproj">
+			<Name>HardwareManager.Core</Name>
+			<Project>{16B3C7A4-9EFD-41CF-92EE-BE4B75145BC8}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Infomedia\Source\ComposerApp\Infomedia.ComposerApp.csproj">
+			<Name>Infomedia.ComposerApp</Name>
+			<Project>{6BF81B52-A426-4102-BC52-6A12DAA673D6}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Protran\Source\ConsoleApp\Protran.ConsoleApp.csproj">
+			<Name>Protran.ConsoleApp</Name>
+			<Project>{1F7C2E8C-AED2-45F8-95F5-EFDA418B10A7}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Protran\Source\Core\Protran.Core.csproj">
+			<Name>Protran.Core</Name>
+			<Project>{C3036BE3-1D3C-4B40-87BB-DDBE33F53568}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Protran\Source\XimpleProtocol\Protran.XimpleProtocol.csproj">
+			<Name>Protran.XimpleProtocol</Name>
+			<Project>{E2EAF924-E3BC-414B-96E6-EE9FDFE8B80A}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\SystemManager\Source\ConsoleApp\SystemManager.ConsoleApp.csproj">
+			<Name>SystemManager.ConsoleApp</Name>
+			<Project>{39A71702-827B-40F8-962F-E4D17B2FA6A5}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\SystemManager\Source\Core\SystemManager.Core.csproj">
+			<Name>SystemManager.Core</Name>
+			<Project>{60C6BEB8-9BEE-4C77-A400-33C532614524}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\SystemManager\Source\ShellApp\SystemManager.ShellApp.csproj">
+			<Name>SystemManager.ShellApp</Name>
+			<Project>{10463A23-ED88-4AEC-B774-671F8E59E269}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Update\Source\ConsoleApp\Update.ConsoleApp.csproj">
+			<Name>Update.ConsoleApp</Name>
+			<Project>{146471A4-6D3D-426E-8B02-A503132A704D}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\Update\Source\Core\Update.Core.csproj">
+			<Name>Update.Core</Name>
+			<Project>{F97A8817-D488-47CE-A9C1-1D6C3D12BECE}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

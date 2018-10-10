@@ -1,0 +1,140 @@
+﻿<editors:EditorViewBase x:Class="Gorba.Center.Media.Core.Views.Editors.LayerEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:layout="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Layout"
+             xmlns:converters="clr-namespace:Gorba.Center.Media.Core.Converters"
+             xmlns:dragDropExtension="clr-namespace:Gorba.Center.Media.Core.Extensions.DragDropExtension"
+             xmlns:viewModels="clr-namespace:Gorba.Center.Media.Core.ViewModels"
+             xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+             xmlns:editors="clr-namespace:Gorba.Center.Media.Core.Views.Editors"
+             mc:Ignorable="d" x:Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModels:MediaShell}">
+    <editors:EditorViewBase.Resources>
+        <converters:GraphicalElementType2ImageConverter x:Key="GraphicalElementType2ImageConverter"/>
+        <dragDropExtension:LayerEditorDropHandler x:Key="LayerEditorDropHandler" />
+    </editors:EditorViewBase.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        
+        <!-- TODO: treeview -->
+
+        <ListView Name="LayerList" Grid.Row="0" ItemsSource="{Binding Elements, ElementName=Root}" Background="Transparent" BorderThickness="0"
+                  SelectionChanged="Selector_OnSelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  dragDropExtension:DragDropHelper.IsDragSource="True"
+                  dragDropExtension:DragDropHelper.IsDropTarget="True"
+                  dragDropExtension:DragDropHelper.DropHandler="{StaticResource LayerEditorDropHandler}"
+                  >
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type layout:GraphicalElementDataViewModelBase}">
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Height="26" BorderThickness="0 0 1 0" BorderBrush="{StaticResource LayerElementBorderBrush}"
+                                    MouseUp="OnMouseUp" Background="Transparent">
+                                <Image Width="12" Height="12">
+                                    <Image.Resources>
+                                        <converters:ToggleSourceConverter x:Key="ToggleSourceConverter"
+                                                                          On="/Gorba.Center.Media.Core;component/Resources/Images/Icons/visible_dark_12x12.png"
+                                                                          Off="/Gorba.Center.Media.Core;component/Resources/Images/Icons/visible_disabled_12x12.png"/>
+                                    </Image.Resources>
+                                    <Image.Source>
+                                        <Binding Path="Visible.Value" Converter="{StaticResource ToggleSourceConverter}" />
+                                    </Image.Source>
+                                </Image>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Image Margin="7 2 7 0" Source="{Binding Converter={StaticResource GraphicalElementType2ImageConverter}}" />
+
+                                <controls:EditableTextblock Grid.Column="0" Margin="15 0 0 0" 
+                                                    VerticalAlignment="Center"
+                                                    VerticalContentAlignment="Center"
+                                                    Text="{Binding ElementName.Value, Mode=TwoWay}"
+                                                    SourceObject="{Binding}"
+                                                    TextChanged="OnElementNameChanged"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type layout:GraphicalElementGroupDataViewModel}">
+                    <Border Background="{StaticResource LayerElementBackgroundBrush}" BorderThickness="1" BorderBrush="{StaticResource LayerElementBorderBrush}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="&#xf07c;" FontFamily="/Gorba.Center.Media.WpfApplication;component/Resources/#FontAwesome"/>
+                                </Border>
+
+                                <TextBlock Grid.Column="1" Text="{Binding GroupName}"/>
+                            </Grid>
+
+                            <ListView ItemsSource="{Binding Items}">
+
+                                <ListView.Resources>
+                                    <DataTemplate DataType="{x:Type layout:LayoutElementDataViewModelBase}">
+                                        <Border>
+                                            <TextBlock Text="{Binding ElementName.Value}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.Resources>
+
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Name="PART_BORDER" BorderThickness="0 0 0 1" BorderBrush="{StaticResource LayoutElementBorder}" 
+                                        IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="PART_BORDER" Property="Background" Value="{StaticResource LayerElementSelectedBackgroundBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+            </ListView.Resources>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+        <Border Grid.Row="1" BorderThickness="0 1 0 0" BorderBrush="{StaticResource LayerEditorSeperatorBorderBrush}" Margin="0 2 0 0">
+            <StackPanel Orientation="Horizontal">
+                <!--<Button Style="{StaticResource FlatIconButton}">
+                    <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/group_grey_12x12.png" Width="16" Height="16" />
+                </Button>-->
+                <Button Style="{StaticResource FlatIconButton}" Command="{Binding DeleteSelectedLayoutElements}">
+                    <Image Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/delete_dark_16x16.png" Width="16" Height="16" />
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</editors:EditorViewBase>

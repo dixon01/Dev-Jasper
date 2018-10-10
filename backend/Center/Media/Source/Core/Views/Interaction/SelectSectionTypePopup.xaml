@@ -1,0 +1,100 @@
+﻿<interaction1:InteractionDialogBase x:Class="Gorba.Center.Media.Core.Views.Interaction.SelectSectionTypePopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interaction1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+             xmlns:interaction="clr-namespace:Gorba.Center.Media.Core.Interaction"
+                                    xmlns:extensions="clr-namespace:Gorba.Center.Media.Core.Extensions"
+                                    xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                    xmlns:section="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation.Section"
+                                    mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance interaction:SelectSectionTypePrompt}"
+             x:Name="Root" Background="{StaticResource PopupBackgroundColorBrush}"
+             BorderThickness="1" BorderBrush="{StaticResource LayoutNavigationDialogBorderColorBrush}"
+             Padding="3">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{x:Static resources:MediaStrings.SelectSection_SelectTypeHeader}" VerticalAlignment="Center" />
+            <ComboBox Margin="5"
+                      Grid.Column="1"
+                      Style="{StaticResource FlatStyleCombobox}"
+                      ItemsSource="{Binding Source={extensions:Enumeration {x:Type section:SectionType}, LocalizationPrefix=SelectSection_}}"
+                      Name="SectionTypeCombobox" SelectedIndex="0"
+                      DropDownOpened="ComboboxOnDropDownOpened" DropDownClosed="ComboboxOnDropDownClosed">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="SectionImage" Height="16" Width="16" />
+                            <TextBlock Grid.Column="1" Text="{Binding Description}"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Standard}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionstandard_dark_16x16.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Image}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionimage_dark_16x16.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Video}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionvideo_dark_16x16.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Multi}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionmulti_dark_16x16.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Pool}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionpool_dark_16x16.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Value}" Value="{x:Static section:SectionType.Dynamic}">
+                                <Setter TargetName="SectionImage" Property="Source"
+                                        Value="/Gorba.Center.Media.Core;component/Resources/Images/Icons/sectionwebmedia_dark_16x16.png" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="{x:Static resources:MediaStrings.SelectSection_SelectLayoutHeader}" Grid.Row="1" VerticalAlignment="Center" />
+            <ComboBox Margin="5"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      Style="{StaticResource FlatStyleCombobox}"
+                      ItemsSource="{Binding Layouts}"
+                      DisplayMemberPath="Name.Value"
+                      DropDownOpened="ComboboxOnDropDownOpened" DropDownClosed="ComboboxOnDropDownClosed"
+                   Name="LayoutCombobox" SelectedIndex="0"/>
+        </Grid>
+            
+        
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
+            <Button Style="{StaticResource FlatDarkButton}" Content="{x:Static resources:MediaStrings.CreateCyclePopup_Cancel}"
+                    Command="{Binding ElementName=Root, Path=CancelCommand}" MinWidth="70" Margin="0 0 10 0"/>
+            <Button Style="{StaticResource FlatHighlightButton}"
+                    Command="{Binding Path=CreateSectionCommandWrapper, ElementName=Root}"
+                    Content="{x:Static resources:MediaStrings.CreateCyclePopup_CreateCycle}"
+                    MinWidth="70"/>
+        </StackPanel>
+    </Grid>
+</interaction1:InteractionDialogBase>

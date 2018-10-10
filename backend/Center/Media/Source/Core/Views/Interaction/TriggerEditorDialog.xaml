@@ -1,0 +1,100 @@
+﻿<interaction:InteractionDialogBase x:Class="Gorba.Center.Media.Core.Views.Interaction.TriggerEditorDialog"
+                                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                   xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+                                   xmlns:interaction1="clr-namespace:Gorba.Center.Media.Core.Interaction"
+                                   xmlns:resources="clr-namespace:Gorba.Center.Media.Core.Resources"
+                                   xmlns:cycle="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Presentation.Cycle"
+                                   xmlns:controls="clr-namespace:Gorba.Center.Media.Core.Views.Controls"
+                                   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                                   xmlns:views="clr-namespace:Gorba.Center.Media.Core.Views"
+                                   xmlns:eval="clr-namespace:Gorba.Center.Media.Core.DataViewModels.Eval"
+                                   xmlns:interaction2="clr-namespace:Gorba.Center.Media.Core.Views.Interaction"
+                                   mc:Ignorable="d" 
+                                   Name="Root"
+                                   d:DesignHeight="165" d:DesignWidth="300" d:DataContext="{d:DesignInstance interaction1:TriggerNavigationEditorPrompt}"
+                                   BorderThickness="1 1 1 1" BorderBrush="{StaticResource MainMenuBorderColorBrush}"
+                                   Background="{StaticResource WindowBackgroundColorBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{x:Static resources:MediaStrings.TriggerEditor_Title}" Margin="3 3 0 0" Foreground="{StaticResource DialogTitleColorBrush}"
+                   VerticalAlignment="Center" FontWeight="Bold" FontFamily="/Gorba.Center.Media.WpfApplication;component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"/>
+        
+        <ListBox Grid.Row="1" ItemsSource="{Binding DataValue.Coordinates}" HorizontalAlignment="Stretch"
+                 BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="2 0 2 0"/>
+                    
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border>
+                                    <ContentPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ResourceManagerSelectedPoolBackgroundColorBrush}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="eval:GenericEvalDataViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding DisplayText}" VerticalAlignment="Center" Margin="5 0 0 0"
+                                   ToolTip="{Binding DisplayText}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" TextAlignment="Left" />
+
+                        <Button Grid.Column="1" Style="{StaticResource FlatImageButton}" Width="20" Height="20"
+                                Command="{Binding ElementName=Root, Path=ShowDictionarySelector}"
+                                CommandParameter="{Binding}">
+                            <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/play_light_10x10.png"/>
+                        </Button>
+
+                        <Button Grid.Column="2" Style="{StaticResource FlatButton}" Width="20" Height="20"
+                                Command="{Binding ElementName=Root, Path=RemoveCoordinate}"
+                                CommandParameter="{Binding}">
+                            <Image Width="10" Height="10" Source="/Gorba.Center.Media.Core;component/Resources/Images/Icons/remove_dark10x10.png"/>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Rectangle Grid.Row="2" Height="1" Fill="{StaticResource ResourceManagerSeparatorBackgroundColorBrush}" 
+                   VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="3 0 3 0"/>
+
+        <controls:NewEntityButton Grid.Row="2" Margin="3 0 3 0" Padding="0 3 0 0"
+                                  CreateNewEntityCommand="{Binding ElementName=Root, Path=AddCoordinateWrapper}"
+                                  NewButtonText="{x:Static resources:MediaStrings.TriggerEditor_AddCoordinate}" />
+        
+        <Canvas Grid.Row="0">
+            <i:Interaction.Triggers>
+                <interaction:InteractionRequestTrigger SourceObject="{Binding DictionarySelectorInteractionRequest}">
+                    <interaction:InteractionAction Modal="True" Width="360" Height="{Binding ElementName=Root, Path=ActualHeight}" CanvasRight="212" CanvasTop="0" >
+                        <interaction:InteractionAction.Dialog>
+                            <interaction2:DictionarySelectorDialog />
+                        </interaction:InteractionAction.Dialog>
+                    </interaction:InteractionAction>
+                </interaction:InteractionRequestTrigger>
+            </i:Interaction.Triggers>
+        </Canvas>
+    </Grid>
+</interaction:InteractionDialogBase>

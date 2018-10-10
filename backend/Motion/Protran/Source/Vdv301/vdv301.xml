@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VDV301 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="file:///. vdv301.xsd">
+  <Services>
+    <CustomerInformationService>
+      <!-- Host="192.168.1.139" Port="8800" SubscriptionTimeout="PT2M" -->
+      <GetAllData Subscribe="true">
+        <TripInformation>
+          <StopSequence>
+            <StopPoint>
+              <StopName Enabled="true" Table="Stops" Column="StopName" Row="{0}" />
+              <DisplayContent>
+                <Destination>
+                  <DestinationName Enabled="true" Table="Destination" Column="DestinationName" />
+                </Destination>
+              </DisplayContent>
+              <Connection>
+                <DisplayContent>
+                  <Destination>
+                    <DestinationName Enabled="true" Table="Connections" Column="ConnectionDestinationName" Row="{0}"/>
+                  </Destination>
+                </DisplayContent>
+                <Platform Enabled="true" Table="Connections" Column="ConnectionPlatform" Row="{0}"/>
+                <TransportMode>
+                  <Name Enabled="true" Table="Connections" Column="ConnectionTransportType" Row="{0}"/>
+                </TransportMode>
+              </Connection>
+            </StopPoint>
+          </StopSequence>
+        </TripInformation>
+        <DoorState Enabled="true" Table="SystemStatus" Column="DoorStatus" TransfRef="DoorStatus" />
+        <VehicleStopRequested Enabled="true" Table="SystemStatus" Column="StopRequestedState"/>
+        <ExitSide Enabled="false" Table="SystemStatus" Column="ExitSide" TransfRef="ExitSide"/>
+      </GetAllData>
+    </CustomerInformationService>
+  </Services>
+  <Languages>
+    <!-- Map all german language texts to the default language in Ximple -->
+    <Language VDV301="de" Ximple="default" />
+  </Languages>
+  <Transformations>
+    <Chain id="DoorStatus">
+      <Replace>
+        <Mapping from="AllDoorsClosed" to="0"/>
+        <Mapping from="DoorsOpen" to="1"/>
+        <Mapping from="SingleDoorOpen" to="1"/>
+        <Mapping from="SingleDoorClosed" to="1"/>
+      </Replace>
+    </Chain>
+
+    <Chain id="ExitSide">
+      <Replace>
+        <Mapping from="unknown" to="0"/>
+        <Mapping from="right" to="1"/>
+        <Mapping from="left" to="2"/>
+        <Mapping from="both" to="3"/>
+      </Replace>
+    </Chain>
+  </Transformations>
+</VDV301>

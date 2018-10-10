@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Gorba.Center.Admin.Core.Views.UnitConfig.Parts.ExportExecutionPartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:parts="clr-namespace:Gorba.Center.Admin.Core.ViewModels.UnitConfig.Parts"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+             xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.Views.UnitConfig.Editors"
+             xmlns:parts1="clr-namespace:Gorba.Center.Admin.Core.Views.UnitConfig.Parts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance parts:ExportExecutionPartViewModel}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+    </UserControl.Resources>
+    
+    <telerik:RadBusyIndicator IsBusy="{Binding Editor.IsExporting}"
+                              BusyContent="{Binding Editor.ExportItemName}"
+                              ProgressValue="{Binding Editor.ExportProgress}"
+                              IsIndeterminate="False">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <editors:MultiSelectEditorControl Grid.Row="0"
+                                               DataContext="{Binding Editor.UpdateGroups}"
+                                               ItemImage="../../../Resources/Icons/EntityTypes/EntityTypes_UpdateGroup_16x16.png"/>
+
+            <parts1:MultiEditorPartControl Grid.Row="1" DataContext="{Binding Editor.DateTimeEditors}" />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding Editor.HasSelectedUpdateGroups, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                       Source="../../../Resources/Icons/config_error_warning_16x16.png" />
+
+                <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Margin="5 0"
+                           TextWrapping="Wrap"
+                           Visibility="{Binding Editor.HasSelectedUpdateGroups, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                           Text="{x:Static resources:AdminStrings.UnitConfig_Conclusion_ExportExecution_NoUpdateGroupSelected}" />
+
+                <telerik:RadButton Grid.Column="2" Content="{x:Static resources:AdminStrings.UnitConfig_Conclusion_ExportExecution_Export}"
+                        Command="{Binding Editor.ExportCommand}"
+                        VerticalAlignment="Center"
+                        Margin="0 5"
+                        Padding="5"
+                        Style="{StaticResource RadButtonStyle}"/>
+            </Grid>
+
+
+
+            <Grid Grid.Column="0" Grid.Row="0" RowSpan="3"
+                  Background="#CCCCCCCC"
+                  Visibility="{Binding Editor.WasExported, Converter={StaticResource BoolToVisibilityConverter}}">
+
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                           MaxWidth="250"
+                           Margin="5"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWithOverflow"
+                           Text="{x:Static resources:AdminStrings.UnitConfig_Conclusion_ExportExecution_Exported}"/>
+            </Grid>
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

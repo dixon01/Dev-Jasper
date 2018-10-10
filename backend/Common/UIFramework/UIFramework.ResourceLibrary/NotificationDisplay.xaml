@@ -1,0 +1,30 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Luminator.UIFramework.ResourceLibrary.NotificationDisplay"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" x:Name="UserControlNotificationsDisplay">
+   
+    <Grid Background="#FFE6E6E6">
+        <Border CornerRadius="5" BorderThickness="0">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.487*" />
+                    <RowDefinition Height="0.513*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" MinWidth="39" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ListBox x:Name="NotificationListBox" Grid.Row="0" Grid.Column="0" 
+                         ItemsSource="{Binding ElementName=UserControlNotificationsDisplay, Path=NotificationsItemsSource}"></ListBox>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

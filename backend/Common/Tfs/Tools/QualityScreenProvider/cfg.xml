@@ -1,0 +1,32 @@
+﻿<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CfgVersion description="The version of this config. file.">1.0.0.0</CfgVersion>
+  <Protocols>
+    <Protocol description="The following TAG is an example of a protocol.">
+      <Name description="Protocol's name. It is always useful this information.">Gorba.Common.Tfs.Tools.QualityScreenProvider.QualityScreenProtocol, QualityScreenProvider</Name>
+      <Version description="Protocol's version. Basing on this value, the corresponding parser will change.">1.0.0.0</Version>
+      <ArgsCmdLine description="The required command line (string[] args) required by the protocol" />
+    </Protocol>
+  </Protocols>
+  <EventHandlers>
+    <EventHandler description="The following TAG(s) contain the details to contact the EventHandler(s) TCP/IP server.">
+      <IsLocal description="Flag to localize an EventHandler server.">true</IsLocal>
+      <IP description="The IP of the EventHandler's server.">127.0.0.1</IP>
+      <Port description="The port of the EventHandler's server.">1596</Port>
+    </EventHandler>
+  </EventHandlers>
+  <GenericView description="A TAG to contain information about the TFT Monitor's generic view feature.">
+    <IsEnabled>true</IsEnabled>
+    <DictionaryFile>dictionary.xml</DictionaryFile>
+  </GenericView>
+  <Persistence description="Allows Protran to store/load information in/from the hard disk in order
+    to reuse them in case of restart.">
+    <IsEnabled desc="Flag that indicates whether the persistence service is enabled or not.
+      Admitted values are: true, false.
+      Default value: false">true</IsEnabled>
+    <PersistenceFile description="Absolute file name for the file that
+      will be used by Protran for the stored information.">persistence.xml</PersistenceFile>
+    <DefaultValidity description="The default amount of seconds
+      for the information's validity. Default is 10 minutes.">86400</DefaultValidity>
+  </Persistence>
+</Settings>

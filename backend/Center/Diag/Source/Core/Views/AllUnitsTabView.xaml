@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="Gorba.Center.Diag.Core.Views.AllUnitsTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:resources="clr-namespace:Gorba.Center.Diag.Core.Resources"
+             xmlns:converters="clr-namespace:Gorba.Center.Diag.Core.Converters"
+             xmlns:controls="clr-namespace:Gorba.Center.Diag.Core.Views.Controls"
+             xmlns:unit="clr-namespace:Gorba.Center.Diag.Core.ViewModels.Unit"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance unit:AllUnitsTab}"
+             Background="{StaticResource TabViewBackground}">
+    <Grid x:Name="MainGrid">
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:ConnectionStateToTextConverter x:Key="ConnectionStateToTextConverter"/>
+            <converters:ConnectionModeToTextConverter x:Key="ConnectionModeToTextConverter"/>
+            <CollectionViewSource Source="{Binding Shell.AllUnits}" x:Key="GroupedItems">
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="IsFavorite" Direction="Descending" />
+                    <componentModel:SortDescription PropertyName="ConnectionState" Direction="Descending" />
+                </CollectionViewSource.SortDescriptions>
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="GroupMember" />
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <telerik:RadGridView Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Shell.AllUnits}" SelectedItem="{Binding SelectedUnit}"
+                             Visibility="{Binding Shell.ShowGridView, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             d:DataContext="{d:DesignInstance unit:UnitViewModelBase}" AutoGenerateColumns="False"
+                             MouseDoubleClick="OnUnitGridMouseDoubleClick">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Width="200"
+                                            Header="{x:Static resources:DiagStrings.Unit_Name_Header}"
+                                            DataMemberBinding="{Binding DisplayName}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="80"
+                                            Header="{x:Static resources:DiagStrings.Unit_IpAddress_Header}"
+                                            DataMemberBinding="{Binding IpAddressString}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="120"
+                                            Header="{x:Static resources:DiagStrings.Unit_ConnectionState_Header}"
+                                            DataMemberBinding="{Binding ConnectionState, Converter={StaticResource ConnectionStateToTextConverter}}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="120"
+                                            Header="{x:Static resources:DiagStrings.Unit_ConnectionMode_Header}"
+                                            DataMemberBinding="{Binding ConnectionMode, Converter={StaticResource ConnectionModeToTextConverter}}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="250"
+                                            Header="{x:Static resources:DiagStrings.Unit_Description_Header}"
+                                            DataMemberBinding="{Binding Description}"
+                                            IsFilterable="True" />
+
+                <telerik:GridViewDataColumn Width="50"
+                                            Header="{x:Static resources:DiagStrings.Unit_Dhcp_Header}"
+                                            DataMemberBinding="{Binding DhcpEnabled}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="120"
+                                            Header="{x:Static resources:DiagStrings.Unit_GatewayAddress_Header}"
+                                            DataMemberBinding="{Binding GatewayAddressString}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="120"
+                                            Header="{x:Static resources:DiagStrings.Unit_NetworkMask_Header}"
+                                            DataMemberBinding="{Binding NetworkMaskString}"
+                                            IsFilterable="True" IsReadOnly="True" />
+
+                <telerik:GridViewDataColumn Width="120"
+                                            Header="{x:Static resources:DiagStrings.Unit_SoftwareVersion_Header}"
+                                            DataMemberBinding="{Binding SoftwareVersion}"
+                                            IsFilterable="True" IsReadOnly="True" />
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        
+        <telerik:RadTileList Grid.Column="0" ItemsSource="{Binding Source={StaticResource GroupedItems}}" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                             SelectedValue="{Binding SelectedUnit}" TileReorderMode="InGroup" GroupHeaderHeight="40" GroupHeaderVisibility="Visible"
+                             VerticalTilesAlignment="Top" 
+                             Visibility="{Binding Shell.ShowTileView, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <telerik:RadTileList.Resources>
+                <Style TargetType="telerik:Tile">
+                    <Setter Property="Background" Value="{StaticResource UnitTileBackground}"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+            </telerik:RadTileList.Resources>
+            <telerik:RadTileList.Style>
+                <Style TargetType="telerik:RadTileList">
+                    
+                </Style>
+            </telerik:RadTileList.Style>
+            <telerik:RadTileList.ItemTemplate>
+                <DataTemplate DataType="unit:UnitViewModelBase">
+                    <controls:UnitTileControl MouseDoubleClick="OnUnitTileMouseDoubleClick"/>
+                </DataTemplate>
+            </telerik:RadTileList.ItemTemplate>
+            <telerik:RadTileList.GroupTemplate>
+                <DataTemplate DataType="telerik:TileGroup">
+                    <TextBlock Text="{Binding}"
+                                FontSize="20"
+                                FontFamily="component/Resources/FrutigerLTCom-Bold.ttf#Frutiger LT Com"
+                                Margin="10"
+                                Foreground="{StaticResource TabViewForeground}"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"/>
+                </DataTemplate>
+            </telerik:RadTileList.GroupTemplate>
+        </telerik:RadTileList>
+        
+        <Button Grid.Column="0" Width="300" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"
+                Content="{x:Static resources:DiagStrings.AllUnits_AddUnit}" Command="{Binding Shell.RequestAddUnitCommand}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource FlatTileButton}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Shell.AllUnits.Count}" Value="0" />
+                                <Condition Binding="{Binding Shell.ShowGridView}" Value="False" />
+                                <Condition Binding="{Binding Shell.DiagApplicationState.IsOfflineMode}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Left"
+                      Visibility="{Binding Shell.ShowTileView, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Border Grid.Column="1" Margin="5 0 0 0"
+                Visibility="{Binding Shell.ShowTileView, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- TODO toolbar? -->
+
+                <telerik:RadPropertyGrid Grid.Row="1" Item="{Binding SelectedUnit}"
+                                        LabelColumnWidth="180" BorderThickness="0"
+                                        AutoGeneratePropertyDefinitions="False">
+                    <telerik:RadPropertyGrid.PropertyDefinitions>
+
+                        <telerik:PropertyDefinition Binding="{Binding Name}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Name}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Name_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding Description}" IsReadOnly="False"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Description}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Description_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding ConnectionState}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_ConnectionState}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_ConnectionState_Help}">
+                            <telerik:PropertyDefinition.EditorTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ConnectionState, Converter={StaticResource ConnectionStateToTextConverter}}" />
+                                </DataTemplate>
+                            </telerik:PropertyDefinition.EditorTemplate>
+                        </telerik:PropertyDefinition>
+
+                        <telerik:PropertyDefinition Binding="{Binding ConnectionMode}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_ConnectionMode}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_ConnectionMode_Help}">
+                            <telerik:PropertyDefinition.EditorTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ConnectionMode, Converter={StaticResource ConnectionModeToTextConverter}}" />
+                                </DataTemplate>
+                            </telerik:PropertyDefinition.EditorTemplate>
+                        </telerik:PropertyDefinition>
+
+                        <telerik:PropertyDefinition Binding="{Binding DhcpEnabled}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_DhcpEnabled}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_DhcpEnabled_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding IpAddress}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_IPAddress}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_IPAddress_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding NetworkMask}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_NetworkMask}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_NetworkMask_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding GatewayAddress}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Gateway}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_Gateway_Help}" />
+
+                        <telerik:PropertyDefinition Binding="{Binding SoftwareVersion}" IsReadOnly="True"
+                                                    GroupName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_CommonGroup}"
+                                                    DisplayName="{x:Static resources:DiagStrings.AllUnits_UnitProperties_SoftwareVersion}"
+                                                    Description="{x:Static resources:DiagStrings.AllUnits_UnitProperties_SoftwareVersion_Help}" />
+                    </telerik:RadPropertyGrid.PropertyDefinitions>
+                </telerik:RadPropertyGrid>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

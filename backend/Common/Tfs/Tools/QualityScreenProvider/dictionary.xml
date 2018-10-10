@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <Tables>
+    <Table>
+      <Number>0</Number>
+      <Name>SystemStatus</Name>
+      <Description>Special values that can be calculated ad-hoc by Infomedia or supplied by Protran</Description>
+      <MaxColumns>10</MaxColumns>
+      <MaxRows>1</MaxRows>
+      <Columns>
+        <Column>
+          <Index>0</Index>
+          <Name>Date</Name>
+          <Description>System date provided by Protran, but ad-hoc calculated in Infomedia as well</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>1</Index>
+          <Name>Time</Name>
+          <Description>System time provided by Protran, but ad-hoc calculated in Infomedia as well</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>2</Index>
+          <Name>RemotePC</Name>
+          <Description>Status of the remote PC (board computer)</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>3</Index>
+          <Name>StopRequestedState</Name>
+          <Description>Set to 1 when stop was requested, otherwise 0</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+          <Fields>
+            <Field Name="ColA" Default="0" Use="mandatory" />
+            <Field Name="Active" Default="1" Use="mandatory" />
+            <Field Name="Visible" Default="1" Use="mandatory" />
+            <Field Name="InfomediaFilePosX" Default="0" Use="mandatory" />
+            <Field Name="InfomediaFilePosY" Default="0" Use="mandatory" />
+            <Field Name="Filename" Default="" Use="mandatory" />
+          </Fields>
+        </Column>
+        <Column>
+          <Index>4</Index>
+          <Name>DoorStatus</Name>
+          <Description>Status of the door: 0 = closed; 1 = open</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+      </Columns>
+    </Table>
+
+    <Table>
+      <Number>1</Number>
+      <Name>SystemConfiguration</Name>
+      <Description>Special values that are supplied by Infomedia at start-up</Description>
+      <MaxColumns>2</MaxColumns>
+      <MaxRows>1</MaxRows>
+      <Columns>
+        <Column>
+          <Index>0</Index>
+          <Name>VersionNumber</Name>
+          <Description>Version number of Infomedia, available only in Infomedia 2.0 and above</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>1</Index>
+          <Name>DirectXDetails</Name>
+          <Description>Details about DirectX (e.g. version number), available only in Infomedia 2.0 and above</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">HIDDEN</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+      </Columns>
+    </Table>
+
+    <Table>
+      <Number>1000</Number>
+      <Name>AllBuilds</Name>
+      <Description>List of all builds</Description>
+      <MaxColumns>5</MaxColumns>
+      <MaxRows>100</MaxRows>
+      <Columns>
+        <Column>
+          <Index>0</Index>
+          <Name>BuildDefinitionName</Name>
+          <Description>Name of the build definition</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>1</Index>
+          <Name>ErrorState</Name>
+          <Description>Error value: 0=OK, 1=Partial, 2=Failed</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>2</Index>
+          <Name>UserName</Name>
+          <Description>Name of the user who triggered the build</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>3</Index>
+          <Name>Timestamp</Name>
+          <Description>Time when the build completed</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>4</Index>
+          <Name>ErrorDescription</Name>
+          <Description>Description of the error</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+      </Columns>
+    </Table>
+
+    <Table>
+      <Number>1001</Number>
+      <Name>FailedBuilds</Name>
+      <Description>List of all failed builds</Description>
+      <MaxColumns>5</MaxColumns>
+      <MaxRows>100</MaxRows>
+      <Columns>
+        <Column>
+          <Index>0</Index>
+          <Name>BuildDefinitionName</Name>
+          <Description>Name of the build definition</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>1</Index>
+          <Name>ErrorState</Name>
+          <Description>Error value: 0=OK (unused), 1=Partial, 2=Failed</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>2</Index>
+          <Name>UserName</Name>
+          <Description>Name of the user who triggered the build</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>3</Index>
+          <Name>Timestamp</Name>
+          <Description>Time when the build completed</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+        <Column>
+          <Index>4</Index>
+          <Name>ErrorDescription</Name>
+          <Description>Description of the error</Description>
+          <Type description="Values admitted: TEXT, MEDIA or HIDDEN (case insensitive)">TEXT</Type>
+          <Addressing description="Values admitted: DIRECT or INDIRECT (case insensitive)">DIRECT</Addressing>
+        </Column>
+      </Columns>
+    </Table>
+  </Tables>
+</Dictionary>

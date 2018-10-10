@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D5C8709-6849-4F2A-A790-47062789C7C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Center.Diag.Core</RootNamespace>
+    <AssemblyName>Gorba.Center.Diag.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Unity\v2\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\System.Windows.Interactivity\v2.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization">
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Docking, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data, Version=2014.3.1021.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\3rdParty\Telerik_WPF\2014.3.1021.45\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Converters\BoolToFluidContentControlStateConverter.cs" />
+    <Compile Include="Converters\BoolToTileViewItemStateConverter.cs" />
+    <Compile Include="Converters\ConnectionModeToTextConverter.cs" />
+    <Compile Include="Converters\ConnectionStateToTextConverter.cs" />
+    <Compile Include="Converters\ApplicationIconConverter.cs" />
+    <Compile Include="DiagBootstrapper.cs" />
+    <Compile Include="CommandCompositionKeys.cs" />
+    <Compile Include="Communication\UdcpManager.cs" />
+    <Compile Include="Controllers\Log\ApplicationLoggingController.cs" />
+    <Compile Include="Controllers\App\RemoteAppController.cs" />
+    <Compile Include="Controllers\Gioom\EnumFlagGioomPortController.cs" />
+    <Compile Include="Controllers\Gioom\EnumGioomPortController.cs" />
+    <Compile Include="Controllers\Gioom\FlagGioomPortController.cs" />
+    <Compile Include="Controllers\Gioom\GioomPortControllerBase.cs" />
+    <Compile Include="Controllers\Gioom\GioomPortControllerBase{TValues,TViewModel}.cs" />
+    <Compile Include="Controllers\Gioom\GioomPortsController.cs" />
+    <Compile Include="Controllers\Gioom\IntegerGioomPortController.cs" />
+    <Compile Include="Controllers\Log\LoggingControllerBase.cs" />
+    <Compile Include="Controllers\Unit\IUnitController.cs" />
+    <Compile Include="Controllers\Unit\MotionUnitController.cs" />
+    <Compile Include="Controllers\Unit\UnitControllerBase.cs" />
+    <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\DataContextToSourceConverter.cs" />
+    <Compile Include="Converters\FileIconConverter.cs" />
+    <Compile Include="Converters\UnitToTileGroupConverter.cs" />
+    <Compile Include="Extensions\HierarchyTemplateSelector.cs" />
+    <Compile Include="Extensions\PaneGroupExtensions.cs" />
+    <Compile Include="Extensions\RadGridViewExtenders.cs" />
+    <Compile Include="Interaction\AddUnitPromptNotification.cs" />
+    <Compile Include="Controllers\DiagApplicationController.cs" />
+    <Compile Include="Controllers\DiagShellController.cs" />
+    <Compile Include="Controllers\IDiagApplicationController.cs" />
+    <Compile Include="Controllers\IDiagShellController.cs" />
+    <Compile Include="Interaction\BusyPrompt.cs" />
+    <Compile Include="Interaction\UnitActionConfirmationPrompt.cs" />
+    <Compile Include="Interaction\EditIpSettingsPromptNotification.cs" />
+    <Compile Include="Interaction\ViewMenuPrompt.cs" />
+    <Compile Include="Interaction\ApplicationMenuPrompt.cs" />
+    <Compile Include="Interaction\UnitMenuPrompt.cs" />
+    <Compile Include="Interaction\MainMenuPrompt.cs" />
+    <Compile Include="Models\DiagApplicationState.cs" />
+    <Compile Include="Models\IDiagApplicationState.cs" />
+    <Compile Include="Models\UnitFavorite.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\DiagStrings.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagStrings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DiagStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DiagStrings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagStrings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DiagShell.cs" />
+    <Compile Include="ViewModels\DiagShellFactory.cs" />
+    <Compile Include="ViewModels\App\AppInfoPartViewModelBase.cs" />
+    <Compile Include="ViewModels\App\ApplIoInfoPartViewModel.cs" />
+    <Compile Include="ViewModels\App\ApplicationType.cs" />
+    <Compile Include="ViewModels\Gioom\EnumFlagGioomPortViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\EnumGioomPortViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\FlagGioomPortViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\GioomPortsViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\GioomPortViewModelBase.cs" />
+    <Compile Include="ViewModels\App\MediTreeInfoPartViewModel.cs" />
+    <Compile Include="ViewModels\App\RemoteAppStateViewModel.cs" />
+    <Compile Include="ViewModels\App\RemoteAppViewModel.cs" />
+    <Compile Include="ViewModels\App\RemoteLogInfoPartViewModel.cs" />
+    <Compile Include="ViewModels\FileSystem\FileSystemItemViewModelBase.cs" />
+    <Compile Include="ViewModels\FileSystem\FileViewModel.cs" />
+    <Compile Include="ViewModels\FileSystem\FolderViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\IntegerGioomPortViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\IOValueViewModel.cs" />
+    <Compile Include="ViewModels\Gioom\SelectableIOValueViewModel.cs" />
+    <Compile Include="ViewModels\IDiagShell.cs" />
+    <Compile Include="ViewModels\Log\LoggingViewModel.cs" />
+    <Compile Include="ViewModels\Log\LogEntryViewModel.cs" />
+    <Compile Include="ViewModels\Log\LogLevel.cs" />
+    <Compile Include="ViewModels\MediTree\MediTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\MediTree\NodeInfoViewModelBase.cs" />
+    <Compile Include="ViewModels\MediTree\NodeType.cs" />
+    <Compile Include="ViewModels\MediTree\ObjectNodeInfoViewModel.cs" />
+    <Compile Include="ViewModels\MediTree\PropertiesHolder.cs" />
+    <Compile Include="ViewModels\MediTree\TableNodeInfoViewModel.cs" />
+    <Compile Include="ViewModels\Unit\AllUnitsTab.cs" />
+    <Compile Include="ViewModels\Unit\ApplicationInfoSectionViewModel.cs" />
+    <Compile Include="ViewModels\Unit\ConnectionMode.cs" />
+    <Compile Include="ViewModels\Unit\ConnectionState.cs" />
+    <Compile Include="ViewModels\Unit\FileSystemInfoSectionViewModel.cs" />
+    <Compile Include="ViewModels\Unit\GaugeViewModel.cs" />
+    <Compile Include="ViewModels\Unit\InfoSectionViewModelBase.cs" />
+    <Compile Include="ViewModels\Unit\MotionUnitViewModel.cs" />
+    <Compile Include="ViewModels\Unit\RemoteViewerSectionViewModel.cs" />
+    <Compile Include="ViewModels\Unit\SystemInfoSectionViewModel.cs" />
+    <Compile Include="ViewModels\Unit\UnitIoInfoSectionViewModel.cs" />
+    <Compile Include="ViewModels\Unit\UnitTab.cs" />
+    <Compile Include="ViewModels\Unit\UnitTabBase.cs" />
+    <Compile Include="ViewModels\Unit\UnitViewModelBase.cs" />
+    <Compile Include="Views\AddUnitDialog.xaml.cs">
+      <DependentUpon>AddUnitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\GaugeControl.xaml.cs">
+      <DependentUpon>GaugeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiagShellWindow.xaml.cs">
+      <DependentUpon>DiagShellWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllUnitsTabView.xaml.cs">
+      <DependentUpon>AllUnitsTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ApplicationInfoTabView.xaml.cs">
+      <DependentUpon>ApplicationInfoTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ApplicationListItem.xaml.cs">
+      <DependentUpon>ApplicationListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\IoListControl.xaml.cs">
+      <DependentUpon>IoListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MediTreeControl.xaml.cs">
+      <DependentUpon>MediTreeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MultiselectCombobox\DataControlHelper.cs" />
+    <Compile Include="Views\Controls\MultiselectCombobox\MultiSelectComboBox.cs" />
+    <Compile Include="Views\Controls\MultiselectCombobox\MultiSelectComboBoxConverter.cs" />
+    <Compile Include="Views\Controls\MultiselectCombobox\MultiSelectComboBoxItem.cs" />
+    <Compile Include="Views\Controls\MultiselectCombobox\MultiSelectComboBoxService.cs" />
+    <Compile Include="Views\Controls\RemoteLogControl.xaml.cs">
+      <DependentUpon>RemoteLogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\UnitRepresentation.xaml.cs">
+      <DependentUpon>UnitRepresentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\UnitTileControl.xaml.cs">
+      <DependentUpon>UnitTileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoteViewerTabView.xaml.cs">
+      <DependentUpon>RemoteViewerTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitActionConfirmationDialog.xaml.cs">
+      <DependentUpon>UnitActionConfirmationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditIpSettingsDialog.xaml.cs">
+      <DependentUpon>EditIpSettingsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileSystemTabView.xaml.cs">
+      <DependentUpon>FileSystemTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemInfoTabView.xaml.cs">
+      <DependentUpon>SystemInfoTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\RadTreeViewExtensions.cs" />
+    <Compile Include="Views\UnitIoInfoTabView.xaml.cs">
+      <DependentUpon>UnitIoInfoTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitTabBaseWrapper.xaml.cs">
+      <DependentUpon>UnitTabBaseWrapper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitTabView.xaml.cs">
+      <DependentUpon>UnitTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewMenuDialog.xaml.cs">
+      <DependentUpon>ViewMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ApplicationMenuDialog.xaml.cs">
+      <DependentUpon>ApplicationMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitMenuDialog.xaml.cs">
+      <DependentUpon>UnitMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuDialog.xaml.cs">
+      <DependentUpon>MainMenuDialog.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Applications\unknown_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\Microsoft.Windows.Shell\Microsoft.Windows.Shell.csproj">
+      <Project>{55d5297c-f1df-4b76-a3c1-d82cc294eebb}</Project>
+      <Name>Microsoft.Windows.Shell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\3rdParty\RemoteViewing\RemoteViewing\RemoteViewing.csproj">
+      <Project>{89569346-2C71-4A85-99B9-D3EB71FDE87A}</Project>
+      <Name>RemoteViewing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7c6b5185-b035-465f-a760-7b7d45b3fbaa}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2b005d69-e10b-4ce6-b9e8-3f3fd1f2c874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\FileSystem\Medi.FileSystem.csproj">
+      <Project>{e7d5796d-ee98-424a-9234-605b83d2b939}</Project>
+      <Name>Medi.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Ports\Medi.Ports.csproj">
+      <Project>{6699BC63-C44D-46B4-962E-A40F55171F6E}</Project>
+      <Name>Medi.Ports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Medi\Source\Resources\Medi.Resources.csproj">
+      <Project>{31d9ead4-9a25-48a1-8491-940c2a711425}</Project>
+      <Name>Medi.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Protocols\Source\Udcp\Protocols.Udcp.csproj">
+      <Project>{dd243842-2ed9-4e77-9be3-3bf5c2c129c1}</Project>
+      <Name>Protocols.Udcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Client\SystemManagement.Client.csproj">
+      <Project>{2183b489-3ab4-4926-9b45-9fddeadb9811}</Project>
+      <Name>SystemManagement.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\Messages\SystemManagement.Messages.csproj">
+      <Project>{552DA335-EA4F-465C-A8D2-2FFCF3A2EAA2}</Project>
+      <Name>SystemManagement.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\SystemManagement\Source\ServiceModel\SystemManagement.ServiceModel.csproj">
+      <Project>{5BF74CBC-E88C-459E-B0DC-34069552A0A3}</Project>
+      <Name>SystemManagement.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Files\Utility.Files.csproj">
+      <Project>{93aae312-adc9-4f65-beaf-4266d171d348}</Project>
+      <Name>Utility.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Utility\Source\Win32\Utility.Win32.csproj">
+      <Project>{817BB42A-324A-4243-9639-33C99F4F883C}</Project>
+      <Name>Utility.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\ServiceModel\Center.Common.ServiceModel.csproj">
+      <Project>{0C98CA35-4D00-46FC-8C37-63B5C36E4C60}</Project>
+      <Name>Center.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Client\Wpf.Client.csproj">
+      <Project>{fbdea493-698e-4f44-9d46-1b3ea374d7e0}</Project>
+      <Name>Wpf.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Core\Wpf.Core.csproj">
+      <Project>{ADE176C8-B499-4597-B13F-F638EC70D090}</Project>
+      <Name>Wpf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Framework\Wpf.Framework.csproj">
+      <Project>{A279B0CB-74CC-4296-8734-BA8AA45B17BF}</Project>
+      <Name>Wpf.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Source\Wpf\Views\Wpf.Views.csproj">
+      <Project>{AA87EDAF-179F-4784-B39C-1F2E8C2055C9}</Project>
+      <Name>Wpf.Views</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AddUnitDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\GaugeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DiagShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllUnitsTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ApplicationInfoTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ApplicationListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\IoListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\MediTreeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\RemoteLogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\UnitRepresentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\UnitTileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemoteViewerTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitActionConfirmationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditIpSettingsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FileSystemTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SystemInfoTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitIoInfoTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitTabBaseWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ApplicationMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitMenuDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainMenuDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\fontawesome.ttf" />
+    <None Include="Resources\FrutigerLTCom-Bold.ttf" />
+    <None Include="Resources\FrutigerLTCom-BoldItalic.ttf" />
+    <None Include="Resources\FrutigerLTCom-Light.ttf" />
+    <None Include="Resources\FrutigerLTCom-LightItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\progicon_placeholder_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DiagStrings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DiagStrings.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DiagStrings.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DiagStrings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DiagStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DiagStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\error_16x16.png" />
+    <Resource Include="Resources\Icons\error_48x48.png" />
+    <Resource Include="Resources\Icons\ok_16x16.png" />
+    <Resource Include="Resources\Icons\ok_48x48.png" />
+    <Resource Include="Resources\Icons\ok_dark_16x16.png" />
+    <Resource Include="Resources\Icons\ok_dark_48x48.png" />
+    <Resource Include="Resources\Icons\warning_16x16.png" />
+    <Resource Include="Resources\Icons\warning_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\InfoSection_SystemInfo_32x32.png" />
+    <Resource Include="Resources\Icons\InfoSection_FileSystem_32x32.png" />
+    <Resource Include="Resources\Icons\InfoSection_UnitIOs_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_Running_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_Unknown_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_AwaitingLaunch_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_Launching_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_Starting_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\State_Exiting_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Medi_Object_16x16.png" />
+    <Resource Include="Resources\Icons\Medi_Plain_16x16.png" />
+    <Resource Include="Resources\Icons\Medi_Table_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\anounce_dark_24x24.png" />
+    <Resource Include="Resources\Icons\anounce_grey_24x24.png" />
+    <Resource Include="Resources\Icons\anounce_light_24x24.png" />
+    <Resource Include="Resources\Icons\anounce_yellow_24x24.png" />
+    <Resource Include="Resources\Icons\connected_dark_24x24.png" />
+    <Resource Include="Resources\Icons\connected_grey_24x24.png" />
+    <Resource Include="Resources\Icons\connected_light_24x24.png" />
+    <Resource Include="Resources\Icons\connecting_dark_24x24.png" />
+    <Resource Include="Resources\Icons\connecting_grey_24x24.png" />
+    <Resource Include="Resources\Icons\connecting_light_24x24.png" />
+    <Resource Include="Resources\Icons\disconnected_dark_24x24.png" />
+    <Resource Include="Resources\Icons\disconnected_grey_24x24.png" />
+    <Resource Include="Resources\Icons\disconnected_light_24x24.png" />
+    <Resource Include="Resources\Icons\document_dark_16x16.png" />
+    <Resource Include="Resources\Icons\document_grey_16x16.png" />
+    <Resource Include="Resources\Icons\document_light_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\favourite_dark_24x24.png" />
+    <Resource Include="Resources\Icons\favourite_grey_24x24.png" />
+    <Resource Include="Resources\Icons\favourite_light_24x24.png" />
+    <Resource Include="Resources\Icons\favourite_yellow_24x24.png" />
+    <Resource Include="Resources\Icons\filesystem_dark_32x32.png" />
+    <Resource Include="Resources\Icons\filesystem_grey_32x32.png" />
+    <Resource Include="Resources\Icons\filesystem_light_32x32.png" />
+    <Resource Include="Resources\Icons\folderopen_dark_16x16.png" />
+    <Resource Include="Resources\Icons\folderopen_grey_16x16.png" />
+    <Resource Include="Resources\Icons\folderopen_light_16x16.png" />
+    <Resource Include="Resources\Icons\folderopen_yellow_16x16.png" />
+    <Resource Include="Resources\Icons\folder_dark_16x16.png" />
+    <Resource Include="Resources\Icons\folder_grey_16x16.png" />
+    <Resource Include="Resources\Icons\folder_light_16x16.png" />
+    <Resource Include="Resources\Icons\folder_yellow_16x16.png" />
+    <Resource Include="Resources\Icons\iounit_dark_32x32.png" />
+    <Resource Include="Resources\Icons\iounit_grey_32x32.png" />
+    <Resource Include="Resources\Icons\iounit_light_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\speaker_dark_16x16.png" />
+    <Resource Include="Resources\Icons\speaker_dark_24x24.png" />
+    <Resource Include="Resources\Icons\speaker_grey_16x16.png" />
+    <Resource Include="Resources\Icons\speaker_grey_24x24.png" />
+    <Resource Include="Resources\Icons\speaker_light_16x16.png" />
+    <Resource Include="Resources\Icons\speaker_light_24x24.png" />
+    <Resource Include="Resources\Icons\systeminfo_dark_32x32.png" />
+    <Resource Include="Resources\Icons\systeminfo_grey_32x32.png" />
+    <Resource Include="Resources\Icons\systeminfo_light_32x32.png" />
+    <Resource Include="Resources\Icons\unknownapplication_dark_32x32.png" />
+    <Resource Include="Resources\Icons\unknownapplication_grey_32x32.png" />
+    <Resource Include="Resources\Icons\unknownapplication_light_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\remotelog_dark_48x48.png" />
+    <Resource Include="Resources\Icons\remotelog_grey_48x48.png" />
+    <Resource Include="Resources\Icons\remotelog_light_48x48.png" />
+    <Resource Include="Resources\Icons\awaitinglaunch_dark_16x16.png" />
+    <Resource Include="Resources\Icons\awaitinglaunch_grey_16x16.png" />
+    <Resource Include="Resources\Icons\awaitinglaunch_light_16x16.png" />
+    <Resource Include="Resources\Icons\exiting_dark_16x16.png" />
+    <Resource Include="Resources\Icons\exiting_grey_16x16.png" />
+    <Resource Include="Resources\Icons\exiting_light_16x16.png" />
+    <Resource Include="Resources\Icons\iounit_dark_48x48.png" />
+    <Resource Include="Resources\Icons\iounit_grey_48x48.png" />
+    <Resource Include="Resources\Icons\iounit_light_48x48.png" />
+    <Resource Include="Resources\Icons\launching_dark_16x16.png" />
+    <Resource Include="Resources\Icons\launching_grex_16x16.png" />
+    <Resource Include="Resources\Icons\launching_light_16x16.png" />
+    <Resource Include="Resources\Icons\medimanagementtree_dark_48x48.png" />
+    <Resource Include="Resources\Icons\medimanagementtree_grey_48x48.png" />
+    <Resource Include="Resources\Icons\medimanagementtree_light_48x48.png" />
+    <Resource Include="Resources\Icons\running_dark_16x16.png" />
+    <Resource Include="Resources\Icons\running_gray_16x16.png" />
+    <Resource Include="Resources\Icons\running_light_16x16.png" />
+    <Resource Include="Resources\Icons\starting_dark_16x16.png" />
+    <Resource Include="Resources\Icons\starting_grey_16x16.png" />
+    <Resource Include="Resources\Icons\starting_light_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\..\..\Motion\HardwareManager\Icons\hardwaremanager_32x32.png">
+      <Link>Resources\Icons\Applications\hardwaremanager_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Infomedia\Icons\ahdlcrenderer_32x32.png">
+      <Link>Resources\Icons\Applications\ahdlcrenderer_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Infomedia\Icons\audiorenderer_32x32.png">
+      <Link>Resources\Icons\Applications\audiorenderer_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Infomedia\Icons\composer_32x32.png">
+      <Link>Resources\Icons\Applications\composer_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Infomedia\Icons\directxrenderer_32x32.png">
+      <Link>Resources\Icons\Applications\directxrenderer_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Protran\Icons\protran_32x32.png">
+      <Link>Resources\Icons\Applications\protran_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\SystemManager\Icons\systemmanager_32x32.png">
+      <Link>Resources\Icons\Applications\systemmanager_32x32.png</Link>
+    </Resource>
+    <Resource Include="..\..\..\..\Motion\Update\Icons\update_32x32.png">
+      <Link>Resources\Icons\Applications\update_32x32.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Icons\diag.ico">
+      <Link>Resources\diag.ico</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Icons\diag_64x64.png">
+      <Link>Resources\diag_64x64.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Icons\diag_196x196.png">
+      <Link>Resources\diag_196x196.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\InfoSection_RemoteViewer_32x32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and '$(Configuration)' == 'DEBUG'" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

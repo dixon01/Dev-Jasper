@@ -1,0 +1,755 @@
+﻿<?xml<#@ template debug="true" hostspecific="true" language="C#" #> version="1.0" encoding="utf-8"?>
+<#@ output extension=".xsd" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="Vdv301Protocol.ttinclude" #>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema" />
+  <xs:element name="VDV301" nillable="true" type="Vdv301ProtocolConfig" />
+  <xs:complexType name="Vdv301ProtocolConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration structure for VDV 301 in Protran.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Services" type="ServicesConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration for all services that Protran needs to subscribe to.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Languages" type="ArrayOfLanguageMappingConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Mappings between VDV 301 languages and Ximple (dictionary) languages.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Transformations" type="ArrayOfChain">
+        <xs:annotation>
+          <xs:documentation>
+            Transformations used to transform the data received before forwarding it to Infomedia.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ServiceConfigBase" abstract="true">
+    <xs:attribute name="Host" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The host name or IP address of the VDV 301 service.
+          If this attribute and the Port (below) are set, automatic service discovery is disabled.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Port" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The port number of the VDV 301 service.
+          If this attribute and the Host (above) are set, automatic service discovery is disabled.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Path" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The path of the VDV 301 service.
+          This only contains the part of the URL between the port number and the service name
+          (not the service name itself).
+          This attribute is only used when automatic service discovery is disabled.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="OperationConfigBase" abstract="true">
+    <xs:attribute name="Subscribe" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if Protran should subscribe to the service.
+          If this attribute is set to false, Protran behaves as if this operation wasn't configured at all.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SubscriptionTimeout" type="xs:duration">
+      <xs:annotation>
+        <xs:documentation>
+          If this attribute is set, the callbacks are monitored. If no callback arrives within the
+          configured timeout, Protran reinitializes the client for the entire service (for all operations).
+          This is used to observe if the OBU is still alive.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DateTimeDataItemConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration what to do with a given date/time data item.
+        This allows to format the received date/time data, transform it and then forward it to a single Ximple cell.
+        The date/time format can be formatted according to the regular C# date/time format strings:
+        http://msdn.microsoft.com/en-us/library/8kb3ddd4(v=vs.80).aspx
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="DataItemConfig">
+        <xs:attribute name="DateTimeFormat" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>
+              The date and time format to use when formatting the value.
+              The regular C# date/time format strings are allowed, see the link below for more information.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DataItemConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration what to do with a given (regular) data item.
+        This allows to transform the received data and then forward it to a single Ximple cell.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="DataItemConfigBase">
+        <xs:attribute name="Language" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>
+              The language name from the dictionary where to put the contents of this data item.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="InternationalTextDataItemConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration what to do with a given InternationalTextType data item.
+        This allows to transform the received data and then forward it to a single Ximple cell for each language.
+        Be aware that you need to configure the languages in the
+        &lt;Languages&gt; element in the root of the config file.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="DataItemConfigBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DataItemConfigBase">
+    <xs:attribute name="Table" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The table name from the dictionary where to put the contents of this data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Column" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The column name from the dictionary where to put the contents of this data item.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Row" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The row number from the dictionary where to put the contents of this data item.
+          If this value is not set, row 0 will be used.
+          For items that exist multiple times (e.g. stop names), this can be set to &quot;{0}&quot;
+          which will then be replace by the received row number plus RowOffset.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute default="0" name="RowOffset" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The row offset for dynamic rows (see above).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if this handling of the data item is enabled.
+          If this is set to false, Protran behaves as if the element didn't exist.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TransfRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          Optional reference to the transformation to be used (see
+          &quot;Transformations&quot; element in the root of the config file).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLanguageMappingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Language" nillable="true" type="LanguageMappingConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LanguageMappingConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Mapping between languages received from a VDV 301 service and the
+        languages from Ximple (defined in dictionary.xml).
+        These mappings are used for InternationalTextType data items.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="VDV301" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The exact name of the language as it is received from the VDV 301 service.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Ximple" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The exact name of the language as it is written in the dictionary.xml.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ServicesConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Container for all VDV 301 services that Protran should subscribe to.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+<#
+    var services = LoadSupportedServices(this.Host.ResolvePath(@"SupportedServices.xml"));
+    
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            continue;
+        }
+        
+        #>
+      <xs:element minOccurs="0" maxOccurs="1" name="<#= service.Name #>" type="<#= service.Name #>Config">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration for the handling of operations of <#= service.Name #>.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+<#
+    }
+#>
+    </xs:sequence>
+    <xs:attribute name="ValidateHttpRequests" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>
+          Validate the HTTP requests before sending them to the server.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ValidateHttpResponses " type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>
+          Validate the HTTP responses when receiving them from the server.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="VerifyVersion" type="xs:boolean" default="false">
+      <xs:annotation>
+        <xs:documentation>
+          Verify the IBIS-IP service version when querying.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+<#
+    foreach (var service in services)
+    {
+        if (service.IsMulticast)
+        {
+            continue;
+        }
+        
+        this.GenerateHttpServiceConfig(service);
+    }
+#>
+  <xs:complexType name="ArrayOfChain">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Chain" type="TransformationChain" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransformationChain">
+    <xs:annotation>
+      <xs:documentation>
+        A chain of transformations used to transform received data items before sending them through Ximple.
+        The elements can be mixed in any (meaningful) order.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Capitalize" nillable="true" type="CapitalizeConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Changes the case of a word.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="ChainRef" nillable="true" type="ChainRefConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Reference to another transformation chain.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Join" nillable="true" type="JoinConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Joins previously divided texts.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RegexDivider" nillable="true" type="RegexDividerConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Divides a value into multiple values using regular expressions.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="RegexMapping" nillable="true" type="RegexMappingConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Replaces characters using regular expressions.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Replace" nillable="true" type="ReplaceConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Simply replaces parts of a string with other strings.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="StringMapping" nillable="true" type="StringMappingConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Replaces the entire text with another text.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="SymbolDivider" nillable="true" type="SymbolDividerConfig">
+        <xs:annotation>
+          <xs:documentation>
+            Splits the value with a simple divider.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:QName" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The unique ID of this transformation chain. This is used to refer to this chain from a data item
+          or another chain.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CapitalizeMode">
+    <xs:annotation>
+      <xs:documentation>
+        Possible modes for capitalizing a string with CapitalizeConfig.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UpperLower">
+        <xs:annotation>
+          <xs:documentation>
+            Make the first character uppercase and the rest of the string lowercase.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UpperOnly">
+        <xs:annotation>
+          <xs:documentation>
+            Make the first character uppercase and don't change the rest of the string.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LowerOnly">
+        <xs:annotation>
+          <xs:documentation>
+            Don't change the first character but make the rest of the string lowercase.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CapitalizeConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Transforms strings by making the first letter of the string uppercase and
+        the rest lowercase, taking into account the configured exceptions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Exceptions" type="ArrayOfString">
+        <xs:annotation>
+          <xs:documentation>
+            Exceptions that shouldn't be capitalized.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Mode" type="CapitalizeMode" default="UpperLower">
+      <xs:annotation>
+        <xs:documentation>
+          The mode how the capitalization should happen.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ChainRefConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Reference to another chain to allow nesting of chains.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="TransfRef" type="xs:QName" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The ID of the transformation; this must exactly match the ID configured for the referenced chain.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="JoinConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Joins the recieved string array to a single string putting the Separator between each item.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Separator" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>
+          The string to put between items. This can be omitted to not insert anything between the items.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="RegexOptions">
+    <xs:annotation>
+      <xs:documentation>
+        Options available when using regular expressions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that no options are set.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IgnoreCase">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies case-insensitive matching.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Multiline">
+        <xs:annotation>
+          <xs:documentation>
+            Multiline mode. Changes the meaning of ^ and $ so they match at the beginning and end, respectively,
+            of any line, and not just the beginning and end of the entire string.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ExplicitCapture">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the only valid captures are explicitly named or
+            numbered groups of the form (?&lt;name&gt;...).
+            This allows unnamed parentheses to act as noncapturing groups without
+            the syntactic clumsiness of the expression (?:...).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Compiled">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the regular expression is compiled to an assembly.
+            This yields faster execution but increases startup time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Singleline">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies single-line mode.
+            Changes the meaning of the dot (.) so it matches every character (instead of every character except \n).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IgnorePatternWhitespace">
+        <xs:annotation>
+          <xs:documentation>
+            Eliminates unescaped white space from the pattern and enables comments marked with #.
+            However, the IgnorePatternWhitespace value does not affect or eliminate white space in character classes.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RightToLeft">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that the search will be from right to left instead of from left to right.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ECMAScript">
+        <xs:annotation>
+          <xs:documentation>
+            Enables ECMAScript-compliant behavior for the expression.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CultureInvariant">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies that cultural differences in language is ignored.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RegexDividerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Devides a given string using the configured regular expression.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Regex" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The regular expression used for dividing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Options" type="RegexOptions">
+        <xs:annotation>
+          <xs:documentation>
+            The regular expression options to be used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Mapping">
+    <xs:annotation>
+      <xs:documentation>
+        Mapping from one string to another.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="from" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The string to be replaced.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="to" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The string replacing the &quot;from&quot; string.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="RegexMappingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReplaceConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Replaces parts of a string with other strings.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CaseSensitive" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            If set to true, the case will be ignored when replacing the strings.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping">
+        <xs:annotation>
+          <xs:documentation>
+            The mappings.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StringMappingConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Mapping" type="Mapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SymbolDividerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Divides a string using a given symbol.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Symbol" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            The symbol with which the string is to be divided.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema><#+
+private void GenerateHttpServiceConfig(Service service)
+{
+    var servicePrefix = service.Name + ".";
+    var operations = service.Operations.Where(o => o.Name.StartsWith("Get")).ToList();
+    #>
+    
+  <xs:complexType name="<#= service.Name #>Config">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration for the subscriptions to <#= service.Name #>.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ServiceConfigBase">
+        <xs:sequence>
+<#+ 
+    foreach (var operation in operations)
+    {
+        #>
+          <xs:element minOccurs="0" maxOccurs="1" name="<#= operation.Name #>" type="<#= servicePrefix + operation.Name #>Config">
+            <xs:annotation>
+              <xs:documentation>
+                If defined, Protran subscribes to <#= operation.Name #>().
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+<#+
+    }
+    #>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType><#+ 
+    
+    foreach (var operation in operations)
+    {
+        var complex = operation.Return.ElementSchemaType as XmlSchemaComplexType;
+        if (complex == null)
+        {
+            continue;
+        }
+
+        #>
+        
+  <xs:complexType name="<#= servicePrefix + operation.Name #>Config">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration for the subscriptions to <#= service.Name #>.<#= operation.Name #>().
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="OperationConfigBase">
+        <xs:sequence><#+
+        this.GenerateConfigProperties(complex, servicePrefix);
+        #>
+        
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType><#+
+    }
+
+    var dataTypes = GetDataTypes(operations);
+    foreach (var dataType in dataTypes)
+    {
+        #>
+        
+  <xs:complexType name="<#= servicePrefix + dataType.Name #>Config">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration for the handling of <#= dataType.Name #> structures received from the service.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence><#+ 
+        this.GenerateConfigProperties(dataType, servicePrefix);
+        #>
+
+    </xs:sequence>
+  </xs:complexType>
+<#+
+    }
+}
+
+private void GenerateConfigProperties(XmlSchemaComplexType type, string servicePrefix)
+{
+    var particle = type.Particle as XmlSchemaGroupBase;
+    if (particle == null)
+    {
+        return;
+    }
+    
+    var children = GetChildren(particle);
+
+    foreach (var child in children)
+    {
+        var configType = servicePrefix + child.ElementSchemaType.Name + "Config";
+        var maxOccurs = "1";
+        if (IsSimpleIbisIpType(child.ElementSchemaType))
+        {
+            maxOccurs = "unbounded";
+            if (child.ElementSchemaType.Name == "IBIS-IP.dateTime")
+            {
+                configType = "DateTimeDataItemConfig";
+            }
+            else if (child.ElementSchemaType.Name == "InternationalTextType")
+            {
+                configType = "InternationalTextDataItemConfig";
+            }
+            else
+            {
+                configType = "DataItemConfig";
+            }
+        }
+        #>
+
+          <xs:element minOccurs="0" maxOccurs="<#= maxOccurs #>" name="<#= child.Name #>" type="<#= configType #>">
+            <xs:annotation>
+              <xs:documentation>
+                Handling of the <#= child.Name #> element.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element><#+
+    }
+}
+#>

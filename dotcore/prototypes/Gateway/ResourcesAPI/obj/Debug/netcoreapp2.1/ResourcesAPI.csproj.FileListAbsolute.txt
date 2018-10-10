@@ -1,0 +1,14 @@
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\bin\Debug\netcoreapp2.1\ResourcesAPI.deps.json
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\bin\Debug\netcoreapp2.1\ResourcesAPI.runtimeconfig.json
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\bin\Debug\netcoreapp2.1\ResourcesAPI.runtimeconfig.dev.json
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\bin\Debug\netcoreapp2.1\ResourcesAPI.dll
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\bin\Debug\netcoreapp2.1\ResourcesAPI.pdb
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.csprojAssemblyReference.cache
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.csproj.CoreCompileInputs.cache
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.RazorAssemblyInfo.cache
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.RazorAssemblyInfo.cs
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.AssemblyInfoInputs.cache
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.AssemblyInfo.cs
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.RazorTargetAssemblyInfo.cache
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.dll
+C:\Dev\jasper\granite-jasper\dotcore\prototypes\Gateway\ResourcesAPI\obj\Debug\netcoreapp2.1\ResourcesAPI.pdb

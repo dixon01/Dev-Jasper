@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.gorba.com/data/center/v1/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" />
+  <xs:element name="LinkUnitWithTenant">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifier" nillable="true" type="q1:UnitIdentifier" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Roles" minOccurs="0" name="tenantIdentifier" nillable="true" type="q2:TenantIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithTenantResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithLayout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifier" nillable="true" type="q3:UnitIdentifier" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="layoutIdentifier" nillable="true" type="q4:LayoutIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithLayoutResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q5:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindUnitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="FindUnitResult" nillable="true" type="q6:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="unit" nillable="true" type="q7:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddUnitResult" nillable="true" type="q8:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddLayout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="layout" nillable="true" type="q9:Layout" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddLayoutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddLayoutResult" nillable="true" type="q10:Layout" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddProductType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="productType" nillable="true" type="q11:ProductType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddProductTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddProductTypeResult" nillable="true" type="q12:ProductType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="unitType" nillable="true" type="q13:UnitType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddUnitTypeResult" nillable="true" type="q14:UnitType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitGroupType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="unitGroupType" nillable="true" type="q15:UnitGroupType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitGroupTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddUnitGroupTypeResult" nillable="true" type="q16:UnitGroupType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="unitGroup" nillable="true" type="q17:UnitGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddUnitGroupResult" nillable="true" type="q18:UnitGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddStopPoint">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="stopPoint" nillable="true" type="q19:StopPoint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddStopPointResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="AddStopPointResult" nillable="true" type="q20:StopPoint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithStopPoint">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" minOccurs="0" name="stopPointIdentifier" nillable="true" type="q21:StopPointIdentifier" />
+        <xs:element xmlns:q22="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifier" nillable="true" type="q22:UnitIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithStopPointResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountUnits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q23:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountUnitsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CountUnitsResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="id" nillable="true" type="q24:UnitIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUnitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUnitGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="id" nillable="true" type="q25:UnitGroupIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUnitGroupResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifier" nillable="true" type="q26:UnitIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="GetUnitResult" nillable="true" type="q27:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q28:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnitsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListUnitsResult" nillable="true" type="q29:ArrayOfU" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifier" nillable="true" type="q30:UnitIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="GetStatusResult" nillable="true" type="q31:UnitOnlineStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListStatuses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitIdentifiers" nillable="true" type="q32:ArrayOfUnitIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListStatusesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListStatusesResult" nillable="true" type="q33:ArrayOfUnitOnlineStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnitTypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q34:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnitTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListUnitTypesResult" nillable="true" type="q35:ArrayOfUnitType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListSubscribedUnits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Itcs" minOccurs="0" name="stopPointReference" nillable="true" type="q36:ItcsLineStopPointReference" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListSubscribedUnitsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListSubscribedUnitsResult" nillable="true" type="q37:ArrayOfU" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="unit" nillable="true" type="q38:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUnitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="UpdateUnitResult" nillable="true" type="q39:U" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StatusUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="statusList" nillable="true" type="q40:ArrayOfUnitStatus" />
+        <xs:element minOccurs="0" name="isEvent" type="xs:boolean" />
+        <xs:element minOccurs="0" name="resetAll" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StatusUpdateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestRestartUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q41:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestRestartUnitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestTimeSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q42:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestTimeSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListProductTypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q43:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListProductTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListProductTypesResult" nillable="true" type="q44:ArrayOfProductType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListStopPoints">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q45:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListStopPointsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListStopPointsResult" nillable="true" type="q46:ArrayOfStopPoint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountStopPoints">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q47:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountStopPointsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CountStopPointsResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListLayouts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q48:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListLayoutsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListLayoutsResult" nillable="true" type="q49:ArrayOfLayout" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnitGroups">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q50:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListUnitGroupsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="ListUnitGroupsResult" nillable="true" type="q51:ArrayOfUnitGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountUnitGroups">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel" minOccurs="0" name="filter" nillable="true" type="q52:FilterBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountUnitGroupsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CountUnitGroupsResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithUnitGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitId" nillable="true" type="q53:UnitIdentifier" />
+        <xs:element xmlns:q54="http://schemas.gorba.com/data/center/v1/" minOccurs="0" name="unitGroupId" nillable="true" type="q54:UnitGroupIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinkUnitWithUnitGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Gorba.Center.Common.ServiceModel.DTO.Units" minOccurs="0" name="LinkUnitWithUnitGroupResult" nillable="true" type="q55:AssociationUnitUnitGroupIdentifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

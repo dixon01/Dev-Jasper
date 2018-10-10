@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.CollectionEvalBase" Collapsed="true">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAARAACBAAAAEBAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.ContainerEvalBase" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAARAACAAAAAEBAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.ConstantEval" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Eval\ConstantEval.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.FormatEval" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAARAACAAAAAEBAAhAAAAAIAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.IfEval" Collapsed="true">
+    <Position X="14.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Condition" />
+      <Property Name="Then" />
+      <Property Name="Else" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.IntegerCompareEval" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAQAACAAAAAABAABAEAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.StringCompareEval" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAABAABAAAAAAAAoAAAAAAQ=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.GenericEval" Collapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAQAAAABAQAAAAAAAAgAAAAAAAAAACAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.OrEval" Collapsed="true">
+    <Position X="1" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAABAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.AndEval" Collapsed="true">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAABAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.NotEval" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAABAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.TextToImageEval" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAQAABAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.CsvMappingEval" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAQAAAAAAAQAAAABAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Matches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.DateEval" Collapsed="true">
+    <Position X="18" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAAAUAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.DayOfWeekEval" Collapsed="true">
+    <Position X="21.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAQAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.EvaluationEval" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.SwitchEval" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAIAAEAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Value" />
+      <Property Name="Default" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Cases" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.TimeEval" Collapsed="true">
+    <Position X="19.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAAAUAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Common.DynamicProperty" Collapsed="true">
+    <Position X="14" Y="5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAgAAAAAAAEBAACAAAAAEBAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Common\DynamicProperty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.EvalBase" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.MatchDynamicProperty" Collapsed="true">
+    <Position X="14" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACABAAAABAABAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Common.Configuration.Infomedia.Eval.CaseDynamicProperty" Collapsed="true">
+    <Position X="15.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAABAABAAAAAAAAoAAAAAAA=</HashCode>
+      <FileName>Eval\Evals.generated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

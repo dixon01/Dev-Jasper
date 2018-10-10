@@ -1,0 +1,304 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#@ import namespace="System" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="$(SolutionDir)Source\T4Templating\bin\Debug\Gorba.Center.Media.T4Templating.dll" #>
+<#@ import namespace="Gorba.Center.Media.T4Templating" #>
+<#
+    var rootPath = "../../Source/Core/";
+    
+    var xamlFiles = System.IO.Directory.GetFiles(Host.ResolvePath(rootPath), 
+                                                 "*.xaml", 
+                                                 System.IO.SearchOption.AllDirectories);
+    
+#>
+namespace Gorba.Center.Media.WpfApplication.Tests
+{
+    using Microsoft.VisualStudio.TestTools.UITesting;
+    using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+
+<#
+    var fileDefinitions = new List<FileDefinition>();
+
+    foreach (var filePath in xamlFiles)
+    {
+        var doc = XDocument.Load(filePath);
+        
+        fileDefinitions.Add(new FileDefinition {
+            FilePath = filePath,
+            FileName = Path.GetFileNameWithoutExtension(filePath),
+            XamlTypeName = doc.Root.Name.LocalName,
+            UIType = GetUITypeFromWpfType(doc.Root.Name.LocalName),
+            Doc = doc,
+        });
+    }
+
+    foreach (var fileDefinition in fileDefinitions)
+    {
+        var children = GetChildrenForFile(fileDefinition);
+
+#>
+    /* Filename: <#= fileDefinition.FilePath #> */
+    public partial class UI<#= fileDefinition.FileName #> : <#= fileDefinition.UIType #> /* WPF Class = <#= fileDefinition.XamlTypeName #> */
+    {
+<#
+        foreach(var childDefinition in children)
+        {
+#>
+        private <#= childDefinition.TypeName #> <#=childDefinition.LowerCaseName #>;
+<#
+        }
+#>
+
+        public UI<#= fileDefinition.FileName #>(UITestControl searchLimitContainer, string automationId = null)
+            : base(searchLimitContainer)
+        {
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "Uia.<#= fileDefinition.FileName #>";
+            if (!string.IsNullOrEmpty(automationId))
+            {
+                this.SearchProperties[WpfControl.PropertyNames.AutomationId] = automationId;
+            }
+        }
+<#
+        foreach(var childDefinition in children)
+        {
+#>
+
+        public <#= childDefinition.TypeName #> <#=childDefinition.Name #>
+        {
+            get
+            {
+                if (this.<#=childDefinition.LowerCaseName#> == null)
+                {
+<#
+                    if (childDefinition.IsLocalType)
+                    {
+#>
+                    this.<#=childDefinition.LowerCaseName#> = new <#=childDefinition.TypeName #>(this, "<#= fileDefinition.FileName #>_<#=childDefinition.Name #>");
+<#
+                    }
+                    else
+                    {
+#>
+                    this.<#=childDefinition.LowerCaseName#> = new <#=childDefinition.TypeName #>(this);
+                    this.<#=childDefinition.LowerCaseName#>.SearchProperties[WpfControl.PropertyNames.AutomationId] = "<#= childDefinition.AutomationId #>";
+<#
+                    }
+#>
+                }
+
+                return this.<#=childDefinition.LowerCaseName#>;
+            }
+        }
+<#
+        }
+#>
+    }
+
+<#
+    }
+#>
+}
+
+<#+
+    public List<ChildFileDefinition> GetChildrenForFile(FileDefinition fileDefinition)
+    {
+        var childDefinitions = new List<ChildFileDefinition>();
+
+        var childElements = GetElementsWithAttribute(fileDefinition.Doc.Elements(), "AutomationProperties.AutomationId");
+
+        foreach (var element in childElements)
+        {
+            if (element == fileDefinition.Doc.Root) { continue; }
+            
+            var isLocalType = element.Name.NamespaceName.StartsWith("clr-namespace:");
+            var automationId = element.Attribute("AutomationProperties.AutomationId").Value;
+
+            var elementName = element.Name.LocalName;
+            var typeName = isLocalType ? "UI" + elementName : GetUITypeFromWpfType(elementName);
+            if (!isLocalType)
+            {
+                var idParts = automationId.Split('_');
+                elementName = idParts[1];
+            }
+
+            childDefinitions.Add(new ChildFileDefinition {
+                AutomationId = automationId,
+                Name = elementName,
+                LowerCaseName = char.ToLowerInvariant(elementName[0]) + elementName.Substring(1),
+                Namespace = element.Name.NamespaceName,
+                TypeName = typeName,
+                IsLocalType = isLocalType,
+            });
+        }
+
+        return childDefinitions;
+    }
+
+    public IEnumerable<XElement> GetElementsWithAttribute(IEnumerable<XElement> elements, string attributeName)
+    {
+        var result = new List<XElement>();
+        
+        foreach (var element in elements)
+        {
+            if (element.Attribute(attributeName) != null)
+            {
+                result.Add(element);
+            }
+
+            var childElements = GetElementsWithAttribute(element.Elements(), attributeName);
+            if (childElements != null)
+            {
+                result.AddRange(childElements);
+            }
+        }
+
+        return result;
+    }
+
+    public string GetUITypeFromWpfType(string wpfTypeName)
+    {
+        string result = "WpfCustom";
+
+        switch (wpfTypeName)
+        {
+            /*
+            case "":
+                result = "WpfCalendar";
+                break;
+            case "":
+                result = "WpfCell";
+                break;
+            case "":
+                result = "WpfDatePicker";
+                break;
+            case "":
+                result = "WpfExpander";
+                break;
+            case "":
+                result = "WpfGroup";
+                break;
+            case "":
+                result = "WpfHyperlink";
+                break;
+            case "":
+                result = "WpfPane";
+                break;
+            case "":
+                result = "WpfRow";
+                break;
+            case "":
+                result = "WpfTable";
+                break;
+            case "":
+                result = "WpfTabPage";
+                break;
+            case "":
+                result = "WpfTabList";
+                break;
+            case "":
+                result = "WpfTitleBar";
+                break;
+            case "":
+                result = "WpfTree";
+                break;
+            case "":
+                result = "WpfTreeItem";
+                break;*/
+
+            case "Button":
+                result = "WpfButton";
+                break;
+            case "CheckBox":
+                result = "WpfCheckBox";
+                break;
+            case "ComboBox":
+                result = "WpfComboBox";
+                break;
+            case "UserControl":
+                result = "WpfCustom";
+                break;
+            case "Image":
+                result = "WpfImage";
+                break;
+            case "ListView":
+                result = "WpfList";
+                break;
+            case "ListViewItem":
+                result = "WpfListItem";
+                break;
+            case "Menu":
+                result = "WpfMenu";
+                break;
+            case "MenuItem":
+                result = "WpfMenuItem";
+                break;
+            case "ProgressBar":
+                result = "WpfProgressBar";
+                break;
+            case "RadioButton":
+                result = "WpfRadioButton";
+                break;
+            case "Scrollbar":
+                result = "WpfScrollBar";
+                break;
+            case "Separator":
+                result = "WpfSeparator";
+                break;
+            case "Slider":
+                result = "WpfSlider";
+                break;
+            case "StatusBar":
+                result = "WpfStatusBar";
+                break;
+            case "TextBlock":
+                result = "WpfText";
+                break;
+            case "TextBox":
+                result = "WpfEdit";
+                break;
+            case "ToggleButton":
+                result = "WpfToggleButton";
+                break;
+            case "ToolBar":
+                result = "WpfToolBar";
+                break;
+            case "ToolTip":
+                result = "WpfToolTip";
+                break;
+            case "TrackingWindow":
+            case "Window":
+                result = "WpfWindow";
+                break;
+        }
+
+        return result;
+    }
+
+    public class FileDefinition
+    {
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+        public string XamlTypeName { get; set; }
+        public string UIType { get; set; }
+        public XDocument Doc { get; set; }
+    }
+
+    public class ChildFileDefinition
+    {
+        public string AutomationId { get; set; }
+        public string LowerCaseName { get; set; }
+        public string Name { get; set; }
+        public string Namespace { get; set; }
+        public string TypeName { get; set; }
+        public bool IsLocalType { get; set; }
+    }
+#>

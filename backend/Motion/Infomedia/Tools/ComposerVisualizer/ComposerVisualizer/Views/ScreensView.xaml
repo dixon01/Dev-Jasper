@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="Gorba.Motion.Infomedia.Tools.ComposerVisualizer.Views.ScreensView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataViewModels="clr-namespace:Gorba.Motion.Infomedia.Tools.ComposerVisualizer.DataViewModels"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:converters="clr-namespace:Gorba.Motion.Infomedia.Tools.ComposerVisualizer.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <converters:TreeViewFolderConverter x:Key="TreeViewFolderConverter" />
+            <Style TargetType="TextBlock" x:Key="TreeViewNodeTextStyle">
+                <Setter Property="FontWeight" Value="Normal" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding NodeVisible}" Value="True">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <HierarchicalDataTemplate x:Key="LayoutNode" ItemsSource="{Binding LayoutNode}"
+                                  DataType="dataViewModels:SectionDataViewModel">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding ImagePath}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="Sections" ItemsSource="{Binding Sections}" ItemTemplate="{StaticResource LayoutNode}"
+                                  DataType="dataViewModels:CycleDataViewModel">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding ImagePath}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="CycleItems" ItemsSource="{Binding Sections}" ItemTemplate="{StaticResource LayoutNode}"
+                                      DataType="dataViewModels:CycleDataViewModel">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding ImagePath}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="CyclesTreeViewItemTemplate"
+                 DataType="dataViewModels:TreeViewFolderItem"
+                 ItemsSource="{Binding Items}" ItemTemplate="{StaticResource CycleItems}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="OrangeRed"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="Cycles" DataType="dataViewModels:VirtualDisplayDataViewModel"
+                ItemTemplate="{StaticResource CyclesTreeViewItemTemplate}" >
+                <HierarchicalDataTemplate.ItemsSource>
+                    <MultiBinding Converter="{StaticResource TreeViewFolderConverter}" ConverterParameter="Standard cycles, Event cycles">
+                        <Binding Path="StandardCycles" />
+                        <Binding Path="EventCycles" />
+                    </MultiBinding>
+                </HierarchicalDataTemplate.ItemsSource>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding ImagePath}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="VirtualDisplays" ItemsSource="{Binding VirtualDisplays}" ItemTemplate="{StaticResource Cycles}"
+                                  DataType="dataViewModels:MasterLayoutDataViewModel">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="MasterLayouts" ItemsSource="{Binding MasterLayouts}" ItemTemplate="{StaticResource VirtualDisplays}"
+                                  DataType="dataViewModels:MasterSectionDataViewModel">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="MasterSections" ItemsSource="{Binding MasterSections}" ItemTemplate="{StaticResource MasterLayouts}"
+                                  DataType="dataViewModels:MasterCycleDataViewModel">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="MasterCyclesTreeViewItemTemplate"
+                 DataType="dataViewModels:TreeViewFolderItem"
+                 ItemsSource="{Binding Items}" ItemTemplate="{StaticResource MasterSections}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="DarkRed"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="PhysicalScreens" DataType="dataViewModels:PhysicalScreenDataViewModel"
+                ItemTemplate="{StaticResource MasterCyclesTreeViewItemTemplate}" >
+                <HierarchicalDataTemplate.ItemsSource>
+                    <MultiBinding Converter="{StaticResource TreeViewFolderConverter}" ConverterParameter="Master Cycles, Master Event Cycles">
+                        <Binding Path="MasterCycles" />
+                        <Binding Path="MasterEventCycles" />
+                    </MultiBinding>
+                </HierarchicalDataTemplate.ItemsSource>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding ImagePath}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TreeViewNodeTextStyle}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter HorizontalAlignment="Right" 
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="1" ResizeBehavior="PreviousAndNext"
+                  Width="5" Background="White"/>
+        <TreeView Name="PresentationTreeView" ItemsSource="{Binding PresentationTreeViewModel.TreeViewRoot.PhysicalScreens}" ItemTemplate="{StaticResource PhysicalScreens}" Background="LightGray" Grid.Column="0">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TreeViewItemPreviewMouseLeftButtonDown"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        <xctk:PropertyGrid x:Name="ItemPropertyGrid" Background="LightGray" Grid.Column="2">
+        </xctk:PropertyGrid>
+    </Grid>
+</UserControl>

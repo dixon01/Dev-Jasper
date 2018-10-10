@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formats.AlphaNT", "Source\AlphaNT\Formats.AlphaNT.csproj", "{189BDF41-0454-4172-BE5B-F88481F78393}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{07E894FA-0E72-494B-8D46-9D9332452C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formats.AlphaNT.Tests", "Source\AlphaNT.Tests\Formats.AlphaNT.Tests.csproj", "{37B5C4AB-71C9-44DC-8683-379A73446D1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64CEA62C-2743-4558-AD5F-2C20CD1B8155}"
+	ProjectSection(SolutionItems) = preProject
+		Gorba.Common.Formats.vsmdi = Gorba.Common.Formats.vsmdi
+		Gorba.Common.Formats1.vsmdi = Gorba.Common.Formats1.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Source\\AlphaNT\\Formats.AlphaNT.csproj
+		SccProjectName1 = Source/AlphaNT
+		SccLocalPath1 = Source\\AlphaNT
+		SccProjectUniqueName2 = ..\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName2 = Gorba.Common.Formats.sln
+		SccProjectName2 = ../Utility/Source/Compatibility
+		SccLocalPath2 = ..\\Utility\\Source\\Compatibility
+		SccProjectUniqueName3 = Source\\AlphaNT.Tests\\Formats.AlphaNT.Tests.csproj
+		SccProjectName3 = Source/AlphaNT.Tests
+		SccLocalPath3 = Source\\AlphaNT.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Gorba.Common.Formats1.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{189BDF41-0454-4172-BE5B-F88481F78393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189BDF41-0454-4172-BE5B-F88481F78393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189BDF41-0454-4172-BE5B-F88481F78393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189BDF41-0454-4172-BE5B-F88481F78393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B5C4AB-71C9-44DC-8683-379A73446D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B5C4AB-71C9-44DC-8683-379A73446D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B5C4AB-71C9-44DC-8683-379A73446D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B5C4AB-71C9-44DC-8683-379A73446D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {07E894FA-0E72-494B-8D46-9D9332452C84}
+	EndGlobalSection
+EndGlobal

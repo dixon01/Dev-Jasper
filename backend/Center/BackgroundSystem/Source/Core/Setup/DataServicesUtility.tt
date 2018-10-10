@@ -1,0 +1,101 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\TemplatingExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.BackgroundSystem.Core" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\Data\Model\EntitySpace.Data.generated.xml");
+    var entitySpace = EntitySpace.Load(path);
+#>
+namespace Gorba.Center.BackgroundSystem.Core.Setup
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.ExceptionServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.BackgroundSystem.Core.ChangeTracking;
+    using Gorba.Center.Common.Client;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Membership;
+    using Gorba.Center.Common.ServiceModel.Notifications;
+    using Gorba.Center.Common.ServiceModel.Security;
+
+    using NLog;
+
+    using Version = Gorba.Center.Common.ServiceModel.ChangeTracking.Version;
+<#
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name);
+    var entities = entitySpace.Partitions
+        .SelectMany(partition => partition.Entities)
+        .OrderBy(entity => entity.Name);
+
+    foreach (var partition in partitions)
+    {
+        this.WriteUsing(partition);
+    }
+#>
+
+    public static partial class DataServicesUtility
+    {
+        public static IEnumerable<IServiceHost> SetupNonChangeTrackingDataServices(
+            BackgroundSystemConfiguration configuration)
+        {
+            ServiceHost host;
+<#
+    foreach (var entity in entities.Where(entity => !entity.HasChangeTracking))
+    {#>
+
+            var service<#= entity.Name #> = Create<#= entity.Name #>DataService();
+            DependencyResolver.Current.Register(service<#= entity.Name #>);
+            host = DataServicesUtility.CreateServiceHost<I<#= entity.Name #>DataService>(
+                service<#= entity.Name #>, "<#= entity.Name #>");
+            yield return new ServiceHostWrapper("<#= entity.Name #>", host);
+<#
+    }
+#>	
+        }
+<#
+    foreach (var entity in entities)
+    {
+        this.WriteCreateDataService(entity);
+    }
+#>
+    }
+}
+<#+
+
+    private void WriteCreateDataService(EntitySpace.Entity entity)
+    {#>
+
+        internal static I<#= entity.Name #>DataService Create<#= entity.Name #>DataService()
+        {
+            var service = new <#= entity.Name #>DataService();
+            var concurrentService = new <#= entity.Name #>ConcurrentDataService(service);
+            ChannelScopeFactory<I<#= entity.Name #>DataService>.SetCurrent(
+                new InstanceChannelScopeFactory<I<#= entity.Name #>DataService>(concurrentService));
+            return new <#= entity.Name #>RemoteDataService(concurrentService);
+        }
+<#+
+    }
+
+    private void WriteUsing(EntitySpace.Partition partition)
+    {#>
+    using Gorba.Center.BackgroundSystem.Core.<#= partition.Name #>;
+<#+
+    }
+#>

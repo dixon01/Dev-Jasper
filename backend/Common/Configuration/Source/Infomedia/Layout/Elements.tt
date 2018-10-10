@@ -1,0 +1,452 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\Entities.ttinclude" #>
+<#@ include file="..\Local.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+
+<#
+    var inputFile = @"..\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(inputFile));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Layout");
+    this.baseNamespace = "Gorba.Common.Configuration.Infomedia";
+
+    #>
+namespace Gorba.Common.Configuration.Infomedia.Layout
+{
+    <#
+    // generate all classes in this namespace
+    foreach (var clazz in layoutNamespace.Classes)
+    {
+        this.GenerateClass(clazz);
+    }
+    #>
+}
+
+<#+
+private Entities entities;
+private string baseNamespace;
+
+private void GenerateClass(Class clazz)
+{
+    var entity = clazz as ElementClass;
+    if (entity != null)
+    {
+        // special handling for element classes
+        this.GenerateElementClass(entity);
+        return;
+    }
+    
+    var inheritance = !string.IsNullOrEmpty(clazz.Base) ? " : " + clazz.Base : " : ICloneable";
+    #>
+
+    [Serializable]
+    public partial class <#= clazz.Name + inheritance #>
+    {
+        public <#= clazz.Name #>()
+        {<#+
+    // set the property values in the constructor
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateDefaultPropertyValues(property);
+    }
+    #>
+
+        }
+    <#+
+    // create all properties
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateProperty(property);
+    }
+
+    if (string.IsNullOrEmpty(clazz.Base))
+    {
+        #>
+        
+        public virtual object Clone()
+        {
+            return this.MemberwiseClone();
+        }<#+
+    }
+    #>
+
+    }
+    <#+
+}
+
+/// <summary>
+/// Creates the real class name for an element.
+/// </summary>
+private static string GetElementClassName(string className)
+{
+    return className.EndsWith("Base") ? className.Replace("Base", "ElementBase") : className + "Element";
+}
+
+/// <summary>
+/// Generates a layout element class.
+/// </summary>
+private void GenerateElementClass(ElementClass clazz)
+{
+    var isAbstract = clazz.Name.EndsWith("Base");
+    var className = GetElementClassName(clazz.Name);
+    var inheritance = clazz.Base == null ? " : ElementId, ICloneable " : " : " + GetElementClassName(clazz.Base);
+
+    if (!string.IsNullOrEmpty(clazz.ChildElementsType))
+    {
+        inheritance += ", ICompositeElement, IXmlSerializable";
+    }
+
+    var attributes = new StringBuilder();
+    if (!string.IsNullOrEmpty(clazz.SupportedScreenTypes))
+    {
+        // create the [SupportedScreenTypes] attribute
+        var screenTypes = clazz.SupportedScreenTypes.Split(',', ';');
+        attributes.AppendLine().Append("    [SupportedScreenTypes(");
+        foreach (var screenType in screenTypes)
+        {
+            attributes.Append(this.baseNamespace).Append(".Presentation.PhysicalScreenType.").Append(screenType.Trim()).Append(", ");
+        }
+
+        attributes.Length -= 2;
+        attributes.Append(")]");
+    }
+
+    if (!isAbstract)
+    {
+        // add the [XmlRoot] attribute
+        attributes.AppendLine().AppendFormat("    [XmlRoot(\"{0}\")]", clazz.Name);
+    }
+    #>
+
+    [Serializable]<#= attributes.ToString() #>
+    public<#= isAbstract ? " abstract" : "" #> partial class <#= className + inheritance #>
+    {
+        public <#= className #>()
+        {<#+
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateDefaultPropertyValues(property);
+    }
+
+    if (!string.IsNullOrEmpty(clazz.ChildElementsType))
+    {
+        // generate the initialization of the Elements list
+        #>
+
+            this.Elements = new List<<#= GetElementClassName(clazz.ChildElementsType) #>>();<#+ 
+    }
+    #>
+
+        }
+    <#+
+    foreach (var property in clazz.Properties)
+    {
+        this.GenerateProperty(property);
+    }
+
+    // ICloneable
+    if (clazz.Base == null)
+    {
+        #>
+
+        public virtual object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+        <#+
+    }
+    else
+    {
+        #>
+
+        public override object Clone()
+        {
+            var clone = (<#= className #>)base.Clone();<#+
+            
+        if (!string.IsNullOrEmpty(clazz.ChildElementsType))
+        {
+            #>
+
+            clone.Elements = this.Elements.ConvertAll(e => (<#= GetElementClassName(clazz.ChildElementsType) #>)e.Clone());<#+
+        }
+        
+        foreach (var compositeProperty in clazz.Properties.OfType<CompositeProperty>())
+        {
+            var compositeType = compositeProperty.Type;
+            if (this.entities.GetClass(compositeType) is ElementClass)
+            {
+                compositeType = GetElementClassName(compositeType);
+            }
+            #>
+
+            clone.<#= compositeProperty.Name #> = (<#= compositeType #>)this.<#= compositeProperty.Name #>.Clone();<#+
+        }
+        #>
+
+            return clone;
+        }
+        <#+
+    }
+
+    // handling of ICompositeElement
+    if (!string.IsNullOrEmpty(clazz.ChildElementsType))
+    {
+        var childElementsType = GetElementClassName(clazz.ChildElementsType);
+        #>
+
+        public List<<#= childElementsType #>> Elements { get; set; }
+
+        IEnumerator<ElementBase> IEnumerable<ElementBase>.GetEnumerator()
+        {
+            return this.Elements.ConvertAll(e => (ElementBase)e).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.Elements.GetEnumerator();
+        }
+        
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
+
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            this.Elements.Clear();
+        <#+
+        this.GenerateAttributeReaders(clazz);
+        #>
+
+            if (reader.IsEmptyElement)
+            {
+                reader.ReadStartElement();
+                return;
+            }
+            
+            reader.ReadStartElement();
+
+            reader.MoveToContent();
+
+            while (reader.NodeType == XmlNodeType.Element)
+            {
+        <#+
+        this.GenerateElementReaders(clazz);
+        #>
+
+                var element = ElementSerializer.Deserialize(reader) as <#= childElementsType #>;
+                if (element != null)
+                {
+                    this.Elements.Add(element);
+                }
+
+                reader.MoveToContent();
+            }
+
+            reader.ReadEndElement();
+        }
+        
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+        <#+
+        this.GenerateAttributeWriters(clazz);
+        this.GenerateElementWriters(clazz);
+        #>
+            foreach (var element in this.Elements)
+            {
+                ElementSerializer.Serialize(element, writer);
+            }
+        }
+        <#+
+
+    }
+    #>
+
+    }
+<#+
+}
+
+/// <summary>
+/// Generates the default property setter in the constructor.
+/// </summary>
+private void GenerateDefaultPropertyValues(PropertyBase propertyBase)
+{
+    var listProperty = propertyBase as ListProperty;
+    if (listProperty != null)
+    {
+        #>   
+            this.<#= listProperty.Name #> = new List<<#= listProperty.ElementType #>>();
+        <#+
+        return;
+    }
+
+    var property = propertyBase as Property;
+    if (property == null || string.IsNullOrEmpty(property.DefaultValue))
+    {
+        return;
+    }
+
+    #>   
+            this.<#= property.Name #> = <#= property.GetEscapedDefaultValue() #>;
+    <#+
+}
+
+/// <summary>
+/// Generates a property.
+/// </summary>
+private void GenerateProperty(PropertyBase propertyBase)
+{
+    var listProperty = propertyBase as ListProperty;
+    if (listProperty != null)
+    {
+        #>
+
+        [XmlElement("<#= listProperty.XmlName ?? listProperty.Name #>")]
+        public List<<#= listProperty.ElementType #>> <#= listProperty.Name #> { get; set; }
+        <#+
+        return;
+    }
+    
+    var compositeProperty = propertyBase as CompositeProperty;
+    if (compositeProperty != null)
+    {
+        var compositeType = compositeProperty.Type;
+        if (this.entities.GetClass(compositeType) is ElementClass)
+        {
+            compositeType = GetElementClassName(compositeType);
+        }
+
+        #>
+
+        [XmlElement("<#= compositeProperty.XmlName ?? compositeProperty.Name #>")]
+        public <#= compositeType #> <#= compositeProperty.Name #> { get; set; }
+        <#+
+        return;
+    }
+
+    var property = propertyBase as Property;
+    if (property == null)
+    {
+        return;
+    }
+
+    var propertyName = property.Name;
+    var xmlName = property.XmlName ?? property.Name;
+    var propertyType = property.Type;
+    var getterSetter = "get; set;";
+
+    if (property.Type == "TimeSpan")
+    {
+        // TimeSpan needs special serialization handling
+        #>
+
+        [XmlIgnore]
+        public <#= property.Type #> <#= propertyName #> { get; set; }
+        <#+
+        getterSetter = "get { return XmlConvert.ToString(this." + propertyName + "); } "
+                       + "set { this." + propertyName + " = XmlConvert.ToTimeSpan(value); }";
+        propertyName += "Xml";
+        xmlName += "\", DataType = \"duration";
+        propertyType = "string";
+    }
+
+    #>
+
+        [XmlAttribute("<#= xmlName #>")]
+<#+
+    if (!string.IsNullOrEmpty(property.DefaultValue))
+    {#>
+        [DefaultValue(<#= property.GetEscapedDefaultValue() #>)]
+<#+
+    }
+    #>
+        public <#= propertyType #> <#= propertyName #> { <#= getterSetter #> }
+    <#+
+    if (!property.Dynamic)
+    {
+        return;
+    }
+
+    var propType = property.Animated ? "AnimatedDynamicProperty" : "DynamicProperty";
+    #>
+                
+        [XmlElement("<#= property.Name #>")]
+        public <#= propType #> <#= property.Name #>Property { get; set; }
+    <#+
+}
+
+/// <summary>
+/// Generates recursively the element reader calls for ICompositeElement implementors.
+/// </summary>
+private void GenerateElementReaders(ElementClass clazz)
+{
+    var baseClass = this.entities.GetClass(clazz.Base) as ElementClass;
+    if (baseClass != null)
+    {
+        this.GenerateElementReaders(baseClass);
+    }
+
+    foreach (Property property in clazz.Properties)
+    {
+        if (!property.Dynamic)
+        {
+            continue;
+        }
+        
+        var propType = property.Animated ? "AnimatedDynamicProperty" : "DynamicProperty";
+        #>
+
+                if (reader.Name == "<#= property.Name #>")
+                {
+                    this.<#= property.Name #>Property = <#= propType #>.ReadFromXml(reader);
+                    reader.MoveToContent();
+                    continue;
+                }
+<#+
+    }
+}
+
+/// <summary>
+/// Generates recursively the element writer calls for ICompositeElement implementors.
+/// </summary>
+private void GenerateElementWriters(ElementClass clazz)
+{
+    var baseClass = this.entities.GetClass(clazz.Base) as ElementClass;
+    if (baseClass != null)
+    {
+        this.GenerateElementWriters(baseClass);
+    }
+    
+    foreach (Property property in clazz.Properties)
+    {
+        if (!property.Dynamic)
+        {
+            continue;
+        }
+
+        #>
+
+            DynamicProperty.WriteToXml("<#= property.Name #>", this.<#= property.Name #>Property, writer);
+<#+
+    }
+}
+#>

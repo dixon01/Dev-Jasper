@@ -1,0 +1,171 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="TemplateExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.Client.ChangeTracking" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\..\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var entities =
+        entitySpace.Partitions
+        .SelectMany(partition => partition.Entities.Where(entity => entity.HasChangeTracking))
+        .ToList();
+#>
+namespace Gorba.Center.Common.Client.ChangeTracking
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Gorba.Center.Common.Client;
+    using Gorba.Center.Common.Client.ChangeTracking;
+    using Gorba.Center.Common.Client.ChangeTracking.AccessControl;
+    using Gorba.Center.Common.Client.ChangeTracking.Configurations;
+    using Gorba.Center.Common.Client.ChangeTracking.Documents;
+    using Gorba.Center.Common.Client.ChangeTracking.Membership;
+    using Gorba.Center.Common.Client.ChangeTracking.Meta;
+    using Gorba.Center.Common.Client.ChangeTracking.Resources;
+    using Gorba.Center.Common.Client.ChangeTracking.Software;
+    using Gorba.Center.Common.Client.ChangeTracking.Units;
+    using Gorba.Center.Common.Client.ChangeTracking.Update;
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.AccessControl;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Configurations;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Documents;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Membership;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Meta;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Resources;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Software;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Units;
+    using Gorba.Center.Common.ServiceModel.ChangeTracking.Update;
+    using Gorba.Center.Common.ServiceModel.Security;
+
+    public abstract partial class ChangeTrackingManagementBootstrapper
+    {
+        private const int TotalCount = <#= entities.Count #>;
+<#
+    foreach (var entity in entities)
+    {
+        #>
+
+        public I<#= entity.Name #>ChangeTrackingManager <#= entity.Name #>ChangeTrackingManager { get; private set; }
+<#
+    }
+#>
+
+        public IEnumerable<string> GetPaths()
+        {
+<#
+    foreach (var entity in entities)
+    {
+        var entityPath = entity.Name.Pluralize();
+        #>
+            yield return "<#= entityPath #>";
+<#
+    }
+#>
+        }
+
+        private async Task CreateAsync(
+            NotificationSubscriptionConfiguration configuration,
+            UserCredentials userCredentials,
+            BackgroundSystemConfiguration backgroundSystemConfiguration)
+        {
+            switch (configuration.NotificationManagerConfiguration.Path)
+            {
+<#
+    foreach (var entity in entities)
+    {
+        var entityPath = entity.Name.Pluralize();
+        #>
+                case "<#= entityPath #>":
+                    this.Result.<#= entity.Name #>ChangeTrackingManager = await this.Create<#= entityPath #>Async(
+                        configuration, userCredentials, backgroundSystemConfiguration).ConfigureAwait(false);
+                    break;
+<#
+    }
+#>
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+        
+        public void CreateRemoteDataService(RemoteServicesConfiguration dataServices, string path)
+        {
+            switch (path)
+            {
+<#
+    foreach (var entity in entities)
+    {
+        var entityPath = entity.Name.Pluralize();
+#>
+                case "<#= entityPath #>":
+                            ChannelScopeFactoryUtility<I<#= entity.Name #>DataService>.ConfigureAsDataService(
+                                dataServices,
+                                "<#= entity.Name #>");
+                            break;
+<#
+    }
+#>
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
+<#
+    foreach (var entity in entities)
+    {
+        var entityPath = entity.Name.Pluralize();
+        #>
+
+        private async Task<I<#= entity.Name #>ChangeTrackingManager> Create<#= entityPath #>Async(
+            NotificationSubscriptionConfiguration configuration,
+            UserCredentials userCredentials,
+            BackgroundSystemConfiguration backgroundSystemConfiguration
+            )
+        {
+            var manager = new <#= entity.Name #>ChangeTrackingManager(configuration, userCredentials);
+            this.<#= entity.Name #>ChangeTrackingManager = manager;
+            DependencyResolver.Current.Register(this.<#= entity.Name #>ChangeTrackingManager);
+            this.ConfigureChannelScopeFactory<I<#= entity.Name #>ChangeTrackingManager, I<#= entity.Name #>DataService>(
+                manager,
+                backgroundSystemConfiguration,
+                "<#= entity.Name #>");
+
+            var waitStarted = new ManualResetEventSlim();
+            EventHandler onRunning = (sender, args) => waitStarted.Set();
+            manager.Running += onRunning;
+            Task.Run(async () => await manager.RunAsync());
+            waitStarted.Wait();
+            manager.Running -= onRunning;
+
+            // TODO is this still required
+            //DependencyResolver.Current.Register<I<#= entity.Name #>ChangeTrackingManager>(manager);
+            await manager.WaitReadyAsync();
+            this.UpdateProgress();
+            return manager;
+        }
+<#
+    }
+#>
+
+        private void HandleRunManagerException(Task task)
+        {
+            if (task.Exception != null)
+            {
+                Logger.Error(task.Exception.Flatten(), "Error while running change tracking manager" );
+                this.Result.Exceptions.Add(task.Exception);
+            }
+        }
+    }
+}

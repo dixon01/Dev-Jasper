@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{12DA777B-8C84-4400-9B14-4961D568D8F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Motion.Obc.Terminal.Gui</RootNamespace>
+    <AssemblyName>Gorba.Motion.Obc.Terminal.Gui</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\..\..\3rdParty\NLog\2.0.0.2000.netfx20\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="Control\CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CustomButton.designer.cs">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CustomMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CustomMenuItem.Designer.cs">
+      <DependentUpon>CustomMenuItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CustomTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CustomTextbox.Designer.cs">
+      <DependentUpon>CustomTextbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\DigitalClock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\DigitalClock.Designer.cs">
+      <DependentUpon>DigitalClock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\IhmiRightButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\IhmiRightButton.Designer.cs">
+      <DependentUpon>IhmiRightButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\IUpdateable.cs" />
+    <Compile Include="Control\MessageField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\MessageField.Designer.cs">
+      <DependentUpon>MessageField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\StatusField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\StatusField.Designer.cs">
+      <DependentUpon>StatusField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiFactory.cs" />
+    <Compile Include="Form\RootForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\RootForm.Designer.cs">
+      <DependentUpon>RootForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hardware\KeyBoard.cs" />
+    <Compile Include="MainFields\DriveBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\DriveBlock.designer.cs">
+      <DependentUpon>DriveBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\DriverBlockInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\DriverBlockInput.designer.cs">
+      <DependentUpon>DriverBlockInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\DriveSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\DriveSelect.designer.cs">
+      <DependentUpon>DriveSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\DriveWaitScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\DriveWaitScreen.designer.cs">
+      <DependentUpon>DriveWaitScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\FieldIcon1.cs" />
+    <Compile Include="MainFields\FieldIcon2.cs" />
+    <Compile Include="MainFields\FieldIcon4.cs" />
+    <Compile Include="MainFields\FieldIcon5.cs" />
+    <Compile Include="MainFields\IconBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\IconBar.designer.cs">
+      <DependentUpon>IconBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\IqubeRadio.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\IqubeRadio.designer.cs">
+      <DependentUpon>IqubeRadio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\List.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\List.designer.cs">
+      <DependentUpon>List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\MainField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\MainField.designer.cs">
+      <DependentUpon>MainField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\MessageList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\MessageList.designer.cs">
+      <DependentUpon>MessageList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\MsgBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\MsgBox.designer.cs">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\NumberInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\NumberInput.designer.cs">
+      <DependentUpon>NumberInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\ProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\ProgressBar.designer.cs">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFields\StatusMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFields\StatusMain.Designer.cs">
+      <DependentUpon>StatusMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MlString.cs" />
+    <Compile Include="MultiLang.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiLang.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MultiLang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiLang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MultiLang.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiLang.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MultiLang.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiLang.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ScreenUtil.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Control\CustomButton.resx">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CustomTextbox.resx">
+      <DependentUpon>CustomTextbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\DigitalClock.en.resx">
+      <DependentUpon>DigitalClock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\DigitalClock.resx">
+      <DependentUpon>DigitalClock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\IhmiRightButton.resx">
+      <DependentUpon>IhmiRightButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\MessageField.en.resx">
+      <DependentUpon>MessageField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\MessageField.resx">
+      <DependentUpon>MessageField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\StatusField.en.resx">
+      <DependentUpon>StatusField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\StatusField.resx">
+      <DependentUpon>StatusField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\RootForm.resx">
+      <DependentUpon>RootForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveBlock.en.resx">
+      <DependentUpon>DriveBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveBlock.resx">
+      <DependentUpon>DriveBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriverBlockInput.en.resx">
+      <DependentUpon>DriverBlockInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriverBlockInput.resx">
+      <DependentUpon>DriverBlockInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveSelect.en.resx">
+      <DependentUpon>DriveSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveSelect.resx">
+      <DependentUpon>DriveSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveWaitScreen.de.resx">
+      <DependentUpon>DriveWaitScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveWaitScreen.en.resx">
+      <DependentUpon>DriveWaitScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveWaitScreen.fr.resx">
+      <DependentUpon>DriveWaitScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\DriveWaitScreen.resx">
+      <DependentUpon>DriveWaitScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\IconBar.resx">
+      <DependentUpon>IconBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\IqubeRadio.de.resx">
+      <DependentUpon>IqubeRadio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\IqubeRadio.en.resx">
+      <DependentUpon>IqubeRadio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\IqubeRadio.fr.resx">
+      <DependentUpon>IqubeRadio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\IqubeRadio.resx">
+      <DependentUpon>IqubeRadio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\List.en.resx">
+      <DependentUpon>List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\List.resx">
+      <DependentUpon>List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MainField.resx">
+      <DependentUpon>MainField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MessageList.en.resx">
+      <DependentUpon>MessageList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MessageList.resx">
+      <DependentUpon>MessageList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MsgBox.de.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MsgBox.en.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MsgBox.fr.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\NumberInput.en.resx">
+      <DependentUpon>NumberInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\NumberInput.resx">
+      <DependentUpon>NumberInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\ProgressBar.en.resx">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\ProgressBar.resx">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\StatusMain.de.resx">
+      <DependentUpon>StatusMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\StatusMain.en.resx">
+      <DependentUpon>StatusMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\StatusMain.fr.resx">
+      <DependentUpon>StatusMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFields\StatusMain.resx">
+      <DependentUpon>StatusMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiLang.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultiLang.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiLang.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultiLang.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiLang.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultiLang.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiLang.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultiLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VMxGUI_ml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Common\Configuration\Source\Obc\Configuration.Obc.csproj">
+      <Project>{939F1E2A-B8EA-43BE-878C-DD9E4FCBA28F}</Project>
+      <Name>Configuration.Obc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Gioom\Source\Core\Gioom.Core.csproj">
+      <Project>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</Project>
+      <Name>Gioom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj">
+      <Project>{ED8C6ACB-E53B-4278-B9AC-485709E6294D}</Project>
+      <Name>Utility.Compatibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Common\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Terminal.Core.csproj">
+      <Project>{431C55F4-BF15-4C3A-9328-150096551886}</Project>
+      <Name>Terminal.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

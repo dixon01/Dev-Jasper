@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataViewModelEntities BaseGeneratedNamespace="Gorba.Center.Media.Core.DataViewModels">
+  <Namespace Name="Layout">
+    <!--Graphical-->
+    <Entity ModelName="Font" DefaultUserVisibleGroupName="Content">
+      <Property ModelName="Face" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Height" UserVisibleOrderIndex="1"/>
+      <Property ModelName="Weight" UserVisibleOrderIndex="2"/>
+      <Property ModelName="Italic" UserVisibleOrderIndex="3"/>
+      <Property ModelName="Color" UserVisibleOrderIndex="4"/>
+      <Property ModelName="OutlineColor" UserVisibleOrderIndex="5"/>
+      <Property ModelName="CharSpacing" UserVisibleOrderIndex="6"/>
+    </Entity>
+
+    <Entity ModelName="GraphicalBase" ViewModelName="Graphical" NoModelInheritance="true" DefaultUserVisibleGroupName="Layout" DefaultUserVisibleGroupOrderIndex="0" >
+      <Property ModelName="X" UserVisibleOrderIndex="4" />
+      <Property ModelName="Y" UserVisibleOrderIndex="5" />
+      <Property ModelName="Width" UserVisibleOrderIndex="2" />
+      <Property ModelName="Height" UserVisibleOrderIndex="3"/>
+      <Property ModelName="Visible" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="DrawableBase" ViewModelName="Drawable" DefaultUserVisibleGroupName="Layout">
+      <Property ModelName="ZIndex" IsHidden="true" UserVisibleGroupName="Layers" UserVisibleFieldName="Z-Index" />
+    </Entity>
+    <Entity ModelName="Frame" ViewModelName="NewFrame"  DefaultUserVisibleGroupName="Layout">
+      <Property ModelName="FrameId" UserVisibleOrderIndex="6"/>
+    </Entity>
+    <Entity ModelName="Image"  DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Filename" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Scaling" UserVisibleOrderIndex="9"/>
+    </Entity>
+    <Entity ModelName="Text"  DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1" >
+      <Property ModelName="Font" IsHidden="true" UserVisibleGroupOrderIndex="2" />
+      <Property ModelName="Rotation" UserVisibleOrderIndex="5"/>
+      <Property ModelName="Align" UserVisibleOrderIndex="1"/>
+      <Property ModelName="VAlign" UserVisibleOrderIndex="2"/>
+      <Property ModelName="Overflow" UserVisibleOrderIndex="3"/>
+      <Property ModelName="ScrollSpeed" UserVisibleOrderIndex="4"/>
+      <Property ModelName="Value" UserVisibleOrderIndex="0"/>
+    </Entity>
+    <Entity ModelName="Video" ViewModelName="NewVideo"  DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="VideoUri" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Scaling" UserVisibleOrderIndex="6"/>
+      <Property ModelName="Replay" UserVisibleOrderIndex="7"/>
+    </Entity>
+    <Entity ModelName="AnalogClock"  DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1" >
+      <Property ModelName="Hour" IsHidden="true" UserVisibleGroupOrderIndex ="2"/>
+      <Property ModelName="Minute" IsHidden="true" UserVisibleGroupOrderIndex ="3"/>
+      <Property ModelName="Seconds" IsHidden="true" UserVisibleGroupOrderIndex ="4"/>
+    </Entity>
+    <Entity ModelName="AnalogClockHand"  DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1" >
+      <Property ModelName="Mode" UserVisibleOrderIndex="8"/>
+      <Property ModelName="CenterX" UserVisibleOrderIndex="6"/>
+      <Property ModelName="CenterY" UserVisibleOrderIndex="7"/>
+    </Entity>
+    <Entity ModelName="ImageList" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Overflow" UserVisibleOrderIndex="5"/>
+      <Property ModelName="Align" UserVisibleOrderIndex="4"/>
+      <Property ModelName="Direction" UserVisibleOrderIndex="6"/>
+      <Property ModelName="HorizontalImageGap" UserVisibleOrderIndex="9"/>
+      <Property ModelName="VerticalImageGap" UserVisibleOrderIndex="10"/>
+      <Property ModelName="ImageWidth" UserVisibleOrderIndex="7"/>
+      <Property ModelName="ImageHeight" UserVisibleOrderIndex="8"/>
+      <Property ModelName="Delimiter" UserVisibleOrderIndex="2"/>
+      <Property ModelName="FilePatterns" UserVisibleOrderIndex="1"/>
+      <Property ModelName="FallbackImage" UserVisibleOrderIndex="3"/>
+      <Property ModelName="Values" UserVisibleOrderIndex="0"/>
+    </Entity>
+
+    <!--Audio-->
+    <Entity ModelName="AudioBase" DefaultUserVisibleGroupName="Layout" DefaultUserVisibleGroupOrderIndex="0">
+      <Property ModelName="Enabled" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="PlaybackBase" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1" />
+    <Entity ModelName="AudioOutput" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Volume" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Priority" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="AudioFile" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Filename" UserVisibleOrderIndex="0"/>
+    </Entity>
+    <Entity ModelName="AudioPause" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Duration" UserVisibleOrderIndex="0"/>
+    </Entity>
+    <Entity ModelName="TextToSpeech" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Voice" UserVisibleOrderIndex="1"/>
+      <Property ModelName="Value" UserVisibleOrderIndex="0"/>
+    </Entity>
+
+    <!--LED only-->
+    <Entity ModelName="Rectangle" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1"/>
+  </Namespace>
+
+  <Namespace Name="Presentation">
+    <Entity ModelName="Infomedia" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="CyclePackage" DefaultUserVisibleGroupName="Content" NoModelInheritance="true">
+      <Property ModelName="StandardCycles" IsHidden="true" />
+      <Property ModelName="EventCycles" IsHidden="true" />
+    </Entity>
+    <Entity ModelName="Cycles" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="Evaluation" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="Font" DefaultUserVisibleGroupName="Content"/>
+    <Entity ModelName="LayoutBase" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="Layout" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="MasterLayout" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="MasterPresentation" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="PhysicalScreen" DefaultUserVisibleGroupName="Content" NoModelInheritance="true">
+      <Property ModelName="Height" IsHidden="true" />
+      <Property ModelName="Width" IsHidden="true" />
+      <Property ModelName="Type" IsHidden="true" />
+      <Property ModelName="Name" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Identifier" UserVisibleOrderIndex="1"/>
+      <Property ModelName="Visible" UserVisibleOrderIndex="2"/>
+    </Entity>
+    <Entity ModelName="PhysicalScreenRef" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="Pool" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="Resolution" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="VirtualDisplay" DefaultUserVisibleGroupName="Content" NoModelInheritance="true" />
+    <Entity ModelName="VirtualDisplayRef" DefaultUserVisibleGroupName="Content" />
+  </Namespace>
+  <Namespace Name="Presentation.Cycle">
+    <Entity ModelName="CycleBase" DefaultUserVisibleGroupName="Common">
+      <Property ModelName="Sections" IsHidden="true"/>
+    </Entity>
+    <Entity ModelName="CycleRefBase" DefaultUserVisibleGroupName="Common" />
+    <Entity ModelName="EventCycle" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1"/>
+    <Entity ModelName="EventCycleBase" DefaultUserVisibleGroupName="Common">
+    </Entity>
+    <Entity ModelName="EventCycleRef" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="GenericTrigger" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="MasterCycle" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="MasterEventCycle" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="StandardCycle" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="StandardCycleRef" DefaultUserVisibleGroupName="Content" />
+  </Namespace>
+  <Namespace Name="Presentation.Section">
+    <Entity ModelName="ImageSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Filename" UserVisibleOrderIndex="0" />
+      <Property ModelName="Frame" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="MasterSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1"/>
+    <Entity ModelName="MultiSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Language" UserVisibleOrderIndex="1"/>
+      <Property ModelName="Table" UserVisibleOrderIndex="0"/>
+      <Property ModelName="RowsPerPage" UserVisibleOrderIndex="4"/>
+      <Property ModelName="MaxPages" UserVisibleOrderIndex="3"/>
+      <Property ModelName="Mode" UserVisibleOrderIndex="2"/>
+    </Entity>
+    <Entity ModelName="PoolSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="Pool" UserVisibleOrderIndex="0"/>
+      <Property ModelName="VideoEndMode" UserVisibleOrderIndex="2"/>
+      <Property ModelName="Frame" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="SectionBase" DefaultUserVisibleGroupName="Common" DefaultUserVisibleGroupOrderIndex="0">
+      <Property ModelName="Enabled" UserVisibleOrderIndex="0"/>
+      <Property ModelName="Duration" UserVisibleOrderIndex="1"/>
+      <Property ModelName="Layout" UserVisibleOrderIndex="2"/>
+    </Entity>
+    <Entity ModelName="StandardSection" DefaultUserVisibleGroupName="Content" />
+    <Entity ModelName="VideoSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1">
+      <Property ModelName="VideoUri" UserVisibleOrderIndex="0"/>
+      <Property ModelName="VideoEndMode" UserVisibleOrderIndex="2"/>
+      <Property ModelName="Frame" UserVisibleOrderIndex="1"/>
+    </Entity>
+    <Entity ModelName="WebmediaSection" DefaultUserVisibleGroupName="Content" DefaultUserVisibleGroupOrderIndex="1"/>
+  </Namespace>
+  <Namespace Name="Eval">
+    <Entity ModelName="Base" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Generic" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="ContainerBase" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="And" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="CollectionBase" DefaultUserVisibleGroupName="Eval">
+      <Property ModelName="Conditions" IsHidden="true" />
+    </Entity>
+    <Entity ModelName="Constant" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="CsvMapping" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="MatchDynamicProperty" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Date" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="DateTimeBase" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="DayOfWeek" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Evaluation" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Format" DefaultUserVisibleGroupName="Eval">
+      <Property ModelName="Arguments" IsHidden="true" />
+    </Entity>
+    <Entity ModelName="If" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="IntegerCompare" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Not" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Or" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="StringCompare" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Switch" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="CaseDynamicProperty" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="TextToImage" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Time" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="BinaryOperatorBase" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="Equals" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="NotEquals" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="GreaterThan" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="GreaterThanOrEqual" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="LessThan" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="LessThanOrEqual" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="RegexReplace" DefaultUserVisibleGroupName="Eval" />
+    <Entity ModelName="CodeConversion" DefaultUserVisibleGroupName="Eval" >
+      <Property ModelName="FileName" IsHidden="true"/>
+    </Entity>
+  </Namespace>
+</DataViewModelEntities>

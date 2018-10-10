@@ -1,0 +1,205 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Core", "..\..\Common\Utility\Source\Core\Utility.Core.csproj", "{8A10E3D6-2C5D-4A72-97EF-5A412663920C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motion.Common.Utility", "Source\Utility\Motion.Common.Utility.csproj", "{D0DBD79E-9637-4E45-948E-70E8F015295D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mgi", "Mgi", "{9917560C-995A-4FD1-9728-C72732718BA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mgi.AtmelControl", "Source\Mgi\AtmelControl\Mgi.AtmelControl.csproj", "{365DB5DB-40ED-4418-B19B-286CCEA083A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mgi.AtmelControl.Tests", "Source\Mgi\AtmelControl.Tests\Mgi.AtmelControl.Tests.csproj", "{1EFA877F-3733-4750-A6B7-352008BA90ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21DEB870-A0AF-4574-9DD0-2F956B5BE021}"
+	ProjectSection(SolutionItems) = preProject
+		Gorba.Motion.Common.vsmdi = Gorba.Motion.Common.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mgi.IO", "Source\Mgi\IO\Mgi.IO.csproj", "{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kontron.Jida32", "..\..\Common\3rdParty\Kontron.Jida32\Kontron.Jida32.csproj", "{D1EE4794-32C2-4047-ACCA-457812A7FCC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Compatibility", "..\..\Common\Utility\Source\Compatibility\Utility.Compatibility.csproj", "{ED8C6ACB-E53B-4278-B9AC-485709E6294D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.Vdv301", "..\..\Common\Protocols\Source\Vdv301\Protocols.Vdv301.csproj", "{60B1A687-3802-499E-B03F-B4BC1829B932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.IbisIP", "Source\IbisIP\Common.IbisIP.csproj", "{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARSoft.Tools.Net", "..\..\Common\3rdParty\ARSoft.Tools.Net\ARSoft.Tools.Net\ARSoft.Tools.Net.csproj", "{65BFA748-C640-49B0-B506-34BBB165233A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medi.Core", "..\..\Common\Medi\Source\Core\Medi.Core.csproj", "{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocols.DnsServiceDiscovery", "..\..\Common\Protocols\Source\DnsServiceDiscovery\Protocols.DnsServiceDiscovery.csproj", "{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motion.Common.Entities", "Source\Entities\Motion.Common.Entities.csproj", "{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 14
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Common\\Utility\\Source\\Core\\Utility.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = Gorba.Motion.Common.sln
+		SccProjectName1 = ../../Common/Utility/Source/Core
+		SccLocalPath1 = ..\\..\\Common\\Utility\\Source\\Core
+		SccProjectUniqueName2 = Source\\Utility\\Motion.Common.Utility.csproj
+		SccProjectName2 = Source/Utility
+		SccLocalPath2 = Source\\Utility
+		SccProjectUniqueName3 = Source\\Mgi\\AtmelControl\\Mgi.AtmelControl.csproj
+		SccProjectTopLevelParentUniqueName3 = Gorba.Motion.Common.sln
+		SccProjectName3 = Source/Mgi/AtmelControl
+		SccLocalPath3 = Source\\Mgi\\AtmelControl
+		SccProjectUniqueName4 = Source\\Mgi\\AtmelControl.Tests\\Mgi.AtmelControl.Tests.csproj
+		SccProjectTopLevelParentUniqueName4 = Gorba.Motion.Common.sln
+		SccProjectName4 = Source/Mgi/AtmelControl.Tests
+		SccLocalPath4 = Source\\Mgi\\AtmelControl.Tests
+		SccProjectUniqueName5 = Source\\Mgi\\IO\\Mgi.IO.csproj
+		SccProjectTopLevelParentUniqueName5 = Gorba.Motion.Common.sln
+		SccProjectName5 = Source/Mgi/IO
+		SccLocalPath5 = Source\\Mgi\\IO
+		SccProjectUniqueName6 = ..\\..\\Common\\3rdParty\\Kontron.Jida32\\Kontron.Jida32.csproj
+		SccProjectTopLevelParentUniqueName6 = Gorba.Motion.Common.sln
+		SccProjectName6 = ../../Common/3rdParty/Kontron.Jida32
+		SccLocalPath6 = ..\\..\\Common\\3rdParty\\Kontron.Jida32
+		SccProjectUniqueName7 = ..\\..\\Common\\Utility\\Source\\Compatibility\\Utility.Compatibility.csproj
+		SccProjectTopLevelParentUniqueName7 = Gorba.Motion.Common.sln
+		SccProjectName7 = ../../Common/Utility/Source/Compatibility
+		SccLocalPath7 = ..\\..\\Common\\Utility\\Source\\Compatibility
+		SccProjectUniqueName8 = ..\\..\\Common\\Protocols\\Source\\Vdv301\\Protocols.Vdv301.csproj
+		SccProjectTopLevelParentUniqueName8 = Gorba.Motion.Common.sln
+		SccProjectName8 = ../../Common/Protocols/Source/Vdv301
+		SccLocalPath8 = ..\\..\\Common\\Protocols\\Source\\Vdv301
+		SccProjectUniqueName9 = Source\\IbisIP\\Common.IbisIP.csproj
+		SccProjectName9 = Source/IbisIP
+		SccLocalPath9 = Source\\IbisIP
+		SccProjectUniqueName10 = ..\\..\\Common\\3rdParty\\ARSoft.Tools.Net\\ARSoft.Tools.Net\\ARSoft.Tools.Net.csproj
+		SccProjectTopLevelParentUniqueName10 = Gorba.Motion.Common.sln
+		SccProjectName10 = ../../Common/3rdParty/ARSoft.Tools.Net/ARSoft.Tools.Net
+		SccLocalPath10 = ..\\..\\Common\\3rdParty\\ARSoft.Tools.Net\\ARSoft.Tools.Net
+		SccProjectUniqueName11 = ..\\..\\Common\\Medi\\Source\\Core\\Medi.Core.csproj
+		SccProjectTopLevelParentUniqueName11 = Gorba.Motion.Common.sln
+		SccProjectName11 = ../../Common/Medi/Source/Core
+		SccLocalPath11 = ..\\..\\Common\\Medi\\Source\\Core
+		SccProjectUniqueName12 = ..\\..\\Common\\Protocols\\Source\\DnsServiceDiscovery\\Protocols.DnsServiceDiscovery.csproj
+		SccProjectTopLevelParentUniqueName12 = Gorba.Motion.Common.sln
+		SccProjectName12 = ../../Common/Protocols/Source/DnsServiceDiscovery
+		SccLocalPath12 = ..\\..\\Common\\Protocols\\Source\\DnsServiceDiscovery
+		SccProjectUniqueName13 = Source\\Entities\\Motion.Common.Entities.csproj
+		SccProjectName13 = Source/Entities
+		SccLocalPath13 = Source\\Entities
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DBD79E-9637-4E45-948E-70E8F015295D}.Release|x86.ActiveCfg = Release|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFA877F-3733-4750-A6B7-352008BA90ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A}.Release|x86.ActiveCfg = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D}.Release|x86.ActiveCfg = Release|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B1A687-3802-499E-B03F-B4BC1829B932}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FAA63E5-FE9F-4EA1-B589-58F74E00F9F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65BFA748-C640-49B0-B506-34BBB165233A}.Release|x86.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.ActiveCfg = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Debug|x86.Build.0 = Debug|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.ActiveCfg = Release|x86
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}.Release|x86.Build.0 = Release|x86
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255CD7A4-3217-4CA4-8E83-4CC91D6CB44D}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A10E3D6-2C5D-4A72-97EF-5A412663920C} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{365DB5DB-40ED-4418-B19B-286CCEA083A1} = {9917560C-995A-4FD1-9728-C72732718BA2}
+		{1EFA877F-3733-4750-A6B7-352008BA90ED} = {9917560C-995A-4FD1-9728-C72732718BA2}
+		{09DC80B3-EFD9-4CAD-88D5-2DAEF7D0C01A} = {9917560C-995A-4FD1-9728-C72732718BA2}
+		{D1EE4794-32C2-4047-ACCA-457812A7FCC6} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{ED8C6ACB-E53B-4278-B9AC-485709E6294D} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{60B1A687-3802-499E-B03F-B4BC1829B932} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{65BFA748-C640-49B0-B506-34BBB165233A} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+		{E8082B21-BF96-4C8F-8664-8E3C198C6DB3} = {AE6A4A2C-F189-4B5A-93E7-DEAFE20D5ED7}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Gorba.Motion.Common.vsmdi
+	EndGlobalSection
+EndGlobal

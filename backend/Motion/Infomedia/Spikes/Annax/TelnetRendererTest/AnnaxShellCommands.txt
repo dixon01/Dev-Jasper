@@ -1,0 +1,182 @@
+﻿Command    Syntax                         Description
+           <command> [<parameters>...]    default shell commandd
+.          . <command-file>               execute commands from file
+?          ? [<command> ...]              print syntax and descr. of commands
+addsershell addsershell sername unit [bdrate] opens a shell on sername,unit [baudrate]
+arp        arp                            shows/adds/removes/ arp-entries
+asconf     asconf <asf-name> [<directory>] configure archive server
+asconn     asconn [-p <pri>] [<asf-name>] <remote-asf> connect archive server
+asdisc     asdisc [<asf-name>] <remote-asf> disconnect archive server
+aslist     aslist [<asf-name>]            list connected archive servers
+asupdate   asupdate <asf> <lmid           update a disk archive server
+bg         bg cmd arg                     execute cmd in the background
+bios       bios name args                 Biosaufruf durchfuehren
+bioslist   bioslist                       alle Biosmodule auflisten
+biosupdate biosupdate biosfile            updates the bios with a new version
+bitmap     bitmap                         listet alle bitmaps auf
+bl         bl [<block>...]                list blocks
+call       call file                      calls a batch-file
+cat        cat [<filename> ...]           copy files to stdout
+cd         cd [<dirname>]                 change the working directory
+chmod      chmod <mode> <path> ...        change access mode of files
+clear      clear                          loescht alle Fenster
+cls        cls                            clear screen (using ANSI codes)
+connfss    connfss <remotefss>            connect to remote fss
+connser    connser sername unit sername2 unit2 [bdrate] connects two serial channels
+cp         cp <source> ... <destination>  copy files
+date       date [[yyyy-]mm-dd]            print or set date
+debug      debug [bid/pid] val            debug interface
+defparam   defparam                       Default-Parameter einstellen
+deleteser  deleteser                      deletes the dual serial connection
+dm         dm adr [size]                  Display Memory
+dmb        dmb adr [size]                 Display Byte Memory
+dml        dml adr [size]                 Display Long Memory
+dumph      dumph -xsoemap <pid>/<segid>/0 dump heap (for proc/seg)
+dumpsig    dumpsig <pid in hex>           lists info on signal buffers owned by the process with the given pid
+echo       echo [-n] [<string> ...]       echo arguments (-n no newline)
+errno      errno [<number>] ...           print description of errno number
+exit       exit                           exit shell
+flags      flags [bid/pid] [mask] val     set flags
+flashchksum flashchksum                    gibt die Flashchecksumme wieder
+font       font                           listet alle fonts auf
+format     format [-f] <volume> [<params>] format a volume
+fssls      fssls [<fsspath>]              list fss objects
+ftlstats   ftlstats                       print stats about all FTL disks
+ftp        ftp <FTP server>               ftp
+help       help [<command> ...]           print syntax and descr. of commands
+hwtest     hwtest [pid]                   tests components of a process
+ifattach   ifattach [options] <process> <ifname> <ipaddr> <devname> <devunit> attach or detach an interface
+ifconfig   ifconfig -a | interface [options] configure network interface
+inetcfg    inetcfg                        Get/set INET configuration
+info       info [bid/pid]                 get information about a process
+intercept  intercept [-bi] <process> ...  intercept process/block
+keys       keys [<cmd>=<key> ...]         configure/display terminal keys
+kill       kill [-bi] <process> ...       kill process/block
+listenv    listenv [<process>]...         list environment variables [for process]
+lmfind     lmfind [<asf-name>] <lmid>     find load module
+lminfo     lminfo [<filename>] ...        load module info
+lmlist     lmlist <asf-name>              list load modules
+lmrem      lmrem <asf-name> <lmid>        remove load module
+lmstor     lmstor <asf-name> <lmid>       store load module
+login      login [-d <device>] [<username>] login in user
+lon        lon                            lon cmds
+loop       loop [pid]                     loop to other proc
+ls         ls [-acil] [<dirname> ...]     list files
+mem        mem                            shows mem stat
+mkdir      mkdir <directory> ...          create directories
+mm         mm adr val                     Modify Memory
+mount      mount <volume> <fmtmgr> <device> [<params>] mount a volume
+mv         mv <source> ... <destination>  rename/move files
+orm        orm adr val                    or Memory
+param      param [name] [val]             Parameter einstellen
+pgexec     pgexec <lmid> [<args>]         load and start a load module. Wait until it terminates. The load module inherits the file descriptors from the shell.
+pgkill     pgkill <pgh>                   kill program
+pglist     pglist [-e]                    list programs [with environment]
+pgload     pgload [-i] [-f] [-r] [-c] [-h <pgh>] [-e <var>=<val>] <lmid> [<args>] load program
+pgremr     pgremr [-a] [<pgh>]            remove [all] resident program(s)
+pgrun      pgrun [-d] <command> [<parameters>...] load and run a program (-d debug mode)
+pgstart    pgstart [-s] <pgh>             start program
+pgtest     pgtest <pgh>                   test consistency of program
+ping       ping [options] host            send ICMP ECHO_REQUEST packets to host.
+prio       prio pid pri                   changes priority
+ps         ps [-wb] [<process>...]        list processes (-b in block)
+pwd        pwd                            print the working directory
+ramtest    ramtest                        Testet das Ram
+readlon
+refresh    refresh                        zeichnet Bild neu
+rem        rem [comment]                  remember
+restart    restart [bid/pid]              restart processes
+resume     resume [-bi] <process> ...     resume process/block
+rm         rm [-f] <filename> ...         remove files
+rmdir      rmdir [-f] <directory> ...     remove (empty) directories
+route      route <add | delete | print> [dest mask gateway] add/delete/list routes
+rtlookup   rtlookup <destination>         look up a route
+run        run lmid args                  loads and starts a program
+rx         rx                             receive xmodem
+rz         rz                             receive zmodem
+s          s [-n] procname signo data[]   ein Signal senden
+set        set [<variable> [<value>]]     set a shell variable
+setaddr    setaddr [val]                  Adresse von RS485 einstellen
+setbaud    setbaud [baud]                 Baudrate von RS485 einstellen
+setenv     setenv [-p <process>] [<env-var> [<value>]]... set an environment variable
+settest    settest bmap nr2               testbitmap darstellen
+setvolt    setvolt volt                   fixiert die LED-Spannung
+shell      shell [<cmd> ...] / [-f <file>] invoke shell [to execute command]
+showparam  showparam                      Parameter zeigen
+shutdown   shutdown [bid/pid]             shutdown processes
+silent     silent [bid/pid] s/n           bring processes to silent/normal mode
+sm         sm adr val                     Sets Memory
+smb        smb adr val                    Sets Byte Memory
+sml        sml adr val                    Sets Long Memory
+start      start [-bi] <process> ...      start process/block
+stat       stat <pathname> ...            report information about file/directory
+stop       stop [-bi] <process> ...       stop process/block
+su         su                             Systemueberwachung
+sx         sx                             send xmodem
+sync       sync <volume>                  synchronize volume with disk
+system     system                         listet die Prozesse auf
+sz         sz files                       send zmodem
+tar        tar -[xtvO] [-f tarFile] [FILE] ... extract/list tape archiv
+telnet     telnet [-bkv] <host-name/ip-address> [<port>] telnet client
+term       term                           display info about terminal
+test       test                           Geschwindigkeitstest
+text       text bmap font [attr] text     schreibt einen Text
+tftp       tftp [<host> [<port>]]         start a TFTP session
+tget       tget [-a] <host>:<remote-file> [<local-file>] get a file with TFTP
+time       time [hh:mm[:ss]]              print or set time
+tput       tput [-a] <local-file> <host>:[<remote-file>] put a file with TFTP
+traceroute traceroute [options] destination print hop-by-hop path to destination.
+unmount    unmount [-f] <volume>          unmount a volume
+unset      unset <variable> ...           unset (remove) shell variables
+unsetenv   unsetenv <env-var> ...         unset (remove) environment variables
+validate   validate [-r] volume           validates a volume
+ver        ver                            print version of kernel and shell
+version    version [bid/pid]              display version
+viewerr    viewerr [-d]                   views all errors
+vols       vols [<volume> ...]            report volume statistics
+wait       wait time                      waits time in ms
+who        who                            list who is logged on
+window     window [nr][xp][yp][xs][ys][xst][yst] window nr xpos ypos xsize ysize xstart ystart
+writelon
+[xxx] xxx is optional
+<yyy> replace yyy with actual value
+zz/ww zz or ww
+...   preceeding item may be specified multiple times
+
+
+From 16046101:
+==============
+setvolt xx   LED-Helligkeit fix einstellen(0..15)
+settest xx   Testbitmap ausgeben (0..11)
+bitmap       Infos ueber Bitmaps. Es werden die Kenndaten aller vorhandenen Bitmaps ausgegeben
+font         Infos über Fonts. Es werden die Kenndaten aller vorhandenen
+             Zeichensätze ausgegeben. Dazu gehören auch die dynamisch geladenen
+             Zeichensätze.
+text         Infos über Texte. Es werden die Kenndaten aller vorhandenen Texte
+             ausgegeben. Da die Texte nach dem Empfang in Bitmaps konvertiert
+             werden, können hier nur im Flashspeicher vorhandene Texte vorhanden sein.
+text bitmapnr font [attr] text
+             generiert aus dem Text text ein Bitmap mit der Nummer bitmapnr und dem
+             Zeichensatz font. Sollte der Text Leerzeichen beinhalten, so muss er in
+             Anführungszeichen gesetzt werden
+window       Infos über Window. Es werden die Kenndaten aller vorhandenen Fenster ausgegeben.
+window winnr xpos ypos xsize ysize xcnt ycnt bmapnr base dur disp cnt tim
+             Erzeugt ein Window mit den angegebenen Parametern. Nicht angegebene
+             Werte werden durch Defaultwerte ersetzt. Z.B. wird bmapnr auf winnr
+             gesetzt, falls nicht angegeben.
+refresh      zeichnet Bild neu
+param [name] [val] Parameter einstellen (unten genauer erklärt)
+showparam    Parameter ausgeben. Es werden die aktuellen Parameterwerte dargestellt
+defparam     Default-Parameter einstellen
+setaddr      Adresse einstellen. Es wird die alte Adresse dargestellt und nach der
+             neuen Adresse gefragt. Wenn nur Enter alleine gedrückt wird, so bleibt die
+             alte Adresse. Dieser Befehl ist nur in der RS232-Shell sinnvoll.
+setbaud      baudrate einstellen. Es wird die alte Baudrate dargestellt und nach der
+             neuen Baudrate gefragt. Wenn nur Enter alleine gedrückt wird, so bleibt die
+             alte Baudrate bestehen. Das System kann unmögliche Baudrates
+             ablehnen. Dieser Befehl ist nur in der RS232-Shell sinnvoll.
+su           Infos über Umgebung wie angelegte Spannung, Temperatur und aktuelle
+             Helligkeitswerte
+clear [nr]   löscht alle oder das angegebene Fenster
+clear bitmap nr löscht Bitmap
+listenv composer gibt Informationen über die eingestellten Paneldimensionen aus.

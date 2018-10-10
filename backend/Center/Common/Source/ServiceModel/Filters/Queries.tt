@@ -1,0 +1,178 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ Compile Processor="CompileDirectiveProcessor" Items="..\ServiceModelExtensions.cs" Assemblies="System.Core.dll;System.Data.Entity.Design.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ import namespace="Gorba.Center.Common.ServiceModel" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path =
+        this.Host.ResolvePath(@"..\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var partitions = entitySpace.Partitions.OrderBy(partition => partition.Name).OrderBy(partition => partition.Name);
+    var entities = partitions.SelectMany(partition => partition.Entities).OrderBy(entity => entity.Name);
+#>
+namespace Gorba.Center.Common.ServiceModel.Filters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Runtime.Serialization;
+
+    using Filters;
+<#
+    foreach (var partition in partitions)
+    {
+        this.WritePartition(partition);
+    }
+#>
+}
+<#+
+    private void WritePartition(EntitySpace.Partition partition)
+    {
+        var entities = partition.Entities.OrderBy(entity => entity.Name).ToList();
+#>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+<#+
+        foreach (var entity in entities)
+        {
+            this.WriteEntity(entity);
+        }
+#>
+    }
+<#+
+    }
+    
+    private void WriteEntity(EntitySpace.Entity entity)
+    {
+        var valueProperties = entity.Properties
+                .OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+                .OrderBy(property => property.Name)
+                .ToList();
+                
+        var enumProperties = entity.Properties
+                .OfType<EntitySpace.Property>()
+                .Where(property => property.PropertyType == EntitySpace.PropertyType.Enumeration)
+                .OrderBy(property => property.Name)
+                .ToList();
+#>
+
+        [DataContract]
+        [DebuggerDisplay("Skip {Skip}, Take {Take}, {Sorting.Count} sorting value(s)")]
+<#+
+        foreach (var property in enumProperties)
+        {
+            this.WriteEnumKnownType(property);
+        }
+
+        foreach (var property in enumProperties.Union(valueProperties))
+        {
+            this.WriteValueKnownType(property);
+        }
+#>
+        public partial class <#= entity.Name #>Query : <#= entity.Name #>Filter, IQuery
+        {
+            public <#= entity.Name #>Query()
+            {
+                this.Sorting = new List<OrderClause>();
+            }
+            
+            public int Skip { get; set; }
+
+            public int? Take { get; set; }
+
+            [DataMember]
+            public ICollection<OrderClause> Sorting { get; set; }
+
+            public static new <#= entity.Name #>Query Create()
+            {
+                return new <#= entity.Name #>Query();
+            }
+<#+
+        this.WriteSortingProperties(entity);
+#>
+
+            [DataContract]
+            [DebuggerDisplay("{Property} {Direction}")]
+            public class OrderClause
+            {
+                public OrderClause(SortingProperties property, SortDirection direction)
+                {
+                    this.Property = property;
+                    this.Direction = direction;
+                }
+
+                public OrderClause()
+                {
+                }
+
+                [DataMember]
+                public SortDirection Direction { get; set; }
+
+                [DataMember]
+                public SortingProperties Property { get; set; }
+            }
+
+        }
+<#+
+    }
+
+    private void WriteValueKnownType(EntitySpace.Property property)
+    {#>
+        [KnownType(typeof(<#= property.Name #>PropertyValueFilter))]
+<#+
+    }
+
+    private void WriteEnumKnownType(EntitySpace.Property property)
+    {#>
+        [KnownType(typeof(<#= property.Type #>))] //here
+<#+
+    }
+    
+    private void WriteSortingProperties(EntitySpace.Entity entity)
+    {
+        var sortingProperties = entity.Properties
+                    .OfType<EntitySpace.Property>()
+                    .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive
+                        || property.PropertyType == EntitySpace.PropertyType.Enumeration)
+                    .Select((property, index) => new { property.Name, Index = index })
+                    .ToList();
+#>
+
+            [DataContract]
+            public enum SortingProperties
+            {
+<#+
+        foreach (var property in sortingProperties)
+        {
+#>
+
+                [EnumMember]
+                <#= property.Name #> = <#= property.Index #>,
+<#+
+        }
+
+                var createdOnValue = sortingProperties.Count;
+                var lastModifiedOnValue = sortingProperties.Count + 1;
+                var versionValue = sortingProperties.Count + 2;
+#>
+                [EnumMember]
+                CreatedOn = <#= createdOnValue #>,
+
+                [EnumMember]
+                LastModifiedOn = <#= lastModifiedOnValue #>,
+
+                [EnumMember]
+                Version = <#= versionValue #>
+            }
+<#+
+    }
+#>

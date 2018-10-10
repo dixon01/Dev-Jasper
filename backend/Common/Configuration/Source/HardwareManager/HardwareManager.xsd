@@ -1,0 +1,1176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="HardwareManager" nillable="true" type="HardwareManagerConfig" />
+  <xs:complexType name="HardwareManagerConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The Hardware Manager configuration.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="BroadcastTimeChanges" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates whether this application should broadcast time changes to any other Hardware Managers.
+            If this is enabled, this application will also listen to incoming
+            time changes via Medi, but not redistribute those received over Medi.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Mgi" type="MgiConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The MGI Topbox and Compact related configuration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="GPS" type="GpsConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The GPS receiver configuration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SNTP" type="SntpConfig">
+        <xs:annotation>
+          <xs:documentation>
+            The general SNTP (network time) configuration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="VDV301" type="Vdv301Config">
+        <xs:annotation>
+          <xs:documentation>
+            The global VDV 301 configuration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Settings" type="ArrayOfHardwareManagerSetting">
+        <xs:annotation>
+          <xs:documentation>
+            The condition-based hardware manager settings.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MgiConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration for the MGI Topbox and Compact. The parameters to be configured within MgiConfig differs 
+        depending on whether the hardware is PC-2 or Comapct. 
+        If the hardware is a Gorba Topbox, then the MGI configuration must not be set or enabled.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="PollingInterval" type="xs:duration" default="PT0.2S" >
+        <xs:annotation>
+          <xs:documentation>
+            The interval at which all the inputs of the hardware are read.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="GPIO" type="GpioConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration for the inputs and outputs of the hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Button" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration for the Button available on the hardware. This is the name of the button.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="UpdateLed" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration for the LED available on the hardware. This is the name of the LED.
+            The LED is used by the Update application to indicate the status of the update. 
+            This LED is available on InfoVision PC-2 and InfoVision Compact hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="RS485Interface" type="CompactRs485Switch" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration for the RS485 interface mode.
+            If this not set, the interface will not be changed (default).
+            This property must be changed only on MGI InfoVision Comapct hardware and not InfoVision PC-2.
+            There is no safeguard against using this on a PC-2, but AtmelControl will then return an error code (-1) if you try to change it to "CPU" mode.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DviLevelShifters" type="ArrayOfDviLevelShifterConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all the DVI Level Shifters available on the hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Transceivers" type="ArrayOfTransceiverConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all the Tranceivers available on the hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="3011" name="AtmelControlPort" type="xs:int" >
+        <xs:annotation>
+          <xs:documentation>
+            The AtmelControl TCP port.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" default="-1" name="DefaultBacklightValue" type="xs:int" >
+        <xs:annotation>
+          <xs:documentation>
+            The default backlight value used for turning the backlight on.
+            Default value of -1 means automatic regulation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="BacklightControlRate" type="BacklightControlRateConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration of the backlight control rate.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating if the MGI configuration is enabled.
+          The MGI configuration must be enabled for all MGI hardware and disabled for Gorba Topboxes.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GpioConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration for the input and output pins with their index and a specific name for
+        the pin. The index of the pin must the exact index of the pin on the port of the hardware.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pin" type="PinConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            List of all the configuration for the IO's on the hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PinConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration an input or output pin of the hardware.
+        The InfoVision PC-2 hardware has 4 inputs (index 0 - 3) and 4 outputs (index 4 - 7).
+        The InfoVision Compact hardware 6 inputs (index 0 - 5) and 2 outputs (index 6 - 7).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Index" type="xs:int" use="required" >
+          <xs:annotation>
+            <xs:documentation>
+              The index of the IO pin as in on the hadrware.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="CompactRs485Switch">
+    <xs:annotation>
+      <xs:documentation>
+        Possible values for the RS485 interface connection on MGI InfoVision Compact hardware.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Cpu" >
+        <xs:annotation>
+          <xs:documentation>
+            RS485 interface connected to CPU.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="At91" >
+        <xs:annotation>
+          <xs:documentation>
+            RS485 interface connected to AT91. This is the default state.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfDviLevelShifterConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the DVI level shifters on the hardware.
+        MGI InfoVision PC-2 has 2 DVI Level Shifters available.
+        MGI InfoVision Comapct has 1 DVI Level Shifter (index = 2) available.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DviLevelShifter" nillable="true" type="DviLevelShifterConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DviLevelShifterConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the DVI level shifter on the hardware.
+        The DVI level shifter is adjustable for each of the two graphic outputs in order to adapt them to the 
+        transmission cable.
+        It is required to specify the index of the DVI level shifter for the correct graphic output.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Trim" type="TrimOptions" >
+        <xs:annotation>
+          <xs:documentation>
+            The different options for the Trim of the DVI Level shifter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="OutputLevel" type="OutputLevels" >
+        <xs:annotation>
+          <xs:documentation>
+            The output level of the DVI Level shifter.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Index" type="xs:int" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          The index of the DVI level shifter.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="TrimOptions">
+    <xs:annotation>
+      <xs:documentation>
+        Possible options for the Trim of the DVI Level shifter.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="StandardCurrent">
+        <xs:annotation>
+          <xs:documentation>
+            The standard current is used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IncreasedCurrent">
+        <xs:annotation>
+          <xs:documentation>
+            The current is increased.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OutputLevels">
+    <xs:annotation>
+      <xs:documentation>
+        Possible values of the output level of the DVI Level shifter.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:documentation>0 dB</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:documentation>2 dB</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:documentation>4 dB</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:documentation>6 dB</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfTransceiverConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configruation of the Tranceivers available on the hardware.
+        MGI InfoVision PC-2 has 2 Tranceivers available.
+        MGI InfoVision Comapct has no Tranceivers available.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Transceiver" nillable="true" type="TransceiverConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransceiverConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the Transceiver on the hardware.
+        A transceiver can be configured for a specific protocol. The two possible protocols are RS485 and RS232.
+        The transceiver is recognised by its index.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="TransceiverType" >
+        <xs:annotation>
+          <xs:documentation>
+            The type of the transceiver.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Termination" type="xs:boolean" >
+        <xs:annotation>
+          <xs:documentation>
+            The setting to indicate if the termination is active or not for the transceiver.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Mode" type="TransceiverMode" >
+        <xs:annotation>
+          <xs:documentation>
+            The options for the mode in which the transceiver operates.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Index" type="xs:int" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          The index of the transceiver.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="TransceiverType">
+    <xs:annotation>
+      <xs:documentation>
+        Possible values of the type of the interface for the transceiver.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RS485" >
+        <xs:annotation>
+          <xs:documentation>RS485 interface is used</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RS232" >
+        <xs:annotation>
+          <xs:documentation>RS232 interface is used</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransceiverMode">
+    <xs:annotation>
+      <xs:documentation>
+        Possible values of the modes in which the transceiver operates.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HalfDuplex" >
+        <xs:annotation>
+          <xs:documentation>Half-Duplex mode</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FullDuplex" >
+        <xs:annotation>
+          <xs:documentation>Full-Duplex mode</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BacklightControlRateConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration to define the minimum, maximum backlight value
+        with the rate at which it is changed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Minimum" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Gets or sets the minimum backlight value.
+          Range is from 1..255
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Maximum" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Gets or sets the maximum backlight value.
+          Range is from 1..255
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Speed" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Gets or sets the speed of backlight regulation.
+          1 => slow (~~1 minute)
+          10 => fast (instantly)
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GpsConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of the GPS client port.
+        Currently GPS connected to a serial port and GPS pilot for uses with ADT are implemented 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ConnectionType">
+        <xs:annotation>
+          <xs:documentation>
+            Defines type of port from which the GPS signal is received.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="GpsPilot" />
+            <xs:enumeration value="GpsSerial" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="GpsPilot" type="GpsPilotConfig" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GpsSerial" type="GpsSerialConfig" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GpsPilotConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a TCP port for listening to a GPS signal from ADT simulator.
+        Has three attributes "Enabled", "IPAddress" and "Port".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Enabled" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>
+          The Hardware Manager configures the port if it is enabled. Can have "true" or "false" values.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IPAddress" type="xs:string" default="127.0.0.1">
+      <xs:annotation>
+        <xs:documentation>
+          IP address of the TCP port. Accepts properly formatted string
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Port" type="xs:int" use="optional" default="1600">
+      <xs:annotation>
+        <xs:documentation>
+          Port number. Accepts integer values.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GpsSerialConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a serial port for listening for a signal from GPS receiver.
+        Has an attribute "Enabled" and a subtag "SerialPort".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="SerialPort" type="SerialPortConfig" />
+    </xs:sequence>
+    <xs:attribute name="Enabled" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>
+          The Hardware Manager configures the port if it is enabled. Can have "true" or "false" values.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SerialPortConfig">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ComPort" type="StringWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BaudRate" type="IntWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DataBits" type="IntWithDescription" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FParity" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StopBits" type="StopBits" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parity" type="Parity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RetryCount" type="IntWithDescription" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SerialPortReopen">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="SerialPortReopen">
+              <xs:attribute name="desc" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="DtrControl" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RtsControl" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReadIntervalTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReadTotalTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReadTotalMultiplierTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="WriteTotalTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="WriteMultiplierTimeout" type="xs:unsignedInt" />
+    </xs:sequence>
+    <xs:attribute name="desc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="StringWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntWithDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:int">
+        <xs:attribute name="desc" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Parity">
+    <xs:sequence>
+      <xs:element name ="Value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="None" />
+            <xs:enumeration value="Odd" />
+            <xs:enumeration value="Even" />
+            <xs:enumeration value="Mark" />
+            <xs:enumeration value="Space" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SerialPortReopen">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="FrameOnly" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="StopBits">
+    <xs:sequence>
+      <xs:element name="Value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="None" />
+            <xs:enumeration value="One" />
+            <xs:enumeration value="Two" />
+            <xs:enumeration value="OnePointFive" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SntpConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the SNTP protocol. It is used to perform time synchronization with the network time.
+        When this is enabled, time synchronization via IBIS or VDV301 must be disabled.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SntpConfigBase">
+        <xs:attribute name="Host" type="xs:string" default="time.nist.gov">
+          <xs:annotation>
+            <xs:documentation>
+              The host name or IP address of the SNTP server.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Port" type="xs:int" use="optional" default="123">
+          <xs:annotation>
+            <xs:documentation>
+              The UDP port of the SNTP server.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="UpdateInterval" type="xs:duration" default="P1D">
+          <xs:annotation>
+            <xs:documentation>
+              The update interval after which the time should be synchronized again.
+              The time is measured from the start of the application.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SntpConfigBase" abstract="true">
+    <xs:attribute name="Enabled" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>Indicates whether the protocol is enabled.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Version" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          The version number of the SNTP protocol to use. Only values 3 and 4 are allowed.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RetryInterval" type="xs:duration" default="PT10S">
+      <xs:annotation>
+        <xs:documentation>
+          The retry interval that is used when the synchronization fails.
+          After this interval, the client will try again to query the time.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RetryCount" type="xs:int" default="5">
+      <xs:annotation>
+        <xs:documentation>
+          The number of retries to do before aborting the time synchronization.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TimeSyncConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of time synchronization via VDV301 protocol.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="SntpConfigBase" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Vdv301Config">
+    <xs:annotation>
+      <xs:documentation>
+        The configuration of the VDV301 protocol. It allows configuration of the different operations of VDV301 protocol
+        that must be performed by the Hardware Manager.
+        Time synchronization can be performed by VDV301 protocol.
+        Configuration of the services under VDV301 protocol to be started automatically by Hardware Manager.
+        Specify the type of device connected to the hardware. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="IbisServiceLocatorConfigBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="TimeSync" type="TimeSyncConfig" >
+            <xs:annotation>
+              <xs:documentation>
+                Configuration of the time snychronization for VDV 301.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AutoStartService" type="ServiceNameEnumeration" >
+            <xs:annotation>
+              <xs:documentation>
+                List of all services to be started automatically.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Enabled" type="xs:boolean" use="required" >
+          <xs:annotation>
+            <xs:documentation>
+              Flag indicating whether VDV 301 must be enabled or not.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="DeviceClass" type="DeviceClassEnumeration" use="required" >
+          <xs:annotation>
+            <xs:documentation>
+              The type of device class which the hardware is part of.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IbisServiceLocatorConfigBase" abstract="true">
+    <xs:attribute name="ValidateHttpRequests" type="xs:boolean" default="false" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating whether to validate the XML structure of received HTTP requests.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ValidateHttpResponses" type="xs:boolean" default="false" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating whether to validate the XML structure of created HTTP responses.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="VerifyVersion" type="xs:boolean" default="false" >
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating whether to whether to verify the version in services provided through DNS-SD.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="ServiceNameEnumeration">
+    <xs:annotation>
+      <xs:documentation>
+        Possible services options.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CustomerInformationService" >
+        <xs:annotation>
+          <xs:documentation>CustomerInformation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DeviceManagementService" >
+        <xs:annotation>
+          <xs:documentation>DeviceManagement Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JourneyInformationService" >
+        <xs:annotation>
+          <xs:documentation>JourneyInformation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BeaconLocationService" >
+        <xs:annotation>
+          <xs:documentation>BeaconLocation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DistanceLocationService" >
+        <xs:annotation>
+          <xs:documentation>DistanceLocation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GNSSLocationService" >
+        <xs:annotation>
+          <xs:documentation>GNSSLocation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NetworkLocationService" >
+        <xs:annotation>
+          <xs:documentation>NetworkLocation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SystemDocumentationService" >
+        <xs:annotation>
+          <xs:documentation>SystemDocumentation Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SystemManagementService" >
+        <xs:annotation>
+          <xs:documentation>SystemManagement Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TicketingService" >
+        <xs:annotation>
+          <xs:documentation>Ticketing Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TimeService" >
+        <xs:annotation>
+          <xs:documentation>Time Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TestService" >
+        <xs:annotation>
+          <xs:documentation>Test Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeviceClassEnumeration">
+    <xs:annotation>
+      <xs:documentation>
+        Possible device class options.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OnBoardUnit" >
+        <xs:annotation>
+          <xs:documentation>On Board Unit</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SideDisplay" >
+        <xs:annotation>
+          <xs:documentation>Side Display</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FrontDisplay">
+        <xs:annotation>
+          <xs:documentation>Front Display</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InteriorDisplay" >
+        <xs:annotation>
+          <xs:documentation>Interior Display</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Validator" >
+        <xs:annotation>
+          <xs:documentation>Validator</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TicketVendingMachine" >
+        <xs:annotation>
+          <xs:documentation>Ticket Vending Machine</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AnnouncementSystem" >
+        <xs:annotation>
+          <xs:documentation>Announcement System</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MMI" >
+        <xs:annotation>
+          <xs:documentation>MMI (Man Machine Interface)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VideoSystem" >
+        <xs:annotation>
+          <xs:documentation>Video System</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="APC" >
+        <xs:annotation>
+          <xs:documentation>APC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MobileInterface" >
+        <xs:annotation>
+          <xs:documentation>Mobile Interface</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other" >
+        <xs:annotation>
+          <xs:documentation>Other</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TestDevice" >
+        <xs:annotation>
+          <xs:documentation>Test Device</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfHardwareManagerSetting">
+    <xs:annotation>
+      <xs:documentation>
+        List of hardware settings that can be applied to the hardware.
+        Only the first setting in the list that is valid will be taken.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Setting" nillable="true" type="HardwareManagerSetting" >
+        <xs:annotation>
+          <xs:documentation>
+            The Hardware Manager setting with one or more conditions that must be met for the settings to be applied.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HardwareManagerSetting">
+    <xs:annotation>
+      <xs:documentation>
+        The Hardware Manager setting must be set like the Hostname, IP Address, Timezone etc on the hardware.
+        The settings are applied if they are different from the current hardware setting.
+        If the settings to be applied are the current hardware setting, then no commit or restart is performed.
+        If any of the settings are applied, a commit and restart is performed on the system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Conditions" type="ArrayOfIOCondition" >
+        <xs:annotation>
+          <xs:documentation>
+            List of conditions to be met for the Hardware Manager setting to be applied.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="HostnameSource" type="HostnameSource" default="MacAddress" >
+        <xs:annotation>
+          <xs:documentation>
+            The way the host name of the system must be set.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="TimeZone" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The time zone to be set on the hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="IPAddress" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The IP address to be set on the system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="SubnetMask" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The subnet mask to be set on the system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Gateway" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The IP gateway address to be set on the system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DNS" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>
+            The DNS server IP addresses to be set on the system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="UseDHCP" type="xs:boolean" >
+        <xs:annotation>
+          <xs:documentation>
+            When set, the system ignores any IP settings and will use DHCP
+            instead of the IP address.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Display" type="DisplayConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration for the display screens available on hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="HostnameSource">
+    <xs:annotation>
+      <xs:documentation>
+        Possible options for the host name setting.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" >
+        <xs:annotation>
+          <xs:documentation>The host name is not changed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MacAddress" >
+        <xs:annotation>
+          <xs:documentation>
+            The hostname is changed to (TFT-xx-xx-xx) using the MAC address of the first network interface.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SerialNumber" >
+        <xs:annotation>
+          <xs:documentation>
+            The hostname is changed to (TFT-xxxxxxx) using the serial number of the device.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfIOCondition">
+    <xs:annotation>
+      <xs:documentation>
+        The list of conditions, all of which must be met in order to apply the settings configured.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IO" nillable="true" type="IOCondition" >
+        <xs:annotation>
+          <xs:documentation>
+            The condition to verify the digital input for its value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOCondition">
+    <xs:annotation>
+      <xs:documentation>
+        The digital input defined must have the specific value configured in order for the condition to be met.
+        The digital input can be on the current unit or on a different unit.
+        The digital input can also be accessed from a specific application.
+        If no conditions are specified, then the setting configured is applied by default.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Unit" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation>
+          The name of the unit where the digital input can be found.
+          If this value is null, then the digital input is expected to be on the current unit. 
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Application" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation>
+          The name of the application in which the digital input can be found.
+          If this value is null, then the digital input is searched for in all the applications found on current unit.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Name" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation>
+          The name of the digital input.
+          It must be the same name as it is configured under the GPIOConfig.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Value" type="xs:int" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          The expected value of the digital input to be checked for the condition to be valid.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DisplayConfig">
+    <xs:annotation>
+      <xs:documentation>
+        The mode of display and the resolutions of the different screens available on hardware.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Screens" type="ArrayOfScreens" >
+        <xs:annotation>
+          <xs:documentation>
+            List of screens available on hardware.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Mode" type="DisplayMode" use="required" >
+      <xs:annotation>
+        <xs:documentation>
+          The mode in which the screens are used.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfScreens">
+    <xs:annotation>
+      <xs:documentation>
+        The list of the display screens which are available on the hardware.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="2" name="Screen" nillable="true" type="ScreenConfig" >
+        <xs:annotation>
+          <xs:documentation>
+            The configuration of the resolution, orientation and whether its a main display or not.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="DisplayMode">
+    <xs:annotation>
+      <xs:documentation>
+        Possible modes to use the displays.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Clone" >
+        <xs:annotation>
+          <xs:documentation>The two displays configured are cloned.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Extend" >
+        <xs:annotation>
+          <xs:documentation>
+            The two displays are extended from one to the other depending on which of them is the main display.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ScreenConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Configuration of a single screen.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Adapter" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The adapter index (starting from 0) as the screens are defined in the operating system.
+          If this attribute is omitted, the screens get their adapter index from the position in the config file.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The native width of the screen in pixels.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Height" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>
+          The native height of the screen in pixels.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Orientation" use="required" type="OrientationConfig">
+      <xs:annotation>
+        <xs:documentation>
+          Possible orientation modes to be used for the displays.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMainDisplay" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>
+          Flag indicating whether to set the screen as the main display or not.
+          If a screen is set as main display, then the other screen automatically is assumed not be a main display.
+          The setting is taken is top-down.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="OrientationConfig">
+    <xs:annotation>
+      <xs:documentation>
+        Possible modes to use the displays.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Landscape" >
+        <xs:annotation>
+          <xs:documentation>
+            The screen is oriented in the landscape mode.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LandscapeFlipped" >
+        <xs:annotation>
+          <xs:documentation>
+            The screen is oriented in the landscape, flipped mode.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Portrait" >
+        <xs:annotation>
+          <xs:documentation>The screen is oriented in the protrait mode.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

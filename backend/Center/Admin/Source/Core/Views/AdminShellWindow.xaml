@@ -1,0 +1,212 @@
+﻿<commonviews:TrackingWindow x:Class="Gorba.Center.Admin.Core.Views.AdminShellWindow"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:commonviews="clr-namespace:Gorba.Center.Common.Wpf.Views;assembly=Gorba.Center.Common.Wpf.Views"
+                            xmlns:interaction="clr-namespace:Gorba.Center.Common.Wpf.Framework.Interaction;assembly=Gorba.Center.Common.Wpf.Framework"
+                            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                            xmlns:resources="clr-namespace:Gorba.Center.Admin.Core.Resources"
+                            xmlns:views="clr-namespace:Gorba.Center.Admin.Core.Views"
+                            xmlns:viewModels="clr-namespace:Gorba.Center.Admin.Core.ViewModels"
+                            xmlns:menu="clr-namespace:Gorba.Center.Admin.Core.Views.Menu"
+                            xmlns:converters="clr-namespace:Gorba.Center.Common.Wpf.Framework.Converters;assembly=Gorba.Center.Common.Wpf.Framework"
+                            xmlns:editors="clr-namespace:Gorba.Center.Admin.Core.Views.Editors"
+                            xmlns:clientViews="clr-namespace:Gorba.Center.Common.Wpf.Client.Views;assembly=Gorba.Center.Common.Wpf.Client"
+                            xmlns:extensions="clr-namespace:Gorba.Center.Admin.Core.Extensions"
+                            xmlns:extensions1="clr-namespace:Gorba.Center.Common.Wpf.Framework.Extensions;assembly=Gorba.Center.Common.Wpf.Framework"
+                            xmlns:components="clr-namespace:Gorba.Center.Common.Wpf.Views.Components;assembly=Gorba.Center.Common.Wpf.Views"
+                            xmlns:options="clr-namespace:Gorba.Center.Common.Wpf.Views.Components.Options;assembly=Gorba.Center.Common.Wpf.Views"
+                            xmlns:options1="clr-namespace:Gorba.Center.Common.Wpf.Framework.ViewModels.Options;assembly=Gorba.Center.Common.Wpf.Framework"
+                            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                            mc:Ignorable="d" 
+                            d:DataContext="{d:DesignInstance viewModels:AdminShell}" 
+                            d:DesignHeight="300" d:DesignWidth="300"
+                            MinWidth="800" MinHeight="600"
+                            Style="{StaticResource MainWindowStyle}"
+                            Title="{Binding Path=Title}" UseLayoutRounding="True"
+                            Icon="{extensions1:IconMarkup Source=/Gorba.Center.Admin.Core;component/Resources/admin.ico, Size=24}"
+                            TextOptions.TextFormattingMode="Display"
+                            TextOptions.TextRenderingMode="ClearType"
+                            ShowShroud="{Binding ElementName=OptionsDialog, Path=Dialog.IsVisible}">
+
+    <commonviews:TrackingWindow.TopMostLayer>
+        <Grid Name="DialogLayer"/>
+    </commonviews:TrackingWindow.TopMostLayer>
+
+    <commonviews:TrackingWindow.MenuItems>
+        <Button Style="{StaticResource MenuButton}" Command="{Binding ShowFileMenuCommand}" 
+                Content="{x:Static resources:AdminStrings.Window_File}" Name="FileMenuButton" />
+    </commonviews:TrackingWindow.MenuItems>
+
+    <commonviews:TrackingWindow.LoginInformation>
+        <clientViews:LoginInformationView DataContext="{Binding LoginInformation}" />
+    </commonviews:TrackingWindow.LoginInformation>
+
+    <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource WindowBorderBrush}">
+            <Grid Name="Grid">
+                <Grid.Resources>
+                    <converters:NullToVisibilityConverter x:Key="NullToVisibility" NullVisibility="Collapsed" />
+                    <converters:HalfValueConverter x:Key="HalfValueConverter" />
+                </Grid.Resources>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <views:NavigatorControl Grid.Row="0" Grid.Column="0" DataContext="{Binding Navigator}" />
+
+                <views:StagesControl
+                DataContext="{Binding CurrentStage}"
+                HorizontalAlignment="Stretch"
+                Grid.Row="0" Grid.Column="1" />
+
+                <GridSplitter
+                Grid.Row="0" Grid.Column="2"
+                Width="5"
+                VerticalAlignment="Stretch"
+                ResizeBehavior="PreviousAndNext"
+                Visibility="{Binding Editor.EditingEntity, Converter={StaticResource NullToVisibility}}"
+                IsVisibleChanged="GridSplitterOnIsVisibleChanged"
+                Validation.ErrorTemplate="{x:Null}"/>
+
+                <editors:EntityEditorControl
+                x:Name="EntityEditor"
+                DataContext="{Binding Editor}"
+                Grid.Row="0" Grid.Column="3"
+                Visibility="{Binding EditingEntity, Converter={StaticResource NullToVisibility}}"/>
+
+
+                <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Name="PopupContainer">
+                    <i:Interaction.Triggers>
+                        <interaction:InteractionRequestTrigger SourceObject="{Binding FileMenuInteractionRequest}">
+                            <interaction:InteractionAction Modal="True" IsToggle="True" ToggleSourceName="FileMenuButton">
+                                <interaction:InteractionAction.Dialog>
+                                    <menu:FileMenuDialog Margin="48 0 0 0" />
+                                </interaction:InteractionAction.Dialog>
+                            </interaction:InteractionAction>
+                        </interaction:InteractionRequestTrigger>
+
+                        <interaction:InteractionRequestTrigger SourceObject="{Binding ConnectionExceptionInteractionRequest}">
+                            <interaction:InteractionAction Width="400" Height="250" Modal="True" x:Name="ConnectionExceptionInteraction">
+                                <interaction:InteractionAction.CanvasLeft>
+                                    <MultiBinding Converter="{StaticResource HalfValueConverter}">
+                                        <Binding ElementName="PopupContainer" Path="ActualWidth" />
+                                        <Binding ElementName="ConnectionExceptionInteraction" Path="Width" />
+                                    </MultiBinding>
+                                </interaction:InteractionAction.CanvasLeft>
+                                <interaction:InteractionAction.CanvasTop>
+                                    <MultiBinding Converter="{StaticResource HalfValueConverter}">
+                                        <Binding ElementName="PopupContainer" Path="ActualHeight" />
+                                        <Binding ElementName="ConnectionExceptionInteraction" Path="Height" />
+                                    </MultiBinding>
+                                </interaction:InteractionAction.CanvasTop>
+                                <interaction:InteractionAction.Dialog>
+                                    <clientViews:ConnectionExceptionDialog AutomationProperties.AutomationId="AdminShellWindow_ConnectionExceptionDialog" />
+                                </interaction:InteractionAction.Dialog>
+                            </interaction:InteractionAction>
+                        </interaction:InteractionRequestTrigger>
+
+                        <interaction:InteractionRequestTrigger SourceObject="{Binding ChangePasswordInteractionRequest}">
+                            <interaction:InteractionAction Width="250" Height="150" Modal="True" x:Name="ChangePasswordInteraction">
+                                <interaction:InteractionAction.CanvasLeft>
+                                    <MultiBinding Converter="{StaticResource HalfValueConverter}">
+                                        <Binding ElementName="PopupContainer" Path="ActualWidth" />
+                                        <Binding ElementName="ChangePasswordInteraction" Path="Width" />
+                                    </MultiBinding>
+                                </interaction:InteractionAction.CanvasLeft>
+                                <interaction:InteractionAction.CanvasTop>
+                                    <MultiBinding Converter="{StaticResource HalfValueConverter}">
+                                        <Binding ElementName="PopupContainer" Path="ActualHeight" />
+                                        <Binding ElementName="ChangePasswordInteraction" Path="Height" />
+                                    </MultiBinding>
+                                </interaction:InteractionAction.CanvasTop>
+                                <interaction:InteractionAction.Dialog>
+                                    <clientViews:ChangePasswordDialog AutomationProperties.AutomationId="AdminShellWindow_ChangePasswordDialog" />
+                                </interaction:InteractionAction.Dialog>
+                            </interaction:InteractionAction>
+                        </interaction:InteractionRequestTrigger>
+
+                        <interaction:InteractionRequestTrigger SourceObject="{Binding AboutScreenRequest}">
+                            <interaction:InteractionAction Modal="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                       Width="600" Height="196" Parent="{Binding ElementName=DialogLayer}">
+                                <interaction:InteractionAction.Dialog>
+                                    <components:AboutScreen />
+                                </interaction:InteractionAction.Dialog>
+                            </interaction:InteractionAction>
+                        </interaction:InteractionRequestTrigger>
+                        <interaction:InteractionRequestTrigger SourceObject="{Binding OptionDialogRequest}">
+                            <interaction:InteractionAction x:Name="OptionsDialog" Modal="False" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                       Width="600" Height="300" Parent="{Binding ElementName=DialogLayer}">
+                                <interaction:InteractionAction.Dialog>
+                                    <options:OptionsDialog>
+                                        <options:OptionsDialog.Resources>
+                                            <DataTemplate DataType="{x:Type options1:LanguageOptionGroupViewModel}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                                        <TextBlock ToolTip="{Binding GroupLabelTooltip}">
+                                                        <Run Text="{Binding Label}"  />
+                                                        <Run Text=": " />
+                                                        </TextBlock>
+                                                        <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                                                              ToolTip="{Binding GroupLabelTooltip}">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding DisplayName}" />
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                                        <Image Source="pack://application:,,,/Gorba.Center.Common.Wpf.Views;Component/Icons/warning_16x16.png" VerticalAlignment="Top" Margin="0 0 5 0" />
+                                                        <TextBlock Text="{Binding RestartInformation}" VerticalAlignment="Top"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </options:OptionsDialog.Resources>
+                                    </options:OptionsDialog>
+                                </interaction:InteractionAction.Dialog>
+                            </interaction:InteractionAction>
+                        </interaction:InteractionRequestTrigger>
+                    </i:Interaction.Triggers>
+                </Canvas>
+
+                <StatusBar Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Foreground="White" 
+                       Height="22"
+                       BorderThickness="0 1 0 0"
+                       BorderBrush="{StaticResource StatusbarBorderBrush}"
+                       Background="{StaticResource StatusbarBackgroundBrush}">
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid/>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
+                    <StatusBar.Template>
+                        <ControlTemplate>
+                            <Border Background="{TemplateBinding Background}" BorderThickness="0 1 0 0"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ItemsPresenter/>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </StatusBar.Template>
+                </StatusBar>
+            </Grid>
+        </Border>
+</commonviews:TrackingWindow>

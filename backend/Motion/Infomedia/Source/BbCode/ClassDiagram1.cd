@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Alternating" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Alternating.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Size" Collapsed="true">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Size.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Alternation" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Alternation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbBranch" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <AssociationLine Name="Children" Type="Gorba.Motion.Infomedia.BbCode.BbNode" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="2.625" />
+        <Point X="6.125" Y="2.625" />
+        <Point X="6.125" Y="0.75" />
+        <Point X="4.5" Y="0.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.273" Y="-1.546" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>BbBranch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbLeafTag" Collapsed="true">
+    <Position X="7.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BbLeafTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbNode" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Parent" Type="Gorba.Motion.Infomedia.BbCode.BbBranch" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.375" Y="1.062" />
+        <Point X="4.375" Y="1.454" />
+        <Point X="6.042" Y="1.454" Type="JumpStart" />
+        <Point X="6.208" Y="1.454" Type="JumpEnd" />
+        <Point X="14.094" Y="1.454" />
+        <Point X="14.094" Y="1.858" />
+        <Point X="6.208" Y="1.858" Type="JumpStart" />
+        <Point X="6.042" Y="1.858" Type="JumpEnd" />
+        <Point X="5.375" Y="1.858" />
+        <Point X="5.375" Y="2.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.677" Y="0.918" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BbNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbParseException" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BbParseException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbParser" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BbParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbRoot" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAgAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BbRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbTag" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>BbTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbText" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCAAAAAA=</HashCode>
+      <FileName>BbText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbValueTag" Collapsed="true">
+    <Position X="3" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>BbValueTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Blink" Collapsed="true">
+    <Position X="12" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Blink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Bold" Collapsed="true">
+    <Position X="14.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Color" Collapsed="true">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Color.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Face" Collapsed="true">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Face.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Italic" Collapsed="true">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Italic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.NewLine" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NewLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Image" Collapsed="true">
+    <Position X="7.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.BbLeafValueTag" Collapsed="true">
+    <Position X="7.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>BbLeafValueTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gorba.Motion.Infomedia.BbCode.Video" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Video.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

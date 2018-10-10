@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerturbationServer", "PerturbationServer\PerturbationServer.csproj", "{B0D259A6-3468-4163-9751-330E3C566E7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{C379DE45-F8F8-481D-AC41-37BFF43E82AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "WpfApplication\WpfApplication.csproj", "{1A8184CB-1708-48AA-97B5-73658AC16BCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{D37B60AE-E7AD-45F5-BCB7-1DA81BF2309C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Transit.Realtime", "..\..\..\..\Common\3rdParty\GtfsRealtime\Google.Transit.Realtime.csproj", "{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3802C7C9-3AB0-4BFA-865F-F5CDA3B17BCE}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		PerturbationManager.vsmdi = PerturbationManager.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfsgorba.gorba.com:8443/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PerturbationServer\\PerturbationServer.csproj
+		SccProjectName1 = PerturbationServer
+		SccLocalPath1 = PerturbationServer
+		SccProjectUniqueName2 = Core\\Core.csproj
+		SccProjectName2 = Core
+		SccLocalPath2 = Core
+		SccProjectUniqueName3 = WpfApplication\\WpfApplication.csproj
+		SccProjectName3 = WpfApplication
+		SccLocalPath3 = WpfApplication
+		SccProjectUniqueName4 = ..\\..\\..\\..\\Common\\3rdParty\\GtfsRealtime\\Google.Transit.Realtime.csproj
+		SccProjectTopLevelParentUniqueName4 = PerturbationManager.sln
+		SccProjectName4 = ../../../../Common/3rdParty/GtfsRealtime
+		SccLocalPath4 = ..\\..\\..\\..\\Common\\3rdParty\\GtfsRealtime
+		SccProjectUniqueName5 = Core.Tests\\Core.Tests.csproj
+		SccProjectName5 = Core.Tests
+		SccLocalPath5 = Core.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = PerturbationManager.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Debug|x86.ActiveCfg = Debug|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Debug|x86.Build.0 = Debug|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Release|Any CPU.ActiveCfg = Release|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Release|x86.ActiveCfg = Release|x86
+		{B0D259A6-3468-4163-9751-330E3C566E7D}.Release|x86.Build.0 = Release|x86
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C379DE45-F8F8-481D-AC41-37BFF43E82AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Debug|x86.ActiveCfg = Debug|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Debug|x86.Build.0 = Debug|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Release|Any CPU.ActiveCfg = Release|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Release|x86.ActiveCfg = Release|x86
+		{1A8184CB-1708-48AA-97B5-73658AC16BCE}.Release|x86.Build.0 = Release|x86
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613}.Release|x86.ActiveCfg = Release|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3B807D90-7FC9-4E0F-BC32-FA8D04D4FA16}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AFCE32B7-951A-47E8-8801-7EDFEBF7D613} = {D37B60AE-E7AD-45F5-BCB7-1DA81BF2309C}
+	EndGlobalSection
+EndGlobal

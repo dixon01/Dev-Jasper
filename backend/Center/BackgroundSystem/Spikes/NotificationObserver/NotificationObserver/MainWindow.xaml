@@ -1,0 +1,119 @@
+﻿<Window x:Class="Gorba.Center.BackgroundSystem.Spikes.NotificationObserver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:units="clr-namespace:Gorba.Center.Common.ServiceModel.ChangeTracking.Units;assembly=Gorba.Center.Common.ServiceModel"
+        xmlns:membership="clr-namespace:Gorba.Center.Common.ServiceModel.ChangeTracking.Membership;assembly=Gorba.Center.Common.ServiceModel"
+        xmlns:viewModel1="clr-namespace:Gorba.Center.BackgroundSystem.Spikes.NotificationObserver.ViewModel"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1024" d:DataContext="{d:DesignInstance viewModel1:Shell, IsDesignTimeCreatable=False}">
+    <DockPanel LastChildFill="True">
+        <DockPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+            </Style>
+            <Style x:Key="TextBlock" TargetType="TextBlock">
+                <Setter Property="TextDecorations" Value="Underline" />
+                <Setter Property="Foreground" Value="Blue" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Foreground" Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <DataTemplate DataType="{x:Type membership:UserDeltaNotification}">
+                <TextBlock>
+                    <Run Text="Entity Id: "/>
+                    <Run Text="{Binding Path=EntityId}"/>
+                </TextBlock>
+            </DataTemplate>
+        </DockPanel.Resources>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Text="{Binding Mode=OneWay, Path=Time}" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Text="{Binding Mode=OneWay, Path=CenterPortalAddress}" />
+            </StatusBarItem>
+            <Separator Grid.Column="3" />
+            <StatusBarItem Grid.Column="4" HorizontalAlignment="Right">
+                <TextBlock Text="{Binding Mode=OneWay, Path=Status}" />
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Google (Spy)">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition MaxWidth="400" Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <Button Command="{Binding Path=ClearCommand}" Content="Clear" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="All times local" />
+                    <telerik:RadGridView Grid.Column="0" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedNotification}" Grid.Row="2" VirtualizingStackPanel.VirtualizationMode="Standard" AutoGenerateColumns="False" ItemsSource="{Binding Path=NotificationsView}">
+                        <telerik:RadGridView.RowStyle>
+                            <Style TargetType="{x:Type telerik:GridViewRow}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsHighlighted}" Value="True">
+                                        <Setter Property="Background" Value="Linen">
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Style>
+                        </telerik:RadGridView.RowStyle>
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=NotificationType}" Header="Type" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=EnqueuedAtLocalTime}" Header="Enqueued time" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneWay, Path=HasReply}" Header="Has reply" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=ReplyToSessionId}" Header="SessionId" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=ReplyTo}" Header="Reply to" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=TimestampLocal}" Header="Received time" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=ReceivedAfter}" Header="Receive time" IsReadOnly="True" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Mode=OneTime, Path=ExpiresAtLocalTime}" Header="Expiration time" IsReadOnly="True" />
+                            <telerik:GridViewColumn Header="Content" IsReadOnly="True">
+                                <telerik:GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{StaticResource ResourceKey=TextBlock}" Text="View">
+                                            <TextBlock.ToolTip>
+                                                <ContentControl Content="{Binding Mode=OneTime, Path=Content}" />
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </telerik:GridViewColumn.CellTemplate>
+                            </telerik:GridViewColumn>
+                        </telerik:RadGridView.Columns>
+                    </telerik:RadGridView>
+                    <TextBlock Grid.Column="1" Grid.Row="2" TextTrimming="CharacterEllipsis" Text="{Binding Path=SelectedNotification.Content}" />
+                </Grid>
+            </TabItem>
+            <TabItem DataContext="{Binding Path=Tools}" Header="Tools">
+                <Button Command="{Binding Path=ClearServerCommand}" Content="Clear server" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

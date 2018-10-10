@@ -1,0 +1,226 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="d">
+
+    <Style TargetType="TabControl" x:Key="OfficeLikeTabControlStyle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TabPanel x:Name="HeaderPanel"
+                              Grid.Column="0"
+                              Panel.ZIndex="1"
+                              IsItemsHost="True"
+                              KeyboardNavigation.TabIndex="1"
+                              Background="Transparent" />
+
+                        <Border x:Name="Border"
+                                Grid.Column="1"
+                                KeyboardNavigation.TabNavigation="Local"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                BorderThickness="1 0 0 0"
+                                BorderBrush="{StaticResource ProjectListViewTabControlBorderBrush}"
+                                Background="{TemplateBinding Background}">
+
+                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}" x:Key="OfficeLikeTabItemStyle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="Root">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" Padding="10 5">
+                            <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Stretch"
+                                                      ContentSource="Header"
+                                                      Margin="0"
+                                                      RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ProjectListViewSelectedTabItemBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource MainMenuItemHoverBackgroundColorBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TabControl" x:Key="OuterOfficeLikeTabControlStyle" BasedOn="{StaticResource OfficeLikeTabControlStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Background="{StaticResource ProjectListViewOuterTabItemsBackgroundBrush}">
+                            <TabPanel x:Name="HeaderPanel"
+                                      Panel.ZIndex="1"
+                                      IsItemsHost="True"
+                                      KeyboardNavigation.TabIndex="1" Margin="0 10 0 0"
+                                      MinWidth="100"
+                                      Background="{StaticResource ProjectListViewOuterTabItemsBackgroundBrush}" />
+                        </Border>
+
+                        <Border x:Name="Border"
+                                Grid.Column="1"
+                                KeyboardNavigation.TabNavigation="Local"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                BorderThickness="1 0 0 0"
+                                BorderBrush="{StaticResource ProjectListViewTabControlBorderBrush}"
+                                Background="{TemplateBinding Background}">
+
+                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}" x:Key="OuterOfficeLikeTabItemStyle" BasedOn="{StaticResource OfficeLikeTabItemStyle}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="Root">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" Padding="20 0 0 0" VerticalAlignment="Top"
+                                Height="18" Margin="3">
+                            <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Stretch"
+                                                      ContentSource="Header"
+                                                      Margin="0"
+                                                      RecognizesAccessKey="True" />
+                        </Border>
+
+                        <Rectangle x:Name="SeparatoRectangle"  SnapsToDevicePixels="True" Height="1" VerticalAlignment="Bottom" 
+                                       HorizontalAlignment="Stretch" Margin="5 5 5 0" 
+                                       Fill="{StaticResource MainMenuSeperatorColorBrush}"
+                                       Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="x">
+                            <Setter TargetName="SeparatoRectangle" Property="Visibility" Value="Visible"/>
+                            <!--<Setter Property="Height" Value="30"/>-->
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ProjectListViewSelectedTabItemBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="TabItem" x:Key="TopFullWidthTabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid Name="TemplateRoot">
+                        <Border Name="Border" Padding="0 5 0 5">
+                            <TextBlock x:Name="ContentSite"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              Text="{TemplateBinding Header}"
+                                              TextBlock.FontWeight="Bold">
+                             </TextBlock>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TopFullWidthTabControlItemBackgroundColorBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="{StaticResource TopFullWidthTabControlItemHeaderFontColorBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TopFullWidthTabControlHoverItemBackgroundColorBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TopFullWidthTabControlSelectedItemBackgroundColorBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="{StaticResource TopFullWidthTabControlSelectedItemHeaderFontColorBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TabControl" x:Key="TopFullWidthTabControl">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TopFullWidthTabItem}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" BorderThickness="0 0 0 1" BorderBrush="{StaticResource TopFullWidthTabControlBorderColorBrush}"
+                                    Padding="0 3 0 3">
+                            <UniformGrid x:Name="HeaderPanel"
+                                             Rows="1"
+                                             Panel.ZIndex="1"
+                                             IsItemsHost="True"
+                                             KeyboardNavigation.TabIndex="1"
+                                             Background="Transparent" />
+                        </Border>
+
+                        <Border x:Name="Border"
+                                    Grid.Row="1"
+                                    KeyboardNavigation.TabNavigation="Local"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    KeyboardNavigation.TabIndex="2">
+
+                            <ContentPresenter Margin="0" ContentSource="SelectedContent" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

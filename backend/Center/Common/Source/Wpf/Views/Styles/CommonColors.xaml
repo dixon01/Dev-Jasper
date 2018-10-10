@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <!-- Colors -->
+    <Color x:Key="ColorHalfTransparentWhite">#55ffffff</Color>
+    <Color x:Key="ColorThirdTransparentWhite">#33ffffff</Color>
+    <Color x:Key="ColorHalfTransparentBlack">#33000000</Color>
+    <Color x:Key="ColorThirdTransparentBlack">#11000000</Color>
+    <Color x:Key="ColorAlmostNotTransparentBlack">#0a000000</Color>
+    <Color x:Key="ColorHalfTransparentRed">#88ff0000</Color>
+    
+    <Color x:Key="ColorWhite">#ffffff</Color>
+    <Color x:Key="ColorBlack">#000000</Color>
+    <Color x:Key="ColorTransparent">Transparent</Color>
+    <Color x:Key="ColorDark">#35343d</Color>
+    <Color x:Key="ColorBrighterDark">#50535c</Color>
+    <Color x:Key="ColorHighlightedBrighterDark">#7f8283</Color>
+    <Color x:Key="ColorDarkForeground">#7f8283</Color>
+    <Color x:Key="ColorHighlight">#fdaf00</Color>
+    <Color x:Key="ColorHighlightHover">#f99d1c</Color>
+    <Color x:Key="ColorAmber">#FFBF00</Color>  
+    <Color x:Key="ColorMediumGray">#e6e7e8</Color>
+    <Color x:Key="ColorDarkerMediumGray">#dbdbdd</Color>
+    <Color x:Key="ColorDarkGray">#c3c6c8</Color>
+    <Color x:Key="ColorExtraDarkGray">#a7adaf</Color>
+    <Color x:Key="ColorLightGray">#f1f1f1</Color>
+   
+    <!-- TextBox -->
+    <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{StaticResource ColorWhite}"/>
+    <SolidColorBrush x:Key="TextBoxBorderColorBrush" Color="{StaticResource ColorDarkGray}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundColorBrush" Color="{StaticResource ColorDark}"/>
+    <SolidColorBrush x:Key="TextBlockDefaultForegroundColorBrush" Color="{StaticResource ColorDark}"/>
+    <SolidColorBrush x:Key="TextBlockFormulaForegroundColorBrush" Color="{StaticResource ColorHighlight}"/>
+    <SolidColorBrush x:Key="TextBoxHighlightFrameColorBrush" Color="{StaticResource ColorHighlight}"/>
+    <SolidColorBrush x:Key="TextBoxHighlightTextColorBrush" Color="{StaticResource ColorHighlight}"/>
+    <SolidColorBrush x:Key="TextBoxMouseOverFrameColorBrush" Color="{StaticResource ColorDarkForeground}"/>
+
+    <!-- Passwordbox -->
+    <SolidColorBrush x:Key="PasswordBoxBorderColorBrush" Color="{StaticResource ColorDarkGray}" />
+    <SolidColorBrush x:Key="PasswordBoxHighlightFrameColorBrush" Color="{StaticResource ColorHighlight}"/>
+    <SolidColorBrush x:Key="PasswordBoxMouseOverFrameColorBrush" Color="{StaticResource ColorDarkForeground}" />
+
+    <!-- OptionDialog -->
+    <SolidColorBrush x:Key="DialogBorderBrush" Color="{StaticResource ColorDarkForeground}"/>
+    <SolidColorBrush x:Key="DialogBackgroundColorBrush" Color="{StaticResource ColorWhite}"/>
+    <SolidColorBrush x:Key="DialogContentBackgroundBrush" Color="{StaticResource ColorDarkerMediumGray}" />
+    <SolidColorBrush x:Key="OptionDialogGroupBackgroundBrush" Color="{StaticResource ColorDarkForeground}"/>
+    <SolidColorBrush x:Key="OptionDialogGroupForegroundBrush" Color="{StaticResource ColorWhite}"/>
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="{StaticResource ColorTransparent}" />
+    <SolidColorBrush x:Key="HoverToolbarButtonBrush" Color="{StaticResource ColorDarkerMediumGray}"/>
+    <SolidColorBrush x:Key="PressedToolbarButtonBrush" Color="{StaticResource ColorHalfTransparentBlack}"/>
+    <SolidColorBrush x:Key="CheckedToolbarButtonBrush" Color="{StaticResource ColorDarkerMediumGray}"/>
+    <SolidColorBrush x:Key="CheckedToolbarButtonBorderBrush" Color="{StaticResource ColorHighlight}"/>
+
+</ResourceDictionary>

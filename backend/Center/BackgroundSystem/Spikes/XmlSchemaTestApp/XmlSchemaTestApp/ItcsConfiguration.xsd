@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ItcsConfiguration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="OperationDayStartUtc" type="xs:time" />
+        <xs:element name="OperationDayDuration" type="xs:duration" />
+        <xs:element name="TimeZoneId" type="xs:string" />
+        <xs:element name="VdvConfiguration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UseRealTimeDataOnly" type="xs:boolean" nillable="true" />
+              <xs:element name="HttpListenerHost" type="xs:string" />
+              <xs:element name="HttpListenerPort" type="xs:nonNegativeInteger" nillable="true" />
+              <xs:element name="HttpServerHost" type="xs:string" />
+              <xs:element name="HttpServerPort" type="xs:nonNegativeInteger" nillable="true" />
+              <xs:element name="HttpWebProxyHost" type="xs:string" />
+              <xs:element name="HttpWebProxyPort" type="xs:nonNegativeInteger" nillable="true" />
+              <xs:element name="HttpClientIdentification" type="xs:string" />
+              <xs:element name="HttpServerIdentification" type="xs:string" />
+              <xs:element name="HttpResponseTimeOut" type="xs:duration" />
+              <xs:element name="XmlClientRequestSenderId" type="xs:string" />
+              <xs:element name="XmlServerRequestSenderId" type="xs:string" />
+              <xs:element name="XmlNameSpaceRequest" type="xs:string" />
+              <xs:element name="XmlNameSpaceResponse" type="xs:string" />
+              <xs:element name="OmitXmlDeclaration" type="xs:boolean" nillable="true" />
+              <xs:element name="EvaluateDataReadyInStatusResponse" type="xs:boolean" nillable="true" />
+              <xs:element name="StatusRequestInterval" type="xs:duration" nillable="true" />
+              <xs:element name="SubscriptionRetryInterval" type="xs:duration" nillable="true" />
+              <xs:element name="KeepAliveOn" type="xs:boolean" nillable="true" />
+              <xs:element name="KeepAliveInterval" type="xs:duration" nillable="true" />
+              <xs:element name="ServerUnavailableErrorThreshold" type="xs:duration" nillable="true" />
+              <xs:element name="ServerUnavailableSpecialInfoText" type="xs:string" />
+              <xs:element name="ServerUnavailableModeConfiguration" type="xs:string" />
+              <xs:element name="CheckDataReadyInterval" type="xs:duration" nillable="true" />
+              <xs:element name="DefaultSubscriptionConfiguration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Hysteresis" type="xs:duration" />
+                    <xs:element name="MaxTripsNumber" type="xs:nonNegativeInteger" />
+                    <xs:element name="PreviewPeriod" type="xs:duration" />
+                    <xs:element name="MaximumTextLength" type="xs:nonNegativeInteger" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Identifier" type="xs:nonNegativeInteger" use="required" />
+      <xs:attribute name="Name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

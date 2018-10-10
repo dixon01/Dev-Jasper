@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EntitySpace baseNamespace="Entities" xmlns="http://schemas.gorba.com/Center/EntitySpace">
+  <Partitions>
+    <Partition name="Partition1">
+      <Entities>
+        <Entity name="Entity1">
+          <Properties>
+            <Property name="Property1"/>
+          </Properties>
+        </Entity>
+      </Entities>
+    </Partition>
+  </Partitions>
+</EntitySpace>

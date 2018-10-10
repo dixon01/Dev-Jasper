@@ -1,0 +1,508 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ ImportProject Processor="ImportProjectDirectiveProcessor" Projects="..\..\..\..\Common\Source\T4Templating\Center.Common.T4Templating.csproj" UnloadGenerationAppDomain="true" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Gorba.Center.Common.T4Templating" #>
+<#@ output extension=".generated.cs" #>
+<#
+    var path = this.Host.ResolvePath(@"..\..\..\..\Common\Source\ServiceModel\EntitySpace.xml");
+    var entitySpace = EntitySpace.Load(path);
+    var userDefinedPropertiesEnabledEntityNames =
+        entitySpace.Partitions.Single(p => p.Name == "Meta")
+            .Enums.Single(e => e.Name == "UserDefinedPropertyEnabledEntity").Members.Select(m => m.Name);
+#>
+namespace Gorba.Center.Admin.Core.DataViewModels
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Xml.Serialization;
+    
+    using Gorba.Center.Common.ServiceModel;
+    using Gorba.Center.Common.ServiceModel.Collections;
+    using Gorba.Center.Common.Wpf.Framework.Controllers;
+<#
+    foreach (var partition in entitySpace.Partitions)
+    {
+        this.WritePartition(partition, userDefinedPropertiesEnabledEntityNames);
+    }
+#>
+}<#+
+    private void WritePartition(EntitySpace.Partition partition, IEnumerable<string> userDefinedPropertiesEnabledEntityNames)
+    { #>
+
+    namespace <#= partition.Name #>
+    {
+        using Gorba.Center.Common.ServiceModel.<#= partition.Name #>;
+        using Gorba.Center.Common.ServiceModel.ChangeTracking.<#= partition.Name #>;
+        
+        <#+
+        foreach (var entity in partition.Entities.Where(entity => entity.HasChangeTracking))
+        {
+            var userDefinedPropertiesEnabled = userDefinedPropertiesEnabledEntityNames.Contains(entity.Name);
+            this.WriteEntity(entity, partition, userDefinedPropertiesEnabled);
+        }
+        #>
+
+    }
+<#+
+    }
+
+    private void WriteEntity(EntitySpace.Entity entity, EntitySpace.Partition partition, bool userDefinedPropertiesEnabled)
+    {
+        this.WriteReadOnlyDataViewModel(entity, userDefinedPropertiesEnabled);
+        this.WriteDataViewModel(entity, userDefinedPropertiesEnabled);
+    }
+    
+    private void WriteReadOnlyDataViewModel(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => (property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+                || property.PropertyType == EntitySpace.PropertyType.Enumeration);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var collectionProperties = entity
+            .Properties.OfType<EntitySpace.CollectionProperty>();
+        var idProperty = entity.IdPropertyType;
+        var baseClass = userDefinedPropertiesEnabled ? "ReadOnlyDataViewModelWithUdpBase" : "ReadOnlyDataViewModelBase";
+#>
+
+        public partial class <#= entity.Name #>ReadOnlyDataViewModel : <#= baseClass #>
+        {<#+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReadOnlyReferenceField(property);
+        }
+        
+        var contextArgument = userDefinedPropertiesEnabled ? ", I" + entity.Name + "UdpContext udpContext" : "";
+        var baseCtorArgs = userDefinedPropertiesEnabled
+                               ? "factory, udpContext != null ? udpContext.GetAdditional" + entity.Name + "Properties() : null"
+                               : "factory";
+        #>
+
+            public <#= entity.Name #>ReadOnlyDataViewModel(
+                <#= entity.Name #>ReadableModel readableModel<#= contextArgument #>, DataViewModelFactory factory)
+                : base(<#= baseCtorArgs #>)
+            {
+                if (readableModel == null)
+                {
+                    throw new ArgumentNullException("readableModel");
+                }
+<#+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteInitializeReadOnlyCollectionProperty(property);
+        }
+#>
+
+                this.ReadableModel = readableModel;
+                this.ReadableModel.PropertyChanged += this.ReadableModelOnPropertyChanged;
+            }
+
+            public <#= entity.IdPropertyType #> Id
+            {
+                get
+                {
+                    return this.ReadableModel.Id;
+                }
+            }
+<#+
+
+        this.WriteReadOnlyProperty(new EntitySpace.Property { Name="CreatedOn", Type="DateTime" });
+        this.WriteReadOnlyProperty(new EntitySpace.Property { Name="LastModifiedOn", Type="DateTime?" });
+
+        foreach (var property in properties)
+        {
+            this.WriteReadOnlyProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReadOnlyReferenceProperty(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            this.WriteReadOnlyCollectionProperty(property);
+        }
+#>
+
+            public override string DisplayText
+            {
+                get
+                {
+                    var displayText = Convert.ToString(this.<#= entity.DisplayProperty #>);
+                    this.GetDisplayText(ref displayText);
+                    return displayText;
+                }
+            }
+
+            public <#= entity.Name #>ReadableModel ReadableModel { get; private set; }
+
+            public override string GetIdString()
+            {
+                return Convert.ToString(this.Id);
+            }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as <#= entity.Name #>ReadOnlyDataViewModel;
+                return other != null && this.Id.Equals(other.Id);
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            protected override string GetUserDefinedPropertyValue(string name)
+            {
+                string value;
+                this.ReadableModel.UserDefinedProperties.TryGetValue(name, out value);
+                return value;
+            }
+            <#+
+        }
+#>
+
+            partial void GetDisplayText(ref string displayText);
+
+            private void ReadableModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                this.RaisePropertyChanged(e.PropertyName);
+                if (e.PropertyName == "<#= entity.DisplayProperty #>")
+                {
+                    this.RaisePropertyChanged(() => this.DisplayText);
+                }
+            }
+        }
+<#+
+    }
+    
+    private void WriteDataViewModel(EntitySpace.Entity entity, bool userDefinedPropertiesEnabled)
+    {
+        var properties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => (property.PropertyType == EntitySpace.PropertyType.Primitive && !property.IsXmlSerialized)
+                || property.PropertyType == EntitySpace.PropertyType.Enumeration);
+        var xmlProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Primitive && property.IsXmlSerialized);
+        var referenceProperties = entity
+            .Properties.OfType<EntitySpace.Property>()
+            .Where(property => property.PropertyType == EntitySpace.PropertyType.Reference);
+        var collectionProperties = entity
+            .Properties.OfType<EntitySpace.CollectionProperty>();
+        var idProperty = entity.IdPropertyType;
+        var baseClass = userDefinedPropertiesEnabled ? "DataViewModelWithUdpBase" : "DataViewModelBase";
+#>
+
+        public partial class <#= entity.Name #>DataViewModel : <#= baseClass #>
+        {<#+
+        foreach (var property in collectionProperties)
+        {
+            // TODO: implement collections
+            //this.WriteCollectionField(property);
+        }
+        
+        var contextArgument = userDefinedPropertiesEnabled ? ", I" + entity.Name + "UdpContext udpContext" : "";
+        var baseCtorReadOnlyArgs = userDefinedPropertiesEnabled
+                                       ? ", readOnlyDataViewModel.GetUserDefinedPropertyNames()"
+                                       : "";
+        var baseCtorModelArgs = userDefinedPropertiesEnabled
+                                    ? ", udpContext != null ? udpContext.GetAdditional" + entity.Name + "Properties() : null"
+                                    : "";
+#>
+
+            public <#= entity.Name #>DataViewModel(
+                <#= entity.Name #>ReadOnlyDataViewModel readOnlyDataViewModel, DataViewModelFactory factory)
+                : base(readOnlyDataViewModel, factory<#= baseCtorReadOnlyArgs #>)
+            {
+                if (readOnlyDataViewModel == null)
+                {
+                    throw new ArgumentNullException("readOnlyDataViewModel");
+                }
+
+                this.Initialize(readOnlyDataViewModel.ReadableModel.ToChangeTrackingModel());
+            }
+
+            public <#= entity.Name #>DataViewModel(
+                <#= entity.Name #>WritableModel writableModel<#= contextArgument #>, DataViewModelFactory factory)
+                : base(null, factory<#= baseCtorModelArgs #>)
+            {
+                if (writableModel == null)
+                {
+                    throw new ArgumentNullException("writableModel");
+                }
+
+                this.Initialize(writableModel);
+            }
+
+            public <#= entity.IdPropertyType #> Id
+            {
+                get
+                {
+                    return this.Model.Id;
+                }
+            }
+
+            public DateTime? CreatedOn
+            {
+                get
+                {
+                    return this.Model.ReadableModel == null ? (DateTime?)null : this.Model.ReadableModel.CreatedOn;
+                }
+            }
+
+            public DateTime? LastModifiedOn
+            {
+                get
+                {
+                    return this.Model.ReadableModel == null ? null : this.Model.ReadableModel.LastModifiedOn;
+                }
+            }
+<#+
+        foreach (var property in properties)
+        {
+            this.WriteProperty(property);
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            this.WriteXmlProperty(property);
+        }
+
+        foreach (var property in referenceProperties)
+        {
+            this.WriteReferenceProperty(property);
+        }
+
+        foreach (var property in collectionProperties)
+        {
+            // TODO: implement collections
+            //this.WriteCollectionProperty(property);
+        }
+#>
+
+            public override string DisplayText
+            {
+                get
+                {
+                    return Convert.ToString(this.<#= entity.DisplayProperty #>);
+                }
+            }
+
+            public <#= entity.Name #>WritableModel Model { get; private set; }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as <#= entity.Name #>DataViewModel;
+                return other != null && this.Id.Equals(other.Id);
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
+<#+
+        if (userDefinedPropertiesEnabled)
+        {
+            #>
+
+            protected override string GetUserDefinedPropertyValue(string name)
+            {
+                string value;
+                this.Model.UserDefinedProperties.TryGetValue(name, out value);
+                return value;
+            }
+
+            protected override void SetUserDefinedPropertyValue(string name, string value)
+            {
+                this.Model.UserDefinedProperties[name] = value;
+                this.RaisePropertyChanged(name);
+            }
+            <#+
+        }
+#>
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    this.Model.Dispose();
+                }
+            }
+
+            private void Initialize(<#= entity.Name #>WritableModel writableModel)
+            {
+                this.Model = writableModel;<#+
+
+        foreach (var property in referenceProperties)
+        {
+            #>
+
+
+                this.<#= property.Name #> = new EntityReference<<#= property.Type #>ReadOnlyDataViewModel>();
+                if (writableModel.<#= property.Name #> != null)
+                {
+                    this.<#= property.Name #>.SelectedEntity = this.Factory.CreateReadOnly(writableModel.<#= property.Name #>);
+                }
+
+                this.<#= property.Name #>.PropertyChanged += (s, e) =>
+                    {
+                        if (e.PropertyName == "SelectedEntity")
+                        {
+                            this.Model.<#= property.Name #> = this.<#= property.Name #>.SelectedEntity == null
+                                                         ? null
+                                                         : this.<#= property.Name #>.SelectedEntity.ReadableModel;
+                            this.RaisePropertyChanged("<#= property.Name #>");
+                        }
+                    };<#+
+        }
+
+        foreach (var property in xmlProperties)
+        {
+            #>
+
+
+                this.<#= property.Name #> =
+                    new XmlDataViewModel(
+                        () => this.Model.<#= property.Name #>,
+                        value =>
+                            {
+                                if (object.Equals(this.Model.<#= property.Name #>, value))
+                                {
+                                    return;
+                                }
+
+                                this.Model.<#= property.Name #> = value;
+                                this.RaisePropertyChanged(() => this.<#= property.Name #>);
+                            });<#+
+        }
+#>
+
+            }
+        }
+<#+
+    }
+
+    private void WriteReadOnlyReferenceField(EntitySpace.Property property)
+    {#>
+
+            private <#= property.Type #>ReadOnlyDataViewModel reference<#= property.Name #>;
+<#+
+    }
+
+    private void WriteInitializeReadOnlyCollectionProperty(EntitySpace.CollectionProperty property)
+    {
+        #>
+
+                this.<#= property.Name #> = new EntityCollection<<#= property.ItemType #>ReadOnlyDataViewModel>(
+                    "<#= property.Name #>", "<#= property.ItemType.Substring(property.ItemType.IndexOf('.') + 1) #>", this.Factory.CommandRegistry);<#+
+    }
+
+    private void WriteReadOnlyProperty(EntitySpace.Property property)
+    {#>
+
+            public <#= property.Type #> <#= property.Name #>
+            {
+                get
+                {
+                    return this.ReadableModel.<#= property.Name #>;
+                }
+            }
+<#+
+    }
+
+    private void WriteProperty(EntitySpace.Property property)
+    {#>
+
+            public <#= property.Type #> <#= property.Name #>
+            {
+                get
+                {
+                    return this.Model.<#= property.Name #>;
+                }
+
+                set
+                {
+                    if (object.Equals(this.Model.<#= property.Name #>, value))
+                    {
+                        return;
+                    }
+
+                    this.Model.<#= property.Name #> = value;
+                    this.RaisePropertyChanged(() => this.<#= property.Name #>);
+                }
+            }
+<#+
+    }
+
+    private void WriteXmlProperty(EntitySpace.Property property)
+    {#>
+
+            public XmlDataViewModel <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WriteReadOnlyReferenceProperty(EntitySpace.Property property)
+    {
+        #>
+
+            public string <#= property.Name #>DisplayText
+            {
+                get
+                {
+                    var reference = this.<#= property.Name #>;
+                    return reference == null ? null : reference.DisplayText;
+                }
+            }
+
+            public <#= property.Type #>ReadOnlyDataViewModel <#= property.Name #>
+            {
+                get
+                {
+                    var currentId = this.reference<#= property.Name #> == null ? 0 : this.reference<#= property.Name #>.Id;
+                    var modelId = this.ReadableModel.<#= property.Name #> == null ? 0 : this.ReadableModel.<#= property.Name #>.Id;
+                    if (currentId != modelId)
+                    {
+                        this.reference<#= property.Name #> =
+                            this.ReadableModel.<#= property.Name #> == null
+                                ? null
+                                : this.Factory.CreateReadOnly(this.ReadableModel.<#= property.Name #>);
+                    }
+
+                    return this.reference<#= property.Name #>;
+                }
+            }
+<#+
+    }
+
+    private void WriteReferenceProperty(EntitySpace.Property property)
+    {#>
+
+            public EntityReference<<#= property.Type #>ReadOnlyDataViewModel> <#= property.Name #> { get; private set; }
+<#+
+    }
+
+    private void WriteReadOnlyCollectionProperty(EntitySpace.CollectionProperty property)
+    {
+        #>
+
+            public EntityCollection<<#= property.ItemType #>ReadOnlyDataViewModel> <#= property.Name #> { get; private set; }
+<#+
+    }
+#>

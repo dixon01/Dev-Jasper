@@ -1,0 +1,36 @@
+﻿<controls:MetroWindow 
+        x:Class="Luminator.Motion.WpfIntegratedTester.Main.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:views="clr-namespace:Luminator.AudioSwitch.WpfSerialPortTester.Views;assembly=Luminator.AudioSwitch.WpfSerialPortTester"
+        xmlns:viewModels="clr-namespace:Luminator.Motion.WpfIntegratedTester.Main.ViewModels"
+        xmlns:views2="clr-namespace:Luminator.Motion.WpfIntegratedTester.Dimmer.Views"
+        xmlns:views1="clr-namespace:Luminator.Motion.WpfIntegratedTester.AudioTTS.Views"
+        mc:Ignorable="d"
+        BorderBrush="{DynamicResource LightBorderBrush}"
+        BorderThickness="1"
+        Title="Luminator TFT Tester"
+        Width="1024" Height="768"
+        ResizeMode="NoResize">
+    <controls:MetroWindow.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </controls:MetroWindow.DataContext>
+    
+    <controls:MetroAnimatedTabControl>
+        <controls:MetroTabItem Header="  AUDIO SWITCH  ">
+            <views:AudioSwitchTesterView DataContext="{Binding AudioTesterViewModel}" />
+        </controls:MetroTabItem>
+
+        <controls:MetroTabItem Header="  DIMMER  " Visibility="Collapsed">
+            <views2:DimmerTesterView DataContext="{Binding DimmerTesterViewModel}" />
+        </controls:MetroTabItem>
+
+        <controls:MetroTabItem Header="  AUDIO TTS  " >
+            <views1:AudioTextToSpeechTesterView DataContext="{Binding AudioTextToSpeechTesterViewModel}" />
+        </controls:MetroTabItem>
+    </controls:MetroAnimatedTabControl>
+    
+</controls:MetroWindow>

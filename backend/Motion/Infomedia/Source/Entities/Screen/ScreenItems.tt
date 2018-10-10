@@ -1,0 +1,247 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="ScreenItems.ttinclude" #>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using Gorba.Common.Configuration.Infomedia.Common;
+using Gorba.Common.Configuration.Infomedia.Layout;
+
+using Gorba.Motion.Infomedia.Entities;
+
+<#
+    var entitiesFile = @"..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.xml";
+    this.entities = Entities.LoadFrom(Host.ResolvePath(entitiesFile));
+    
+    var screenItemsFile = @"ScreenItems.xml";
+    this.changes = ScreenItems.LoadFrom(Host.ResolvePath(screenItemsFile));
+
+    // this template is only about the "Layout" namespace
+    var layoutNamespace = this.entities.Namespaces.Find(ns => ns.Name == "Layout");
+    
+    this.screenItems = this.changes.ApplyTo(layoutNamespace.Classes.OfType<ElementClass>());
+
+    #>
+namespace Gorba.Motion.Infomedia.Entities.Screen
+{
+    <#
+    // generate all classes in this namespace
+    foreach (var clazz in this.screenItems)
+    {
+        this.GenerateClass(clazz);
+    }
+    #>
+
+}
+
+<#+
+private Entities entities;
+private ScreenItems changes;
+private List<ElementClass> screenItems;
+
+private void GenerateClass(ElementClass clazz)
+{
+    var isAbstract = clazz.Name.EndsWith("Base");
+    var itemClassName = GetItemClassName(clazz.Name);
+    var baseClass = string.IsNullOrEmpty(clazz.Base) ? "ItemBase" : GetItemClassName(clazz.Base);
+    
+    var modif = this.changes.GetItem(clazz.Name);
+    if (!isAbstract && modif != null && !modif.Presentable)
+    {
+        return;
+    }
+
+    var properties = clazz.Properties.OfType<TypedProperty>();
+
+    #>
+
+    public <#= isAbstract ? "abstract " : string.Empty #>partial class <#= itemClassName #> : <#= baseClass #>
+    {<#+
+    foreach (var property in properties)
+    {
+        var fieldName = GetFieldName(property.Name);
+        var propertyType = this.GetPropertyType(property);
+        #>
+
+        private <#= propertyType #> <#= fieldName #>;<#+
+    }
+    #>
+
+
+        public <#= itemClassName #>()
+        {<#+
+    foreach (var property in properties.OfType<Property>().Where(p => !string.IsNullOrEmpty(p.DefaultValue)))
+    {
+        var fieldName = GetFieldName(property.Name);
+        var defaultValue = property.Type == "string" ? '"' + property.DefaultValue + '"' : property.DefaultValue;
+        #>
+
+            this.<#= fieldName #> = <#= defaultValue #>;<#+
+    }
+    #>
+
+        }
+    <#+
+    
+    foreach (var property in properties)
+    {
+        var fieldName = GetFieldName(property.Name);
+        var propertyType = this.GetPropertyType(property);
+        var xmlAttribute = string.Empty;
+        if (propertyType == "TimeSpan")
+        {
+            xmlAttribute = "\r\n        [XmlIgnore]";
+        }
+
+        #>
+        <#= xmlAttribute #>
+        public <#= propertyType #> <#= property.Name #>
+        {
+            get
+            {
+                return this.<#= fieldName #>;
+            }
+
+            set
+            {
+                this.Set<#= property.Name #>(value, null);
+            }
+        }
+        <#+
+
+        if (propertyType != "TimeSpan")
+        {
+            continue;
+        }
+        
+        #>
+
+        [XmlAttribute("<#= property.Name #>", DataType = "duration")]
+        public string <#= property.Name #>Xml
+        {
+            get
+            {
+                return XmlConvert.ToString(this.<#= property.Name #>);
+            }
+
+            set
+            {
+                this.<#= property.Name #> = XmlConvert.ToTimeSpan(value);
+            }
+        }
+        <#+
+    }
+    
+    foreach (var property in properties)
+    {
+        var fieldName = GetFieldName(property.Name);
+        var propertyType = this.GetPropertyType(property);
+        #>
+
+        public void Set<#= property.Name #>(<#= propertyType #> value, PropertyChangeAnimation animation)
+        {
+            if (this.<#= fieldName #> == value)
+            {
+                return;
+            }
+
+            this.<#= fieldName #> = value;
+            this.RaisePropertyValueChanged(new AnimatedPropertyChangedEventArgs("<#= property.Name #>", value, animation));
+        }
+        <#+
+    }
+    #>
+    
+        protected override void SetProperty(string property, object value, PropertyChangeAnimation animation)
+        {
+            switch (property)
+            {<#+
+    foreach (var property in properties)
+    {
+        var fieldName = GetFieldName(property.Name);
+        var propertyType = this.GetPropertyType(property);
+        #>
+
+                case "<#= property.Name #>":
+                    this.Set<#= property.Name #>((<#= propertyType #>)value, animation);
+                    break;<#+
+    }
+    #>
+
+                default:
+                    base.SetProperty(property, value, animation);
+                    break;
+            }
+        }
+    }
+    <#+
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetItemClassName(string className)
+{
+    if (className == "Base")
+    {
+        return "ScreenItemBase";
+    }
+
+    return GetClassName(className, "Item");
+}
+
+/// <summary>
+/// Creates the real composer class name for an element.
+/// <summary>
+private static string GetClassName(string className, string category)
+{
+    return className.EndsWith("Base") ? className.Replace("Base", category + "Base") : className + category;
+}
+
+/// <summary>
+/// Creates the backing field name for a property.
+/// <summary>
+private static string GetFieldName(string propertyName)
+{
+    if (string.IsNullOrEmpty(propertyName))
+    {
+        return propertyName;
+    }
+
+    return char.ToLower(propertyName[0]) + propertyName.Substring(1);
+}
+
+/// <summary>
+/// Creates the property type name for a property.
+/// <summary>
+private string GetPropertyType(TypedProperty property)
+{
+    var composite = property as CompositeProperty;
+    if (composite == null)
+    {
+        return property.Type;
+    }
+
+    var element = this.screenItems.Find(e => e.Name == composite.Type);
+    if (element != null)
+    {
+        return GetItemClassName(element.Name);
+    }
+
+    return property.Type;
+}
+#>

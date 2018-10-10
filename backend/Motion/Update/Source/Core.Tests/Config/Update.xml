@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Update>
+  <Agent Enabled="true">
+    <!--
+    you can change the handled unit name manually by setting it here:
+    <UnitName>MyName</UnitName>
+    -->
+    <RestartApplications>
+      <Dependency Path ="D:\Presentation\main.im2">
+        <ExecutablePath>D:\Root\Progs\Composer\Composer.exe</ExecutablePath>
+      </Dependency>
+      <Dependency Path ="D:\Presentation\Images">
+        <ExecutablePath>D:\Root\Progs\Protran\Protran.exe</ExecutablePath>
+        <ExecutablePath>D:\Root\Progs\HardwareManager\HardwareManager.exe</ExecutablePath>
+      </Dependency>
+    </RestartApplications>
+  </Agent>
+  <Clients>
+    <USBUpdateClient Name="USB_E">
+      <USBDetectionTimeOut>PT20S</USBDetectionTimeOut>
+      <RepositoryBasePath>E:\Gorba\Update</RepositoryBasePath>
+      <PollInterval>PT30S</PollInterval>
+    </USBUpdateClient>
+  </Clients>
+  <Providers>
+    <MediUpdateProvider Name="MediProvider">
+    </MediUpdateProvider>
+  </Providers>
+  <Visualization>
+    <HideTimeout>PT30S</HideTimeout>
+    <ShowSplashScreen>true</ShowSplashScreen>
+    <UseLED>true</UseLED>
+  </Visualization>
+</Update>

@@ -1,0 +1,134 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ include file="..\..\..\..\..\Common\Configuration\Source\Infomedia\Entities.ttinclude" #>
+<#+
+public class ScreenItems
+{
+    [XmlElement("ScreenItem")]
+    public List<ScreenItemModification> Items { get; set; }
+
+    public static ScreenItems LoadFrom(string fileName)
+    {
+        var serializer = new XmlSerializer(typeof(ScreenItems));
+        using (var input = File.OpenRead(fileName))
+        {
+            return (ScreenItems)serializer.Deserialize(input);
+        }
+    }
+
+    public PropertyModification GetProperty(string itemName, string propertyName)
+    {
+        var item = this.GetItem(itemName);
+        if (item == null)
+        {
+            return null;
+        }
+
+        foreach (var prop in item.Properties)
+        {
+            if (prop.Name == propertyName)
+            {
+                return prop;
+            }
+        }
+
+        return null;
+    }
+
+    public ScreenItemModification GetItem(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            return null;
+        }
+
+        foreach (var item in this.Items)
+        {
+            if (item.Name == name)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public List<ElementClass> ApplyTo(IEnumerable<ElementClass> elements)
+    {
+        var items = new List<ElementClass>();
+        foreach (var element in elements)
+        {
+            var modif = this.GetItem(element.Name);
+            if (modif == null || modif.Action == ItemAction.None)
+            {
+                items.Add(element);
+                continue;
+            }
+
+            if (modif.Action == ItemAction.Remove)
+            {
+                continue;
+            }
+            
+            items.Add(element);
+            foreach (var propertyModif in modif.Properties)
+            {
+                switch (propertyModif.Action)
+                {
+                    case PropertyAction.Add:
+                        element.Properties.Add(propertyModif);
+                        break;
+                    case PropertyAction.Remove:
+                        element.Properties.RemoveAll(p => p.Name == propertyModif.Name);
+                        break;
+                }
+            }
+        }
+
+        return items;
+    }
+}
+
+public class ScreenItemModification
+{
+    public ScreenItemModification()
+    {
+        this.Presentable = true;
+    }
+
+    [XmlAttribute]
+    public string Name { get; set; }
+    
+    [XmlAttribute]
+    public ItemAction Action { get; set; }
+    
+    [XmlAttribute]
+    public bool Presentable { get; set; }
+    
+    [XmlElement("Property")]
+    public List<PropertyModification> Properties { get; set; }
+}
+
+public enum ItemAction
+{
+    None,
+    Remove,
+    Modify
+}
+
+public class PropertyModification : Property
+{
+    [XmlAttribute]
+    public PropertyAction Action { get; set; }
+}
+
+public enum PropertyAction
+{
+    None,
+    Add,
+    Remove
+}
+#>

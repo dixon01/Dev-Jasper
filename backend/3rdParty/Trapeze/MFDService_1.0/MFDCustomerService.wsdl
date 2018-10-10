@@ -1,0 +1,418 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name='ServiceInterface' targetNamespace='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+            xmlns='http://schemas.xmlsoap.org/wsdl/'
+            xmlns:tns='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+            xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+            xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+            xmlns:suds='http://www.w3.org/2000/wsdl/suds'
+            xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+            xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+            xmlns:ns2='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+            xmlns:ns1='http://schemas.microsoft.com/clr/ns/System'
+            xmlns:ns0='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+            xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'>
+    <types>
+        <schema targetNamespace='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+                xmlns='http://www.w3.org/2001/XMLSchema'
+                elementFormDefault='unqualified' attributeFormDefault='unqualified'>
+            <element name='StopInfoType' type='ns0:StopInfoType'/>
+            <complexType name='StopInfoType'>
+                <all>
+                        <element name='StopID' type='xsd:int'/>
+                        <element name='StopNumber' type='xsd:int'/>
+                        <element name='StopLongDesc' type='xsd:string'/>
+                        <element name='StopOBCDesc' type='xsd:string'/>
+                        <element name='StopSymbol' type='xsd:string'/>
+                        <element name='ArrivalTime' type='xsd:int'/>
+                        <element name='DepartureTime' type='xsd:int'/>
+                </all>
+            </complexType>
+            <element name='PassengerInformation' type='ns0:PassengerInformation'/>
+            <complexType name='PassengerInformation'>
+                <all>
+                        <element name='Id' type='xsd:int'/>
+                        <element name='Body' type='xsd:string'/>
+                </all>
+            </complexType>
+            <element name='TransferInformation' type='ns0:TransferInformation'/>
+            <complexType name='TransferInformation'>
+                <all>
+                        <element name='StopId' type='xsd:int'/>
+                        <element name='TripKey' type='xsd:int'/>
+                        <element name='PlannedDepartureTime' type='xsd:int'/>
+                        <element name='CalculatedDepartureTime' type='xsd:int'/>
+                        <element name='RouteNumber' type='xsd:int'/>
+                        <element name='DestinationText' type='xsd:string'/>
+                        <element name='TrackText' type='xsd:string'/>
+                </all>
+            </complexType>
+        </schema>
+        <schema targetNamespace='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'
+                xmlns='http://www.w3.org/2001/XMLSchema'
+                elementFormDefault='unqualified' attributeFormDefault='unqualified'>
+            <import namespace='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService/MFD.MFDCustomerService%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull'/>
+            <complexType name='ArrayOfStopInfoType'>
+                    <complexContent>
+                            <restriction base='soapenc:Array'>
+                                    <attribute ref='soapenc:arrayType' wsdl:arrayType ='ns0:StopInfoType[]'/>
+                            </restriction>
+                    </complexContent>
+            </complexType>
+            <complexType name='ArrayOfPassengerInformation'>
+                    <complexContent>
+                            <restriction base='soapenc:Array'>
+                                    <attribute ref='soapenc:arrayType' wsdl:arrayType ='ns0:PassengerInformation[]'/>
+                            </restriction>
+                    </complexContent>
+            </complexType>
+            <complexType name='ArrayOfTransferInformation'>
+                    <complexContent>
+                            <restriction base='soapenc:Array'>
+                                    <attribute ref='soapenc:arrayType' wsdl:arrayType ='ns0:TransferInformation[]'/>
+                            </restriction>
+                    </complexContent>
+            </complexType>
+        </schema>
+    </types>
+
+    <message name='ServiceInterface.GetServiceStatusInput'>
+    </message>
+    <message name='ServiceInterface.GetServiceStatusOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetTripInfoInput'>
+        <part name='trpIdx' type='xsd:int'/>
+        <part name='patIdx' type='xsd:int'/>
+        <part name='routeNo' type='xsd:int'/>
+        <part name='runNo' type='xsd:int'/>
+        <part name='blockNo' type='xsd:int'/>
+        <part name='stopPoints' type='ns2:ArrayOfStopInfoType'/>
+        <part name='direction' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.SetTripInfoOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.ActivateNewTripInput'>
+        <part name='trpIdx' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.ActivateNewTripOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetReleaseDoorInput'>
+    </message>
+    <message name='ServiceInterface.SetReleaseDoorOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetNextStopInput'>
+        <part name='stopID' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.SetNextStopOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetDateTimeInput'>
+        <part name='datetime' type='xsd:string'/>
+    </message>
+    <message name='ServiceInterface.SetDateTimeOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.ResetInput'>
+    </message>
+    <message name='ServiceInterface.ResetOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.GetIFVersionInput'>
+    </message>
+    <message name='ServiceInterface.GetIFVersionOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetIBISHeartbeatInput'>
+        <part name='state' type='xsd:boolean'/>
+    </message>
+    <message name='ServiceInterface.SetIBISHeartbeatOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.GetErrorDetailsInput'>
+        <part name='type' type='xsd:int'/>
+        <part name='number' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.GetErrorDetailsOutput'>
+        <part name='return' type='xsd:string'/>
+    </message>
+
+    <message name='ServiceInterface.SetPassengerInfoInput'>
+        <part name='passengerInformationList' type='ns2:ArrayOfPassengerInformation'/>
+    </message>
+    <message name='ServiceInterface.SetPassengerInfoOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.DeletePassengerInfoInput'>
+        <part name='informationID' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.DeletePassengerInfoOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.SetTransferInformationInput'>
+        <part name='transferInformationList' type='ns2:ArrayOfTransferInformation'/>
+    </message>
+    <message name='ServiceInterface.SetTransferInformationOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.UpdateTransferInformationInput'>
+        <part name='position' type='xsd:int'/>
+        <part name='transferInfo' type='ns0:TransferInformation'/>
+    </message>
+    <message name='ServiceInterface.UpdateTransferInformationOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <message name='ServiceInterface.DeleteTransferInformationInput'>
+        <part name='tripKey' type='xsd:int'/>
+        <part name='stopId' type='xsd:int'/>
+    </message>
+    <message name='ServiceInterface.DeleteTransferInformationOutput'>
+        <part name='return' type='xsd:int'/>
+    </message>
+
+    <portType name='ServiceInterfacePortType'>
+        <operation name='GetServiceStatus'>
+            <input name='GetServiceStatusRequest' message='tns:ServiceInterface.GetServiceStatusInput'/>
+            <output name='GetServiceStatusResponse' message='tns:ServiceInterface.GetServiceStatusOutput'/>
+        </operation>
+        <operation name='SetTripInfo' parameterOrder='trpIdx patIdx routeNo runNo blockNo stopPoints direction'>
+            <input name='SetTripInfoRequest' message='tns:ServiceInterface.SetTripInfoInput'/>
+            <output name='SetTripInfoResponse' message='tns:ServiceInterface.SetTripInfoOutput'/>
+        </operation>
+        <operation name='ActivateNewTrip' parameterOrder='trpIdx'>
+            <input name='ActivateNewTripRequest' message='tns:ServiceInterface.ActivateNewTripInput'/>
+            <output name='ActivateNewTripResponse' message='tns:ServiceInterface.ActivateNewTripOutput'/>
+        </operation>
+        <operation name='SetReleaseDoor'>
+            <input name='SetReleaseDoorRequest' message='tns:ServiceInterface.SetReleaseDoorInput'/>
+            <output name='SetReleaseDoorResponse' message='tns:ServiceInterface.SetReleaseDoorOutput'/>
+        </operation>
+        <operation name='SetNextStop' parameterOrder='stopID'>
+            <input name='SetNextStopRequest' message='tns:ServiceInterface.SetNextStopInput'/>
+            <output name='SetNextStopResponse' message='tns:ServiceInterface.SetNextStopOutput'/>
+        </operation>
+        <operation name='SetDateTime' parameterOrder='datetime'>
+            <input name='SetDateTimeRequest' message='tns:ServiceInterface.SetDateTimeInput'/>
+            <output name='SetDateTimeResponse' message='tns:ServiceInterface.SetDateTimeOutput'/>
+        </operation>
+        <operation name='Reset'>
+            <input name='ResetRequest' message='tns:ServiceInterface.ResetInput'/>
+            <output name='ResetResponse' message='tns:ServiceInterface.ResetOutput'/>
+        </operation>
+        <operation name='GetIFVersion'>
+            <input name='GetIFVersionRequest' message='tns:ServiceInterface.GetIFVersionInput'/>
+            <output name='GetIFVersionResponse' message='tns:ServiceInterface.GetIFVersionOutput'/>
+        </operation>
+        <operation name='SetIBISHeartbeat' parameterOrder='state'>
+            <input name='SetIBISHeartbeatRequest' message='tns:ServiceInterface.SetIBISHeartbeatInput'/>
+            <output name='SetIBISHeartbeatResponse' message='tns:ServiceInterface.SetIBISHeartbeatOutput'/>
+        </operation>
+        <operation name='GetErrorDetails' parameterOrder='type number'>
+            <input name='GetErrorDetailsRequest' message='tns:ServiceInterface.GetErrorDetailsInput'/>
+            <output name='GetErrorDetailsResponse' message='tns:ServiceInterface.GetErrorDetailsOutput'/>
+        </operation>
+        <operation name='SetPassengerInfo' parameterOrder='passengerInformationList'>
+            <input name='SetPassengerInfoRequest' message='tns:ServiceInterface.SetPassengerInfoInput'/>
+            <output name='SetPassengerInfoResponse' message='tns:ServiceInterface.SetPassengerInfoOutput'/>
+        </operation>
+        <operation name='DeletePassengerInfo' parameterOrder='informationID'>
+            <input name='DeletePassengerInfoRequest' message='tns:ServiceInterface.DeletePassengerInfoInput'/>
+            <output name='DeletePassengerInfoResponse' message='tns:ServiceInterface.DeletePassengerInfoOutput'/>
+        </operation>
+        <operation name='SetTransferInformation' parameterOrder='transferInformationList'>
+            <input name='SetTransferInformationRequest' message='tns:ServiceInterface.SetTransferInformationInput'/>
+            <output name='SetTransferInformationResponse' message='tns:ServiceInterface.SetTransferInformationOutput'/>
+        </operation>
+        <operation name='UpdateTransferInformation' parameterOrder='position transferInfo'>
+            <input name='UpdateTransferInformationRequest' message='tns:ServiceInterface.UpdateTransferInformationInput'/>
+            <output name='UpdateTransferInformationResponse' message='tns:ServiceInterface.UpdateTransferInformationOutput'/>
+        </operation>
+        <operation name='DeleteTransferInformation' parameterOrder='tripKey stopId'>
+            <input name='DeleteTransferInformationRequest' message='tns:ServiceInterface.DeleteTransferInformationInput'/>
+            <output name='DeleteTransferInformationResponse' message='tns:ServiceInterface.DeleteTransferInformationOutput'/>
+        </operation>
+    </portType>
+
+    <binding name='ServiceInterfaceBinding' type='tns:ServiceInterfacePortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <suds:class type='ns0:ServiceInterface' rootType='MarshalByRefObject'>
+        </suds:class>
+        <suds:class type='ns0:StopInfoType'>
+        </suds:class>
+        <suds:class type='ns0:PassengerInformation'>
+        </suds:class>
+        <suds:class type='ns0:TransferInformation'>
+        </suds:class>
+        <operation name='GetServiceStatus'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#GetServiceStatus'/>
+            <suds:method attributes='public'/>
+            <input name='GetServiceStatusRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='GetServiceStatusResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetTripInfo'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetTripInfo'/>
+            <suds:method attributes='public'/>
+            <input name='SetTripInfoRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetTripInfoResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='ActivateNewTrip'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#ActivateNewTrip'/>
+            <suds:method attributes='public'/>
+            <input name='ActivateNewTripRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='ActivateNewTripResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetReleaseDoor'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetReleaseDoor'/>
+            <suds:method attributes='public'/>
+            <input name='SetReleaseDoorRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetReleaseDoorResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetNextStop'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetNextStop'/>
+            <suds:method attributes='public'/>
+            <input name='SetNextStopRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetNextStopResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetDateTime'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetDateTime'/>
+            <suds:method attributes='public'/>
+            <input name='SetDateTimeRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetDateTimeResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='Reset'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#Reset'/>
+            <suds:method attributes='public'/>
+            <input name='ResetRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='ResetResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='GetIFVersion'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#GetIFVersion'/>
+            <suds:method attributes='public'/>
+            <input name='GetIFVersionRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='GetIFVersionResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetIBISHeartbeat'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetIBISHeartbeat'/>
+            <suds:method attributes='public'/>
+            <input name='SetIBISHeartbeatRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetIBISHeartbeatResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='GetErrorDetails'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#GetErrorDetails'/>
+            <suds:method attributes='public'/>
+            <input name='GetErrorDetailsRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='GetErrorDetailsResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetPassengerInfo'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetPassengerInfo'/>
+            <suds:method attributes='public'/>
+            <input name='SetPassengerInfoRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetPassengerInfoResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='DeletePassengerInfo'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#DeletePassengerInfo'/>
+            <suds:method attributes='public'/>
+            <input name='DeletePassengerInfoRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='DeletePassengerInfoResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='SetTransferInformation'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#SetTransferInformation'/>
+            <suds:method attributes='public'/>
+            <input name='SetTransferInformationRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='SetTransferInformationResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='UpdateTransferInformation'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#UpdateTransferInformation'/>
+            <suds:method attributes='public'/>
+            <input name='UpdateTransferInformationRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='UpdateTransferInformationResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+        <operation name='DeleteTransferInformation'>
+            <soap:operation soapAction='http://schemas.microsoft.com/clr/nsassem/MFD.MFDCustomerService.ServiceInterface/MFD.MFDCustomerService#DeleteTransferInformation'/>
+            <suds:method attributes='public'/>
+            <input name='DeleteTransferInformationRequest'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </input>
+            <output name='DeleteTransferInformationResponse'>
+                <soap:body use='encoded' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' namespace='http://nrhi.ch/ibisplus/services/MFDCustomerService/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='ServiceInterfaceService'>
+        <port name='ServiceInterfacePort' binding='tns:ServiceInterfaceBinding'>
+            <soap:address location='http://localhost:9091/MFDCustomerService.soap'/>
+        </port>
+    </service>
+</definitions>

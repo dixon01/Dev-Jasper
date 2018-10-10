@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C6B5185-B035-465F-A760-7B7D45B3FBAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gorba.Common.Gioom.Core</RootNamespace>
+    <AssemblyName>Gorba.Common.Gioom.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\3rdParty\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyProductInfo.cs">
+      <Link>Properties\SolutionAssemblyProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="GioomClient.cs" />
+    <Compile Include="GioomClientBase.cs" />
+    <Compile Include="LocalMessageHandler.cs" />
+    <Compile Include="MessageHandler.cs" />
+    <Compile Include="Messages\EnumFlagValuesInfo.cs" />
+    <Compile Include="Messages\EnumValuesInfo.cs" />
+    <Compile Include="Messages\FlagValuesInfo.cs" />
+    <Compile Include="Messages\IntegerValuesInfo.cs" />
+    <Compile Include="Messages\PortChangeMessageBase.cs" />
+    <Compile Include="Messages\PortChangeNotification.cs" />
+    <Compile Include="Messages\PortChangeRegistration.cs" />
+    <Compile Include="Messages\PortChangeRequest.cs" />
+    <Compile Include="Messages\PortInfo.cs" />
+    <Compile Include="Messages\QueryPortsRequest.cs" />
+    <Compile Include="Messages\QueryPortsResponse.cs" />
+    <Compile Include="Messages\ValuesInfoBase.cs" />
+    <Compile Include="PortInfoWrapper.cs" />
+    <Compile Include="RemoteGioomClient.cs" />
+    <Compile Include="Utility\PortListener.cs" />
+    <Compile Include="Values\EnumValues.FX20.cs" />
+    <Compile Include="Values\EnumFlagValues.cs" />
+    <Compile Include="Values\EnumValues.cs" />
+    <Compile Include="Values\FlagValues.cs" />
+    <Compile Include="Values\IntegerValues.cs" />
+    <Compile Include="Values\IOValue.cs" />
+    <Compile Include="IPort.cs" />
+    <Compile Include="IPortInfo.cs" />
+    <Compile Include="PortBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemotePort.cs" />
+    <Compile Include="SimplePort.cs" />
+    <Compile Include="Values\ValuesBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Medi\Source\Core\Medi.Core.csproj">
+      <Project>{2B005D69-E10B-4CE6-B9E8-3F3FD1F2C874}</Project>
+      <Name>Medi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Source\Core\Utility.Core.csproj">
+      <Project>{8A10E3D6-2C5D-4A72-97EF-5A412663920C}</Project>
+      <Name>Utility.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
