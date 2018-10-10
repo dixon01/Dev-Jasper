@@ -12550,11 +12550,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Dev\\jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\prototypes.csproj",
+      "projectUniqueName": "c:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\prototypes.csproj",
       "projectName": "prototypes",
-      "projectPath": "c:\\Dev\\jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\prototypes.csproj",
+      "projectPath": "c:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\prototypes.csproj",
       "packagesPath": "C:\\Users\\nbontha\\.nuget\\packages\\",
-      "outputPath": "c:\\Dev\\jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\obj\\",
+      "outputPath": "c:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Identity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
