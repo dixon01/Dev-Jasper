@@ -10,9 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ResourcesAPI
 {
+    using System.IO;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -26,6 +29,11 @@ namespace ResourcesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+              services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Resources API", Version = "v1" });
+            });
+            services.AddMvcCore().AddApiExplorer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +50,14 @@ namespace ResourcesAPI
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+              app.UseSwagger(c =>
+            {
+            });
+            app.UseSwaggerUI(c =>
+            {                
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Resources API");
+            });
         }
     }
 }
