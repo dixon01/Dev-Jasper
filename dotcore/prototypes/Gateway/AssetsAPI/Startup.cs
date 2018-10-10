@@ -31,8 +31,6 @@ namespace AssetsAPI
              services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Assets API", Version = "v1" });
-              //  var xmlPath = Path.Combine(basePath, "AssetsAPI.xml");
-              //  c.IncludeXmlComments(xmlPath);
             });
             services.AddMvcCore().AddApiExplorer();
         }
