@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"log"
 	"net/http"
@@ -237,19 +236,9 @@ func main() {
 	projects = append(projects, im2)
 	//im2xml, _ := LoadXMLTest(".\\simple\\test.im2")
 	//	projectsXML = append(projectsXML, im2xml)
-	v := new(HostProperties)
-	err := xml.Unmarshal([]byte(data), v)
-	if err != nil {
-		fmt.Printf("error: %v", err)
-		return
-	}
-	// fmt.Printf("v = %#v\n", v)
-	tags := make(map[string]string)
-	for _, tag := range v.Tags {
-		tags[tag.Key] = tag.Value
-	}
-	fmt.Printf("map = %#v\n", tags)
-	//litter.Dump(im2xml)
+	//LoadXMLAttributesAndValues()
+
+	LoadIm2XML()
 
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")

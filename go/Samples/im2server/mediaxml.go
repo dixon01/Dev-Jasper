@@ -2,47 +2,51 @@ package main
 
 import (
 	"encoding/xml"
+	"fmt"
 )
 
-var data = `<HostProperties>
-<tag name="HOST_END">Thu Feb 20 12:38:24 2014</tag>
-<tag name="patch-summary-total-cves">4</tag>
-<tag name="cpe-1">cpe:/a:openbsd:openssh:5.6 -&gt; OpenBSD OpenSSH 5.6</tag>
-<tag name="cpe-0">cpe:/o:vmware:esx_server</tag>
-<tag name="system-type">hypervisor</tag>
-<tag name="operating-system">VMware ESXi</tag>
-<tag name="mac-address">00:00:00:00:00:00</tag>
-<tag name="traceroute-hop-0">172.28.28.29</tag>
-<tag name="host-ip">172.28.28.29</tag>
-<tag name="host-fqdn">foobar.com</tag>
-<tag name="HOST_START">Thu Feb 20 12:30:14 2014</tag>
-</HostProperties>`
-
-type HostProperties struct {
-	XMLName xml.Name `xml:HostProperties"`
-	Tags    []Tag    `xml:"tag"`
+type PhysicalScreenList struct {
+	XMLName         xml.Name         `xml:"PhysicalScreenList"`
+	PhysicalScreens []PhysicalScreen `xml:"PhysicalScreen"`
 }
 
-type Tag struct {
-	Key   string `xml:"name,attr"`
-	Value string `xml:",chardata"`
+type PhysicalScreen struct {
+	Name   string `xml:"Name,attr"`
+	Type   string `xml:"Type,attr"`
+	Width  string `xml:"Width,attr"`
+	Height string `xml:"Height,attr"`
 }
 
-// func LoadXML(filename string) (InfomediaXML, error) {
-// 	fmt.Println("loading XML media file ...")
-// 	var im2xml InfomediaXML
-// 	im2File, err := os.Open(filename)
-// 	defer im2File.Close()
-// 	if err != nil {
-// 		return im2xml, err
-// 	}
-// 	xmlParser := xml.NewDecoder(im2File)
-// 	err = xmlParser.Decode(&im2xml)
-// 	if err != nil {
-// 		fmt.Println("Error loading media xml file. ")
-// 		return im2xml, err
-// 	}
-// 	fmt.Println("loading media xml file ...success ")
-// 	return im2xml, err
-
+// type AppList struct {
+// 	XMLName xml.Name `xml:"applist"`
+// 	Apps    []App    `xml:"app"`
 // }
+
+func LoadIm2XML() {
+	var data = `
+		<?xml version="1.0" encoding="UTF-8"?>
+    <PhysicalScreenList>
+		<PhysicalScreen Name="1366x768" Type="TFT" Width="1366" Height="768" />
+		<PhysicalScreen Name="1366x768" Type="TFT" Width="1366" Height="768" />
+    </PhysicalScreenList>
+		`
+
+	// data := `
+	// <?xml version="1.0" encoding="UTF-8"?>
+	// <applist>
+	//     <app app_id="1234" app_name="abc"/>
+	//     <app app_id="5678" app_name="def"/>
+	// </applist>
+	// `
+
+	var media PhysicalScreenList
+	err := xml.Unmarshal([]byte(data), &media)
+	if err != nil {
+		fmt.Printf("error: %v", err)
+		return
+	}
+	fmt.Printf("PhysicalScreen Name:: %q\n", media.PhysicalScreens[0].Name)
+	fmt.Printf("PhysicalScreen Type:: %q\n", media.PhysicalScreens[0].Type)
+	fmt.Printf("PhysicalScreen Width:: %q\n", media.PhysicalScreens[0].Width)
+	fmt.Printf("PhysicalScreen Height:: %q\n", media.PhysicalScreens[0].Height)
+}
