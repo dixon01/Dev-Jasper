@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Infomedia struct {
+type InfomediaJson struct {
 	PhysicalScreens struct {
 		PhysicalScreen struct {
 			Name   string `json:"Name"`
@@ -171,9 +171,9 @@ type Infomedia struct {
 	Created  string `json:"Created"`
 }
 
-func LoadIm2(filename string) (Infomedia, error) {
+func LoadIm2(filename string) (InfomediaJson, error) {
 	fmt.Println("loading media file ...")
-	var im2 Infomedia
+	var im2 InfomediaJson
 	im2File, err := os.Open(filename)
 	defer im2File.Close()
 	if err != nil {
@@ -186,7 +186,7 @@ func LoadIm2(filename string) (Infomedia, error) {
 
 }
 
-var projects []Infomedia
+var projects []InfomediaJson
 
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	//params := mux.Vars(req)
@@ -197,7 +197,7 @@ func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(&Infomedia{})
+	json.NewEncoder(w).Encode(&InfomediaJson{})
 }
 
 func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
@@ -208,7 +208,7 @@ func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
 func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("calling CreateProjectEndPoint ...")
 	// params := mux.Vars(req)
-	var project Infomedia
+	var project InfomediaJson
 	// _ = json.NewDecoder(req.Body).Decode(&project)
 	// //	project.ProjectID = params["projectid"]
 	// projects = append(projects, project)
@@ -234,11 +234,14 @@ func main() {
 	router := mux.NewRouter()
 	im2, _ := LoadIm2(".\\simple\\main.json")
 	projects = append(projects, im2)
-	//im2xml, _ := LoadXMLTest(".\\simple\\test.im2")
-	//	projectsXML = append(projectsXML, im2xml)
-	//LoadXMLAttributesAndValues()
+	PrintHostProperties()
 
-	LoadIm2XML()
+	im2xml, _ := LoadIm2FromXMLTest(".\\simple\\test.im2")
+	fmt.Printf("Im2 File Loaded: %q\n", im2xml)
+	//	projectsXML = append(projectsXML, im2xml)
+	//  LoadXMLAttributesAndValues()
+	//  im2xml, _ := LoadIm2FromXML(".\\simple\\main.im2")
+	//	fmt.Printf("Im2 File Loaded: %q\n", im2xml)
 
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
