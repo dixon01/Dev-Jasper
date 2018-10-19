@@ -1,0 +1,1976 @@
+<?xml version="1.0"?>
+<Infomedia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="2.0" Created="2016-08-10 13:09:29">
+  <PhysicalScreens>
+    <PhysicalScreen Name="1366x768" Type="TFT" Width="1366" Height="768" />
+    <PhysicalScreen Name="Now Arriving Audio" Type="Audio" Id="1" Width="0" Height="0" />
+    <PhysicalScreen Name="Transfers Audio" Type="Audio" Id="3" Width="0" Height="0" />
+  </PhysicalScreens>
+  <VirtualDisplays>
+    <VirtualDisplay Name="TFT Display_1" CyclePackage="CyclePackage TFT 1366x768" Width="1366" Height="768" />
+    <VirtualDisplay Name="TFT Display_1 (2)" CyclePackage="CyclePackage Audio 0x0" Width="0" Height="0" />
+    <VirtualDisplay Name="TFT Display_1 (4)" CyclePackage="CyclePackage Audio 0x0 (3)" Width="0" Height="0" />
+  </VirtualDisplays>
+  <MasterPresentation>
+    <MasterCycles>
+      <MasterCycle Name="Master cycle">
+        <MasterSection Duration="P1D" Layout="Standard Master Layout" />
+      </MasterCycle>
+    </MasterCycles>
+    <MasterEventCycles />
+    <MasterLayouts>
+      <MasterLayout Name="Standard Master Layout">
+        <PhysicalScreen Ref="1366x768">
+          <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="Now Arriving Audio">
+          <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1 (2)" />
+        </PhysicalScreen>
+        <PhysicalScreen Ref="Transfers Audio">
+          <VirtualDisplay X="0" Y="0" ZIndex="0" Ref="TFT Display_1 (4)" />
+        </PhysicalScreen>
+      </MasterLayout>
+    </MasterLayouts>
+  </MasterPresentation>
+  <Evaluations>
+    <Evaluation Name="DoorClose">
+      <And>
+        <StringCompare Value="0">
+          <Generic Lang="0" Table="105" Column="0" Row="0" />
+        </StringCompare>
+        <StringCompare Value="0">
+          <Generic Lang="0" Table="105" Column="1" Row="0" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="DoorOpen">
+      <Or>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="0" Row="0" />
+        </StringCompare>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="1" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="Line0">
+      <IntegerCompare Begin="0" End="0">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="LineBlank">
+      <StringCompare Value="">
+        <Generic Lang="0" Table="10" Column="0" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="MissingIBIS">
+      <StringCompare Value="0">
+        <Generic Lang="0" Table="0" Column="2" Row="0" />
+      </StringCompare>
+    </Evaluation>
+    <Evaluation Name="SpecialLinePicture">
+      <CodeConversion FileName="codeconversion.csv" UseImage="true" />
+    </Evaluation>
+    <Evaluation Name="SpecialLineText">
+      <CodeConversion FileName="codeconversion.csv" UseImage="false" />
+    </Evaluation>
+    <Evaluation Name="StopIndex1to89">
+      <IntegerCompare Begin="1" End="89">
+        <Generic Lang="0" Table="10" Column="4" Row="0" />
+      </IntegerCompare>
+    </Evaluation>
+    <Evaluation Name="StopRequest">
+      <Or>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="2" Row="0" />
+        </StringCompare>
+        <StringCompare Value="1">
+          <Generic Lang="0" Table="105" Column="3" Row="0" />
+        </StringCompare>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="ConnectionsAvailable">
+      <Or>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="13" Column="2" Row="1" />
+          </StringCompare>
+        </Not>
+      </Or>
+    </Evaluation>
+    <Evaluation Name="FullStrip">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="EndStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="3" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="LastStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="Stops">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </StringCompare>
+        </Not>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+      </And>
+    </Evaluation>
+    <Evaluation Name="DisplayVersion">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="DestinationAvailable">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="11" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="Stop">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="0" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="BoardingFullStrip">
+      <Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </Not>
+    </Evaluation>
+    <Evaluation Name="BoardingEndStrip">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="2" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="NextStopT2S">
+      <Format Format="Next stop is: {0}">
+        <RegexReplace Pattern="KISSENA" Replacement=" kisseena">
+          <RegexReplace Pattern="\bS\b" Replacement=" south ">
+            <RegexReplace Pattern="\bN\b" Replacement=" north ">
+              <RegexReplace Pattern="\bE\b" Replacement=" east ">
+                <RegexReplace Pattern="\bW\b" Replacement=" west ">
+                  <RegexReplace Pattern="/" Replacement=" AND ">
+                    <RegexReplace Pattern="\bSQ(s?)\b" Replacement="SQUARE$1">
+                      <RegexReplace Pattern="\bPLZ(s?)\b" Replacement="PLAZA$1">
+                        <RegexReplace Pattern="\bPK(s?)\b" Replacement="PARK$1">
+                          <RegexReplace Pattern="\bPKWY(s?)\b" Replacement="PARKWAY$1">
+                            <RegexReplace Pattern="\bPT(s?)\b" Replacement="POINT$1">
+                              <RegexReplace Pattern="\bHWY(s?)\b" Replacement="HIGHWAY$1">
+                                <RegexReplace Pattern="\bEXP(s?)\b" Replacement="EXPRESSWAY$1">
+                                  <RegexReplace Pattern="\bRD(s?)\b" Replacement="ROAD$1">
+                                    <RegexReplace Pattern="\bTPK(s?)\b" Replacement="TURNPIKE$1">
+                                      <RegexReplace Pattern="\bDR(s?)\b" Replacement="DRIVE$1">
+                                        <RegexReplace Pattern="\bBLVD(s?)\b" Replacement="BOULEVARD$1">
+                                          <RegexReplace Pattern="\bBL(s?)\b" Replacement="BOULEVARD$1">
+                                            <RegexReplace Pattern="\bAV(s?)\b" Replacement="AVENUE$1">
+                                              <RegexReplace Pattern="\bST(s?)\b" Replacement="STREET$1">
+                                                <RegexReplace Pattern="(3)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1RD">
+                                                  <RegexReplace Pattern="(2)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1ND">
+                                                    <RegexReplace Pattern="(13)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                      <RegexReplace Pattern="(12)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                        <RegexReplace Pattern="(1)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1st">
+                                                          <RegexReplace Pattern="(11)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                            <RegexReplace Pattern="([0456789])\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                              <Generic Lang="0" Table="12" Column="0" Row="0" />
+                                                            </RegexReplace>
+                                                          </RegexReplace>
+                                                        </RegexReplace>
+                                                      </RegexReplace>
+                                                    </RegexReplace>
+                                                  </RegexReplace>
+                                                </RegexReplace>
+                                              </RegexReplace>
+                                            </RegexReplace>
+                                          </RegexReplace>
+                                        </RegexReplace>
+                                      </RegexReplace>
+                                    </RegexReplace>
+                                  </RegexReplace>
+                                </RegexReplace>
+                              </RegexReplace>
+                            </RegexReplace>
+                          </RegexReplace>
+                        </RegexReplace>
+                      </RegexReplace>
+                    </RegexReplace>
+                  </RegexReplace>
+                </RegexReplace>
+              </RegexReplace>
+            </RegexReplace>
+          </RegexReplace>
+        </RegexReplace>
+      </Format>
+    </Evaluation>
+    <Evaluation Name="BoardingLastStripLine">
+      <And>
+        <Not>
+          <StringCompare Value="">
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </StringCompare>
+        </Not>
+        <StringCompare Value="">
+          <Generic Lang="0" Table="12" Column="0" Row="1" />
+        </StringCompare>
+      </And>
+    </Evaluation>
+    <Evaluation Name="OffRoute">
+      <Generic Lang="0" Table="10" Column="12" Row="0" />
+    </Evaluation>
+    <Evaluation Name="OnRoute">
+      <Not>
+        <Generic Lang="0" Table="10" Column="12" Row="0" />
+      </Not>
+    </Evaluation>
+  </Evaluations>
+  <Cycles>
+    <StandardCycles>
+      <StandardCycle Name="Masterlayout Cycle ">
+        <StandardSection Enabled="false" Duration="PT15S" Layout="Service Alert layout" />
+        <StandardSection Duration="PT10S" Layout="Transfers layout NYCT">
+          <Enabled>
+            <And>
+              <Evaluation Ref="ConnectionsAvailable" />
+              <Evaluation Ref="DestinationAvailable" />
+              <Evaluation Ref="Stops" />
+            </And>
+          </Enabled>
+        </StandardSection>
+        <PoolSection Duration="PT10S" Layout="Between Stops AD layout NYCT" Pool="Small Ad pool" VideoEndMode="Adapt" Frame="1">
+          <Enabled>
+            <And>
+              <Evaluation Ref="DestinationAvailable" />
+              <Evaluation Ref="Stop" />
+            </And>
+          </Enabled>
+        </PoolSection>
+        <StandardSection Duration="PT10S" Layout="Route Destination layout NYCT">
+          <Enabled>
+            <And>
+              <Not>
+                <StringCompare Value="">
+                  <Generic Lang="0" Table="10" Column="0" Row="0" />
+                </StringCompare>
+              </Not>
+              <Evaluation Ref="DestinationAvailable" />
+            </And>
+          </Enabled>
+        </StandardSection>
+        <StandardSection Duration="PT10S" Layout="Next Stop layout NYCT">
+          <Enabled>
+            <And>
+              <Evaluation Ref="Stops" />
+              <Evaluation Ref="DestinationAvailable" />
+            </And>
+          </Enabled>
+        </StandardSection>
+        <PoolSection Duration="PT5S" Layout="Slideshow" Pool="Slideshow pool" VideoEndMode="Adapt" Frame="0">
+          <Enabled>
+            <Not>
+              <Evaluation Ref="Stop" />
+            </Not>
+          </Enabled>
+        </PoolSection>
+        <PoolSection Duration="PT5S" Layout="Full Page Add layout NYCT" Pool="FullPageAd Pool" VideoEndMode="Adapt" Frame="0" />
+      </StandardCycle>
+      <StandardCycle Name="Standard Section">
+        <StandardSection Duration="PT10H" Layout="Standard Audio Layout 0" />
+      </StandardCycle>
+      <StandardCycle Name="New Cycle 2">
+        <StandardSection Duration="PT10H" Layout="Standard Audio Layout 2" />
+      </StandardCycle>
+    </StandardCycles>
+    <EventCycles>
+      <EventCycle Name="StopArrival Event Cycle ">
+        <Enabled>
+          <And>
+            <Generic Lang="0" Table="10" Column="5" Row="0" />
+            <Evaluation Ref="DestinationAvailable" />
+          </And>
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="5" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT30M" Layout="At Stop layout NYCT">
+          <Enabled>
+            <And>
+              <And>
+                <Evaluation Ref="DestinationAvailable" />
+                <Evaluation Ref="Stop" />
+              </And>
+              <Evaluation Ref="OnRoute" />
+            </And>
+          </Enabled>
+        </StandardSection>
+      </EventCycle>
+      <EventCycle Name="Customers Boarding Event Cycle">
+        <Enabled>
+          <Evaluation Ref="DoorOpen" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="105" Column="0" Row="0" />
+          <Generic Lang="0" Table="105" Column="1" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT23H59M59S" Layout="Customers board layout NYCT">
+          <Enabled>
+            <And>
+              <Evaluation Ref="DoorOpen" />
+              <Generic Lang="0" Table="10" Column="5" Row="0" />
+            </And>
+          </Enabled>
+        </StandardSection>
+      </EventCycle>
+      <EventCycle Name="Status Screen">
+        <Enabled>
+          <Evaluation Ref="DisplayVersion" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="20" Column="2" Row="90" />
+        </Trigger>
+        <StandardSection Duration="PT23H59M59S" Layout="Status Screen" />
+      </EventCycle>
+      <EventCycle Name="Approaching Stop Event Cycle ">
+        <Enabled>
+          <Generic Lang="0" Table="10" Column="5" Row="0" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="5" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT1S" Layout="Now Arriving Event Audio Layout" />
+      </EventCycle>
+      <EventCycle Name="Next Stop Event Cycle">
+        <Enabled>
+          <Not>
+            <Generic Lang="0" Table="10" Column="5" Row="0" />
+          </Not>
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="5" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT1S" Layout="Next Stop Event Audio Layout" />
+      </EventCycle>
+      <EventCycle Name="New Event Cycle 2">
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="0" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT1S" Layout="Transfers  Audio Layout" />
+      </EventCycle>
+      <EventCycle Name="Transfers Event Cycle">
+        <Trigger>
+          <Generic Lang="0" Table="12" Column="0" Row="0" />
+          <Generic Lang="0" Table="10" Column="5" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT1S" Layout="Transfers  Audio Layout" />
+      </EventCycle>
+      <EventCycle Name="Off Route Event Cycle">
+        <Enabled>
+          <Evaluation Ref="DestinationAvailable" />
+        </Enabled>
+        <Trigger>
+          <Generic Lang="0" Table="10" Column="12" Row="0" />
+        </Trigger>
+        <StandardSection Duration="PT1S" Layout="Route Destination layout NYCT" />
+      </EventCycle>
+    </EventCycles>
+  </Cycles>
+  <CyclePackages>
+    <CyclePackage Name="CyclePackage TFT 1366x768">
+      <StandardCycles>
+        <StandardCycle Ref="Masterlayout Cycle " />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="Status Screen" />
+        <EventCycle Ref="Customers Boarding Event Cycle" />
+        <EventCycle Ref="StopArrival Event Cycle " />
+        <EventCycle Ref="Off Route Event Cycle" />
+      </EventCycles>
+    </CyclePackage>
+    <CyclePackage Name="CyclePackage Audio 0x0">
+      <StandardCycles>
+        <StandardCycle Ref="Standard Section" />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="Approaching Stop Event Cycle " />
+        <EventCycle Ref="Next Stop Event Cycle" />
+        <EventCycle Ref="Transfers Event Cycle" />
+      </EventCycles>
+    </CyclePackage>
+    <CyclePackage Name="CyclePackage Audio 0x0 (3)">
+      <StandardCycles>
+        <StandardCycle Ref="New Cycle 2" />
+      </StandardCycles>
+      <EventCycles>
+        <EventCycle Ref="New Event Cycle 2" />
+      </EventCycles>
+    </CyclePackage>
+  </CyclePackages>
+  <Pools>
+    <Pool Name="Small Ad pool" BaseDirectory="Pools\Small Ad pool" />
+    <Pool Name="Slideshow pool" BaseDirectory="Pools\Slideshow pool" />
+    <Pool Name="FullPageAd Pool" BaseDirectory="Pools\FullPageAd Pool" />
+  </Pools>
+  <Layouts>
+    <Layout Name="Customers board layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Text X="1260" Y="311" Width="94" Height="19" ZIndex="0" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="Keep this text hidden.">
+          <Visible>
+            <Date Begin="2016-08-01" End="2016-08-02" />
+          </Visible>
+          <Font Face="Unispace" Height="10" Weight="100" Italic="false" Color="#eeeeee" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="566" Width="1194" Height="112" ZIndex="10" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="100" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="437" Width="1196" Height="97" ZIndex="9" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="100" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="16" Y="455" Width="55" Height="187" ZIndex="8" Filename="Images\BoardingEndStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingEndStrip" />
+          </Visible>
+        </Image>
+        <Image X="16" Y="455" Width="55" Height="56" ZIndex="7" Filename="Images\BoardingSingleStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingEndStrip" />
+          </Visible>
+        </Image>
+        <Image X="16" Y="455" Width="55" Height="313" ZIndex="6" Filename="Images\BoardingStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingFullStrip" />
+          </Visible>
+        </Image>
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="1" Filename="Images\head.jpg" />
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="2" Filename="Images\LowerArea.jpg" />
+        <Text X="97" Y="360" Width="410" Height="73" ZIndex="5" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="UPCOMING STOPS">
+          <Font Face="Franklin Gothic Demi" Height="50" Weight="100" Italic="false" Color="#1c6cb1" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="97" Y="138" Width="1175" Height="134" ZIndex="4" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFFF" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="10" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="71" Y="6" Width="1226" Height="176" ZIndex="3" Align="Center" Overflow="Scale" ScrollSpeed="-200" Value="WELCOME ABOARD">
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#65ade4" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="At Stop layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Image X="16" Y="189" Width="50" Height="59" ZIndex="12" Filename="Images\StopRequestedBullet.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+        </Image>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="10" Filename="Images\LastStripHead.jpg">
+          <Visible>
+            <Evaluation Ref="LastStrip" />
+          </Visible>
+        </Image>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="9" Filename="Images\EndStripLine.jpg">
+          <Visible>
+            <Evaluation Ref="EndStrip" />
+          </Visible>
+        </Image>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="8" Filename="Images\StripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="FullStrip" />
+          </Visible>
+        </Image>
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="2" Filename="Images\LowerArea.jpg" />
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="0" Filename="Images\head.jpg" />
+        <Image X="16" Y="189" Width="50" Height="117" ZIndex="1" Filename="Images\StripHead.jpg" Scaling="Scale" />
+        <Text X="100" Y="6" Width="962" Height="142" ZIndex="11" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="STOP REQUESTED">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="140" Weight="100" Italic="false" Color="#feff97" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="550" Width="1194" Height="125" ZIndex="7" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="420" Width="1196" Height="118" ZIndex="6" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="322" Width="806" Height="97" ZIndex="5" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="UPCOMING STOPS">
+          <Visible>
+            <Evaluation Ref="Stops" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="84" Weight="100" Italic="false" Color="#1c6cb1" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="156" Width="1244" Height="118" ZIndex="4" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFffff" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="2" Width="739" Height="165" ZIndex="3" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="THIS STOP">
+          <Visible>
+            <Not>
+              <Evaluation Ref="StopRequest" />
+            </Not>
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#ff8902" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="Between Stops AD layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Frame X="0" Y="300" Width="1366" Height="468" ZIndex="7" Id="1" />
+        <Image X="16" Y="189" Width="50" Height="59" ZIndex="6" Filename="Images\StopRequestedBullet.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+        </Image>
+        <Text X="100" Y="5" Width="962" Height="162" ZIndex="5" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="STOP REQUESTED">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#feff97" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="2" Width="788" Height="165" ZIndex="4" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="NEXT STOP">
+          <Visible>
+            <Not>
+              <Evaluation Ref="StopRequest" />
+            </Not>
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#0ecd99" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="143" Width="1244" Height="158" ZIndex="3" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFffff" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="16" Y="188" Width="50" Height="117" ZIndex="1" Filename="Images\NextStripHead.jpg" Scaling="Scale" />
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="2" Filename="Images\LowerArea.jpg" />
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="0" Filename="Images\head.jpg" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Service Alert layout">
+      <Resolution Width="1366" Height="768">
+        <Text X="65" Y="326" Width="1234" Height="388" ZIndex="3" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="90" Weight="100" Italic="false" Color="#FFFFFF" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="65" Y="160" Width="923" Height="93" ZIndex="2" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="SERVICE ALERT">
+          <Font Face="Franklin Gothic Demi" Height="95" Weight="100" Italic="false" Color="#FFFF0000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="65" Y="18" Width="344" Height="129" ZIndex="1" Align="Left" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="120" Weight="100" Italic="false" Color="#525156" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="10" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="0" Width="1366" Height="768" ZIndex="0" Filename="Images\ServiceAlertTemplate.jpg" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Transfers layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Image X="16" Y="188" Width="50" Height="117" ZIndex="1" Filename="Images\NextStripHead.jpg" Scaling="Scale" />
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="2" Filename="Images\LowerArea.jpg" />
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="0" Filename="Images\head.jpg" />
+        <Image X="16" Y="189" Width="50" Height="59" ZIndex="16" Filename="Images\StopRequestedBullet.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+        </Image>
+        <Image X="824" Y="670" Width="80" Height="80" ZIndex="15" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="9" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="9" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="734" Y="670" Width="80" Height="80" ZIndex="14" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="8" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="8" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="644" Y="670" Width="80" Height="80" ZIndex="13" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="7" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="7" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="554" Y="670" Width="80" Height="80" ZIndex="12" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="6" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="6" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="464" Y="670" Width="80" Height="80" ZIndex="11" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="5" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="5" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="374" Y="670" Width="80" Height="80" ZIndex="10" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="4" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="4" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="284" Y="670" Width="80" Height="80" ZIndex="9" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="3" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="3" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="194" Y="670" Width="80" Height="80" ZIndex="8" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="2" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="2" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Image X="104" Y="670" Width="80" Height="80" ZIndex="7" Scaling="Scale">
+          <Filename>
+            <CsvMapping FileName="LineIconMapping.csv" OutputFormat="{1}">
+              <DefaultValue>
+                <Generic Lang="0" Table="13" Column="2" Row="1" />
+              </DefaultValue>
+              <Match Column="0">
+                <Generic Lang="0" Table="13" Column="2" Row="1" />
+              </Match>
+            </CsvMapping>
+          </Filename>
+        </Image>
+        <Text X="104" Y="416" Width="1164" Height="231" ZIndex="6" Align="Left" Overflow="WrapScale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="100" Weight="100" Italic="false" Color="#525156" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="13" Column="2" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="322" Width="1067" Height="87" ZIndex="5" Align="Left" Overflow="Wrap" ScrollSpeed="-200" Value="TRANSFERS AVAILABLE FOR">
+          <Visible>
+            <Evaluation Ref="ConnectionsAvailable" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="84" Weight="100" Italic="false" Color="#1c6cb1" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="143" Width="1244" Height="157" ZIndex="4" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFffff" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="2" Width="788" Height="165" ZIndex="3" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="NEXT STOP">
+          <Visible>
+            <Not>
+              <Evaluation Ref="StopRequest" />
+            </Not>
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#0ecd99" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="Next Stop layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Text X="100" Y="5" Width="1263" Height="162" ZIndex="12" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="STOP REQUESTED">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#feff97" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="550" Width="1196" Height="144" ZIndex="11" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="2" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="420" Width="1196" Height="144" ZIndex="10" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="322" Width="766" Height="98" ZIndex="3" Align="Left" Overflow="Wrap" ScrollSpeed="-200" Value="UPCOMING STOPS">
+          <Visible>
+            <Evaluation Ref="Stops" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="84" Weight="100" Italic="false" Color="#1c6cb1" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="8" Filename="Images\LastStripHead.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="LastStrip" />
+          </Visible>
+        </Image>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="6" Filename="Images\StripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="FullStrip" />
+          </Visible>
+        </Image>
+        <Image X="14" Y="300" Width="55" Height="468" ZIndex="7" Filename="Images\EndStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="EndStrip" />
+          </Visible>
+        </Image>
+        <Image X="16" Y="188" Width="50" Height="117" ZIndex="1" Filename="Images\NextStripHead.jpg" Scaling="Scale" />
+        <Image X="16" Y="189" Width="50" Height="59" ZIndex="9" Filename="Images\StopRequestedBullet.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="StopRequest" />
+          </Visible>
+        </Image>
+        <Text X="100" Y="143" Width="1244" Height="158" ZIndex="5" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFffff" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="2" Width="788" Height="165" ZIndex="4" Align="Left" Overflow="Scale" ScrollSpeed="-200" Value="NEXT STOP">
+          <Visible>
+            <Not>
+              <Evaluation Ref="StopRequest" />
+            </Not>
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#0ecd99" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="2" Filename="Images\LowerArea.jpg" />
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="0" Filename="Images\head.jpg" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Route Destination layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Text X="100" Y="322" Width="766" Height="98" ZIndex="3" Align="Left" Overflow="Wrap" ScrollSpeed="-200" Value="NO MORE STOPS">
+          <Visible>
+            <And>
+              <Not>
+                <Evaluation Ref="Stop" />
+              </Not>
+              <Evaluation Ref="OnRoute" />
+            </And>
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="84" Weight="100" Italic="false" Color="#ff0000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="152" Width="1175" Height="134" ZIndex="10" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#FFFFFF" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="11" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="100" Y="38" Width="316" Height="134" ZIndex="9" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="160" Weight="100" Italic="false" Color="#0ecd99" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="10" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="550" Width="1196" Height="125" ZIndex="8" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="1" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="94" Y="420" Width="1196" Height="118" ZIndex="7" Align="Left" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200">
+          <Font Face="Franklin Gothic Demi" Height="130" Weight="100" Italic="false" Color="#545358" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="12" Column="0" Row="0" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="16" Y="455" Width="55" Height="313" ZIndex="6" Filename="Images\BoardingStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingFullStrip" />
+          </Visible>
+        </Image>
+        <Image X="16" Y="455" Width="55" Height="56" ZIndex="5" Filename="Images\BoardingSingleStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingLastStripLine" />
+          </Visible>
+        </Image>
+        <Image X="16" Y="455" Width="55" Height="187" ZIndex="4" Filename="Images\BoardingEndStripLine.jpg" Scaling="Scale">
+          <Visible>
+            <Evaluation Ref="BoardingEndStrip" />
+          </Visible>
+        </Image>
+        <Text X="100" Y="322" Width="766" Height="98" ZIndex="2" Align="Left" Overflow="Wrap" ScrollSpeed="-200" Value="UPCOMING STOPS">
+          <Visible>
+            <Evaluation Ref="Stops" />
+          </Visible>
+          <Font Face="Franklin Gothic Demi" Height="84" Weight="100" Italic="false" Color="#1c6cb1" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="0" Y="300" Width="1366" Height="468" ZIndex="1" Filename="Images\LowerArea.jpg" />
+        <Image X="0" Y="0" Width="1366" Height="300" ZIndex="0" Filename="Images\head.jpg" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Full Page Add layout NYCT">
+      <Resolution Width="1366" Height="768">
+        <Frame X="0" Y="0" Width="1366" Height="768" ZIndex="0" Id="0" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Status Screen">
+      <Resolution Width="1366" Height="768">
+        <Text X="133" Y="730" Width="132" Height="27" ZIndex="35" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="RadioSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="730" Width="132" Height="27" ZIndex="33" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ExtSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="397" Y="703" Width="132" Height="27" ZIndex="31" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="IntSpkrNonMuted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="265" Y="703" Width="132" Height="27" ZIndex="29" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Radio Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="133" Y="703" Width="132" Height="27" ZIndex="27" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Ext. Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="703" Width="132" Height="27" ZIndex="25" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Int. Spkr Muted">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="397" Y="676" Width="132" Height="27" ZIndex="23" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Odometer">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="265" Y="676" Width="132" Height="27" ZIndex="21" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Exterior Active">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="133" Y="676" Width="132" Height="27" ZIndex="19" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Interior Active">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="676" Width="132" Height="27" ZIndex="17" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Push To Talk">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="397" Y="649" Width="132" Height="27" ZIndex="15" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="ADA Stop Request">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="265" Y="649" Width="132" Height="27" ZIndex="13" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Stop Request">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="133" Y="649" Width="132" Height="27" ZIndex="11" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door2">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="649" Width="132" Height="27" ZIndex="9" Align="Center" VAlign="Middle" Overflow="Scale" ScrollSpeed="-200" Value="Door1">
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Image X="133" Y="730" Width="132" Height="27" ZIndex="34" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="13" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="1" Y="730" Width="132" Height="27" ZIndex="32" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="12" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="397" Y="703" Width="132" Height="27" ZIndex="30" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="11" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="265" Y="703" Width="132" Height="27" ZIndex="28" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="10" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="133" Y="703" Width="132" Height="27" ZIndex="26" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="9" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="1" Y="703" Width="132" Height="27" ZIndex="24" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="8" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="397" Y="676" Width="132" Height="27" ZIndex="22" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="7" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="265" Y="676" Width="132" Height="27" ZIndex="20" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="6" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="133" Y="676" Width="132" Height="27" ZIndex="18" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="5" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="1" Y="676" Width="132" Height="27" ZIndex="16" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="4" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="397" Y="649" Width="132" Height="27" ZIndex="14" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="3" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="265" Y="649" Width="132" Height="27" ZIndex="12" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="2" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="133" Y="649" Width="132" Height="27" ZIndex="10" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="1" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="1" Y="649" Width="132" Height="27" ZIndex="8" Filename="Images\GpioOn.jpg">
+          <Visible>
+            <Generic Lang="0" Table="105" Column="0" Row="0" />
+          </Visible>
+        </Image>
+        <Image X="0" Y="0" Width="1366" Height="768" ZIndex="0" Filename="Images\StatusBackground.jpg" />
+        <Text X="0" Y="0" Width="1366" Height="64" ZIndex="7" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="90" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="0" Y="63" Width="535" Height="310" ZIndex="6" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="91" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="535" Y="683" Width="827" Height="81" ZIndex="5" Align="Left" Overflow="Clip" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="96" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="1" Y="370" Width="534" Height="276" ZIndex="4" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="92" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="535" Y="63" Width="462" Height="370" ZIndex="3" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="93" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="997" Y="63" Width="367" Height="370" ZIndex="2" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="94" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+        <Text X="535" Y="433" Width="831" Height="243" ZIndex="1" Align="Left" Overflow="Wrap" ScrollSpeed="-200">
+          <Visible>
+            <Evaluation Ref="DisplayVersion" />
+          </Visible>
+          <Font Face="Courier New" Height="16" Weight="100" Italic="false" Color="#000000" OutlineColor="" />
+          <Value>
+            <Generic Lang="0" Table="20" Column="2" Row="95" />
+          </Value>
+          <LastPosition>
+            <Location>
+              <X>0</X>
+              <Y>0</Y>
+            </Location>
+            <Size>
+              <Width>0</Width>
+              <Height>0</Height>
+            </Size>
+            <X>0</X>
+            <Y>0</Y>
+            <Width>0</Width>
+            <Height>0</Height>
+          </LastPosition>
+        </Text>
+      </Resolution>
+    </Layout>
+    <Layout Name="Slideshow">
+      <Resolution Width="1366" Height="768">
+        <Frame X="0" Y="0" Width="1366" Height="768" ZIndex="0" Id="2" />
+      </Resolution>
+    </Layout>
+    <Layout Name="Now Arriving Event Audio Layout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Volume="80" Priority="0">
+          <TextToSpeech Voice="Sharon22k_HQ">
+            <Value>
+              <Format Format="Now arriving at: {0}">
+                <RegexReplace Pattern="KISSENA" Replacement=" kisseena">
+                  <RegexReplace Pattern="\bS\b" Replacement=" south ">
+                    <RegexReplace Pattern="\bN\b" Replacement=" north ">
+                      <RegexReplace Pattern="\bE\b" Replacement=" east ">
+                        <RegexReplace Pattern="\bW\b" Replacement=" west ">
+                          <RegexReplace Pattern="/" Replacement=" AND ">
+                            <RegexReplace Pattern="\bSQ(s?)\b" Replacement="SQUARE$1">
+                              <RegexReplace Pattern="\bPLZ(s?)\b" Replacement="PLAZA$1">
+                                <RegexReplace Pattern="\bPK(s?)\b" Replacement="PARK$1">
+                                  <RegexReplace Pattern="\bPKWY(s?)\b" Replacement="PARKWAY$1">
+                                    <RegexReplace Pattern="\bPT(s?)\b" Replacement="POINT$1">
+                                      <RegexReplace Pattern="\bHWY(s?)\b" Replacement="HIGHWAY$1">
+                                        <RegexReplace Pattern="\bEXP(s?)\b" Replacement="EXPRESSWAY$1">
+                                          <RegexReplace Pattern="\bRD(s?)\b" Replacement="ROAD$1">
+                                            <RegexReplace Pattern="\bTPK(s?)\b" Replacement="TURNPIKE$1">
+                                              <RegexReplace Pattern="\bDR(s?)\b" Replacement="DRIVE$1">
+                                                <RegexReplace Pattern="\bBLVD(s?)\b" Replacement="BOULEVARD$1">
+                                                  <RegexReplace Pattern="\bBL(s?)\b" Replacement="BOULEVARD$1">
+                                                    <RegexReplace Pattern="\bAV(s?)\b" Replacement="AVENUE$1">
+                                                      <RegexReplace Pattern="\bST(s?)\b" Replacement="STREET$1">
+                                                        <RegexReplace Pattern="(3)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1RD">
+                                                          <RegexReplace Pattern="(2)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1ND">
+                                                            <RegexReplace Pattern="(13)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                              <RegexReplace Pattern="(12)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                                <RegexReplace Pattern="(1)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1st">
+                                                                  <RegexReplace Pattern="(11)\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                                    <RegexReplace Pattern="([0456789])\b(?=([,\s\dAND]+)(ST|AV|DR|BL|RD))" Replacement="$1TH">
+                                                                      <Generic Lang="0" Table="12" Column="0" Row="0" />
+                                                                    </RegexReplace>
+                                                                  </RegexReplace>
+                                                                </RegexReplace>
+                                                              </RegexReplace>
+                                                            </RegexReplace>
+                                                          </RegexReplace>
+                                                        </RegexReplace>
+                                                      </RegexReplace>
+                                                    </RegexReplace>
+                                                  </RegexReplace>
+                                                </RegexReplace>
+                                              </RegexReplace>
+                                            </RegexReplace>
+                                          </RegexReplace>
+                                        </RegexReplace>
+                                      </RegexReplace>
+                                    </RegexReplace>
+                                  </RegexReplace>
+                                </RegexReplace>
+                              </RegexReplace>
+                            </RegexReplace>
+                          </RegexReplace>
+                        </RegexReplace>
+                      </RegexReplace>
+                    </RegexReplace>
+                  </RegexReplace>
+                </RegexReplace>
+              </Format>
+            </Value>
+          </TextToSpeech>
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+    <Layout Name="Standard Audio Layout 0">
+      <Resolution Width="0" Height="0" />
+    </Layout>
+    <Layout Name="Next Stop Event Audio Layout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Volume="80" Priority="0">
+          <TextToSpeech Voice="Sharon22k_HQ">
+            <Value>
+              <Evaluation Ref="NextStopT2S" />
+            </Value>
+          </TextToSpeech>
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+    <Layout Name="Transfers  Audio Layout">
+      <Resolution Width="0" Height="0">
+        <AudioOutput Volume="80" Priority="0">
+          <Enabled>
+            <StringCompare Value="0">
+              <Generic Lang="0" Table="10" Column="5" Row="0" />
+            </StringCompare>
+          </Enabled>
+          <TextToSpeech Voice="Sharon22k_HQ">
+            <Enabled>
+              <Not>
+                <StringCompare Value="">
+                  <Generic Lang="0" Table="13" Column="2" Row="0" />
+                </StringCompare>
+              </Not>
+            </Enabled>
+            <Value>
+              <Format Format="Transfers available {0}">
+                <RegexReplace Pattern="(\w)([0-9]+)(\w*)" Replacement="$1 $2 $3">
+                  <Generic Lang="0" Table="13" Column="2" Row="0" />
+                </RegexReplace>
+              </Format>
+            </Value>
+          </TextToSpeech>
+        </AudioOutput>
+      </Resolution>
+    </Layout>
+    <Layout Name="Standard Audio Layout 2">
+      <Resolution Width="0" Height="0" />
+    </Layout>
+  </Layouts>
+  <Fonts>
+    <Font Path="Fonts\ufonts.com_franklin-gothic-demi.ttf" />
+    <Font Path="Fonts\cour.ttf" />
+    <Font Path="Fonts\unispace.ttf" />
+  </Fonts>
+</Infomedia>

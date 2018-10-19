@@ -16,21 +16,26 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-type ProjectManager struct{
-	XMLName            xml.Name           `xml:"ProjectManager"`
-   Projects []Infomedia `xml:Infomedia`
+type ProjectManager struct {
+	XMLName  xml.Name    `xml:"ProjectManager"`
+	Projects []Infomedia `xml:Infomedia`
 }
+
 var projects []Infomedia
 
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
-	//params := mux.Vars(req)
+	params := mux.Vars(req)
+	id := params["projectid"]
 	fmt.Println("calling GetProjectEndPoint ...")
 	for i, item := range projects {
-		if i == 0 {
+		if strconv.Itoa(i) == id {
 			json.NewEncoder(w).Encode(item)
 			return
 		}
@@ -44,13 +49,16 @@ func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
 }
 
 func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+
 	fmt.Println("calling CreateProjectEndPoint ...")
-	// params := mux.Vars(req)
-	var project Infomedia
-	// _ = json.NewDecoder(req.Body).Decode(&project)
-	// //	project.ProjectID = params["projectid"]
-	// projects = append(projects, project)
-	json.NewEncoder(w).Encode(project)
+	params := mux.Vars(req)
+	projectname := params["projectname"]
+	dirnameofproject := "." + string(filepath.Separator) + "Presentations" + string(filepath.Separator) + projectname
+	fmt.Println("calling CreateProjectEndPoint ...5s\n", dirnameofproject)
+	newProject := new(Infomedia)
+	os.Mkdir(dirnameofproject, 0777)
+
+	json.NewEncoder(w).Encode(newProject)
 }
 func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("calling DeleteProjectEndPoint ...")
@@ -66,72 +74,96 @@ func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 func TestEndPoint(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(w, "testing server - server is running !!!")
 }
+
+func LoadProjects() {
+	var presentations []string
+
+	presentationsRoot := ".\\Presentations"
+	files, err := ioutil.ReadDir(presentationsRoot)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		if f.IsDir() {
+			//*files = append(*files, path)
+			presentations = append(presentations, fmt.Sprintf("%s\\%s\\main.im2", presentationsRoot, f.Name()))
+		}
+	}
+	fmt.Println(presentations)
+
+	for _, pres := range presentations {
+		im2Temp, _ := LoadIm2FromXML(pres)
+		projects = append(projects, im2Temp)
+	}
+}
+
 func main() {
 
 	fmt.Println("Strating application")
 	log.Print("Starting Go Server at http://localhost:8011")
 	router := mux.NewRouter()
-	im2xml, _ := LoadIm2FromXML(".\\Presentations\\Presentation 1\\main.im2")
-	projects = append(projects, im2xml)
-	im2xml1, _ := LoadIm2FromXML(".\\Presentations\\Presentation 2\\main.im2")
-	projects = append(projects, im2xml1)
+	LoadProjects()
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
 	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
-	router.HandleFunc("/project/{projectid}", CreateProjectEndPoint).Methods("POST")
+	router.HandleFunc("/project/{projectname}", CreateProjectEndPoint).Methods("POST")
 	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8011", router))
 
-	fmt.Printf("Created : %q\n", im2xml.Created)
-	fmt.Printf("Version %q\n", im2xml.Version)
-	fmt.Printf("Name %q\n", im2xml.PhysicalScreens.PhysicalScreen.Name)
+}
 
-	fmt.Printf("Height %q\n", im2xml.PhysicalScreens.PhysicalScreen.Height)
-	fmt.Printf("Width %q\n", im2xml.PhysicalScreens.PhysicalScreen.Width)
+func PrintIm2Data(im2xmlData Infomedia) {
+	fmt.Printf("Created : %q\n", im2xmlData.Created)
+	fmt.Printf("Version %q\n", im2xmlData.Version)
+	fmt.Printf("Name %q\n", im2xmlData.PhysicalScreens.PhysicalScreen.Name)
 
-	fmt.Printf("Cycle Package Name %q\n", im2xml.CyclePackages.CyclePackage.Name)
+	fmt.Printf("Height %q\n", im2xmlData.PhysicalScreens.PhysicalScreen.Height)
+	fmt.Printf("Width %q\n", im2xmlData.PhysicalScreens.PhysicalScreen.Width)
+
+	fmt.Printf("Cycle Package Name %q\n", im2xmlData.CyclePackages.CyclePackage.Name)
 	fmt.Printf("Cycle Package Standard Cycle Ref %q\n",
-		im2xml.CyclePackages.CyclePackage.StandardCycles.StandardCycle.Ref)
+		im2xmlData.CyclePackages.CyclePackage.StandardCycles.StandardCycle.Ref)
 
-	fmt.Printf("Master Presentation %q\n", im2xml.MasterPresentation.MasterLayouts.MasterLayout.Name)
+	fmt.Printf("Master Presentation %q\n", im2xmlData.MasterPresentation.MasterLayouts.MasterLayout.Name)
 	fmt.Printf("Master Presentation Ref(%q) => %q x %q\n",
-		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Ref,
-		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.X,
-		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Y)
+		im2xmlData.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Ref,
+		im2xmlData.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.X,
+		im2xmlData.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Y)
 
 	fmt.Printf("Master Cycle Name %q, Duration %q , Layout %q\n",
-		im2xml.MasterPresentation.MasterCycles.MasterCycle.Name,
-		im2xml.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Duration,
-		im2xml.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Layout)
+		im2xmlData.MasterPresentation.MasterCycles.MasterCycle.Name,
+		im2xmlData.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Duration,
+		im2xmlData.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Layout)
 
 	fmt.Printf("Layout Cycle Name = %q, Resolution %q x %q\n",
-		im2xml.Layouts[0].Name, im2xml.Layouts[0].Resolution.Height,
-		im2xml.Layouts[0].Resolution.Height)
+		im2xmlData.Layouts[0].Name, im2xmlData.Layouts[0].Resolution.Height,
+		im2xmlData.Layouts[0].Resolution.Height)
 
 	fmt.Printf("Layout Cycle Resolution Name = %q, Text.Font %q, ScrollSpeed %q, Align %q, LastPosition %q, Overflow %q \n",
-		im2xml.Layouts[0].Name,
-		im2xml.Layouts[0].Resolution.Text[0].Font,
-		im2xml.Layouts[0].Resolution.Text[0].ScrollSpeed,
-		im2xml.Layouts[0].Resolution.Text[0].Align,
-		im2xml.Layouts[0].Resolution.Text[0].LastPosition,
-		im2xml.Layouts[0].Resolution.Text[0].Overflow)
+		im2xmlData.Layouts[0].Name,
+		im2xmlData.Layouts[0].Resolution.Text[0].Font,
+		im2xmlData.Layouts[0].Resolution.Text[0].ScrollSpeed,
+		im2xmlData.Layouts[0].Resolution.Text[0].Align,
+		im2xmlData.Layouts[0].Resolution.Text[0].LastPosition,
+		im2xmlData.Layouts[0].Resolution.Text[0].Overflow)
 
 	fmt.Printf("Layout Cycle Resolution Name = %q, Image %q, Video %q \n",
-		im2xml.Layouts[0].Name,
-		im2xml.Layouts[0].Resolution.Image.Filename,
-		im2xml.Layouts[0].Resolution.Video.VideoURI)
-	// fmt.Printf("VirtualDisplay.Name %q\n", im2xml.VirtualDisplays.VirtualDisplay.Name)
-	// fmt.Printf("VirtualDisplay %q x %q\n", im2xml.VirtualDisplays.VirtualDisplay.Height,
-	// 										im2xml.VirtualDisplays.VirtualDisplay.Width)
+		im2xmlData.Layouts[0].Name,
+		im2xmlData.Layouts[0].Resolution.Image.Filename,
+		im2xmlData.Layouts[0].Resolution.Video.VideoURI)
+	fmt.Printf("VirtualDisplay.Name %q\n", im2xmlData.VirtualDisplays.VirtualDisplay.Name)
+	fmt.Printf("VirtualDisplay %q x %q\n", im2xmlData.VirtualDisplays.VirtualDisplay.Height,
+		im2xmlData.VirtualDisplays.VirtualDisplay.Width)
 
-	// fmt.Printf("Evaluations 0 Name %q\n", im2xml.Evaluations[0].Name)
-	// fmt.Printf("Evaluations StringCompare.Value %q\n", im2xml.Evaluations[0].StringCompare.Value)
-	// fmt.Printf("Evaluations Column %q\n", im2xml.Evaluations[0].StringCompare.Generic.Column)
-	// fmt.Printf("Evaluations Lang %q\n", im2xml.Evaluations[0].StringCompare.Generic.Lang)
-	// fmt.Printf("Evaluations Table %q\n", im2xml.Evaluations[0].StringCompare.Generic.Table)
+	fmt.Printf("Evaluations 0 Name %q\n", im2xmlData.Evaluations[0].Name)
+	fmt.Printf("Evaluations StringCompare.Value %q\n", im2xmlData.Evaluations[0].StringCompare.Value)
+	fmt.Printf("Evaluations Column %q\n", im2xmlData.Evaluations[0].StringCompare.Generic.Column)
+	fmt.Printf("Evaluations Lang %q\n", im2xmlData.Evaluations[0].StringCompare.Generic.Lang)
+	fmt.Printf("Evaluations Table %q\n", im2xmlData.Evaluations[0].StringCompare.Generic.Table)
 
-	// fmt.Printf("Evaluations CodeConversion.FileName %q\n", im2xml.Evaluations[6].CodeConversion.FileName)
-	// fmt.Printf("Evaluations CodeConversion.UseImage %q\n", im2xml.Evaluations[6].CodeConversion.UseImage)
+	fmt.Printf("Evaluations CodeConversion.FileName %q\n", im2xmlData.Evaluations[6].CodeConversion.FileName)
+	fmt.Printf("Evaluations CodeConversion.UseImage %q\n", im2xmlData.Evaluations[6].CodeConversion.UseImage)
 }
 
 func LoadIm2FromXML(filename string) (Infomedia, error) {
@@ -175,11 +207,32 @@ type Infomedia struct {
 	Evaluations        []Evaluation       `xml:"Evaluations>Evaluation"`
 	Cycles             Cycles             `xml:"Cycles"`
 	CyclePackages      CyclePackages      `xml:"CyclePackages"`
-	Pools              []interface{}      `xml:"Pools"`
+	Pools              []Pool             `xml:"Pools>Pool"`
 	Layouts            []Layout           `xml:"Layouts>Layout"`
-	Fonts              []interface{}      `xml:"Fonts"`
+	Fonts              []FontElement      `xml:"Fonts>FontElement"`
+}
+type Pool struct {
+	Name          string `xml:"Name,attr"`
+	BaseDirectory string `xml:"BaseDirectory,attr"`
 }
 
+type Filename struct {
+	CSVMapping CSVMapping `xml:"CsvMapping"`
+}
+
+type CSVMapping struct {
+	FileName     string  `xml:"FileName,attr"`
+	OutputFormat string  `xml:"OutputFormat,attr"`
+	DefaultValue Trigger `xml:"DefaultValue,attr"`
+	Match        Match   `xml:"Match,attr"`
+}
+type Match struct {
+	Column  string  `json:"Column,attr"`
+	Generic Generic `json:"Generic"`
+}
+type FontElement struct {
+	Path string `xml:"Path,attr"`
+}
 type CyclePackages struct {
 	CyclePackage CyclePackage `xml:"CyclePackage"`
 }
@@ -198,18 +251,36 @@ type PurpleStandardCycle struct {
 	Ref string `xml:"Ref,attr"`
 }
 
+type EventCycles struct {
+	EventCycle EventCycle `xml:"EventCycle"`
+}
 type Cycles struct {
-	StandardCycles CyclesStandardCycles `xml:"StandardCycles"`
-	EventCycles    []interface{}        `xml:"EventCycles"`
+	StandardCycles StandardCycles `xml:"StandardCycles"`
+	EventCycles    []EventCycle   `xml:"EventCycles"`
 }
 
-type CyclesStandardCycles struct {
-	StandardCycle FluffyStandardCycle `xml:"StandardCycle"`
+type StandardCycles struct {
+	StandardCycle EventCycle `xml:"StandardCycle"`
 }
 
-type FluffyStandardCycle struct {
+type StandardCycle struct {
 	Name            string    `xml:"Name,attr"`
 	StandardSection []Section `xml:"StandardSection"`
+}
+
+type EventCycle struct {
+	Name            string             `xml:"Name,attr"`
+	Enabled         *EventCycleEnabled `xml:"Enabled,omitempty"`
+	Trigger         Trigger            `xml:"Trigger"`
+	StandardSection Section            `xml:"StandardSection"`
+}
+type EventCycleEnabled struct {
+	Evaluation *EventCycle `xml:"Evaluation,omitempty"`
+	Not        *Trigger    `xml:"Not,omitempty"`
+}
+
+type Trigger struct {
+	Generic Generic `json:"Generic"`
 }
 
 type Section struct {
