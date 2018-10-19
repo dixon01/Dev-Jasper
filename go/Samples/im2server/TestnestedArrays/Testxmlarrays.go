@@ -56,6 +56,7 @@ type HostCommand struct {
 func main() {
 	conf, _ := ReadSystemConfig(xmlData)
 	fmt.Printf("%#v\n", conf)
+	fmt.Printf(" host ip: %q\n", conf.Hosts[0].IPaddr)
 	data, _ := WriteSystemConfig(conf)
 	fmt.Printf("%#v\n", data)
 }

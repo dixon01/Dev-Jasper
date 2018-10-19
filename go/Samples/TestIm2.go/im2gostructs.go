@@ -19,13 +19,53 @@ func main() {
 	fmt.Printf("Created : %q\n", im2xml.Created)
 	fmt.Printf("Version %q\n", im2xml.Version)
 	fmt.Printf("Name %q\n", im2xml.PhysicalScreens.PhysicalScreen.Name)
-	fmt.Printf("Cycle Package Name %q\n", im2xml.CyclePackages.CyclePackage.Name)
+
 	fmt.Printf("Height %q\n", im2xml.PhysicalScreens.PhysicalScreen.Height)
 	fmt.Printf("Width %q\n", im2xml.PhysicalScreens.PhysicalScreen.Width)
 
-	fmt.Printf("Evaluations 0 %q\n", im2xml.Evaluations[0].Name)
-	fmt.Printf("Evaluations 1 %q\n", im2xml.Evaluations[1].Name)
-	fmt.Printf("Evaluations 2 %q\n", im2xml.Evaluations[2].Name)
+	fmt.Printf("Cycle Package Name %q\n", im2xml.CyclePackages.CyclePackage.Name)
+	fmt.Printf("Cycle Package Standard Cycle Ref %q\n",
+		im2xml.CyclePackages.CyclePackage.StandardCycles.StandardCycle.Ref)
+
+	fmt.Printf("Master Presentation %q\n", im2xml.MasterPresentation.MasterLayouts.MasterLayout.Name)
+	fmt.Printf("Master Presentation Ref(%q) => %q x %q\n",
+		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Ref,
+		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.X,
+		im2xml.MasterPresentation.MasterLayouts.MasterLayout.PhysicalScreen.VirtualDisplay.Y)
+
+	fmt.Printf("Master Cycle Name %q, Duration %q , Layout %q\n",
+		im2xml.MasterPresentation.MasterCycles.MasterCycle.Name,
+		im2xml.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Duration,
+		im2xml.MasterPresentation.MasterCycles.MasterCycle.MasterSection.Layout)
+
+	fmt.Printf("Layout Cycle Name = %q, Resolution %q x %q\n",
+		im2xml.Layouts[0].Name, im2xml.Layouts[0].Resolution.Height,
+		im2xml.Layouts[0].Resolution.Height)
+
+	fmt.Printf("Layout Cycle Resolution Name = %q, Text.Font %q, ScrollSpeed %q, Align %q, LastPosition %q, Overflow %q \n",
+		im2xml.Layouts[0].Name,
+		im2xml.Layouts[0].Resolution.Text[0].Font,
+		im2xml.Layouts[0].Resolution.Text[0].ScrollSpeed,
+		im2xml.Layouts[0].Resolution.Text[0].Align,
+		im2xml.Layouts[0].Resolution.Text[0].LastPosition,
+		im2xml.Layouts[0].Resolution.Text[0].Overflow)
+
+	fmt.Printf("Layout Cycle Resolution Name = %q, Image %q, Video %q \n",
+		im2xml.Layouts[0].Name,
+		im2xml.Layouts[0].Resolution.Image.Filename,
+		im2xml.Layouts[0].Resolution.Video.VideoURI)
+	// fmt.Printf("VirtualDisplay.Name %q\n", im2xml.VirtualDisplays.VirtualDisplay.Name)
+	// fmt.Printf("VirtualDisplay %q x %q\n", im2xml.VirtualDisplays.VirtualDisplay.Height,
+	// 										im2xml.VirtualDisplays.VirtualDisplay.Width)
+
+	// fmt.Printf("Evaluations 0 Name %q\n", im2xml.Evaluations[0].Name)
+	// fmt.Printf("Evaluations StringCompare.Value %q\n", im2xml.Evaluations[0].StringCompare.Value)
+	// fmt.Printf("Evaluations Column %q\n", im2xml.Evaluations[0].StringCompare.Generic.Column)
+	// fmt.Printf("Evaluations Lang %q\n", im2xml.Evaluations[0].StringCompare.Generic.Lang)
+	// fmt.Printf("Evaluations Table %q\n", im2xml.Evaluations[0].StringCompare.Generic.Table)
+
+	// fmt.Printf("Evaluations CodeConversion.FileName %q\n", im2xml.Evaluations[6].CodeConversion.FileName)
+	// fmt.Printf("Evaluations CodeConversion.UseImage %q\n", im2xml.Evaluations[6].CodeConversion.UseImage)
 }
 
 func LoadIm2FromXML(filename string) (Infomedia, error) {
@@ -66,11 +106,11 @@ type Infomedia struct {
 	PhysicalScreens    PhysicalScreens    `xml:"PhysicalScreens"`
 	VirtualDisplays    VirtualDisplays    `xml:"VirtualDisplays"`
 	MasterPresentation MasterPresentation `xml:"MasterPresentation"`
-	Evaluations        []*Evaluation      `xml:"Evaluations"`
+	Evaluations        []Evaluation       `xml:"Evaluations>Evaluation"`
 	Cycles             Cycles             `xml:"Cycles"`
 	CyclePackages      CyclePackages      `xml:"CyclePackages"`
 	Pools              []interface{}      `xml:"Pools"`
-	Layouts            []Layout           `xml:"Layouts"`
+	Layouts            []Layout           `xml:"Layouts>Layout"`
 	Fonts              []interface{}      `xml:"Fonts"`
 }
 
@@ -89,7 +129,7 @@ type CyclePackageStandardCycles struct {
 }
 
 type PurpleStandardCycle struct {
-	Ref string `xml:"@Ref"`
+	Ref string `xml:"Ref,attr"`
 }
 
 type Cycles struct {
@@ -102,17 +142,17 @@ type CyclesStandardCycles struct {
 }
 
 type FluffyStandardCycle struct {
-	Name            string    `xml:"@Name"`
+	Name            string    `xml:"Name,attr"`
 	StandardSection []Section `xml:"StandardSection"`
 }
 
 type Section struct {
-	Duration string `xml:"@Duration"`
-	Layout   string `xml:"@Layout"`
+	Duration string `xml:"Duration,attr"`
+	Layout   string `xml:"Layout,attr"`
 }
 
 type Evaluation struct {
-	XMLName        xml.Name        `xml:"Evaluation"`
+	Name           string          `xml:"Name,attr"`
 	StringCompare  *StringCompare  `xml:"StringCompare,omitempty"`
 	IntegerCompare *IntegerCompare `xml:"IntegerCompare,omitempty"`
 	CodeConversion *CodeConversion `xml:"CodeConversion,omitempty"`
