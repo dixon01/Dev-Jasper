@@ -3,18 +3,83 @@
 //    infomedia, err := UnmarshalInfomedia(bytes)
 //    bytes, err = infomedia.Marshal()
 
+// https://itnext.io/building-restful-web-api-service-using-golang-chi-mysql-d85f427dee54
+//https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql
+
 package main
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
+type ProjectManager struct{
+	XMLName            xml.Name           `xml:"ProjectManager"`
+   Projects []Infomedia `xml:Infomedia`
+}
+var projects []Infomedia
+
+func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	//params := mux.Vars(req)
+	fmt.Println("calling GetProjectEndPoint ...")
+	for i, item := range projects {
+		if i == 0 {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+	json.NewEncoder(w).Encode(&Infomedia{})
+}
+
+func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling GetProjectsDataEndPoint ...")
+	json.NewEncoder(w).Encode(projects)
+}
+
+func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling CreateProjectEndPoint ...")
+	// params := mux.Vars(req)
+	var project Infomedia
+	// _ = json.NewDecoder(req.Body).Decode(&project)
+	// //	project.ProjectID = params["projectid"]
+	// projects = append(projects, project)
+	json.NewEncoder(w).Encode(project)
+}
+func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("calling DeleteProjectEndPoint ...")
+	// params := mux.Vars(req)
+	// for index, item := range projects {
+	// 	if index == 0 {
+	// 		projects = append(projects[:index], projects[index+1:]...)
+	// 		break
+	// 	}
+	// }
+	json.NewEncoder(w).Encode(projects)
+}
+func TestEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(w, "testing server - server is running !!!")
+}
 func main() {
+
 	fmt.Println("Strating application")
-	im2xml, _ := LoadIm2FromXML(".\\main.im2")
-	fmt.Printf("Im2 File Loaded: %q\n", im2xml)
+	log.Print("Starting Go Server at http://localhost:8011")
+	router := mux.NewRouter()
+	im2xml, _ := LoadIm2FromXML(".\\Presentations\\Presentation 1\\main.im2")
+	projects = append(projects, im2xml)
+	im2xml1, _ := LoadIm2FromXML(".\\Presentations\\Presentation 2\\main.im2")
+	projects = append(projects, im2xml1)
+	router.HandleFunc("/test", TestEndPoint).Methods("GET")
+	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
+	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
+	router.HandleFunc("/project/{projectid}", CreateProjectEndPoint).Methods("POST")
+	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
+	log.Fatal(http.ListenAndServe(":8011", router))
 
 	fmt.Printf("Created : %q\n", im2xml.Created)
 	fmt.Printf("Version %q\n", im2xml.Version)
