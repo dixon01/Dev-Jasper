@@ -5,6 +5,7 @@
 
 // https://itnext.io/building-restful-web-api-service-using-golang-chi-mysql-d85f427dee54
 //https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql
+//https://github.com/jtbonhomme/go-rest-api-boilerplate
 
 package main
 
