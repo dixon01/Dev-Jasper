@@ -32,6 +32,15 @@ type Project struct {
 
 var projects []Project
 
+func GetPresentationsDataEndPoint(w http.ResponseWriter, req *http.Request) {
+	//params := mux.Vars(req)
+	fmt.Println("calling GetPresentationsDataEndPoint ...")
+	presentations := []string{}
+	for _, item := range projects {
+		presentations = append(presentations, item.ShortName)
+	}
+	json.NewEncoder(w).Encode(presentations)
+}
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	id := params["projectid"]
@@ -123,6 +132,7 @@ func main() {
 	LoadProjects()
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
+	router.HandleFunc("/presentations", GetPresentationsDataEndPoint).Methods("GET")
 	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
 	router.HandleFunc("/project/{projectname}", CreateProjectEndPoint).Methods("POST")
 	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
