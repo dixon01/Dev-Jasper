@@ -23,21 +23,33 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type ProjectManager struct {
-	XMLName  xml.Name    `xml:"ProjectManager"`
-	Projects []Infomedia `xml:Infomedia`
+type Project struct {
+	XMLName   xml.Name  `xml:"ProjectManager",omitonempty`
+	Name      string    `xml:Name`
+	ShortName string    `xml:ShortName,omitonempty`
+	Media     Infomedia `xml:Infomedia`
 }
 
-var projects []Infomedia
+var projects []Project
 
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	id := params["projectid"]
 	fmt.Println("calling GetProjectEndPoint ...")
 	for i, item := range projects {
-		if strconv.Itoa(i) == id {
-			json.NewEncoder(w).Encode(item)
-			return
+		_, err := strconv.Atoi(id)
+		if err == nil {
+			fmt.Println("calling GetProjectEndPoint using project id")
+			if strconv.Itoa(i) == id {
+				json.NewEncoder(w).Encode(item)
+				return
+			}
+		} else {
+			if item.ShortName == id {
+				fmt.Println("calling GetProjectEndPoint using project name %s , %s", item.Name, item.ShortName)
+				json.NewEncoder(w).Encode(item)
+				return
+			}
 		}
 	}
 	json.NewEncoder(w).Encode(&Infomedia{})
@@ -87,15 +99,20 @@ func LoadProjects() {
 	for _, f := range files {
 		if f.IsDir() {
 			//*files = append(*files, path)
-			presentations = append(presentations, fmt.Sprintf("%s\\%s\\main.im2", presentationsRoot, f.Name()))
+			//	presentations = append(presentations, fmt.Sprintf("%s\\%s\\main.im2", presentationsRoot, f.Name()))
+			pres := fmt.Sprintf("%s\\%s\\main.im2", presentationsRoot, f.Name())
+			im2Temp, _ := LoadIm2FromXML(pres)
+			project := Project{Name: pres, ShortName: f.Name(), Media: im2Temp}
+			projects = append(projects, project)
 		}
 	}
 	fmt.Println(presentations)
 
-	for _, pres := range presentations {
-		im2Temp, _ := LoadIm2FromXML(pres)
-		projects = append(projects, im2Temp)
-	}
+	// for _, pres := range presentations {
+	// 	im2Temp, _ := LoadIm2FromXML(pres)
+	// 	project := Project{Name: pres, Media: im2Temp}
+	// 	projects = append(projects, project)
+	// }
 }
 
 func main() {
