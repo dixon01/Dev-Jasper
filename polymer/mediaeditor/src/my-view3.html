@@ -41,10 +41,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     class MyView3 extends Polymer.Element {
       static get is() { return 'my-view3'; }
 
-       getData(event) {
+      getData(event) {
          console.log("calling ajax get" + JSON.stringify(event, null, 2));
           this.$.getExample.generateRequest();
-          
       }
 
       serverSuccessCb(e){

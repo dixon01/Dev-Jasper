@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../../bower_components/juicy-jsoneditor/juicy-jsoneditor.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="stylesheet" type="text/css" href="../../bower_components/jsoneditor/dist/jsoneditor.min.css">
+
+<dom-module id="mediaupdate-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax id="getExample" method="GET" body='{{getBody}}' handle-as="json" content-type="application/json"
+    on-response="serverSuccessCb" last-response="{{serverSuccessObj}}" on-error="serverErrorCb" last-error="{{serverErrorObj}}"
+    url="http://localhost:8011/project/1">
+  </iron-ajax>
+  
+ 
+  <div class="card">
+    <juicy-jsoneditor json={{serverSuccessObj}}></juicy-jsoneditor>
+    <paper-button toggles raised active on-tap="getData">Get Request</paper-button>
+  </div>
+  <div class="card">
+    <h3>serverErrorObj Results:</h3>
+    <span>{{serverErrorObj}}</span>
+  </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class MediaupdateApp extends Polymer.Element {
+      static get is() { return 'mediaupdate-app'; }
+      getData(event) {
+         console.log("calling ajax get" + JSON.stringify(event, null, 2));
+          this.$.getExample.generateRequest();
+      }
+
+      serverSuccessCb(e){
+        const resp = e.detail.response;
+        console.log("serverSuccess call back ajax get " + JSON.stringify(resp, null, ' '));
+      }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'mediaupdate-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MediaupdateApp.is, MediaupdateApp);
+  </script>
+</dom-module>
