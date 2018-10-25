@@ -7264,10 +7264,11 @@
       ]
     },
     "Swashbuckle.AspNetCore/3.0.0": {
-      "sha512": "aM17YeBlYLIftD+4xCUPw/yT+FLjCyOCFinikXj42hntFYkkAuTRGLm9x+t7kfC13/OBiMJ1XEjl3MGeknx1cw==",
+      "sha512": "MVDLekgUsowAtPVif6Qf4wK1sNZVvH3+w0t9CgYJfUS8o5bcHp4n2wNbZSCef9ctbzowCCaaaUORcuPne8rSCQ==",
       "type": "package",
       "path": "swashbuckle.aspnetcore/3.0.0",
       "files": [
+        ".signature.p7s",
         "lib/net451/Swashbuckle.AspNetCore.dll",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.dll",
         "swashbuckle.aspnetcore.3.0.0.nupkg.sha512",
@@ -7275,10 +7276,11 @@
       ]
     },
     "Swashbuckle.AspNetCore.Swagger/3.0.0": {
-      "sha512": "smrewcRU7HK+3WRZWNYFXVAqD1apyIEwcYEdzVu23tNJek8GQM1V8yqIlj41D8CbYoqaeF+fDhkUDY6FSXUDuw==",
+      "sha512": "byxupaMfEioVpfZLVvI1PzSp5YjIIixwH9NQFJsab1Ye4EgzWoPUJg+QyTY5kZNGDmZ2ir/WfTJyEV4seOCxLw==",
       "type": "package",
       "path": "swashbuckle.aspnetcore.swagger/3.0.0",
       "files": [
+        ".signature.p7s",
         "lib/net451/Swashbuckle.AspNetCore.Swagger.dll",
         "lib/net451/Swashbuckle.AspNetCore.Swagger.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.Swagger.dll",
@@ -7288,10 +7290,11 @@
       ]
     },
     "Swashbuckle.AspNetCore.SwaggerGen/3.0.0": {
-      "sha512": "DjGV/s6dUi+Xg4ofc2/TCDJlFhGAstvStCBAJ8F2mllIRAtf+s0HsfAIPmFy+W0gOzo1/voRtMKU1uvINZtDFw==",
+      "sha512": "yzsizeij622YTehkcMFNP1sH/v0CEGZ3NiEkJC4vG6rt7dgCRXZ2rQdN4mn44XlTBv+616ga5fYySuJzka+y9Q==",
       "type": "package",
       "path": "swashbuckle.aspnetcore.swaggergen/3.0.0",
       "files": [
+        ".signature.p7s",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerGen.dll",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerGen.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerGen.dll",
@@ -7301,10 +7304,11 @@
       ]
     },
     "Swashbuckle.AspNetCore.SwaggerUI/3.0.0": {
-      "sha512": "Gg3rELfq7qJOx8d4xO6hvqSdhMk9ofQCdtLVjBAAVyKehkJRCqiXUO+hJ+/GeEngkaLEglaK/+6an4gC/AxOlg==",
+      "sha512": "rmQEdp6njngOGs/0nT2g2olygKiG+SdDVf4Ju7y7Pn6JoiGZ5VukrzaCnPxOvEOkq1vJeV8QCTaNytlTwHaBvQ==",
       "type": "package",
       "path": "swashbuckle.aspnetcore.swaggerui/3.0.0",
       "files": [
+        ".signature.p7s",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerUI.dll",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerUI.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerUI.dll",
@@ -11616,30 +11620,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nbontha\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
+    "C:\\Users\\tzulhasnine\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\AssetsAPI.csproj",
+      "projectUniqueName": "c:\\Dev\\Granite\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\AssetsAPI.csproj",
       "projectName": "AssetsAPI",
-      "projectPath": "C:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\AssetsAPI.csproj",
-      "packagesPath": "C:\\Users\\nbontha\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\test-jasper\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\obj\\",
+      "projectPath": "c:\\Dev\\Granite\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\AssetsAPI.csproj",
+      "packagesPath": "C:\\Users\\tzulhasnine\\.nuget\\packages\\",
+      "outputPath": "c:\\Dev\\Granite\\granite-jasper\\dotcore\\prototypes\\Gateway\\AssetsAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\nbontha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Users\\tzulhasnine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
