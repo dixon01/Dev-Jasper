@@ -1,0 +1,91 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/app-storage/app-storage-behavior.html">
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="my-view7">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      /* .newTask {
+        display: block;
+      } */
+      .form{
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .form paper-input {
+        flex: 1;
+        margin-right: 10px;
+
+      }
+
+      .form vaadin-date-picker {
+        flex: 1;
+        width:140px;
+      }
+      .form paper-button {
+        align-self: flex-end;
+      }
+    </style>
+    <div class="card">
+      <div class="form">
+        <paper-input label="Task" value="{{todo.task}}"></paper-input>
+        <vaadin-date-picker label="Due" value="{{todo.due}}"></vaadin-date-picker>
+        <paper-button raised on-tap="_addTodo">Add Todo<paper-button>
+      </div>
+
+      <vaadin-grid items="{{todos}}">
+        <vaadin-grid-column>
+          <template class="header">Task</template>
+          <template>{{todo.task}}</template>
+        </vaadin-grid-column>
+        <vaadin-grid-column>
+          <template class="header">Due</template>
+          <template>{{todo.due}}</template>
+        </vaadin-grid-column>
+      </vaadin-grid>
+    </div>
+
+    <app-localstorage-document
+      key="todos"
+      data="{{todos}}"></app-localstorage-document>
+  </template>
+
+  <script>
+    class MyView7 extends Polymer.Element{
+      static get is(){return 'my-view7'}
+      static get properties(){
+        return {
+          todo: {
+            type: Object,
+            value: function(){
+              return {};
+            }
+          },
+          todos: {
+            type: Array,
+            value: function(){
+              return [];
+            }
+          }
+        }
+      }
+
+      _addTodo(){
+        this.push("todos",this.todo);
+      }
+
+    }
+    window.customElements.define(MyView7.is, MyView7);
+  </script>
+</dom-module>
