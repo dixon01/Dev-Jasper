@@ -33,6 +33,10 @@ type Project struct {
 var projects []Project
 
 func GetPresentationsDataEndPoint(w http.ResponseWriter, req *http.Request) {
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	//params := mux.Vars(req)
 	fmt.Println("calling GetPresentationsDataEndPoint ...")
 	presentations := []string{}
@@ -42,6 +46,10 @@ func GetPresentationsDataEndPoint(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(presentations)
 }
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	params := mux.Vars(req)
 	id := params["projectid"]
 	fmt.Println("calling GetProjectEndPoint ...")
@@ -65,6 +73,10 @@ func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 }
 
 func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	fmt.Println("calling GetProjectsDataEndPoint ...")
 	json.NewEncoder(w).Encode(projects)
 }
@@ -82,6 +94,10 @@ func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(newProject)
 }
 func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	fmt.Println("calling DeleteProjectEndPoint ...")
 	// params := mux.Vars(req)
 	// for index, item := range projects {
@@ -131,11 +147,11 @@ func main() {
 	router := mux.NewRouter()
 	LoadProjects()
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
-	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
-	router.HandleFunc("/presentations", GetPresentationsDataEndPoint).Methods("GET")
-	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
-	router.HandleFunc("/project/{projectname}", CreateProjectEndPoint).Methods("POST")
-	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
+	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET", "OPTIONS")
+	router.HandleFunc("/presentations", GetPresentationsDataEndPoint).Methods("GET", "OPTIONS")
+	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET", "OPTIONS")
+	router.HandleFunc("/project/{projectname}", CreateProjectEndPoint).Methods("POST", "OPTIONS")
+	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE", "OPTIONS")
 	log.Fatal(http.ListenAndServe(":8011", router))
 
 }
