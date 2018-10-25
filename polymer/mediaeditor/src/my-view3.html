@@ -9,6 +9,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../bower_components/juicy-jsoneditor/juicy-jsoneditor.html">
+
+<link rel="stylesheet" type="text/css" href="../bower_components/jsoneditor/dist/jsoneditor.min.css">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view3">
@@ -26,8 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <paper-button raised on-tap="getData">Get Request</paper-button>
    
     <div class="card">
-      <h3>serverSuccessObj Results:</h3>
-      <span>{{serverSuccessObj}}</span>
+      <juicy-jsoneditor json={{serverSuccessObj}}></juicy-jsoneditor>
     </div>
     <div class="card">
       <h3>serverErrorObj Results:</h3>
