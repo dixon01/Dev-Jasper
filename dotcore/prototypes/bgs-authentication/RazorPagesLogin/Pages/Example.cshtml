@@ -1,8 +1,44 @@
 ﻿@page
 @model RazorPagesLogin.Pages.ExampleModel
+
 @{
     ViewData["Title"] = "Example";
 }
 
-<h2>Example</h2>
+
+@functions {
+    [BindProperty]
+    public string UserName { get; set; }
+    public string Password { get; set; }
+}
+
+
+<form method="post">
+        
+    <table style="width: 100%">
+        <h2>Login</h2>
+
+        <tr>
+            <td style="width: 15%">User Name:</td>
+            <td style="width: 50%"><input name="username"/></td>
+        </tr>
+           
+        <tr>
+            <td><br />Password:</td>
+            <td><input name="password"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td><br/><input type="submit"/></td>
+        </tr>
+
+    </table>
+</form>
+
+
+
+
+
+
+
 

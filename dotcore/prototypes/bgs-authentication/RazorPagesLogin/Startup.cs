@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TestDB.Models;
 
 namespace RazorPagesLogin
 {
@@ -31,7 +33,8 @@ namespace RazorPagesLogin
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            var connection = "Server=TZULHASNINE-Z42\\SQLEXPRESS;Database=Gorba.Center.BackgroundSystem;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<GorbaCenterBackgroundSystemContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -52,7 +55,12 @@ namespace RazorPagesLogin
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Example}/{id?}");
+            });
         }
     }
 }
