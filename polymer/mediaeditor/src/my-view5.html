@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view5">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      paper-button {
+        background-color: lightblue;
+        color: black;
+      }
+    </style>
+
+    <iron-ajax id="postExample"
+        method="POST"
+        body='{{postBody}}'
+        handle-as="json"
+        content-type="application/json"
+        on-response="serverSuccessCb"
+        last-response="{{serverSuccessObj}}"
+        on-error="serverErrorCb"
+        last-error="{{serverErrorObj}}"
+        url="https://jsonplaceholder.typicode.com/posts">
+    </iron-ajax>
+
+    <div class="card">
+      <h1>View Five</h1>
+      <div>
+        <paper-input id="inputOne" label="Input 1" value="{{myIp1}}" no-label-float></paper-input>
+        <paper-input id="inputTwo" label="Input 2" value="{{myIp2}}" no-label-float></paper-input>
+        <paper-input id="inputThree" label="Input 3" value="{{myIp3}}" no-label-float></paper-input>
+      </div>
+      <paper-button raised on-tap="sendData">Post Request</paper-button>
+    </div>
+    <div class="card">
+			<h3>serverSuccessObj Results:</h3>
+			<span>{{ssoDisplay}}</span>
+		</div>
+    <div class="card">
+			<h3>serverErrorObj Results:</h3>
+			<span>{{serverErrorObj}}</span>
+		</div>
+  </template>
+
+  </div>
+  <script>
+    class MyView5 extends Polymer.Element{
+      static get is(){return 'my-view5';}
+      static get properties(){
+        return {
+          myIp1: {
+            type: String,
+            // value: 'Value 1',
+            notify: true
+          },
+          myIp2: {
+            type: String,
+            //value: 'Value 2',
+            notify: true,
+          },
+          myIp3: {
+            type: String,
+            //value: 'Value 3',
+            notify: true
+          },
+          postBody: {
+            type: String,
+            computed: "getPostBody(myIp1, myIp2, myIp3)"
+          },
+          serverErrorObj: {
+            type: Object
+          },
+          serverSuccessObj: {
+            type: Object
+          },
+          ssoDisplay: {
+            type: String,
+            computed: "getSso(serverSuccessObj)"
+          }
+        }
+      }
+
+      getPostBody(i1, i2, i3){
+        return {
+          i1: i1,
+          i2: i2,
+          i3: i3
+        }
+      }
+
+      sendData(event) {
+          this.$.postExample.generateRequest();
+      }
+
+      getSso(serverSuccessObj){
+        return JSON.stringify(serverSuccessObj);
+      }
+
+    }
+    window.customElements.define(MyView5.is, MyView5);
+  </script>
+</dom-module>

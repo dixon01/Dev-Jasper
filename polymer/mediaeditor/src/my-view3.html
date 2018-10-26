@@ -1,0 +1,56 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../bower_components/juicy-jsoneditor/juicy-jsoneditor.html">
+
+<link rel="stylesheet" type="text/css" href="../bower_components/jsoneditor/dist/jsoneditor.min.css">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view3">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+    <iron-ajax id="getExample" method="GET" body='{{getBody}}' handle-as="json" content-type="application/json"
+      on-response="serverSuccessCb" last-response="{{serverSuccessObj}}" on-error="serverErrorCb" last-error="{{serverErrorObj}}"
+      url="http://localhost:8011/project/1">
+    </iron-ajax>
+    <paper-button raised on-tap="getData">Get Request</paper-button>
+   
+    <div class="card">
+      <juicy-jsoneditor json={{serverSuccessObj}}></juicy-jsoneditor>
+    </div>
+    <div class="card">
+      <h3>serverErrorObj Results:</h3>
+      <span>{{serverErrorObj}}</span>
+    </div>
+  </template>
+  <script>
+    class MyView3 extends Polymer.Element {
+      static get is() { return 'my-view3'; }
+
+      getData(event) {
+         console.log("calling ajax get" + JSON.stringify(event, null, 2));
+          this.$.getExample.generateRequest();
+      }
+
+      serverSuccessCb(e){
+        const resp = e.detail.response;
+        console.log("serverSuccess call back ajax get " + JSON.stringify(resp, null, ' '));
+      }
+    }
+    window.customElements.define(MyView3.is, MyView3);
+  </script>
+</dom-module>

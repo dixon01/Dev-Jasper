@@ -1,0 +1,7 @@
+{
+  "name": "mediaupdate",
+  "short_name": "mediaupdate",
+  "description": "Media Editor SPA",
+  "start_url": "/",
+  "display": "standalone"
+}

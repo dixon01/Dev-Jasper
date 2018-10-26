@@ -1,0 +1,90 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="my-view6">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      /* .newTask {
+        display: block;
+      } */
+      .task {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+    <div class="card">
+      <h1>Todo List</h1>
+      <h2>Todos:</h2>
+
+      <dom-repeat
+        items="{{tasks}}"
+        as="task"
+        filter="isNotCompleted"
+        observe="completed">
+        <template>
+          <div class="task">
+            <paper-checkbox checked="{{task.completed}}"></paper-checkbox>
+            <paper-input label="New Task" no-label-float value={{task.name}}></paper-input>
+          </div>
+        </template>
+      </dom-repeat>
+
+      <h2>Completed: </h2>
+      <dom-repeat
+        items="{{tasks}}"
+        as="task"
+        filter="isCompleted"
+        observe="completed">
+        <template>
+          <div class="task">
+            <paper-checkbox checked="{{task.completed}}"></paper-checkbox>
+            <paper-input label="task name" no-label-float value="{{task.name}}"></paper-input>
+          </div>
+        </template>
+      </dom-repeat>
+
+      <paper-button raised on-tap="addTask">Add Task</paper-button>
+    </div>
+  </template>
+
+  <script>
+    class MyView6 extends Polymer.Element{
+      static get is(){return 'my-view6'}
+      static get properties(){
+        return {
+          tasks: {
+            type: Array,
+            value: function(){
+              return [];
+            }
+          }
+        }
+      }
+      addTask(){
+        var newTask = {
+          name: "",
+          completed: false
+        }
+        this.push("tasks", newTask);
+      }
+
+      isNotCompleted(task){
+        return !task.completed;
+      }
+      isCompleted(task){
+        return task.completed;
+      }
+
+    }
+    window.customElements.define(MyView6.is, MyView6);
+  </script>
+</dom-module>
