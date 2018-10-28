@@ -1,0 +1,6 @@
+FROM golang:onbuild
+EXPOSE 8011
+# add source code
+COPY Presentations/ /Presentations/
+RUN ls -la /Presentations/*
+

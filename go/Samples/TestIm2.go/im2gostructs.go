@@ -7,6 +7,11 @@
 //https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql
 //https://github.com/jtbonhomme/go-rest-api-boilerplate
 
+// Docker Commands
+// Build 
+// $ docker build . -t natraj:im2server
+// Run 
+// $ docker run --publish 8011:8011 -t natraj:im2server
 package main
 
 import (
@@ -118,7 +123,11 @@ func LoadProjects() {
 	presentationsRoot := ".\\Presentations"
 	files, err := ioutil.ReadDir(presentationsRoot)
 	if err != nil {
-		log.Fatal(err)
+		presentationsRoot := "./Presentations"
+		files, err = ioutil.ReadDir(presentationsRoot)
+		if err != nil {
+			log.Fatal("Cannot read presentations dir %v " , err)
+		}
 	}
 
 	for _, f := range files {
@@ -216,6 +225,8 @@ func LoadIm2FromXML(filename string) (Infomedia, error) {
 
 	if err != nil {
 		return im2, err
+	}else {
+		fmt.Println("loading media file success...")
 	}
 
 	//im2string := string(im2File) // convert content to a 'string'
