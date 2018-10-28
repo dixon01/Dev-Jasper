@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -53,10 +54,9 @@ func GetPresentationsDataEndPoint(w http.ResponseWriter, req *http.Request) {
 func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	//Allow CORS here By * or specific origin
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	params := mux.Vars(req)
-	id := params["projectid"]
+	id := params["projectidname"]
 	fmt.Println("calling GetProjectEndPoint ...")
 	for i, item := range projects {
 		_, err := strconv.Atoi(id)
@@ -80,7 +80,6 @@ func GetProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 func GetProjectsDataEndPoint(w http.ResponseWriter, req *http.Request) {
 	//Allow CORS here By * or specific origin
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	fmt.Println("calling GetProjectsDataEndPoint ...")
 	json.NewEncoder(w).Encode(projects)
@@ -90,27 +89,40 @@ func CreateProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("calling CreateProjectEndPoint ...")
 	params := mux.Vars(req)
-	projectname := params["projectname"]
+	projectname := params["projectidname"]
 	dirnameofproject := "." + string(filepath.Separator) + "Presentations" + string(filepath.Separator) + projectname
-	fmt.Println("calling CreateProjectEndPoint ...5s\n", dirnameofproject)
+	fmt.Println("calling CreateProjectEndPoint ...", dirnameofproject)
 	newProject := new(Infomedia)
 	os.Mkdir(dirnameofproject, 0777)
+	//  display on screen what we are about to save
+	xmlString, err := xml.MarshalIndent(newProject, "", "    ")
+	if err != nil {
+			fmt.Println(err)
+	}
+ 	fmt.Printf("%s \n", string(xmlString))
+	// everything ok now, write to file.
+	filename := dirnameofproject + string(filepath.Separator) + "main.im2"
+	file, _ := os.Create(filename)
+
+	xmlWriter := io.Writer(file)
+
+	enc := xml.NewEncoder(xmlWriter)
+	enc.Indent("  ", "    ")
+	if err := enc.Encode(newProject); err != nil {
+			fmt.Printf("error: %v\n", err)
+	}
 
 	json.NewEncoder(w).Encode(newProject)
 }
 func DeleteProjectEndPoint(w http.ResponseWriter, req *http.Request) {
 	//Allow CORS here By * or specific origin
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	fmt.Println("calling DeleteProjectEndPoint ...")
-	// params := mux.Vars(req)
-	// for index, item := range projects {
-	// 	if index == 0 {
-	// 		projects = append(projects[:index], projects[index+1:]...)
-	// 		break
-	// 	}
-	// }
+	params := mux.Vars(req)
+	projectname := params["projectidname"]
+	dirnameofproject := "." + string(filepath.Separator) + "Presentations" + string(filepath.Separator) + projectname
+	fmt.Println("calling DeleteProjectEndPoint ", dirnameofproject)
+	os.RemoveAll(dirnameofproject)
 	json.NewEncoder(w).Encode(projects)
 }
 func TestEndPoint(w http.ResponseWriter, req *http.Request) {
@@ -158,9 +170,9 @@ func main() {
 	router.HandleFunc("/test", TestEndPoint).Methods("GET")
 	router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET", "OPTIONS")
 	router.HandleFunc("/presentations", GetPresentationsDataEndPoint).Methods("GET", "OPTIONS")
-	router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET", "OPTIONS")
-	router.HandleFunc("/project/{projectname}", CreateProjectEndPoint).Methods("POST", "OPTIONS")
-	router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/project/{projectidname}", GetProjectEndPoint).Methods("GET", "OPTIONS")
+	router.HandleFunc("/project/{projectidname}", CreateProjectEndPoint).Methods("POST", "OPTIONS")
+	router.HandleFunc("/project/{projectidname}", DeleteProjectEndPoint).Methods("DELETE", "OPTIONS")
 	log.Fatal(http.ListenAndServe(":8011", router))
 
 }
