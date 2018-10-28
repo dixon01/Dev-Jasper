@@ -5,14 +5,14 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRest", "TestRest\TestRest.csproj", "{BF82DA68-5CAF-4E87-AF3B-CBBBD415A7E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDB", "..\TestDB\TestDB\TestDB.csproj", "{3CEB3883-191C-474E-BD85-11C920E17BBF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesLogin", "RazorPagesLogin\RazorPagesLogin.csproj", "{F871F720-8A79-4B49-960F-60805AB05E75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{BB2256CF-D98A-4983-804D-B900DDAD3F52}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\Dev\Infotransit\Ltg-Infotransit\Common\Utility\Source\Core\SecurityUtility.cs = ..\..\..\..\..\..\Dev\Infotransit\Ltg-Infotransit\Common\Utility\Source\Core\SecurityUtility.cs
+		..\..\..\..\..\Infotransit\Ltg-Infotransit\Common\Utility\Source\Core\SecurityUtility.cs = ..\..\..\..\..\Infotransit\Ltg-Infotransit\Common\Utility\Source\Core\SecurityUtility.cs
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDB", "..\..\..\..\..\..\Users\tzulhasnine\Documents\Visual Studio 2017\Projects\TestDB\TestDB\TestDB.csproj", "{DEFCD825-1AB4-4DA5-BE2F-ABC56C69E3CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,14 +24,14 @@ Global
 		{BF82DA68-5CAF-4E87-AF3B-CBBBD415A7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF82DA68-5CAF-4E87-AF3B-CBBBD415A7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF82DA68-5CAF-4E87-AF3B-CBBBD415A7E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CEB3883-191C-474E-BD85-11C920E17BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CEB3883-191C-474E-BD85-11C920E17BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CEB3883-191C-474E-BD85-11C920E17BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CEB3883-191C-474E-BD85-11C920E17BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F871F720-8A79-4B49-960F-60805AB05E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F871F720-8A79-4B49-960F-60805AB05E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F871F720-8A79-4B49-960F-60805AB05E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F871F720-8A79-4B49-960F-60805AB05E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEFCD825-1AB4-4DA5-BE2F-ABC56C69E3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEFCD825-1AB4-4DA5-BE2F-ABC56C69E3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEFCD825-1AB4-4DA5-BE2F-ABC56C69E3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEFCD825-1AB4-4DA5-BE2F-ABC56C69E3CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

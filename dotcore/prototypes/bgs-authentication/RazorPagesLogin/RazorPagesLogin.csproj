@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Gorba.Common.Utility.Core">
+      <HintPath>..\..\..\..\..\..\Infotransit\Ltg-Infotransit\Common\Utility\Source\Core\bin\Gorba.Common.Utility.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
