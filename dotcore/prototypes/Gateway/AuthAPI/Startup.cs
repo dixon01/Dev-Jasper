@@ -10,11 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Ocelot.Middleware;
-using Ocelot.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace LtgGateway
+namespace AuthAPI
 {
     public class Startup
     {
@@ -29,17 +27,15 @@ namespace LtgGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddOcelot(Configuration);
-
-             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
+               services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "LTG Gateway", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Authentication API", Version = "v1" });
             });
+            services.AddMvcCore().AddApiExplorer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -51,14 +47,14 @@ namespace LtgGateway
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc().UseSwaggerUI(c =>
-                    {
-                        c.SwaggerEndpoint("/assets/swagger.json", "Assets Service");
-                        c.SwaggerEndpoint("/resources/swagger.json", "Resources Service");
-                        c.SwaggerEndpoint("/agent/swagger.json", "Agent Service");
-                        c.SwaggerEndpoint("/authentication/swagger.json", "Authentication Service");
-                    });;
-            await app.UseOcelot();
+            app.UseMvc();
+            app.UseSwagger(c =>
+            {
+            });
+            app.UseSwaggerUI(c =>
+            {                
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API");
+            });
         }
     }
 }
