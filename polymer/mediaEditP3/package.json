@@ -1,0 +1,19 @@
+{
+  "name": "polymer3",
+  "dependencies": {
+    "@polymer/iron-ajax": "^3.0.1",
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-dropdown-menu": "^3.0.1",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-listbox": "^3.0.1",
+    "@polymer/polymer": "^3.0.0",
+    "pass-down": "0.0.10",
+    "web-animations-js": "^2.3.1",
+    "xtal-json-editor": "0.0.32",
+    "xtal-json-merge": "^0.2.32"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  }
+}
