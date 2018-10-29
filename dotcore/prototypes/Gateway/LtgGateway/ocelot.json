@@ -26,6 +26,19 @@
             "UpstreamHttpMethod": [ "Get","POST" ]
            
         },
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7003
+                }
+            ],
+            "UpstreamPathTemplate": "/agent/swagger.json",
+            "UpstreamHttpMethod": [ "Get", "POST" ]
+           
+        },
         {  
             "DownstreamPathTemplate": "/api/assets",  
             "DownstreamScheme": "http",  
